@@ -53,13 +53,13 @@
     border-radius: 0;
     margin-top: -130px;
 }
-.card:hover .data_vendor {
+.card:hover .data {
     background: #3487f7;
     color: #FFF;
     margin-top: 100px;
     padding: 5px;
 }
-.card:hover .data_vendor small { color: rgb(71, 254, 144) }
+.card:hover .data small { color: rgb(71, 254, 144) }
 .card:hover .member { margin-top: 300px }
 .card_circle {
    
@@ -73,7 +73,7 @@
     width: 450px;
 }
 
-.data_vendor {
+.data {
     color: rgb(0, 0, 0);
     font-family: 'Raleway', sans-serif;
     font-size: 24px;

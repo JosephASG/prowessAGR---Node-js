@@ -55,9 +55,10 @@ const SellFilterInfo = ({user}) => {
     <div className="card">
     <div  key={user._id}>
         
-        <h2 classname="data_vendor">
-        <div className="transition">
-            <img href={user.image} alt={user.name} /> </div></h2>
+        <h3 className= "data">
+        
+            <img href={user.image} alt={user.name} />
+        </h3>
    
         <p class="member"> 
         Miembro Desde: {(user.createdAt).slice(0, 10)} 
