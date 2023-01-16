@@ -43,6 +43,7 @@ const FollCustomer = () => {
                     <FollCustomerInfo key={item._id} item={item} />
                 ))}
                 </div>
+                
                 <ReactPaginate className='filter-pagination' 
                     previousLabel={"Ant"}
                     nextLabel={"Sig"}
