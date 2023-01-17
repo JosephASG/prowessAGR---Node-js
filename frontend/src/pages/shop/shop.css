@@ -1,7 +1,7 @@
 .filter-row {
-    padding: 50px 15px;
+    padding: 40px 15px;
     height: 80vh;
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
 }
@@ -45,6 +45,7 @@
 }
 
 .filter-row .filter-col:first-child .filter-group:last-child button {
+    position:relative;
     background-color: #2f5f74;
     padding: 10px 25px;
     border: none;
