@@ -3,7 +3,7 @@ import { v2 as cloudinary } from "cloudinary";
 // Path: backend\src\utils\cloudinaryConfig.js
 export async function uploadImage(filePath) {
   return await cloudinary.uploader.upload(filePath, {
-    folder: "products",
+    folder: "prowess",
   }); 
 }
 
@@ -13,7 +13,7 @@ export async function deleteImage(publicId) {
 
 export async function updateImage(publicId, filePath) {
   return await cloudinary.uploader.update_metadata(filePath, {
-    folder: "products",
+    folder: "prowess",
     public_id: publicId,
   });
 }
