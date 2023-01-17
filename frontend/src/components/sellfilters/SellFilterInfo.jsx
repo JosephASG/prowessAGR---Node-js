@@ -43,7 +43,7 @@ const SellFilterInfo = ({ user }) => {
   return (
     <div className="card">
       <div key={user._id}>
-        <h2 classname="data">
+        <h2 className="data-vendor">
           <img href={user.image.secure_url} alt={user.name} />
         </h2>
 

@@ -212,14 +212,14 @@
     margin-top: -130px;
 }
 
-.card:hover h2 {
+.card:hover .data-vendor {
     background: #69e7a2;
     color: #FFF;
     margin-top: 100px;
     padding: 5px;
 }
 
-.card:hover h2 small {
+.card:hover .data-vendor small {
     color: rgb(71, 254, 144)
 }
 
@@ -240,7 +240,7 @@
     width: 450px;
 }
 
-h2 {
+.data-vendor {
     color: rgb(0, 0, 0);
     font-family: 'Raleway', sans-serif;
     font-size: 24px;
