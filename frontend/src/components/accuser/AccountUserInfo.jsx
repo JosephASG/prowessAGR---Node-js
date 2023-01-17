@@ -16,7 +16,7 @@ const AccountUserInfo = () => {
       const fetchData = async () => {
         try {
 
-          const result = await axios.get(`/api/orders/userorders/${id}`);
+          const result = await axios.get(`/orders/userorders/${id}`);
           console.log(result.data);
           setUserOrders(result.data)
   
