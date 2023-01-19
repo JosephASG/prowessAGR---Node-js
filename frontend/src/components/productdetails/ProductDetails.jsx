@@ -45,7 +45,11 @@ const ProductDetails = () => {
   return (
     <div className="product-row">
       <div className="product-col">
-        <img src={product.image.secure_url} alt={product.name} />
+      {product.length === 0 ? ( 
+            <h3 className="info">Foto Producto</h3>
+          ) : (
+            <img src={product.image.secure_url} alt={product.name} />
+          )}
         <Link to={`../seller/${product.sellerId}`}>
           <img
             className="seller-product"
