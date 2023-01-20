@@ -60,7 +60,29 @@
 
 .sell-fill-group {
     width: 250px;
+    /* Current changes */
+
     margin: 0 50px;
+
+    /* Incoming change */
+    background-color: rgb(200, 235, 203);
+    transition: all 2s linear;
+    border-top-right-radius: 50px;
+    border: double 10px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sell-fill-group:hover {
+    background-color: white;
+    transform-origin: right;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sell-fill-group:hover {
+    background-color: rgb(223, 246, 228);
+    transform-origin: bottom;
+    transform: scale(1.02);
+    transition-duration: 0.2s, 0.2s;
 }
 
 .sell-fill-header {
@@ -82,7 +104,16 @@
 }
 
 .sell-fill-body span.follow {
+    /* Current change */
     background: #2f5f74;
+    /* Incoming change */
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 1rem;
+    height: 2rem;
+    ;
+    background: #c7a915;
+    /* --------------- */
     width: max-content;
     color: #ffffff;
     text-transform: uppercase;
@@ -96,6 +127,9 @@
     cursor: pointer;
     box-shadow: 0 0 1px #2f5f74;
     transition: all 0.5s;
+    /* Incoming change */
+    /* Current change */
+    border: black 1px solid;
 }
 
 .sell-fill-body span.follow:hover {
@@ -117,4 +151,25 @@
 
 .sell-fill-row .sell-fill-col .filter-pagination {
     margin: 80px 0 50px 0;
+    /* Incoming change */
+    /* Current change */
+}
+
+
+
+.background-sellers {
+    background: -webkit-linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
+    /* Chrome 10+, Saf5.1+ */
+    background: -moz-linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
+    /* FF3.6+ */
+    background: -ms-linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
+    /* IE10 */
+    background: -o-linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
+    /* Opera 11.10+ */
+    background: linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
+    /* W3C */
+}
+
+.transition {
+    transition: .3s cubic-bezier(.3, 0, 0, 1.3)
 }

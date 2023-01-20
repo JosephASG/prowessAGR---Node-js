@@ -1,58 +1,57 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import SellFilter from './SellFilter';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import SellFilter from "./SellFilter";
 import "./Cards.css";
 
 const SellFilters = () => {
+  const [seller, setSeller] = useState([]);
+  const [query, setQuery] = useState("");
 
-    
-    const [seller, setSeller] = useState([]);
-    const [query, setQuery] = useState("");
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-
-            const result = await axios.get("/api/users/all");
-            console.log(result.data);
-            setSeller(result.data);
-        }
-
-        fetchData();
-
-    }, []);
-
-    //search
-    const keys = ["name", "email", "address"];
-
-    const search = () => {
-        return seller.filter((item) => keys.some((key) => item[key].toLowerCase().includes(query)));
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios.get("/api/users/all");
+      console.log(result.data);
+      setSeller(result.data);
     };
 
+    fetchData();
+  }, []);
+
+  //search
+  const keys = ["name", "email", "address"];
+
+  const search = () => {
+    return seller.filter((item) =>
+      keys.some((key) => item[key].toLowerCase().includes(query))
+    );
+  };
+
   return (
-    <div className='sell-fill-row'>
-        {seller.length === 0 ? (<div className='ctn-products'>
-            <h3 className='info'>Actualmente no hay vendedores! 😓</h3>
-            <img src="./assets/images/illustrations/no-data.svg" alt="" />
-        </div>) : (
-            <>
-            
-                <div className="sell-fill-col">
-                    <div className="Buscador">
-                    <input type="search" placeholder='Buscar...' onChange={(e) => setQuery(e.target.value)} id= "Buscador"/>
-                    </div>
-                </div>
-                <div className="sell-fill-col">
-                    <SellFilter seller={search(SellFilter)} />
-                </div>
-            
-            </>
-        )}
-      
-
+    <div className="sell-fill-row">
+      {seller.length === 0 ? (
+        <div className="ctn-products">
+          <h3 className="info">Actualmente no hay vendedores! 😓</h3>
+          <img src="./assets/images/illustrations/no-data.svg" alt="" />
+        </div>
+      ) : (
+        <>
+          <div className="sell-fill-col">
+            <div className="Buscador">
+              <input
+                type="search"
+                placeholder="Buscar..."
+                onChange={(e) => setQuery(e.target.value)}
+                id="Buscador"
+              />
+            </div>
+          </div>
+          <div className="sell-fill-col">
+            <SellFilter seller={search(SellFilter)} />
+          </div>
+        </>
+      )}
     </div>
-       
-  )
-}
+  );
+};
 
-export default SellFilters
+export default SellFilters;

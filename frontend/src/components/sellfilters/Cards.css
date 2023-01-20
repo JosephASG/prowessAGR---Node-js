@@ -1,5 +1,12 @@
 #Buscador {
-    margin: 50px 0 0 0;
+
+    background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png) no-repeat 0px 5px;
+    background-size: 24px;
+    width: 500px;
+    border: transparent;
+    border-bottom: solid 1px #ccc;
+    padding: 10px 10px 10px 30px;
+    outline: none;
     width: 700px;
     height: 50px;
     border: solid 2px;
@@ -20,13 +27,19 @@
 
 .card {
     background-color: rgb(254, 255, 247);
+    bottom: 0;
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     height: 300px;
+    left: 0;
+    margin: auto;
     overflow: hidden;
     position: relative;
+    right: 0;
+    top: 0;
     width: 300px;
+    place-items: center;
 }
 
 .card:hover {
@@ -47,7 +60,7 @@
 }
 
 .card:hover h2 {
-    background: #5bcf8f;
+    background: #3487f7;
     color: #FFF;
     margin-top: 100px;
     padding: 5px;
@@ -63,7 +76,7 @@
 
 .card_circle {
 
-    background-color: #50b57d;
+    background-color: #5bcf8f;
     background-size: cover;
     border-radius: 50%;
     height: 400px;
@@ -74,7 +87,7 @@
     width: 450px;
 }
 
-.ctn-user-member h2 {
+h2.transition {
     color: rgb(0, 0, 0);
     font-size: 24px;
     font-weight: 200;
@@ -85,8 +98,9 @@
     z-index: 9999;
 }
 
-.ctn-user-member p {
+p.member {
     color: rgba(0, 0, 0, .6);
+    font-family: 'Raleway', sans-serif;
     font-size: 100%;
     font-weight: normal;
     margin-top: 200px;
@@ -97,6 +111,7 @@
 }
 
 .cta-container {
+    font-family: 'Raleway', sans-serif;
     display: none;
     margin-top: 320px;
     position: absolute;
@@ -113,9 +128,9 @@
     -webkit-border-radius: 2px;
     -webkit-transition: 0.2s ease-out;
     background-clip: padding-box;
-    border: 2px solid #5bcf8f;
+    border: 2px solid #3487f7;
     border-radius: 2px;
-    color: #5bcf8f;
+    color: #3487f7;
     display: inline-block;
     font-family: 'Raleway', sans-serif;
     font-size: 17px;
@@ -131,7 +146,7 @@
 }
 
 .cta:hover {
-    background-color: #5bcf8f;
+    background-color: #3487f7;
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     color: #fff;
     -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

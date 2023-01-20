@@ -9,7 +9,10 @@ const UserSchema = new mongoose.Schema(
     password: { type: String, required: true },
     address: { type: String, required: true },
     phone: { type: String, required: true },
-    image: { type: String, required: true },
+    image: {
+      public_id: { type: String },
+      secure_url: { type: String },
+    },
     isAdmin: { type: Boolean, default: false, required: true },
   },
   {
@@ -17,6 +20,7 @@ const UserSchema = new mongoose.Schema(
     versionKey: false, //for version
   }
 );
+
 UserSchema.methods.encrypPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);

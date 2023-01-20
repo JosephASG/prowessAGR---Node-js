@@ -4,7 +4,7 @@ import * as productController from "../controllers/productController.js";
 
 const router = Router();
 
-router.get("/seller/:id", productController.getProductById);
+router.get("/seller/:id", productController.getProductBySellerId);
 router.post(
   "/add",
   fileUpload({
@@ -15,7 +15,14 @@ router.post(
 );
 router.get("/", productController.getProducts);
 router.get("/slug/:slug", productController.getProductBySlug);
-router.put("/update/:id", productController.updateProduct);
+router.put(
+  "/update/:id",
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "./src/uploads",
+  }),
+  productController.updateProduct
+);
 router.delete("/delete/:id", productController.deleteProduct);
 
 export default router;

@@ -12,9 +12,9 @@ const ProductSchema = new mongoose.Schema(
       public_id: { type: String },
       secure_url: { type: String },
     },
-    sellerId: { type: String },
-    seller: { type: String },
-    sellerImage: { type: String },
+    sellerId: { type: String, required: true },
+    seller: { type: String, required: true},
+    sellerImage: { type: String, required: true },
   },
   {
     timestamps: true, //for date

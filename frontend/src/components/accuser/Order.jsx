@@ -1,55 +1,44 @@
-import { faArrowLeft, faEye } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import React, { useEffect } from 'react'
-import { useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { faArrowLeft, faEye } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Order = () => {
-
   const userInfo = localStorage.getItem("userInfo");
 
   const params = useParams();
-  const {id} = params;
+  const { id } = params;
 
   const navigate = useNavigate();
 
   const [order, setOrder] = useState([]);
 
   useEffect(() => {
-
     const fetchOrder = async () => {
-
       try {
+        const { data } = await axios.get(`/api/orders/${id}`);
 
-        const {data} = await axios.get(`/api/orders/${id}`);
-        
         console.log(data);
         setOrder(data);
-  
-        
-  
-      } catch(err) {
-          alert("Orden no encontrada!");
+      } catch (err) {
+        alert("Orden no encontrada!");
       }
+    };
 
-    }
-
-    if(!userInfo) {
-
-      return navigate('/');
-
+    if (!userInfo) {
+      return navigate("/");
     }
 
     fetchOrder();
-
   }, [id, navigate, userInfo]);
 
-
-
   return (
-    <div className='orderContainer'>
-      <Link className='back' to="/account"><FontAwesomeIcon icon={faArrowLeft} /> Regresar</Link>
+    <div className="orderContainer">
+      <Link className="back" to="/account">
+        <FontAwesomeIcon icon={faArrowLeft} /> Regresar
+      </Link>
       <div className="orderRow">
         <h3>Mi orden No: {order._id}</h3>
       </div>
@@ -59,14 +48,22 @@ const Order = () => {
             {order.orderItems?.map((item) => (
               <div className="filter-card" key={item._id}>
                 <div className="card-header">
-                    <img src={item.image} alt={item.name} />
-                    <Link to={`../seller/${item.sellerId}`}><img className='card-sellers' src={item.sellerImage} alt={item.seller} /></Link>
+                  <img src={item.image.secure_url} alt={item.name} />
+                  <Link to={`../seller/${item.sellerId}`}>
+                    <img
+                      className="card-sellers"
+                      src={item.sellerImage}
+                      alt={item.seller}
+                    />
+                  </Link>
                 </div>
                 <div className="card-body">
-                    <Link to={`../${item.slug}`}>{item.name} <FontAwesomeIcon icon={faEye} /></Link>
-                    <span className="price">${(item.price).toFixed(2)}/kg</span>
+                  <Link to={`../${item.slug}`}>
+                    {item.name} <FontAwesomeIcon icon={faEye} />
+                  </Link>
+                  <span className="price">${item.price.toFixed(2)}/kg</span>
                 </div>
-            </div>
+              </div>
             ))}
           </div>
         </div>
@@ -92,23 +89,27 @@ const Order = () => {
           <div className="infoGroups">
             <div className="info-group">
               <span>IVA:</span>
-              <span>${(order.taxPrice)?.toFixed(2)}</span>
+              <span>${order.taxPrice?.toFixed(2)}</span>
             </div>
             <div className="info-group">
               <span>Precio total:</span>
-              <span>${(order.totalPrice)?.toFixed(2)}</span>
+              <span>${order.totalPrice?.toFixed(2)}</span>
             </div>
           </div>
           <div className="infoGroups">
             <div className="info-group">
               <span>Pagado:</span>
-              {order.isPaid ? (<span> Paid at {order.paidAt} </span>) : (
-              <span>Not pagado!</span>
+              {order.isPaid ? (
+                <span> Paid at {order.paidAt} </span>
+              ) : (
+                <span>Not pagado!</span>
               )}
             </div>
             <div className="info-group">
               <span>Entregado:</span>
-              {order.isDelivered ? (<span> Delivered at {order.deliveredAt} </span>) : (
+              {order.isDelivered ? (
+                <span> Delivered at {order.deliveredAt} </span>
+              ) : (
                 <span>No entregado!</span>
               )}
             </div>
@@ -116,7 +117,7 @@ const Order = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Order
+export default Order;
