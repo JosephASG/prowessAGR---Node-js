@@ -17,9 +17,9 @@ export const postOrder = async (req, res) => {
       totalPrice: req.body.totalPrice,
     });
     const order = await newOrder.save();
-    res.status(201).send({ message: "Nueva orden creada", order });
+    return res.status(200).json(order);
   } catch (error) {
-    res.status(500).send({ message: "Error al crear orden" });
+    return res.status(500).json(error);
   }
 };
 
@@ -27,9 +27,14 @@ export const postOrder = async (req, res) => {
 export const getMyOrders = async (req, res) => {
   try {
     const orders = await Order.find({ sellerId: req.params.id });
-    res.status(200).send(orders);
+    if (!orders) {
+      return res
+        .status(404)
+        .json({ error: `No orders found for this seller by ${id}` });
+    }
+    return res.status(200).json(orders);
   } catch (error) {
-    res.status(404).send({ message: "No existen ordenes" });
+    return res.status(500).json(error);
   }
 };
 
@@ -37,9 +42,9 @@ export const getMyOrders = async (req, res) => {
 export const getOrder = async (req, res) => {
   try {
     const order = await Order.find({});
-    res.send(order);
+    return res.send(order);
   } catch (error) {
-    res.status(404).send({ message: "Orden no encontrada" });
+    return res.status(404).send({ message: "Orden no encontrada" });
   }
 };
 
@@ -48,8 +53,8 @@ export const getOrders = async (req, res) => {
   const id = req.params.id;
   try {
     const orders = await Order.findById(id);
-    res.send(orders);
+    return res.status(200).json(orders);
   } catch (error) {
-    res.status(404).send({ message: "Orden no encontrada" });
+    return res.status(500).send({ message: "Orden no encontrada" });
   }
 };

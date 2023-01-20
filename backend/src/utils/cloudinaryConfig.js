@@ -4,7 +4,7 @@ import { v2 as cloudinary } from "cloudinary";
 // upload image to cloudinary and return the image url
 export async function uploadImage(filePath) {
   return await cloudinary.uploader.upload(filePath, {
-    folder: "prowess",
+    folder: "prowess", // cloudinary folder name
   }); 
 } 
 //delete image from cloudinary 

@@ -61,6 +61,16 @@ export const getProductBySellerId = async (req, res) => {
   }
 };
 
+//GET PRODUCT BY ID
+export const getProductById = async (req, res) => {
+  try {
+    const product = await Products.findById(req.params.id);
+    return res.status(200).json(product);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+};
+
 //UPDATE PRODUCT
 export const updateProduct = async (req, res) => {
   try {
