@@ -18,6 +18,7 @@ const ProductItem = ({ pro }) => {
 
       if (data) {
         alert("Producto eliminado exitosamente!");
+        window.location.reload();
       }
     } catch (err) {
       alert("Producto no eliminado!");
