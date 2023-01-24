@@ -128,7 +128,8 @@ const AccountUser = () => {
       <h2 className="account-title">Mi cuenta</h2>
       <div className="account-groups">
         <div className="account-group">
-          <form className="form-image" onSubmit={handlerUpdateImage}>
+          <div className="wrapper-form-edit-account">
+              <form className="form-image image-account" onSubmit={handlerUpdateImage}>
             <img
               src={previewImage || (userInfo && userInfo.image.secure_url)}
               alt=""
@@ -146,61 +147,62 @@ const AccountUser = () => {
             <button className="btn-upload">
               {uploadingImage ? "Subiendo..." : "Subir"}
             </button>
-          </form>
+              </form>
 
-          <div className="form-row account form-account">
-            <form className="form" onSubmit={handlerUpdate}>
-              <div className="form-group">
-                <label htmlFor="name">Nombre completo</label>
-                <input
-                  required
-                  type="text"
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
-                  id="name"
-                />
+              <div className="form-row account form-account">
+                <form className="form" onSubmit={handlerUpdate}>
+                  <div className="form-group">
+                    <label htmlFor="name">Nombre completo</label>
+                    <input
+                      required
+                      type="text"
+                      onChange={(e) => setName(e.target.value)}
+                      value={name}
+                      id="name"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                      required
+                      type="email"
+                      onChange={(e) => setEmail(e.target.value)}
+                      value={email}
+                      id="email"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="address">Dirección</label>
+                    <input
+                      required
+                      type="text"
+                      onChange={(e) => setAddress(e.target.value)}
+                      value={address}
+                      id="address"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone">Teléfono</label>
+                    <input
+                      required
+                      type="text"
+                      id="phone"
+                      onChange={(e) => setPhone(e.target.value)}
+                      value={phone}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <span className="change-password" onClick={() => setOpen(true)}>
+                      Cambiar contraseña
+                    </span>
+                  </div>
+                  <div className="form-btn">
+                    <button>
+                      <FontAwesomeIcon icon={faRefresh} /> Actualizar
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input
-                  required
-                  type="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  id="email"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="address">Dirección</label>
-                <input
-                  required
-                  type="text"
-                  onChange={(e) => setAddress(e.target.value)}
-                  value={address}
-                  id="address"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="phone">Teléfono</label>
-                <input
-                  required
-                  type="text"
-                  id="phone"
-                  onChange={(e) => setPhone(e.target.value)}
-                  value={phone}
-                />
-              </div>
-              <div className="form-group">
-                <span className="change-password" onClick={() => setOpen(true)}>
-                  Cambiar contraseña
-                </span>
-              </div>
-              <div className="form-btn">
-                <button>
-                  <FontAwesomeIcon icon={faRefresh} /> Actualizar
-                </button>
-              </div>
-            </form>
           </div>
           {open && <Passwords setOpen={setOpen} />}
           <div className="account-info">

@@ -3,7 +3,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 100vh;
+    background-color: #52C993;
+    font-size: 14px;
+    color: #121212;
 }
 
 .seller-col:first-child {
@@ -11,7 +14,12 @@
 }
 
 .seller-info {
-    width: 100%;
+    width: auto;
+    background-color: #68D0A1;
+    box-shadow: 12px 12px 15px -3px rgba(0, 0, 0, 0.1), -13px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    padding: 30px 50px;
+    border-radius: 60px;
+    margin: 0 100px;
 }
 
 .seller-header {
@@ -21,7 +29,7 @@
 }
 
 .seller-header img {
-    width: 80%;
+    width: 150px;
     height: auto;
 }
 
@@ -55,9 +63,9 @@
     text-transform: uppercase;
     letter-spacing: 1.3px;
     font-weight: bold;
-    padding: 5px 15px;
+    padding: 10px 20px;
     border-radius: 3px;
-    font-size: 14px;
+    font-size: 12px;
     display: block;
     margin: 5px auto;
     cursor: pointer;
@@ -75,17 +83,23 @@
     margin-bottom: 40px;
 }
 
+.seller-products .card-footer {
+    padding: 20px 0;
+}
+
 .seller-products .card-footer button {
     display: block;
-    margin: 10px auto;
+    margin: 0 auto;
     background-color: #f0f3bd;
     padding: 5px 10px;
     border: none;
     box-shadow: 0 0 5px #f0f3bd;
-    color: #2f5f74;
+    color: #000000;
     letter-spacing: 1.4px;
     text-transform: uppercase;
     transition: all 0.5s;
+    padding: 10px 20px;
+    border-radius: 20px;
 }
 
 .seller-products .card-footer button:hover {

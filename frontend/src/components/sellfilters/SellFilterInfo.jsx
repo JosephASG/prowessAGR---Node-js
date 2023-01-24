@@ -1,12 +1,8 @@
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { Store } from "../../Store";
+import Button from "@mui/material/Button";
 
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { Store } from '../../Store'
-import { Button} from '@mui/material';
-
-import "./Cards.css";
 
 const SellFilterInfo = ({ user }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -80,7 +76,7 @@ const SellFilterInfo = ({ user }) => {
   return (
     <div className="card">
       <div key={user._id}>
-        <h2 className="transition">
+        <h2 className="data-vendor">
           <img href={user.image.secure_url} alt={user.name} />
         </h2>
 

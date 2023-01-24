@@ -57,6 +57,7 @@ h3.info-empty {
     padding: 20px;
     border-radius: 20px;
     color: #ffffff;
+    flex-wrap: wrap;
 }
 
 .card-footer.cart {

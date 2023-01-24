@@ -68,7 +68,11 @@ const SellerInfo = () => {
       <div className="seller-col">
         <div className="seller-info">
           <div className="seller-header">
+          {seller.length === 0 ? ( 
+            <h3 className="info">Foto</h3>
+          ) : (
             <img src={seller.image.secure_url} alt={seller.name} />
+          )}
           </div>
           <div className="seller-body">
             <span>{seller.name}</span>

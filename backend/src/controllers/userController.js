@@ -1,16 +1,12 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
-import {
-  uploadImage,
-  deleteImage,
-  updateImage,
-} from "../utils/cloudinaryConfig.js";
+import { uploadImage, deleteImage } from "../utils/cloudinaryConfig.js";
 import fs from "fs-extra";
 
 //LOGIN USER
 export const loginUser = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  //if user exists
+  //if user exists and password is correct send user data
   if (user) {
     if (bcrypt.compareSync(req.body.password, user.password)) {
       res.send({
@@ -30,6 +26,7 @@ export const loginUser = async (req, res) => {
 
 //CREATE USER
 export const postUser = async (req, res) => {
+  // Check if all fields are filled and send error if not filled
   if (
     (!req.body.name,
     !req.body.email,
@@ -39,6 +36,7 @@ export const postUser = async (req, res) => {
   )
     return res.status(400).json({ message: "All fields are required" });
   try {
+    // create a new user with the data from the request body
     const newUser = new User(req.body);
     newUser.image = {
       public_id: req.body.public_id || "prowess/seller_tlpqnm",
@@ -46,7 +44,9 @@ export const postUser = async (req, res) => {
         req.body.secure_url ||
         "https://res.cloudinary.com/primalappsje/image/upload/v1671478343/primal/seller_tlpqnm.png",
     };
+    // Create a salt and hash the password
     newUser.password = bcrypt.hashSync(req.body.password);
+    // save image to cloudinary
     if (req.files?.image) {
       if (req.files?.image) {
         const result = await uploadImage(req.files.image.tempFilePath);
@@ -57,7 +57,7 @@ export const postUser = async (req, res) => {
         await fs.unlink(req.files.image.tempFilePath);
       }
     }
-    newUser.password = bcrypt.hashSync(req.body.password);
+    // save user to DB and send response
     const user = await newUser.save();
     return res.status(201).json(user);
   } catch (error) {
@@ -68,6 +68,7 @@ export const postUser = async (req, res) => {
 //GET
 export const getUser = async (req, res) => {
   try {
+    // search all users in DB
     const user = await User.find();
     return res.status(200).json(user);
   } catch (error) {
@@ -78,6 +79,7 @@ export const getUser = async (req, res) => {
 //GET BY ID
 export const getUserById = async (req, res) => {
   try {
+    // obtein user to the id from params and search user by id in DB
     const user = await User.findById(req.params.id);
     return res.status(200).send(user);
   } catch (error) {
@@ -87,24 +89,42 @@ export const getUserById = async (req, res) => {
 
 //PUT
 export const updateUser = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findByIdAndUpdate(id, {
-    $set: {
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-      address: req.body.address,
-      phone: req.body.phone,
-      isAdmin: req.body.isAdmin,
-    },
-  });
-  if (!user) {
-    return res.status(400).send({
-      message: `Error, This user with id: ${id}, does not exist`,
-    });
-  }
+  try {
+    // obtein user to the id from params and search user by id in DB
+    const { id: userId } = req.params;
+    // if user not found, return error
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    // update user data with data
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.address = req.body.address;
+    user.phone = req.body.phone;
+    // if password is provided, hash it and update user
+    if (req.body.password) {
+      user.password = bcrypt.hashSync(req.body.password);
+    }
+    // if image is provided, delete old image and upload new image to cloudinary
+    if (req.files?.image) {
+      if (user.image?.public_id) {
+        await deleteImage(user.image.public_id);
+      }
+      const result = await uploadImage(req.files.image.tempFilePath);
+      user.image = {
+        public_id: result.public_id,
+        secure_url: result.secure_url,
+      };
+      await fs.unlink(req.files.image.tempFilePath);
+    }
 
-  return res.status(200).json({
-    message: `User was updated succesfully`,
-  });
+    // save user in database and return updated user
+    const updateUser = await user.save();
+
+    // return updated user to client
+    return res.status(200).json({ user: updateUser });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
 };

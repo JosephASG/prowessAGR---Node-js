@@ -13,7 +13,7 @@ const ProductSchema = new mongoose.Schema(
       secure_url: { type: String },
     },
     sellerId: { type: String, required: true },
-    seller: { type: String, required: true},
+    seller: { type: String, required: true },
     sellerImage: { type: String, required: true },
   },
   {
@@ -22,6 +22,5 @@ const ProductSchema = new mongoose.Schema(
   }
 );
 
-ProductSchema.methods.setImage = function setImage() {};
 const Product = mongoose.model("Product", ProductSchema);
 export default Product;

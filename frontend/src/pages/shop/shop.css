@@ -5,6 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: #ffffff;
 }
 
 .filter-row .filter-col:first-child {
@@ -62,6 +63,7 @@
 }
 
 .filter-cards {
+    width: auto;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -70,8 +72,13 @@
 }
 
 .filter-card {
-    width: 250px;
-    border-bottom: 1px dashed #485b63;
+    margin: 10px;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    width: 300px;
+    height: auto;
     transition: all 0.5s;
 }
 
@@ -81,9 +88,12 @@
 
 .card-header {
     position: relative;
-    height: 80px;
-    display: grid;
-    place-items: center;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
 }
 
 .card-header .card-sellers {
@@ -93,33 +103,35 @@
     width: 50px;
     border-radius: 50%;
     filter: drop-shadow(0 0 1px #485b63);
-    height: auto;
+    height: 50px;
+    margin-right: 10px;
 }
 
 .card-body {
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
+    justify-content: center;
+    margin: 0px 0;
+    background-color: #57b983;
+    padding: 10px
 }
 
 .card-body a {
     text-align: center;
     text-shadow: 0 0 1px #2f5f74;
     margin-bottom: 10px;
+
 }
 
 .card-body span.category {
-    background: #ca2734 !important;
-    width: max-content;
-    color: #ffffff;
-    text-transform: uppercase;
-    letter-spacing: 1.3px;
-    font-weight: bold;
-    padding: 2px 10px;
-    border-radius: 3px;
+    background: #8add95;
+    border-radius: 10px;
     font-size: 12px;
-    display: block;
-    margin: 5px 0 5px auto;
+    margin: 0;
+    color: #fff;
+    padding: 2px 10px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .card-body span.price {
@@ -129,12 +141,13 @@
 }
 
 .card-header img {
-    width: 80px;
+    width: 60px;
     height: auto;
 }
 
 .filter-row .filter-col:last-child .card-footer {
     margin: 10px 0;
+    padding: 20px;
 }
 
 .filter-row .filter-col:last-child .card-footer button {
@@ -144,10 +157,12 @@
     padding: 5px 10px;
     border: none;
     box-shadow: 0 0 5px #f0f3bd;
-    color: #2f5f74;
+    color: #000000;
     letter-spacing: 1.4px;
     text-transform: uppercase;
     transition: all 0.5s;
+    padding: 10px 20px;
+    border-radius: 20px;
 }
 
 .filter-row .filter-col:last-child button:hover {
@@ -183,7 +198,7 @@
 }
 
 .pagi-active {
-    background-color: #2f5f74;
+    background-color: #99b6ec;
 }
 
 .filter-pagination ul li.pagi-active a,

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import SellFilterInfo from "./SellFilterInfo";
-import "./Cards.css";
+
 
 const SellFilter = ({ seller }) => {
   const [pageNumber, setPageNumber] = useState(0);
