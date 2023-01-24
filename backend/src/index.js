@@ -1,4 +1,4 @@
 import "./app.js";
-import "./database/databaseMongoDB.js";
-import "./database/databaseCloudinary.js";
+import "./databases/databaseMongoDB.js";
+import "./databases/databaseCloudinary.js";
  

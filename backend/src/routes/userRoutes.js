@@ -24,5 +24,6 @@ router.post(
 );
 router.get("/all", userController.getUser);
 router.get("/user/:id", userController.getUserById);
+router.delete("/delete/:id", userController.deleteUser);
 
 export default router;
