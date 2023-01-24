@@ -97,7 +97,7 @@ span.login {
     background-color: #121212;
     bottom: 0;
     width: 100%;
-    position: absolute;
+    position: relative;
 }
 
 .footer-row {
