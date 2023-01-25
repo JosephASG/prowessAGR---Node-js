@@ -23,7 +23,7 @@ const OrderSchema = new mongoose.Schema(
         sellerImage: { type: String, required: true },
       },
     ],
-    id: { type: String, unique: true, required: false },
+    //id: { type: String, unique: true, required: false },
     name: { type: String, required: true },
     email: { type: String, required: true },
     address: { type: String, required: true },

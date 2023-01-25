@@ -100,17 +100,6 @@ export const getUserById = async (req, res) => {
 
 //PUT
 export const updateUser = async (req, res) => {
-  if (
-    (!req.body.name,
-    !req.body.email,
-    !req.body.password,
-    !req.body.address,
-    !req.body.phone)
-  )
-    return res
-      .status(HTTP_STATUS.BAD_REQUEST)
-      .json({ message: "All fields are required" });
-
   try {
     const { id: userId } = req.params;
     // if user not found, return error
@@ -120,17 +109,11 @@ export const updateUser = async (req, res) => {
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ error: "User not found" });
     }
-    // validate user
-    const currentUser = await User.findById(userId);
-    if (!currentUser.isAdmin)
-      return res
-        .status(HTTP_STATUS.UNAUTHORIZED)
-        .json({ error: "You don't have permission to update this user" });
     // update user data with data
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.address = req.body.address;
-    user.phone = req.body.phone;
+    user.name = req.body.name ? req.body.name : user.name;
+    user.email = req.body.email ? req.body.email : user.email;
+    user.address = req.body.address ? req.body.address : user.address;
+    user.phone = req.body.phone ? req.body.phone : user.phone;
     // if password is changed, hash it and save it to DB
     if (req.body.password) {
       user.password = bcrypt.hashSync(req.body.password);
