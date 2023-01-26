@@ -41,12 +41,22 @@ const LatestSeller = ({ user }) => {
   };
 
   return (
-    <div className="sellers-group" key={user._id}>
-      <div className="sellers-header">
-        <img src={user.image.secure_url} alt={user.name} />
+
+      <div className="latest-sellers" >
+        
+        <div className="card-latest">
+          <div className="image">
+          <img src={user.image.secure_url} alt={user.name} />
+          <div className="info-latest">
+          <ul>
+          <li>
+        {user.name}
+        </li>
+        </ul>
+        </div>
       </div>
-      <div className="sellers-body">
-        <Link to={`seller/${user._id}`}>
+      <div className="content">
+      <Link to={`seller/${user._id}`}>
           {user.name} <FontAwesomeIcon icon={faEye} />
         </Link>
 
@@ -67,9 +77,15 @@ const LatestSeller = ({ user }) => {
         <span className="date">
           Miembro desde: {user.createdAt.slice(0, 10)}
         </span>
+          </div>
+        
+
+        </div>
+        
       </div>
-    </div>
+
   );
+
 };
 
 export default LatestSeller;
