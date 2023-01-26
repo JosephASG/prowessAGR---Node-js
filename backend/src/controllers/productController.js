@@ -1,5 +1,8 @@
 import Products from "../models/productModel.js";
-import { uploadImage, deleteImage } from "../utils/cloudinaryConfig.js";
+import {
+  uploadImageProduct,
+  deleteImageProduct,
+} from "../utils/cloudinaryConfig.js";
 import HTTP_STATUS from "http-status-codes";
 import fs from "fs-extra";
 
@@ -19,7 +22,7 @@ export const postProduct = async (req, res) => {
   try {
     const newProduct = new Products(req.body);
     if (req.files?.image) {
-      const result = await uploadImage(req.files.image.tempFilePath);
+      const result = await uploadImageProduct(req.files.image.tempFilePath);
       newProduct.image = {
         public_id: result.public_id,
         secure_url: result.secure_url,
@@ -84,14 +87,13 @@ export const getProductById = async (req, res) => {
 
 //UPDATE PRODUCT
 export const updateProduct = async (req, res) => {
-   // check if all fields are sent
-   if (
+  // check if all fields are sent
+  if (
     (!req.body.name,
     !req.body.slug,
     !req.body.category,
     !req.body.description,
-    !req.body.price,
-    !req.body.image)
+    !req.body.price)
   )
     return res
       .status(HTTP_STATUS.BAD_REQUEST)
@@ -115,9 +117,9 @@ export const updateProduct = async (req, res) => {
     // if image is uploaded, delete old image from cloudinary and upload new image
     if (req.files?.image) {
       if (product.image?.public_id) {
-        await deleteImage(product.image.public_id);
+        await deleteImageProduct(product.image.public_id);
       }
-      const result = await uploadImage(req.files.image.tempFilePath);
+      const result = await uploadImageProduct(req.files.image.tempFilePath);
       product.image = {
         public_id: result.public_id,
         secure_url: result.secure_url,
@@ -139,16 +141,20 @@ export const deleteProduct = async (req, res) => {
     const { id: productId } = req.params;
     const product = await Products.findById(productId);
     if (!product) {
-      return res.status(HTTP_STATUS.NOT_FOUND).json({ error: "Product not found" });
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ error: "Product not found" });
     }
     // delete image from cloudinary
     if (product.image?.public_id) {
-      await deleteImage(product.image.public_id);
+      await deleteImageProduct(product.image.public_id);
     }
     // delete product from DB
     await product.remove();
-    return res.status(HTTP_STATUS.OK).json({ message: "Product deleted successfully" });
+    return res
+      .status(HTTP_STATUS.OK)
+      .json({ message: "Product deleted successfully" });
   } catch (error) {
-    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error });
-  }
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error });
+  }
 };

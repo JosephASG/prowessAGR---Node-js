@@ -3,7 +3,10 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import HTTP_STATUS from "http-status-codes";
 import User from "../models/userModel.js";
-import { uploadImage, deleteImage } from "../utils/cloudinaryConfig.js";
+import {
+  uploadImageUser,
+  deleteImageUser
+} from "../utils/cloudinaryConfig.js";
 import fs from "fs-extra";
 
 //LOGIN USER
@@ -121,9 +124,9 @@ export const updateUser = async (req, res) => {
     // if image is uploaded, save it to cloudinary and save the link to DB and delete the old image
     if (req.files?.image) {
       if (user.image?.public_id) {
-        await deleteImage(user.image.public_id);
+        await deleteImageUser(user.image.public_id);
       }
-      const result = await uploadImage(req.files.image.tempFilePath);
+      const result = await uploadImageUser(req.files.image.tempFilePath);
       user.image = {
         public_id: result.public_id,
         secure_url: result.secure_url,
