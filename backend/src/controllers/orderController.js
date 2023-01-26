@@ -5,12 +5,6 @@ import HTTP_STATUS from "http-status-codes";
 //Post Order
 export const createOrder = async (req, res) => {
   try {
-    const existingOrder = await Order.findOne({ id: req.body.id });
-    if (existingOrder) {
-      return res
-        .status(HTTP_STATUS.BAD_REQUEST)
-        .json({ message: "Order already exists" });
-    }
     const orderItems = req.body.orderItems;
     for (const item of orderItems) {
       const product = await Product.findById(item.product_id);
@@ -25,7 +19,7 @@ export const createOrder = async (req, res) => {
 
     const newOrder = new Order({
       orderItems: req.body.orderItems,
-      id: req.body.id,
+      // id: req.body.id,
       name: req.body.name,
       email: req.body.email,
       address: req.body.address,

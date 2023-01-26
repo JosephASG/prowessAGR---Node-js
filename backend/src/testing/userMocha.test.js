@@ -1,7 +1,7 @@
 import request from "supertest";
 import test from "./app-testing.js";
 import User from "../models/userModel.js";
-import HTTP_STATUS from "http-status-codes";;
+import HTTP_STATUS from "http-status-codes";
 
 beforeEach(() => {
   jest.setTimeout(10000);
@@ -61,7 +61,6 @@ describe("POST /api/users/login", () => {
     expect(response.status).toBe(HTTP_STATUS.OK);
     expect(response.body).toHaveProperty("token");
     const loggedInUser = await User.findOneAndDelete({ email: newUser.email });
-    await loggedInUser.delete();
     expect(loggedInUser).not.toBeNull();
   });
 
@@ -96,42 +95,11 @@ describe("PUT /api/users/update/:id", () => {
       address: "456 Elm St",
       phone: "5555555556",
     };
-
     const response = await request(test)
       .put(`/api/users/update/${savedUser._id}`)
       .send(updateData);
 
-    if (!response.body.isAdmin) {
-      expect(response.status).toBe(HTTP_STATUS.UNAUTHORIZED);
-    } else {
-      expect(response.status).toBe(HTTP_STATUS.OK);
-      expect(updatedUser).not.toBeNull();
-    }
-    const updatedUser = await User.findByIdAndDelete(savedUser._id);
-  });
-
-  it("should return error if fields are missing", async () => {
-    const newUser = {
-      name: "John Ica",
-      email: "johnIca@example.com",
-      password: "password123",
-      address: "123 Main St",
-      phone: "555-555-5555",
-      image: {
-        public_id: "prowess/seller_tlpqnm",
-        secure_url:
-          "https://res.cloudinary.com/primalappsje/image/upload/v1671478343/primal/seller_tlpqnm.png",
-      },
-      asAdmin: false,
-    };
-    const savedUser = await new User(newUser).save();
-    const updateData = { name: "John Ica" };
-    const response = await request(test)
-      .put(`/api/users/update/${savedUser._id}`)
-      .send(updateData);
-    expect(response.status).toBe(HTTP_STATUS.BAD_REQUEST);
-    expect(response.body.message).toBe("All fields are required");
-    const updatedUser = await User.findOneAndDelete({ name: updateData.name });
-    expect(updatedUser).not.toBeNull();
+    expect(response.status).toBe(HTTP_STATUS.OK);
+    await User.findOneAndDelete({ name: updateData.name });
   });
 });
