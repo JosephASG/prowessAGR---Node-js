@@ -52,6 +52,9 @@ const LatestSeller = ({ user }) => {
           <li>
         {user.name}
         </li>
+        <li>
+        {user.email}
+        </li>
         </ul>
         </div>
       </div>
