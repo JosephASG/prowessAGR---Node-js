@@ -50,19 +50,28 @@ const LatestSeller = ({ user }) => {
           <div className="info-latest">
           <ul>
           <li>
-        {user.name}
+        <span className="date">
+         <strong> Miembro desde: </strong> {user.createdAt.slice(0, 10)}
+        </span>
         </li>
-        <li>
+        <li><strong>Correo: </strong>
         {user.email}
+        </li>
+        <li><strong>Teléfono: </strong>
+        {user.phone}
+        </li>
+        <li><strong>Dirección: </strong>
+        {user.address}
         </li>
         </ul>
         </div>
       </div>
       <div className="content">
+        <ul>
       <Link to={`seller/${user._id}`}>
           {user.name} <FontAwesomeIcon icon={faEye} />
         </Link>
-
+      
         {existUser && sellerExists ? (
           <span
             key={user._id}
@@ -76,10 +85,7 @@ const LatestSeller = ({ user }) => {
             Seguir
           </span>
         )}
-
-        <span className="date">
-          Miembro desde: {user.createdAt.slice(0, 10)}
-        </span>
+          </ul> 
           </div>
         
 
