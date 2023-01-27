@@ -22,8 +22,7 @@ const AccountUser = () => {
   const [email, setEmail] = useState(userInfo && userInfo.email);
   const [address, setAddress] = useState(userInfo && userInfo.address);
   const [phone, setPhone] = useState(userInfo && userInfo.phone);
-
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(userInfo && userInfo.image);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [previewImage, setPreviewImage] = useState(false);
 
@@ -55,72 +54,61 @@ const AccountUser = () => {
     fetchData();
   }, [navigate, id]);
 
+  // update info user
   const handlerUpdate = async (e) => {
     e.preventDefault();
-
     try {
-      const { data } = await axios.put("/api/users/update", {
-        _id: userInfo._id,
-        name,
-        email,
-        address,
-        phone,
-      });
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("address", address);
+      formData.append("phone", phone);
+      const { data } = await axios.put(
+        `/api/users/update/${userInfo._id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       localStorage.setItem("userInfo", JSON.stringify(data));
       alert("Información actualizada con éxito!");
     } catch (err) {
       alert("Información no actualizada!");
     }
   };
-
+  // validate image
   const validateImage = async (e) => {
-    const file = e.target.files[0];
-    if (file.size >= 1048576) {
+    const fileUser = e.target.files[0];
+    if (fileUser.size >= 1048576) {
       return alert("El tamaño máximo de la imagen es 1MB");
     } else {
-      setImage(file);
-      setPreviewImage(URL.createObjectURL(file));
+      setImage(fileUser);
+      setPreviewImage(URL.createObjectURL(fileUser));
     }
   };
 
-  const uploadImage = async () => {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "your_folder");
-    try {
-      setUploadingImage(true);
-      let res = await fetch(
-        "https://api.cloudinary.com/v1_1/YOUR_NAME/image/upload",
-        {
-          method: "post",
-          body: data,
-        }
-      );
-      const urlData = await res.json();
-      setUploadingImage(false);
-      return urlData.url;
-    } catch (error) {
-      setUploadingImage(false);
-      console.log(error);
-    }
-  };
-
+  // if just upload image
   const handlerUpdateImage = async (e) => {
     e.preventDefault();
-
     if (!image) {
       return alert("Por favor selecciona una imagen de Perfil");
     }
-
-    const url = await uploadImage(image);
-    console.log(url);
-
-    const { data } = await axios.put("/api/users/update", {
-      _id: userInfo._id,
-      image: url,
-    });
+    const formData = new FormData();
+    formData.append("image", image);
+    const { data } = await axios.put(
+      `/api/users/update/${userInfo._id}`,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
     localStorage.setItem("userInfo", JSON.stringify(data));
     alert("Imagen de perfil actualizada con éxito");
+    setUploadingImage(false);
   };
 
   return (
@@ -223,7 +211,7 @@ const AccountUser = () => {
           </div>
           {/* <h2 className="account-subtitle">Mis órdenes</h2>
           <div className="account-orders">
-             {orders.length === 0 ? (
+            {orders.length === 0 ? (
               <h3 className="info">
                 Actualmente no tienes órdenes de entrega!
               </h3>

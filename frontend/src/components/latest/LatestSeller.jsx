@@ -41,15 +41,37 @@ const LatestSeller = ({ user }) => {
   };
 
   return (
-    <div className="sellers-group" key={user._id}>
-      <div className="sellers-header">
-        <img src={user.image.secure_url} alt={user.name} />
+
+      <div className="latest-sellers" >
+        
+        <div className="card-latest">
+          <div className="image">
+          <img src={user.image.secure_url} alt={user.name} />
+          <div className="info-latest">
+          <ul>
+          <li>
+        <span className="date">
+         <strong> Miembro desde: </strong> {user.createdAt.slice(0, 10)}
+        </span>
+        </li>
+        <li><strong>Correo: </strong>
+        {user.email}
+        </li>
+        <li><strong>Teléfono: </strong>
+        {user.phone}
+        </li>
+        <li><strong>Dirección: </strong>
+        {user.address}
+        </li>
+        </ul>
+        </div>
       </div>
-      <div className="sellers-body">
-        <Link to={`seller/${user._id}`}>
+      <div className="content">
+        <ul>
+      <Link to={`seller/${user._id}`}>
           {user.name} <FontAwesomeIcon icon={faEye} />
         </Link>
-
+      
         {existUser && sellerExists ? (
           <span
             key={user._id}
@@ -63,13 +85,16 @@ const LatestSeller = ({ user }) => {
             Seguir
           </span>
         )}
+          </ul> 
+          </div>
+        
 
-        <span className="date">
-          Miembro desde: {user.createdAt.slice(0, 10)}
-        </span>
+        </div>
+        
       </div>
-    </div>
+
   );
+
 };
 
 export default LatestSeller;

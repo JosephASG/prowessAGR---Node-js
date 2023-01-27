@@ -1,11 +1,12 @@
 import { Router } from "express";
 import * as orderController from "../controllers/orderController.js";
 
-const OrderRouter = Router();
+const router = Router();
 
-OrderRouter.post("/", orderController.createOrder);
-OrderRouter.get("/userorders/:id", orderController.getOrders);
-OrderRouter.get("/:id", orderController.getOrder);
-OrderRouter.get("/mine/:id", orderController.getMyOrders);
+router.post("/", orderController.createOrder);
+router.get("/mine/:id", orderController.getMyOrders);
+router.get("/userorders/:id", orderController.getOrders);
+router.get("/:id", orderController.getOrder);
 
-export default OrderRouter;
+
+export default router;

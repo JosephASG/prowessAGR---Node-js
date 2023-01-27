@@ -3,7 +3,10 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import HTTP_STATUS from "http-status-codes";
 import User from "../models/userModel.js";
-import { uploadImage, deleteImage } from "../utils/cloudinaryConfig.js";
+import {
+  uploadImageUser,
+  deleteImageUser
+} from "../utils/cloudinaryConfig.js";
 import fs from "fs-extra";
 
 //LOGIN USER
@@ -100,17 +103,6 @@ export const getUserById = async (req, res) => {
 
 //PUT
 export const updateUser = async (req, res) => {
-  if (
-    (!req.body.name,
-    !req.body.email,
-    !req.body.password,
-    !req.body.address,
-    !req.body.phone)
-  )
-    return res
-      .status(HTTP_STATUS.BAD_REQUEST)
-      .json({ message: "All fields are required" });
-
   try {
     const { id: userId } = req.params;
     // if user not found, return error
@@ -120,17 +112,11 @@ export const updateUser = async (req, res) => {
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ error: "User not found" });
     }
-    // validate user
-    const currentUser = await User.findById(userId);
-    if (!currentUser.isAdmin)
-      return res
-        .status(HTTP_STATUS.UNAUTHORIZED)
-        .json({ error: "You don't have permission to update this user" });
     // update user data with data
-    user.name = req.body.name;
-    user.email = req.body.email;
-    user.address = req.body.address;
-    user.phone = req.body.phone;
+    user.name = req.body.name ? req.body.name : user.name;
+    user.email = req.body.email ? req.body.email : user.email;
+    user.address = req.body.address ? req.body.address : user.address;
+    user.phone = req.body.phone ? req.body.phone : user.phone;
     // if password is changed, hash it and save it to DB
     if (req.body.password) {
       user.password = bcrypt.hashSync(req.body.password);
@@ -138,9 +124,9 @@ export const updateUser = async (req, res) => {
     // if image is uploaded, save it to cloudinary and save the link to DB and delete the old image
     if (req.files?.image) {
       if (user.image?.public_id) {
-        await deleteImage(user.image.public_id);
+        await deleteImageUser(user.image.public_id);
       }
-      const result = await uploadImage(req.files.image.tempFilePath);
+      const result = await uploadImageUser(req.files.image.tempFilePath);
       user.image = {
         public_id: result.public_id,
         secure_url: result.secure_url,

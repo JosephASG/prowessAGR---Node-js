@@ -21,10 +21,17 @@ const Passwords = ({ setOpen }) => {
     //if equal pass with r_pass
     if (password === rPassword) {
       try {
-        const { data } = await axios.put("/api/users/update", {
-          _id: userInfo._id,
-          password,
-        });
+        const formData = new FormData();
+        formData.append("password", password);
+        const { data } = await axios.put(
+          `/api/users/update/${userInfo._id}`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
         localStorage.removeItem("userInfo", JSON.stringify(data));
         alert("Contraseña actualizada con éxito!");
         navigate("/login");
