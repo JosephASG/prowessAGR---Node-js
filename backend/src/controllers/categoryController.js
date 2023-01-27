@@ -1,13 +1,21 @@
 import Category from "../models/categoryModel.js";
+import HTTP_STATUS from "http-status-codes";
 
 //GET BY ID
 export const getCategoryById = async (req, res) => {
-
+  const id = req.params.id;
   try {
-    const category = await Category.findById(req.params.id);
-    res.status(200).json(category);
+    const category = await Category.findById(id);
+    if (!category) {
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ message: `No category found by id ${id}` });
+    }
+    return res.status(HTTP_STATUS.OK).json(category);
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    return res
+      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
   }
 };
 
@@ -15,8 +23,15 @@ export const getCategoryById = async (req, res) => {
 export const getCategories = async (req, res) => {
   try {
     const categories = await Category.find();
-    res.status(200).json(categories);
+    if (!categories) {
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ message: "No categories found" });
+    }
+    return res.status(HTTP_STATUS.OK).json(categories);
   } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
+    return res
+      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+  }
 };

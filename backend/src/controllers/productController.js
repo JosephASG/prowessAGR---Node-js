@@ -1,12 +1,11 @@
 import Products from "../models/productModel.js";
-import {
-  uploadImage,
-  deleteImage,
-} from "../utils/cloudinaryConfig.js";
+import { uploadImage, deleteImage } from "../utils/cloudinaryConfig.js";
+import HTTP_STATUS from "http-status-codes";
 import fs from "fs-extra";
 
 //CREATE PRODUCT
 export const postProduct = async (req, res) => {
+  //
   if (
     (!req.body.name,
     !req.body.slug,
@@ -14,7 +13,9 @@ export const postProduct = async (req, res) => {
     !req.body.description,
     !req.body.price)
   )
-    return res.status(400).json({ message: "All fields are required" });
+    return res
+      .status(HTTP_STATUS.BAD_REQUEST)
+      .json({ message: "All fields are required" });
   try {
     const newProduct = new Products(req.body);
     if (req.files?.image) {
@@ -26,9 +27,9 @@ export const postProduct = async (req, res) => {
       await fs.unlink(req.files.image.tempFilePath);
     }
     const savedProduct = await newProduct.save();
-    return res.status(200).json(savedProduct);
+    return res.status(HTTP_STATUS.CREATED).json(savedProduct);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
 
@@ -36,9 +37,9 @@ export const postProduct = async (req, res) => {
 export const getProducts = async (req, res) => {
   try {
     const products = await Products.find();
-    return res.status(200).json(products);
+    return res.status(HTTP_STATUS.OK).json(products);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
 
@@ -46,30 +47,64 @@ export const getProducts = async (req, res) => {
 export const getProductBySlug = async (req, res) => {
   try {
     const product = await Products.findOne({ slug: req.params.slug });
-    return res.status(200).json(product);
+    if (!product) {
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ message: "Product not found" });
+    }
+    return res.status(HTTP_STATUS.OK).json(product);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
 //GET PRODUCT BY SELLER ID
 export const getProductBySellerId = async (req, res) => {
   try {
     const product = await Products.find({ sellerId: req.params.id });
-    return res.status(200).json(product);
+    return res.status(HTTP_STATUS.OK).json(product);
   } catch (error) {
-    return res.status(500).json(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
+  }
+};
+
+//GET PRODUCT BY ID
+export const getProductById = async (req, res) => {
+  try {
+    const product = await Products.findById(req.params.id);
+    if (!product) {
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ message: "Product not found" });
+    }
+    return res.status(HTTP_STATUS.OK).json(product);
+  } catch (error) {
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
 
 //UPDATE PRODUCT
 export const updateProduct = async (req, res) => {
+   // check if all fields are sent
+   if (
+    (!req.body.name,
+    !req.body.slug,
+    !req.body.category,
+    !req.body.description,
+    !req.body.price,
+    !req.body.image)
+  )
+    return res
+      .status(HTTP_STATUS.BAD_REQUEST)
+      .json({ message: "All fields are required" });
   try {
     // obtein product id from params and search user by id in DB
     const { id: productId } = req.params;
     // search product by id in DB
     const product = await Products.findById(productId);
     if (!product) {
-      return res.status(404).json({ error: "Product not found" });
+      return res
+        .status(HTTP_STATUS.NOT_FOUND)
+        .json({ error: "Product not found" });
     }
     // update product data with data from request body
     product.name = req.body.name;
@@ -92,24 +127,28 @@ export const updateProduct = async (req, res) => {
 
     // save product in DB and return updated product
     const updatedProduct = await product.save();
-    return res.status(200).json({ product: updatedProduct });
+    return res.status(HTTP_STATUS.OK).json({ product: updatedProduct });
   } catch (error) {
-    return res.status(500).json({ error });
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error });
   }
 };
 
 //DELETE PRODUCT
 export const deleteProduct = async (req, res) => {
   try {
-    const product = await Products.findByIdAndDelete(req.params.id);
-    if (!product)
-      return res.status(404).json({ message: "Product does not exits" });
-
+    const { id: productId } = req.params;
+    const product = await Products.findById(productId);
+    if (!product) {
+      return res.status(HTTP_STATUS.NOT_FOUND).json({ error: "Product not found" });
+    }
+    // delete image from cloudinary
     if (product.image?.public_id) {
       await deleteImage(product.image.public_id);
     }
-    return res.status(200).json({ message: "Product deleted" });
+    // delete product from DB
+    await product.remove();
+    return res.status(HTTP_STATUS.OK).json({ message: "Product deleted successfully" });
   } catch (error) {
-    return res.status(500).json(error);
-  }
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error });
+  }
 };

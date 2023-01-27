@@ -159,12 +159,12 @@ const CartItems = () => {
       </div>
       {openCheckout && (
         <Checkout
-          cartItems={cartItems}
           idSeller={idSeller}
+          setOpenCheckout={setOpenCheckout}
+          cartItems={cartItems}
           itemsPrice={itemsPrice}
           taxPrice={taxPrice}
           totalPrice={totalPrice}
-          setOpenCheckout={setOpenCheckout}
         />
       )}
     </div>

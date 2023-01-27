@@ -22,7 +22,7 @@ const UserInfoOrders = ({ userOrders }) => {
         .map((item) => (
           <h4 key={item._id}>
             Order No: {item._id.substring(0, 10)}...{" "}
-            <Link className="linkOrder" to={`/userorder/${item._id}`}>
+            <Link className="linkOrder" to={`/order/${item._id}`}>
               <FontAwesomeIcon icon={faEye} />
             </Link>
           </h4>

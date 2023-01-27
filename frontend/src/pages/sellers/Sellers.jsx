@@ -14,9 +14,11 @@ const Sellers = () => {
       {/* Header End */}
 
       {/* Main Start */}
+       <main className="main-container">
       <div className="background-sellers">
         <SellFilters />
       </div>
+      </main>
       {/* Main End*/}
 
       {/* Footer Start */}

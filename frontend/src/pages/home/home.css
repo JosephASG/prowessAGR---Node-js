@@ -93,12 +93,12 @@ span.login {
 }
 
 .footer-container {
-    width: 100%;
-    height: auto;
+    height: 40px;
     box-shadow: 0 -15px 10px -15px #485b63;
     background-color: #121212;
-    padding: 20px;
-    margin: 0;
+    bottom: 0;
+    width: 100%;
+    position: relative;
 }
 
 .footer-row {
@@ -106,6 +106,7 @@ span.login {
     justify-content: center;
     align-items: center;
     height: 100%;
+
 }
 
 .footer-row span {

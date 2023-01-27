@@ -5,6 +5,7 @@ import * as productController from "../controllers/productController.js";
 const router = Router();
 
 router.get("/seller/:id", productController.getProductBySellerId);
+router.get("/product/:id", productController.getProductById);
 router.post(
   "/add",
   fileUpload({

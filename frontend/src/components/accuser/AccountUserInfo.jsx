@@ -16,12 +16,12 @@ const AccountUserInfo = () => {
       const fetchData = async () => {
         try {
 
-          const result = await axios.get(`/orders/userorders/${id}`);
-          console.log(result.data);
-          setUserOrders(result.data)
+          const result = await axios.get(`/api/orders/userorders/${id}`);
+          console.log(result.orderIems.data); 
+          setUserOrders(result.orderItems.data)
   
         } catch(err) {
-          console.log("Error!");
+          console.log("No se muestran las ordenes del usuario!");
         }
     }
     fetchData();

@@ -74,6 +74,7 @@ const SellFilterInfo = ({ user }) => {
 // };
 
   return (
+    <div className="container-card">
     <div className="card">
       <div key={user._id}>
         <h2 className="data-vendor">
@@ -104,8 +105,8 @@ const SellFilterInfo = ({ user }) => {
         <div class="card_circle transition"></div>
       </div>
     </div>
-  )
-}
-
+    </div>
+  );
+};
 
 export default SellFilterInfo;

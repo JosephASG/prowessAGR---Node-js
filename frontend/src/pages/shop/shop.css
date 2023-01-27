@@ -1,21 +1,25 @@
 .filter-row {
-    padding: 50px 15px;
-    height: auto;
+    padding: 1em;
+    height: 80vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
+    /**/
+    flex-direction: row;
 }
 
 .filter-row .filter-col:first-child {
     display: flex;
     justify-content: space-evenly;
-    margin: 50px 0;
+    margin-bottom: 20px;
+    flex-direction: row;
+    /**/
 }
 
 .filter-row .filter-col:first-child .filter-group:first-child button {
-    margin: 0 15px;
+    margin: 0.5em, ;
     background-color: #2f5f74;
     padding: 10px 25px;
     border: none;
@@ -40,6 +44,7 @@
     letter-spacing: 1.4px;
     color: #2f5f74;
     transition: all 0.7s;
+
 }
 
 .filter-row .filter-col:first-child .filter-group:last-child input:focus {
@@ -55,6 +60,7 @@
     letter-spacing: 1.4px;
     text-transform: uppercase;
     transition: all 0.5s;
+
 }
 
 .filter-row .filter-col:first-child .filter-group:last-child button:hover {
@@ -67,8 +73,9 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 35px 20px;
-    margin-bottom: 50px;
+    gap: 15px 10px;
+    margin-bottom: 1em;
+    /**/
 }
 
 .filter-card {
@@ -80,6 +87,7 @@
     width: 300px;
     height: auto;
     transition: all 0.5s;
+
 }
 
 .filter-card:hover {
@@ -121,6 +129,7 @@
     text-shadow: 0 0 1px #2f5f74;
     margin-bottom: 10px;
 
+
 }
 
 .card-body span.category {
@@ -132,17 +141,20 @@
     padding: 2px 10px;
     text-transform: uppercase;
     cursor: pointer;
+
 }
 
 .card-body span.price {
     font-weight: bold;
     display: block;
     margin: 5px 0 5px auto;
+
 }
 
 .card-header img {
     width: 60px;
     height: auto;
+
 }
 
 .filter-row .filter-col:last-child .card-footer {
@@ -173,10 +185,12 @@
 .filter-pagination {
     display: flex;
     justify-content: center;
+    bottom: 0;
 }
 
 .filter-pagination ul {
     display: flex;
+    background-color: #2f5f74;
 }
 
 .filter-pagination ul li {
@@ -204,4 +218,10 @@
 .filter-pagination ul li.pagi-active a,
 .filter-pagination ul li:hover a {
     color: #ffffff;
+}
+
+@media (max-width: 800px) {
+    .filter-row filter-col:first-child {
+        flex-direction: column;
+    }
 }

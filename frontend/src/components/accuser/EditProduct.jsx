@@ -16,7 +16,7 @@ const EditProduct = ({ setOpenEdit, pro }) => {
   const [category, setCategory] = useState(pro.category);
   const [description, setDescription] = useState(pro.description);
   const [price, setPrice] = useState(pro.price);
-  const [imageProduct, setImageProduct] = useState(null);
+  const [image, setImage] = useState(pro.image);
   const [uploadingImageProduct, setUploadingImageProduct] = useState(false);
   const [previewImageProduct, setPreviewImageProduct] = useState(
     pro.image.secure_url
@@ -27,89 +27,47 @@ const EditProduct = ({ setOpenEdit, pro }) => {
     if (fileProduct.size >= 1048576) {
       return alert("El tamaño máximo de la imagen es 1MB");
     } else {
-      setImageProduct(fileProduct);
+      setImage(fileProduct);
       setPreviewImageProduct(URL.createObjectURL(fileProduct));
-    }
-  };
-
-  const uploadImageProduct = async () => {
-    const dataProduct = new FormData();
-    dataProduct.append("file", imageProduct);
-    dataProduct.append("upload_preset", "your_folder");
-    try {
-      setUploadingImageProduct(true);
-      let res = await fetch(
-        "https://api.cloudinary.com/v1_1/YOUR_NAME/image/upload",
-        {
-          method: "post",
-          body: dataProduct,
-        }
-      );
-      const urlDataProduct = await res.json();
-      setUploadingImageProduct(false);
-      return urlDataProduct.url;
-    } catch (error) {
-      setUploadingImageProduct(false);
-      console.log(error);
     }
   };
 
   const handlerUpdateProduct = async (e) => {
     e.preventDefault();
 
-    //if is not set new images, if exists image
-    if (previewImageProduct) {
-      try {
-        const { data } = await axios.put("/api/products/update", {
-          _id: pro._id,
-          name,
-          slug,
-          category,
-          description,
-          price,
-          image: previewImageProduct,
-          sellerId: userInfo._id,
-          seller: userInfo.name,
-          sellerImage: userInfo.image,
-        });
-        console.log(data);
-        alert("Producto actualizado con éxito!");
-        navigate("/account");
-        setOpenEdit(false);
-      } catch (error) {
-        console.log("Error!");
-        alert("Error al actulizar, por favor intente de nuevo!");
-      }
-      //if set new image, than set url link for new image
-    } else {
-      const url = await uploadImageProduct(imageProduct);
-      console.log(url);
-
-      try {
-        const { data } = await axios.put("/api/products/update", {
-          id: pro._id,
-          name,
-          slug,
-          category,
-          description,
-          price,
-          image: url,
-          sellerId: userInfo._id,
-          seller: userInfo.name,
-          sellerImage: userInfo.imagez,
-        });
-        console.log(data);
-        alert("Producto actualizado con éxito!");
-        navigate("/account");
-        setOpenEdit(false);
-      } catch (error) {
-        console.log("Error!");
-        alert("Error al actualizar, por favor intente de nuevo!");
-      }
+    if (!image) {
+      return alert("Por favor seleccione una imagen del producto");
     }
-
-    const url = await uploadImageProduct(imageProduct);
-    console.log(url);
+    setUploadingImageProduct(true);
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("slug", slug);
+      formData.append("category", category);
+      formData.append("description", description);
+      formData.append("price", price);
+      formData.append("image", image);
+      formData.append("sellerId", userInfo._id);
+      formData.append("seller", userInfo.name);
+      formData.append("sellerImage", userInfo.image.secure_url);
+      const data = await axios.put(
+        `/api/products/update/${pro._id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      alert("Producto actualizado con éxito!");
+      navigate("/account");
+      window.location.reload();
+      setOpenEdit(false);
+      console.log(data);
+    } catch (error) {
+      alert("Error al actualizar el producto, error: " + error);
+    }
+    setUploadingImageProduct(false);
   };
 
   return (
