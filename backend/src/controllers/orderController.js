@@ -7,8 +7,6 @@ export const createOrder = async (req, res) => {
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
       id: req.body.id,
-      orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
-      // orderItems: req.body.orderItems,
       name: req.body.name,
       email: req.body.email,
       address: req.body.address,
@@ -30,7 +28,6 @@ export const createOrder = async (req, res) => {
 };
 
 //Get my orders
-
 export const getMyOrders = async (req, res) => {
   try {
     const orders = await Order.find({ id: req.params.id });

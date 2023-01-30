@@ -116,8 +116,7 @@ const AccountUser = () => {
       <h2 className="account-title">Mi cuenta</h2>
       <div className="account-groups">
         <div className="account-group">
-          <div className="wrapper-form-edit-account">
-              <form className="form-image image-account" onSubmit={handlerUpdateImage}>
+          <form className="form-image" onSubmit={handlerUpdateImage}>
             <img
               src={previewImage || (userInfo && userInfo.image.secure_url)}
               alt=""
@@ -135,62 +134,61 @@ const AccountUser = () => {
             <button className="btn-upload">
               {uploadingImage ? "Subiendo..." : "Subir"}
             </button>
-              </form>
+          </form>
 
-              <div className="form-row account form-account">
-                <form className="form" onSubmit={handlerUpdate}>
-                  <div className="form-group">
-                    <label htmlFor="name">Nombre completo</label>
-                    <input
-                      required
-                      type="text"
-                      onChange={(e) => setName(e.target.value)}
-                      value={name}
-                      id="name"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      required
-                      type="email"
-                      onChange={(e) => setEmail(e.target.value)}
-                      value={email}
-                      id="email"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="address">Dirección</label>
-                    <input
-                      required
-                      type="text"
-                      onChange={(e) => setAddress(e.target.value)}
-                      value={address}
-                      id="address"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="phone">Teléfono</label>
-                    <input
-                      required
-                      type="text"
-                      id="phone"
-                      onChange={(e) => setPhone(e.target.value)}
-                      value={phone}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <span className="change-password" onClick={() => setOpen(true)}>
-                      Cambiar contraseña
-                    </span>
-                  </div>
-                  <div className="form-btn">
-                    <button>
-                      <FontAwesomeIcon icon={faRefresh} /> Actualizar
-                    </button>
-                  </div>
-                </form>
+          <div className="form-row account form-account">
+            <form className="form" onSubmit={handlerUpdate}>
+              <div className="form-group">
+                <label htmlFor="name">Nombre completo</label>
+                <input
+                  required
+                  type="text"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  id="name"
+                />
               </div>
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  required
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  id="email"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="address">Dirección</label>
+                <input
+                  required
+                  type="text"
+                  onChange={(e) => setAddress(e.target.value)}
+                  value={address}
+                  id="address"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Teléfono</label>
+                <input
+                  required
+                  type="text"
+                  id="phone"
+                  onChange={(e) => setPhone(e.target.value)}
+                  value={phone}
+                />
+              </div>
+              <div className="form-group">
+                <span className="change-password" onClick={() => setOpen(true)}>
+                  Cambiar contraseña
+                </span>
+              </div>
+              <div className="form-btn">
+                <button>
+                  <FontAwesomeIcon icon={faRefresh} /> Actualizar
+                </button>
+              </div>
+            </form>
           </div>
           {open && <Passwords setOpen={setOpen} />}
           <div className="account-info">
@@ -209,7 +207,7 @@ const AccountUser = () => {
               <UserProduct product={product} />
             )}
           </div>
-          {/* <h2 className="account-subtitle">Mis órdenes</h2>
+          <h2 className="account-subtitle">Mis órdenes</h2>
           <div className="account-orders">
             {orders.length === 0 ? (
               <h3 className="info">
@@ -217,8 +215,8 @@ const AccountUser = () => {
               </h3>
             ) : (
               <Orders orders={orders} />
-            )} 
-          </div> */}
+            )}
+          </div>
 
           {openAdd && <AddProduct setOpenAdd={setOpenAdd} />}
         </div>
@@ -227,4 +225,4 @@ const AccountUser = () => {
   );
 };
 
-export default AccountUser;
+export default AccountUser;
