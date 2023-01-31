@@ -32,6 +32,6 @@ export const getCategories = async (req, res) => {
   } catch (error) {
     return res
       .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
-      .json({ message: error.message });
-  }
+      .json({ message: error.message });
+  }
 };

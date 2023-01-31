@@ -209,7 +209,7 @@ const AccountUser = () => {
               <UserProduct product={product} />
             )}
           </div>
-          {/* <h2 className="account-subtitle">Mis órdenes</h2>
+          <h2 className="account-subtitle">Mis órdenes</h2>
           <div className="account-orders">
             {orders.length === 0 ? (
               <h3 className="info">
@@ -218,7 +218,7 @@ const AccountUser = () => {
             ) : (
               <Orders orders={orders} />
             )} 
-          </div> */}
+          </div> 
 
           {openAdd && <AddProduct setOpenAdd={setOpenAdd} />}
         </div>

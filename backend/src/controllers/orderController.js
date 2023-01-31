@@ -7,8 +7,6 @@ export const createOrder = async (req, res) => {
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
       id: req.body.id,
-      orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
-      // orderItems: req.body.orderItems,
       name: req.body.name,
       email: req.body.email,
       address: req.body.address,
