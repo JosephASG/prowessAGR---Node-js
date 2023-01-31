@@ -28,7 +28,6 @@ export const createOrder = async (req, res) => {
 };
 
 //Get my orders
-
 export const getMyOrders = async (req, res) => {
   try {
     const orders = await Order.find({ id: req.params.id });
