@@ -216,8 +216,7 @@ const AccountUser = () => {
             ) : (
               <Orders orders={orders} />
             )} 
-          </div> 
-
+          </div>
           {openAdd && <AddProduct setOpenAdd={setOpenAdd} />}
         </div>
       </div>
