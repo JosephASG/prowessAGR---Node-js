@@ -17,8 +17,8 @@ const AccountUserInfo = () => {
         try {
 
           const result = await axios.get(`/api/orders/userorders/${id}`);
-          console.log(result.orderIems.data); 
-          setUserOrders(result.orderItems.data)
+          console.log(result.data); 
+          setUserOrders(result.data)
   
         } catch(err) {
           console.log("No se muestran las ordenes del usuario!");
