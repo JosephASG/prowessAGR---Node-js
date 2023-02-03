@@ -41,3 +41,20 @@
     background: #ffffff;
     color: #ca2734;
 }
+
+@media screen and (max-width: 375px) {
+    .follow-title{
+        font-size: 20px;
+        margin-top: 40rem;
+        font-size: 3rem;
+    }
+    .footer-container{
+        position: absolute;
+    }   
+    .header-menu{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
