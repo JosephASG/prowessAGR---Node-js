@@ -35,19 +35,19 @@ const SellFilters = () => {
         </div>
       ) : (
         <>
-          <div className="sell-fill-col">
-            <div className="Buscador">
+
+            <div className="filter-group">
               <input
                 type="search"
                 placeholder="Buscar..."
                 onChange={(e) => setQuery(e.target.value)}
-                id="Buscador"
+              id="Buscador"
               />
             </div>
-          </div>
-          <div className="sell-fill-col">
+          
+            <div className="filter-col">
             <SellFilter seller={search(SellFilter)} />
-          </div>
+            </div>
         </>
       )}
     </div>
