@@ -50,6 +50,76 @@
     gap: 20px;
 }
 
+
+.sell-fill-group {
+    --bg: #e5ffee;
+    --hover-bg: #dceee2;
+    --hover-text: #fffbfd;
+    max-width: 23ch;
+    text-align: center;
+    background: var(--bg);
+    padding: 1.5em;
+    padding-block: 1.8em;
+    border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+    transition: .3s cubic-bezier(.6,.4,0,1),transform .15s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+
+.sell-fill-group .body {
+    color: #464853;
+    line-height: 1.5em;
+    font-size: 1em;
+  }
+  
+  .sell-fill-group > :not(span) {
+    transition: .3s cubic-bezier(.6,.4,0,1);
+  }
+  
+  .sell-fill-group > strong {
+    display: block;
+    font-size: 1.4rem;
+    letter-spacing: -.035em;
+  }
+
+  
+
+  .sell-fill-group span {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--hover-text);
+    border-radius: 5px;
+    font-weight: bold;
+    top: 100%;
+    transition: all .3s cubic-bezier(.6,.4,0,1);
+  }
+  
+  .sell-fill-group:hover span {
+    top: 0;
+    font-size: 1.2em;
+  }
+  
+  .sell-fill-group:hover {
+    background: var(--hover-bg);
+  }
+  
+  .sell-fill-group:hover>div,.sell-fill-group:hover>strong {
+    opacity: 0;
+  }
+/*
+
+
+
 .sell-fill-group {
     background-color: white;
     width: 250px;
@@ -72,6 +142,8 @@
     transform: scale(1.02);
     transition-duration: 0.2s, 0.2s;
 }
+
+*/
 
 .sell-fill-header {
     height: 130px;
@@ -138,16 +210,8 @@
 
 
 .background-sellers {
-    background: -webkit-linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
-    /* Chrome 10+, Saf5.1+ */
-    background: -moz-linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
-    /* FF3.6+ */
-    background: -ms-linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
-    /* IE10 */
-    background: -o-linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
-    /* Opera 11.10+ */
-    background: linear-gradient(90deg, #5bcf8f 10%, #5bcf8f 90%);
-    /* W3C */
+    
+    background: #fff;
 }
 
 #Buscador {
@@ -157,7 +221,7 @@
     width: 500px;
     border: transparent;
     border-bottom: solid 1px #ccc;
-    padding: 10px 10px 10px 30px;
+    padding: 1rem;
     outline: none;
     width: 700px;
     height: 50px;
@@ -172,10 +236,7 @@
     border-color: black;
 }
 
-
-.transition {
-    transition: .8s cubic-bezier(.3, 0, 0, 1.3)
-}
+/**/
 
 .card {
     background-color: rgb(254, 255, 247);
@@ -183,37 +244,42 @@
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
-    height: 300px;
+    height: 20rem;
     left: 0;
     margin: auto;
-    overflow: hidden;
+    overflow:hidden;
     position: relative;
     right: 0;
     top: 0;
-    width: 300px;
+    width: 15rem;
     place-items: center;
 }
 
 .card:hover {
-    height: 450px;
+    height: 20rem;
     /*salen todos los datos*/
-    width: 300px;
+    width: 16rem;
 }
 
 .card:hover .cta-container {
-    display: inline;
-    margin-top: 380px;
+  display: inline;
+  margin-left: -210px;
+    margin-top: 15px;
 }
 
 .card:hover .card_circle {
     background-size: cover;
     border-radius: 0;
-    margin-top: -130px;
+    margin-top: -80px;
+    
 }
 
+.transition {
+    transition: .8s cubic-bezier(.3, 0, 0, 1.3)
+}
 .card:hover .data-vendor {
     background: #69e7a2;
-    color: #FFF;
+    
     margin-top: 100px;
     padding: 5px;
 }
@@ -223,28 +289,40 @@
 }
 
 .card:hover .member {
-    margin-top: 300px
+    margin-top: 200px; /*desde*/
+
 }
 
-.card_circle {
-
-    background-color: #5bcf8f;
-    background-size: cover;
+.card_circle  {
     border-radius: 50%;
-    height: 400px;
-    margin-left: -75px;
-    margin-top: -270px;
-    /**/
+    
     position: absolute;
-    width: 450px;
+    margin-left: -40px;
+    margin-top: -150px;
+    /*background-color: #69e7a2;*/
+    background-size: cover;
 }
+
+
+.card_circle .image {
+    border-radius: 50%;
+    background-size: cover;
+    background-position: top;
+}
+
+.card_circle .image img{
+    height: 20rem;
+    width: 20rem;
+}
+
+
 
 .data-vendor {
     color: rgb(0, 0, 0);
     font-family: 'Raleway', sans-serif;
-    font-size: 24px;
-    font-weight: 200;
-    margin-top: 150px;
+    font-size: 20px;
+    font-style: bold;
+    margin-top:170px;
     position: absolute;
     text-align: center;
     width: 100%;
@@ -255,8 +333,7 @@
     color: rgba(0, 0, 0, .6);
     font-family: 'Raleway', sans-serif;
     font-size: 100%;
-    font-weight: normal;
-    margin-top: 200px;
+    margin-top: 220px;
     position: absolute;
     text-align: center;
     z-index: 9999;
@@ -265,43 +342,11 @@
 
 .cta-container {
     font-family: 'Raleway', sans-serif;
-    display: none;
-    margin-top: 320px;
-    position: absolute;
+    display:none;
+    padding: 16rem;
+    position:fixed;
     text-align: center;
     width: 100%;
-    z-index: 9999;
 }
 
-.cta {
-    -moz-border-radius: 2px;
-    -moz-transition: 0.2s ease-out;
-    -ms-transition: 0.2s ease-out;
-    -o-transition: 0.2s ease-out;
-    -webkit-border-radius: 2px;
-    -webkit-transition: 0.2s ease-out;
-    background-clip: padding-box;
-    border: 2px solid #3487f7;
-    border-radius: 2px;
-    color: #3487f7;
-    display: inline-block;
-    font-family: 'Raleway', sans-serif;
-    font-size: 17px;
-    font-weight: 400;
-    height: 36px;
-    letter-spacing: 0.5px;
-    line-height: 36px;
-    margin-bottom: 15px;
-    padding: 0 2rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    transition: 0.2s ease-out;
-}
 
-.cta:hover {
-    background-color: #3487f7;
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    color: #fff;
-    -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
