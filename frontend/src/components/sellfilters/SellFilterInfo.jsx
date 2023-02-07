@@ -43,21 +43,16 @@ const SellFilterInfo = ({ user }) => {
   return (
     <div className="container-card">
     <div className="card">
-      <div key={user._id}>
-        <h2 className="data-vendor">
-          <img href={user.image.secure_url} alt={user.name} />
-        </h2>
-
-        <p class="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
-      </div>
+      
       <div>
         {" "}
         {/* body*/}
+        
+        <div class="cta-container">
         <div>
           <Link to={`../seller/${user._id}`}></Link>
         </div>
-        <div class="cta-container transition">
-          {existUser && sellerExists ? (
+        {existUser && sellerExists ? (
             <Button variant="contained" color="error" size="medium">
               <span onClick={() => handlerUnfollow(user)}>Dejar de seguir</span>
             </Button>
@@ -69,9 +64,19 @@ const SellFilterInfo = ({ user }) => {
             </Button>
           )}
         </div>
-        <div class="card_circle transition"></div>
+        <div class="card_circle transition">
+        <div className="image">
+        <img src={user.image.secure_url} alt={user.name} />
+        </div>
       </div>
-    </div>
+        </div>
+        <div key={user._id}>
+        <h2 className="data-vendor">
+          {user.name}
+        </h2>
+        <p class="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
+      </div>
+    </div> 
     </div>
   );
 };
