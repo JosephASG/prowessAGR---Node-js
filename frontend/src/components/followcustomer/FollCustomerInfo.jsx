@@ -20,17 +20,20 @@ const FollCustomerInfo = ({ item }) => {
       <div className="sell-fill-header">
         <img src={item.image.secure_url} alt={item.name} />
       </div>
-      <div className="sell-fill-body">
+      <div className="sell-fill-group .body">
         <Link to={`../seller/${item._id}`}>
           {item.name} <FontAwesomeIcon icon={faEye} />
         </Link>
-        <span onClick={() => handlerUnfollow(item)} className="unfollow">
-          Dejar de seguir
-        </span>
-        <span className="date">
-          Miembro desde: {item.createdAt.slice(0, 10)}
-        </span>
       </div>
+      <div>
+      
+      <strong className="date">
+      Miembro desde: {item.createdAt.slice(0, 10)}
+        </strong>
+      </div>
+        <span onClick={() => handlerUnfollow(item)} className="unfollow">
+        Dejar de seguir
+        </span>
     </div>
   );
 };
