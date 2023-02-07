@@ -1,22 +1,31 @@
+.ctn-sellers {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
 .sell-fill-row {
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 50px 0;
 }
 
 .sell-fill-row .sell-fill-col:first-child {
+    position: relative;
     display: flex;
     justify-content: center;
-    margin: 35px 0 70px 0;
+    margin: 50px 0 50px 0;
 }
 
 .sell-fill-row .sell-fill-col:first-child input {
     padding: 10px 25px;
     border: none;
     box-shadow: 0 0 3px #2f5f74;
-    width: 150px;
+    width: 400px;
     outline: none;
     letter-spacing: 1.4px;
     color: #2f5f74;
@@ -121,8 +130,12 @@
 
 
 .sell-fill-group {
-    background-color: white;
     width: 250px;
+    /* Current changes */
+
+    margin: 0 50px;
+
+    /* Incoming change */
     background-color: rgb(200, 235, 203);
     transition: all 2s linear;
     border-top-right-radius: 50px;
@@ -164,12 +177,16 @@
 }
 
 .sell-fill-body span.follow {
+    /* Current change */
+    background: #2f5f74;
+    /* Incoming change */
     font-style: italic;
     font-family: Georgia, 'Times New Roman', Times, serif;
     width: 1rem;
     height: 2rem;
     ;
     background: #c7a915;
+    /* --------------- */
     width: max-content;
     color: #ffffff;
     text-transform: uppercase;
@@ -183,13 +200,14 @@
     cursor: pointer;
     box-shadow: 0 0 1px #2f5f74;
     transition: all 0.5s;
+    /* Incoming change */
+    /* Current change */
     border: black 1px solid;
 }
 
 .sell-fill-body span.follow:hover {
-    box-shadow: 0 3px 0.5px black, 0 0 0 0.5px #e79c07eb;
-    background: #5bb547;
-    color: #000000;
+    background: #ffffff;
+    color: #2f5f74;
 }
 
 .sell-fill-body span.date {
@@ -206,6 +224,8 @@
 
 .sell-fill-row .sell-fill-col .filter-pagination {
     margin: 80px 0 50px 0;
+    /* Incoming change */
+    /* Current change */
 }
 
 

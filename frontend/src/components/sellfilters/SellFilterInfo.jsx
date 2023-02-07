@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Store } from "../../Store";
 import Button from "@mui/material/Button";
 
-
 const SellFilterInfo = ({ user }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { wish } = state;
@@ -49,8 +48,35 @@ const SellFilterInfo = ({ user }) => {
         {/* body*/}
         
         <div class="cta-container">
+      <div className="card">
+        <div key={user._id}>
+          <h2 className="data-vendor">
+            <img src={user.image.secure_url} alt={user.name} />
+          </h2>
+
+          <p className="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
+        </div>
         <div>
-          <Link to={`../seller/${user._id}`}></Link>
+          {" "}
+          <div>
+            <Link to={`../seller/${user._id}`}></Link>
+          </div>
+          <div class="cta-container transition">
+            {existUser && sellerExists ? (
+              <Button variant="contained" color="error" size="medium">
+                <span onClick={() => handlerUnfollow(user)}>
+                  Dejar de seguir
+                </span>
+              </Button>
+            ) : (
+              <Button variant="contained" size="medium" color="success">
+                <span key={user._id} onClick={handlerFollow}>
+                  Seguir
+                </span>
+              </Button>
+            )}
+          </div>
+          <div class="card_circle transition"></div>
         </div>
         {existUser && sellerExists ? (
             <Button variant="contained" color="error" size="medium">
@@ -77,6 +103,8 @@ const SellFilterInfo = ({ user }) => {
         <p class="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
       </div>
     </div> 
+
+      </div>
     </div>
   );
 };

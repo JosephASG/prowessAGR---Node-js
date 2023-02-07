@@ -216,9 +216,8 @@ const AccountUser = () => {
               </h3>
             ) : (
               <Orders orders={orders} />
-            )}
+            )} 
           </div>
-
           {openAdd && <AddProduct setOpenAdd={setOpenAdd} />}
         </div>
       </div>
@@ -226,4 +225,4 @@ const AccountUser = () => {
   );
 };
 
-export default AccountUser;
+export default AccountUser;

@@ -55,7 +55,7 @@ const Filter = () => {
         <>
           <div className="filter-col">
             <div className="filter-group">
-              <button onClick={handleReset}>All</button>
+              <button onClick={handleReset}>Todo</button>
               {category.map((cat) => (
                 <button key={cat._id} onClick={() => filterResult(cat.name)}>
                   {cat.name}
@@ -65,7 +65,7 @@ const Filter = () => {
             <div className="filter-group">
               <input
                 type="search"
-                placeholder="Search..."
+                placeholder="Buscar..."
                 onChange={(e) => setQuery(e.target.value)}
               />
             </div>

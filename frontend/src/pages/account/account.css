@@ -46,11 +46,29 @@
     flex: 2;
 }
 
+.wrapper-form-edit-account {
+    background-color: #f5f5f5;
+    box-shadow: 20px 12px 15px -3px rgba(0, 0, 0, 0.1), -20px 12px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 60px;
+    margin: 0 50px;
+}
+
 .account-group {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.account-group:nth-child(1) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-group:nth-child(2) {
+    padding: 50px 0;
 }
 
 .account-group img {
@@ -66,13 +84,13 @@
     margin: 20px 0;
     min-height: auto;
     width: fit-content;
-
+    min-height: unset;
+    padding: 0 auto !important;
 }
 
 .account-image {
     display: block;
     margin: 5px auto;
-    background-color: #f0f3bd;
     padding: 5px 10px;
     border: none;
     box-shadow: 0 0 5px #f0f3bd;
@@ -81,6 +99,11 @@
     font-size: 12px;
     text-transform: uppercase;
     transition: all 0.5s;
+}
+
+.image-account {
+    background-color: transparent !important;
+    box-shadow: none !important;
 }
 
 .account-image:hover {
@@ -169,12 +192,23 @@
 
 .form-image {
     position: relative;
+    background-color: rgba(18, 18, 18, 0.2);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.form-image p {
+    font-size: 12px;
+    margin: 20px 0;
 }
 
 .form-image label {
-    position: absolute;
-    top: 0;
-    right: 30%;
+    position: relative;
     font-size: 25px;
     cursor: pointer;
     filter: drop-shadow(0 0 1px #2f5f74);
@@ -308,6 +342,7 @@
     border-radius: 60px;
     width: fit-content;
     height:fit-content;
+    padding: 10px 30px !important;
 }
 
 .form-account form {
@@ -325,8 +360,8 @@
     border: 0;
     border-bottom: 1px #121212 solid;
     display: block;
-    width: 450px;
-    padding: 1.25rem 0;
+    width: 300px;
+    padding: 15px 0;
     font-size: 1.125rem;
     color: #121212;
 }

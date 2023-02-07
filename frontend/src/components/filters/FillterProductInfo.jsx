@@ -44,7 +44,7 @@ const FillterProductInfo = ({ product }) => {
         <span className="price">${product.price.toFixed(2)}/kg</span>
       </div>
       <div className="card-footer">
-        <button onClick={addToCart}>Add to Bag</button>
+        <button onClick={addToCart}>Añadir a la bolsa</button>
       </div>
     </div>
   );

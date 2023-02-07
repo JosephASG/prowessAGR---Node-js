@@ -77,74 +77,80 @@ const EditProduct = ({ setOpenEdit, pro }) => {
           <div className="close-form" onClick={() => setOpenEdit(false)}>
             X
           </div>
-          <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-              required
-              type="text"
-              id="name"
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="slug">Slug</label>
-            <input
-              required
-              type="text"
-              id="slug"
-              onChange={(e) => setSlug(e.target.value)}
-              value={slug}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="category">Category</label>
-            <input
-              required
-              type="text"
-              id="category"
-              onChange={(e) => setCategory(e.target.value)}
-              value={category}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <input
-              required
-              type="text"
-              id="description"
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="price">Price</label>
-            <input
-              required
-              type="text"
-              id="price"
-              onChange={(e) => setPrice(e.target.value)}
-              value={price}
-            />
-          </div>
-          <div className="form-group form-image product">
-            <img src={previewImageProduct} alt="" />
-            <label htmlFor="image_update_product">
-              <FontAwesomeIcon icon={faPlusCircle} />
-            </label>
-            <input
-              type="file"
-              hidden
-              id="image_update_product"
-              accept="image/png, image/jpeg"
-              onChange={validateImageProduct}
-            />
-          </div>
-          <div className="form-btn">
-            <button type="submit">
-              <FontAwesomeIcon icon={faRefresh} />
-              {uploadingImageProduct ? "Changing..." : "Edit Product"}
-            </button>
+          <div className="wrapper-add-product">
+              <div className="ctn-add-product">
+                    <div className="form-group">
+                    <label htmlFor="name">Nombre del producto</label>
+                    <input
+                      required
+                      type="text"
+                      id="name"
+                      onChange={(e) => setName(e.target.value)}
+                      value={name}
+                    />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="slug">Peso en kg</label>
+                      <input
+                        required
+                        type="text"
+                        id="slug"
+                        onChange={(e) => setSlug(e.target.value)}
+                        value={slug}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="category">Categoría</label>
+                      <input
+                        required
+                        type="text"
+                        id="category"
+                        onChange={(e) => setCategory(e.target.value)}
+                        value={category}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="description">Descripción</label>
+                      <input
+                        required
+                        type="text"
+                        id="description"
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="price">Precio por kg</label>
+                      <input
+                        required
+                        type="text"
+                        id="price"
+                        onChange={(e) => setPrice(e.target.value)}
+                        value={price}
+                      />
+                    </div>
+              </div>
+              <div className="product-add">
+                <div className="form-group form-image product">
+                  <img src={previewImageProduct} alt="" />
+                  <label htmlFor="image_update_product">
+                    <FontAwesomeIcon icon={faPlusCircle} />
+                  </label>
+                  <input
+                    type="file"
+                    hidden
+                    id="image_update_product"
+                    accept="image/png, image/jpeg"
+                    onChange={validateImageProduct}
+                  />
+                </div>
+                <div className="form-btn">
+                  <button type="submit" className="button-add-product">
+                    <FontAwesomeIcon icon={faRefresh} className="icon-plus"/>
+                    {uploadingImageProduct ? "Changing..." : "Edit Product"}
+                  </button>
+                </div>
+              </div>
           </div>
         </form>
       </div>

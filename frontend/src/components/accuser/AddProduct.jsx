@@ -69,81 +69,89 @@ const AddProduct = ({ setOpenAdd }) => {
         <div className="close-form" onClick={() => setOpenAdd(false)}>
           X
         </div>
-        <div className="form-group">
-          <label htmlFor="name">Name</label>
-          <input
-            required
-            type="text"
-            id="name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-          />
+        <div className="wrapper-add-product">
+            <div className="ctn-add-product">
+                <div className="form-group">
+                <label htmlFor="name">Nombre del producto</label>
+                <input
+                  required
+                  type="text"
+                  id="name"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="slug">Peso en kg</label>
+                  <input
+                    required
+                    type="text"
+                    id="slug"
+                    onChange={(e) => setSlug(e.target.value)}
+                    value={slug}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="category">Categoría</label>
+                  <input
+                    required
+                    type="text"
+                    id="category"
+                    onChange={(e) => setCategory(e.target.value)}
+                    value={category}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="description">Descripción</label>
+                  <input
+                    required
+                    type="text"
+                    id="description"
+                    onChange={(e) => setDescription(e.target.value)}
+                    value={description}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="price">Precio por kg</label>
+                  <input
+                    required
+                    type="text"
+                    id="price"
+                    onChange={(e) => setPrice(e.target.value)}
+                    value={price}
+                  />
+                </div>
+            </div>
+            <div className="product-add">
+              <div className="form-group form-image product">
+              <img
+                src={
+                  previewImageProduct ||
+                  "https://res.cloudinary.com/primalappsje/image/upload/v1674510284/primal/fruits_b6j5kx.png"
+                }
+                alt=""
+              />
+                <p>Añade una imagen de tu producto</p>
+              <label htmlFor="image_upload_product" title="Añadir imagen">
+                <FontAwesomeIcon icon={faPlusCircle} />
+              </label>
+              <input
+                type="file"
+                hidden
+                id="image_upload_product"
+                accept="image/png, image/jpeg"
+                onChange={validateImageProduct}
+              />
+              </div>
+              <div className="form-btn">
+                <button type="submit" className="button-add-product">
+                  <FontAwesomeIcon icon={faPlusCircle} className="icon-plus"/>
+                  {uploadingImageProduct ? "Guardando..." : "Guardar producto"}
+                </button>
+              </div>
+            </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="slug">Slug</label>
-          <input
-            required
-            type="text"
-            id="slug"
-            onChange={(e) => setSlug(e.target.value)}
-            value={slug}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="category">Category</label>
-          <input
-            required
-            type="text"
-            id="category"
-            onChange={(e) => setCategory(e.target.value)}
-            value={category}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <input
-            required
-            type="text"
-            id="description"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="price">Price</label>
-          <input
-            required
-            type="text"
-            id="price"
-            onChange={(e) => setPrice(e.target.value)}
-            value={price}
-          />
-        </div>
-        <div className="form-group form-image product">
-          <img
-            src={
-              previewImageProduct ||
-              "https://res.cloudinary.com/primalappsje/image/upload/v1652227975/primal/1652227496734_rnnh7m.png"
-            }
-            alt=""
-          />
-          <label htmlFor="image_upload_product">
-            <FontAwesomeIcon icon={faPlusCircle} />
-          </label>
-          <input
-            type="file"
-            hidden
-            id="image_upload_product"
-            accept="image/png, image/jpeg"
-            onChange={validateImageProduct}
-          />
-        </div>
-        <div className="form-btn">
-          <button type="submit">
-            <FontAwesomeIcon icon={faPlusCircle} />
-            {uploadingImageProduct ? "Guardando..." : "Guardar producto"}
-          </button>
-        </div>
+        
       </form>
     </div>
   );

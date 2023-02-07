@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 //server listening
 app.listen(PORT, () => {
   console.log(`Server at: http://localhost:${PORT}`);
-  });
+});
 
 //routers
 app.use(`${API_PREFIX}/seed/`, seedRouter);
@@ -35,4 +35,4 @@ app.use(`${API_PREFIX}/products/`, ProductRouter);
 app.use(`${API_PREFIX}/users/`, UserRouter);
 app.use(`${API_PREFIX}/orders/`, OrderRouter);
 
-export default app;
+export default app;

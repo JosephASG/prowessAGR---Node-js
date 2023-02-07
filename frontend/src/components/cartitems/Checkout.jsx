@@ -31,9 +31,9 @@ const Checkout = ({
     e.preventDefault();
 
     try {
-      const { data } = await axios.post("/api/orders", {
-        orderItems: cartItems,
+      const { data } = await axios.post(`/api/orders`, {
         id: userInfo._id,
+        orderItems: cartItems,
         name: name,
         email: email,
         address: address,
@@ -53,7 +53,6 @@ const Checkout = ({
       console.log("Orden fallida!");
     }
   };
-
   return (
     <div className="passwords">
       <form onSubmit={handlerAddProduct}>
