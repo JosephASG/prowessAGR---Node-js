@@ -137,6 +137,7 @@ const AccountUser = () => {
           </form>
 
           <div className="form-row account form-account">
+            <h2> Datos Personales</h2>
             <form className="form" onSubmit={handlerUpdate}>
               <div className="form-group">
                 <label htmlFor="name">Nombre completo</label>
