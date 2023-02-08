@@ -253,7 +253,6 @@
     border-color: black;
 }
 
-/**/
 
 .card {
     background-color: rgb(254, 255, 247);
@@ -359,11 +358,16 @@
 
 .cta-container {
     font-family: 'Raleway', sans-serif;
-    display:none;
     padding: 16rem;
-    position:fixed;
+    position:absolute;
     text-align: center;
-    width: 100%;
+
 }
 
+.cta-container button {
+    position:absolute;
+    height: 2rem;
+    width: 12rem;
+    display: flex;
+}
 
