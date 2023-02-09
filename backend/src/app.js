@@ -14,7 +14,7 @@ const app = express();
 
 //middlewares
 app.use(cors());
-app.use(morgan(config.LOG_FORMAT));
+app.use(morgan(config.LOG_FORMAT || "development" ? "combined" : "dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
