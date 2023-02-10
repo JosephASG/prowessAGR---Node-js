@@ -6,7 +6,7 @@
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    /**/
+    flex-wrap: wrap;
     flex-direction: row;
 }
 
@@ -184,7 +184,7 @@
 
 .filter-pagination {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     bottom: 0;
 }
 
