@@ -682,7 +682,7 @@ span.text-percent {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-image: url(../../../public/assets/images/others/layered-waves-haikei.svg); */
+    background-image: url(../../../public/assets/images/others/layered-waves-haikei.svg); 
 }
 
 .container-footer .footer {
