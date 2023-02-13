@@ -1,12 +1,12 @@
 .filter-row {
     padding: 1em;
-    height: 80vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    /**/
+    flex-wrap: wrap;
     flex-direction: row;
 }
 
@@ -16,6 +16,7 @@
     margin-bottom: 20px;
     flex-direction: row;
     /**/
+    margin-top: 4rem;
 }
 
 .filter-row .filter-col:first-child .filter-group:first-child button {
@@ -184,7 +185,7 @@
 
 .filter-pagination {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     bottom: 0;
 }
 

@@ -38,48 +38,14 @@ const SellFilterInfo = ({ user }) => {
       payload: user,
     });
   };
-  //   return (
-  //     <div className="card">
-  //       <div key={user._id}>
-  //         <h2 classname="transition">
-  //           <img href={user.image.secure_url} alt={user.name} />
-  //         </h2>
-
-  //         <p class="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
-  //       </div>
-  //       <div>
-  //         {" "}
-  //         {/* body*/}
-  //         <div>
-  //           <Link to={`../seller/${user._id}`}></Link>
-  //         </div>
-  //         <div class="cta-container transition">
-  //           {existUser && sellerExists ? (
-  //             <Button variant="contained" color="error" size="medium">
-  //               <span onClick={() => handlerUnfollow(user)}>Dejar de seguir</span>
-  //             </Button>
-  //           ) : (
-  //             <Button variant="contained" size="medium" color="success">
-  //               <span key={user._id} onClick={handlerFollow}>
-  //                 Seguir
-  //               </span>
-  //             </Button>
-  //           )}
-  //         </div>
-  //         <div class="card_circle transition"></div>
-  //       </div>
-  //     </div>
-  //   );
-  // };
 
   return (
     <div className="container-card">
-      <div className="card">
+    <div className="card">
+      <div>
+        {" "}
+        {/* body*/}
         <div key={user._id}>
-          <h2 className="data-vendor">
-            <img src={user.image.secure_url} alt={user.name} />
-          </h2>
-
           <p className="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
         </div>
         <div>
@@ -88,22 +54,33 @@ const SellFilterInfo = ({ user }) => {
             <Link to={`../seller/${user._id}`}></Link>
           </div>
           <div class="cta-container transition">
-            {existUser && sellerExists ? (
-              <Button variant="contained" color="error" size="medium">
-                <span onClick={() => handlerUnfollow(user)}>
-                  Dejar de seguir
-                </span>
-              </Button>
-            ) : (
-              <Button variant="contained" size="medium" color="success">
-                <span key={user._id} onClick={handlerFollow}>
-                  Seguir
-                </span>
-              </Button>
-            )}
-          </div>
-          <div class="card_circle transition"></div>
+          
+        {existUser && sellerExists ? (
+            <Button variant="contained" color="error" size="medium">
+              <span onClick={() => handlerUnfollow(user)}>Dejar de seguir</span>
+            </Button>
+          ) : (
+            <Button variant="contained" size="medium" color="success">
+              <span key={user._id} onClick={handlerFollow}>
+                Seguir
+              </span>
+            </Button>
+          )}
         </div>
+        <div class="card_circle transition">
+        <div className="image">
+        <img src={user.image.secure_url} alt={user.name} />
+        </div>
+      </div>
+        </div>
+        <div key={user._id}>
+        <h2 className="data-vendor">
+          {user.name}
+        </h2>
+        <p class="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
+      </div>
+    </div> 
+
       </div>
     </div>
   );
