@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-//for create Table into DB for product
+// for create Table into DB for product
 const ProductSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -17,8 +17,8 @@ const ProductSchema = new mongoose.Schema(
     sellerImage: { type: String, required: true },
   },
   {
-    timestamps: true, //for date
-    versionKey: false, //for version
+    timestamps: true, // for date
+    versionKey: false, // for version
   }
 );
 

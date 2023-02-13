@@ -22,7 +22,7 @@ router.post(
   }),
   userController.postUser
 );
-router.get("/all", userController.getUser);
+router.get("/all", userController.getUsers);
 router.get("/user/:id", userController.getUserById);
 router.delete("/delete/:id", userController.deleteUser);
 

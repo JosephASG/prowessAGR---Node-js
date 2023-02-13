@@ -8,5 +8,4 @@ router.get("/mine/:id", orderController.getMyOrders);
 router.get("/userorders/:id", orderController.getOrders);
 router.get("/:id", orderController.getOrder);
 
-
 export default router;

@@ -8,7 +8,7 @@ import fs from "fs-extra";
 
 //CREATE PRODUCT
 export const postProduct = async (req, res) => {
-  //
+  // check if all fields are sent
   if (
     (!req.body.name,
     !req.body.slug,
@@ -20,7 +20,9 @@ export const postProduct = async (req, res) => {
       .status(HTTP_STATUS.BAD_REQUEST)
       .json({ message: "All fields are required" });
   try {
+    // create new product
     const newProduct = new Products(req.body);
+    // if image is uploaded, upload image to cloudinary
     if (req.files?.image) {
       const result = await uploadImageProduct(req.files.image.tempFilePath);
       newProduct.image = {
@@ -29,19 +31,25 @@ export const postProduct = async (req, res) => {
       };
       await fs.unlink(req.files.image.tempFilePath);
     }
+    // save product in DB and return saved product
     const savedProduct = await newProduct.save();
+    // return saved product with a 201 status code
     return res.status(HTTP_STATUS.CREATED).json(savedProduct);
   } catch (error) {
+    // if there is an error, return error with a 500 status code
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
 
 //GET ALL PRODUCTS
 export const getProducts = async (req, res) => {
+  // Try to get all the products
   try {
     const products = await Products.find();
+    // If there are products, return them with a 200 status code
     return res.status(HTTP_STATUS.OK).json(products);
   } catch (error) {
+    // If there was an error, return the error with a 500 status code
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
@@ -49,14 +57,18 @@ export const getProducts = async (req, res) => {
 //GET PRODUCT BY SLUG
 export const getProductBySlug = async (req, res) => {
   try {
+    //find product by slug
     const product = await Products.findOne({ slug: req.params.slug });
+    //if there is no product
     if (!product) {
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ message: "Product not found" });
     }
+    //return product
     return res.status(HTTP_STATUS.OK).json(product);
   } catch (error) {
+    //if there is an error
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
@@ -73,14 +85,20 @@ export const getProductBySellerId = async (req, res) => {
 //GET PRODUCT BY ID
 export const getProductById = async (req, res) => {
   try {
+    // Get the product from the database
     const product = await Products.findById(req.params.id);
+
+    // If no product is found, return a 404
     if (!product) {
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ message: "Product not found" });
     }
+
+    // If a product is found, return the product in a 200
     return res.status(HTTP_STATUS.OK).json(product);
   } catch (error) {
+    // If there is an error, return a 500
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
@@ -119,6 +137,7 @@ export const updateProduct = async (req, res) => {
       if (product.image?.public_id) {
         await deleteImageProduct(product.image.public_id);
       }
+      // upload new image to cloudinary
       const result = await uploadImageProduct(req.files.image.tempFilePath);
       product.image = {
         public_id: result.public_id,

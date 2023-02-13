@@ -17,7 +17,8 @@ export const loginUser = async (req, res) => {
   if (user) {
     if (bcrypt.compareSync(req.body.password, user.password)) {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET);
-      res.send({
+      // return user data and token
+       res.send({
         token,
         _id: user._id,
         name: user.name,
@@ -78,25 +79,34 @@ export const postUser = async (req, res) => {
 };
 
 //GET
-export const getUser = async (req, res) => {
+export const getUsers = async (req, res) => {
   try {
-    const user = await User.find();
-    return res.status(HTTP_STATUS.OK).json(user);
+    // Get all users from the database
+    const users = await User.find();
+    // Return all users in the response
+    return res.status(HTTP_STATUS.OK).json(users);
   } catch (error) {
+    // If an error occurs, return it in the response
     return res.status(HTTP_STATUS.NOT_FOUND).json({ message: error.message });
   }
 };
 
-//GET BY ID
+// GET BY ID
 export const getUserById = async (req, res) => {
   try {
+    // Get user by id from the database
     const user = await User.findById(req.params.id);
-    if (!user)
+    // If user is not found in the database
+    if (!user) {
+      // Return 404 status and error message
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ message: "user not found" });
+    }
+    // Return 200 status and user object
     return res.status(HTTP_STATUS.OK).send(user);
   } catch (error) {
+    // Return 404 status and error message
     return res.status(HTTP_STATUS.NOT_FOUND).json({ message: error.message });
   }
 };
