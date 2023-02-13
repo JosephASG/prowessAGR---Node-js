@@ -1,6 +1,6 @@
 .filter-row {
     padding: 1em;
-    height: 80vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,6 +16,7 @@
     margin-bottom: 20px;
     flex-direction: row;
     /**/
+    margin-top: 4rem;
 }
 
 .filter-row .filter-col:first-child .filter-group:first-child button {

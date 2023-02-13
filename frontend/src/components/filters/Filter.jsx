@@ -47,10 +47,10 @@ const Filter = () => {
   };
 
   return (
+
     <div className="filter-row">
-      <div className="container-product">
-      {products.length === 0 ? (
-        <h3 className="info">Actualmente no hay productos!</h3>
+      {products.length === 0 ? ( <div className='ctn-products'>
+        <h3 className="info">Actualmente no hay productos!</h3></div>
       ) : (
         <>
           <div className="filter-col">
@@ -76,7 +76,7 @@ const Filter = () => {
         </>
       )}
     </div>
-    </div>
+  
   );
 };
 

@@ -6,12 +6,12 @@
 }
 
 .sell-fill-row {
-    height: auto;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 50px 0;
+    padding: 20px 0;
 }
 
 .sell-fill-row .sell-fill-col:first-child {
@@ -235,7 +235,6 @@
 
     background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png) no-repeat 0px 5px;
     background-size: 24px;
-    width: 500px;
     border: transparent;
     border-bottom: solid 1px #ccc;
     padding: 1rem;
@@ -251,6 +250,7 @@
     -moz-border-radius: 5px;
     border-radius: 10px;
     border-color: black;
+    margin-bottom: 3rem;
 }
 
 
@@ -269,6 +269,7 @@
     top: 0;
     width: 15rem;
     place-items: center;
+    margin-bottom: 3rem;
 }
 
 .card:hover {
