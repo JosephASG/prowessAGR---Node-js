@@ -4,7 +4,7 @@ import Category from "../models/categoryModel.js";
 import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
 
-//Seed data into table -> db
+//Guardar datos en la tabla -> base de datos
 
 const seedRouter = express.Router();
 

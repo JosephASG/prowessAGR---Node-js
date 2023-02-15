@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 
-//for create Table into DB for User
+//Esquema para crear la tabla USUARIOS en la base de datos
 const UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -16,16 +16,18 @@ const UserSchema = new mongoose.Schema(
     isAdmin: { type: Boolean, default: false, required: true },
   },
   {
-    timestamps: true, //for date
-    versionKey: false, //for version
+    timestamps: true, //para fechas
+    versionKey: false, //para version
   }
 );
 
+// Create a method called encryptPassword that takes in a password, hashes it, and returns the hashed password.
 UserSchema.methods.encrypPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
 
+// Create a method called matchPassword that takes in a password and checks if it matches the password in the database.
 UserSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };

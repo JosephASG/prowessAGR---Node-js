@@ -4,7 +4,7 @@ import * as userController from "../controllers/userController.js";
 
 const router = Router();
 
-//for login user
+//Para iniciar sesion con cuenta de usuario
 router.post("/login", userController.loginUser);
 router.put(
   "/update/:id",
@@ -22,7 +22,7 @@ router.post(
   }),
   userController.postUser
 );
-router.get("/all", userController.getUser);
+router.get("/all", userController.getUsers);
 router.get("/user/:id", userController.getUserById);
 router.delete("/delete/:id", userController.deleteUser);
 

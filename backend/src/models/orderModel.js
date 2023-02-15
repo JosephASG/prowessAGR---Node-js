@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-//Create table for Order
+//Creacion de tabla ORDENES
 const OrderSchema = new mongoose.Schema(
   {
     orderItems: [
@@ -43,5 +43,8 @@ const OrderSchema = new mongoose.Schema(
   }
 );
 
+//Create model for Order
 const Order = mongoose.model("Order", OrderSchema);
+
+//Export Order model
 export default Order;
