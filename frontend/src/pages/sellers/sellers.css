@@ -68,7 +68,7 @@
     text-align: center;
     background: var(--bg);
     padding: 1.5em;
-    padding-block: 1.8em;
+    padding-block: 1.2em;
     border-radius: 5px;
     position: relative;
     overflow: hidden;
@@ -77,13 +77,13 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1em;
+    gap: 0.5em;
 }
 
 .sell-fill-group .body {
     color: #464853;
     line-height: 1.5em;
-    font-size: 1em;
+    font-size: 8em;
   }
   
   .sell-fill-group > :not(span) {
@@ -95,8 +95,6 @@
     font-size: 1.4rem;
     letter-spacing: -.035em;
   }
-
-  
 
   .sell-fill-group span {
     position: absolute;
@@ -127,10 +125,11 @@
   }
 
 .sell-fill-header {
-    height: 130px;
-    display: grid;
-    place-items: center;
+    height: 120px;
+    width: 180px;
 }
+
+.sell-fill-header img {width: 170px;height: 110px;}
 
 .sell-fill-body {
     display: flex;
@@ -185,10 +184,6 @@
     font-size: 10px;
 }
 
-.sell-fill-header img {
-    width: 10px;
-    height: 10px;
-}
 
 .sell-fill-row .sell-fill-col .filter-pagination {
     margin: 80px 0 50px 0;
@@ -343,3 +338,19 @@
     display: flex;
 }
 
+@media screen and (max-width: 375px) {
+    .follow-title{
+        font-size: 20px;
+        margin-top: 40rem;
+        font-size: 3rem;
+    }
+    .footer-container{
+        position: absolute;
+    }   
+    .header-menu{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
