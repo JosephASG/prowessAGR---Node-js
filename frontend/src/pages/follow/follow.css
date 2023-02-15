@@ -1,9 +1,10 @@
 .follow-row {
-    height: 100vh;
+    min-height: 105vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 .follow-title {
