@@ -3,7 +3,7 @@ import config from "./config.js"
 import "./databases/databaseMongoDB.js";
 import "./databases/databaseCloudinary.js";
 
-//server listening
+//Puerto del Servidor
 app.listen(config.PORT, () => {
   console.log(`Server at: http://localhost:${config.PORT}`);
 });

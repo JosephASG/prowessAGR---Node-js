@@ -6,7 +6,7 @@ import {
 import HTTP_STATUS from "http-status-codes";
 import fs from "fs-extra";
 
-//CREATE PRODUCT
+//Crear un producto
 export const postProduct = async (req, res) => {
   //
   if (
@@ -36,7 +36,7 @@ export const postProduct = async (req, res) => {
   }
 };
 
-//GET ALL PRODUCTS
+//Obtener informacion de todos los productos registrados
 export const getProducts = async (req, res) => {
   try {
     const products = await Products.find();
@@ -46,7 +46,7 @@ export const getProducts = async (req, res) => {
   }
 };
 
-//GET PRODUCT BY SLUG
+//Obtener producto segun su peso en kilogramos
 export const getProductBySlug = async (req, res) => {
   try {
     const product = await Products.findOne({ slug: req.params.slug });
@@ -60,7 +60,7 @@ export const getProductBySlug = async (req, res) => {
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
-//GET PRODUCT BY SELLER ID
+//Obtener los productos de acuerdo al ID del vendedor
 export const getProductBySellerId = async (req, res) => {
   try {
     const product = await Products.find({ sellerId: req.params.id });
@@ -70,7 +70,7 @@ export const getProductBySellerId = async (req, res) => {
   }
 };
 
-//GET PRODUCT BY ID
+//Obtener los productos por ID
 export const getProductById = async (req, res) => {
   try {
     const product = await Products.findById(req.params.id);
@@ -85,9 +85,9 @@ export const getProductById = async (req, res) => {
   }
 };
 
-//UPDATE PRODUCT
+//Actualizar producto
 export const updateProduct = async (req, res) => {
-  // check if all fields are sent
+ // comprobar si se envían todos los campos
   if (
     (!req.body.name,
     !req.body.slug,
@@ -99,22 +99,22 @@ export const updateProduct = async (req, res) => {
       .status(HTTP_STATUS.BAD_REQUEST)
       .json({ message: "All fields are required" });
   try {
-    // obtein product id from params and search user by id in DB
+    //Obtenga la identificación del producto de los parámetros y busque el usuario por identificación en la base de datos
     const { id: productId } = req.params;
-    // search product by id in DB
+    //Buscar producto por id en la base de datos
     const product = await Products.findById(productId);
     if (!product) {
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ error: "Product not found" });
     }
-    // update product data with data from request body
+    //actualizar los datos del producto con los datos del cuerpo de la solicitud
     product.name = req.body.name;
     product.slug = req.body.slug;
     product.category = req.body.category;
     product.description = req.body.description;
     product.price = req.body.price;
-    // if image is uploaded, delete old image from cloudinary and upload new image
+    //si se carga la imagen, elimine la imagen anterior de cloudinary y cargue una nueva imagen
     if (req.files?.image) {
       if (product.image?.public_id) {
         await deleteImageProduct(product.image.public_id);
@@ -127,7 +127,7 @@ export const updateProduct = async (req, res) => {
       await fs.unlink(req.files.image.tempFilePath);
     }
 
-    // save product in DB and return updated product
+    // guardar el producto en la base de datos y devolver el producto actualizado
     const updatedProduct = await product.save();
     return res.status(HTTP_STATUS.OK).json({ product: updatedProduct });
   } catch (error) {
@@ -135,7 +135,7 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-//DELETE PRODUCT
+//Eliminar producto
 export const deleteProduct = async (req, res) => {
   try {
     const { id: productId } = req.params;
@@ -145,11 +145,11 @@ export const deleteProduct = async (req, res) => {
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ error: "Product not found" });
     }
-    // delete image from cloudinary
+    // Eliminar imagen de la base de datos cloudinary 
     if (product.image?.public_id) {
       await deleteImageProduct(product.image.public_id);
     }
-    // delete product from DB
+    // Eliminar productos en la base de datos
     await product.remove();
     return res
       .status(HTTP_STATUS.OK)

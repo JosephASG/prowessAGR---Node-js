@@ -9,16 +9,16 @@ import UserRouter from "./routes/userRoutes.js";
 import OrderRouter from "./routes/orderRoutes.js";
 
 
-//server
+//Servidor
 const app = express();
 
-//middlewares
+//apis intermediarias
 app.use(cors());
 app.use(morgan(config.LOG_FORMAT || "development" ? "combined" : "dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//routers
+//Rutas
 app.use(`${config.API_PREFIX}/seed/`, seedRouter);
 app.use(`${config.API_PREFIX}/category/`, CategoryRouter);
 app.use(`${config.API_PREFIX}/products/`, ProductRouter);

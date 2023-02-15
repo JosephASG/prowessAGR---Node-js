@@ -1,7 +1,7 @@
 import { config } from "dotenv";
 config();
 
-// Configure the environment variables
+// Configurar variables de entorno
 export default {
   MONGODB_URI: process.env.MONGODB_URI,
   API_PREFIX: process.env.API_PREFIX,

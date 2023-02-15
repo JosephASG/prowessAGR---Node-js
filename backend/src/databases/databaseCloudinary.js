@@ -1,3 +1,4 @@
+//Almacenamiento de imagenes base de datos en la nube
 import cloudinary from "cloudinary";
 
 try {

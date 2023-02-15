@@ -4,7 +4,7 @@ import * as userController from "../controllers/userController.js";
 
 const router = Router();
 
-//for login user
+//Para iniciar sesion con cuenta de usuario
 router.post("/login", userController.loginUser);
 router.put(
   "/update/:id",
