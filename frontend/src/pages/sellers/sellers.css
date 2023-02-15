@@ -126,35 +126,6 @@
     opacity: 0;
   }
 
-.sell-fill-group {
-    width: 250px;
-    /* Current changes */
-
-    margin: 0 50px;
-
-    /* Incoming change */
-    background-color: rgb(200, 235, 203);
-    transition: all 2s linear;
-    border-top-right-radius: 50px;
-    border: double 10px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.sell-fill-group:hover {
-    background-color: white;
-    transform-origin: right;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.sell-fill-group:hover {
-    background-color: rgb(223, 246, 228);
-    transform-origin: bottom;
-    transform: scale(1.02);
-    transition-duration: 0.2s, 0.2s;
-}
-
-*/
-
 .sell-fill-header {
     height: 130px;
     display: grid;
