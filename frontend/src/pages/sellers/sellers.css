@@ -129,14 +129,10 @@
 .sell-fill-group {
     width: 250px;
     /* Current changes */
-
     margin: 0 50px;
-
     /* Incoming change */
-    background-color: rgb(200, 235, 203);
+    background-color: rgb(250, 250, 250);
     transition: all 2s linear;
-    border-top-right-radius: 50px;
-    border: double 10px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -215,8 +211,8 @@
 }
 
 .sell-fill-header img {
-    width: 130px;
-    height: auto;
+    width: 10px;
+    height: 10px;
 }
 
 .sell-fill-row .sell-fill-col .filter-pagination {

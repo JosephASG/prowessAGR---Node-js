@@ -1,0 +1,37 @@
+.latest-products{
+    justify-content: center;
+    justify-items: center;
+}
+
+.latest-sellers{
+    display: flex;
+}
+
+.latest-low{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px 10px;
+    margin-bottom: 1em;
+}
+
+.latest-group{
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px 10px;
+    margin-bottom: 1em;
+    border: solid;
+    border-radius: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .latest-sellers{
+        display: block;
+    }
+    .latest-col:last-child h2{        
+        margin-left: 4rem;
+        margin-right: 40rem;
+        justify-items: end;
+        
+    }
+}
