@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-//Create table for Order
+//Creacion de tabla ORDENES
 const OrderSchema = new mongoose.Schema(
   {
     orderItems: [

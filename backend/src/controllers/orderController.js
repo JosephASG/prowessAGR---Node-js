@@ -1,7 +1,7 @@
 import Order from "../models/orderModel.js";
 import HTTP_STATUS from "http-status-codes";
 
-//Post Order
+//Estructura metodo post
 export const createOrder = async (req, res) => {
   try {
     // 1. Get the order items from the request.
@@ -30,7 +30,7 @@ export const createOrder = async (req, res) => {
   }
 };
 
-//Get my orders
+//Obtener todas las ordenes registradas
 export const getMyOrders = async (req, res) => {
   try {
     //find orders by user id
@@ -45,6 +45,7 @@ export const getMyOrders = async (req, res) => {
   }
 };
 
+//Get my One Order
 export const getOrder = async (req, res) => {
   // Send the order with the matching id as a response
   try {
@@ -58,6 +59,7 @@ export const getOrder = async (req, res) => {
   }
 };
 
+//Get my orders by sellerId
 export const getOrders = async (req, res) => {
   try {
     // Get orders from database

@@ -1,7 +1,7 @@
 import Category from "../models/categoryModel.js";
 import HTTP_STATUS from "http-status-codes";
 
-//GET BY ID
+//Obtener categoria por el Id
 export const getCategoryById = async (req, res) => {
   // Get the id from the request
   const id = req.params.id;
@@ -25,7 +25,7 @@ export const getCategoryById = async (req, res) => {
 };
 
 //GET ALL CATEGORIES
-export const getAllCategories = async (req, res) => {
+export const getCategories = async (req, res) => {
   try {
     // Get all categories from the database
     const categories = await Category.find();

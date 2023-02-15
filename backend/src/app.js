@@ -10,10 +10,11 @@ import ProductRouter from "./routes/productRoutes.js";
 import UserRouter from "./routes/userRoutes.js";
 import OrderRouter from "./routes/orderRoutes.js";
 
-// create the express app
+
+//server
 const app = express();
 
-// use cors middleware to allow cross-origin requests
+//middlewares
 app.use(cors());
 
 // use morgan middleware to log HTTP requests
@@ -23,7 +24,7 @@ app.use(morgan(config.LOG_FORMAT || "development" ? "combined" : "dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// use the routers for each of the collection endpoints
+//routers
 app.use(`${config.API_PREFIX}/seed/`, seedRouter);
 app.use(`${config.API_PREFIX}/category/`, CategoryRouter);
 app.use(`${config.API_PREFIX}/products/`, ProductRouter);

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-// create mongoose schema for User
+//for create Table into DB for User
 const CategorySchema = new mongoose.Schema(
   {
     name: { type: String, required: true },

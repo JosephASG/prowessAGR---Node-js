@@ -1,7 +1,8 @@
+//Conexion de la aplicacion con la base de datos en Mongo DB
 import mongoose from "mongoose";
 import config from "../config.js";
 
-// Connect to MongoDB
+// Conexion con Mongo DB 
 (async () => {
   try {
     // Connect to MongoDB
