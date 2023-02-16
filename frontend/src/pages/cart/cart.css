@@ -204,3 +204,23 @@ h3.info-empty {
 .view-product-info {
     padding: 10px 0;
 }
+
+@media screen and (orientation: portrait) {
+    .cart-title{
+        padding-left: 10%;
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
+    .cart-items{
+        padding-left: 10%;
+        display: flex;
+        flex-wrap: wrap;
+    }   
+    .card-footer.cart{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
