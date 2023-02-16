@@ -217,10 +217,15 @@ h3.info-empty {
         display: flex;
         flex-wrap: wrap;
     }   
-    .card-footer.cart{
+    .footer-row{
         display: flex;
         flex-wrap: wrap;
+    }
+    .footer-container{
         justify-content: center;
         align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        position: relative;
     }
 }
