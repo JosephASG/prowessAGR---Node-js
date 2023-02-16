@@ -204,3 +204,41 @@ h3.info-empty {
 .view-product-info {
     padding: 10px 0;
 }
+
+@media screen and (orientation: portrait) {
+    .cart-title{
+        padding-left: 10%;
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
+    .cart-items{
+        padding-left: 5%;
+        display: flex;
+        flex-wrap: wrap;
+    }   
+    .footer-row{   
+        display: flex;
+        flex-wrap: wrap;
+    }
+  
+    .footer-container{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        
+    }
+    .ctn-cart{      
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .cart-row{
+       
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .cart-bill{
+        padding-top: 0px;
+    }
+}
