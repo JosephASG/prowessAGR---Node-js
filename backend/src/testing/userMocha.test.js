@@ -7,7 +7,7 @@ beforeEach(() => {
   jest.setTimeout(10000);
 });
 
-//CREATE USER TEST
+//CREAR PRUEBA DE USUARIO
 describe("POST /api/users/register", () => {
   it("should create a new user", async () => {
     const newUser = {
@@ -39,7 +39,7 @@ describe("POST /api/users/register", () => {
   });
 });
 
-//LOGIN USER TEST
+//PRUEBA DE USUARIO DE INICIO DE SESIÓN
 describe("POST /api/users/login", () => {
   it("should login a user", async () => {
     const newUser = {
@@ -77,7 +77,7 @@ describe("POST /api/users/login", () => {
   });
 });
 
-//UPDATE USER TEST
+//ACTUALIZACIÓN DE LA PRUEBA DE USUARIO
 describe("PUT /api/users/update/:id", () => {
   it("should update a user", async () => {
     const newUser = {

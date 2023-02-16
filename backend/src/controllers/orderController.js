@@ -4,7 +4,7 @@ import HTTP_STATUS from "http-status-codes";
 //Estructura metodo post
 export const createOrder = async (req, res) => {
   try {
-    // 1. Get the order items from the request.
+    // 1. Obtiene los elementos del pedido a partir de la solicitud.
     const newOrder = new Order({
       orderItems: req.body.orderItems.map((x) => ({ ...x, product: x._id })),
       id: req.body.id,
@@ -17,9 +17,9 @@ export const createOrder = async (req, res) => {
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
     });
-    // 2. Save the order to the database.
+    // 2. Guarde el pedido en la base de datos.
     const order = await newOrder.save();
-    // 3. Return the order information to the client.
+    // 3. Devuelve la información del pedido al cliente.
     return res
       .status(HTTP_STATUS.OK)
       .send({ message: "New Order Created", order });
@@ -33,42 +33,42 @@ export const createOrder = async (req, res) => {
 //Obtener todas las ordenes registradas
 export const getMyOrders = async (req, res) => {
   try {
-    //find orders by user id
+    //buscar pedidos por id de usuario
     const orders = await Order.find({ id: req.params.id });
-    //return orders
+    //retorna los pedidos
     return res.status(HTTP_STATUS.OK).send(orders);
   } catch (error) {
-    //return error message
+    //mensaje de error de retorno
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
       message: "Error getting orders",
     });
   }
 };
 
-//Get my One Order
+//Obtener mi orden única 
 export const getOrder = async (req, res) => {
-  // Send the order with the matching id as a response
+  //Enviar el pedido con el id coincidente como respuesta
   try {
     const order = await Order.findById(req.params.id);
     return res.status(HTTP_STATUS.OK).send(order);
   } catch (error) {
-    // If the order wasn't found, return an error message
+    //Si no se encuentra el pedido, devuelve un mensaje de error
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
       message: "Error getting order",
     });
   }
 };
 
-//Get my orders by sellerId
+//Obtener mis pedidos por Id del vendedor
 export const getOrders = async (req, res) => {
   try {
-    // Get orders from database
+    //Obtener pedidos de la base de datos
     const orders = await Order.find({ sellerId: req.params.id });
 
-    // Send orders to client
+    //Enviar pedidos al cliente
     return res.status(HTTP_STATUS.OK).send(orders);
   } catch (error) {
-    // Send error to client
+    //Enviar error al cliente
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
       message: "Error getting orders",
     });

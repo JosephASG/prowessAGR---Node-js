@@ -21,13 +21,13 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-// Create a method called encryptPassword that takes in a password, hashes it, and returns the hashed password.
+//Crea un método llamado encryptPassword que reciba una contraseña, la codifique y devuelva la contraseña codificada.
 UserSchema.methods.encrypPassword = async (password) => {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
 
-// Create a method called matchPassword that takes in a password and checks if it matches the password in the database.
+//Crea un método llamado matchPassword que toma una contraseña y comprueba si coincide con la contraseña de la base de datos.
 UserSchema.methods.matchPassword = async function (password) {
   return await bcrypt.compare(password, this.password);
 };

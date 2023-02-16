@@ -7,7 +7,7 @@ beforeEach(() => {
   jest.setTimeout(10000);
 });
 
-//POST ORDER TEST
+//PRUEBA POSTERIOR AL PEDIDO
 describe("POST /api/orders", () => {
   it("Should create a new order", async () => {
     const order = {

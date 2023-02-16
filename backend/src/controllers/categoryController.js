@@ -3,44 +3,44 @@ import HTTP_STATUS from "http-status-codes";
 
 //Obtener categoria por el Id
 export const getCategoryById = async (req, res) => {
-  // Get the id from the request
+  // Obtener el id de la solicitud
   const id = req.params.id;
   try {
-    // Find the category by id
+    // Buscar la categoria por el Id
     const category = await Category.findById(id);
-    // If the category is not found, return a 404 status
+    // Si no se encuentra la categoría, devuelve un estado 404
     if (!category) {
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ message: `No category found by id ${id}` });
     }
-    // If the category is found, return a 200 status
+    // Si se encuentra la categoría, devuelve un estado 200
     return res.status(HTTP_STATUS.OK).json(category);
   } catch (error) {
-    // If there is an error, return a 500 status
+    // Si hay un error, devuelve un estado 500
     return res
       .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
       .json({ message: error.message });
   }
 };
 
-//GET ALL CATEGORIES
+//OBTENER TODAS LAS CATEGORÍAS
 export const getCategories = async (req, res) => {
   try {
-    // Get all categories from the database
+    // Obtener todas las categorías de la base de datos
     const categories = await Category.find();
 
-    // If no categories are found, send a 404 response
+    // Si no se encuentra ninguna categoría, envía una respuesta 404
     if (!categories) {
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ message: "No categories found" });
     }
 
-    // Send the found categories in a JSON response
+    // Enviar las categorías encontradas en una respuesta JSON
     return res.status(HTTP_STATUS.OK).json(categories);
   } catch (error) {
-    // If there is an error, send the error message in a JSON response
+    // Si se produce un error, envíe el mensaje de error en formato JSON
     return res
       .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
       .json({ message: error.message });

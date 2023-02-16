@@ -5,7 +5,7 @@ import config from "../config.js";
 // Conexion con Mongo DB 
 (async () => {
   try {
-    // Connect to MongoDB
+    // Conectarse a MongoDB
     const conn = await mongoose.connect(config.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -14,7 +14,7 @@ import config from "../config.js";
       `Connected to database MongoDB: name ${conn.connection.name} at host port ${conn.connection.host}`
     );
   } catch (error) {
-    // Handle errors
+    // Gestión de errores
     console.log("Error connecting to MongoDB:", error.message);
   }
 })();

@@ -1,11 +1,11 @@
 //Almacenamiento de imagenes base de datos en la nube
 import cloudinary from "cloudinary";
 
-// 1. Import the cloudinary library
+// 1. Importar la biblioteca cloudinary
 try {
-  // 2. Try to access the cloudinary library
+  // 2. Intenta acceder a la biblioteca cloudinary
   cloudinary.config({
-    // 3. Configure the cloudinary library
+    // 3. Configurar la biblioteca cloudinary
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
@@ -13,6 +13,6 @@ try {
   });
   console.log("Connected to Cloudinary");
 } catch (error) {
-  // 4. If there is an error, show a message in the console
+  // 4. Si se produce un error, muestra un mensaje en la consola
   console.log("Error connecting to Cloudinary");
 }

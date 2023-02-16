@@ -7,7 +7,7 @@ beforeEach(() => {
   jest.setTimeout(10000);
 });
 
-//POST PRODUCT TEST
+//PRUEBA POSTERIOR DEL PRODUCTO
 describe("POST /api/products/add", () => {
   it("should create a new product", async () => {
     const newProduct = {
@@ -85,7 +85,7 @@ describe("POST /api/products/add", () => {
   });
 });
 
-//UPDATE PRODUCT TEST
+//ACTUALIZAR LA PRUEBA DE PRODUCTO
 describe("PUT /api/products/update/:id", () => {
   it("should update a product", async () => {
     const newProduct = {

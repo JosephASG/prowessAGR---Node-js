@@ -8,7 +8,7 @@ import fs from "fs-extra";
 
 //Crear un producto
 export const postProduct = async (req, res) => {
-  // check if all fields are sent
+  // comprobar si se envían todos los campos
   if (
     (!req.body.name,
     !req.body.slug,
@@ -20,9 +20,9 @@ export const postProduct = async (req, res) => {
       .status(HTTP_STATUS.BAD_REQUEST)
       .json({ message: "All fields are required" });
   try {
-    // create new product
+    // crear un nuevo producto
     const newProduct = new Products(req.body);
-    // if image is uploaded, upload image to cloudinary
+    //si la imagen está cargada, cárguela en cloudinary
     if (req.files?.image) {
       const result = await uploadImageProduct(req.files.image.tempFilePath);
       newProduct.image = {
@@ -31,25 +31,25 @@ export const postProduct = async (req, res) => {
       };
       await fs.unlink(req.files.image.tempFilePath);
     }
-    // save product in DB and return saved product
+    //guardar el producto en la base de datos y devolver el producto guardado
     const savedProduct = await newProduct.save();
-    // return saved product with a 201 status code
+    //devolver el producto guardado con un código de estado 201
     return res.status(HTTP_STATUS.CREATED).json(savedProduct);
   } catch (error) {
-    // if there is an error, return error with a 500 status code
+    // si hay un error, devolver error con un código de estado 500
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
 
 //Obtener informacion de todos los productos registrados
 export const getProducts = async (req, res) => {
-  // Try to get all the products
+  //Intenta conseguir todos los productos
   try {
     const products = await Products.find();
-    // If there are products, return them with a 200 status code
+    // Si hay productos, devuélvalos con un código de estado 200
     return res.status(HTTP_STATUS.OK).json(products);
   } catch (error) {
-    // If there was an error, return the error with a 500 status code
+    // Si se ha producido un error, devuelve el error con un código de estado 500
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
@@ -57,18 +57,18 @@ export const getProducts = async (req, res) => {
 //Obtener producto segun su peso en kilogramos
 export const getProductBySlug = async (req, res) => {
   try {
-    //find product by slug
+    //Buscar producto segun su peso en kilogramos
     const product = await Products.findOne({ slug: req.params.slug });
-    //if there is no product
+    //si no hay producto
     if (!product) {
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ message: "Product not found" });
     }
-    //return product
+    //devolver producto
     return res.status(HTTP_STATUS.OK).json(product);
   } catch (error) {
-    //if there is an error
+    //si hay un error
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
@@ -85,20 +85,20 @@ export const getProductBySellerId = async (req, res) => {
 //Obtener los productos por ID
 export const getProductById = async (req, res) => {
   try {
-    // Get the product from the database
+    //Obtener el producto de la base de datos
     const product = await Products.findById(req.params.id);
 
-    // If no product is found, return a 404
+    //Si no se encuentra ningún producto, devuelve un error 404
     if (!product) {
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ message: "Product not found" });
     }
 
-    // If a product is found, return the product in a 200
+    //Si se encuentra un producto, devuelve el producto en un 200
     return res.status(HTTP_STATUS.OK).json(product);
   } catch (error) {
-    // If there is an error, return a 500
+    // Si hay un error, devuelve un 500
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
   }
 };
@@ -137,7 +137,7 @@ export const updateProduct = async (req, res) => {
       if (product.image?.public_id) {
         await deleteImageProduct(product.image.public_id);
       }
-      // upload new image to cloudinary
+      // subir nueva imagen a cloudinary
       const result = await uploadImageProduct(req.files.image.tempFilePath);
       product.image = {
         public_id: result.public_id,

@@ -1,10 +1,10 @@
-//Importing the app file
+//Importar el archivo de la aplicación
 import app from "./app.js";
-//Importing the config file
+//Importar el archivo de configuración
 import config from "./config.js"
-//Importing the databaseMongoDB file
+//Importar la base de datos fichero MongoDB
 import "./databases/databaseMongoDB.js";
-//Importing the databaseCloudinary file
+//Importar el archivo databaseCloudinary
 import "./databases/databaseCloudinary.js";
 
 //Puerto del Servidor

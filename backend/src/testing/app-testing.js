@@ -17,18 +17,18 @@ const API_PREFIX = '/api'
 
 const app = express();
 
-//middlewares
+//Intermediarios
 app.use(cors());
 app.use(morgan(LOG_FORMAT));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//server listening
+//servidor a la escucha
 app.listen(() => {
   console.log(`Server at: http://localhost:${PORT}`);
   });
 
-//routers
+//rutas
 app.use(`${API_PREFIX}/seed/`, seedRouter);
 app.use(`${API_PREFIX}/category/`, CategoryRouter);
 app.use(`${API_PREFIX}/products/`, ProductRouter);

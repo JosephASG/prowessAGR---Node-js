@@ -1,16 +1,16 @@
 import mongoose from "mongoose";
 
-//for create Table into DB for User
+//Para crear Tabla en BD para Usuario
 const CategorySchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
   },
   {
-    timestamps: true, // auto insert timestamps into each document
-    versionKey: false, // disable versioning
+    timestamps: true, // insertar automáticamente marcas de tiempo en cada documento
+    versionKey: false, // desactivar el control de versiones
   }
 );
 
-// create mongoose model for User
+// crear modelo mongoose para Usuario
 const Category = mongoose.model("Category", CategorySchema);
 export default Category;

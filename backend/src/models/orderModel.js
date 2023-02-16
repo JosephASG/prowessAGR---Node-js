@@ -43,8 +43,8 @@ const OrderSchema = new mongoose.Schema(
   }
 );
 
-//Create model for Order
+//Crear modelo para la Orden
 const Order = mongoose.model("Order", OrderSchema);
 
-//Export Order model
+//Exportar modelo de pedido
 export default Order;

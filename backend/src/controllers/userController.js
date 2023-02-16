@@ -17,7 +17,7 @@ export const loginUser = async (req, res) => {
   if (user) {
     if (bcrypt.compareSync(req.body.password, user.password)) {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET);
-      // return user data and token
+      // devolver datos de usuario y token
        res.send({
         token,
         _id: user._id,
@@ -36,7 +36,7 @@ export const loginUser = async (req, res) => {
 
 //Crear usuario
 export const postUser = async (req, res) => {
-  // Check if all fields are filled and send error if not filled
+  // Comprueba si todos los campos están rellenados y envía un error si no lo están
   if (
     (!req.body.name,
     !req.body.email,
@@ -78,35 +78,35 @@ export const postUser = async (req, res) => {
   }
 };
 
-//GET
+//METODO GET
 export const getUser = async (req, res) => {
   try {
-    // Get all users from the database
+    //Obtener todos los usuarios de la base de datos
     const users = await User.find();
-    // Return all users in the response
+    //Devuelve todos los usuarios de la respuesta
     return res.status(HTTP_STATUS.OK).json(users);
   } catch (error) {
-    // If an error occurs, return it in the response
+    //Si se produce un error, devuélvalo en la respuesta
     return res.status(HTTP_STATUS.NOT_FOUND).json({ message: error.message });
   }
 };
 
-//GET BY ID
+//OBTENER POR ID
 export const getUserById = async (req, res) => {
   try {
-    // Get user by id from the database
+    //Obtener usuario por id de la base de datos
     const user = await User.findById(req.params.id);
-    // If user is not found in the database
+    // Si el usuario no se encuentra en la base de datos
     if (!user) {
-      // Return 404 status and error message
+      // Devolver el estado 404 y el mensaje de error
       return res
         .status(HTTP_STATUS.NOT_FOUND)
         .json({ message: "user not found" });
     }
-    // Return 200 status and user object
+    // Devuelve el estado 200 y el objeto de usuario
     return res.status(HTTP_STATUS.OK).send(user);
   } catch (error) {
-    // Return 404 status and error message
+    // Devolver el estado 404 y el mensaje de error
     return res.status(HTTP_STATUS.NOT_FOUND).json({ message: error.message });
   }
 };
