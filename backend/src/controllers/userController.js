@@ -79,7 +79,7 @@ export const postUser = async (req, res) => {
 };
 
 //METODO GET
-export const getUser = async (req, res) => {
+export const getUsers = async (req, res) => {
   try {
     //Obtener todos los usuarios de la base de datos
     const users = await User.find();
