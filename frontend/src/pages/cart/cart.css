@@ -213,19 +213,32 @@ h3.info-empty {
         
     }
     .cart-items{
-        padding-left: 10%;
+        padding-left: 5%;
         display: flex;
         flex-wrap: wrap;
     }   
-    .footer-row{
+    .footer-row{   
         display: flex;
         flex-wrap: wrap;
     }
+  
     .footer-container{
         justify-content: center;
         align-items: center;
         display: flex;
         flex-wrap: wrap;
-        position: relative;
+        
+    }
+    .ctn-cart{      
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .cart-row{
+       
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .cart-bill{
+        padding-top: 0px;
     }
 }
