@@ -213,6 +213,9 @@ h3.info-empty {
         
     }
     .cart-items{
+        margin: 40px 0;
+        display: flex;
+        padding: 0 5px;
         padding-left: 5%;
         display: flex;
         flex-wrap: wrap;
