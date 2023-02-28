@@ -1,7 +1,7 @@
 .account-row {
-    padding: 90px;
+    
     height: auto;
-    background-color: #01b95d8c;
+    background-image: url("fond.jpg");
     width: 100vw;
 }
 
@@ -12,20 +12,20 @@
     align-items: center;
     padding: 20px 50px;
     height: 100%;
-    border: 1px solid #c71313;
+    border: 1px solid #dfd5d5;
     margin-bottom: 30px;
     border-radius: 60px;
 }
 .account-title{
-    font: bold 30px MiNuevaFuente, verdana, sans-serif;
+    font: bold 40px MiNuevaFuente, verdana, sans-serif;
+    margin-top: 7%;
     text-align: center;
-    padding-top: 20px;
-    padding-left: 50px;
-    color: whitesmoke;
+    padding-top: 10px;
+    border-radius: 10px;
+    color: rgb(245, 245, 245);
     justify-content: center;
-        align-items: center;
-        display: flex;
-        flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
  @font-face {
     font-family: 'MiNuevaFuente';
@@ -47,7 +47,7 @@
 .account-groups {
     display: flex;
     flex-direction: column;
-    padding: 50px 50px;
+    margin-top: 30px;
 }
 
 .wrapper-items-account {
@@ -101,6 +101,7 @@
 .account-group img {
     width: 280px;
     height: auto;
+    color: #1ef00b;
     display: block;
     margin: 0 auto;
 }
@@ -142,7 +143,7 @@
     font: bold 30px MiNuevaFuente2, verdana, sans-serif;
     margin-bottom: 30px;
     letter-spacing: 1.4px;
-    color: #2f5f74;
+    color: #f0f2f3;
     text-align: center;
 }
 
@@ -159,7 +160,7 @@
 .card-footer.account button:first-child {
     display: block;
     margin: 5px auto;
-    background-color: #05e79c;
+    background-color: #abe705;
     padding: 5px 10px;
     border: none;
     box-shadow: 0 0 5px #f0f3bd;
@@ -220,7 +221,7 @@
 
 .form-image {
     position: relative;
-    background-color: rgba(22, 207, 105, 0.808);
+    background-color: rgba(5, 192, 30, 0.664);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     border-radius: 20px;
     margin-right: 40px;
@@ -228,9 +229,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    
+}
+.form-image:hover {
+    color: rgb(5, 5, 5);
+}
+.form-image {
+    transition: color 0.3s linear 0.2s;
 }
 
+.form-image:hover,
+.form-image:focus{
+  background-color: #52ce0bd0;
+}
 .form-image p {
     font-size: 12px;
     margin: 20px 0;
@@ -240,12 +251,12 @@
     position: relative;
     font-size: 25px;
     cursor: pointer;
-    filter: drop-shadow(0 0 1px #2f5f74);
+    filter: drop-shadow(0 0 1px #ebe5e5);
     transition: all 0.5s;
 }
 
 .form-image label:hover {
-    color: #ca2734;
+    color: #dd390f;
 }
 
 .btn-upload {
@@ -259,18 +270,29 @@
     letter-spacing: 1.4px;
     font-size: 12px;
     text-transform: uppercase;
+    border: 1px solid #999999;
+    background: #0e0beb;
+    border-radius: 2px;
+    color: rgb(245, 245, 245);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
     transition: all 0.5s;
 }
 
 .btn-upload:hover {
-    background-color: #2f5f74;
+    background-color: #0dc21c;
     color: #f0f3bd;
 }
 
 .add-btn {
     display: block;
-    margin: 0 0 30px auto;
+    margin-left: 40%;
     padding: 5px 15px;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
     background-color: #fafbfc;
     color: #1ef00b;
     text-transform: uppercase;
@@ -284,7 +306,7 @@
 
 .add-btn:hover {
     background-color: #ffffff;
-    color: #2f5f74;
+    color: #d6ec09;
 }
 
 .form-image.product img {
@@ -347,13 +369,29 @@
 }
 
 .info-group span:nth-child(2) {
-    color: black;
+    color: rgb(224, 220, 220);
     font-weight: bold;
 }
 
 .account-info {
-    margin-top: 100px;
+    margin-top: 10px;
+    color: #fcfcfc;
+    background-color: #c26e0d;
+    margin-left: 10px;
     
+}
+.account-info:hover {
+    color: red;
+}
+.account-info {
+    transition: color 0.3s linear 0.2s;
+}
+
+.account-info:hover,
+.account-info:focus{
+  background-color: #50e20c81;
+  color: #faf4f4;
+
 }
 
 .userInfoRow {
@@ -400,7 +438,7 @@
 
 .form-account .form .form-group input:focus {
     outline: 0;
-    border-bottom-color: #bfcf62;
+    border-bottom-color: #19c909ce;
 }
 
 .ctn-group {
