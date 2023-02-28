@@ -40,47 +40,56 @@ const SellFilterInfo = ({ user }) => {
   };
 
   return (
+    
     <div className="container-card">
-    <div className="card">
-      <div>
-        {" "}
-        {/* body*/}
-        <div key={user._id}>
-          <p className="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
-        </div>
+      <div className="card">
         <div>
           {" "}
+          {/* body*/}
           <div>
-            <Link to={`../seller/${user._id}`}></Link>
+            {" "}
+            <div>
+              <Link to={`../seller/${user._id}`}></Link>
+            </div>
+            <div class="cta-container transition">
+              {existUser && sellerExists ? (
+                <Button variant="contained" color="error" size="medium">
+                  <span onClick={() => handlerUnfollow(user)}>Dejar de seguir</span>
+                </Button>
+                ) : (
+                  <Button variant="contained" size="medium" color="success">
+                    <span key={user._id} onClick={handlerFollow}>
+                      Seguir
+                      </span>
+                  </Button>
+                )}
+            </div>
+            <div class="card_circle transition">
+              <div className="image">
+                <img src={user.image.secure_url} alt={user.name} />
+              </div>
+            </div>
           </div>
-          <div class="cta-container transition">
-          
-        {existUser && sellerExists ? (
-            <Button variant="contained" color="error" size="medium">
-              <span onClick={() => handlerUnfollow(user)}>Dejar de seguir</span>
-            </Button>
-          ) : (
-            <Button variant="contained" size="medium" color="success">
-              <span key={user._id} onClick={handlerFollow}>
-                Seguir
-              </span>
-            </Button>
-          )}
-        </div>
-        <div class="card_circle transition">
-        <div className="image">
-        <img src={user.image.secure_url} alt={user.name} />
-        </div>
-      </div>
-        </div>
-        <div key={user._id}>
-        <h2 className="data-vendor">
-          {user.name}
-        </h2>
-        <p class="member">Miembro Desde: {user.createdAt.slice(0, 10)}</p>
-      </div>
-    </div> 
-
+          <div key={user._id}>
+            <h2 className="data-vendor">{user.name}</h2>
+            <h2 class="member">Miembro Desde: {user.createdAt.slice(0, 10)}</h2>
+          </div>
+          <div className="wrapper-info">
+            <div className="sub_card">
+              <h2 className="mail">&nbsp;&nbsp;&nbsp;Correo: </h2>
+              <br></br>
+              <h3 className="m_mail">&nbsp;&nbsp;&nbsp;{user.email}</h3>
+              <br></br>
+              <h2 className="address">&nbsp;&nbsp;&nbsp;Dirección:</h2>
+              <br></br>
+              <h3 className="a_address">{user.address}</h3>
+              <br></br>
+              <h2 className="phone">&nbsp;&nbsp;&nbsp;Teléfono:</h2>
+              <br></br>
+              <h3 className="p_phone">{user.phone}</h3>
+            </div>
+          </div>
+        </div> 
       </div>
     </div>
   );

@@ -193,13 +193,13 @@
 
 
 .background-sellers {
-    
-    background: #fff;
+    background: url(https://wallpaperaccess.com/full/1163891.jpg) no-repeat 0px 5px;
+    background-size: 1500px;
 }
 
 #Buscador {
 
-    background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png) no-repeat 0px 5px;
+    background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png) no-repeat 10px 10px;
     background-size: 24px;
     border: transparent;
     border-bottom: solid 1px #ccc;
@@ -221,67 +221,70 @@
 
 
 .card {
-    background-color: rgb(254, 255, 247);
-    bottom: 0;
+    background-color: rgba(100, 211, 234, 0.673);
+    bottom: 50;
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
-    height: 20rem;
-    left: 0;
+    height: 22rem;
+    left: 50;
     margin: auto;
     overflow:hidden;
     position: relative;
     right: 0;
-    top: 0;
+    top: 50;
     width: 15rem;
     place-items: center;
     margin-bottom: 3rem;
+    border-radius: 25px;
 }
 
+/*tarjeta completa*/
 .card:hover {
-    height: 20rem;
+    height: 22rem;
     /*salen todos los datos*/
-    width: 16rem;
+    width: 35rem;
 }
 
 .card:hover .cta-container {
-  display: inline;
-  margin-left: -210px;
-    margin-top: 15px;
+    display: inline;
+    margin-left: -210px;
+    margin-top: 50px;
 }
-
+/*tarjeta completa*/
 .card:hover .card_circle {
     background-size: cover;
     border-radius: 0;
-    margin-top: -80px;
+    margin-top: 5px;
+    margin-left: 10px;
     
 }
 
 .transition {
     transition: .8s cubic-bezier(.3, 0, 0, 1.3)
 }
+/*tabla completa*/
 .card:hover .data-vendor {
-    background: #69e7a2;
-    
-    margin-top: 100px;
-    padding: 5px;
+    margin-top: 250px;
+    margin-left: -170px;
+    padding: 0px;
 }
 
 .card:hover .data-vendor small {
     color: rgb(71, 254, 144)
 }
-
+/*tabla completa*/
 .card:hover .member {
-    margin-top: 200px; /*desde*/
+    margin-left: 20px;
+    margin-top: 280px; /*desde*/
 
 }
-
+/*tabla inicial imagen*/
 .card_circle  {
     border-radius: 50%;
-    
     position: absolute;
-    margin-left: -40px;
-    margin-top: -150px;
+    margin-left: -10px;
+    margin-top: -10px;
     /*background-color: #69e7a2;*/
     background-size: cover;
 }
@@ -292,20 +295,18 @@
     background-size: cover;
     background-position: top;
 }
-
+/*tamaño imagen*/
 .card_circle .image img{
-    height: 20rem;
-    width: 20rem;
+    height: 15rem;
+    width: 15rem;
 }
-
-
 
 .data-vendor {
     color: rgb(0, 0, 0);
     font-family: 'Raleway', sans-serif;
-    font-size: 20px;
+    font-size: 25px;
     font-style: bold;
-    margin-top:170px;
+    margin-top:290px;
     position: absolute;
     text-align: center;
     width: 100%;
@@ -316,7 +317,7 @@
     color: rgba(0, 0, 0, .6);
     font-family: 'Raleway', sans-serif;
     font-size: 100%;
-    margin-top: 220px;
+    margin-top: 500px;
     position: absolute;
     text-align: center;
     z-index: 9999;
@@ -353,4 +354,31 @@
         justify-content: center;
         align-items: center;
     }
+}
+
+.wrapper-info{
+    border-left: thick solid #000;
+    margin-left: 270px;
+    margin-top: 50px;
+    position: absolute;
+}
+
+h3.m_mail {
+    color: rgba(18, 4, 101, 0.6);
+    font-style: bold;
+    font-family: 'Raleway', sans-serif;
+  }
+
+h3.a_address{
+    text-align: center;
+    color: rgba(18, 4, 101, 0.6);
+    font-style: bold;
+    font-family: 'Raleway', sans-serif;
+}
+
+h3.p_phone{
+    text-align: center;
+    color: rgba(18, 4, 101, 0.6);
+    font-style: bold;
+    font-family: 'Raleway', sans-serif;
 }
