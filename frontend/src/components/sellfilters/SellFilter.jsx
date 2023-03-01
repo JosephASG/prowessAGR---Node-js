@@ -6,7 +6,7 @@ import SellFilterInfo from "./SellFilterInfo";
 
 const SellFilter = ({ seller }) => {
   const [pageNumber, setPageNumber] = useState(0);
-  const sellersPerPage = 12;
+  const sellersPerPage = 4;
   const pagesVisited = pageNumber * sellersPerPage;
 
   const pageCount = Math.ceil(seller.length / sellersPerPage);
