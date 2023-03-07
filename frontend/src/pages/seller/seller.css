@@ -114,7 +114,7 @@
 }
 /*up the click*/
 .pagi-item:hover {
-    background-color: #35aa64;
+    background-color: #0003c2fb;
     cursor: pointer;
 }
 
@@ -132,16 +132,21 @@
 }
 
 .disabledPagi {
-    background-color: #76e0e5b6;
+    -webkit-transition: 1s linear;
+    transition: 0.25s linear;
+    background-color: #33ec04b6;
 }
-
+.disabledPagi:hover{  
+    -webkit-box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.47);
+    box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.47);
+  }
 .disabledPagi .pagi-link {
     color: #000000;
 }
 
 .disabledPagi:hover {
     transform: scale(1.1);
-    background-color: #35aa64;
+    background-color: #09c909;
 }
 
 .disabledPagi:hover .pagi-link {
