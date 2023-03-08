@@ -5,11 +5,12 @@
     align-items: center;
     height: auto;
     padding: 100px 0;
-    background-color: #52C993;
+    background: url(https://thumbs.dreamstime.com/b/bolsa-de-dinero-en-manos-del-agricultor-sobre-el-fondo-los-cultivos-agr%C3%ADcolas-beneficio-concepto-agroindustrial-agr%C3%ADcola-209620066.jpg) no-repeat 0px 5px;
+    background-size: 1500px;
 }
 
 .ctn-cart {
-    background-color: #68D0A1;
+    background-color: #41d5d793;
     padding: 20px;
     border-radius: 60px;
     box-shadow: 12px 12px 15px -3px rgba(0, 0, 0, 0.1), -13px 10px 15px -3px rgba(0, 0, 0, 0.1);
@@ -111,8 +112,9 @@ h3.info-empty {
 }
 
 .cart-bill {
+    margin-left: 80px;
     width: 100%;
-    background-color: #ffffff;
+    background-color: #36e697d3;
     padding: 10px;
     border-radius: 5px;
     padding: 50px 80px;

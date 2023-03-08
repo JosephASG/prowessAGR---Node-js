@@ -59,7 +59,7 @@ const CartItems = () => {
   return (
     <div className="cart-row">
       <div className="ctn-cart">
-        <h2 className="cart-title">Mi bolsa de compras</h2>
+        <h1 className="cart-title">MI BOLSA DE COMPRAS</h1>
         <div className="cart-items">
           <div className="cart-col">
             {cartItems.length === 0 ? (

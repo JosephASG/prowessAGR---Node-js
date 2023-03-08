@@ -1,3 +1,14 @@
+.mainCont{
+    display: flex;
+    justify-content: center;
+}
+
+    @media screen and (max-width: 700px){
+        .mainCont{
+            display: inline-block;
+        }
+    }
+
 .ctn-sellers {
     display: flex;
     justify-content: center;
@@ -193,13 +204,13 @@
 
 
 .background-sellers {
-    background: url(https://wallpaperaccess.com/full/1163891.jpg) no-repeat 0px 5px;
+    background: url(https://wallpaperaccess.com/full/3158925.jpg) no-repeat 0px 5px;
     background-size: 1500px;
 }
 
 #Buscador {
 
-    background: url(https://cdn0.iconfinder.com/data/icons/slim-square-icons-basics/100/basics-19-32.png) no-repeat 10px 10px;
+    background: url(https://icones.pro/wp-content/uploads/2021/06/icone-loupe-noir.png) no-repeat 10px 10px;
     background-size: 24px;
     border: transparent;
     border-bottom: solid 1px #ccc;
@@ -207,10 +218,11 @@
     outline: none;
     width: 700px;
     height: 50px;
-    border: solid 2px;
-    font-size: 15pt;
+    border: solid 3px;
+    font-size: 20pt;
     float: left;
-    color: #262626;
+    color: #000000;
+    font-style: bold;
     padding-left: 45px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -222,7 +234,7 @@
 
 .card {
     background-color: rgba(100, 211, 234, 0.673);
-    bottom: 50;
+    bottom: auto;
     box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
@@ -242,7 +254,6 @@
 /*tarjeta completa*/
 .card:hover {
     height: 22rem;
-    /*salen todos los datos*/
     width: 35rem;
 }
 
@@ -275,17 +286,17 @@
 }
 /*tabla completa*/
 .card:hover .member {
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 280px; /*desde*/
+    text-decoration: underline;
 
 }
 /*tabla inicial imagen*/
 .card_circle  {
     border-radius: 50%;
     position: absolute;
-    margin-left: -10px;
+    margin-left: 0px;
     margin-top: -10px;
-    /*background-color: #69e7a2;*/
     background-size: cover;
 }
 
@@ -299,6 +310,7 @@
 .card_circle .image img{
     height: 15rem;
     width: 15rem;
+    border-radius: 25px;
 }
 
 .data-vendor {
@@ -358,6 +370,7 @@
 
 .wrapper-info{
     border-left: thick solid #000;
+    /*border-right: thick solid #000;*/
     margin-left: 270px;
     margin-top: 50px;
     position: absolute;

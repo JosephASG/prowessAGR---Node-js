@@ -40,8 +40,8 @@ const SellFilterInfo = ({ user }) => {
   };
 
   return (
-    
-    <div className="container-card">
+    <div className="mainCont">
+      <div className="container-card">
       <div className="card">
         <div>
           {" "}
@@ -78,7 +78,7 @@ const SellFilterInfo = ({ user }) => {
             <div className="sub_card">
               <h2 className="mail">&nbsp;&nbsp;&nbsp;Correo: </h2>
               <br></br>
-              <h3 className="m_mail">&nbsp;&nbsp;&nbsp;{user.email}</h3>
+              <h3 className="m_mail">&nbsp;&nbsp;&nbsp;{user.email}&nbsp;&nbsp;</h3>
               <br></br>
               <h2 className="address">&nbsp;&nbsp;&nbsp;Dirección:</h2>
               <br></br>
@@ -91,6 +91,7 @@ const SellFilterInfo = ({ user }) => {
           </div>
         </div> 
       </div>
+    </div>
     </div>
   );
 };
