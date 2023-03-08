@@ -1,5 +1,5 @@
 .account-row {
-    
+    flex-wrap: wrap;
     height: auto;
     background-image: url("fond.jpg");
     width: 100vw;
@@ -18,11 +18,16 @@
 }
 .account-title{
     font: bold 40px MiNuevaFuente, verdana, sans-serif;
-    margin-top: 7%;
+    margin-top: 10%;
+    background-color: #fefffe;
+    box-shadow: rgb(150,150,150) 0px 0px 0px 8px;
+    margin-left: 28.15%;
+    width: 35%;
+    margin-bottom: 3%;
     text-align: center;
     padding-top: 10px;
     border-radius: 10px;
-    color: rgb(245, 245, 245);
+    color: rgb(5, 109, 10);
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
@@ -42,6 +47,7 @@
     font-family: 'Krona One', sans-serif;
     font-size: 22px;
     color: #2f5f74;
+    
 }
 
 .account-groups {
@@ -77,19 +83,17 @@
 }
 
 .account-group {
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    justify-content: center;
-        align-items: center;
-        display: flex;
-        flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .account-group:nth-child(1) {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -107,13 +111,18 @@
 }
 
 .form-row.account {
+    box-shadow: rgb(150,150,150) 0px 0px 0px 8px;
     display: flex;
     flex-direction: column;
     margin: 20px 0;
     min-height: auto;
     width: fit-content;
+    color: rgb(5, 109, 10);
     min-height: unset;
     padding: 0 auto !important;
+}
+label{
+    color: rgb(247, 250, 249);
 }
 
 .account-image {
@@ -149,6 +158,7 @@
 
 .account-products {
     margin-bottom: 50px;
+    color: whitesmoke;
 }
 
 .card-footer.account {
@@ -182,7 +192,7 @@
     background-color: #ca2734;
     padding: 5px 10px;
     border: none;
-    box-shadow: 0 0 5px #ca2734;
+    box-shadow: 0 0 5px #7eca27;
     color: #ffffff;
     letter-spacing: 1.4px;
     font-size: 12px;
@@ -192,11 +202,12 @@
 
 .card-footer.account button:last-child:hover {
     background-color: #ffffff;
-    color: #ca2734;
+    color: #11eb40;
 }
 
 .account-orders {
     display: flex;
+    color:whitesmoke;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -238,10 +249,6 @@
     transition: color 0.3s linear 0.2s;
 }
 
-.form-image:hover,
-.form-image:focus{
-  background-color: #52ce0bd0;
-}
 .form-image p {
     font-size: 12px;
     margin: 20px 0;
@@ -256,7 +263,7 @@
 }
 
 .form-image label:hover {
-    color: #dd390f;
+    color: #ffffff79;
 }
 
 .btn-upload {
@@ -271,7 +278,7 @@
     font-size: 12px;
     text-transform: uppercase;
     border: 1px solid #999999;
-    background: #0e0beb;
+    background: #03026b;
     border-radius: 2px;
     color: rgb(245, 245, 245);
     justify-content: center;
@@ -374,10 +381,11 @@
 }
 
 .account-info {
-    margin-top: 10px;
+    margin-top: 0px;
     color: #fcfcfc;
-    background-color: #c26e0d;
-    margin-left: 10px;
+    height: 347px;
+    background-color: rgba(5, 192, 30, 0.664);
+    margin-left: 25px;
     
 }
 .account-info:hover {
@@ -389,7 +397,7 @@
 
 .account-info:hover,
 .account-info:focus{
-  background-color: #50e20c81;
+  background-color: #c26e0db9;
   color: #faf4f4;
 
 }
