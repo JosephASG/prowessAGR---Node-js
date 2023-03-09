@@ -56,12 +56,12 @@ const Checkout = ({
   return (
     <div className="passwords">
       <form onSubmit={handlerAddProduct}>
-        <h5 className="orderPay"> You will pay after delivery! </h5>
+        <h3 className="orderPay"> Podrás realizar el pago después de la entrega.</h3>
         <div className="close-form" onClick={() => setOpenCheckout(false)}>
           X
         </div>
         <div className="form-group">
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name"> <b>Nombre:</b></label>
           <input
             required
             type="text"
@@ -71,7 +71,7 @@ const Checkout = ({
           />
         </div>
         <div className="form-group">
-          <label htmlFor="slug">Email</label>
+          <label htmlFor="slug"> <b>E-mail:</b></label>
           <input
             required
             type="text"
@@ -81,7 +81,7 @@ const Checkout = ({
           />
         </div>
         <div className="form-group">
-          <label htmlFor="category">Address</label>
+          <label htmlFor="category"><b>Dirección:</b></label>
           <input
             required
             type="text"
@@ -91,7 +91,7 @@ const Checkout = ({
           />
         </div>
         <div className="form-group">
-          <label htmlFor="description">Phone</label>
+          <label htmlFor="description"><b>Teléfono:</b></label>
           <input
             required
             type="text"
@@ -101,9 +101,11 @@ const Checkout = ({
           />
         </div>
         <div className="form-btn">
+          <center>
           <button type="submit">
-            Order <FontAwesomeIcon icon={faTruck} />
+            Ordenar <FontAwesomeIcon icon={faTruck} />
           </button>
+          </center>
         </div>
       </form>
     </div>
