@@ -1,41 +1,55 @@
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Sign = () => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [confirmPassword, setConfrimPassword] = useState();
-  const [address, setAddress] = useState();
-  const [phone, setPhone] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    if (event.target.value.length < 8) {
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
+    }
+  };
+
+  const submitHandler = async (event) => {
+    event.preventDefault();
+
     if (password !== confirmPassword) {
-      alert("Las contraseñas no coinciden!");
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    if (passwordError) {
+      alert("La contraseña debe tener al menos 8 caracteres");
       return;
     }
 
     try {
-      const { data } = await axios.post("/api/users/register", {
+      const response = await axios.post("/api/users/register", {
         name,
         email,
         password,
         address,
         phone,
       });
-      //localStorage.setItem("userInfo", JSON.stringify(data));
-      alert("Te has registrado con éxito!");
+      alert("Te has registrado con éxito");
       navigate("/login");
     } catch (error) {
-      console.log("Error!");
-      alert("Regristo fallido, por favor intente de nuevo!");
+      console.log("Error!", error);
+      alert("Registro fallido, por favor intente de nuevo");
     }
   };
 
@@ -46,7 +60,7 @@ const Sign = () => {
           <label htmlFor="name">Nombre completo</label>
           <input
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={(event) => setName(event.target.value)}
             type="text"
             id="name"
           />
@@ -55,7 +69,7 @@ const Sign = () => {
           <label htmlFor="email">Email</label>
           <input
             required
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
             type="email"
             id="email"
           />
@@ -64,16 +78,21 @@ const Sign = () => {
           <label htmlFor="password">Contraseña</label>
           <input
             required
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             type="password"
             id="password"
           />
+          {passwordError && (
+            <span className="error-message">
+              La contraseña debe tener al menos 8 caracteres
+            </span>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="r_password">Confirmar contraseña</label>
           <input
             required
-            onChange={(e) => setConfrimPassword(e.target.value)}
+            onChange={(event) => setConfirmPassword(event.target.value)}
             type="password"
             id="r_password"
           />
@@ -82,7 +101,7 @@ const Sign = () => {
           <label htmlFor="address">Dirección</label>
           <input
             required
-            onChange={(e) => setAddress(e.target.value)}
+            onChange={(event) => setAddress(event.target.value)}
             type="text"
             id="address"
           />
@@ -91,7 +110,7 @@ const Sign = () => {
           <label htmlFor="phone">Teléfono</label>
           <input
             required
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(event) => setPhone(event.target.value)}
             type="text"
             id="phone"
           />
