@@ -114,7 +114,7 @@
 }
 /*up the click*/
 .pagi-item:hover {
-    background-color: #0003c2fb;
+    background-color: #09c909;
     cursor: pointer;
 }
 
@@ -134,7 +134,7 @@
 .disabledPagi {
     -webkit-transition: 1s linear;
     transition: 0.25s linear;
-    background-color: #33ec04b6;
+    background-color: #76e0e5b6;
 }
 .disabledPagi:hover{  
     -webkit-box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.47);
