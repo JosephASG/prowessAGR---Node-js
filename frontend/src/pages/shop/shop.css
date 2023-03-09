@@ -121,7 +121,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0px 0;
-    background-color: #57b983;
+    background-color: #da8f0475;
     padding: 10px
 }
 
@@ -134,7 +134,7 @@
 }
 
 .card-body span.category {
-    background: #8add95;
+    background: #48df0c;
     border-radius: 10px;
     font-size: 12px;
     margin: 0;

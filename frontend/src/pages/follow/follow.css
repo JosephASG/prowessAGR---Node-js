@@ -11,6 +11,7 @@
 .follow-title {
     text-align: center;
     font-size: 28px;
+    margin-top: 10%;
     -webkit-transition: 1s linear;
     transition: 0.25s linear;
     letter-spacing: 1.3px;
