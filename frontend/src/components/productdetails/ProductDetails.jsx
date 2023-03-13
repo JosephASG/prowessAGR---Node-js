@@ -43,6 +43,7 @@ const ProductDetails = () => {
   };
 
   return (
+    <header className="bg_animate">
     <div className="product-row">
       <div className="product-col">
       {product.length === 0 ? ( 
@@ -72,8 +73,21 @@ const ProductDetails = () => {
         <div className="product-add">
           <button onClick={addToCart}>Añadir a la bolsa</button>
         </div>
+        <div className="burbujas">
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        <div className="burbuja"></div>
+        </div>
       </div>
     </div>
+    </header>
   );
 };
 
