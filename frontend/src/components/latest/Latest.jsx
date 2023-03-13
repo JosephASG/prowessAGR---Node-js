@@ -51,19 +51,7 @@ const Latest = () => {
         )}
       </div>
       {/*Nuevos Vendedores*/}
-      <div className="latest-col">
-        <h2>Proveemos soporte a nuestros nuevos vendedores registrados</h2>
-        {users.length === 0 ? (
-          <h3 className="info">Actualmente no hay vendedores registrados!</h3>
-        ) : (
-          <div className="container-sellers">
-            {/*i want only last 6 fetch, not all*/}
-            {users.slice(-6).map((user) => (
-              <LatestSeller key={user._id} user={user} />
-            ))}
-          </div>
-        )}
-      </div>
+     
     </div>
   );
 };

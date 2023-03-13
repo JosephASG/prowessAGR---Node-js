@@ -1,4 +1,4 @@
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare, faL } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import axios from "axios";
@@ -14,6 +14,7 @@ const Sign = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [passwordError, setPasswordError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -21,6 +22,18 @@ const Sign = () => {
       setPasswordError(true);
     } else {
       setPasswordError(false);
+    }
+  };
+
+  const handlePhoneChange = (event) => {
+    const inputPhone = event.target.value.replace(/\D/g, ""); // elimina todos los caracteres que no son dígitos
+    if (inputPhone.length <= 10) {
+      setPhone(inputPhone);
+    }
+    if (inputPhone.length >=10) {
+      setPhoneError(false);
+    } else {
+      setPhoneError(true);
     }
   };
 
@@ -110,10 +123,16 @@ const Sign = () => {
           <label htmlFor="phone">Teléfono</label>
           <input
             required
-            onChange={(event) => setPhone(event.target.value)}
+            onChange={handlePhoneChange}
             type="text"
             id="phone"
+            value={phone}
           />
+          {phoneError && (
+            <span className="error-message">
+              El número debe constar de exactamente 10 dígitos
+            </span>
+          )}
         </div>
         <div className="form-btn">
           <button type="submit">

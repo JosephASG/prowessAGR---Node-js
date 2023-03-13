@@ -416,7 +416,8 @@ span.text-percent {
     align-content: center;
     padding: 100px 200px;
     min-height: 100vh;
-    display: inline-block;
+    display: flex;
+    
 }
 
 .latest-col:first-child {
