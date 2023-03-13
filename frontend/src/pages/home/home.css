@@ -34,7 +34,7 @@
 }
 
 .header-logo-image {
-    width: 80px;
+    width: 90px;
     margin: 0 !important;
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@
 }
 
 .header-logo-image img {
-    width: 80px;
+    width: 90px;
     height: auto;
 }
 
@@ -502,7 +502,7 @@ span.text-percent {
 }
 
 .latest-header img {
-    width: 80px;
+    width: 220px;
     height: auto;
 }
 
