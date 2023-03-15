@@ -4,7 +4,7 @@ import FillterProductInfo from "./FillterProductInfo";
 
 const FilterProduct = ({ products }) => {
   const [pageNumber, setPageNumber] = useState(0);
-  const sellersPerPage = 12;
+  const sellersPerPage = 3;
   const pagesVisited = pageNumber * sellersPerPage;
 
   const pageCount = Math.ceil(products.length / sellersPerPage);

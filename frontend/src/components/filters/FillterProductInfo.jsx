@@ -25,26 +25,28 @@ const FillterProductInfo = ({ product }) => {
   };
 
   return (
-    <div className="filter-card" key={product._id}>
-      <div className="card-header">
-        <img src={product.image.secure_url} alt={product.name} />
-        <Link to={`../seller/${product.sellerId}`}>
-          <img
-            className="card-sellers"
-            src={product.sellerImage}
-            alt={product.seller}
-          />
-        </Link>
-      </div>
-      <div className="card-body">
-        <Link to={`../${product.slug}`}>
-          {product.name} <FontAwesomeIcon icon={faEye} />
-        </Link>
-        <span className="category">{product.category}</span>
-        <span className="price">${product.price.toFixed(2)}/kg</span>
-      </div>
-      <div className="card-footer">
-        <button onClick={addToCart}>Añadir a la bolsa</button>
+    <div className="shoppage">
+      <div className="filter-card" key={product._id}>
+        <div className="card-header">
+          <img src={product.image.secure_url} alt={product.name} />
+          <Link to={`../seller/${product.sellerId}`}>
+            <img
+              className="card-sellers"
+              src={product.sellerImage}
+              alt={product.seller}
+            />
+          </Link>
+        </div>
+        <div className="card-body">
+          <Link to={`../${product.slug}`}>
+            {product.name} <FontAwesomeIcon icon={faEye} />
+          </Link>
+          <span className="category">{product.category}</span>
+          <span className="price">${product.price.toFixed(2)}/kg</span>
+        </div>
+        <div className="card-footer">
+          <button onClick={addToCart}>Añadir a la bolsa</button>
+        </div>
       </div>
     </div>
   );

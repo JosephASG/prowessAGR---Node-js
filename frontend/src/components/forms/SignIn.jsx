@@ -58,13 +58,15 @@ const SignIn = () => {
               required
             />
           </div>
-          <div className="form-btn">
-            <button>
-              <FontAwesomeIcon icon={faLock} /> Acceder
+          <div className="form-btn-a">
+            <button className="btn-acc1">
+              Acceder
             </button>
           </div>
-          <div className="form-footer">
-            <Link to="/register">Registrarse</Link>
+          <div className="form-btn-b">
+            <button className="btn-reg1">
+              <Link to="/register">Registrarse</Link>
+            </button>
           </div>
         </form>
       </div>
