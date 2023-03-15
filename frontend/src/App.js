@@ -12,7 +12,8 @@ import Product from './pages/product/Product';
 import Seller from './pages/seller/Seller';
 import Sellers from './pages/sellers/Sellers';
 import Shop from './pages/shop/Shop';
-
+import Terms from './pages/terms/Terms'
+import AboutUs from './pages/about/AboutUs';
 function App() {
   return (
     <>
@@ -27,6 +28,8 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/follow' element={<Follow />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/about' element={<AboutUs/>}/>
+          <Route path='/terms' element={<Terms/>} />
           <Route path='/account' element={<Account />} />
           <Route path='/order/:id' element={<Order />} />
           <Route path='/userorder/:id' element={<UserInfoOrder />} />

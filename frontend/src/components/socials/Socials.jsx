@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaTiktok, FaInstagram } from "react-icons/fa";
 
+
 const Socials = () => {
   return (
     <div className="container-footer">
@@ -17,14 +18,14 @@ const Socials = () => {
             <Link to="/">
               <span>Equipo</span>
             </Link>
-            <Link to="/">
+            <Link to="/about">
               <span>Nosotros</span>
             </Link>
-            <Link to="/">
+            <Link to="/shop">
               <span>Productos</span>
             </Link>
-            <Link to="/">
-              <span>Terminos y condiciones</span>
+            <Link to="/terms" target="_blank">
+              <span>Términos y condiciones</span>
             </Link>
           </div>
         </div>
@@ -33,21 +34,33 @@ const Socials = () => {
             <span>Síguenos en nuestras redes sociales</span>
           </div>
           <div className="redes-footer">
-            <Link to="/">
+            <a
+              href="https://www.facebook.com/prowess.ec"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <i className="fab fa-facebook-f icon-redes-footer">
                 <FaFacebookF />
               </i>
-            </Link>
-            <Link to="/">
+            </a>
+            <a
+              href="https://www.tiktok.com/@totalprowess_ec"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <i className="fab fa-tiktok icon-redes-footer">
                 <FaTiktok />
               </i>
-            </Link>
-            <Link to="/">
+            </a>
+            <a
+              href="https://www.instagram.com/prowess_ec/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               <i className="fab fa-instagram icon-redes-footer">
                 <FaInstagram />
               </i>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
