@@ -414,10 +414,19 @@ span.text-percent {
 
 .latest-row {
     align-content: center;
-    padding: 100px 200px;
-    min-height: 100vh;
+    width: 100%;
+    height: 75vh;
+    padding: 8% 2%;
+    margin-left: 0px;
     display: flex;
-    
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    background-size: cover;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
 }
 
 .latest-col:first-child {
@@ -429,9 +438,23 @@ span.text-percent {
 
 .latest-products {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, auto));
+    flex-wrap: wrap;
+    margin-bottom: 0px;
+    flex: 2;
+    min-width:250px;
+    margin-top: 100px;
+    padding: 0px;
+    grid-template-columns: repeat(auto-fit, minmax(270px,auto));
+    align-content:center;
+    margin-left: 0px;
+    justify-content: left;
+    align-items:center;
+    background-repeat: no-repeat;
+    background-position: left;
+    position: relative;
+    background-size: cover;
+    flex-direction: column;
     gap: 1.5rem;
-    margin-top: 2rem;
 }
 
 .latest-group {
@@ -481,7 +504,7 @@ span.text-percent {
     font-size: 1rem;
     font-weight: 600;
     margin-top: 0.5rem;
-    color: rgb(121, 221, 121);
+    color: rgb(24, 122, 5);
 }
 
 .latest-col:first-child h2 {
@@ -498,6 +521,8 @@ span.text-percent {
     text-align: center;
     color: #37aa20;
     margin-bottom: 50px;
+    letter-spacing: 5px;
+    display: flex;
     position: relative;
     top: 50px;
 }
@@ -532,9 +557,7 @@ span.text-percent {
         position: relative;
         overflow: hidden;
         height: 100%;
-        float: right;
         width: 60%;
-      
     }
     
     .latest-sellers .image img {width: 100%;height: 100%;}
@@ -674,7 +697,7 @@ span.text-percent {
 /* ---------------------- Social footer --------------------------- */
 .container-footer {
     height: 60vh;
-    width: 100%;
+    width: 90%;
     position: relative;
     background-repeat: no-repeat;
     background-size: cover;
@@ -691,8 +714,8 @@ span.text-percent {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
-    padding: 0 100px;
+    padding: 0x;
+
 }
 
 .container-footer .footer .logo-footer {
@@ -815,7 +838,7 @@ span.text-percent {
 
 @media only screen and (max-width: 991px) {
     .container-footer {
-        height: 100vh;
+        height: 80vh;
     }
 
     .ctn-img-logo {
