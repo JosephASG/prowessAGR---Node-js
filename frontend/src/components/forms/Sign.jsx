@@ -134,13 +134,15 @@ const Sign = () => {
             </span>
           )}
         </div>
-        <div className="form-btn">
-          <button type="submit">
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} /> Registrarse
+        <div className="form-btn-c">
+          <button className="btn-reg2" type="submit">
+            Registrarse
           </button>
         </div>
-        <div className="form-footer">
-          <Link to="/login">Acceder</Link>
+        <div className="form-btn-d">
+          <button className="btn-acc2">
+            <Link to="/login">Acceder</Link>
+          </button>
         </div>
       </form>
     </div>

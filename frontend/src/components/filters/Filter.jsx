@@ -49,19 +49,21 @@ const Filter = () => {
   return (
 
     <div className="filter-row">
-      {products.length === 0 ? ( <div className='ctn-products'>
-        <h3 className="info">Actualmente no hay productos!</h3></div>
+      {products.length === 0 ? ( 
+      <div className="ctn-products">
+        <h3 className="info">Actualmente no hay productos!</h3>
+      </div>
       ) : (
         <>
           <div className="filter-col">
-            <div className="filter-group">
-              <button onClick={handleReset}>Todo</button>
+            {/*<div className="filter-group">
+             <button onClick={handleReset}>Todo</button>
               {category.map((cat) => (
                 <button key={cat._id} onClick={() => filterResult(cat.name)}>
                   {cat.name}
                 </button>
               ))}
-            </div>
+              </div>*/}
             <div className="filter-group">
               <input
                 type="search"
