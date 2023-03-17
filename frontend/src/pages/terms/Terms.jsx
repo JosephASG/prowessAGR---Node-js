@@ -1,22 +1,17 @@
 import React from "react";
-import Filter from "../../components/filters/Filter";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
-
+import "./Terms.css";
 const Terms = () => {
   return (
     <div className="wrapper">
-      {/* Header Start */}
       <header className="header-container">
         <Header />
       </header>
-      {/* Header End */}
 
       {/* Main Start */}
       <main className="main-container"></main>
-      {/* Main End*/}
-      
-      <div>
+      <div className="terms">
         <h1>Términos y Condiciones</h1>
         <p>
           Bienvenidos a la página de Términos y Condiciones de Prowess Agricola.
@@ -33,8 +28,7 @@ const Terms = () => {
         <p>
           Los derechos de propiedad intelectual, incluyendo, sin limitación, los
           derechos de autor, marcas comerciales, nombres comerciales y patentes,
-          en y para el sitio web y su contenido, pertenecen a [Nombre de la
-          empresa].
+          en y para el sitio web y su contenido, pertenecen a Prowess Agricola.
         </p>
         <h2>3. Uso del Sitio Web</h2>
         <p>
@@ -45,14 +39,14 @@ const Terms = () => {
         <h2>4. Exclusión de Garantías y Limitación de Responsabilidad</h2>
         <p>
           El sitio web se proporciona "tal cual" sin garantías de ningún tipo,
-          ya sean expresas o implícitas. [Nombre de la empresa] no será
+          ya sean expresas o implícitas. Prowess Agricola. no será
           responsable de ningún daño directo, indirecto, incidental, especial o
           consecuente que resulte del uso o la imposibilidad de uso del sitio
           web.
         </p>
         <h2>5. Modificaciones a los Términos y Condiciones</h2>
         <p>
-          [Nombre de la empresa] se reserva el derecho de modificar estos
+        Prowess Agricola se reserva el derecho de modificar estos
           términos y condiciones en cualquier momento y sin previo aviso. Al
           utilizar el sitio web después de cualquier modificación, usted acepta
           estar sujeto a los términos y condiciones modificados.
@@ -60,11 +54,13 @@ const Terms = () => {
         <h2>6. Ley Aplicable y Jurisdicción</h2>
         <p>
           Estos términos y condiciones se regirán e interpretarán de acuerdo con
-          las leyes de [país/estado/provincia]. Cualquier disputa que surja en
+          las leyes de Ecuador. Cualquier disputa que surja en
           relación con estos términos y condiciones estará sujeta a la
-          jurisdicción exclusiva de los tribunales de [ciudad/país].
+          jurisdicción exclusiva de los tribunales de Pichincha.
         </p>
       </div>
+      {/* Main End*/}
+
       {/* Footer Start */}
       <footer className="footer-container">
         <Footer />

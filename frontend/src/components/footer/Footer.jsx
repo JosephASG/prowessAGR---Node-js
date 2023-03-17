@@ -63,7 +63,8 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <span>&copy; 2023. Todos los derechos reservados. Prowess Agrícola</span>
+        <div className="copyright">
+        <span>&copy; 2023. Todos los derechos reservados. Prowess Agrícola</span></div>
         <br />
       </div>
     </div>

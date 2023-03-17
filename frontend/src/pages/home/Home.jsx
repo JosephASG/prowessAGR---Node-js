@@ -3,7 +3,6 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Latest from "../../components/latest/Latest";
 import Hero from "../../components/hero/Hero";
-import Socials from "../../components/socials/Socials";
 import "./home.css";
 
 const Home = () => {
