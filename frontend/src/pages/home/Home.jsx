@@ -19,7 +19,7 @@ const Home = () => {
       <main className="main-container">
         <Hero />
         <Latest />
-        <Socials />
+        
       </main>
       {/* Main End*/}
 
