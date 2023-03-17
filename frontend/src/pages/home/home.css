@@ -556,13 +556,13 @@ span.text-percent {
 }
 
 .latest-col:last-child h2 {
-  text-align: center;
-  color: #121212;
-  margin-bottom: 50px;
-  letter-spacing: 5px;
-  display: flex;
-  position: relative;
-  top: 50px;
+    text-align: center;
+    color: #121212;
+    margin-bottom: 50px;
+    letter-spacing: 5px;
+    display: flex;
+    position: relative;
+    top: 50px;
 }
 
 .latest-header img {
