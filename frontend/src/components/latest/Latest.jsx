@@ -33,7 +33,7 @@ const Latest = () => {
         ) : (
           <div className="latest-products">
             {/*i want only last 3 fetch, not all*/}
-            {products.slice(-3).map((product) => (
+            {products.slice(-6).map((product) => (
               <div className="latest-group" key={product._id}>
                 <div className="latest-header">
                   <img src={product.image.secure_url} alt={product.name} />

@@ -11,15 +11,14 @@
 .follow-title {
     text-align: center;
     font-size: 28px;
-    position: relative;
-    margin-top: 8%;
+    margin-top: 10%;
     -webkit-transition: 1s linear;
     transition: 0.25s linear;
     letter-spacing: 1.3px;
     color: #1cd40b;
     border: solid 2px;
     border-radius: 10px;
-    width: 38%;
+    width: 28%;
     border-color: #070707;
     background-color: white;
 }

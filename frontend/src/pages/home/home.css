@@ -5,7 +5,6 @@
     box-shadow: 0 15px 10px -15px #485b63;
     z-index: 999999999;
     background-color: #121212;
-    position: fixed;
     border-radius: 0 0 60px 60px;
 }
 
@@ -92,22 +91,58 @@ span.login {
     border-bottom: 3px solid #ca2734;
 }
 
-.footer-container {
-    height: 40px;
-    box-shadow: 0 -15px 10px -15px #485b63;
-    background-color: #121212;
-    bottom: 0;
-    width: 100%;
-    position: relative;
-}
+.container-footer {
+    background-color: #309B6A;
+    color: #ffffff;
+    padding: 30px 0;
+  }
 
-.footer-row {
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ctn-img-logo img {
+    max-width: 180px;
+  }
+  .columF {
+    flex: 1;
+    margin: 25px;
+  }
+  
+  .paginas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .paginas a {
+    margin: 5px 10px;
+  }
+  
+  .ctn-social-media {
+    flex: 1;
+    margin: 20px;
+  }
+  
+  .title-social {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .redes-footer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100%;
+  }
+  
+  .redes-footer a {
+    margin: 0 10px;
+    color: #ffffff;
+  }
 
-}
 
 .footer-row span {
     font-size: 12px;
@@ -379,7 +414,7 @@ span.text-percent {
     .ctn-img-bg-4 {
         bottom: 5%;
         right: 20%;
-        width: 60px;
+        width: 50px;
     }
 
     .ctn-img-bg-1 {
@@ -415,9 +450,10 @@ span.text-percent {
 
 .latest-row {
     align-content: center;
+    background-color: #3CC285;
     width: 100%;
-    height: 80vh;
-    padding: 8% 2%;
+    height: 130vh;
+    padding: 10% 2%;
     margin-left: 0px;
     display: flex;
     justify-content: center;
@@ -438,14 +474,14 @@ span.text-percent {
 }
 
 .latest-products {
-    display:grid;
+    display: grid;
     flex-wrap: wrap;
     margin-bottom: 0px;
     flex: 2;
     min-width:250px;
     margin-top: 100px;
     padding: 0px;
-    grid-template-columns: repeat(auto-fit, minmax(260px,auto));
+    grid-template-columns: repeat(auto-fit, minmax(270px,auto));
     align-content:center;
     margin-left: 0px;
     justify-content: left;
@@ -454,7 +490,6 @@ span.text-percent {
     background-position: left;
     position: relative;
     background-size: cover;
-    z-index: 100;
     flex-direction: column;
     gap: 1.5rem;
 }
@@ -506,12 +541,12 @@ span.text-percent {
     font-size: 1rem;
     font-weight: 600;
     margin-top: 0.5rem;
-    color: rgb(24, 122, 5);
+    color:#121212;
 }
 
 .latest-col:first-child h2 {
     text-align: center;
-    color: #37aa20;
+    color: #121212;
     margin-bottom: 10px;
 }
 
@@ -521,7 +556,7 @@ span.text-percent {
 
 .latest-col:last-child h2 {
     text-align: center;
-    color: #37aa20;
+    color: #121212;
     margin-bottom: 50px;
     letter-spacing: 3px;
     display: flex;
@@ -698,56 +733,39 @@ span.text-percent {
 
 /* ---------------------- Social footer --------------------------- */
 .container-footer {
-    height: 60vh;
-    width: 90%;
+    height: 45vh;
+    width: 100%;
+    background-color: #193327;
     position: relative;
-    flex-wrap: wrap;
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-image: url(../../../public/assets/images/others/layered-waves-haikei.svg); */
 }
 
 .container-footer .footer {
     width: 100%;
+    color:#ffffff;
     height: auto;
-    display: flex;
+    font-size: 14px;
     flex-direction: row;
     justify-content: center;
     padding: 0x;
-
-}
-
-.container-footer .footer .logo-footer {
-    text-align: center;
-}
-
-.container-footer .footer .logo-footer img {
-    width: 100px;
-}
-
-.container-footer .footer .redes-footer {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
 }
 
 .container-footer .footer .redes-footer .icon-redes-footer {
-    font-size: 20px;
+    font-size: 16px;
     margin: 20px;
-    border: 2px solid #121212;
+    border: 2px solid #ffffff;
     width: 60px;
     height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    color: #121212;
+    color: #ffffff;
     text-decoration: none;
-    transition: all .5s ease;
+    
 }
 
 .ctn-social-media {
@@ -755,22 +773,26 @@ span.text-percent {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    
 }
 
 .title-social {
+    color:#ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .title-social span {
-    font-size: 24px;
-    color: #121212;
-    font-weight: 600;
+    font-size: 16px;
+    color: #ffffff;
+    justify-content: center;
 }
 
 .container-footer .footer .redes-footer a {
+    padding-left: 10px;
     text-decoration: none;
+    color: #ffffff;
     transition: all .5s ease;
 }
 
@@ -797,10 +819,10 @@ span.text-percent {
 .columF {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 50px 0 20px 0;
+    margin: 60px 0 10px 0;
 }
 
 .paginas {
@@ -811,9 +833,10 @@ span.text-percent {
 }
 
 .paginas a {
-    font-size: 18px;
+    padding-left: 100px;
+    font-size: 20px;
     margin: 10px 50px;
-    color: #121212;
+    color: #ffffff;;
     transition: all .5s ease;
     text-decoration: none;
 }
@@ -823,29 +846,14 @@ span.text-percent {
     transition: all .5s ease;
 }
 
-.ctn-derechos {
-    position: absolute;
-    bottom: 0;
-    padding: 30px 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
 
-.ctn-derechos h4 {
-    font-family: 'Krona One', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-}
-
-@media only screen and (max-width: 991px) {
+@media only screen and (max-width: 1280px) {
     .container-footer {
         height: 80vh;
     }
 
     .ctn-img-logo {
-        margin: 50px 0 0 0;
+        margin: 80px 0 0 0;
     }
 
     .container-footer footer {
@@ -854,7 +862,7 @@ span.text-percent {
     }
 
     .container-footer footer .logo-footer img {
-        width: 60px;
+        width: 50px;
     }
 
     .ctn-derechos h4 {
@@ -862,7 +870,7 @@ span.text-percent {
     }
 
     .title-social span {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .ctn-social-media {

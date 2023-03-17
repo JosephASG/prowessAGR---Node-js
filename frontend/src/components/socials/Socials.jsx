@@ -65,6 +65,7 @@ const Socials = () => {
         </div>
       </div>
     </div>
+    
   );
 };
 
