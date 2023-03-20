@@ -348,8 +348,6 @@ label{
 
 .orderContainer .orderRow.products .orderCol:last-child {
     flex: 1;
-    position: absolute;
-    margin-top: 19rem;
 }
 
 .orderContainer .orderRow.products .orderCol:first-child .cards {

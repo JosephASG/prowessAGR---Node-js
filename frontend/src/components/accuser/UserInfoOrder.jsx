@@ -78,25 +78,25 @@ const UserInfoOrder = () => {
         <div className="orderCol">
           <div className="infoGroups">
             <div className="info-group">
-              <span>Nombre: </span>
+              <span>Nombre:</span>
               <span>{order.name}</span>
             </div>
             <div className="info-group">
-              <span>Email: </span>
+              <span>Email:</span>
               <span>{order.email}</span>
             </div>
             <div className="info-group">
-              <span>Teléfono: </span>
+              <span>Teléfono:</span>
               <span>{order.phone}</span>
             </div>
             <div className="info-group">
-              <span>Dirección: </span>
+              <span>Dirección:</span>
               <span>{order.address}</span>
             </div>
           </div>
           <div className="infoGroups">
             <div className="info-group">
-              <span>Sub Total: </span>
+              <span>Sub Total:</span>
               {/* that it does not count all ordered products, but only mine */}
               <span>${order.orderItems?.filter(item => item.sellerId === userId)?.reduce((a,v) =>  a = a + v.price , 0 )?.toFixed(2)}</span>
             </div>
@@ -106,13 +106,13 @@ const UserInfoOrder = () => {
               <span>${((order.orderItems?.filter(item => item.sellerId === userId)?.reduce((a,v) =>  a = a + v.price , 0 )) * 0.10)?.toFixed(2) }</span>
             </div>
             <div className="info-group">
-              <span>Precio total: </span>
+              <span>Precio total:</span>
               <span>${(order.orderItems?.filter(item => item.sellerId === userId)?.reduce((a,v) =>  a = a + v.price , 0 ) - ((order.orderItems?.filter(item => item.sellerId === userId)?.reduce((a,v) =>  a = a + v.price , 0 ))* 0.10))?.toFixed(2)}</span>
             </div>
           </div>
           <div className="infoGroups">
             <div className="info-group">
-              <span>Pagado: </span>
+              <span>Pagado:</span>
               {order.isPaid ? (<span> Paid at {order.paidAt} </span>) : (
               <span>No pagado!</span>
               )}

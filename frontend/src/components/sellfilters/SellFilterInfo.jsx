@@ -77,10 +77,15 @@ const SellFilterInfo = ({ user }) => {
           <div className="wrapper-info">
             <div className="sub_card">
               <h2 className="mail">&nbsp;&nbsp;&nbsp;Correo: </h2>
+              <br></br>
               <h3 className="m_mail">&nbsp;&nbsp;&nbsp;{user.email}&nbsp;&nbsp;</h3>
+              <br></br>
               <h2 className="address">&nbsp;&nbsp;&nbsp;Dirección:</h2>
+              <br></br>
               <h3 className="a_address">{user.address}</h3>
+              <br></br>
               <h2 className="phone">&nbsp;&nbsp;&nbsp;Teléfono:</h2>
+              <br></br>
               <h3 className="p_phone">{user.phone}</h3>
             </div>
           </div>
