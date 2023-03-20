@@ -27,7 +27,7 @@ const Latest = () => {
   return (
     <div className="latest-row">
       <div className="latest-col">
-        <h2>Nuevos productos frescos</h2>
+        <h2>Nuevos productos frescos:</h2>
         {products.length === 0 ? (
           <h3 className="info">Actualmente no hay productos</h3>
         ) : (
