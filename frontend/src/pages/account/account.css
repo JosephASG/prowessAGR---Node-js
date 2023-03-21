@@ -1,7 +1,8 @@
 .account-row {
     flex-wrap: wrap;
     height: auto;
-    background-image: url("fond.jpg");
+    background-image: url("Fond2.jpg");
+    background-size: cover;
     width: 100vw;
 }
 
@@ -20,6 +21,7 @@
     font: bold 40px MiNuevaFuente, verdana, sans-serif;
     margin-top: 20%;
     background-color: #fefffe;
+    background-size: cover;
     box-shadow: rgb(150,150,150) 0px 0px 0px 8px;
     margin-left: 33.9%;
     width: 35%;
@@ -153,7 +155,7 @@ label{
     font: bold 30px MiNuevaFuente2, verdana, sans-serif;
     margin-bottom: 30px;
     letter-spacing: 1.4px;
-    color: #063808;
+    color: rgb(255, 255, 255);
     text-align: center;
 }
 

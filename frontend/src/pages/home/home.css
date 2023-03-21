@@ -445,6 +445,7 @@ span.text-percent {
     font-size: 14px;
     margin: 20px 0;
     letter-spacing: 2px;
+    
   }
 }
 
@@ -464,7 +465,7 @@ span.text-percent {
   background-position: center;
   position: relative;
   background-size: cover;
-  flex-direction: row-reverse;
+  flex-direction: row;
   flex-wrap: wrap;
 }
 
@@ -477,22 +478,17 @@ span.text-percent {
 .latest-products {
   display: grid;
   flex-wrap: wrap;
-  margin-bottom: 0px;
-  flex: 2;
-  min-width: 250px;
-  margin-top: 100px;
-  padding: 0px;
-  grid-template-columns: repeat(auto-fit, minmax(270px, auto));
-  align-content: center;
-  margin-left: 0px;
-  justify-content: left;
-  align-items: center;
-  background-repeat: no-repeat;
-  background-position: left;
   position: relative;
-  background-size: cover;
-  flex-direction: column;
-  gap: 1.5rem;
+  margin-bottom: 0px;
+  flex: 1;
+  min-width: 250px;
+  margin-top: 0px;
+  object-fit: cover;
+  padding: 0px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+  justify-content: space-between;
+  justify-items: center;
+
 }
 
 .latest-group {
@@ -743,7 +739,7 @@ span.text-percent {
 }
 
 .container-footer {
-    height: 37vh;
+    height: 100%;
     width: 100%;
     background-color: #193327;
     position: relative;
@@ -946,6 +942,9 @@ span.text-percent {
     @media only screen and (max-width: 480px) {
     .container-footer {
     height: auto;
+    background-size: cover;
+    position: relative;
+    flex-wrap: wrap;
     }
     
     .ctn-img-logo {
