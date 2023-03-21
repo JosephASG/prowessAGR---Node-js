@@ -1,13 +1,14 @@
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext } from "react";
+import React, { useContext,useState} from "react";
 import { Link } from "react-router-dom";
 import { Store } from "../../Store";
+import '../filters/Filter.css'
 
 const FillterProductInfo = ({ product }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
-
+  const [showModal, setShowModal] = useState(false);
   const existUser = localStorage.getItem("userInfo");
 
   const addToCart = () => {
@@ -21,6 +22,7 @@ const FillterProductInfo = ({ product }) => {
         type: "CART_ADD_ITEM",
         payload: { ...product, quantity },
       });
+      setShowModal(true);
     }
   };
 
@@ -45,10 +47,18 @@ const FillterProductInfo = ({ product }) => {
           <span className="price">${product.price.toFixed(2)}/kg</span>
         </div>
         <div className="card-footer">
-          <button onClick={addToCart}>Añadir a la bolsa</button>
-        </div>
+        <button onClick={addToCart}>Añadir a la bolsa</button>
       </div>
     </div>
+    {showModal && (
+  <div className="modal">
+    <div className="modal-content">
+      <p>Producto añadido correctamente</p>
+      <button onClick={() => setShowModal(false)}>Cerrar</button>
+    </div>
+  </div>
+)}
+  </div>
   );
 };
 

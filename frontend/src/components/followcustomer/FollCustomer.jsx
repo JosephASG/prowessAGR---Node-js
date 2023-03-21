@@ -33,7 +33,7 @@ const FollCustomer = () => {
 
   return (
     <div className="follow-row">
-      <h2 className="follow-title">Subscripciones</h2>
+      <h2 className="follow-title">Lista de seguidos</h2>
       {wishItems.length === 0 ? (
         <h3 className="info">
           No estás siguiendo a ningún vendedor en este momento.

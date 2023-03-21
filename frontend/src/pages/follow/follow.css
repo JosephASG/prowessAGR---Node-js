@@ -1,26 +1,24 @@
 .follow-row {
     min-height: 105vh;
     display: flex;
-    background-image: url("fond2.jpg");
-    justify-content: space-between;
+    background-image: url("fond.jpg");
+    justify-content: center;
     align-items: center;
     flex-direction: column;
-    letter-spacing: 3px;
     flex-wrap: nowrap;
 }
 
 .follow-title {
     text-align: center;
-    font-size: 32px;
-    position: relative;
-    margin-top: 18%;
+    font-size: 28px;
+    margin-top: 10%;
     -webkit-transition: 1s linear;
     transition: 0.25s linear;
     letter-spacing: 1.3px;
     color: #1cd40b;
     border: solid 2px;
     border-radius: 10px;
-    width: 64%;
+    width: 28%;
     border-color: #070707;
     background-color: white;
 }
@@ -66,7 +64,7 @@
     }
     .footer-container{
         
-        position: relative;
+        position: absolute;
     }   
     .header-menu{
         display: flex;
