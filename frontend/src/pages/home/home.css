@@ -743,7 +743,7 @@ span.text-percent {
 }
 
 .container-footer {
-    height: 37vh;
+    height: 100%;
     width: 100%;
     background-color: #193327;
     position: relative;
@@ -917,11 +917,11 @@ span.text-percent {
     }
     
     .container-footer footer .logo-footer img {
-    width: 40px;
+    width: 30px;
     }
     
     .ctn-derechos h4 {
-    font-size: 8px;
+    font-size: 10px;
     }
     
     .title-social span {
@@ -949,16 +949,16 @@ span.text-percent {
     }
     
     .ctn-img-logo {
-    margin: 20px 0 20px 0;
+    display: flex;
+    margin: 0 90px 0 90px;
     }
     
     .container-footer footer {
-    flex-direction: column;
-    padding: 0 20px;
+    padding: 0 10px;
     }
     
     .container-footer footer .logo-footer img {
-    width: 30px;
+    width: 20px;
     }
     
     .ctn-derechos h4 {
@@ -966,11 +966,11 @@ span.text-percent {
     }
     
     .title-social span {
-    font-size: 10px;
+    font-size: 12px;
     }
     
     .ctn-social-media {
-    margin: 20px 0 20px 0;
+    margin: 10px 0 10px 0;
     }
     
     .paginas {
@@ -979,8 +979,8 @@ span.text-percent {
     
     .paginas a {
     margin: 5px 10px;
-    padding-left: 10px;
-    font-size: 10px;
+    padding-left: 5px;
+    font-size: 14px;
     }
     }
     
