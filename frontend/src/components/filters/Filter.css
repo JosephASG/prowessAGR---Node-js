@@ -11,18 +11,23 @@
     align-items: center;
   }
   .modal-content {
-    background-color: #fff;
+    background-color: #62CF9D;
     padding: 20px;
     border-radius: 5px;
     max-width: 300px;
     text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);;
+    gap: 10px;
+    
   }
   .modal-content p {
     margin-bottom: 20px;
+
   }
   .modal-content button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #FEEC80;
+    color: #050505;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -30,4 +35,18 @@
   }
   .modal-content button:hover {
     background-color: #0069d9;
+  }
+
+  .one{
+    grid-column: 1/4;
+  }
+
+  .two{
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .three{
+    grid-column: 3;
+    grid-row: 2;
   }

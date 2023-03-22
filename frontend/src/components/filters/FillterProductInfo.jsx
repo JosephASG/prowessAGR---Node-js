@@ -53,8 +53,11 @@ const FillterProductInfo = ({ product }) => {
     {showModal && (
   <div className="modal">
     <div className="modal-content">
-      <p>Producto añadido correctamente</p>
-      <button onClick={() => setShowModal(false)}>Cerrar</button>
+      <p className="one">El producto seleccionado se añadió correctamente.</p>
+      <Link to="/cart" className="two">
+        <button  >Carrito</button>
+      </Link>
+      <button className="three" onClick={() => setShowModal(false)}>Cerrar</button>
     </div>
   </div>
 )}
