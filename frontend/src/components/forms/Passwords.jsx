@@ -14,6 +14,7 @@ const Passwords = ({ setOpen }) => {
 
   const [password, setPassword] = useState("");
   const [rPassword, setRPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handlerUpdatePassword = async (e) => {
     e.preventDefault();
@@ -41,6 +42,21 @@ const Passwords = ({ setOpen }) => {
     } else {
       alert("Las contraseñas no coinciden!");
     }
+
+    if(passwordError){
+      alert("La contraseña debe tener al menos 8 caracteres");
+      return;
+    }
+  };
+
+  const handleUpdatePasswordChange = (event) =>{
+    setPassword(event.target.value);
+    if (event.target.value.length < 8){
+      setPasswordError(true);
+      
+    }else{
+      setPasswordError(false);
+    }
   };
 
   return (
@@ -50,15 +66,22 @@ const Passwords = ({ setOpen }) => {
           X
         </div>
         <div className="form-group">
-          <label htmlFor="pass">Contraseña</label>
+        <label htmlFor="pass">Contraseña</label>
           <input
             required
+            onChange={handleUpdatePasswordChange}
             type="password"
             id="pass"
-            onChange={(e) => setPassword(e.target.value)}
+            //onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
+          {passwordError && (
+            <span className="error-message">
+              La contraseña debe tener al menos 8 caracteres
+            </span>
+          )}
         </div>
+
         <div className="form-group">
           <label htmlFor="r_pass">Confirmar contraseña</label>
           <input
@@ -68,6 +91,11 @@ const Passwords = ({ setOpen }) => {
             onChange={(e) => setRPassword(e.target.value)}
             value={rPassword}
           />
+          {passwordError && (
+            <span className="error-message">
+              La contraseña debe tener al menos 8 caracteres
+            </span>
+          )}
         </div>
         <div className="form-btn">
           <button type="submit">
