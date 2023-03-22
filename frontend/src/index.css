@@ -14,7 +14,7 @@
 html,
 body {
   overflow-x: hidden;
-  background-color: #B1B6B9;
+  background-image:url("Fond.jpg");
 }
 
 body {
@@ -43,7 +43,7 @@ button {
 
 a {
   text-decoration: none;
-  color: #000000;
+  color: #eee8e8;
 }
 
 ul {
