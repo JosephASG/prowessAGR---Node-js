@@ -125,7 +125,8 @@
     padding: 0 auto !important;
 }
 label{
-    color: rgb(97, 6, 82);
+    color: rgb(255, 255, 255);
+    background: #d86405a8;
 }
 
 .account-image {
