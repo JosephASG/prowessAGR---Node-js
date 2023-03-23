@@ -1,0 +1,353 @@
+
+.container-footer {
+    height: 100%;
+    width: 100%;
+    background-color: #193327;
+    position: relative;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .ctn-img-logo img {
+    display: flex;
+    justify-content: center;
+    max-width: 260px;
+    padding: 0 20px;
+  }
+  .columF {
+    flex: 1;
+    margin: 25px;
+  }
+  
+  .paginas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .paginas a {
+    margin: 5px 10px;
+  }
+  
+  .ctn-social-media {
+    flex: 1;
+    margin: 20px;
+  }
+  
+  .title-social {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .redes-footer {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .redes-footer a {
+    margin: 0 10px;
+    color: #ffffff;
+  }
+  
+  .footer-row span {
+    font-size: 12px;
+    color: #62cf9d;
+  }
+.socials-row {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f3bd;
+    -webkit-clip-path: polygon(0 0, 100% 23%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0, 100% 23%, 100% 100%, 0 100%);
+  }
+  
+  .socials-row h1 {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .socials-group {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .socials-group a {
+    margin: 0 15px;
+    transition: all 0.5s;
+  }
+  
+  .socials-group a:hover {
+    transform: scale(1.1);
+  }
+  
+  .socials-group img {
+    width: 60px;
+    height: auto;
+  }
+  
+  
+container-footer {
+    height: 100%;
+    width: 100%;
+    background-color: #193327;
+    position: relative;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container-footer .footer {
+    width: 100%;
+    color: #ffffff;
+    height: auto;
+    font-size: 14px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0x;
+  }
+  
+  .container-footer .footer .redes-footer .icon-redes-footer {
+    font-size: 16px;
+    margin: 20px;
+    border: 2px solid #ffffff;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .ctn-social-media {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .title-social {
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .title-social span {
+    font-size: 16px;
+    color: #ffffff;
+    justify-content: center;
+  }
+  
+  .container-footer .footer .redes-footer a {
+    padding-left: 10px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.5s ease;
+  }
+  
+  .footer .redes-footer .fa-facebook-f:hover {
+    background: #41579a;
+    color: #fff;
+    transition: all 0.5s ease;
+  }
+  
+  .footer .redes-footer .fa-tiktok:hover {
+    background: #000000;
+    color: #fff;
+    transition: all 0.5s ease;
+  }
+  
+  .footer .redes-footer .fa-instagram:hover {
+    background: linear-gradient(
+      to top right,
+      #fcde30,
+      #e9712a,
+      #d2313b,
+      #ae4198,
+      #7540a1,
+      #5443a8
+    );
+    color: #fff;
+    transition: all 0.5s ease;
+  }
+  
+  .columF {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0 10px 0;
+  }
+  
+  .paginas {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .paginas a {
+    padding-left: 100px;
+    font-size: 16px;
+    margin: 10px 10px;
+    color: #ffffff;
+    transition: all 0.5s ease;
+    text-decoration: none;
+  }
+  
+  .paginas a:hover {
+    color: #e49b30;
+    transition: all 0.5s ease;
+  }
+
+  /* Modificaciones para pantallas más pequeñas */
+  @media only screen and (max-width: 1024px) {
+    .container-footer {
+    height: 50vh;
+    }
+    
+    .ctn-img-logo {
+    margin: 80px 0 0 0;
+    }
+    
+    .container-footer footer {
+    flex-direction: column;
+    padding: 0 20px;
+    }
+    
+    .container-footer footer .logo-footer img {
+    width: 50px;
+    }
+    
+    .ctn-derechos h4 {
+    font-size: 8px;
+    }
+    
+    .title-social span {
+    font-size: 14px;
+    }
+    
+    .ctn-social-media {
+    margin: 20px 0 20px 0;
+    }
+    
+    .paginas a {
+    margin: 10px 10px;
+    padding-left: 30px;
+    font-size: 14px;
+    }
+    
+    .title-social span {
+    text-align: center;
+    }
+    }
+    
+    @media only screen and (max-width: 768px) {
+    .container-footer {
+    height: auto;
+    }
+    
+    .ctn-img-logo {
+    margin: 20px 0 20px 0;
+    }
+    
+    .container-footer footer {
+    flex-direction: column;
+    padding: 0 20px;
+    }
+    
+    .container-footer footer .logo-footer img {
+    width: 30px;
+    }
+    
+    .ctn-derechos h4 {
+    font-size: 10px;
+    }
+    
+    .title-social span {
+    font-size: 12px;
+    }
+    
+    .ctn-social-media {
+    margin: 20px 0 20px 0;
+    }
+    
+    .paginas {
+    align-items: center;
+    }
+    
+    .paginas a {
+    margin: 5px 10px;
+    padding-left: 20px;
+    font-size: 12px;
+    }
+    }
+    
+    @media only screen and (max-width: 480px) {
+    .container-footer {
+    height: auto;
+    background-size: cover;
+    position: relative;
+    flex-wrap: wrap;
+    }
+    
+    .ctn-img-logo {
+    display: flex;
+    margin: 0 90px 0 90px;
+    }
+    
+    .container-footer footer {
+    padding: 0 10px;
+    }
+    
+    .container-footer footer .logo-footer img {
+    width: 20px;
+    }
+    
+    .ctn-derechos h4 {
+    font-size: 8px;
+    }
+    
+    .title-social span {
+    font-size: 12px;
+    }
+    
+    .ctn-social-media {
+    margin: 10px 0 10px 0;
+    }
+    
+    .paginas {
+    align-items: center;
+    }
+    
+    .paginas a {
+    margin: 5px 10px;
+    padding-left: 5px;
+    font-size: 14px;
+    }
+    }
+    
+    
+    
+    
+    
+    
+    
