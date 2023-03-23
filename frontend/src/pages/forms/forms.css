@@ -191,9 +191,10 @@
 
 .passwords form {
   width: auto;
-  background-image: url("fond.jpg");
-  padding: 30px 50px;
-  border-radius: 10px;
+  background-image: url("Fond2.jpg");
+  padding: 3px 5px;
+  background-size: cover;
+  border-radius: 7px;
   position: relative;
   display: flex;
   flex-direction: column;
