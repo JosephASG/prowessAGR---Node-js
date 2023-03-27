@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import LatestSeller from "./LatestSeller";
+import "./latest.css"
 
 const Latest = () => {
   const [users, setUsers] = useState([]); //Default is empty
@@ -28,6 +29,7 @@ const Latest = () => {
     <div className="latest-row">
       <div className="latest-col">
         <h2>Nuevos productos frescos</h2>
+        
         {products.length === 0 ? (
           <h3 className="info">Actualmente no hay productos</h3>
         ) : (

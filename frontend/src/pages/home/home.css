@@ -393,7 +393,7 @@ span.text-percent {
 
 /* --------------------------------------------------- */
 
-.latest-row {
+/* .latest-row {
   align-content: center;
   background-color: #3cc285;
   width: 100%;
@@ -430,6 +430,7 @@ span.text-percent {
   grid-template-columns: repeat(auto-fit, minmax(220px, auto));
   justify-content: space-between;
   justify-items: center;
+  grid-gap: 30px 50px
 
 }
 
@@ -438,6 +439,7 @@ span.text-percent {
   box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);
   border-radius: 0.5rem;
   position: relative;
+  
 }
 
 .latest-header {
@@ -506,7 +508,7 @@ span.text-percent {
 .latest-header img {
   width: 200px;
   height: 150px;
-}
+} */
 
 /*CARDS*/
 
