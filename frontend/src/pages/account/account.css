@@ -432,7 +432,7 @@ label{
 .form-account {
     background-image: none !important;
     padding: 60px 50px !important;
-    background-color: #f4f5f3;
+    background-color: #dddddd;
     box-shadow: 20px 12px 15px -3px rgba(0, 0, 0, 0.1), -20px 12px 15px -3px rgba(0, 0, 0, 0.1);
    
     width: fit-content;
