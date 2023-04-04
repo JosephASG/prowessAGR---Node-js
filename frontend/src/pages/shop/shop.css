@@ -94,11 +94,11 @@
 }
 
 .filter-cards {
+    flex-wrap: wrap;
     width: auto;
     display: flex;
     justify-content: center;
     position: relative;
-    flex-wrap: nowrap;
     gap: 15px 10px;
     margin-bottom: 1em;
     /**/
