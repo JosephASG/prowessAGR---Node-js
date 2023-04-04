@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 //para crear una tabla en la base de datos para el producto
 const ProductSchema = new mongoose.Schema(
   {
+    id: {type:String, required: true},
     name: { type: String, required: true },
-    slug: { type: String, required: true, unique: true },
+    slug: { type: String, required: true},
     category: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
