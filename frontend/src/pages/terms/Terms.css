@@ -1,5 +1,5 @@
 .terms {
-    background-color: azure;
+    background-color: #acf4a4 ;
     margin: 100px;
     max-width: 1280px;
     align-content: center;
@@ -26,6 +26,19 @@
     text-align: justify;
     margin-bottom: 20px;
   }
+
+  .condiciones{
+    margin: 150px;
+}
+
+.img-condiciones{
+    width: 250px;
+    height: auto;
+}
+.col-3 {width: 50%;}
+.col-9 {width: 50%;}
+
+
   @media only screen and (max-width: 600px) {
     h1 {
       font-size: 28px;
