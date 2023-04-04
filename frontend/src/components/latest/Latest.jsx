@@ -41,7 +41,7 @@ const Latest = () => {
                   <img src={product.image.secure_url} alt={product.name} />
                 </div>
                 <div className="latest-body">
-                  <Link to={`${product.slug}`}>
+                  <Link to={`${product._id}`}>
                     {product.name} <FontAwesomeIcon icon={faEye} />
                   </Link>
                   <span className="category">{product.category}</span>
