@@ -20,6 +20,7 @@ export const postProduct = async (req, res) => {
       .status(HTTP_STATUS.BAD_REQUEST)
       .json({ message: "All fields are required" });
   try {
+    
     // crear un nuevo producto
     const newProduct = new Products(req.body);
     //si la imagen está cargada, cárguela en cloudinary
@@ -58,7 +59,7 @@ export const getProducts = async (req, res) => {
 export const getProductBySlug = async (req, res) => {
   try {
     //Buscar producto segun su peso en kilogramos
-    const product = await Products.findOne({ slug: req.params.slug });
+    const product = await Products.findById(req.params.id);
     //si no hay producto
     if (!product) {
       return res
@@ -86,7 +87,7 @@ export const getProductBySellerId = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
     //Obtener el producto de la base de datos
-    const product = await Products.findById(req.params.id);
+    const product = await Products.findOne(productId);
 
     //Si no se encuentra ningún producto, devuelve un error 404
     if (!product) {

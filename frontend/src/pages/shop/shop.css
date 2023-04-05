@@ -8,9 +8,9 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    background: url(https://cdn.pixabay.com/photo/2017/03/29/11/48/meadow-2184989_1280.jpg) no-repeat 0px 5px;
+    /*background: url(https://cdn.pixabay.com/photo/2017/03/29/11/48/meadow-2184989_1280.jpg) no-repeat 0px 5px;*/
     background-size: cover;
-    /*background-color: #ffffff;*/
+    background-color: #08c06d;
     flex-wrap: wrap;
 }
 
@@ -106,7 +106,7 @@
 
 .filter-card {
     margin: 10px;
-    background-color: rgba(111, 218, 207, 0.814);
+    background-color: #0bb405d2;
     border-radius: 10px;
     box-shadow: 0 2px 20px rgba(222, 20, 20, 0);
     overflow: hidden;
@@ -124,6 +124,7 @@
     position: relative;
     height: 100%;
     width: 100%;
+    background-color: #3cc285;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -146,7 +147,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0px 0;
-    background-color: #e03030a7;
+    background-color: #0bb405d2;
     padding: 10px
 }
 

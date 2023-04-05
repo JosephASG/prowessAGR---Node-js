@@ -105,6 +105,7 @@ const CartItems = () => {
                         onClick={() =>
                           updateQuantityHandler(item, item.quantity + 1)
                         }
+                        disabled={item.quantity === parseInt(item.slug) }
                       >
                         <FontAwesomeIcon icon={faPlusCircle} />
                       </button>

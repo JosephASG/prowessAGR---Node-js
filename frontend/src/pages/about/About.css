@@ -2,16 +2,19 @@
     box-sizing: border-box;
     position: relative;
   }
-  
+
   .flex-container {
+    margin-bottom: 40px;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
     align-items: center;
-    padding-top: 15px;
+    padding-top: 20px;
+
   }
   
   .flex-container2 {
+    margin-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
@@ -24,12 +27,14 @@
   }
   
   .flex-item-right {
-    padding: 10px;
+    background-color: rgb(109, 237, 154);
+    border-radius: 8px;
+    padding: 55px;
     flex: 70%;
   }
 
   .flex-item-left2 {
-    padding: 10px;
+    padding: 50px;
     flex: 70%;
   }
   
@@ -38,14 +43,13 @@
     flex: 30%;
   }
 
-
 .img-nosotros{
     width: 350px;
     height: auto;
 }
 
 .nosotros{
-    margin: 50px;
+    margin: 100px;
 }
 
 .img-cont{
@@ -54,17 +58,22 @@
 }
 
 .img-about{
-    width: 250px;
-    height: 230px;
+    width: 350px;
+    height: 307px;
     border-radius: 8px;
 }
 
+.texto{
+  font-size: 20px;
+  text-align: justify;
+  margin-left: 100px;
+}
 
 
  @media only screen and (max-width: 600px) {
-    h1 {
+    /*h1 {
       font-size: 28px;
-    }
+    }*/
   
     h2 {
       font-size: 20px;
@@ -86,9 +95,9 @@
     .col-9 {width: 50%;}
   }
   @media only screen and (max-width: 400px) {
-    h1 {
+    /*h1 {
       font-size: 24px;
-    }
+    }*/
   
     h2 {
       font-size: 18px;
