@@ -424,7 +424,7 @@ label{
 
 .account-info:hover,
 .account-info:focus{
-  background-color: #c26e0db9;
+  background-color: #00ff00;
   color: #faf4f4;
 
 }
@@ -442,7 +442,7 @@ label{
 .form-account {
     background-image: none !important;
     padding: 60px 50px !important;
-    background-color: #f4f5f3;
+    background-color: #dddddd;
     box-shadow: 20px 12px 15px -3px rgba(0, 0, 0, 0.1), -20px 12px 15px -3px rgba(0, 0, 0, 0.1);
    
     width: fit-content;

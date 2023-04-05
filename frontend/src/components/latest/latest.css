@@ -1,37 +1,116 @@
-.latest-products{
+.latest-row {
+    align-content: center;
+    background-color: #3cc285;
+    width: 100%;
+    height: 130vh;
+    padding: 10% 2%;
+    margin-left: 0px;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    background-size: cover;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .latest-col:first-child {
+    max-width: 968px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .latest-products {
+    display: grid;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 0px;
+    flex: 1;
+    min-width: 250px;
+    margin-top: 0px;
+    object-fit: cover;
+    padding: 0px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+    justify-content: space-between;
     justify-items: center;
-}
-
-.latest-sellers{
-    display: flex;
-}
-
-.latest-low{
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px 10px;
-    margin-bottom: 1em;
-}
-
-.latest-group{
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px 10px;
-    margin-bottom: 1em;
-    border: solid;
-    border-radius: 1rem;
-}
-
-@media screen and (max-width: 768px) {
-    .latest-sellers{
-        display: block;
-    }
-    .latest-col:last-child h2{        
-        margin-left: 4rem;
-        margin-right: 40rem;
-        justify-items: end;
-        
-    }
-}
+    grid-gap: 30px 50px
+  
+  }
+  
+  .latest-group {
+    padding: 20px;
+    box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);
+    border-radius: 0.5rem;
+    position: relative;
+    
+  }
+  
+  .latest-header {
+    width: 100%;
+    height: 200px;
+    display: grid;
+    place-items: center;
+    object-fit: contain;
+    object-position: center;
+  }
+  
+  .latest-body {
+    font-weight: 500;
+    font-size: 13px;
+  }
+  
+  .latest-body a {
+    text-align: center;
+    text-shadow: 0 0 1px #2f5f74;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .latest-body span.category {
+    background: #ca2734 !important;
+    width: max-content;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: bold;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    display: block;
+    margin: 10px 0 5px auto;
+  }
+  
+  .latest-body span.price {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    color: #121212;
+  }
+  
+  .latest-col:first-child h2 {
+    text-align: center;
+    color: #121212;
+    margin-bottom: 10px;
+  }
+  
+  .latest-col:last-child {
+    flex: 4;
+  }
+  
+  .latest-col:last-child h2 {
+      text-align: center;
+      color: #121212;
+      margin-bottom: 50px;
+      letter-spacing: 5px;
+      display: flex;
+      position: relative;
+      top: 50px;
+  }
+  
+  .latest-header img {
+    width: 200px;
+    height: 150px;
+  }

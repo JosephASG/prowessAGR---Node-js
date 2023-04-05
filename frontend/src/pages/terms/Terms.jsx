@@ -11,7 +11,11 @@ const Terms = () => {
 
       {/* Main Start */}
       <main className="main-container"></main>
-      <div className="terms">
+
+      <div className="condiciones">
+          <div className="img-cont">
+            <img className="img-condiciones" src="./assets/images/others/condiciones.png" alt="" />
+          </div>
         <h1>Términos y Condiciones</h1>
         <p>
           Bienvenidos a la página de Términos y Condiciones de Prowess Agricola.
