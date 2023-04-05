@@ -257,3 +257,21 @@
     }
 }
 
+@media screen and (max-width: 760px) {
+    .filter-row {
+      height: auto;
+    }
+  
+    .filter-col:first-child .filter-group:last-child input {
+      width: 100%;
+    }
+  
+    .filter-cards {
+      flex-direction: column;
+    }
+  
+    .filter-card {
+      width: 100%;
+      height: auto;
+    }
+  }
