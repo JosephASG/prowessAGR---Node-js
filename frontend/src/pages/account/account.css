@@ -1,7 +1,7 @@
 .account-row {
     flex-wrap: wrap;
     height: auto;
-    background-image: url("Fond2.jpg");
+    background-color: #09ce8c;
     background-size: cover;
     width: 100vw;
 }
@@ -114,8 +114,9 @@
 }
 
 .form-row.account {
-    box-shadow: rgb(150,150,150) 0px 0px 0px 8px;
+    box-shadow: rgb(23, 133, 19) 0px 0px 0px 8px;
     display: flex;
+    background-color: rgb(252, 252, 252);
     flex-direction: column;
     margin: 20px 0;
     min-height: auto;
