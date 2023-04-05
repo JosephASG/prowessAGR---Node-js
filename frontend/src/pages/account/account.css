@@ -326,7 +326,11 @@ label{
 }
 
 .orderContainer {
-    margin: 50px 5px;
+    background-color: #a8f3a5;
+    max-width: 1824px;
+    padding: 10px 3px 150px;
+    background-size: cover;
+    margin: auto;
 }
 
 .orderContainer .orderRow:first-child {
@@ -340,9 +344,10 @@ label{
     font-size: 27px;
     text-size-adjust: 38px;
     position: relative;
+    border-color: #021807;
     border-radius: 10px;
     color: #e9d8d8;
-    background-color: #04b31383;
+    background-color: #07682fb0;
     margin-bottom: 80px;
 }
 
@@ -354,15 +359,20 @@ label{
     flex: 2;
     padding: 0 10px;
 }
-
+@media(min-width: 768px) and (max-width:900px){
 .orderContainer .orderRow.products .orderCol:last-child {
     flex: 1;
-    position:absolute;
+    position:relative;
     display: block;
+    width: calc(100% - 25px);
+    max-width: 1796px;
+    margin: auto;
+    padding: 10px 20px 20px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: wrap;
-    padding-top: 38vh;
+    padding-top: initial;
+}
 }
 
 .orderContainer .orderRow.products .orderCol:first-child .cards {
