@@ -103,13 +103,13 @@
 }
 
 .seller-products .card-footer button:hover {
-    background-color: #2f5f74;
+    background-color: #227a07;
     color: #f3bdbd;
 }
 
 .pagi-item {
-    background-color: #76e0e5b6;
-    border: 3px solid #76dfe500;
+    background-color: #1bd60ab4;
+    border: solid;
     padding: 3px;
 }
 /*up the click*/
@@ -120,6 +120,7 @@
 
 .pagi-link {
     padding: 15px;
+    margin-left: -2%;
     font-weight: bold;
 }
 /*words in buttons activated*/
@@ -134,7 +135,8 @@
 .disabledPagi {
     -webkit-transition: 1s linear;
     transition: 0.25s linear;
-    background-color: #76e0e5b6;
+    background-color: #1bd60ab4;
+
 }
 .disabledPagi:hover{  
     -webkit-box-shadow: 10px 10px 14px 2px rgba(0,0,0,0.47);
