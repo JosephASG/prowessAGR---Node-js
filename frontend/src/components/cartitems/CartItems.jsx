@@ -10,6 +10,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import Checkout from "./Checkout";
+import "./cartitems.css"
 
 const CartItems = () => {
   const navigate = useNavigate();
