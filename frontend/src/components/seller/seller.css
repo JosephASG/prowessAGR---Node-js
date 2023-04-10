@@ -1,4 +1,4 @@
-/* .seller-row {
+.seller-row {
     position: relative;
     display: flex;
     justify-content: center;
@@ -113,7 +113,7 @@
     padding: 3px;
 }
 /*up the click*/
-/* .pagi-item:hover {
+.pagi-item:hover {
     background-color: #09c909;
     cursor: pointer;
 }
@@ -124,7 +124,7 @@
     font-weight: bold;
 }
 /*words in buttons activated*/
-/* .pagi-item:hover .pagi-link {
+.pagi-item:hover .pagi-link {
     color: #ffffff;
 }
 
@@ -153,4 +153,4 @@
 
 .disabledPagi:hover .pagi-link {
     color: #fdfdfd;
-}  */
+}
