@@ -8,6 +8,17 @@
             display: inline-block;
         }
     }
+    @media screen and (max-width: 414px){
+        .mainCont{
+        height: 360px;
+        width: 700px;
+        left:-190px;
+        top:80px;
+        display: flex;
+        }
+    
+        
+    }
 
 .ctn-sellers {
     display: flex;
@@ -90,6 +101,7 @@
     align-items: center;
     gap: 0.5em;
 }
+
 
 .sell-fill-group .body {
     color: #464853;
@@ -218,8 +230,9 @@
     border-bottom: solid 1px #ccc;
     padding: 1rem;
     outline: none;
-    width: 700px;
+    width: 800px;
     height: 50px;
+    top:35px;
     border: solid 3px;
     font-size: 20pt;
     float: left;
@@ -231,6 +244,32 @@
     border-radius: 10px;
     border-color: black;
     margin-bottom: 3rem;
+}
+@media screen and (max-width: 414px){
+    #Buscador {
+
+        background: url(https://icones.pro/wp-content/uploads/2021/06/icone-loupe-noir.png) no-repeat 10px 10px;
+        background-size: 24px;
+        border: transparent;
+        border-bottom: solid 1px #ccc;
+        padding: 1rem;
+        outline: none;
+        width: 300px;
+        height: 50px;
+        left: -180px;
+        top:100px;
+        border: solid 3px;
+        font-size: 20pt;
+        float: left;
+        color: #000000;
+        font-style: bold;
+        padding-left: 45px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 10px;
+        border-color: black;
+        margin-bottom: 3rem;
+    }        
 }
 
 
@@ -253,10 +292,17 @@
     border-radius: 25px;
 }
 
+
 /*tarjeta completa*/
 .card:hover {
     height: 22rem;
     width: 35rem;
+}
+@media screen and (max-width: 414px){
+    .card:hover {
+        height: 22rem;
+        width: 23rem;
+    }        
 }
 
 .card:hover .cta-container {
@@ -274,7 +320,7 @@
 }
 
 .transition {
-    transition: .8s cubic-bezier(.3, 0, 0, 1.3)
+    transition: .8s cubic-bezier(.3, 0, 0, 1.3);
 }
 /*tabla completa*/
 .card:hover .data-vendor {
@@ -284,13 +330,14 @@
 }
 
 .card:hover .data-vendor small {
-    color: rgb(71, 254, 144)
+    color: rgb(71, 254, 144);
 }
 /*tabla completa*/
 .card:hover .member {
     margin-left: 10px;
     margin-top: 280px; /*desde*/
     text-decoration: underline;
+    
 
 }
 /*tabla inicial imagen*/
@@ -314,7 +361,7 @@
     width: 15rem;
     border-radius: 25px;
 }
-
+/*nombre de las tarjetas*/
 .data-vendor {
     color: rgb(0, 0, 0);
     font-family: 'Raleway', sans-serif;
@@ -369,7 +416,92 @@
         align-items: center;
     }
 }
+@media screen and (max-width: 820px){
+    .follow-title{
+        font-size: 20px;
+        margin-top: 40rem;
+        font-size: 3rem;
+    }
+    .footer-container{
+        position: absolute;
+    }   
+    .header-menu{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 768px){
+    .follow-title{
+        font-size: 20px;
+        margin-top: 40rem;
+        font-size: 3rem;
+        
+    }
+    .footer-container{
+        height: 180px;
+        width: 780px;
+        top: -55px;
+        position:relative;
+    }   
+    .header-menu{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+@media screen and (max-width: 414px) {
+    .follow-title{
+        font-size: 20px;
+        margin-top: 40rem;
+        font-size: 3rem;
+    }
+    .footer-container{
+        height: 590px;
+        width: 430px;
+        top: 100px;
+        position:relative;
+    }   
+    .header-menu{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
 
+@media screen and (max-width: 415px) {
+    .wrapper-info{
+        border-left: thick solid #000;
+        /*border-right: thick solid #000;*/
+        margin-left: 270px;
+        margin-top: 30px;
+        position: absolute;
+    }
+    
+    h3.m_mail {
+        color: rgba(18, 4, 101, 0.6);
+        font-style: bold;
+        font-family: 'Raleway', sans-serif;
+        left: 10px;
+      }
+    
+    h3.a_address{
+        text-align: center;
+        color: rgba(18, 4, 101, 0.6);
+        font-style: bold;
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    h3.p_phone{
+        text-align: center;
+        color: rgba(18, 4, 101, 0.6);
+        font-style: bold;
+        font-family: 'Raleway', sans-serif;
+    }
+}
 .wrapper-info{
     border-left: thick solid #000;
     /*border-right: thick solid #000;*/
