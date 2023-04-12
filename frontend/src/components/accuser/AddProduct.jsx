@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './AddProduct.css';
 
 const AddProduct = ({ setOpenAdd }) => {
   const navigate = useNavigate();

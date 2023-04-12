@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import UserInfoOrders from './UserInfoOrders';
+import './AccountUserinfo.css';
 
 const AccountUserInfo = () => {
 

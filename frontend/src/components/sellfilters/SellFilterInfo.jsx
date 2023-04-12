@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Store } from "../../Store";
 import Button from "@mui/material/Button";
+import './sellFilter.css';
 
 const SellFilterInfo = ({ user }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);

@@ -15,8 +15,8 @@
     flex-direction: column;
     align-items: center;
 }
-
-.sell-fill-row {
+/*-------------------------------------*/
+/*.sell-fill-row {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -31,6 +31,7 @@
     justify-content: center;
     margin: 50px 0 50px 0;
 }
+/*import to sellFilter*/
 
 .sell-fill-row .sell-fill-col:first-child input {
     padding: 10px 25px;

@@ -1,0 +1,16 @@
+
+.sell-fill-row {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.sell-fill-row .sell-fill-col:first-child {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin: 50px 0 50px 0;
+}

@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import './Order.css';
 
 const Order = () => {
   const userInfo = localStorage.getItem("userInfo");
