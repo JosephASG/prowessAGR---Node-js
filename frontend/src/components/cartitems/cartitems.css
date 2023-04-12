@@ -1,4 +1,4 @@
-/* .cart-row {
+.cart-row {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -179,13 +179,12 @@ h3.info-empty {
 }
 
 /* Card prodcut */
-/* .filter-card {
+.filter-card {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
 }
 
 .card-header {
@@ -254,4 +253,3 @@ h3.info-empty {
         padding-top: 0px;
     }
 }
- */ 

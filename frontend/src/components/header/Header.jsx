@@ -9,7 +9,7 @@ import {
 import "../../pages/home/home.css";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
-
+import "./header.css"
 const Header = () => {
   const navigate = useNavigate();
 

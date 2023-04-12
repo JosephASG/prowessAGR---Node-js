@@ -1,4 +1,4 @@
-.form-row {
+/* .form-row {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,8 +12,8 @@
 }
 
 .form-row form {
-  /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.2);
+  From https://css.glass */
+  /* background: rgba(255, 255, 255, 0.2);
   border-radius: 16px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -29,8 +29,8 @@
 
 .form-row .form-group label {
   letter-spacing: 1.4px;
-  color: #62cf9d;
-  font-size: 14px;
+  color: #015801;
+  font-size: 18px;
   margin-bottom: 5px;
 }
 
@@ -96,7 +96,7 @@
   color: #2f5f74;
 }*/
 
-.form-btn-b {
+/* .form-btn-b {
   margin-top: 20px;
   margin-left: 180px;
 }
@@ -262,4 +262,4 @@
 
 .error-message {
   color: red;
-}
+} */

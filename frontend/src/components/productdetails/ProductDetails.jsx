@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Store } from "../../Store";
-
+import "./producdetails.css"
 const ProductDetails = () => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;

@@ -145,6 +145,7 @@
 
 .sell-fill-body {
     display: flex;
+    background-color: #2f5f74;
     flex-direction: column;
     margin: 10px 0;
 }
@@ -374,7 +375,7 @@
     border-left: thick solid #000;
     /*border-right: thick solid #000;*/
     margin-left: 270px;
-    margin-top: 50px;
+    margin-top: 30px;
     position: absolute;
 }
 
