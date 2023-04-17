@@ -1,11 +1,11 @@
 .header-container {
-    position: absolute;
     width: 100vw;
-    min-height: 60px;
+    min-height: 90px;
     box-shadow: 0 15px 10px -15px #485b63;
     z-index: 999999999;
     background-color: #121212;
     border-radius: 0 0 60px 60px;
+    position: fixed;
   }
   .header-action{
     flex-wrap: wrap;

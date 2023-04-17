@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <div className="header-row" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 999 }}>
+    <div className="header-row " >
       <div className="header-menu">
         <div className="header-logo">
           <Link to="/">
@@ -37,7 +37,7 @@ const Header = () => {
             />
           </Link>
         </div>
-        <div className="header-nav">
+        <div className="header-nav" >
           <NavLink to="/" activeclassname="active">
             Inicio
           </NavLink>
