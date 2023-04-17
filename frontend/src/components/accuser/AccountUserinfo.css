@@ -1,0 +1,21 @@
+
+.account-info {
+    margin-top: 0px;
+    color: #fcfcfc;
+    height: 347px;
+    background-color: rgba(5, 192, 30, 0.664);
+    margin-left: 25px;
+    
+}
+.account-info:hover {
+    color: red;
+}
+.account-info {
+    transition: color 0.3s linear 0.2s;
+}
+.account-info:hover,
+.account-info:focus{
+  background-color: #c26e0db9;
+  color: #faf4f4;
+
+}

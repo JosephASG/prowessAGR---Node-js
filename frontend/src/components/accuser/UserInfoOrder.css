@@ -1,0 +1,25 @@
+
+.orderContainer .orderRow.products .orderCol:last-child {
+    flex: 1;
+    position:absolute;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 38vh;
+}
+
+.orderContainer .orderRow.products .orderCol:first-child .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.orderContainer .back {
+    font-weight: bold;
+}
+
+.orderContainer .back:hover {
+    text-decoration: underline;
+}

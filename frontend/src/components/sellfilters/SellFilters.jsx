@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import SellFilter from "./SellFilter";
-
+import './sellFilter.css';
 
 const SellFilters = () => {
   const [seller, setSeller] = useState([]);

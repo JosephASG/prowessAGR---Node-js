@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <div className="header-row">
+    <div className="header-row " >
       <div className="header-menu">
         <div className="header-logo">
           <Link to="/">
@@ -37,7 +37,7 @@ const Header = () => {
             />
           </Link>
         </div>
-        <div className="header-nav">
+        <div className="header-nav" >
           <NavLink to="/" activeclassname="active">
             Inicio
           </NavLink>

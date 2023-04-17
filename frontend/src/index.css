@@ -10,8 +10,9 @@
 ::selection {
   background-color: #0c065a2d;
 }
+/*---------------------------------*/
 
-html,
+/*html,
 body {
   overflow-x: hidden;
   background-color: #a8f3a5;
@@ -19,7 +20,7 @@ body {
 
 body {
   font-family: 'Quicksand', sans-serif;
-}
+}*/
 
 .wrapper {
   min-height: 100vh;
@@ -43,7 +44,7 @@ button {
 
 a {
   text-decoration: none;
-  color: #070707;
+  color: #050505;
 }
 
 ul {

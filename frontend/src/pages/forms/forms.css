@@ -72,8 +72,8 @@
   text-decoration: underline;
   color: rgb(255, 255, 255);
 }
-
-.form-btn button.button-add-product {
+/*---------------------------------------*/
+/*.form-btn button.button-add-product {
   width: 100%;
   padding: 15px 0;
   background-color: #62cf9d;
@@ -85,12 +85,12 @@
   transition: all 0.5s;
   box-shadow: 0 0 5px #2f5f74;
   border-radius: 30px;
-}
-
+}*/
+/*button AddProduct*/
 .icon-plus {
   margin: 0 10px;
-} */
-
+}
+/*-----------*/
 /*.form-btn button:hover {
   background-color: #ffffff;
   color: #2f5f74;
@@ -188,8 +188,9 @@
   z-index: 10;
   background-color: #0000001e;
 }
+/* --------------------------------------------------- */
 
-.passwords form {
+/*.passwords form {
   width: auto;
   background-image: url("Fond2.jpg");
   padding: 3px 5px;
@@ -221,7 +222,8 @@
   outline: none;
   color: #040d8d;
   border-radius: 10px;
-}
+}*/
+/*ADD PRODUCT*/
 
 .close-form {
   position: absolute;
@@ -239,12 +241,13 @@
   font-size: 20px;
   cursor: pointer;
 }
-
-.wrapper-add-product {
+/* --------------------------------------------------- */
+/*.wrapper-add-product {
   display: flex;
   justify-content: space-around;
   align-items: center;
-}
+}*/
+/*Add product*/
 
 .product-add {
   display: flex;
@@ -259,4 +262,4 @@
 
 .error-message {
   color: red;
-} */
+} 

@@ -360,8 +360,8 @@ label{
     flex: 2;
     padding: 0 10px;
 }
-@media(min-width: 768px) and (max-width:900px){
-.orderContainer .orderRow.products .orderCol:last-child {
+/*------------------*/
+/*.orderContainer .orderRow.products .orderCol:last-child {
     flex: 1;
     position:relative;
     display: block;
@@ -389,7 +389,8 @@ label{
 
 .orderContainer .back:hover {
     text-decoration: underline;
-}
+}*/
+/*USER INFO ORDER*/
 
 .infoGroups {
     margin-bottom: 40px;
@@ -408,7 +409,8 @@ label{
     font-weight: bold;
 }
 
-.account-info {
+/* --------------------------------------------------- */
+/*.account-info {
     margin-top: 0px;
     color: #fcfcfc;
     height: 347px;
@@ -428,7 +430,8 @@ label{
   background-color: #00ff00;
   color: #faf4f4;
 
-}
+}*/
+/* ACCOUNT USER INFO */
 
 .userInfoRow {
     margin-bottom: 50px;

@@ -1,0 +1,54 @@
+
+.form-btn button.button-add-product {
+  width: 100%;
+  padding: 15px 0;
+  background-color: #62cf9d;
+  color: #121212;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  letter-spacing: 1.3px;
+  transition: all 0.5s;
+  box-shadow: 0 0 5px #2f5f74;
+  border-radius: 30px;
+}
+
+.passwords form {
+    width: auto;
+    background-image: url("Fond2.jpg");
+    padding: 3px 5px;
+    background-size: cover;
+    border-radius: 7px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    margin: 50px 0 0 0;
+  }
+
+.passwords form .form-group {
+  margin: 15px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.passwords form .form-group label {
+  margin-bottom: 5px;
+}
+
+.passwords form .form-group input {
+  height: 40px;
+  border: 1px solid #2f5f74;
+  padding: 5px 15px;
+  outline: none;
+  color: #040d8d;
+  border-radius: 10px;
+}
+
+.wrapper-add-product {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
