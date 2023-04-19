@@ -3,9 +3,46 @@
     justify-content: left;
     padding-left: 10%;
     align-items: center;
-    background-color: rgba(3, 211, 83, 0.781);
+    background-color: #3cc285;
     height: 100vh;
 }
+.product-group {
+    padding: 20px;
+    margin-top: -8rem;
+    bottom: 10px;
+    position: absolute;
+    height: auto;
+    left: 250px;
+    transition:transform .4s;
+    
+  }
+  .product-group {
+    background-color: #04a53a;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-top: -8rem;
+  bottom: -100px;
+  position: absolute;
+  height: auto;
+  left: 0rem;
+  transition:transform .10s;
+}
+
+  .infopro-group {
+    padding: 20px;
+    margin-bottom: -50px;
+    box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);
+    border-radius: 13%;
+    border: solid 0.1px;
+    margin-top: 1rem;
+    background-color: #04a53a;
+    border-radius: 0.5rem;
+    position:relative;
+    height: auto;
+    left: 180px;
+    transition:transform .4s;
+  }
 .product-col{
     margin-left: 6%;
 }
@@ -163,11 +200,18 @@
 
 .product-info {
     margin-bottom: 20px;
+    align-items: center;
 }
 
 .product-info h2 {
     letter-spacing: 1.3px;
-    color: #485b63;
+    color: black;
+    bottom: 20px;
+    text-transform: lowercase;
+    text-align: center;
+}
+.product-info h2:first-letter {
+    text-transform: uppercase;
 }
 
 .product-info .category {
@@ -181,6 +225,10 @@
     border-radius: 3px;
     font-size: 12px;
     display: block;
+    margin: 0 auto 0 auto;
+    bottom: 8px;
+    align-content: center;
+    
 }
 
 .product-info:nth-child(2) {
@@ -192,24 +240,32 @@
     margin-bottom: 5px;
     font-weight: bold;
     font-size: 18px;
+    text-align: center;
 }
 
 .product-info .desc {
-    color: #485b63;
+    color:black;
+    text-align: center;
+    bottom: -1rem;
+}
+.product-info .desc:first-letter {
+    text-transform: uppercase;
 }
 
 .product-add {
     margin-top: 40px;
+    left: 10px;
+    
 }
 
 .product-add button {
     display: block;
-    margin: 0 20px 0 auto;
+    margin: 0 auto 0 auto;
     background-color: #f0f3bd;
     padding: 5px 10px;
     border: none;
     box-shadow: 0 0 5px #f0f3bd;
-    color: #2f5f74;
+    color: black;
     letter-spacing: 1.4px;
     text-transform: uppercase;
     transition: all 0.5s;

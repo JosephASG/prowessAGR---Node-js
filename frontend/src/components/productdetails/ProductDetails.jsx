@@ -46,6 +46,7 @@ const ProductDetails = () => {
     <header className="bg_animate">
     <div className="product-row">
       <div className="product-col">
+      <div className="product-group">
       {product.length === 0 ? ( 
             <h3 className="info">Foto Producto</h3>
           ) : (
@@ -59,7 +60,9 @@ const ProductDetails = () => {
           />
         </Link>
       </div>
+      </div>
       <div className="product-col">
+      <div className="infopro-group">
         <div className="product-info">
           <h2 className="product-title">{product.name}</h2>
           <span className="category">{product.category}</span>
@@ -73,6 +76,7 @@ const ProductDetails = () => {
         <div className="product-add">
           <button onClick={addToCart}>Añadir a la bolsa</button>
         </div>
+        
         <div className="burbujas">
         <div className="burbuja"></div>
         <div className="burbuja"></div>
@@ -85,6 +89,7 @@ const ProductDetails = () => {
         <div className="burbuja"></div>
         <div className="burbuja"></div>
         </div>
+      </div>
       </div>
     </div>
     </header>
