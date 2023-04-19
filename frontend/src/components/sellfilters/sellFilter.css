@@ -1,11 +1,12 @@
 
+/*Espacio entre filas pagina sellers*/
 .sell-fill-row {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px 0;
+    padding: 80px 0;
 }
 
 .sell-fill-row .sell-fill-col:first-child {

@@ -1,7 +1,7 @@
 .account-row {
     flex-wrap: wrap;
     height: auto;
-    background-color: #09ce8c;
+    background-color: #a8f3a5;
     background-size: cover;
     width: 100vw;
 }
@@ -178,7 +178,7 @@ label{
     padding: 5px 10px;
     border: none;
     box-shadow: 0 0 5px #38383470;
-    color: #21be2e;
+    color: #a8f3a5;
     margin-right: 10px;
     letter-spacing: 1.4px;
     font-size: 12px;
