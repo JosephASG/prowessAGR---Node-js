@@ -1,4 +1,4 @@
-/* .product-row {
+ .product-row {
     display: flex;
     justify-content: left;
     padding-left: 10%;
@@ -218,4 +218,4 @@
 .product-add button:hover {
     background-color: #2f5f74;
     color: #f0f3bd;
-} */
+} 
