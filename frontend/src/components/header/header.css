@@ -37,7 +37,7 @@
   }
   
   .header-logo-image {
-    width: 90px;
+    width: 100px;
     margin: 0 !important;
     display: flex;
     justify-content: center;
@@ -52,7 +52,7 @@
   .header-nav a {
     margin: 0 25px;
     text-transform: capitalize;
-    font-size: 14px;
+    font-size: 18px;
     color: #ffffff;
     text-shadow: 0 0 1px #485b63;
   }

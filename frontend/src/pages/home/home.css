@@ -125,14 +125,14 @@ span.login {
 /*HERO*/
 .ctn-land-hero {
   position: relative;
-  width: 50%;
+  width: 70%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   /* background-color: #62cf9d; */
-  padding: 100px 0 100px 150px;
+  padding: 100px 0 100px 110px;
   z-index: 99999;
 }
 

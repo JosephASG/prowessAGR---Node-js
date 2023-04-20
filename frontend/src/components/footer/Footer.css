@@ -22,7 +22,7 @@
   .ctn-img-logo img {
     display: flex;
     justify-content: center;
-    max-width: 260px;
+    max-width: 220px;
     padding: 0 20px;
   }
   .columF {
@@ -194,7 +194,7 @@ container-footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 60px 0 10px 0;
+    margin: 20px 0 10px 0;
   }
   
   .paginas {
@@ -221,7 +221,7 @@ container-footer {
   /* Modificaciones para pantallas más pequeñas */
   @media only screen and (max-width: 1024px) {
     .container-footer {
-    height: 50vh;
+    height: 47vh;
     }
     
     .ctn-img-logo {
@@ -252,7 +252,7 @@ container-footer {
     .paginas a {
     margin: 10px 10px;
     padding-left: 30px;
-    font-size: 14px;
+    font-size: 16px;
     }
     
     .title-social span {
