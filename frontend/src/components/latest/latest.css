@@ -110,10 +110,10 @@
       text-align: center;
       color: #121212;
       margin-bottom: 50px;
-      letter-spacing: 5px;
+      letter-spacing: 2.5px;
       display: flex;
       position: relative;
-      top: 50px;
+      top: 30px;
   }
   
   .latest-header img {
