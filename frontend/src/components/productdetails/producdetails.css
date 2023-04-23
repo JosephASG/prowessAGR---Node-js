@@ -6,18 +6,65 @@
     background-color: #3cc285;
     height: 100vh;
 }
+.filter-product {
+    margin: 10px;
+    background-color: #0bb405d2;
+    border-radius: 10px;
+    box-shadow: 0 2px 20px rgba(222, 20, 20, 0);
+    overflow: hidden;
+    width: 300px;
+    height: auto;
+    transition: all 0.5s;
+
+}
+.product-header {
+    position: relative;
+    height: auto;
+    width: 100%;
+    background-color: #3cc285;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0;
+}
+.product-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px 0;
+    background-color: #0bb405d2;
+    padding: 10px
+}
+.product-footer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px 0;
+    background-color: #0bb405d2;
+    padding: 10px
+}
+.card-header img {
+    width: 180px;
+    height: 120px;
+
+}
 .product-group {
     padding: 20px;
     margin-top: -8rem;
     bottom: 10px;
     position: absolute;
-    height: auto;
+    height: 2px;
     left: 250px;
+    top: 100px;
     transition:transform .4s;
     
   }
+  .pequeña{
+    width: 0px;
+    height: -1000px;
+  }
   .product-group {
-    background-color: #04a53a;
+    
   display: flex;
   align-items: center;
   padding: 10px;
@@ -254,7 +301,8 @@
 
 .product-add {
     margin-top: 40px;
-    left: 10px;
+    align-content: center;
+    bottom: 30px;
     
 }
 
@@ -275,3 +323,60 @@
     background-color: #2f5f74;
     color: #f0f3bd;
 }
+
+
+
+
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-content {
+    background-color: #62CF9D;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 300px;
+    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);;
+    gap: 10px;
+    
+  }
+  .modal-content p {
+    margin-bottom: 20px;
+
+  }
+  .modal-content button {
+    background-color: #FEEC80;
+    color: #050505;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  .modal-content button:hover {
+    background-color: #0069d9;
+  }
+
+  .one{
+    grid-column: 1/4;
+  }
+
+  .two{
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .three{
+    grid-column: 3;
+    grid-row: 2;
+  }
