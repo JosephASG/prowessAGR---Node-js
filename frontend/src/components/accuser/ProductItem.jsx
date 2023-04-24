@@ -32,7 +32,7 @@ const ProductItem = ({ pro }) => {
           <img src={pro.image.secure_url} alt={pro.name} />
         </div>
         <div className="card-body">
-          <Link to={`../${pro.slug}`}>
+          <Link to={`../${pro._id}`}>
             {pro.name} <FontAwesomeIcon icon={faEye} />
           </Link>
           <span className="category">{pro.category}</span>
