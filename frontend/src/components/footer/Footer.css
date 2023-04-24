@@ -28,6 +28,7 @@
   .columF {
     flex: 1;
     margin: 25px;
+    
   }
   
   .paginas {
@@ -194,7 +195,7 @@ container-footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 20px 0 10px 0;
+    margin: 5px 0 6px 0;
   }
   
   .paginas {
