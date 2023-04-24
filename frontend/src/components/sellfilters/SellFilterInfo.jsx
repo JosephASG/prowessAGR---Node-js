@@ -65,6 +65,22 @@ const SellFilterInfo = ({ user }) => {
                   </Button>
                 )}
             </div>
+            <div>
+              <Link to={`../seller/${user._id}`}></Link>
+            </div>
+            <div class="cta-container transition">
+              {existUser && sellerExists ? (
+                <Button variant="contained" color="error" size="medium">
+                  <span onClick={() => handlerUnfollow(user)}>Dejar de seguir</span>
+                </Button>
+                ) : (
+                  <Button variant="contained" size="medium" color="success">
+                    <span key={user._id} onClick={handlerFollow}>
+                      Seguir
+                      </span>
+                  </Button>
+                )}
+            </div>            
             <div class="card_circle transition">
               <div className="image">
                 <img src={user.image.secure_url} alt={user.name} />
