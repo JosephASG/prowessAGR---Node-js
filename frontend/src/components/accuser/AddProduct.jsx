@@ -30,7 +30,9 @@ const AddProduct = ({ setOpenAdd }) => {
       setPreviewImageProduct(URL.createObjectURL(fileProduct));
     }
   };
-
+  function handleChange(event) {
+   setCategory(event.target.value);
+  }
   const handlerAddProduct = async (e) => {
     e.preventDefault();
  
@@ -93,14 +95,16 @@ const AddProduct = ({ setOpenAdd }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="category">Categoría</label>
-                  <input
-                    required
-                    type="text"
-                    id="category"
-                    onChange={(e) => setCategory(e.target.value)}
-                    value={category}
-                  />
+                  <label htmlFor="category">Seleccione una Categoría</label>
+                  <select value={category} onChange={handleChange}>
+                 
+                    <option value="Fruta">Fruta</option>
+                    <option value="Hortaliza">Hortaliza</option>
+                    <option value="Verdura">Verdura</option>
+                    <option value="Vegetal">Vegetal</option>
+                    <option value="Cereales">Cereal</option>
+                    
+                  </select>
                 </div>
                 <div className="form-group">
                   <label htmlFor="description">Descripción</label>

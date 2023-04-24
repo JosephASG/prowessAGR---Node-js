@@ -9,7 +9,7 @@ const ProductDetails = () => {
   const { cart } = state;
 
   const existUser = localStorage.getItem("userInfo");
-
+  const [showModal, setShowModal] = useState(false);
   const [product, setProduct] = useState([]);
 
   const params = useParams();
@@ -39,7 +39,11 @@ const ProductDetails = () => {
         type: "CART_ADD_ITEM",
         payload: { ...product, quantity },
       });
+<<<<<<< Updated upstream
       
+=======
+      setShowModal(true);
+>>>>>>> Stashed changes
     }
   };
 
@@ -85,9 +89,23 @@ const ProductDetails = () => {
         <div className="product-add">
           <button onClick={addToCart}>Añadir a la bolsa</button>
         </div>
+<<<<<<< Updated upstream
         </div>
         </div>
         
+=======
+        {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <p className="one">El producto seleccionado se añadió correctamente.</p>
+            <Link to="/cart" className="two">
+              <button  >Carrito</button>
+            </Link>
+            <button className="three" onClick={() => setShowModal(false)}>Cerrar</button>
+        </div>
+  </div>
+)}
+>>>>>>> Stashed changes
         <div className="burbujas">
         <div className="burbuja"></div>
         <div className="burbuja"></div>
