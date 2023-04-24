@@ -40,7 +40,7 @@ const FillterProductInfo = ({ product }) => {
           </Link>
         </div>
         <div className="card-body">
-          <Link to={`../${product.slug}`}>
+          <Link to={`../${product._id}`}>
             {product.name} <FontAwesomeIcon icon={faEye} />
           </Link>
           <span className="category">{product.category}</span>
