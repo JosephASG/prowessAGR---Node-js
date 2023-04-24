@@ -32,7 +32,9 @@ const Header = () => {
           <Link to="/">
             <img
               className="header-logo-image"
-              src="./assets/images/others/prowess-logo.png"
+              src="./assets/images/others/prowess-logo1.png"
+              //src="./assets/images/others/prowess-logo2.png"
+
               alt=""
             />
           </Link>
