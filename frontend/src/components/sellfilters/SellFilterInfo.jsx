@@ -64,23 +64,7 @@ const SellFilterInfo = ({ user }) => {
                       </span>
                   </Button>
                 )}
-            </div>
-            <div>
-              <Link to={`../seller/${user._id}`}></Link>
-            </div>
-            <div class="cta-container transition">
-              {existUser && sellerExists ? (
-                <Button variant="contained" color="error" size="medium">
-                  <span onClick={() => handlerUnfollow(user)}>Dejar de seguir</span>
-                </Button>
-                ) : (
-                  <Button variant="contained" size="medium" color="success">
-                    <span key={user._id} onClick={handlerFollow}>
-                      Seguir
-                      </span>
-                  </Button>
-                )}
-            </div>            
+            </div>         
             <div class="card_circle transition">
               <div className="image">
                 <img src={user.image.secure_url} alt={user.name} />
@@ -92,6 +76,15 @@ const SellFilterInfo = ({ user }) => {
             <h2 class="member">Miembro Desde: {user.createdAt.slice(0, 10)}</h2>
           </div>
           <div className="wrapper-info">
+            <div className="sub_card">
+              <h2 className="mail">&nbsp;&nbsp;&nbsp;Correo: </h2>
+              <h3 className="m_mail">&nbsp;&nbsp;&nbsp;{user.email}&nbsp;&nbsp;</h3>
+              <h2 className="address">&nbsp;&nbsp;&nbsp;Dirección:</h2>
+              <h3 className="a_address">{user.address}</h3>
+              <h2 className="phone">&nbsp;&nbsp;&nbsp;Teléfono:</h2>
+              <h3 className="p_phone">{user.phone}</h3>
+            </div>
+            <div className="wrapper-info">
             <div className="sub_card">
               <h2 className="mail">&nbsp;&nbsp;&nbsp;Correo: </h2>
               <h3 className="m_mail">&nbsp;&nbsp;&nbsp;{user.email}&nbsp;&nbsp;</h3>
