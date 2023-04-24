@@ -39,11 +39,11 @@ const ProductDetails = () => {
         type: "CART_ADD_ITEM",
         payload: { ...product, quantity },
       });
-<<<<<<< Updated upstream
+
       
-=======
+
       setShowModal(true);
->>>>>>> Stashed changes
+
     }
   };
 
@@ -89,11 +89,11 @@ const ProductDetails = () => {
         <div className="product-add">
           <button onClick={addToCart}>Añadir a la bolsa</button>
         </div>
-<<<<<<< Updated upstream
+
         </div>
         </div>
         
-=======
+
         {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -105,7 +105,7 @@ const ProductDetails = () => {
         </div>
   </div>
 )}
->>>>>>> Stashed changes
+
         <div className="burbujas">
         <div className="burbuja"></div>
         <div className="burbuja"></div>
