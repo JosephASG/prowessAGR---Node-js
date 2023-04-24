@@ -39,20 +39,25 @@ const ProductDetails = () => {
         type: "CART_ADD_ITEM",
         payload: { ...product, quantity },
       });
+      
     }
   };
 
   return (
     <header className="bg_animate">
+    <div className=".filter-product" >
     <div className="product-row">
       <div className="product-col">
       <div className="product-group">
+      
       {product.length === 0 ? ( 
             <h3 className="info">Foto Producto</h3>
           ) : (
             <img src={product.image.secure_url} alt={product.name} />
           )}
+          
         <Link to={`../seller/${product.sellerId}`}>
+          
           <img
             className="seller-product"
             src={product.sellerImage}
@@ -61,8 +66,10 @@ const ProductDetails = () => {
         </Link>
       </div>
       </div>
+      
       <div className="product-col">
       <div className="infopro-group">
+      <div className="product-body">
         <div className="product-info">
           <h2 className="product-title">{product.name}</h2>
           <span className="category">{product.category}</span>
@@ -73,8 +80,12 @@ const ProductDetails = () => {
           </span>
           <span className="desc">{product.description}</span>
         </div>
+        </div>
+        <div className="product-footer">
         <div className="product-add">
           <button onClick={addToCart}>Añadir a la bolsa</button>
+        </div>
+        </div>
         </div>
         
         <div className="burbujas">
