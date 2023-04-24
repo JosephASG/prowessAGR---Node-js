@@ -33,7 +33,7 @@ const AddProduct = ({ setOpenAdd }) => {
 
   const handlerAddProduct = async (e) => {
     e.preventDefault();
-
+ 
     if (!image) {
       return alert("Por favor seleccione una imagen del producto");
     }
