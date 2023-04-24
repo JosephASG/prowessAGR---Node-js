@@ -3,7 +3,7 @@
     justify-content: left;
     padding-left: 10%;
     align-items: center;
-    background-color: rgba(3, 211, 83, 0.781);
+    background-color: #a8f3a5;
     height: 100vh;
 }
 .product-col{
@@ -167,7 +167,7 @@
 
 .product-info h2 {
     letter-spacing: 1.3px;
-    color: #485b63;
+    color: #f0f3bd;
 }
 
 .product-info .category {
@@ -195,7 +195,7 @@
 }
 
 .product-info .desc {
-    color: #485b63;
+    color: #ffffff;
 }
 
 .product-add {
