@@ -40,7 +40,7 @@ const CartItems = () => {
   const itemsPrice = roundPrice(
     cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
-  const taxPrice = roundPrice(0.2 * itemsPrice); //for tax in Serbia 20%
+  const taxPrice = roundPrice(0.0 * itemsPrice); //for tax in Serbia 20%
   const totalPrice = itemsPrice + taxPrice;
 
   const updateQuantityHandler = async (item, quantity) => {
@@ -144,7 +144,7 @@ const CartItems = () => {
                   </span>
                 </div>
                 <div className="bill-group">
-                  <span>Tax 20%:</span>
+                  <span>IVA 0%:</span>
                   <span>${taxPrice}</span>
                 </div>
                 <div className="bill-group">
