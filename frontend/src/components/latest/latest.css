@@ -32,20 +32,20 @@
     margin-top: 0px;
     object-fit: cover;
     padding: 0px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(175px, auto));
     justify-content: space-between;
     justify-items: center;
-    grid-gap: 30px 50px
+    grid-gap: 20px 40px
   
   }
   
   .latest-group {
-    padding: 20px;
+    padding: 16px;
     box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);
     border-radius: 13%;
     border: solid 0.1px;
     background-color: #04a53a;
-    border-radius: 0.5rem;
+    border-radius: 0.4rem;
     position: relative;
     height: auto;
     transition:transform .4s;

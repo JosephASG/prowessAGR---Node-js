@@ -22,7 +22,7 @@
   .ctn-img-logo img {
     display: flex;
     justify-content: center;
-    max-width: 220px;
+    max-width: 305px;
     padding: 0 20px;
   }
   .columF {
@@ -194,7 +194,7 @@ container-footer {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 20px 0 10px 0;
+    margin: 10px 0 10px 0;
   }
   
   .paginas {

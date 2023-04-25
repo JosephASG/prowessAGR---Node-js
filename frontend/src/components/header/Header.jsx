@@ -32,7 +32,9 @@ const Header = () => {
           <Link to="/">
             <img
               className="header-logo-image"
-              src="./assets/images/others/prowess-logo.png"
+              src="./assets/images/others/prowess-logo1.png"
+              //src="./assets/images/others/prowess-logo2.png"
+
               alt=""
             />
           </Link>
@@ -51,18 +53,19 @@ const Header = () => {
         <div className="header-action">
           {userInfo && (
             <>
-              <Link to="/account">
+              <Link to="/">
                 <FontAwesomeIcon icon={faHome} />
               </Link>
-              <Link to="/follow">
+              <Link to="/account">
                 <FontAwesomeIcon icon={faUser} />
-                {wish.wishItems.length ? (
+                {/* Numeración de seguidos sobre ícono de usuario
+                  wish.wishItems.length ? (
                   <span className="header-cart-badge">
                     {wish.wishItems.length}
                   </span>
                 ) : (
                   <span className="header-cart-badge">0</span>
-                )}
+                )*/}
               </Link>
               <Link to="/cart">
                 <FontAwesomeIcon icon={faShoppingBag} />

@@ -59,7 +59,7 @@ const Order = () => {
                   </Link>
                 </div>
                 <div className="card-body">
-                  <Link to={`../${item.slug}`}>
+                  <Link to={`../${item._id}`}>
                     {item.name} <FontAwesomeIcon icon={faEye} />
                   </Link>
                   <span className="price">${item.price.toFixed(2)}/kg</span>

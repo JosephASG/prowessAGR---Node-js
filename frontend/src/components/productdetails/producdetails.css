@@ -32,7 +32,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0px 0;
-    background-color: rgba(0, 82, 64, 0.267);
+    background-color: #04a53a;
     padding: 10px
 }
 .product-footer{
@@ -40,7 +40,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0px 0;
-    background-color: #48c9c257;
+    background-color: #04a53a;
     padding: 10px
 }
 .card-header img {
