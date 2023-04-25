@@ -24,7 +24,7 @@
     margin: 0px 0;
     background-color: #5eb47b;
     padding: 10px;
-    left: center;
+    left: 150px;
     bottom: 10px;
     
 }
@@ -88,7 +88,7 @@
     border-radius: 0.5rem;
     position:relative;
     height: auto;
-    left: 180px;
+    left: 330px;
     top:10px;
     width: 400px;
     transition:transform .4s;
@@ -306,6 +306,7 @@
     margin-top: 40px;
     align-content: center;
     bottom: 30px;
+    right: 20px;
     
 }
 
