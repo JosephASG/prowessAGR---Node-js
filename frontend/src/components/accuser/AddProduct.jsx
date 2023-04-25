@@ -31,8 +31,17 @@ const AddProduct = ({ setOpenAdd }) => {
     }
   };
   function handleChange(event) {
+
    setCategory(event.target.value);
+   
   }
+  const handleKeyPress = (e) => {
+    const charCode = e.which ? e.which : e.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      e.preventDefault();
+    }
+  };
+
   const handlerAddProduct = async (e) => {
     e.preventDefault();
  
@@ -90,6 +99,7 @@ const AddProduct = ({ setOpenAdd }) => {
                     required
                     type="text"
                     id="slug"
+                    onKeyPress={handleKeyPress}
                     onChange={(e) => setSlug(e.target.value)}
                     value={slug}
                   />
@@ -122,6 +132,7 @@ const AddProduct = ({ setOpenAdd }) => {
                     required
                     type="text"
                     id="price"
+                    onKeyPress={handleKeyPress}
                     onChange={(e) => setPrice(e.target.value)}
                     value={price}
                   />
