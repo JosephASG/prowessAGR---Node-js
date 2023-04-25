@@ -153,10 +153,10 @@ label{
 }
 
 .account-subtitle {
-    font: bold 30px MiNuevaFuente2, verdana, sans-serif;
+    font: bold 50px  a_SeriferNr;
     margin-bottom: 30px;
     letter-spacing: 1.4px;
-    color: rgb(255, 255, 255);
+    color: rgb(15, 15, 15);
     text-align: center;
 }
 
@@ -178,7 +178,7 @@ label{
     padding: 5px 10px;
     border: none;
     box-shadow: 0 0 5px #38383470;
-    color: #a8f3a5;
+    color: #02052c;
     margin-right: 10px;
     letter-spacing: 1.4px;
     font-size: 12px;
@@ -212,7 +212,7 @@ label{
 
 .account-orders {
     display: flex;
-    color:whitesmoke;
+    color: rgb(15,15,15);
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -301,7 +301,7 @@ label{
 .add-btn {
     display: block;
     margin-left: 0%;
-    padding: 5px 15px;
+    padding: 9px 18px;
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -313,7 +313,7 @@ label{
     letter-spacing: 1.3px;
     transition: all 0.5s;
     box-shadow: 0 0 5px #e09812a4;
-    font-size: 10px;
+    font-size: 18px;
 }
 
 .add-btn:hover {
