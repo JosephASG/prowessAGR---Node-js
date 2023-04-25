@@ -51,14 +51,16 @@ const ProductDetails = () => {
     <header className="bg_animate">
     <div className=".filter-product" >
     <div className="product-row">
+      
       <div className="product-col">
       <div className="product-group">
-      
+      <div className="product-header">
       {product.length === 0 ? ( 
             <h3 className="info">Foto Producto</h3>
           ) : (
             <img src={product.image.secure_url} alt={product.name} />
           )}
+          
           
         <Link to={`../seller/${product.sellerId}`}>
           
@@ -68,6 +70,7 @@ const ProductDetails = () => {
             alt={product.seller}
           />
         </Link>
+        </div>
       </div>
       </div>
       
