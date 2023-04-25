@@ -113,6 +113,7 @@ const AddProduct = ({ setOpenAdd }) => {
                     <option value="Verdura">Verdura</option>
                     <option value="Vegetal">Vegetal</option>
                     <option value="Cereales">Cereal</option>
+                    <option value="Rubiáceas">Rubiáceas</option> 
                     
                   </select>
                 </div>
