@@ -3,7 +3,7 @@
     justify-content: left;
     padding-left: 10%;
     align-items: center;
-    background-color: green;
+    background-color: rgb(2, 114, 2);
     height: 100vh;
 }
 .filter-product {
@@ -32,7 +32,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0px 0;
-    background-color: #04a53a;
+    background-color: #6ac789;
     padding: 10px
 }
 .product-footer{
@@ -40,7 +40,7 @@
     flex-direction: column;
     justify-content: center;
     margin: 0px 0;
-    background-color: #04a53a;
+    background-color: #5eb47b;
     padding: 10px
 }
 .card-header img {
@@ -83,7 +83,7 @@
     border-radius: 13%;
     border: solid 0.1px;
     margin-top: 1rem;
-    background-color: #28af55;
+    background-color: #4ba067;
     border-radius: 0.5rem;
     position:relative;
     height: auto;
