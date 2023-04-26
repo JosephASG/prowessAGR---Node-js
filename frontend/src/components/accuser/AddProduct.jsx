@@ -115,8 +115,9 @@ const AddProduct = ({ setOpenAdd }) => {
                     <option value="Vegetal">Vegetal</option>
                     <option value="Cereales">Cereal</option>
                     <option value="Rubiáceas">Rubiáceas</option> 
-                    
+
                   </select>
+                  
                 </div>
                 <div className="form-group">
                   <label htmlFor="description">Descripción</label>
