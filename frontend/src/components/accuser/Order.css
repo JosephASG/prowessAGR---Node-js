@@ -11,6 +11,9 @@ body {
 .ctn-add-product{
   font: bold 20px a_SeriferNr;
 }
+.form{
+  font: bold 15px a_SeriferNr;
+}
 
 .filter-card {
   margin: 10px;
