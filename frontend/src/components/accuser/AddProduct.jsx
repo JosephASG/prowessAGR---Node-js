@@ -105,9 +105,10 @@ const AddProduct = ({ setOpenAdd }) => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="category">Seleccione una Categoría</label>
-                  <select value={category} onChange={handleChange}>
+                  <label htmlFor="category">Categoria</label>
+                  <select value={category} onChange={handleChange}  required>
                  
+                    <option value="">Seleccione una Categoria</option>
                     <option value="Fruta">Fruta</option>
                     <option value="Hortaliza">Hortaliza</option>
                     <option value="Verdura">Verdura</option>
