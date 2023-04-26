@@ -6,7 +6,7 @@ body {
 }
 
 body {
-  font-family: 'Quicksand', sans-serif;
+  font: bold 20px a_SeriferNr;
 }
 .filter-card {
   margin: 10px;
