@@ -1,27 +1,3 @@
-/*
-html,
-body {
-  overflow-x: hidden;
-  background-color: #a8f3a5;
-}
-
-body {
-  font-family: "Quicksand", sans-serif;
-}
-.ctn-add-product{
-  font: bold 20px a_SeriferNr;
-}
-
-.filter-card {
-  margin: 10px;
-  background-color: #161c98d2;
-  border-radius: 10px;
-  box-shadow: 0 2px 20px rgba(222, 20, 20, 0);
-  overflow: hidden;
-  width: 300px;
-  height: auto;
-  transition: all 0.5s;
-}*/
 
 .order-row {
   display: flex;
