@@ -78,7 +78,7 @@ const Header = () => {
                 )}
               </Link>
             </>
-          )}
+          )} 
 
           {userInfo ? (
             <span className="logout" onClick={signouthandler}>
