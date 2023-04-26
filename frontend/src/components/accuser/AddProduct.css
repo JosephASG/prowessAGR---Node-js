@@ -15,7 +15,7 @@
 
 .passwords form {
     width: auto;
-    background-image: url("Fond2.jpg");
+    background-image: url("Fondo3.jpg");
     padding: 3px 5px;
     background-size: cover;
     border-radius: 7px;
@@ -29,7 +29,7 @@
   }
 
 .passwords form .form-group {
-  margin: 15px 30px;
+  margin: 15px 35px;
   display: flex;
   flex-direction: column;
 }

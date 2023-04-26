@@ -30,17 +30,51 @@ const AddProduct = ({ setOpenAdd }) => {
       setPreviewImageProduct(URL.createObjectURL(fileProduct));
     }
   };
-  function handleChange(event) {
 
-   setCategory(event.target.value);
-   
+  function handleKeyDown(e) {
+    // Permitir solo números y un punto decimal
+    if (!/[0-9\.]/.test(e.key)) {
+      e.preventDefault();
+    }
   }
   const handleKeyPress = (e) => {
     const charCode = e.which ? e.which : e.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+    // Permitir solo números y un solo punto decimal, y permitir la tecla de retroceso (backspace) y la tecla de suprimir (delete)
+    if (
+      (charCode !== 46 || price.includes(".")) &&
+      charCode > 31 &&
+      (charCode < 48 || charCode > 57)
+    ) {
       e.preventDefault();
     }
-  };
+    
+  }
+  const handleKeyPress1 = (e) => {
+    const charCode = e.which ? e.which : e.keyCode;
+    // Permitir solo números y un solo punto decimal, y permitir la tecla de retroceso (backspace) y la tecla de suprimir (delete)
+    if (
+      (charCode !== 46 || slug.includes(".")) &&
+      charCode > 31 &&
+      (charCode < 48 || charCode > 57)
+    ) {
+      e.preventDefault();
+    }
+    
+  }
+  function handlePaste(e) {
+    const pastedData = e.clipboardData.getData("text/plain");
+    // Permitir solo números y un punto decimal en el contenido pegado
+    if (!/^\d*\.?\d*$/.test(pastedData)) {
+      e.preventDefault();
+    }
+  }
+function handleChange(e) {
+    if (/^[0-9]*\.?[0-9]*$/.test(e.target.value)) {
+      setPrice(e.target.value);
+    }
+
+  }
+
 
   const handlerAddProduct = async (e) => {
     e.preventDefault();
@@ -99,22 +133,26 @@ const AddProduct = ({ setOpenAdd }) => {
                     required
                     type="text"
                     id="slug"
-                    onKeyPress={handleKeyPress}
+                    onKeyPress={handleKeyPress1}
+                    onPaste={handlePaste}
                     onChange={(e) => setSlug(e.target.value)}
                     value={slug}
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="category">Seleccione una Categoría</label>
-                  <select value={category} onChange={handleChange}>
+                  <label htmlFor="category">Categoria</label>
+                  <select value={category} onChange={(e)=> setCategory(e.target.value)}  required>
                  
+                    <option value="">Seleccione una Categoria</option>
                     <option value="Fruta">Fruta</option>
                     <option value="Hortaliza">Hortaliza</option>
                     <option value="Verdura">Verdura</option>
                     <option value="Vegetal">Vegetal</option>
                     <option value="Cereales">Cereal</option>
-                    
+                    <option value="Rubiáceas">Rubiáceas</option> 
+
                   </select>
+                  
                 </div>
                 <div className="form-group">
                   <label htmlFor="description">Descripción</label>
@@ -133,7 +171,8 @@ const AddProduct = ({ setOpenAdd }) => {
                     type="text"
                     id="price"
                     onKeyPress={handleKeyPress}
-                    onChange={(e) => setPrice(e.target.value)}
+                    onPaste={handlePaste}
+                    onChange={ handleChange}
                     value={price}
                   />
                 </div>
