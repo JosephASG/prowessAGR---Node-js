@@ -8,7 +8,9 @@
     background-size: cover;
     background-position: center;
     padding: 100px 0;
-    background-image: url(https://res.cloudinary.com/primalappsje/image/upload/v1672782251/primal/bg-login_dshaap.jpg);
+    /*background-image: url(https://www.lasirena.es/blog/wp-content/uploads/2019/01/produccion_verduras_congeladas_04.jpg);*/
+    /*background-image: url(https://cdn.pixabay.com/photo/2020/09/27/23/12/lettuce-5608096_1280.jpg);*/
+    background-image: url(https://static.vecteezy.com/system/resources/previews/003/324/019/non_2x/landscape-of-corn-field-with-the-sunset-farm-of-green-crop-field-free-photo.jpg);
   }
   
   .form-row form {
@@ -42,7 +44,7 @@
     width: 450px;
     padding: 1.25rem 0;
     font-size: 1.125rem;
-    color: #fff;
+    color: #050505;
   }
   
   .form-row .form-group input:focus {
