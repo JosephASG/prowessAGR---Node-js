@@ -35,10 +35,147 @@ const Order = () => {
     fetchOrder();
   }, [id, navigate, userInfo]);
 
+  function formatDate(date) {
+    const d = new Date(date);
+    const day = d.getDate().toString().padStart(2, '0');
+    const month = (d.getMonth() + 1).toString().padStart(2, '0');
+    const year = d.getFullYear().toString().slice(0);
+    return `${day}/${month}/${year}`;
+  }
+
   return (
-    <div className="orderContainer">
+
+    <div className="order-row">
+    <button className="back-button">
+     <Link className="back" to="/account">
+     <FontAwesomeIcon icon={faArrowLeft} /> Regresar
+     </Link>
+     </button> 
+     <div className="ctn-order" >
+     
+     <h1 className="order-title">FACTURA</h1>
+     <div className="order-info">
+           <img className="logo-img"
+             src="../assets/images/others/prowess-logo2.png"
+             alt=""
+           />
+           <div className="order-number">
+             <div className="client">
+               <h3>Nº Orden:</h3><br/>
+               <h4>{order._id}</h4>
+             </div>
+           </div>
+         </div>
+
+         <div className="header">
+         <div className="client-info">
+             <div className="client">
+               <span>Nombre:</span>
+               <span>{order.name}</span>
+             </div>
+
+             <div className="client">
+               <span>Email:</span>
+               <span>{order.email}</span>
+             </div>
+
+             <div className="client">
+               <span>Teléfono:</span>
+               <span>{order.phone}</span>
+             </div>
+
+             <div className="client">
+               <span>Dirección:</span>
+               <span>{order.address}</span>
+             </div>
+
+             <div className="client">
+               <span>Fecha de emisión:</span>
+               <span>{formatDate(order.createdAt)}</span>
+             </div>
+           </div>
+         </div>         
+       <table className="products"> 
+         <thead>
+           <tr class="highlight">
+             <th>Descripción</th>
+             <th>Peso (Kg)</th>
+             <th>Precio Unitario</th>
+             <th>Precio Total</th>
+           </tr>
+         </thead>
+ 
+         <thead>
+         <tr >
+             <th>
+               {order.orderItems?.map((item) => (
+                 <p style={{ textAlign: "center" }}>{item.name} </p> 
+               ))}
+             </th>
+             <th>
+               {order.orderItems?.map((item) => (
+                 <p style={{ textAlign: "center" }}>{item.slug} kg</p> 
+               ))}
+             </th>
+             <th>
+             {order.orderItems?.map((item) => (
+                 <p style={{ textAlign: "center" }} className="price">${item.price.toFixed(2)}/kg</p>
+               ))}  
+             </th>
+             <th>
+               {order.orderItems?.map((item) => (
+                 <p style={{ textAlign: "center" }} className="price">${(item.price.toFixed(2))*(item.quantity)}/kg</p>
+               ))}   
+             </th>
+           </tr>
+         </thead>
+           <tbody >
+             <td colSpan={2}></td>
+             <th><p>Subtotal:</p></th>
+             <th><span>${order.totalPrice?.toFixed(2)}</span></th>
+           </tbody>
+           <tbody >
+             <td colSpan={2}></td>
+             <th><p>IVA (0%):</p></th>
+             <th><span>${order.taxPrice?.toFixed(2)}</span></th>
+           </tbody>
+           <tbody>
+             <td colSpan={2}></td>
+             <th><p>Precio total:</p></th>
+             <th><span>${order.totalPrice?.toFixed(2)}</span></th>
+           </tbody> 
+           <th rowSpan={2}></th>
+           <tbody>
+             <td colSpan={2}></td>
+             <th><p>Pagado:</p></th>
+             <th>
+           {order.isPaid ? (
+                 <span> Paid at {order.paidAt} </span>
+               ) : (
+                 <span>Not pagado!</span>
+               )}
+           </th>
+           </tbody>
+           <tbody>
+             <td colSpan={2}></td>
+             <th><p>Entregado:</p></th>
+             <th>
+               {order.isDelivered ? (
+                 <span> Delivered at {order.deliveredAt} </span>
+               ) : (
+                 <span>No entregado!</span>
+               )}
+           </th>
+         </tbody>  
+           
+     </table>
+     </div>
+   </div>
+
+
+    /*<div className="orderContainer">
       <Link className="back" to="/account">
-        <FontAwesomeIcon icon={faArrowLeft} /> Regresar
+        <FontAwesomeIcon icon={faArrowLeft} /> Volver
       </Link>
       <div className="orderRow">
         <h3>Mi orden No: {order._id}</h3>
@@ -117,7 +254,7 @@ const Order = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div>*/
   );
 };
 

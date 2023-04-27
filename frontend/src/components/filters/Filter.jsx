@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FilterProduct from "./FilterProduct";
 
+
 const Filter = () => {
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState([]);
@@ -76,8 +77,10 @@ const Filter = () => {
             <FilterProduct products={search(FilterProduct)} />
           </div>
         </>
+
       )}
-    </div>
+      
+    </div>  
   
   );
 };
