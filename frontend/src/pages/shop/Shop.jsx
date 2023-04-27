@@ -2,6 +2,7 @@ import React from "react";
 import Filter from "../../components/filters/Filter";
 import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
+
 import "./shop.css";
 
 const Shop = () => {
@@ -26,6 +27,8 @@ const Shop = () => {
       {/* Footer End*/}
     </div>
   );
+
+  
 };
 
 export default Shop;

@@ -47,6 +47,7 @@ const Latest = () => {
                   <span className="category">{product.category}</span>
                   <span className="price">${product.price.toFixed(2)}/kg</span>
                 </div>
+                
               </div>
             ))}
           </div>
