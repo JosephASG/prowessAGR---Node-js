@@ -15,15 +15,14 @@ const Footer = () => {
             <Link to="/">
               <span>Inicio</span>
             </Link>
-            <Link to="/about" target="_blank">
+            <Link to="/about" >
               <span>Nosotros</span>
             </Link>
             <Link to="/shop">
               <span>Productos</span>
             </Link>
-            <Link to="https://prowessec.com/servicio-al-cliente/">
-              <span>Contacto con Prowess EC</span>
-            </Link>
+            <a href="https://prowessec.com/servicio-al-cliente/" target="_blank" rel="noreferrer" >Contacto con Prowess EC</a>
+    
             <Link to="/terms" target="_blank">
               <span>Términos y condiciones</span>
             </Link>
