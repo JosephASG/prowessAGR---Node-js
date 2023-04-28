@@ -34,7 +34,7 @@ const FilterProduct = ({ products }) => {
         pageClassName={"pagi-item"}
         pageLinkClassName={"pagi-link"}
         activeClassName={"pagi-active"}
-        activeLinkClassName={"pagi-active-link"}
+        //activeLinkClassName={"pagi-active-link"}
         previousClassName={"pagi-item"}
         previousLinkClassName={"pagi-link"}
         nextClassName={"pagi-item"}
