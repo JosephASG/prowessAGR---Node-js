@@ -51,4 +51,47 @@
     grid-row: 2;
   }
 
+  .filter-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-right: 50px;
+    margin-bottom: 40px;
+  }
   
+  .pagi-item {
+    margin: 0 10px;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 12px;
+    background-color: #1c9b23;
+    box-shadow: 10px 2px 4px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+  
+  .pagi-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 5px;
+  }
+  
+  .pagi-active .a {
+    background-color: #65cc6a;
+    color: #fff;
+  }
+  /*
+  .pagi-active-link {
+    background: #1c9b23;
+    box-sizing: border-box;
+  }*/
+
+  .disabledPagi {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .page-link-clickable {
+    cursor: pointer;
+    display: block;
+    
+  }
