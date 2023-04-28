@@ -48,11 +48,11 @@
 .filter-row .filter-col:first-child {
     display: flex;
     justify-content: space-evenly;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     justify-content: left;
     flex-direction: row-reverse;
     /**/
-    margin-top: 4rem;
+    margin-top: 6rem;
 }
 
 /*.filter-row .filter-col:first-child .filter-group:first-child button {
