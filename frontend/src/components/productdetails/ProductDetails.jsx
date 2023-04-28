@@ -58,7 +58,10 @@ const ProductDetails = () => {
       {product.length === 0 ? ( 
             <h3 className="info">Foto Producto</h3>
           ) : (
-            <img src={product.image.secure_url} alt={product.name} />
+            <img 
+            src={product.image.secure_url} 
+            alt={product.name} 
+            style={{ width: "180px", height: "140px"}}/>
           )}
           
           

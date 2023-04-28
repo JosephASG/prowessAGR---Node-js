@@ -42,7 +42,7 @@ const Latest = () => {
                 </div>
                 <div className="latest-body">
                   <Link to={`${product._id}`}>
-                    {product.name} <FontAwesomeIcon icon={faEye} />
+                    {product.name.charAt(0).toUpperCase() + product.name.slice(1)} <FontAwesomeIcon icon={faEye} />
                   </Link>
                   <span className="category">{product.category}</span>
                   <span className="price">${product.price.toFixed(2)}/kg</span>
