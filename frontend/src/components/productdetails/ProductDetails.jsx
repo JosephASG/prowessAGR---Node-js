@@ -68,6 +68,7 @@ const ProductDetails = () => {
             className="seller-product"
             src={product.sellerImage}
             alt={product.seller}
+          
           />
         </Link>
         </div>
