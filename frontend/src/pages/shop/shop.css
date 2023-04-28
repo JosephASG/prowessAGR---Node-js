@@ -26,7 +26,7 @@
     position:relative;
     height: auto;
     left: 600px;
-    top:-6rem;
+    top:-5rem;
     width: 400px;
     transition:transform .4s;
   }
