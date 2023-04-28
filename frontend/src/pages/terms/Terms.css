@@ -1,3 +1,7 @@
+body{
+  background: #a8f3a5;
+}
+
 .terms {
     background-color: #acf4a4 ;
     margin: 100px;
@@ -37,6 +41,7 @@
   .condiciones{
     margin: 150px;
 }
+
 
 .img-condiciones{
     width: 250px;
