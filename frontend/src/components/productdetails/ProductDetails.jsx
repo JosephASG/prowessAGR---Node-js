@@ -79,7 +79,7 @@ const ProductDetails = () => {
         </div>
         <div className="product-info">
           <h2 style={{ color:"#885359"}}>{product.name}</h2>
-          <span className="category">{product.category}</span>
+          <span className="category2">{product.category}</span>
         </div>
         <div className="product-info2">
           <span className="price">
@@ -88,6 +88,7 @@ const ProductDetails = () => {
           </div>
           <br></br>
           <div className="product-info3">
+          <span className="descripción">Descripción</span><br></br>
           <span className="desc">{product.description}</span>
         </div>
         </div>

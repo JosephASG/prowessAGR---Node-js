@@ -113,12 +113,12 @@ const SellerInfo = () => {
       </div>
       <div className="seller-col">
         <h2 className="seller-title">
-          Todos los productos del vendedor {seller.name}
+          Todos los productos del vendedor: {seller.name}
         </h2>
         {product.length === 0 ? (
           <h3 className="info">Actualmente no hay productos!</h3>
         ) : (
-          <div className="seller-products">
+          <div className="seller-products2">
             <SellerProduct product={product} />
           </div>
         )}

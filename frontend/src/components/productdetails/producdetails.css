@@ -22,6 +22,7 @@
 
 }
 .product-header {
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,7 +30,8 @@
     padding: 10px;
     left: 70px;
     bottom: -2px;
-    width: 20px;
+    width: 200px;
+    
     
 }
 .product-body {
@@ -225,6 +227,9 @@
     height: auto;
     animation: flotar1 5s infinite;
 }
+.descripción{
+    size: 20px;
+}
 
 @keyframes flotar1 {
     0% {
@@ -273,6 +278,21 @@
 }
 .product-info h2:first-letter {
     text-transform: uppercase;
+}
+.category2{
+    background: green !important;
+    width: max-content;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    font-weight: bold;
+    padding: 2px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    display: block;
+    margin: 0 auto 0 auto;
+    bottom: 8px;
+    align-content: center;
 }
 
 .product-info .category {
