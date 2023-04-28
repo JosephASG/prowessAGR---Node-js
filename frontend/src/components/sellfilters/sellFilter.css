@@ -1,7 +1,7 @@
 
 /*Espacio entre filas pagina sellers*/
 .sell-fill-row {
-    height: 75vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
