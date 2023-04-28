@@ -76,7 +76,7 @@ const SellerInfo = () => {
           className="seller-image"
           src={seller.image.secure_url}
           alt={seller.name}
-          style={{ width: "135px", height: "180px",left:"28px",top:"20px"}}
+          style={{ width: "135px", height: "180px",left:"27px",top:"20px"}}
         />
         )}
         </div>
