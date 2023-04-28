@@ -12,6 +12,13 @@
     background-image: url(https://static.vecteezy.com/system/resources/previews/003/324/019/non_2x/landscape-of-corn-field-with-the-sunset-farm-of-green-crop-field-free-photo.jpg);
   }
   
+  .form {
+    font-size: 4.5em;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
   .form-row form {
     /* From https://css.glass */
     background: rgba(255, 255, 255, 0.2);
