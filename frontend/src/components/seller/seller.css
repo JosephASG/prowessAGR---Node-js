@@ -82,8 +82,20 @@
 .seller-title {
     text-align: center;
     margin-bottom: 40px;
+    
 }
-
+.seller-products2{
+    display: block;
+    margin: 0 20px 0 auto;
+    background-color: #f0f3bd;
+    padding: 2px 10px;
+    border: none;
+    box-shadow: 0 0 5px #f0f3bd;
+    color: #2f5f74;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    transition: all 0.5s;
+}
 .seller-products .card-footer {
     padding: 20px 0;
 }

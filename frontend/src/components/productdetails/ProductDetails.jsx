@@ -72,14 +72,14 @@ const ProductDetails = () => {
             className="seller-product"
             src={product.sellerImage}
             alt={product.seller}
-            style={{ width: "60px", height: "60px", borderRadius: "50%" }}
+            style={{ width: "50px", height: "50px", borderRadius: "50%" }}
           
           />
         </Link>
         </div>
         <div className="product-info">
-          <h2 className="product-title">{product.name}</h2>
-          <span className="category">{product.category}</span>
+          <h2 style={{ color:"#885359"}}>{product.name}</h2>
+          <span className="category2">{product.category}</span>
         </div>
         <div className="product-info2">
           <span className="price">
@@ -88,6 +88,7 @@ const ProductDetails = () => {
           </div>
           <br></br>
           <div className="product-info3">
+          <span className="descripción">Descripción</span><br></br>
           <span className="desc">{product.description}</span>
         </div>
         </div>

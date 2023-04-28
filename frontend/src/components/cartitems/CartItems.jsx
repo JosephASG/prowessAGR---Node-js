@@ -23,7 +23,7 @@ const CartItems = () => {
       navigate("/");
     }
   });
-
+ 
   const { state, dispatch: ctxDispatch } = useContext(Store);
 
   const {
