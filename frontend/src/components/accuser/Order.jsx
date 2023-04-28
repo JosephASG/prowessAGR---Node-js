@@ -152,7 +152,7 @@ const Order = () => {
            {order.isPaid ? (
                  <span> Paid at {order.paidAt} </span>
                ) : (
-                 <span>Not pagado!</span>
+                 <span>No pagado</span>
                )}
            </th>
            </tbody>
@@ -163,7 +163,7 @@ const Order = () => {
                {order.isDelivered ? (
                  <span> Delivered at {order.deliveredAt} </span>
                ) : (
-                 <span>No entregado!</span>
+                 <span>No entregado</span>
                )}
            </th>
          </tbody>  
