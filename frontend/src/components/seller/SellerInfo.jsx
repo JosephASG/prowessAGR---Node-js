@@ -67,19 +67,32 @@ const SellerInfo = () => {
     <div className="seller-row">
       <div className="seller-col">
         <div className="seller-info">
-          <div className="seller-header">
-          {seller.length === 0 ? ( 
-            <h3 className="info">Foto</h3>
-          ) : (
-            <img src={seller.image.secure_url} alt={seller.name} />
-          )}
+        <div className="seller-header">
+        <div className="seller-info2"> 
+        {seller.length === 0 ? (
+        <h3 className="info">Foto</h3>
+        ) : (
+        <img
+          className="seller-image"
+          src={seller.image.secure_url}
+          alt={seller.name}
+          style={{ width: "135px", height: "180px",left:"27px",top:"20px"}}
+        />
+        )}
+        </div>
+
           </div>
-          <div className="seller-body">
-            <span>{seller.name}</span>
-            <span>{seller.email}</span>
-            <span>{seller.phone}</span>
-            <span>{seller.address}</span>
-          </div>
+          <div className="seller-body2">
+            <h1 className="titulovendedor">Datos del Vendedor</h1>
+            <h4>Nombre:</h4><span>{seller.name}</span>
+            <br></br>
+            <h4>Correo:</h4><span>{seller.email}</span>
+            <br></br>
+            <h4>Teléfono:</h4><span>{seller.phone}</span>
+            <br></br>
+            <h4>Dirección:</h4><span>{seller.address}</span>
+            <br></br>
+            <br></br>
           <div className="seller-footer">
             {existUser && sellerExists ? (
               <span
@@ -90,10 +103,11 @@ const SellerInfo = () => {
                 Dejar de seguir
               </span>
             ) : (
-              <span onClick={handlerFollow} className="follow">
+              <span onClick={handlerFollow} className="unfollow">
                 Seguir
               </span>
             )}
+          </div>
           </div>
         </div>
       </div>
