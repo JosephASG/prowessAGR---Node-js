@@ -51,40 +51,44 @@ const ProductDetails = () => {
     <header className="bg_animate">
     <div className=".filter-product" >
     <div className="product-row">
-      
+
       <div className="product-col">
-      <div className="product-group">
+      <div className="infopro-group">
+      <div className="product-body">
       <div className="product-header">
       {product.length === 0 ? ( 
             <h3 className="info">Foto Producto</h3>
           ) : (
-            <img src={product.image.secure_url} alt={product.name} />
+            <img 
+            src={product.image.secure_url} 
+            alt={product.name} 
+            style={{ width: "180px", height: "140px"}}/>
           )}
-          
-          
-        <Link to={`../seller/${product.sellerId}`}>
-          
+        
+        </div>
+        <div className="card-header2">
+      <Link to={`../seller/${product.sellerId}`}>
           <img
             className="seller-product"
             src={product.sellerImage}
             alt={product.seller}
+            style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+          
           />
         </Link>
         </div>
-      </div>
-      </div>
-      
-      <div className="product-col">
-      <div className="infopro-group">
-      <div className="product-body">
         <div className="product-info">
-          <h2 className="product-title">{product.name}</h2>
-          <span className="category">{product.category}</span>
+          <h2 style={{ color:"#885359"}}>{product.name}</h2>
+          <span className="category2">{product.category}</span>
         </div>
-        <div className="product-info">
+        <div className="product-info2">
           <span className="price">
             Precio: ${Number(product.price).toFixed(2)}/kg
           </span>
+          </div>
+          <br></br>
+          <div className="product-info3">
+          <span className="descripción">Descripción</span><br></br>
           <span className="desc">{product.description}</span>
         </div>
         </div>

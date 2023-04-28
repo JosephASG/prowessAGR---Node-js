@@ -224,7 +224,7 @@
     
     background: url(https://wallpaperaccess.com/full/3158925.jpg) no-repeat 0px 5px;
     */background-size: 2000px;
-    background-image: linear-gradient(to bottom, #08c06d, #1bc59b, #62cf9d);
+    background:#a8f3a5;
 }
 
 #Buscador {
@@ -292,7 +292,7 @@
     overflow:hidden;
     position: relative;
     right: 0;
-    top: 50;
+    top: 0%;
     width: 15rem;
     place-items: center;
     margin-bottom: 3rem;

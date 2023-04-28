@@ -124,7 +124,7 @@ const Order = () => {
              </th>
              <th>
                {order.orderItems?.map((item) => (
-                 <p style={{ textAlign: "center" }} className="price">${(item.price.toFixed(2))*(item.quantity)}/kg</p>
+                 <p style={{ textAlign: "center" }} className="price">${((item.price)*(item.quantity)).toFixed(2)}</p>
                ))}   
              </th>
            </tr>
@@ -141,7 +141,7 @@ const Order = () => {
            </tbody>
            <tbody>
              <td colSpan={2}></td>
-             <th><p>Precio total:</p></th>
+             <th><p>Total:</p></th>
              <th><span>${order.totalPrice?.toFixed(2)}</span></th>
            </tbody> 
            <th rowSpan={2}></th>
@@ -152,7 +152,7 @@ const Order = () => {
            {order.isPaid ? (
                  <span> Paid at {order.paidAt} </span>
                ) : (
-                 <span>Not pagado!</span>
+                 <span>No pagado</span>
                )}
            </th>
            </tbody>
@@ -163,7 +163,7 @@ const Order = () => {
                {order.isDelivered ? (
                  <span> Delivered at {order.deliveredAt} </span>
                ) : (
-                 <span>No entregado!</span>
+                 <span>No entregado</span>
                )}
            </th>
          </tbody>  

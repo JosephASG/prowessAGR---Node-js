@@ -53,6 +53,8 @@ const Checkout = ({
     } catch (error) {
       console.log("Orden fallida!");
     }
+   
+
   };
   return (
     <div className="passwords">

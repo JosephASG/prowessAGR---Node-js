@@ -121,7 +121,7 @@ const UserInfoOrder = () => {
             <div className="info-group">
               <span>Entregado:</span>
               {order.isDelivered ? (<span> Delivered at {order.deliveredAt} </span>) : (
-                <span>No entregado!</span>
+                <span>No entregado</span>
               )}
             </div>
           </div>
