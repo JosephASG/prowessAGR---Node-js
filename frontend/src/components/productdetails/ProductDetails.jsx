@@ -63,10 +63,7 @@ const ProductDetails = () => {
             alt={product.name} 
             style={{ width: "180px", height: "140px"}}/>
           )}
-          
-          
         <Link to={`../seller/${product.sellerId}`}>
-          
           <img
             className="seller-product"
             src={product.sellerImage}
