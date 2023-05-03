@@ -1,6 +1,7 @@
 .filter-row {
     padding: 1em;
-    height: 100vh;
+    height: 85vh;
+    height: 130vh;
     position: relative;
     display: flex;
     background-repeat: no-repeat;
@@ -94,6 +95,7 @@
     border-radius: 10px;
     border-color: black;
     margin-bottom: 3rem;
+   
     /*letter-spacing: 1.4px;
     transition: all 0.7s;*/
 
@@ -291,7 +293,8 @@
 
 @media screen and (max-width: 760px) {
     .filter-row {
-      height: auto;
+        height: auto;
+      
     }
   
     .filter-col:first-child .filter-group:last-child input {

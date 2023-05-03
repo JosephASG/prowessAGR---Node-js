@@ -64,7 +64,7 @@ const SellFilterInfo = ({ user }) => {
                       </span>
                   </Button>
                 )}
-            </div>
+            </div>         
             <div class="card_circle transition">
               <div className="image">
                 <img src={user.image.secure_url} alt={user.name} />
