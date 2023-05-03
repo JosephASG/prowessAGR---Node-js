@@ -152,8 +152,12 @@ const CartItems = () => {
                   <h3>${totalPrice.toFixed(2)}</h3>
                 </div>
               </div>
-              <div className="bill-btn">
-                <button onClick={() => setOpenCheckout(true)}>Pagar</button>
+              <div className="bill-btn-disabled">
+                <button disable={cartItems.length === 0}
+                    onClick={ () =>  /*MARY */
+                    {setOpenCheckout(true);
+                    }}>Pagar</button>
+
               </div>
             </div>
           </div>
