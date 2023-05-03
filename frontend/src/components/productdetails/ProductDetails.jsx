@@ -88,8 +88,9 @@ const ProductDetails = () => {
           </div>
           <br></br>
           <div className="product-info3">
-          <span className="descripción">Descripción</span><br></br>
-          <span className="desc">{product.description}</span>
+          <span style={{ fontSize:"20px"}}><b>Descripción</b></span><br></br>
+          <br></br>
+          <span style={{ fontSize:"20px"}} className="desc">{product.description}</span>
         </div>
         </div>
         <div className="product-footer">
