@@ -49,8 +49,6 @@
   height: auto;
 }
 
-
-
 .nav-menu {
   display: flex;
   list-style: none;
@@ -71,11 +69,12 @@
   padding: 0.1rem 1.5rem;
   height: 100%;
   border-bottom: 3px solid transparent;
+  width: 100px;
+  white-space: nowrap;
 }
 .fa-code {
   margin-left: 1rem;
 }
-
 
 .nav-item {
   line-height: 40px;
@@ -160,6 +159,12 @@ span.logout {
   margin: 0px 10px;
   color: #ffffff;
   top: -7%;
+}
+.login-text {
+  padding: 0.1rem 1.5rem;
+  display: flex;
+  margin-left: 5px;
+  margin-top: -1rem;
 }
 
 @media screen and (max-width: 960px) {

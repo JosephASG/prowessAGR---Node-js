@@ -131,7 +131,7 @@ const Header = () => {
             className="nav-links"
             onClick={handleClick}
           >
-            Inicio Sesión
+            <span className="login-text">Inicio Sesión</span> 
           </NavLink>
           )}
           
