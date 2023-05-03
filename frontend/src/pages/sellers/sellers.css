@@ -236,7 +236,7 @@
     outline: none;
     width: 800px;
     height: 50px;
-    top:35px;
+    top:-20px;
     border: solid 3px;
     font-size: 20pt;
     float: left;
@@ -248,7 +248,7 @@
     border-radius: 10px;
     border-color: black;
     margin-bottom: 1rem;
-    margin-top: 9rem;
+    margin-top: 17rem;
 }
 @media screen and (max-width: 414px){
     #Buscador {
@@ -292,11 +292,11 @@
     overflow:hidden;
     position: relative;
     right: 0;
-    top: 0%;
+    top: -12%;
     width: 15rem;
     place-items: center;
-    margin-bottom: 3rem;
-    margin-top: 4rem;
+    margin-bottom: -2rem;
+    margin-top: 3rem;
     border-radius: 25px;
     
 }
