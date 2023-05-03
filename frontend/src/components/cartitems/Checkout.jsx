@@ -59,7 +59,7 @@ const Checkout = ({
   return (
     <div className="passwords">
       <form onSubmit={handlerAddProduct}>
-        <h3 className="orderPay"> Podrás realizar el pago el momento de la entrega.</h3>
+        <h3 className="orderPay"> Podrás realizar el pago al momento de la entrega.</h3>
         <div className="close-form" onClick={() => setOpenCheckout(false)}>
           X
         </div>

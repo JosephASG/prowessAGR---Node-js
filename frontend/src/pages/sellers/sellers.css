@@ -234,7 +234,7 @@
     border-bottom: solid 1px #ccc;
     padding: 1rem;
     outline: none;
-    width: 800px;
+    width: 650px;
     height: 50px;
     top:-20px;
     border: solid 3px;
@@ -248,7 +248,7 @@
     border-radius: 10px;
     border-color: black;
     margin-bottom: 1rem;
-    margin-top: 17rem;
+    margin-top: 10rem;
 }
 @media screen and (max-width: 414px){
     #Buscador {
