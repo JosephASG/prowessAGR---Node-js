@@ -4,7 +4,7 @@ import FillterProductInfo from "./FillterProductInfo";
 
 const FilterProduct = ({ products }) => {
   const [pageNumber, setPageNumber] = useState(0);
-  const sellersPerPage = 3;
+  const sellersPerPage = 8;
   const pagesVisited = pageNumber * sellersPerPage;
 
   const pageCount = Math.ceil(products.length / sellersPerPage);
@@ -12,6 +12,8 @@ const FilterProduct = ({ products }) => {
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
+
+  
 
   return (
     <>
