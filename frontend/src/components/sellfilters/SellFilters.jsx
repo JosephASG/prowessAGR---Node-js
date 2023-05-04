@@ -23,7 +23,7 @@ const SellFilters = () => {
   const search = () => {
     return seller.filter((item) =>
       keys.some((key) => item[key].toLowerCase().includes(query))
-    );
+    ); 
   };
 
   return (

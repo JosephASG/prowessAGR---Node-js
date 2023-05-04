@@ -49,6 +49,7 @@ const Checkout = ({
         localStorage.removeItem("cartItems");
         setOpenCheckout(false);
         navigate("/account");
+        window.location.reload();
       }
     } catch (error) {
       console.log("Orden fallida!");
