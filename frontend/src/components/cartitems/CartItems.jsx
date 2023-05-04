@@ -153,9 +153,12 @@ const CartItems = () => {
                 </div>
               </div>
               <div className="bill-btn">
-              <button disabled={cartItems.length === 0} onClick={() => 
+              <button disabled={cartItems.length === 0}  onClick={() => 
                 {setOpenCheckout(true);
-                }}>Pagar</button>
+                }}>Pagar</button> 
+                {cartItems.length === 0 && (
+                <div style={{ color: 'red' }}>Agregue un producto primero</div>
+              )}
               </div>
             </div>
           </div>
