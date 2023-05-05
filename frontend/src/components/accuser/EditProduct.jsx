@@ -100,14 +100,18 @@ const EditProduct = ({ setOpenEdit, pro }) => {
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="category">Categoría</label>
-                      <input
-                        required
-                        type="text"
-                        id="category"
-                        onChange={(e) => setCategory(e.target.value)}
-                        value={category}
-                      />
+                    <label htmlFor="category">Categoria</label>
+                  <select value={category} onChange={(e)=> setCategory(e.target.value)}  required>
+                 
+                    <option value="">Seleccione una Categoria</option>
+                    <option value="Fruta">Fruta</option>
+                    <option value="Hortaliza">Hortaliza</option>
+                    <option value="Verdura">Verdura</option>
+                    <option value="Vegetal">Vegetal</option>
+                    <option value="Cereales">Cereal</option>
+                    <option value="Rubiáceas">Rubiáceas</option> 
+
+                  </select>
                     </div>
                     <div className="form-group">
                       <label htmlFor="description">Descripción</label>

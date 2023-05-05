@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect } from "react";
-import { useState } from "react";
+import { useState ,useParams} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import Checkout from "./Checkout";
@@ -44,10 +44,13 @@ const CartItems = () => {
   const totalPrice = itemsPrice + taxPrice;
 
   const updateQuantityHandler = async (item, quantity) => {
+   
     ctxDispatch({
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
     });
+    
+    
   };
 
   const removeProduct = (item) => {
@@ -81,7 +84,7 @@ const CartItems = () => {
                     </div>
                     <div className="card-body">
                       <div className="view-product-page">
-                        <Link to={`../${item.slug}`}>
+                        <Link to={`../${item._id}`}>
                           {item.name} <FontAwesomeIcon icon={faEye} />
                         </Link>
                       </div>
@@ -153,11 +156,11 @@ const CartItems = () => {
                 </div>
               </div>
               <div className="bill-btn">
-              <button disabled={cartItems.length === 0}  onClick={() => 
+              <button disabled={cartItems.length === 0 }   style={{backgroundColor: cartItems.length === 0 ? 'red' : 'green', color: 'white'}}  onClick={() => 
                 {setOpenCheckout(true);
                 }}>Pagar</button> 
                 {cartItems.length === 0 && (
-                <div style={{ color: 'red' }}>Agregue un producto primero</div>
+                <div style={{ color: 'red' , marginTop:'15px' ,padding: '20px' ,textAlign: "center"} }>Agregue un producto primero</div>
               )}
               </div>
             </div>

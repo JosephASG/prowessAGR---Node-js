@@ -48,8 +48,9 @@ const Checkout = ({
       if (data) {
         localStorage.removeItem("cartItems");
         setOpenCheckout(false);
-        navigate("/account");
+        navigate("/shop");
         window.location.reload();
+        alert("Su orden fue realizada con exito");
       }
     } catch (error) {
       console.log("Orden fallida!");

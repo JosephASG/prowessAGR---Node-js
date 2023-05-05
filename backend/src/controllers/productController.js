@@ -178,3 +178,21 @@ export const deleteProduct = async (req, res) => {
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error });
   }
 };
+export const compraProducto =async (req, res) => {
+    try {
+      const product = await Products.findById(req.params.id);
+      const newQuantity = product.quantity - req.body.quantity;
+      product.quantity = newQuantity;
+      const updatedProduct = await product.save();
+   
+      return res.status(HTTP_STATUS.OK).json({ product: updatedProduct });
+
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Error del servidor');
+    
+   
+    }
+    
+  
+};
