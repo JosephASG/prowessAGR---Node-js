@@ -523,6 +523,7 @@ h3.m_mail {
     color: rgba(18, 4, 101, 0.6);
     font-style: bold;
     font-family: 'Raleway', sans-serif;
+    text-align: center;
   }
 
 h3.a_address{
