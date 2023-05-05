@@ -2,10 +2,10 @@
 .account-info {
     margin-top: 0px;
     color: #fcfcfc;
-    height: 347px;
+    height: 350px;
     background-color: rgba(5, 192, 30, 0.664);
-    margin-left: 25px;
-    
+    margin-left: 30px;
+    border-radius: 3%;    
 }
 .account-info:hover {
     color: red;
