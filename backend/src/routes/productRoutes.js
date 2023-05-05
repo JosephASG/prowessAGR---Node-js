@@ -24,5 +24,17 @@ router.put(
   }),
   productController.updateProduct
 );
+router.put('/:id', async (req, res) => {
+  try {
+    const product = await productController.findById(req.params.id);
+    const newQuantity = product.quantity - req.body.quantity;
+    product.quantity = newQuantity;
+    await product.save();
+    res.json(product);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error del servidor');
+  }
+});
 router.delete("/delete/:id", productController.deleteProduct);
 export default router;
