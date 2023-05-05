@@ -125,6 +125,7 @@
     color: rgb(5, 109, 10);
     min-height: unset;
     padding: 0 auto !important;
+    border-radius: 3%;
 }
 label{
     color: rgb(0, 0, 0);
