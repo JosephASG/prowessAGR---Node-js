@@ -124,7 +124,7 @@ const Order = () => {
              </th>
              <th>
                {order.orderItems?.map((item) => (
-                 <p style={{ textAlign: "center" }} className="price">${((item.price)*(item.slug)).toFixed(2)}</p>
+                 <p style={{ textAlign: "center" }} className="price">${((item.price)*(item.quantity)).toFixed(2)}</p>
                ))}   
              </th>
            </tr>
