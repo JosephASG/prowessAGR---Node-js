@@ -114,7 +114,7 @@ const Order = () => {
              </th>
              <th>
                {order.orderItems?.map((item) => (
-                 <p style={{ textAlign: "center" }}>{item.slug} kg</p> 
+                 <p style={{ textAlign: "center" }}>{item.quantity} kg</p> 
                ))}
              </th>
              <th>
