@@ -37,7 +37,7 @@ const AccountUserInfo = () => {
     </div>
     <div className="userInfoRow">
 
-        <p className="userOrders">Órdenes de los usuarios a Mis Productos</p>
+        <p className="userOrders">Órdenes por entregar a los usuarios</p>
 
         <div className="account-orders">
             {userOrders.length === 0 ? (<h3 className='info userOrders'>Actualmente no tienes órdenes de entrega!</h3>) : (<UserInfoOrders userOrders={userOrders} />)}
