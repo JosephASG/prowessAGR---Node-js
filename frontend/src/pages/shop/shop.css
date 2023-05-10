@@ -181,7 +181,7 @@
     justify-content: center;
     margin: 0px 0;
     background-color: #04a53a;
-    padding: 10px
+    padding: 5px;
 }
 
 .card-body a {
@@ -195,7 +195,7 @@
 .card-body span.category {
     background: #48df0c;
     border-radius: 10px;
-    font-size: 12px;
+    font-size: 16px;
     margin: 0;
     color: #fff;
     padding: 2px 10px;
@@ -225,7 +225,7 @@
 .filter-row .filter-col:last-child .card-footer button {
     display: block;
     margin: 0 auto;
-    background-color: yellowgreen;
+    background-color: rgb(255, 255, 255);
     padding: 5px 10px;
     border: none;
     box-shadow: 0 0 5px #f0f3bd;
