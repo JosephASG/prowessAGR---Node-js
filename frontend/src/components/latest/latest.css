@@ -76,17 +76,19 @@
   }
   
   .latest-body span.category {
-    background: #ca2734 !important;
+    background: #ffffff !important;
     width: max-content;
-    color: #ffffff;
+    color: #000000;
     text-transform: uppercase;
-    letter-spacing: 1.3px;
+    letter-spacing: .3px;
     font-weight: bold;
     padding: 2px 10px;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: 14px;
     display: block;
     margin: 10px 0 5px auto;
+    align-items: center
+   
   }
   
   .latest-body span.price {
