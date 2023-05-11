@@ -15,6 +15,11 @@ const Sign = () => {
   const [phone, setPhone] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  }
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
@@ -57,6 +62,7 @@ const Sign = () => {
         password,
         address,
         phone,
+        selectedOption,
       });
       alert("Te has registrado con éxito");
       navigate("/login");
@@ -133,6 +139,14 @@ const Sign = () => {
               El número debe constar de exactamente 10 dígitos
             </span>
           )}
+        </div>
+        <div className="form-group">
+          <label htmlFor="options">Tipo de Usuario: </label>
+          <select name="options" value={selectedOption} onChange={handleOptionChange}>
+            <option value="">Seleccione una opcion</option>
+            <option value="option1">Cliente</option>
+            <option value="option2">Vendedor</option>
+          </select>
         </div>
         <div className="form-btn-c">
           <button className="btn-reg2" type="submit">
