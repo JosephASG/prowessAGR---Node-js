@@ -79,7 +79,7 @@
     border: transparent;
     border-bottom: solid 1px #1a880b;
     padding: 1rem;
-    width: 700px;
+    width: 600px;
     height: 50px;
     display: flex;
     flex-wrap: wrap;
@@ -132,13 +132,13 @@
     display: flex;
     justify-content: center;
     position: relative;
-    gap: 15px 10px;
+    grid-gap: 20px 40px;
     margin-bottom: 1em;
     /**/
 }
 
 .filter-card {
-    margin: 10px;
+    margin: 5px;
     background-color: #0bb405d2;
     border-radius: 10px;
     box-shadow: 0 2px 20px rgba(222, 20, 20, 0);
@@ -146,6 +146,8 @@
     width: 230px;
     height: auto;
     transition: all 0.5s;
+    border: solid 0.1px;
+    
 
 }
 
@@ -219,8 +221,8 @@
 }
 
 .filter-row .filter-col:last-child .card-footer {
-    margin: 10px 0;
-    padding: 20px;
+    margin: 8px 0;
+    padding: 15px;
 }
 
 .filter-row .filter-col:last-child .card-footer button {
