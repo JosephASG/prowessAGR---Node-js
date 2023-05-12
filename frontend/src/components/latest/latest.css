@@ -87,7 +87,8 @@
     font-size: 14px;
     display: block;
     margin: 10px 0 5px auto;
-    align-items: center
+    align-items: center;
+    left: -3.5rem;
    
   }
   
@@ -95,6 +96,7 @@
     font-size: 1rem;
     font-weight: 600;
     margin-top: 0.5rem;
+    left: 9rem;
     color: #121212;
   }
   
