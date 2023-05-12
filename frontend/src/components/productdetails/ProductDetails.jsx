@@ -90,7 +90,7 @@ const ProductDetails = () => {
           <div className="product-info3">
           <span style={{ fontSize:"20px"}}><b>Descripción</b></span><br></br>
           <br></br>
-          <span style={{ fontSize:"20px"}} className="desc">{product.description}</span>
+          <span style={{ fontSize:"20px"}} className="desc">{product.description.charAt(0).toUpperCase()+product.description.slice(1) }</span>
         </div>
         </div>
         <div className="product-footer">
