@@ -1,7 +1,7 @@
 .filter-row {
     padding: 1em;
     height: 85vh;
-    height: 169vh;
+    height: 170vh;
     position: relative;
     display: flex;
     background-repeat: no-repeat;
@@ -140,16 +140,16 @@
 .filter-card {
     margin: 5px;
     background-color: #0bb405d2;
-    border-radius: 10px;
-    box-shadow: 0 2px 20px rgba(222, 20, 20, 0);
+    border-radius: 15px;
+    box-shadow: 0 2px 20px rgba(18, 18, 18, 0.96);
     overflow: hidden;
     width: 230px;
     height: auto;
     transition: all 0.5s;
     border: solid 0.1px;
-    
-
+    border-image: linear-gradient(to right, #00ff00, #008000);
 }
+
 
 .filter-card:hover {
     transform: scale(1.02);

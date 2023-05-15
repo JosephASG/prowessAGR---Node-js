@@ -41,7 +41,7 @@
   
   .latest-group {
     padding: 16px;
-    box-shadow: 1px 2px 11px 4px rgb(14 55 54 / 15%);
+    box-shadow: 0 2px 20px rgba(18, 18, 18, 0.96);
     border-radius: 13%;
     border: solid 0.1px;
     background-color: #04a53a;
