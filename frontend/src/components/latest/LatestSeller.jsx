@@ -72,19 +72,6 @@ const LatestSeller = ({ user }) => {
           {user.name} <FontAwesomeIcon icon={faEye} />
         </Link>
       
-        {existUser && sellerExists ? (
-          <span
-            key={user._id}
-            onClick={() => handlerUnfollow(user)}
-            className="unfollow"
-          >
-            Dejar de seguir
-          </span>
-        ) : (
-          <span key={user._id} onClick={handlerFollow} className="follow">
-            Seguir
-          </span>
-        )}
           </ul> 
           </div>
         
