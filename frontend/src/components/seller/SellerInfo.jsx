@@ -84,30 +84,15 @@ const SellerInfo = () => {
           </div>
           <div className="seller-body2">
             <h1 className="titulovendedor">Datos del Vendedor</h1>
-            <h4>Nombre:</h4><span>{seller.name}</span>
+            <h3>Nombre:</h3><span>{seller.name}</span>
             <br></br>
-            <h4>Correo:</h4><span>{seller.email}</span>
+            <h3>Correo:</h3><span>{seller.email}</span>
             <br></br>
-            <h4>Teléfono:</h4><span>{seller.phone}</span>
+            <h3>Teléfono:</h3><span>{seller.phone}</span>
             <br></br>
-            <h4>Dirección:</h4><span>{seller.address}</span>
+            <h3>Dirección:</h3><span>{seller.address}</span>
             <br></br>
             <br></br>
-          <div className="seller-footer">
-            {existUser && sellerExists ? (
-              <span
-                key={seller._id}
-                onClick={() => handlerUnfollow(seller)}
-                className="unfollow"
-              >
-                Dejar de seguir
-              </span>
-            ) : (
-              <span onClick={handlerFollow} className="unfollow">
-                Seguir
-              </span>
-            )}
-          </div>
           </div>
         </div>
       </div>
