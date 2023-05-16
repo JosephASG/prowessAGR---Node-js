@@ -24,6 +24,8 @@ const SellerProductInfo = ({ pro }) => {
     }
   };
 
+  const capitalizedName = pro.name.charAt(0).toUpperCase() + pro.name.slice(1);
+
   return (
     <div className="filter-card" key={pro._id}>
       <div className="card-header">
@@ -31,7 +33,7 @@ const SellerProductInfo = ({ pro }) => {
       </div>
       <div className="card-body">
         <Link to={`../${pro._id}`}>
-          {pro.name} <FontAwesomeIcon icon={faEye} />
+          {capitalizedName} <FontAwesomeIcon icon={faEye} />
         </Link>
         <span className="category">{pro.category}</span>
         <span className="price">${pro.price.toFixed(2)}/kg</span>
