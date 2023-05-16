@@ -123,4 +123,7 @@
   .latest-header img {
     width: 200px;
     height: 150px;
+    border: solid 0.1px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px rgba(18, 18, 18, 0.96);
   }

@@ -214,12 +214,14 @@
     margin: 5px 0 5px auto;
 
 }
-
+ 
 .card-header img {
-    width: 180px;
-    height: 120px;
-
-}
+        width: 180px;
+        height: 120px;
+        border: solid 0.1px;
+        border-radius: 20px;
+        box-shadow: 0 2px 8px rgba(18, 18, 18, 0.96);
+    }
 
 .filter-row .filter-col:last-child .card-footer {
     margin: 8px 0;
