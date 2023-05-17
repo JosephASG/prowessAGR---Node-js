@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import Checkout from "./Checkout";
 import "./cartitems.css"
+import axios from "axios";
 
 const CartItems = () => {
   const navigate = useNavigate();
@@ -34,17 +35,23 @@ const CartItems = () => {
 
   //console.log(idSeller);
 
-  const totalItems = cartItems.reduce((a, c) => a + c.quantity, 0) + "/items";
+  const totalItems = cartItems.reduce((a, c) => a + c.quantity, 0);
 
   const roundPrice = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
   const itemsPrice = roundPrice(
     cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
   );
-  const taxPrice = roundPrice(0.0 * itemsPrice); //for tax in Serbia 20%
+  const taxPrice = roundPrice(0.0 * itemsPrice); //Impuesto 0%
   const totalPrice = itemsPrice + taxPrice;
+  const isPaid= false;
+  const isDelivered=false;
+  const subtotal=totalItems*itemsPrice;
+ const slug1=cartItems.reduce((a, c) => a + c.quantity, 0)-cartItems.slug;
+  
 
   const updateQuantityHandler = async (item, quantity) => {
    
+  
     ctxDispatch({
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
@@ -52,6 +59,8 @@ const CartItems = () => {
     
     
   };
+ 
+  
 
   const removeProduct = (item) => {
     ctxDispatch({
@@ -143,7 +152,7 @@ const CartItems = () => {
                 <div className="bill-group">
                   <span>SubTotal:</span>
                   <span>
-                    {totalItems} {itemsPrice}
+                    {"$"+totalPrice}
                   </span>
                 </div>
                 <div className="bill-group">
@@ -153,29 +162,46 @@ const CartItems = () => {
                 <div className="bill-group">
                   <h3>Total:</h3>
                   <h3>${totalPrice.toFixed(2)}</h3>
+                  
                 </div>
+               
               </div>
               <div className="bill-btn">
-              <button disabled={cartItems.length === 0 }   style={{backgroundColor: cartItems.length === 0 ? 'red' : 'green', color: 'white'}}  onClick={() => 
-                {setOpenCheckout(true);
-                }}>Pagar</button> 
-                {cartItems.length === 0 && (
-                <div style={{ color: 'red' , marginTop:'15px' ,padding: '20px' ,textAlign: "center"} }>Agregue un producto primero</div>
-              )}
-              </div>
+
+                    <button 
+                    disabled={cartItems.length === 0 }   
+                    style={{backgroundColor: cartItems.length === 0 ? 'red' : 'green', color: 'white'}}  
+                    onClick={() => 
+                      setOpenCheckout(true) }>
+                    Pagar
+                  </button>
+                    
+                
+              
+                    {cartItems.length === 0 && (
+                      <div style={{ color: 'red' , marginTop:'15px' ,padding: '20px' ,textAlign: "center"} }>
+                        Agregue un producto primero
+                      </div>
+                    )}
+                  </div>
             </div>
           </div>
         </div>
       </div>
       {openCheckout && (
         <Checkout
+        
           idSeller={idSeller}
           setOpenCheckout={setOpenCheckout}
           cartItems={cartItems}
           itemsPrice={itemsPrice}
           taxPrice={taxPrice}
           totalPrice={totalPrice}
+          isPaid={isPaid}
+          isDelivered={isDelivered}
+
         />
+      
       )}
     </div>
   );

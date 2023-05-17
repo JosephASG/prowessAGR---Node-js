@@ -31,12 +31,7 @@ const AddProduct = ({ setOpenAdd }) => {
     }
   };
 
-  function handleKeyDown(e) {
-    // Permitir solo números y un punto decimal
-    if (!/[0-9\.]/.test(e.key)) {
-      e.preventDefault();
-    }
-  }
+
   const handleKeyPress = (e) => {
     const charCode = e.which ? e.which : e.keyCode;
     // Permitir solo números y un solo punto decimal, y permitir la tecla de retroceso (backspace) y la tecla de suprimir (delete)
@@ -135,6 +130,7 @@ function handleChange(e) {
                     id="slug"
                     onKeyPress={handleKeyPress1}
                     onPaste={handlePaste}
+                     
                     onChange={(e) => setSlug(e.target.value)}
                     value={slug}
                   />
@@ -208,7 +204,9 @@ function handleChange(e) {
         </div>
         
       </form>
+        
     </div>
+    
   );
 };
 

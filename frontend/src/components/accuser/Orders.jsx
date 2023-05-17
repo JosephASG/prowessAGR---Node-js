@@ -1,19 +1,61 @@
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate,useParams} from "react-router-dom";
+import axios from "axios";
+import './Order.css';
+import EditProduct from "./EditProduct";
 
-const Orders = ({ orders }) => {
+const Orders = ({ orders}) => {
   const [pageNumber, setPageNumber] = useState(0);
   const productsPerPage = 6;
   const pagesVisited = pageNumber * productsPerPage;
-
   const pageCount = Math.ceil(orders.length / productsPerPage);
 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
+  const userInfo = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null;
+  const id = userInfo && userInfo._id;
+
+const [order, setOrder] = useState(null);
+
+function actualizarPedido(id) {
+  axios.put(`/api/orders/update/${id}`)
+    .then(res => {
+      console.log(res.data);
+   alert("Orden Pagada")
+   window.location.reload();
+    })
+    .catch(err => {
+      console.log(err);
+      alert("error")
+      // Manejar errores
+    });
+}
+function cancelarPedido(id) {
+  
+   alert("Orden Pagada")
+   window.location.reload();
+    
+    
+}
+function actualizarSlug(ide) {
+  axios.put(`/api/products/delete/${ide}`)
+    .then(res => {
+      console.log(res.data);
+   alert("slug cambiado")
+   window.location.reload();
+    })
+    .catch(err => {
+      console.log(err);
+      alert("error")
+      // Manejar errores
+    });
+}
+
+
 
   return (
     <>
@@ -23,9 +65,32 @@ const Orders = ({ orders }) => {
           <h4 key={order._id}>
             Order No: {order._id.substring(0, 10)}...{" "}
             <Link className="linkOrder" to={`/order/${order._id}`}>
-              <FontAwesomeIcon icon={faEye} />
+              <FontAwesomeIcon icon={faEye}  ></FontAwesomeIcon>
+              
             </Link>
+            <div className="estado-pago">
+          <h3>Estado de pago:</h3>
+          <span className={`estado-pago__${order.isPaid ? 'pagado' : 'pendiente'}`}>
+            {order.isPaid ? 'Pagado' : 'Pendiente'}
+          </span>
+          {!order.isPaid && (
+            <button className="btn-pagar" onClick={() => {actualizarPedido(order._id)}}>
+              Pagar
+            </button>
+            
+            
+          )}
+          {!order.isPaid && (
+            <button className="btn-pagar" onClick={() => {actualizarPedido(order._id)}}>
+             Cancelar
+            </button>
+            
+            
+          )}
+  
+</div>
           </h4>
+
         ))}
 
       <ReactPaginate
