@@ -16,6 +16,8 @@ export const createOrder = async (req, res) => {
       itemsPrice: req.body.itemsPrice,
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
+      isPaid: req.body.isPaid,
+      isDelivered:req.body.isDelivered
     });
     // 2. Guarde el pedido en la base de datos.
     const order = await newOrder.save();
@@ -58,6 +60,44 @@ export const getOrder = async (req, res) => {
     });
   }
 };
+export const Paid = async (req, res) => {
+  
+  try {
+    const { id } = req.params;
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    order.isPaid = true;
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+export const delivered = async (req, res) => {
+  
+  try {
+    const { id } = req.params;
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    order.isDelivered = true;
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+  
+export const updateSlug=async(req,res)=>{
+ 
+  alert(
+    res.send('¡Hola desde mi API!'))
+  }
 
 //Obtener mis pedidos por Id del vendedor
 export const getOrders = async (req, res) => {

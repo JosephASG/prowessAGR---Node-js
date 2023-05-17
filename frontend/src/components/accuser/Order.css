@@ -111,7 +111,70 @@
   height: 50px;
   background-color: transparent;
 }
+.estado-pago {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
+.estado-pago p {
+  margin-right: 15px;
+}
+
+.estado-pago__pagado {
+  color: green;
+  margin-left: 15px;
+}
+
+.estado-pago__pendiente {
+  color: red;
+  margin-left: 15px;
+}
+
+.btn-pagar {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.btn-pagar:hover {
+  background-color: darkblue;
+}
+.estado-entrega {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.estado-entrega p {
+  margin-right: 15px;
+}
+
+.estado-entrega__Entregado {
+  color: green;
+  margin-left: 15px;
+}
+
+.estado-entrega__Pendiente {
+  color: red;
+  margin-left: 15px;
+}
+
+.btn-entregar {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.btn-pagar:hover {
+  background-color: darkblue;
+}
 @media (max-width: 280px) and (max-width: 750px)  { 
   .order-title{
   font-size: 1.5em;

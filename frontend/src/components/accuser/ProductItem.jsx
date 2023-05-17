@@ -4,10 +4,8 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import EditProduct from "./EditProduct";
-
 const ProductItem = ({ pro }) => {
   const id = pro._id;
-
   const [openEdit, setOpenEdit] = useState(false);
 
   const handlerDeleteProduct = async (e) => {
@@ -48,7 +46,11 @@ const ProductItem = ({ pro }) => {
         </div>
       </div>
       {openEdit && <EditProduct pro={pro} setOpenEdit={setOpenEdit} />}
+ <div></div>
+
+
     </>
+    
   );
 };
 

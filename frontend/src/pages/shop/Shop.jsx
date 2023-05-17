@@ -4,7 +4,6 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 
 import "./shop.css";
-
 const Shop = () => {
   return (
     <div className="wrapper">
