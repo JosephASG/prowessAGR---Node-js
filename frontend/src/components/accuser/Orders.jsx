@@ -81,7 +81,7 @@ function actualizarSlug(ide) {
             
           )}
           {!order.isPaid && (
-            <button className="btn-pagar" onClick={() => {actualizarPedido(order._id)}}>
+            <button className="btn-pagar" onClick={() => {}}>
              Cancelar
             </button>
             
