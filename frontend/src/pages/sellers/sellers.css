@@ -417,6 +417,7 @@
     }
     .footer-container{
         position: absolute;
+
     }   
     .header-menu{
         display: flex;
@@ -468,9 +469,8 @@
         font-size: 3rem;
     }
     .footer-container{
-        height: 590px;
+        height: 400px;
         width: 430px;
-        top: 100px;
         position:relative;
     }   
     .header-menu{

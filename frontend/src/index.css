@@ -68,13 +68,13 @@ ul {
 @media (max-width: 768px) {
   /* Estilos para pantallas con un ancho máximo de 768px */
   main {
-      padding: 20px;
+      padding: 0px;
    }
 }
 
 @media (max-width: 480px) {
   /* Estilos para pantallas con un ancho máximo de 480px */
   main {
-      padding: 10px;
+      padding: 0px;
   }
 }
