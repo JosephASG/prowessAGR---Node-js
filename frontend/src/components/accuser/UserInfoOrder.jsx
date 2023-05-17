@@ -114,13 +114,13 @@ const UserInfoOrder = () => {
           <div className="infoGroups">
             <div className="info-group">
               <span>Pagado:</span>
-              {order.isPaid ? (<span> Paid at {order.paidAt} </span>) : (
+              {order.isPaid ? (<span> Esta Pagado {order.paidAt} </span>) : (
               <span>No pagado!</span>
               )}
             </div>
             <div className="info-group">
               <span>Entregado:</span>
-              {order.isDelivered ? (<span> Delivered at {order.deliveredAt} </span>) : (
+              {order.isDelivered ? (<span> Esta Entregado {order.deliveredAt} </span>) : (
                 <span>No entregado</span>
               )}
             </div>

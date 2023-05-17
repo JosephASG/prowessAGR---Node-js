@@ -92,5 +92,16 @@
       letter-spacing: 2px;
       
     }
+    @media (max-width: 768px) {
+      .ctn-images-hero {
+        margin: 20px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .ctn-images-hero {
+        margin: 10px;
+      }
+    }
 }
 

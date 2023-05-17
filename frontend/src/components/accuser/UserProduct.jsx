@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import ProductItem from "./ProductItem";
-
+import Orders from "./Orders";
 const UserProduct = ({ product }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const productsPerPage = 6;
@@ -20,8 +20,11 @@ const UserProduct = ({ product }) => {
           .slice(pagesVisited, pagesVisited + productsPerPage)
           .map((pro) => (
             <ProductItem key={pro._id} pro={pro} />
+           
           ))}
+      
       </div>
+      
       <ReactPaginate
         className="filter-pagination"
         previousLabel={"Ant"}

@@ -205,6 +205,8 @@ h3.info-empty {
 
 .card-body a {
     color: #ffffff;
+    font-size:  20px;
+    font-weight: 600;
 }
 
 .view-product-page,

@@ -25,12 +25,12 @@ body{
   }
   
   h2 {
-    font-size: 2.3em;
+    font-size: 1.5em;
     font-weight: bold;
     margin-top: 30px;
     margin-bottom: 10px;
   }
-  
+
   p {
     font-size: 1.1em;
     line-height: 1.5;
@@ -42,13 +42,13 @@ body{
     margin: 150px;
 }
 
-
 .img-condiciones{
     width: 150px;
     height: auto;
 }
 .col-3 {width: 50%;}
 .col-9 {width: 50%;}
+
 
 
   @media only screen and (max-width: 600px) {

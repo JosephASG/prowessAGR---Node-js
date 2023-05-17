@@ -13,7 +13,13 @@ const Order = () => {
   const { id } = params;
 
   const navigate = useNavigate();
+  const [dateTime, setDateTime] = useState('');
 
+  useEffect(() => {
+    const currentDate = new Date();
+    const formattedDateTime = currentDate.toLocaleString();
+    setDateTime(formattedDateTime);
+  }, []);
   const [order, setOrder] = useState([]);
 
   useEffect(() => {
@@ -150,7 +156,7 @@ const Order = () => {
              <th><p>Pagado:</p></th>
              <th>
            {order.isPaid ? (
-                 <span> Paid at {order.paidAt} </span>
+                 <span> {dateTime} {order.paidAt} </span>
                ) : (
                  <span>No pagado</span>
                )}
@@ -158,7 +164,7 @@ const Order = () => {
            </tbody>
            <tbody>
              <td colSpan={2}></td>
-             <th><p>Entregado:</p></th>
+             <th><p>Entregados:</p></th>
              <th>
                {order.isDelivered ? (
                  <span> Delivered at {order.deliveredAt} </span>

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const UserInfoOrders = ({ userOrders }) => {
   const [pageNumber, setPageNumber] = useState(0);
@@ -10,11 +11,26 @@ const UserInfoOrders = ({ userOrders }) => {
   const pagesVisited = pageNumber * productsPerPage;
 
   const pageCount = Math.ceil(userOrders.length / productsPerPage);
-
+  const userInfo = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null;
+  const id = userInfo && userInfo._id;
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
-
+  function actualizarEntrega(id) {
+    axios.put(`/api/orders/delivered/${id}`)
+      .then(res => {
+        console.log(res.data);
+        alert("Orden entregada")
+        window.location.reload()
+        // Hacer algo con la respuesta, como actualizar el estado del componente
+      })
+      .catch(err => {
+        console.log(err);
+        alert("error")
+        // Manejar errores
+      });
+  }
+  
   return (
     <>
       {userOrders
@@ -25,7 +41,19 @@ const UserInfoOrders = ({ userOrders }) => {
             <Link className="linkOrder" to={`/order/${item._id}`}>
               <FontAwesomeIcon icon={faEye} />
             </Link>
+            <div className="estado-entrega">
+          <h3>Estado de entrega:</h3>
+          <span className={`estado-entrega__${item.isDelivered ? 'Entregado' : 'Pendiente'}`}>
+            {item.isDelivered ? 'Entregado' : 'Pendiente'}
+          </span>
+          {!item.isDelivered && (
+            <button className="btn-pagar" onClick={() => actualizarEntrega(item._id)}>
+              Entregar
+            </button>
+  )}
+</div>
           </h4>
+          
         ))}
 
       <ReactPaginate

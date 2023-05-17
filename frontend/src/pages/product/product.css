@@ -133,6 +133,7 @@
     width: 200px;
     height: auto;
     animation: flotar1 5s infinite;
+    border-radius: 20px;
 }
 
 @keyframes flotar1 {
@@ -207,8 +208,9 @@
     margin: 0 20px 0 auto;
     background-color: #f0f3bd;
     padding: 5px 10px;
-    border: none;
-    box-shadow: 0 0 5px #f0f3bd;
+    border: solid 2px;
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(18, 18, 18, 0.5);
     color: #2f5f74;
     letter-spacing: 1.4px;
     text-transform: uppercase;

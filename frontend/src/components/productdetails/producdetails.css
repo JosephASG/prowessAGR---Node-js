@@ -39,16 +39,24 @@
     flex-direction: column;
     justify-content: center;
     margin: 0px 0;
-    background-color: #6ac789;
-    padding: 10px
+    background-color: #0bb405d2;
+    box-shadow: 0 1px 10px rgba(18, 18, 18, 0.6);
+    padding: 10px;
+    border: solid 0.01px black;
+    border-radius: 15px;
+    color: white;
 }
 .product-footer{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0px 0;
-    background-color: #5eb47b;
+    margin: 5px 0;
+    background-color: #04a53a;
+    box-shadow: 0 1px 10px rgba(18, 18, 18, 0.6);
     padding: 10px;
+    border: solid 0.01px;
+    border-radius: 15px;
+    
 }
 .card-header img {
     width: 180px;
@@ -86,7 +94,7 @@
   .infopro-group {
     padding: 20px;
     margin-bottom: -50px;
-    box-shadow: 1px 2px 11px 4px rgba(10, 63, 63, 0.15);
+    box-shadow: 1px 2px 11px 4px rgba(18, 18, 18, 0.9);
     border-radius: 13%;
     border: solid 0.1px;
     margin-top: 1rem;
