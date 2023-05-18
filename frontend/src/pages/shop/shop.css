@@ -46,6 +46,7 @@
     height: 220px;
     left:380px ;
     border-radius: 5%;
+    box-shadow: 0 2px 8px rgba(18, 18, 18, 0.96);
 }
 .filter-row .filter-col:first-child {
     display: flex;

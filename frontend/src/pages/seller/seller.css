@@ -154,3 +154,12 @@
 .disabledPagi:hover .pagi-link {
     color: #fdfdfd;
 }  */
+.seller-image{
+    width: 135px;
+    height: 180px;
+    left: 27px;
+    top: 20px;
+    border-radius: 20px;
+    border: solid 0.01px;
+    box-shadow: 0 2px 8px rgba(18, 18, 18, 0.96);
+}
