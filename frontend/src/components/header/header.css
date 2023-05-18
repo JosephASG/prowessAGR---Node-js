@@ -1,11 +1,10 @@
 
 .navbar {
-  background-color: #121212;
-  width: 101vw;
+  width: 100%;
   min-height: 13%;
   box-shadow: 0 18px 10px -15px #485b63;
   z-index: 999999999;
-  background-color: #121212;
+  background-color: rgba(18, 18, 18, 0.90);
   border-radius: 0 0 45px 45px;
   position: fixed;
   display: flex;

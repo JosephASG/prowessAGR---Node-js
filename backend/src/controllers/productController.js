@@ -178,21 +178,18 @@ export const deleteProduct = async (req, res) => {
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error });
   }
 };
-export const compraProducto =async (req, res) => {
-    try {
-      const product = await Products.findById(req.params.id);
-      const newQuantity = product.quantity - req.body.quantity;
-      product.quantity = newQuantity;
-      const updatedProduct = await product.save();
-   
-      return res.status(HTTP_STATUS.OK).json({ product: updatedProduct });
-
-    } catch (err) {
-      console.error(err);
-      res.status(500).send('Error del servidor');
-    
-   
+export const updateSlug=async (req, res) => {
+  try {
+    const { id: productId } = req.params;
+    const product = await Products.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Order not found' });
     }
-    
-  
+   product.slug=5;
+    const updatedProduct = await product.save();
+    res.json(updatedProduct);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
 };

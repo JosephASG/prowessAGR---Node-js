@@ -90,6 +90,7 @@
     align-items: center;
     display: flex;
     flex-wrap: wrap;
+    
 }
 
 .account-group:nth-child(1) {
@@ -247,6 +248,7 @@ label{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    top: -170px;
 
 }
 .form-image:hover {

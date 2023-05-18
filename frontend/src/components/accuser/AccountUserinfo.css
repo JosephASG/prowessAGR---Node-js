@@ -12,6 +12,7 @@
 }
 .account-info {
     transition: color 0.3s linear 0.2s;
+    top: -166px;
 }
 .account-info:hover,
 .account-info:focus{

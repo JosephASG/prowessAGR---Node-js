@@ -49,15 +49,15 @@
   outline: 0;
   border-bottom-color: #62cf9d;
 }
-
+*/
 .form-btn-a {
   margin-top: 20px;
-  margin-left: 193px;
+  margin-left: 143px;
 }
 
 .btn-acc1 {
-  height: 25px;
-  width: 75px;
+  height: 35px;
+  width: 120px;
   display: flex;
   font-size: 16px;
   letter-spacing: 1.3px;
@@ -66,8 +66,9 @@
   border-radius: 10%;
   color: rgb(0, 0, 0);
   font-weight: bold;
-}
 
+}
+/*
 .form-btn-a :hover{
   text-decoration: underline;
   color: rgb(255, 255, 255);
@@ -96,11 +97,12 @@
   color: #2f5f74;
 }*/
 
-/* .form-btn-b {
+ .form-btn-b {
   margin-top: 20px;
-  margin-left: 180px;
+  margin-left: 120px;
 }
 
+/*
 .btn-reg1 {
   display: flex;
   font-size: 16px;
@@ -263,3 +265,63 @@
 .error-message {
   color: red;
 } 
+@media screen and (max-width: 768px) {
+  /* Estilos específicos para pantallas con un ancho máximo de 768px */
+  .form-row {
+    margin: 50px 0;
+    padding: 20px;
+  }
+}
+@media (max-width: 768px) {
+  /* Estilos para pantallas con un ancho máximo de 768px */
+  .form-row form {
+      padding: 30px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Estilos para pantallas con un ancho máximo de 480px */
+  .form-row form {
+      padding: 20px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Estilos para pantallas con un ancho máximo de 768px */
+  .form-row .form-group input {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Estilos para pantallas con un ancho máximo de 480px */
+  .form-row .form-group input {
+      width: 100%;
+      font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px){
+  .form-btn-a {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+}
+@media (max-width: 480px){
+  .form-btn-a {
+    margin-top: 10px;
+    margin-left: 30px;
+}
+}
+@media (max-width: 768px){
+  .form-btn-b {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+}
+@media (max-width: 480px){
+  .form-btn-b {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+}
