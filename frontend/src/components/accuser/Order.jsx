@@ -8,19 +8,14 @@ import './Order.css';
 
 const Order = () => {
   const userInfo = localStorage.getItem("userInfo");
-
+  
   const params = useParams();
   const { id } = params;
 
   const navigate = useNavigate();
-  const [dateTime, setDateTime] = useState('');
 
-  useEffect(() => {
-    const currentDate = new Date();
-    const formattedDateTime = currentDate.toLocaleString();
-    setDateTime(formattedDateTime);
-  }, []);
   const [order, setOrder] = useState([]);
+
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -153,10 +148,11 @@ const Order = () => {
            <th rowSpan={2}></th>
            <tbody>
              <td colSpan={2}></td>
-             <th><p>Pagado:</p></th>
+             <th><p>Estado de Pago :</p></th>
              <th>
+           
            {order.isPaid ? (
-                 <span> {dateTime} {order.paidAt} </span>
+                 <span>  Pago Realizado en {order.paidAt} </span>
                ) : (
                  <span>No pagado</span>
                )}
@@ -164,10 +160,10 @@ const Order = () => {
            </tbody>
            <tbody>
              <td colSpan={2}></td>
-             <th><p>Entregados:</p></th>
+             <th><p>Estado de Entrega:</p></th>
              <th>
                {order.isDelivered ? (
-                 <span> Delivered at {order.deliveredAt} </span>
+                 <span> La orden fue entregada :{order.deliveredAt} </span>
                ) : (
                  <span>No entregado</span>
                )}

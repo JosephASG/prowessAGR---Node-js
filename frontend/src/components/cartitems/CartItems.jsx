@@ -11,7 +11,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Store } from "../../Store";
 import Checkout from "./Checkout";
 import "./cartitems.css"
-import axios from "axios";
 
 const CartItems = () => {
   const navigate = useNavigate();
@@ -47,10 +46,11 @@ const CartItems = () => {
   const totalPrice = itemsPrice + taxPrice;
   const isPaid= false;
   const isDelivered=false;
-  const subtotal=totalItems*itemsPrice;
- const slug1=cartItems.reduce((a, c) => a + c.quantity, 0)-cartItems.slug;
-  
+  const fechaHoraActual = "No paid";
 
+const paidAt=fechaHoraActual;  
+const deliveredAt=fechaHoraActual;  
+console.log(paidAt)
   const updateQuantityHandler = async (item, quantity) => {
    
   
@@ -205,7 +205,8 @@ const CartItems = () => {
           totalPrice={totalPrice}
           isPaid={isPaid}
           isDelivered={isDelivered}
-
+          paidAt ={paidAt}
+          deliveredAt ={deliveredAt}
         />
       
       )}

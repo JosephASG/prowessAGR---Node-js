@@ -13,7 +13,10 @@
         taxPrice,
         totalPrice,
         isPaid,
-        isDelivered
+        isDelivered,
+        paidAt,
+        deliveredAt,
+     
       }) => {
         const navigate = useNavigate();
 
@@ -30,7 +33,6 @@
         const [address, setAddress] = useState(userInfo && userInfo.address);
         const [phone, setPhone] = useState(userInfo && userInfo.phone);
 
-        
         const handlerAddProduct = async (e) => {
           e.preventDefault();
 
@@ -48,7 +50,10 @@
               totalPrice: totalPrice,
               isPaid: isPaid,
               isDelivered:isDelivered,
-              
+              paidAt: paidAt,
+              deliveredAt: deliveredAt
+
+           
             });
 
             if (data) {
