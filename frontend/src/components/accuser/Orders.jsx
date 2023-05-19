@@ -23,8 +23,7 @@ const Orders = ({ orders}) => {
   const id = userInfo && userInfo._id;
 
 const [order, setOrder] = useState(null);
-const fechaHoraActual = moment().format('MMMM DD, YYYY HH:mm:ss');
-console.log(fechaHoraActual)
+
 function actualizarPedido(id) {
   if(window.confirm("Desea continuar ")){
     axios.put(`/api/orders/update/${id}`)
