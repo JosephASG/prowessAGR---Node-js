@@ -117,10 +117,9 @@ const AccountUser = () => {
       <div className="account-groups">
         <div className="account-group">
           <form className="form-image" onSubmit={handlerUpdateImage}>
-            <img
+            <img className="imgusr"
               src={previewImage || (userInfo && userInfo.image.secure_url)}
               alt=""
-              style={{ width: "245px", height: "280px",left:"-1px",top:"25px"}}
             />
             <label htmlFor="image_upload">
               <FontAwesomeIcon icon={faPlusCircle} />
