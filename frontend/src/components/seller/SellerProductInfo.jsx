@@ -1,12 +1,13 @@
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext } from "react";
+import React, { useContext ,useState} from "react";
 import { Link } from "react-router-dom";
 import { Store } from "../../Store";
 
 const SellerProductInfo = ({ pro }) => {
   const { state, dispatch: ctxDispatch } = useContext(Store);
   const { cart } = state;
+  const [showModal, setShowModal] = useState(false);
 
   const existUser = localStorage.getItem("userInfo");
 
@@ -21,12 +22,14 @@ const SellerProductInfo = ({ pro }) => {
         type: "CART_ADD_ITEM",
         payload: { ...pro, quantity },
       });
+      setShowModal(true);
     }
   };
 
   const capitalizedName = pro.name.charAt(0).toUpperCase() + pro.name.slice(1);
 
   return (
+    <>
     <div className="filter-card" key={pro._id}>
       <div className="card-header">
         <img src={pro.image.secure_url} alt={pro.name} />
@@ -42,6 +45,18 @@ const SellerProductInfo = ({ pro }) => {
         <button onClick={addToCart}>Añadir al carrito</button>
       </div>
     </div>
+    {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <p className="one">El producto seleccionado se añadió correctamente.</p>
+            <Link to="/cart" className="two">
+              <button  >Carrito</button>
+            </Link>
+            <button className="three" onClick={() => setShowModal(false)}>Cerrar</button>
+        </div>
+  </div>
+)}
+    </>
   );
 };
 
