@@ -46,7 +46,22 @@ export const getMyOrders = async (req, res) => {
     });
   }
 };
+export const deleteOrden= async (req, res) => {
 
+  try {
+    const { id } = req.params;
+    const order = await Order.findById(id);
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+    await order.remove();
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 //Obtener mi orden única 
 export const getOrder = async (req, res) => {
   //Enviar el pedido con el id coincidente como respuesta

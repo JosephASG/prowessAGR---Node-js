@@ -35,6 +35,8 @@ const CartItems = () => {
 
   //console.log(idSeller);
 
+
+
   const totalItems = cartItems.reduce((a, c) => a + c.quantity, 0);
 
   const roundPrice = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
@@ -167,7 +169,9 @@ const CartItems = () => {
                
               </div>
               <div className="bill-btn">
-
+                       
+                          
+  
                     <button 
                     disabled={cartItems.length === 0 }   
                     style={{backgroundColor: cartItems.length === 0 ? 'red' : 'green', color: 'white'}}  
@@ -175,9 +179,7 @@ const CartItems = () => {
                       setOpenCheckout(true) }>
                     Pagar
                   </button>
-                    
-                
-              
+
                     {cartItems.length === 0 && (
                       <div style={{ color: 'red' , marginTop:'15px' ,padding: '20px' ,textAlign: "center"} }>
                         Agregue un producto primero
@@ -187,7 +189,11 @@ const CartItems = () => {
             </div>
           </div>
         </div>
+        <div>
+      
+    </div>
       </div>
+      
       {openCheckout && (
         <Checkout
         
@@ -203,7 +209,12 @@ const CartItems = () => {
         />
       
       )}
+      <div>
+      
     </div>
+    
+    </div>
+    
   );
 };
 

@@ -22,7 +22,8 @@ const Orders = ({ orders}) => {
 const [order, setOrder] = useState(null);
 
 function actualizarPedido(id) {
-  axios.put(`/api/orders/update/${id}`)
+  if(window.confirm("Desea continuar ")){
+    axios.put(`/api/orders/update/${id}`)
     .then(res => {
       console.log(res.data);
    alert("Orden Pagada")
@@ -33,6 +34,8 @@ function actualizarPedido(id) {
       alert("error")
       // Manejar errores
     });
+  }
+  
 }
 function cancelarPedido(id) {
   
@@ -41,6 +44,21 @@ function cancelarPedido(id) {
     
     
 }
+function cancelarOrden(id) {
+  if(window.confirm("Desea eliminar la orden ")){
+  axios.delete(`/api/orders/delete/${id}`)
+    .then(res => {
+      console.log(res.data);
+      alert("Orden Cancelada");
+      window.location.reload();
+    })
+    .catch(err => {
+      console.error(err);
+      window.location.reload();
+    });
+  }
+}
+
 function actualizarSlug(ide) {
   axios.put(`/api/products/delete/${ide}`)
     .then(res => {
@@ -73,6 +91,7 @@ function actualizarSlug(ide) {
           <span className={`estado-pago__${order.isPaid ? 'pagado' : 'pendiente'}`}>
             {order.isPaid ? 'Pagado' : 'Pendiente'}
           </span>
+          
           {!order.isPaid && (
             <button className="btn-pagar" onClick={() => {actualizarPedido(order._id)}}>
               Pagar
@@ -81,7 +100,7 @@ function actualizarSlug(ide) {
             
           )}
           {!order.isPaid && (
-            <button className="btn-pagar" onClick={() => {}}>
+            <button className="btn-pagar" onClick={() => {cancelarOrden(order._id)}}>
              Cancelar
             </button>
             

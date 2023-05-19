@@ -10,6 +10,6 @@ router.get("/:id", orderController.getOrder);
 router.put("/update/:id",orderController.Paid); //Ruta para pagar el producto
 router.put("/delivered/:id",orderController.delivered); //Ruta para entregar el producto
 router.put("/slug/:id",orderController.updateSlug);
-
+router.delete("/delete/:id", orderController.deleteOrden);
 
 export default router;
