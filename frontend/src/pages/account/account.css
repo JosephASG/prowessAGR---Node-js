@@ -23,7 +23,7 @@
     background-color: #fefffe;
     background-size: cover;
     box-shadow: rgb(150,150,150) 0px 0px 0px 8px;
-    margin-left: 33.9%;
+    margin-left: 30%;
     width: 35%;
     margin-bottom: 3%;
     text-align: center;
@@ -243,7 +243,7 @@ label{
     background-color: rgba(5, 192, 30, 0.664);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     border-radius: 30px;
-    margin-right: 30px;
+    margin-right: 80px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -514,3 +514,24 @@ label{
     padding: 10px 0;
     border-bottom: 1px solid #121212;
 }
+.account-group .imgusr {
+    margin: 5%;
+    width: 245px;
+    height: 220px;
+}
+
+@media (max-width: 768px) {
+    /* Estilos para pantallas con un ancho máximo de 768px */
+    .account-group .imgusr {
+        width: 145px;
+        height: 140px;
+     }
+  }
+  @media (max-width: 480px) {
+    /* Estilos para pantallas con un ancho máximo de 480px */
+    .account-group .imgusr {
+        margin: 5%;
+        width: 145px;
+        height: 140px;
+    }
+  }
