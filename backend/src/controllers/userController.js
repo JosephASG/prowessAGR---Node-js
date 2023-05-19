@@ -46,7 +46,7 @@ export const postUser = async (req, res) => {
   )
     return res
       .status(HTTP_STATUS.BAD_REQUEST)
-      .json({ message: "All fields are required" });
+      .json({ message: "Todos los campos son requeridos" });
 
   try {
     // crear un nuevo usuario con los datos del cuerpo de la solicitud
@@ -70,7 +70,7 @@ export const postUser = async (req, res) => {
         await fs.unlink(req.files.image.tempFilePath);
       }
     }
-    // guardar el usuario en la base de datos y enviar la respuesta
+    // Guardar el usuario en la base de datos y enviar la respuesta
     const user = await newUser.save();
     return res.status(HTTP_STATUS.CREATED).json(user);
   } catch (error) {
@@ -144,7 +144,7 @@ export const updateUser = async (req, res) => {
       await fs.unlink(req.files.image.tempFilePath);
     }
 
-    // guardar el usuario en la base de datos y enviar la respuesta
+    // Guardar el usuario en la base de datos y enviar la respuesta
     const updatedUser = await user.save();
     return res.status(HTTP_STATUS.OK).json(updatedUser);
   } catch (error) {
@@ -163,17 +163,17 @@ export const deleteUser = async (req, res) => {
     if (!user) {
       return res
         .status(HTTP_STATUS.NOT_FOUND)
-        .json({ error: "User not found" });
+        .json({ error: "Usuario no encontrado" });
     }
     //Validacion del usuario
     const currentUser = await User.findById(userId);
     if (!currentUser.isAdmin)
       return res
         .status(HTTP_STATUS.UNAUTHORIZED)
-        .json({ error: "You don't have permission to delete this user" });
+        .json({ error: "No tiene permisos para eliminar este usuario" });
     //Eliminar usuario
     await user.remove();
-    return res.status(HTTP_STATUS.OK).json({ message: "User deleted" });
+    return res.status(HTTP_STATUS.OK).json({ message: "Usuario eliminado" });
   } catch (error) {
     return res
       .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
