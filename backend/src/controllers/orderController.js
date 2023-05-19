@@ -1,5 +1,6 @@
 import Order from "../models/orderModel.js";
 import HTTP_STATUS from "http-status-codes";
+import moment from 'moment-timezone';
 
 //Estructura metodo post
 export const createOrder = async (req, res) => {
@@ -17,7 +18,10 @@ export const createOrder = async (req, res) => {
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
       isPaid: req.body.isPaid,
-      isDelivered:req.body.isDelivered
+      isDelivered:req.body.isDelivered,
+      paidAt: req.body.paidAt,
+      deliveredAt: req.body.deliveredAt
+
     });
     // 2. Guarde el pedido en la base de datos.
     const order = await newOrder.save();
@@ -76,15 +80,19 @@ export const getOrder = async (req, res) => {
   }
 };
 export const Paid = async (req, res) => {
-  
+  const fechaHoraActual = moment().format('MMMM DD, YYYY HH:mm:ss');
+
+ 
   try {
     const { id } = req.params;
     const order = await Order.findById(id);
     if (!order) {
       return res.status(404).json({ message: 'Order not found' });
     }
+ 
     order.isPaid = true;
-    const updatedOrder = await order.save();
+    order.paidAt = fechaHoraActual;  
+      const updatedOrder = await order.save();
     res.json(updatedOrder);
   } catch (err) {
     console.error(err);
@@ -92,7 +100,8 @@ export const Paid = async (req, res) => {
   }
 };
 export const delivered = async (req, res) => {
-  
+  const fechaHoraActual = moment().format('MMMM DD, YYYY HH:mm:ss');
+
   try {
     const { id } = req.params;
     const order = await Order.findById(id);
@@ -100,6 +109,8 @@ export const delivered = async (req, res) => {
       return res.status(404).json({ message: 'Order not found' });
     }
     order.isDelivered = true;
+    order.paidAt = fechaHoraActual;  
+
     const updatedOrder = await order.save();
     res.json(updatedOrder);
   } catch (err) {
@@ -108,11 +119,6 @@ export const delivered = async (req, res) => {
   }
 };
   
-export const updateSlug=async(req,res)=>{
- 
-  alert(
-    res.send('¡Hola desde mi API!'))
-  }
 
 //Obtener mis pedidos por Id del vendedor
 export const getOrders = async (req, res) => {

@@ -25,6 +25,7 @@
     "fs-extra": "^11.1.0",
     "http-status-codes": "^2.2.0",
     "jsonwebtoken": "^9.0.0",
+    "moment-timezone": "^0.5.43",
     "mongoose": "^6.3.6",
     "morgan": "^1.10.0"
   },
