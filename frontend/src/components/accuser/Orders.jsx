@@ -6,8 +6,11 @@ import { Link ,useNavigate,useParams} from "react-router-dom";
 import axios from "axios";
 import './Order.css';
 import EditProduct from "./EditProduct";
+import Order from "./Order";
+import moment from 'moment-timezone';
 
 const Orders = ({ orders}) => {
+  
   const [pageNumber, setPageNumber] = useState(0);
   const productsPerPage = 6;
   const pagesVisited = pageNumber * productsPerPage;
@@ -20,13 +23,16 @@ const Orders = ({ orders}) => {
   const id = userInfo && userInfo._id;
 
 const [order, setOrder] = useState(null);
-
+const fechaHoraActual = moment().format('MMMM DD, YYYY HH:mm:ss');
+console.log(fechaHoraActual)
 function actualizarPedido(id) {
   if(window.confirm("Desea continuar ")){
     axios.put(`/api/orders/update/${id}`)
     .then(res => {
       console.log(res.data);
    alert("Orden Pagada")
+
+
    window.location.reload();
     })
     .catch(err => {
@@ -37,13 +43,9 @@ function actualizarPedido(id) {
   }
   
 }
-function cancelarPedido(id) {
-  
-   alert("Orden Pagada")
-   window.location.reload();
-    
-    
-}
+
+
+
 function cancelarOrden(id) {
   if(window.confirm("Desea eliminar la orden ")){
   axios.delete(`/api/orders/delete/${id}`)
@@ -80,6 +82,7 @@ function actualizarSlug(ide) {
       {orders
         .slice(pagesVisited, pagesVisited + productsPerPage)
         .map((order) => (
+          
           <h4 key={order._id}>
             Order No: {order._id.substring(0, 10)}...{" "}
             <Link className="linkOrder" to={`/order/${order._id}`}>
@@ -93,21 +96,17 @@ function actualizarSlug(ide) {
           </span>
           
           {!order.isPaid && (
-            <button className="btn-pagar" onClick={() => {actualizarPedido(order._id)}}>
-              Pagar
-            </button>
-            
-            
+          <button className="btn-pagar" onClick={() => { actualizarPedido(order._id) }}>
+          Pagar
+        </button>
           )}
           {!order.isPaid && (
             <button className="btn-pagar" onClick={() => {cancelarOrden(order._id)}}>
              Cancelar
-            </button>
-            
-            
+            </button>          
           )}
   
-</div>
+            </div>
           </h4>
 
         ))}
@@ -132,7 +131,9 @@ function actualizarSlug(ide) {
         breakClassName={"pagi-item"}
         breakLinkClassName={"pagi-link"}
         disabledClassName={"disabledPagi"}
+       
       />
+
     </>
   );
 };
