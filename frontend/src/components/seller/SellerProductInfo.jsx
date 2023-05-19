@@ -22,7 +22,7 @@ const SellerProductInfo = ({ pro }) => {
         type: "CART_ADD_ITEM",
         payload: { ...pro, quantity },
       });
-      setShowModal(true);
+      setShowModal(true); 
     }
   };
 
@@ -48,7 +48,7 @@ const SellerProductInfo = ({ pro }) => {
     {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <p className="one">El producto seleccionado se añadió correctamente.</p>
+            <p className="one">El producto seleccionado se añadió correctamente..</p>
             <Link to="/cart" className="two">
               <button  >Carrito</button>
             </Link>
@@ -56,7 +56,7 @@ const SellerProductInfo = ({ pro }) => {
         </div>
   </div>
 )}
-    </>
+    </> 
   );
 };
 
