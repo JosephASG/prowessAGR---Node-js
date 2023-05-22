@@ -21,21 +21,3 @@
   color: #faf4f4;
 
 }
-@media screen and (max-width: 600px) {
-    .form-row.account {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .form-image {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        top: auto;
-    }
-}
