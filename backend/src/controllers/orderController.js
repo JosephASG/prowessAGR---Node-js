@@ -104,7 +104,7 @@ export const delivered = async (req, res) => {
       return res.status(404).json({ message: 'Order not found' });
     }
     order.isDelivered = true;
-    order.deliveredAt= fechaHoraActual
+    order.deliveredAt= fechaHoraActual;
     const updatedOrder = await order.save();
     res.json(updatedOrder);
   } catch (err) {
