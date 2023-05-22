@@ -177,7 +177,7 @@ console.log(paidAt)
                     style={{backgroundColor: cartItems.length === 0 ? 'red' : 'green', color: 'white'}}  
                     onClick={() => 
                       setOpenCheckout(true) }>
-                    Pagar
+                    Ordenar
                   </button>
 
                     {cartItems.length === 0 && (

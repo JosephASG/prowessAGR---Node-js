@@ -123,7 +123,7 @@
                 <center>
                                 <button type="submit"  >
                   
-                  Ordenar <FontAwesomeIcon icon={faTruck} />
+                  Enviar <FontAwesomeIcon icon={faTruck} />
                 </button>
                            
                      
