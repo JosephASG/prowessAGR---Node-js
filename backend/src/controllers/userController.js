@@ -27,6 +27,7 @@ export const loginUser = async (req, res) => {
         phone: user.phone,
         image: user.image,
         isAdmin: user.isAdmin,
+        commission: user.commission,
       });
       return;
     }
@@ -42,8 +43,7 @@ export const postUser = async (req, res) => {
     !req.body.email,
     !req.body.password,
     !req.body.address,
-    !req.body.phone)
-  )
+    !req.body.phone))
     return res
       .status(HTTP_STATUS.BAD_REQUEST)
       .json({ message: "Todos los campos son requeridos" });
@@ -123,6 +123,7 @@ export const updateUser = async (req, res) => {
         .json({ error: "User not found" });
     }
     // Actualizar datos del usuario con datos
+    user.commission = req.body.commission? req.body.commission : user.commission;
     user.name = req.body.name ? req.body.name : user.name;
     user.email = req.body.email ? req.body.email : user.email;
     user.address = req.body.address ? req.body.address : user.address;

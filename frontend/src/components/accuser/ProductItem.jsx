@@ -4,10 +4,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import EditProduct from "./EditProduct";
+import CartItems from "../cartitems/CartItems";
 const ProductItem = ({ pro }) => {
   const id = pro._id;
   const [openEdit, setOpenEdit] = useState(false);
-
   const handlerDeleteProduct = async (e) => {
     e.preventDefault();
 
@@ -33,6 +33,9 @@ const ProductItem = ({ pro }) => {
           <Link to={`../${pro._id}`}>
             {pro.name} <FontAwesomeIcon icon={faEye} />
           </Link>
+          <div>
+
+    </div>
           <span className="category">{pro.category}</span>
           <span className="price">${pro.price.toFixed(2)}/kg</span>
         </div>
@@ -46,11 +49,11 @@ const ProductItem = ({ pro }) => {
         </div>
       </div>
       {openEdit && <EditProduct pro={pro} setOpenEdit={setOpenEdit} />}
- <div></div>
+        
 
 
-    </>
-    
+      {openEdit ? <CartItems id={id} /> : null}    </>
+  
   );
 };
 

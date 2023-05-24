@@ -49,6 +49,7 @@ const EditProduct = ({ setOpenEdit, pro }) => {
       formData.append("sellerId", userInfo._id);
       formData.append("seller", userInfo.name);
       formData.append("sellerImage", userInfo.image.secure_url);
+      console.log(pro._id)
       const data = await axios.put(
         `/api/products/update/${pro._id}`,
         formData,

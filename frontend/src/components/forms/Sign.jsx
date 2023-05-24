@@ -11,6 +11,7 @@ const Sign = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [commission, setCommission] = useState(0);
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [passwordError, setPasswordError] = useState(false);
@@ -62,6 +63,7 @@ const Sign = () => {
         password,
         address,
         phone,
+        commission,
         selectedOption,
       });
       alert("Te has registrado con éxito");
@@ -125,6 +127,19 @@ const Sign = () => {
             id="address"
           />
         </div>
+        <div className="form-group">
+                  <label htmlFor="commission">Commission</label>
+            {commission !== 0 ? (
+              <input
+                type="text"
+                onChange={(e) => setCommission(e.target.value)}
+                value={commission}
+                id="commission"
+              />
+            ) : (
+              <span>{commission}</span>
+            )}
+            </div>
         <div className="form-group">
           <label htmlFor="phone">Teléfono</label>
           <input

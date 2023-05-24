@@ -8,7 +8,7 @@ import UserProduct from "./UserProduct";
 import AddProduct from "./AddProduct";
 import Orders from "./Orders";
 import AccountUserInfo from "./AccountUserInfo";
-
+import Checkout from "../cartitems/Checkout";
 const AccountUser = () => {
   const navigate = useNavigate();
 
@@ -25,7 +25,8 @@ const AccountUser = () => {
   const [image, setImage] = useState(userInfo && userInfo.image);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [previewImage, setPreviewImage] = useState(false);
-
+  const [commission ,setCommission] = useState(userInfo && userInfo.commission);
+  console.log(commission)
   const [open, setOpen] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
 
@@ -74,6 +75,7 @@ const AccountUser = () => {
       );
       localStorage.setItem("userInfo", JSON.stringify(data));
       alert("Información actualizada con éxito!");
+      window.location.reload();
     } catch (err) {
       alert("Información no actualizada!");
     }
@@ -88,7 +90,6 @@ const AccountUser = () => {
       setPreviewImage(URL.createObjectURL(fileUser));
     }
   };
-
   // if just upload image
   const handlerUpdateImage = async (e) => {
     e.preventDefault();
@@ -112,15 +113,16 @@ const AccountUser = () => {
   };
 
   return (
+    
     <div className="account-row">
       <h2 className="account-title">Mi cuenta</h2>
       <div className="account-groups">
         <div className="account-group">
           <form className="form-image" onSubmit={handlerUpdateImage}>
-            <img
+            <img className="imgusr"
               src={previewImage || (userInfo && userInfo.image.secure_url)}
               alt=""
-              style={{ width: "245px", height: "280px",left:"-1px",top:"25px"}}
+style={{ width: "245px", height: "280px",left:"-1px",top:"25px"}}
             />
             <label htmlFor="image_upload">
               <FontAwesomeIcon icon={faPlusCircle} />
@@ -181,6 +183,30 @@ const AccountUser = () => {
                 />
               </div>
               <div className="form-group">
+        <label htmlFor="commission">Comisiones Ganadas</label>
+        {commission !== 0 ? (
+          <input
+            type="text"
+            onChange={(e) => setCommission(e.target.value)}
+            value={commission}
+            id="commission"
+            style={{
+              color: 'red',
+              fontSize: '16px',
+            }}
+          />
+        ) : (
+          <span
+            style={{
+              color: 'red',
+              fontSize: '45px',
+            }}
+          >
+            ${commission}
+          </span>
+        )}
+      </div>
+              <div className="form-group">
                 <span className="change-password" onClick={() => setOpen(true)}>
                   Cambiar contraseña
                 </span>
@@ -194,8 +220,12 @@ const AccountUser = () => {
           </div>
           {open && <Passwords setOpen={setOpen} />}
           <div className="account-info">
-            <AccountUserInfo />
+            <AccountUserInfo commission={commission} />
+          
           </div>
+         <>
+
+         </>
         </div>
         <div className="account-group">
           <h2 className="account-subtitle">Mis productos</h2>
@@ -217,13 +247,14 @@ const AccountUser = () => {
               </h3>
             ) : (
               <Orders orders={orders} />
+              
             )} 
           </div>
           {openAdd && <AddProduct setOpenAdd={setOpenAdd} />}
         </div>
       </div>
+    
     </div>
+   
   );
 };
-
-export default AccountUser;

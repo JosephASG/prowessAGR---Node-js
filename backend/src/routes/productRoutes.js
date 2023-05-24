@@ -24,7 +24,7 @@ router.put(
   }),
   productController.updateProduct
 );
-router.put("/",productController.updateSlug)
+router.put("/slug/:id",productController.updateSlug)
 
 router.delete("/delete/:id", productController.deleteProduct);
 export default router;

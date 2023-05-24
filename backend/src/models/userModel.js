@@ -14,6 +14,8 @@ const UserSchema = new mongoose.Schema(
       secure_url: { type: String },
     },
     isAdmin: { type: Boolean, default: false, required: true },
+    commission : { type: Number, required: true },
+
   },
   {
     timestamps: true, //para fechas

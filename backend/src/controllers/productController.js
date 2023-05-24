@@ -180,16 +180,17 @@ export const deleteProduct = async (req, res) => {
 };
 export const updateSlug=async (req, res) => {
   try {
+
+
+ 
     const { id: productId } = req.params;
     const product = await Products.findById(productId);
-    if (!product) {
-      return res.status(404).json({ message: 'Order not found' });
-    }
-   product.slug=5;
-    const updatedProduct = await product.save();
-    res.json(updatedProduct);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Server error' });
-  }
+    // Buscar y actualizar el valor en MongoDB
+     product.slug=6;
+     const updatedOrder = await product.save();
+     res.json(updatedOrder);
+   } catch (err) {
+     console.error(err);
+     res.status(500).json({ message: 'Server error' });
+   }
 };

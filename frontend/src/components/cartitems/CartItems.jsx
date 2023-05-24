@@ -31,12 +31,17 @@ const CartItems = () => {
   } = state;
 
   const idSeller = cartItems.map((sellId) => sellId.sellerId);
-
   //console.log(idSeller);
-
-
-
-  const totalItems = cartItems.reduce((a, c) => a + c.quantity, 0);
+  //cartItems.map((item) => {
+    //const product = item.name;
+    // Realiza las operaciones que necesites con el producto
+    // Por ejemplo, muestra el nombre del producto en la consola
+    //console.log("Nombre del producto:", product);
+    // También puedes devolver el producto si deseas almacenarlo en un nuevo arreglo
+    //return product;
+ // });
+  
+  //const totalItems = cartItems.reduce((a, c) => a + c.quantity, 0);
 
   const roundPrice = (num) => Math.round(num * 100 + Number.EPSILON) / 100;
   const itemsPrice = roundPrice(
@@ -47,22 +52,45 @@ const CartItems = () => {
   const isPaid= false;
   const isDelivered=false;
   const fechaHoraActual = "No paid";
+  const [openEdit, setOpenEdit] = useState(false);
 
 const paidAt=fechaHoraActual;  
-const deliveredAt=fechaHoraActual;  
-console.log(paidAt)
+const deliveredAt=fechaHoraActual; 
+/* const producto =(quantity)=>{
+const uniqueSellerIds = [...new Set(idSeller)];
+
+const separatedArrays = uniqueSellerIds.reduce((acc, curr) => {
+const filteredItems = cartItems.filter((item) => item.sellerId === curr);
+return [...acc, { sellerId: curr, items: filteredItems }];
+}, []);
+//console.log("Arreglos separados por ID de vendedor:", separatedArrays);
+// Mostrar los IDs de los vendedores y las propiedades de cada elemento en los arreglos separados
+separatedArrays.forEach((group) => {
+console.log("ID del vendedor:", group.sellerId);
+group.items.forEach((item) => {
+console.log("Propiedades del elemento:", item.slug);
+console.log("Propiedades del elemento:", item.name);
+if (item.slug > quantity) {
+  const v = item.slug - quantity;
+  console.log("Venta en producto:", v);
+  // Resto del código para utilizar la variable `v` en caso de que se cumpla la condición
+} 
+});
+});
+}  ;
+ */
+
+//producto();
   const updateQuantityHandler = async (item, quantity) => {
+   // producto(item.quantity)
    
-  
     ctxDispatch({
       type: "CART_ADD_ITEM",
       payload: { ...item, quantity },
     });
-    
-    
+
   };
  
-  
 
   const removeProduct = (item) => {
     ctxDispatch({
@@ -83,6 +111,7 @@ console.log(paidAt)
               <div className="cart-cards">
                 {cartItems.map((item) => (
                   <div className="filter-card" key={item._id}>
+
                     <div className="card-header">
                       <img src={item.image.secure_url} alt={item.name} />
                       <Link to={`../seller/${item.sellerId}`}>
@@ -90,6 +119,7 @@ console.log(paidAt)
                           className="card-sellers"
                           src={item.sellerImage}
                           alt={item.sellerName}
+                          
                         />
                       </Link>
                     </div>
@@ -108,9 +138,11 @@ console.log(paidAt)
                     </div>
                     <div className="card-action">
                       <button
-                        onClick={() =>
-                          updateQuantityHandler(item, item.quantity - 1)
-                        }
+                      onClick={() => {
+                        updateQuantityHandler(item, item.quantity - 1);
+                        //producto(item.quantity-1);
+                        
+                      }}
                         disabled={item.quantity === 1}
                       >
                         <FontAwesomeIcon icon={faMinusCircle} />
@@ -166,20 +198,17 @@ console.log(paidAt)
                   <h3>${totalPrice.toFixed(2)}</h3>
                   
                 </div>
-               
+         
               </div>
               <div className="bill-btn">
-                       
-                          
-  
                     <button 
                     disabled={cartItems.length === 0 }   
                     style={{backgroundColor: cartItems.length === 0 ? 'red' : 'green', color: 'white'}}  
                     onClick={() => 
                       setOpenCheckout(true) }>
                     Ordenar
+                   
                   </button>
-
                     {cartItems.length === 0 && (
                       <div style={{ color: 'red' , marginTop:'15px' ,padding: '20px' ,textAlign: "center"} }>
                         Agregue un producto primero
@@ -207,6 +236,8 @@ console.log(paidAt)
           isDelivered={isDelivered}
           paidAt ={paidAt}
           deliveredAt ={deliveredAt}
+     
+       
         />
       
       )}

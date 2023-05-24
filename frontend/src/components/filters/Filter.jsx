@@ -13,11 +13,11 @@ const Filter = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get("/api/products");
-      console.log(result.data);
+     // console.log(result.data);
       setProducts(result.data);
 
       const res = await axios.get("/api/category");
-      console.log(res.data);
+    //  console.log(res.data);
       setCategory(res.data);
     };
 

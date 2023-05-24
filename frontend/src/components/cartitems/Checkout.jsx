@@ -16,26 +16,73 @@
         isDelivered,
         paidAt,
         deliveredAt,
+   
+     
      
       }) => {
         const navigate = useNavigate();
-
+    
         const userInfo = localStorage.getItem("userInfo")
           ? JSON.parse(localStorage.getItem("userInfo"))
           : null;
-
+          cartItems.forEach((item) => {
+            console.log(item._id);
+          });
         const id = userInfo && userInfo._id;
+      /*   const producto = (quantities) => {
+          const uniqueSellerIds = [...new Set(idSeller)];
+        
+          const separatedArrays = uniqueSellerIds.reduce((acc, curr) => {
+            const filteredItems = cartItems.filter((item) => item.sellerId === curr);
+            return [...acc, { sellerId: curr, items: filteredItems }];
+          }, []);
+        
+          separatedArrays.forEach((group) => {
+            console.log("ID del vendedor:", group.sellerId);
+        
+            group.items.forEach((item) => {
+              console.log("Propiedades del elemento:", item.slug);
+              console.log("Propiedades del elemento:", item.name);
+        
+              if (item.slug > quantities) {
+                const v = item.slug ;
+                console.log("Venta en producto:", v);
+        
+                // Resto del código para utilizar la variable `v` en caso de que se cumpla la condición
+              }
+            });
+          });
+        };
+        const quantities = cartItems.map((item) => item.quantity);
 
-        //console.log(idSeller);
+        producto(quantities);
+        //console.log(idSeller); */
 
         const [name, setName] = useState(userInfo && userInfo.name);
         const [email, setEmail] = useState(userInfo && userInfo.email);
         const [address, setAddress] = useState(userInfo && userInfo.address);
         const [phone, setPhone] = useState(userInfo && userInfo.phone);
-
+        //console.log(cartItems)
+   
+        const producto =  () => {
+          const _id = "646c10d6cc2d15be4fa8d0f8";
+          const result = 6;
+        apiSlug(_id)
+        }
+        
+        const apiSlug = async (id) => {
+          try {
+            const response = await axios.put(`/api/products/slug/${id}`);
+            console.log(response.data);
+            alert("Ha cambiado");
+          } catch (error) {
+            alert("Error");
+          }
+        };
         const handlerAddProduct = async (e) => {
           e.preventDefault();
-
+     
+        
           try {
             const { data } = await axios.post(`/api/orders`, {
               id: userInfo._id,
@@ -55,8 +102,10 @@
 
            
             });
-
+           
+         
             if (data) {
+              producto();
               localStorage.removeItem("cartItems");
               setOpenCheckout(false);
        

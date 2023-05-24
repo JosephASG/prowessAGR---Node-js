@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import ProductItem from "./ProductItem";
+import Checkout from "../cartitems/Checkout";
 import Orders from "./Orders";
 const UserProduct = ({ product }) => {
   const [pageNumber, setPageNumber] = useState(0);
@@ -16,12 +17,17 @@ const UserProduct = ({ product }) => {
   return (
     <>
       <div className="filter-cards">
-        {product
-          .slice(pagesVisited, pagesVisited + productsPerPage)
-          .map((pro) => (
-            <ProductItem key={pro._id} pro={pro} />
-           
-          ))}
+      {product
+  .slice(pagesVisited, pagesVisited + productsPerPage)
+  .map((pro) => (
+    <div key={pro._id}>
+      <ProductItem pro={pro} />
+    </div>
+    
+  ))}
+   <div>
+   
+   </div>
       
       </div>
       
