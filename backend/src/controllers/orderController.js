@@ -1,6 +1,6 @@
 import Order from "../models/orderModel.js";
 import HTTP_STATUS from "http-status-codes";
-import moment from 'moment-timezone';
+
 //Estructura metodo post
 export const createOrder = async (req, res) => {
   try {
@@ -17,9 +17,7 @@ export const createOrder = async (req, res) => {
       taxPrice: req.body.taxPrice,
       totalPrice: req.body.totalPrice,
       isPaid: req.body.isPaid,
-      isDelivered:req.body.isDelivered,
-      deliveredAt :req.body.deliveredAt,
-      paidAt: req.body.paidAt
+      isDelivered:req.body.isDelivered
     });
     // 2. Guarde el pedido en la base de datos.
     const order = await newOrder.save();
@@ -78,7 +76,7 @@ export const getOrder = async (req, res) => {
   }
 };
 export const Paid = async (req, res) => {
-  const fechaHoraActual = moment().format('MMMM DD, YYYY HH:mm:ss');
+  
   try {
     const { id } = req.params;
     const order = await Order.findById(id);
@@ -86,7 +84,6 @@ export const Paid = async (req, res) => {
       return res.status(404).json({ message: 'Order not found' });
     }
     order.isPaid = true;
-    order.paidAt= fechaHoraActual;
     const updatedOrder = await order.save();
     res.json(updatedOrder);
   } catch (err) {
@@ -95,8 +92,7 @@ export const Paid = async (req, res) => {
   }
 };
 export const delivered = async (req, res) => {
-  const fechaHoraActual = moment().format('MMMM DD, YYYY HH:mm:ss');
-
+  
   try {
     const { id } = req.params;
     const order = await Order.findById(id);
@@ -104,7 +100,6 @@ export const delivered = async (req, res) => {
       return res.status(404).json({ message: 'Order not found' });
     }
     order.isDelivered = true;
-    order.deliveredAt= fechaHoraActual;
     const updatedOrder = await order.save();
     res.json(updatedOrder);
   } catch (err) {

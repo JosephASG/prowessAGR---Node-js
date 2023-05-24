@@ -42,25 +42,15 @@ const UserInfoOrders = ({ userOrders }) => {
               <FontAwesomeIcon icon={faEye} />
             </Link>
             <div className="estado-entrega">
-          <h4>Estado de entrega:</h4>
-          
-          
+          <h3>Estado de entrega:</h3>
           <span className={`estado-entrega__${item.isDelivered ? 'Entregado' : 'Pendiente'}`}>
-            {item.isDelivered ? 'Entregado' : ''}
-            {!item.isDelivered && (
-  <div>
-    {item.isPaid ? (
-      <button className="btn-entregar" onClick={() => actualizarEntrega(item._id)}>
-        Entregar
-      </button>
-    ) : (
-     
-      <span>No cancelado</span>
-    )}
-  </div>
-)}
+            {item.isDelivered ? 'Entregado' : 'Pendiente'}
           </span>
-       
+          {!item.isDelivered && (
+            <button className="btn-pagar" onClick={() => actualizarEntrega(item._id)}>
+              Entregar
+            </button>
+  )}
 </div>
           </h4>
           

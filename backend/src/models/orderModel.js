@@ -33,9 +33,9 @@ const OrderSchema = new mongoose.Schema(
     taxPrice: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
     isPaid: { type: Boolean, required: true },
-    paidAt: { type: String, required: true },
+    paidAt: { type: Date },
     isDelivered: { type: Boolean, required: true },
-    deliveredAt: { type: String, required: true},
+    deliveredAt: { type: Date },
   },
   {
     versionKey: false,

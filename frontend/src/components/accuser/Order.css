@@ -129,7 +129,7 @@
 
 .estado-pago__pendiente {
   color: red;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .btn-pagar {
@@ -148,9 +148,6 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  position: relative;
-  top: 50%;
-  transform: translateY(0%); /* Alineación vertical */
 }
 
 .estado-entrega p {
@@ -159,19 +156,12 @@
 
 .estado-entrega__Entregado {
   color: green;
-  margin-left: 5px;
-  position: relative;
-  top: 50%;
-  transform: translateY(-25%); /* Alineación vertical */
-
+  margin-left: 15px;
 }
 
 .estado-entrega__Pendiente {
   color: red;
-  margin-left: 5px;
-  position: relative;
-  top: 50%;
-  transform: translateY(-25%); /* Alineación vertical */
+  margin-left: 15px;
 }
 
 .btn-entregar {
@@ -181,10 +171,6 @@
   padding: 5px 10px;
   margin-left: 10px;
   cursor: pointer;
-  margin-left: 5px;
-  position: relative;
-  top: 50%;
-  transform: translateY(25%); 
 }
 
 .btn-pagar:hover {
