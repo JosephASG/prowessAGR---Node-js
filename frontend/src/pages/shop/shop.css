@@ -310,6 +310,9 @@
   
     .filter-cards {
       flex-direction: column;
+      width: fit-content;
+      height: fit-content;
+      margin-left: 15%;
     }
   
     .filter-card {
