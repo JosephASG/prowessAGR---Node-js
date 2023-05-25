@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+/*import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
@@ -70,8 +70,9 @@ const FollCustomer = () => {
           />
         </>
       )}
-    </div>
+    </div
   );
 };
 
 export default FollCustomer;
+*/

@@ -53,11 +53,12 @@ const SellFilterInfo = ({ user }) => {
               <Link to={`../seller/${user._id}`}></Link>
             </div>
             <div class="cta-container transition">
-                  <Button variant="contained" size="medium" color="success">
-                    <span key={user._id} onClick={handlerFollow}>
-                      Información
-                      </span>
-                  </Button>
+            <Link to="/seller/6438291e3bc7570f8bfa5266">
+              <Button variant="contained" size="medium" color="success">
+                    Información
+                </Button>
+              </Link>
+
             </div>         
             <div class="card_circle transition">
               <div className="image">
