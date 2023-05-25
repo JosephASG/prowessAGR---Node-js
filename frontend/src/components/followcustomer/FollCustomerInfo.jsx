@@ -1,4 +1,4 @@
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+/*import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -38,4 +38,4 @@ const FollCustomerInfo = ({ item }) => {
   );
 };
 
-export default FollCustomerInfo;
+export default FollCustomerInfo;*/
