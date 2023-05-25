@@ -268,7 +268,6 @@
 @media screen and (max-width: 768px) {
   /* Estilos específicos para pantallas con un ancho máximo de 768px */
   .form-row {
-    margin: 50px 0;
     padding: 20px;
   }
 }
