@@ -99,7 +99,7 @@
     margin-left: 0px;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
+    align-items: normal;
 }
 
 .account-group:nth-child(2) {
@@ -248,8 +248,9 @@ label{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    top: -170px;
-    width: 270px;
+    width: fit-content;
+    height: fit-content;
+    padding: 20px;
 
 }
 .form-image:hover {
@@ -514,3 +515,57 @@ label{
     padding: 10px 0;
     border-bottom: 1px solid #121212;
 }
+
+@media (max-width: 768px) {
+    /* Estilos para pantallas con un ancho máximo de 768px */
+    .account-title {
+    font: bold 40px MiNuevaFuente, verdana, sans-serif;
+    font-size: 25px;
+    padding: 0%;
+    margin-left: 33%;
+    margin-top: 0%;
+     }
+  }
+
+  @media (max-width: 420px) {
+    /* Estilos para pantallas con un ancho máximo de 420px */
+    .account-title {
+    font: bold 40px MiNuevaFuente, verdana, sans-serif;
+    font-size: 25px;
+    padding: 0%;
+    margin-left: 33%;
+
+     }
+  }
+  @media (max-width: 768px) {
+    /* Estilos para pantallas con un ancho máximo de 768px */
+    .account-row {
+    margin-left: 10px;
+     }
+  }
+  @media (max-width: 920px) {
+    /* Estilos para pantallas con un ancho máximo de 768px */
+    .account-row {
+    margin-left: 10px;
+     }
+  }
+  @media (max-width: 768px) {
+    /* Estilos para pantallas con un ancho máximo de 768px */
+    .account-group .imgusr {
+        width: 145px;
+        height: 140px;
+    }
+  }
+  @media (max-width: 768px) {
+    /* Estilos para pantallas con un ancho máximo de 768px */
+    .account-subtitle {
+        font-size: 35px;
+     }
+  }
+  @media (max-width: 480px) {
+    /* Estilos para pantallas con un ancho máximo de 480px */
+    .account-subtitle {
+        font-size: 35px;
+        
+    }
+  }

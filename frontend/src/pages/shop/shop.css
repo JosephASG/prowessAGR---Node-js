@@ -292,7 +292,7 @@
     color: #ffffff;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     .filter-row filter-col:first-child {
         flex-direction: column;
     }
@@ -303,15 +303,15 @@
         height: auto;
       
     }
-  
     .filter-col:first-child .filter-group:last-child input {
       width: 100%;
     }
-  
     .filter-cards {
       flex-direction: column;
+      width: fit-content;
+      height: fit-content;
+      margin-left: 15%;
     }
-  
     .filter-card {
       width: 100%;
       height: auto;
