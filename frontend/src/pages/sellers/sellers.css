@@ -250,7 +250,16 @@
     margin-bottom: 1rem;
     margin-top: 5rem;
 }
-@media screen and (max-width: 414px){
+
+@media (max-width: 400px){}
+
+@media (max-width: 400px){
+    .card {
+        height: 20rem; /* Modifica la altura según tus necesidades */
+        width: 12rem; /* Modifica el ancho según tus necesidades */
+      }
+
+
     #Buscador {
 
         background: url(https://icones.pro/wp-content/uploads/2021/06/icone-loupe-noir.png) no-repeat 10px 10px;
@@ -261,8 +270,8 @@
         outline: none;
         width: 300px;
         height: 50px;
-        left: -180px;
-        top:100px;
+        left: -140px;
+        top:110px;
         border: solid 3px;
         font-size: 20pt;
         float: left;
@@ -274,7 +283,18 @@
         border-radius: 10px;
         border-color: black;
         margin-bottom: 3rem;
-    }        
+    }   
+    
+    .card:hover {
+        height: 22rem;
+        width: 23rem;
+    }  
+    
+
+        .container-card {
+          height: 20rem; /* Modifica la altura según tus necesidades */
+          width: 12rem; /* Modifica el ancho según tus necesidades */
+        }
 }
 
 
@@ -307,12 +327,7 @@
     height: 25rem;
     width: 35rem;
 }
-@media screen and (max-width: 414px){
-    .card:hover {
-        height: 22rem;
-        width: 23rem;
-    }        
-}
+
 
 .card:hover .cta-container {
     display: inline;
@@ -441,6 +456,31 @@
         justify-content: center;
         align-items: center;
     }
+
+    #Buscador {
+
+        background: url(https://icones.pro/wp-content/uploads/2021/06/icone-loupe-noir.png) no-repeat 10px 10px;
+        background-size: 24px;
+        border: transparent;
+        border-bottom: solid 1px #ccc;
+        padding: 1rem;
+        outline: none;
+        width: 300px;
+        height: 50px;
+        left: -140px;
+        top:110px;
+        border: solid 3px;
+        font-size: 20pt;
+        float: left;
+        color: #000000;
+        font-style: bold;
+        padding-left: 45px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 10px;
+        border-color: black;
+        margin-bottom: 3rem;
+    } 
 }
 @media screen and (max-width: 768px){
     .follow-title{
@@ -461,6 +501,31 @@
         justify-content: center;
         align-items: center;
     }
+
+    #Buscador {
+
+        background: url(https://icones.pro/wp-content/uploads/2021/06/icone-loupe-noir.png) no-repeat 10px 10px;
+        background-size: 24px;
+        border: transparent;
+        border-bottom: solid 1px #ccc;
+        padding: 1rem;
+        outline: none;
+        width: 300px;
+        height: 50px;
+        left: -140px;
+        top:-50px;
+        border: solid 3px;
+        font-size: 20pt;
+        float: left;
+        color: #000000;
+        font-style: bold;
+        padding-left: 45px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 10px;
+        border-color: black;
+        margin-bottom: 3rem;
+    } 
 }
 @media screen and (max-width: 414px) {
     .follow-title{
