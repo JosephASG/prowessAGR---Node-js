@@ -450,9 +450,10 @@
         
     }
     .footer-container{
-        height: 100%;
-        top: 35%;
-        position: absolute;
+        height: 180px;
+        width: 780px;
+        top: -55px;
+        position:relative;
     }   
     .header-menu{
         display: flex;
