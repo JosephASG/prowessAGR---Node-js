@@ -223,12 +223,7 @@ container-footer {
 
 /* Modificaciones para pantallas más pequeñas */
 @media only screen and (max-width: 1024px) {
-  .container-footer {
-    height: 100%;
-    top: 20%;
-    position: relative;
-  }
-  
+    
   .ctn-img-logo {
   margin: 80px 0 0 0;
   }
