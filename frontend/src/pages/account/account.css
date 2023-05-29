@@ -569,3 +569,10 @@ label{
         
     }
   }
+  
+  @media (max-width: 480px) {
+    /* Estilos para pantallas con un ancho máximo de 480px */
+    .account-group img {
+    
+    }
+  }
