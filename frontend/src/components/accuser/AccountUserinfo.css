@@ -4,8 +4,12 @@
     color: #fcfcfc;
     height: 350px;
     background-color: rgba(5, 192, 30, 0.664);
-    margin-left: 30px;
-    border-radius: 3%;    
+    margin-left: 80px;
+    border-radius: 3%;
+    transition: color 0.3s linear 0.2s;
+    width: fit-content;
+    height: fit-content;   
+    padding: 20px;   
 }
 .account-info:hover {
     color: red;
@@ -22,21 +26,35 @@
 
 }
 
-@media screen and (max-width: 600px) {
-    .form-row.account {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-}
-
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 780px) {
     .form-image {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
+        width: fit-content;
         top: auto;
+        padding: 20px;
+        margin-top: 0%;
+    }
+}
+@media screen and (max-width: 780px) {
+    .form-row.account {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: fit-content;
+        margin-left: 1%;
+    }
+} 
+@media screen and (max-width: 420px) {
+    .account-info {
+        margin-left: 0px;
+        padding: 20px;
+    }
+} 
+@media screen and (max-width: 780px) {
+    .account-info {
+    margin-left: 0px;
+    padding: 20px;
     }
 }

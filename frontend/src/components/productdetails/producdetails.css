@@ -53,10 +53,11 @@
     margin: 5px 0;
     background-color: #04a53a;
     box-shadow: 0 1px 10px rgba(18, 18, 18, 0.6);
-    padding: 10px;
+    padding: 1px;
     border: solid 0.01px;
     border-radius: 15px;
-    
+    top: 2px;
+    height: 40px;
 }
 .card-header img {
     width: 180px;

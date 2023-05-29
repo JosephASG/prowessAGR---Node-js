@@ -268,7 +268,6 @@
 @media screen and (max-width: 768px) {
   /* Estilos específicos para pantallas con un ancho máximo de 768px */
   .form-row {
-    margin: 50px 0;
     padding: 20px;
   }
 }
@@ -282,7 +281,8 @@
 @media (max-width: 480px) {
   /* Estilos para pantallas con un ancho máximo de 480px */
   .form-row form {
-      padding: 20px 20px;
+    padding: 20px 0px;
+    margin: 0px;
   }
 }
 
