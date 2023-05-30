@@ -442,7 +442,7 @@
         align-items: center;
     }
 }
-@media screen and (max-width: 825px){
+@media screen and (max-width: 768px){
     .follow-title{
         font-size: 20px;
         margin-top: 40rem;
