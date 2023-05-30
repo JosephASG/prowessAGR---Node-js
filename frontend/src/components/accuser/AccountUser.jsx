@@ -258,3 +258,5 @@ style={{ width: "245px", height: "280px",left:"-1px",top:"25px"}}
    
   );
 };
+
+export default AccountUser;
