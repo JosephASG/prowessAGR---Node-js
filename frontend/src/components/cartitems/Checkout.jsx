@@ -4,12 +4,11 @@
       import { useNavigate } from "react-router-dom";
       import axios from "axios";
       import "./cartitems.css"
-
       const Checkout = ({
         idSeller,
         setOpenCheckout,
         cartItems,
-        itemsPrice,
+        itemsPrice, 
         taxPrice,
         totalPrice,
         isPaid,
@@ -25,11 +24,36 @@
         const userInfo = localStorage.getItem("userInfo")
           ? JSON.parse(localStorage.getItem("userInfo"))
           : null;
-          cartItems.forEach((item) => {
-            console.log(item._id);
-          });
+        
         const id = userInfo && userInfo._id;
-      /*   const producto = (quantities) => {
+          for (const item of cartItems) {
+         // console.log(item.quantity)
+          console.log(item.name);
+          console.log(item.slug);
+          console.log(item._id);
+          console.log(item.slug-item.quantity);
+        }  
+        
+       /*  async function updateSlug(itemId) {
+          try {
+            const response = await axios.get(`api/products/slug/${itemId}`);
+              // Puedes pasar parámetros o datos adicionales aquí
+            
+        
+            // Procesar la respuesta de la API
+            console.log(response.data);
+          } catch (error) {
+            // Manejar errores en la llamada a la API
+            console.error(error);
+          }
+        } */
+        
+        // Llamar a la API en el bucle
+         
+          // Llamar a la función de actualización del slug
+      /*   /updateSlug("646a9af6b5b1dfb6f8a4318d"); */
+        
+       /*  const producto = () => {
           const uniqueSellerIds = [...new Set(idSeller)];
         
           const separatedArrays = uniqueSellerIds.reduce((acc, curr) => {
@@ -38,24 +62,39 @@
           }, []);
         
           separatedArrays.forEach((group) => {
-            console.log("ID del vendedor:", group.sellerId);
+            console.log("ID :", group.sellerId);
         
             group.items.forEach((item) => {
-              console.log("Propiedades del elemento:", item.slug);
-              console.log("Propiedades del elemento:", item.name);
+              console.log(item.slug);
+              console.log(item.name);
+              console.log("Cantidad:", item.quantity);
         
-              if (item.slug > quantities) {
-                const v = item.slug ;
-                console.log("Venta en producto:", v);
+              const v = item.slug - item.quantity;
+              console.log("Venta en producto:", v);
         
-                // Resto del código para utilizar la variable `v` en caso de que se cumpla la condición
-              }
+              // Llamar a la API para actualizar el campo slug en MongoDB
+              const payload = { slug: v };
+              fetch(`api/products/updateSlug/${encodeURIComponent(item.name)}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  alert(data)
+                  // Resto del código para manejar la respuesta de la API
+                })
+                .catch((error) => {
+                  alert(error)
+                  // Resto del código para manejar errores en la solicitud
+                });
             });
           });
-        };
-        const quantities = cartItems.map((item) => item.quantity);
+        }; */
+        //const quantities = cartItems.map((item) => item.quantity);
 
-        producto(quantities);
         //console.log(idSeller); */
 
         const [name, setName] = useState(userInfo && userInfo.name);
@@ -64,11 +103,11 @@
         const [phone, setPhone] = useState(userInfo && userInfo.phone);
         //console.log(cartItems)
    
-        const producto =  () => {
+        /*const producto =  () => {
           const _id = "646c10d6cc2d15be4fa8d0f8";
           const result = 6;
         apiSlug(_id)
-        }
+        }*/
         
         const apiSlug = async (id) => {
           try {
@@ -76,7 +115,7 @@
             console.log(response.data);
             alert("Ha cambiado");
           } catch (error) {
-            alert("Error");
+            //alert("Error");
           }
         };
         const handlerAddProduct = async (e) => {
@@ -105,7 +144,7 @@
            
          
             if (data) {
-              producto();
+             // producto();
               localStorage.removeItem("cartItems");
               setOpenCheckout(false);
        
