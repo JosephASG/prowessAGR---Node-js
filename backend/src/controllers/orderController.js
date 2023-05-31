@@ -83,7 +83,7 @@ export const Paid = async (req, res) => {
     const { id } = req.params;
     const order = await Order.findById(id);
     if (!order) {
-      return res.status(404).json({ message: 'Order not found' });
+      return res.status(404).json({ message: 'Order not found' }); 
     }
     order.isPaid = true;
     order.paidAt= fechaHoraActual;

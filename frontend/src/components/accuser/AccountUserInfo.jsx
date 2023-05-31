@@ -7,7 +7,7 @@ import './AccountUserinfo.css';
 
 const AccountUserInfo = (props) => {
 
-    const userInfo = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null;
+    const userInfo = localStorage.getItem("userInfo") ? JSON.parse(localStorage.getItem("userInfo")) : null; 
 
     const id = userInfo && userInfo._id;
   const {commission} = props

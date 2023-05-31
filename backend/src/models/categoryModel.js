@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 //Para crear Tabla en BD para Usuario
 const CategorySchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true }, 
   },
   {
     timestamps: true, // insertar automáticamente marcas de tiempo en cada documento

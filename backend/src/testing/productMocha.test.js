@@ -1,6 +1,6 @@
 import request from "supertest";
 import test from "./app-testing.js";
-import Products from "../models/productModel.js";
+import Products from "../models/productModel.js"; 
 import HTTP_STATUS from "http-status-codes";
 
 beforeEach(() => {

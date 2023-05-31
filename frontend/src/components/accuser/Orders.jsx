@@ -110,7 +110,7 @@ function actualizarSlug(ide) {
 
         ))}
 
-      <ReactPaginate
+      <ReactPaginate 
         className="filter-pagination"
         previousLabel={"Ant"}
         nextLabel={"Sig"}

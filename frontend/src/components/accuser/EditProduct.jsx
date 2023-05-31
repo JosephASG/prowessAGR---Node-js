@@ -46,7 +46,7 @@ const EditProduct = ({ setOpenEdit, pro }) => {
       formData.append("description", description);
       formData.append("price", price);
       formData.append("image", image);
-      formData.append("sellerId", userInfo._id);
+      formData.append("sellerId", userInfo._id); 
       formData.append("seller", userInfo.name);
       formData.append("sellerImage", userInfo.image.secure_url);
       console.log(pro._id)

@@ -54,7 +54,7 @@ const Order = () => {
      </button> 
      <div className="ctn-order" >
      
-     <h1 className="order-title">FACTURA</h1>
+     <h1 className="order-title">FACTURA</h1> 
      <div className="order-info">
            <img className="logo-img"
              src="../assets/images/others/prowess-logo2.png"

@@ -46,7 +46,7 @@ const UserInfoOrders = ({ userOrders }) => {
           
           
           <span className={`estado-entrega__${item.isDelivered ? 'Entregado' : 'Pendiente'}`}>
-            {item.isDelivered ? 'Entregado' : ''}
+            {item.isDelivered ? 'Entregado' : ''} 
             {!item.isDelivered && (
   <div>
     {item.isPaid ? (

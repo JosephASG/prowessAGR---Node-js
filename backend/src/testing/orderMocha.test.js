@@ -1,7 +1,7 @@
 import request from "supertest";
 import test from "./app-testing.js";
 import HTTP_STATUS from "http-status-codes";
-import Orders from "../models/orderModel.js";
+import Orders from "../models/orderModel.js"; 
 
 beforeEach(() => {
   jest.setTimeout(10000);

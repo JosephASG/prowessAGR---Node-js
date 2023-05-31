@@ -195,7 +195,7 @@ function handleChange(e) {
               />
               </div>
               <div className="form-btn">
-                <button type="submit" className="button-add-product">
+                <button type="submit" className="button-add-product"> 
                   <FontAwesomeIcon icon={faPlusCircle} className="icon-plus"/>
                   {uploadingImageProduct ? "Guardando..." : "Guardar producto"}
                 </button>

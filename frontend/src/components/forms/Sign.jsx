@@ -76,7 +76,7 @@ const Sign = () => {
 
   return (
     <div className="form-row">
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler}> 
         <div className="form-group">
           <label htmlFor="name">Nombre completo</label>
           <input

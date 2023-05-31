@@ -13,7 +13,7 @@ const UserSchema = new mongoose.Schema(
       public_id: { type: String },
       secure_url: { type: String },
     },
-    isAdmin: { type: Boolean, default: false, required: true },
+    isAdmin: { type: Boolean, default: false, required: true }, 
     commission : { type: Number, required: true },  
 
   },

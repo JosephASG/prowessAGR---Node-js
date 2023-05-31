@@ -6,7 +6,7 @@ import seedRouter from "../routes/seedRoutes.js";
 import CategoryRouter from "../routes/categoryRoutes.js";
 import ProductRouter from "../routes/productRoutes.js";
 import UserRouter from "../routes/userRoutes.js";
-import OrderRouter from "../routes/orderRoutes.js";
+import OrderRouter from "../routes/orderRoutes.js"; 
 import "../databases/databaseMongoDB.js";
 import "../databases/databaseCloudinary.js";
  

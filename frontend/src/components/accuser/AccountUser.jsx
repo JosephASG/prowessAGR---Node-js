@@ -183,7 +183,7 @@ style={{ width: "245px", height: "280px",left:"-1px",top:"25px"}}
                 />
               </div>
               <div className="form-group">
-        <label htmlFor="commission">Comisiones Ganadas</label>
+        <label htmlFor="commission">Comisiones Ganadas</label> 
         {commission !== 0 ? (
           <input
             type="text"

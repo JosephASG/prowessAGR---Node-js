@@ -5,7 +5,7 @@ import * as userController from "../controllers/userController.js";
 const router = Router();
 
 //Para iniciar sesion con cuenta de usuario
-router.post("/login", userController.loginUser);
+router.post("/login", userController.loginUser); 
 router.put(
   "/update/:id",
   fileUpload({

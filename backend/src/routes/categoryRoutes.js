@@ -5,6 +5,6 @@ const router = Router();
 
 //para obtener una categoría de la base de datos --- PULL CATEGORY
 router.get("/", categoryController.getCategories);
-router.get("/:id", categoryController.getCategoryById);
-
+router.get("/:id", categoryController.getCategoryById); 
+ 
 export default router;

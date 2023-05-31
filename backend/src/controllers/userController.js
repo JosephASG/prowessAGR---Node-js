@@ -177,7 +177,7 @@ export const deleteUser = async (req, res) => {
     return res.status(HTTP_STATUS.OK).json({ message: "Usuario eliminado" });
   } catch (error) {
     return res
-      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR) 
       .json({ message: error.message });
   }
 };

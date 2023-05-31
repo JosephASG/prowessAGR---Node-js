@@ -11,7 +11,7 @@ const SignIn = () => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState(""); 
 
   const submitHandler = async (e) => {
     e.preventDefault();

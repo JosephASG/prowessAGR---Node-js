@@ -24,7 +24,7 @@ const CartItems = () => {
     }
   });
  
-  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { state, dispatch: ctxDispatch } = useContext(Store); 
 
   const {
     cart: { cartItems },

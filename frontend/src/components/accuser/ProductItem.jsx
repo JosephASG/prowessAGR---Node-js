@@ -57,4 +57,4 @@ const ProductItem = ({ pro }) => {
   );
 };
 
-export default ProductItem;
+export default ProductItem; 

@@ -6,7 +6,7 @@ try {
   // 2. Intenta acceder a la biblioteca cloudinary
   cloudinary.config({
     // 3. Configurar la biblioteca cloudinary
-    cloud_name: process.env.CLOUD_NAME,
+    cloud_name: process.env.CLOUD_NAME, 
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET,
     secure: true,

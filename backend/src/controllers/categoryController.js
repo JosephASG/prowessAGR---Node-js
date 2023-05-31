@@ -38,7 +38,7 @@ export const getCategories = async (req, res) => {
     }
 
     // Enviar las categorías encontradas en una respuesta JSON
-    return res.status(HTTP_STATUS.OK).json(categories);
+    return res.status(HTTP_STATUS.OK).json(categories); 
   } catch (error) {
     // Si se produce un error, envíe el mensaje de error en formato JSON
     return res
