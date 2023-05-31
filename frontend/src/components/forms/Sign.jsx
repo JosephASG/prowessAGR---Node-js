@@ -134,7 +134,7 @@ const Sign = () => {
                 type="text"
                 onChange={(e) => setCommission(e.target.value)}
                 value={commission}
-                id="commission"
+                id="commission" 
               />
             ) : (
               <span>{commission}</span>

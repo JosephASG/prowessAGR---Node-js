@@ -27,7 +27,7 @@ export const loginUser = async (req, res) => {
         phone: user.phone,
         image: user.image,
         isAdmin: user.isAdmin,
-        commission: user.commission,
+        commission: user.commission,  
       });
       return;
     }

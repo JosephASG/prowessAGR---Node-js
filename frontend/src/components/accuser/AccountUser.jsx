@@ -25,7 +25,7 @@ const AccountUser = () => {
   const [image, setImage] = useState(userInfo && userInfo.image);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [previewImage, setPreviewImage] = useState(false);
-  const [commission ,setCommission] = useState(userInfo && userInfo.commission);
+  const [commission ,setCommission] = useState(userInfo && userInfo.commission);  
   console.log(commission)
   const [open, setOpen] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
@@ -192,7 +192,7 @@ style={{ width: "245px", height: "280px",left:"-1px",top:"25px"}}
             id="commission"
             style={{
               color: 'red',
-              fontSize: '16px',
+              fontSize: '16px', 
             }}
           />
         ) : (
@@ -250,7 +250,7 @@ style={{ width: "245px", height: "280px",left:"-1px",top:"25px"}}
               
             )} 
           </div>
-          {openAdd && <AddProduct setOpenAdd={setOpenAdd} />}
+          {openAdd && <AddProduct setOpenAdd={setOpenAdd} />} 
         </div>
       </div>
     
