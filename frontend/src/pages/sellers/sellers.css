@@ -3,12 +3,12 @@
     justify-content: center;
 }
 
-    @media screen and (max-width: 700px){
+    @media screen and (max-width: 720px){
         .mainCont{
             display: inline-block;
         }
     }
-    @media screen and (max-width: 414px){
+    @media screen and (max-width: 480px){
         .mainCont{
         height: 360px;
         width: 700px;
@@ -250,7 +250,7 @@
     margin-bottom: 1rem;
     margin-top: 5rem;
 }
-@media screen and (max-width: 414px){
+@media screen and (max-width: 480px){
     #Buscador {
 
         background: url(https://icones.pro/wp-content/uploads/2021/06/icone-loupe-noir.png) no-repeat 10px 10px;
@@ -307,7 +307,7 @@
     height: 25rem;
     width: 35rem;
 }
-@media screen and (max-width: 414px){
+@media screen and (max-width: 480px){
     .card:hover {
         height: 22rem;
         width: 23rem;
@@ -409,7 +409,7 @@
     display: flex;
 }
 
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 320px) {
     .follow-title{
         font-size: 20px;
         margin-top: 40rem;
@@ -418,7 +418,11 @@
     .footer-container{
         position: absolute;
 
-    }   
+    }  
+    .card {
+        bottom: auto;
+        
+    } 
     .header-menu{
         display: flex;
         flex-wrap: wrap;
@@ -426,13 +430,16 @@
         align-items: center;
     }
 }
-@media screen and (max-width: 820px){
+@media screen and (max-width: 720px){
     .follow-title{
         font-size: 20px;
         margin-top: 40rem;
         font-size: 3rem;
+        
     }
     .footer-container{
+        height: 100%;
+        top: 35%;
         position: absolute;
     }   
     .header-menu{
@@ -442,27 +449,7 @@
         align-items: center;
     }
 }
-@media screen and (max-width: 768px){
-    .follow-title{
-        font-size: 20px;
-        margin-top: 40rem;
-        font-size: 3rem;
-        
-    }
-    .footer-container{
-        height: 180px;
-        width: 780px;
-        top: -55px;
-        position:relative;
-    }   
-    .header-menu{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-}
-@media screen and (max-width: 414px) {
+@media screen and (max-width: 480px) {
     .follow-title{
         font-size: 20px;
         margin-top: 40rem;
@@ -481,7 +468,7 @@
     }
 }
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 480px) {
     .wrapper-info{
         border-left: thick solid #000;
         /*border-right: thick solid #000;*/
