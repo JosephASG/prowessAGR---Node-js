@@ -10,11 +10,13 @@
     }
     @media screen and (max-width: 480px){
         .mainCont{
-        height: 360px;
-        width: 700px;
-        left:-190px;
-        top:80px;
+        height: fit-content;
+        width: fit-content;
+        padding: 18px;
         display: flex;
+        }
+        .sell-fill-cards{
+           margin-top: 20%;
         }
     
         
@@ -261,7 +263,6 @@
         outline: none;
         width: 300px;
         height: 50px;
-        left: -180px;
         top:100px;
         border: solid 3px;
         font-size: 20pt;
@@ -456,8 +457,8 @@
         font-size: 3rem;
     }
     .footer-container{
-        height: 400px;
-        width: 430px;
+        height: 100%;
+        width: 100%;
         position:relative;
     }   
     .header-menu{
