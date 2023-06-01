@@ -225,7 +225,7 @@ container-footer {
 @media only screen and (max-width: 1024px) {
   .container-footer {
   height: 47vh;
-  position: fixed;
+  margin-top: auto;
   }
   
   .ctn-img-logo {
