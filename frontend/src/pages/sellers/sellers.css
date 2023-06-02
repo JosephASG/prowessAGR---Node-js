@@ -439,9 +439,7 @@
         
     }
     .footer-container{
-        height: 100%;
-        top: 35%;
-        position: absolute;
+        height: 100%;   
     }   
     .header-menu{
         display: flex;
@@ -460,6 +458,7 @@
         height: 100%;
         width: 100%;
         position:relative;
+        top: 80px;
     }   
     .header-menu{
         display: flex;
@@ -467,6 +466,9 @@
         justify-content: center;
         align-items: center;
     }
+    #Buscador {
+        width: 400px;
+}
 }
 
 @media screen and (max-width: 480px) {
@@ -526,4 +528,18 @@ h3.p_phone{
     color: rgba(18, 4, 101, 0.6);
     font-style: bold;
     font-family: 'Raleway', sans-serif;
+}
+
+@media screen and (max-width: 720px) {
+    .sell-fill-cards{
+    height: fit-content;
+    }
+    #Buscador{
+        width: 400px;
+        margin-top: 30%;
+    }
+    .filter-pagination {
+        top: 40px;
+
+    }
 }
