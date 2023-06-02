@@ -23,14 +23,41 @@
     /* background-color: #309b6a; */
     margin: 100px;
 }
-
+@media only screen and (max-width: 480px) {
+  .landing {
+    flex-direction: row;
+    width: 100%;
+  }
+  .ctn-img-bg-3 img.third {
+    display: none;
+    animation: none;
+    transform: none;
+  }
+  .ctn-img-bg-2 img.second {
+    display: none;
+    animation: none;
+    transform: none;
+  }
+  .ctn-img-bg-1 img.first {
+    display: none;
+    animation: none;
+    transform: none;
+  }
+  .ctn-img-bg-4 img.fourth{
+  display: none;
+  animation: none;
+  transform: none;
+  }
+}
 @media only screen and (max-width: 991px) {
     .landing {
       flex-direction: row;
+      width: 100%;
     }
   
     .ctn-wrapper-landing {
       flex-direction: column;
+
     }
   
     .ctn-land-hero {

@@ -201,6 +201,11 @@ svg.rotating-slow {
   z-index: 1;
   animation: flotar4 60s infinite linear;
 }
+@media only screen and (max-width: 480px){
+  svg.rotating-slow{
+    animation: none;
+  }
+}
 
 @keyframes flotar1 {
   0% {

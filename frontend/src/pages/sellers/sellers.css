@@ -310,8 +310,8 @@
 }
 @media screen and (max-width: 480px){
     .card:hover {
-        height: 22rem;
-        width: 23rem;
+        padding: 20px;
+        margin: auto;
     }        
 }
 
