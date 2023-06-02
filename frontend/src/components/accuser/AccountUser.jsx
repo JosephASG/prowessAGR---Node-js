@@ -64,6 +64,7 @@ const AccountUser = () => {
       formData.append("email", email);
       formData.append("address", address);
       formData.append("phone", phone);
+      formData.append("commission",commission)
       const { data } = await axios.put(
         `/api/users/update/${userInfo._id}`,
         formData,
@@ -183,27 +184,13 @@ const AccountUser = () => {
               </div>
               <div className="form-group">
         <label htmlFor="commission">Comisiones Ganadas</label> 
-        {commission !== 0 ? (
-          <input
-            type="text"
-            onChange={(e) => setCommission(e.target.value)}
-            value={commission}
-            id="commission"
-            style={{
-              color: 'red',
-              fontSize: '16px', 
-            }}
-          />
-        ) : (
-          <span
-            style={{
-              color: 'red',
-              fontSize: '45px',
-            }}
-          >
-            ${commission}
-          </span>
-        )}
+        <input
+                  required
+                  type="text"
+                  onChange={(e) => setCommission(e.target.value)}
+                  value={commission}
+                  id="commission"
+                />
       </div>
               <div className="form-group">
                 <span className="change-password" onClick={() => setOpen(true)}>

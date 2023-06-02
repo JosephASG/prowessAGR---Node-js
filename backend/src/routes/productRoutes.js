@@ -15,7 +15,7 @@ router.post(
   productController.postProduct
 );
 router.get("/", productController.getProducts);
-router.get("/detail/:id", productController.getProductBySlug);
+router.get("/detail/:id", productController.getProductBySlug); 
 router.put(
   "/update/:id",
   fileUpload({
@@ -24,7 +24,7 @@ router.put(
   }),
   productController.updateProduct
 );
-router.put("/slug/:id",productController.updateSlug)
+router.get("/slug/:id", productController.updateSlug);
 
 router.delete("/delete/:id", productController.deleteProduct);
 export default router;

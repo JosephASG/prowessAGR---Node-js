@@ -38,7 +38,7 @@ export const postProduct = async (req, res) => {
     return res.status(HTTP_STATUS.CREATED).json(savedProduct);
   } catch (error) {
     // si hay un error, devolver error con un código de estado 500
-    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error);
+    return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json(error); 
   }
 };
 
@@ -178,19 +178,11 @@ export const deleteProduct = async (req, res) => {
     return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error });
   }
 };
-export const updateSlug=async (req, res) => {
-  try {
-
-
- 
-    const { id: productId } = req.params;
+export const updateSlug = async (req, res) => {
+  const { id: productId } = req.params;
     const product = await Products.findById(productId);
-    // Buscar y actualizar el valor en MongoDB
-     product.slug=6;
-     const updatedOrder = await product.save();
-     res.json(updatedOrder);
-   } catch (err) {
-     console.error(err);
-     res.status(500).json({ message: 'Server error' });
-   }
+  
+
+
 };
+
