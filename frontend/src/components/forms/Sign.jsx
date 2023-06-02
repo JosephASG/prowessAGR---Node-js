@@ -17,9 +17,16 @@ const Sign = () => {
   const [passwordError, setPasswordError] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
+    if (event.target.value === "option2") {
+      setIsAdmin(true);
+    } else {
+      setIsAdmin(false);
+    }
+  
   }
 
   const handlePasswordChange = (event) => {
@@ -41,6 +48,10 @@ const Sign = () => {
     } else {
       setPhoneError(true);
     }
+
+    //Verificamos usuarioAdmi
+    
+
   };
 
   const submitHandler = async (event) => {
@@ -65,6 +76,7 @@ const Sign = () => {
         phone,
         commission,
         selectedOption,
+        isAdmin
       });
       alert("Te has registrado con éxito");
       navigate("/login");

@@ -8,7 +8,6 @@ import UserProduct from "./UserProduct";
 import AddProduct from "./AddProduct";
 import Orders from "./Orders";
 import AccountUserInfo from "./AccountUserInfo";
-import Checkout from "../cartitems/Checkout";
 const AccountUser = () => {
   const navigate = useNavigate();
 
