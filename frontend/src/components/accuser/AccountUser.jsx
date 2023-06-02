@@ -183,14 +183,28 @@ const AccountUser = () => {
               </div>
               <div className="form-group">
         <label htmlFor="commission">Comisiones Ganadas</label> 
-        <input
-                  required
-                  type="text"
-                  onChange={(e) => setCommission(e.target.value)}
-                  value={commission}
-                  id="commission"
-                />
-      </div>
+        {commission !== 0 ? (
+          <input
+            type="text"
+            onChange={(e) => setCommission(e.target.value)}
+            value={commission}
+            id="commission"
+            style={{
+              color: 'red',
+              fontSize: '16px', 
+            }}
+          />
+        ) : (
+          <span
+            style={{
+              color: 'red',
+              fontSize: '45px',
+            }}
+          >
+            ${commission}
+          </span>
+        )}
+        </div>
               <div className="form-group">
                 <span className="change-password" onClick={() => setOpen(true)}>
                   Cambiar contraseña
