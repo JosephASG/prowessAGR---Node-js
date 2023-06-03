@@ -19,6 +19,7 @@ const Sign = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
 
+ 
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
     if (event.target.value === "option2") {
@@ -139,19 +140,7 @@ const Sign = () => {
             id="address"
           />
         </div>
-        <div className="form-group">
-                  <label htmlFor="commission">Commission</label>
-            {commission !== 0 ? (
-              <input
-                type="text"
-                onChange={(e) => setCommission(e.target.value)}
-                value={commission}
-                id="commission" 
-              />
-            ) : (
-              <span>{commission}</span>
-            )}
-            </div>
+      
         <div className="form-group">
           <label htmlFor="phone">Teléfono</label>
           <input
@@ -175,6 +164,21 @@ const Sign = () => {
             <option value="option2">Vendedor</option>
           </select>
         </div>
+        {selectedOption === "option2" && (
+        <div className="form-group">
+          <label htmlFor="commission">Comisión</label>
+          {commission !== 0 ? (
+              <input
+                type="text"
+                onChange={(e) => setCommission(e.target.value)}
+                value={commission}
+                id="commission" 
+              />
+            ) : (
+              <span>{commission}</span>
+            )}
+        </div>
+      )}
         <div className="form-btn-c">
           <button className="btn-reg2" type="submit">
             Registrarse
