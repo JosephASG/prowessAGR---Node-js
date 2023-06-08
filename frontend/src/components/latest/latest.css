@@ -127,3 +127,24 @@
     border-radius: 20px;
     box-shadow: 0 2px 8px rgba(18, 18, 18, 0.96);
   }
+  @media only screen and (max-width: 480px){
+    .latest-group{
+      width: fit-content;
+    }
+    .latest-header {
+      width: auto;
+      height: auto;
+    }
+    .latest-header img{
+      width: 150px;
+      height: 100px;
+    }
+    .latest-body span.price {
+      margin-top: 0.5rem;
+      left: 5px;
+  } 
+  .latest-products{
+    grid-template-columns: repeat(auto-fit, minmax(227px, 0px));
+  }
+
+  }
