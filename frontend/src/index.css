@@ -70,11 +70,17 @@ ul {
   main {
       padding: 0px;
    }
+   #Star {
+    display: none;
+  }
 }
 
 @media (max-width: 480px) {
   /* Estilos para pantallas con un ancho máximo de 480px */
   main {
       padding: 0px;
+  }
+  #Star {
+    display: none;
   }
 }
