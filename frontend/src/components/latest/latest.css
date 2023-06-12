@@ -131,6 +131,10 @@
     .latest-group{
       width: fit-content;
     }
+    .latest-col:last-child h2{
+
+    }
+
     .latest-header {
       width: auto;
       height: auto;
@@ -145,6 +149,34 @@
   } 
   .latest-products{
     grid-template-columns: repeat(auto-fit, minmax(227px, 0px));
+  }
+
+  }
+
+  @media only screen and (max-width: 720px){
+    .latest-group{
+      width: fit-content;
+    }
+    .latest-col:last-child h2{
+      font-size: 40px;
+      margin-left: 90px;
+    }
+
+    .latest-header {
+      width: auto;
+      height: auto;
+    }
+    .latest-header img{
+      width: 150px;
+      height: 100px;
+    }
+    .latest-body span.price {
+      margin-top: 0.5rem;
+      left: 5px;
+  } 
+  .latest-products{
+    grid-template-columns:1fr 1fr;
+    grid-column-gap: 10px;
   }
 
   }
