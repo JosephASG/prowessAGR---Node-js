@@ -134,7 +134,9 @@
     .latest-col:last-child h2{
 
     }
-
+    .latest-row {
+      margin-top: 30%; 
+    }
     .latest-header {
       width: auto;
       height: auto;
@@ -160,6 +162,10 @@
     .latest-col:last-child h2{
       font-size: 40px;
       margin-left: 90px;
+      margin-top: 177px;
+    }
+    .latest-row {
+      margin-top: 30%; 
     }
 
     .latest-header {

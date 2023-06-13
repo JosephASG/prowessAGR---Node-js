@@ -27,6 +27,8 @@
   .landing {
     flex-direction: row;
     width: 100%;
+    height: 200px;
+    margin-top: 40%;
   }
   .ctn-wrapper-landing {
     background: none;
@@ -56,6 +58,8 @@
     .landing {
       flex-direction: row;
       width: 100%;
+      height: 0px;
+    margin-top: 40%;
     }
     .ctn-wrapper-landing {
       background: none;
@@ -80,6 +84,7 @@
     .ctn-images-hero {
       width: 100%;
       margin: 50px;
+      display: none;
     }
   
     .ctn-img-bg-1,
@@ -114,9 +119,9 @@
   
     .ctn-text-1 span {
       font-size: 35px;
-      margin: 20px 10px;
       text-align: center;
       letter-spacing: 5px;
+      margin-top: 20%;
     }
   
     .ctn-text-2 span {

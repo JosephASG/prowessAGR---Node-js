@@ -186,12 +186,13 @@ span.logout {
 
   .nav-menu.active {
     background: #1f5156;
-    top: 120px;
+    top: 185%;
     padding-top: 60px;
     border-radius: 0 0 45px 45px;
-    left: 0px;
+    left: 55%;
     opacity: 1;
     transition: all 0.5s ease; 
+    width: 250px;
     
   }
 
@@ -210,10 +211,11 @@ span.logout {
     background: #1f5156;
     padding-top: 30px;
     border-radius: 45px 45px 0px 0px;
-    top: 102%;
-    left: 0px;
+    top: 140%;
+    left: 55%;
     opacity: 1;
-    transition: all 0.5s ease; 
+    transition: all 0.5s ease;
+    width: 250px;
   }
   
   .nav-item .active {
