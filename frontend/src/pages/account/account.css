@@ -554,6 +554,7 @@ label{
     padding: 0%;
     margin-top: 15%;
     display: flex;
+    left: 10%;
      }
     .account-row {
     margin-left: 10px;
@@ -565,7 +566,15 @@ label{
         }
     .account-subtitle {
             font-size: 35px;
+            left: 13%;
          }
+    .add-btn{
+            left: 15%;
+         }
+    .account-orders{
+            left: 15%;
+         }
+
   }
 
   @media (max-width: 920px) {
