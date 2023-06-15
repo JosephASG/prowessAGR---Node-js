@@ -24,7 +24,8 @@ const AccountUser = () => {
   const [image, setImage] = useState(userInfo && userInfo.image);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [previewImage, setPreviewImage] = useState(false);
-  const [commission ,setCommission] = useState(userInfo && userInfo.commission);  
+  const [commission ,setCommission] = useState(userInfo && userInfo.commission);
+  const [isAdmin,setIsAdmin] = useState(userInfo && userInfo.isAdmin);
   console.log(commission)
   const [open, setOpen] = useState(false);
   const [openAdd, setOpenAdd] = useState(false);
@@ -182,7 +183,8 @@ const AccountUser = () => {
                 />
               </div>
               <div className="form-group">
-        <label htmlFor="commission">Comisiones Ganadas</label> 
+        {isAdmin && <div>
+          <label htmlFor="commission">Comisiones Ganadas</label> 
         {commission !== 0 ? (
           <input
             type="text"
@@ -203,7 +205,7 @@ const AccountUser = () => {
           >
             ${commission}
           </span>
-        )}
+        )}</div>}
         </div>
               <div className="form-group">
                 <span className="change-password" onClick={() => setOpen(true)}>
@@ -218,16 +220,16 @@ const AccountUser = () => {
             </form>
           </div>
           {open && <Passwords setOpen={setOpen} />}
-          <div className="account-info">
+          {isAdmin && <div className="account-info">
             <AccountUserInfo commission={commission} />
           
-          </div>
+          </div>}
          <>
 
          </>
         </div>
         <div className="account-group">
-          <h2 className="account-subtitle">Mis productos</h2>
+          {isAdmin && <div><h2 className="account-subtitle">Mis productos</h2>
           <button className="add-btn" onClick={() => setOpenAdd(true)}>
             Añadir producto
           </button>
@@ -237,7 +239,7 @@ const AccountUser = () => {
             ) : (
               <UserProduct product={product} />
             )}
-          </div>
+          </div></div>}
           <h2 className="account-subtitle">Mis órdenes</h2>
           <div className="account-orders">
             {orders.length === 0 ? (
