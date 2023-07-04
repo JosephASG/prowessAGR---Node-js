@@ -1,0 +1,13 @@
+.shopping-cart-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .shopping-cart-content {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  

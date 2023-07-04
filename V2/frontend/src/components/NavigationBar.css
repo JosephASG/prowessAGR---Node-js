@@ -1,0 +1,90 @@
+/* Estilos previos (sin cambios) */
+
+.navigation-bar {
+  height: 50px;
+}
+
+.navigation-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Alinea el logo a la izquierda y el botón a la derecha */
+  width: 100%;
+}
+
+.logo {
+  margin-right: 10px;
+  max-width: 100px;
+}
+
+.logo img {
+  height: auto;
+  width: 100%;
+}
+
+.navigation-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.navigation-list li {
+  margin-right: 38px;
+}
+
+.navigation-list li:last-child {
+  margin-right: 0;
+}
+
+.navigation-list li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navigation-list li a:hover {
+  color: orange;
+}
+
+/* Nuevos estilos para el menú hamburguesa */
+
+.hamburger-menu {
+  display: block; /* Muestra el botón del menú hamburguesa */
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: white;
+}
+
+@media screen and (min-width: 769px) {
+  .hamburger-menu {
+    display: none; /* Oculta el botón del menú hamburguesa para tamaños mayores a 768px */
+  }
+
+  .navigation-list {
+    display: flex; /* Muestra la lista de navegación por defecto para tamaños mayores a 768px */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navigation-list {
+    display: none; /* Oculta la lista de navegación por defecto para tamaños de tablet y móvil */
+  }
+
+  .navigation-list.active {
+    display: flex; /* Muestra la lista de navegación cuando el menú hamburguesa está activo */
+    flex-direction: column; /* Alinea los elementos en una columna vertical */
+    background-color: #333; /* Puedes ajustar el color de fondo a tu gusto */
+    position: absolute; /* Coloca la lista encima del botón del menú hamburguesa */
+    top: 50px; /* Ajusta la posición vertical de la lista */
+    right: 10px; /* Ajusta la posición horizontal de la lista */
+    z-index: 1; /* Asegura que la lista aparezca por encima del contenido */
+  }
+
+  .navigation-list.active li {
+    margin-right: 0; /* Quita el margen derecho entre los elementos de la lista */
+    margin-bottom: 10px; /* Añade un poco de espacio entre los elementos */
+  }
+}
