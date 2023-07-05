@@ -67,7 +67,7 @@ function Register() {
           accept="image/*"
           onChange={handlePhotoUpload}
         />
-        {photo && <img src={photo} alt="Foto de perfil" />}
+        {photo && <img src={photo} alt="Foto de perfil" className='image-Show'/>}
         <h3 className="register-subtitle">Dirección</h3>
         <input
           className="register-input"
