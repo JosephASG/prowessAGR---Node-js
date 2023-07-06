@@ -81,7 +81,7 @@ function Register() {
           required
         />
         <select
-          className="register-input"
+          className="register-inputS"
           value={userType}
           onChange={(e) => setUserType(e.target.value)}
           required
@@ -115,7 +115,7 @@ function Register() {
         {photo && <img src={photo} alt="Foto de perfil" />}
         <h3 className="register-subtitle">Dirección</h3>
         <select
-          className="register-input"
+          className="register-inputS"
           value={province}
           onChange={handleProvinceChange}
           required
@@ -128,7 +128,7 @@ function Register() {
           ))}
         </select>
         <select
-          className="register-input"
+          className="register-inputS"
           value={city}
           onChange={(e) => setCity(e.target.value)}
           required
