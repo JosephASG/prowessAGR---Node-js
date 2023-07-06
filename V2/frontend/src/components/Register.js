@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import './Register.css'; // Importa el archivo de estilos CSS
 
+const provinces = [
+  { name: 'Tungurahua', cities: ['Ambato', 'Pelileo', 'Cevallos'] },
+  { name: 'Pichincha', cities: ['Quito', 'Machachi', 'Cayambe'] },
+  { name: 'Provincia 3', cities: ['Ciudad 7', 'Ciudad 8', 'Ciudad 9'] },
+  // Agrega más provincias y ciudades según tus necesidades
+];
+
 function Register() {
   const [name, setName] = useState('');
   const [userType, setUserType] = useState('');
@@ -21,6 +28,24 @@ function Register() {
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     setPhoto(URL.createObjectURL(file));
+  };
+
+  const handleProvinceChange = (e) => {
+    const selectedProvince = e.target.value;
+    setProvince(selectedProvince);
+    setCity('');
+  };
+
+  const getCityOptions = () => {
+    const selectedProvinceObj = provinces.find((p) => p.name === province);
+    if (selectedProvinceObj) {
+      return selectedProvinceObj.cities.map((c) => (
+        <option key={c} value={c}>
+          {c}
+        </option>
+      ));
+    }
+    return null;
   };
 
   return (
@@ -67,24 +92,30 @@ function Register() {
           accept="image/*"
           onChange={handlePhotoUpload}
         />
-        {photo && <img src={photo} alt="Foto de perfil" className='image-Show'/>}
+        {photo && <img src={photo} alt="Foto de perfil" />}
         <h3 className="register-subtitle">Dirección</h3>
-        <input
+        <select
           className="register-input"
-          type="text"
-          placeholder="Provincia"
           value={province}
-          onChange={(e) => setProvince(e.target.value)}
+          onChange={handleProvinceChange}
           required
-        />
-        <input
+        >
+          <option value="">Seleccionar provincia</option>
+          {provinces.map((p) => (
+            <option key={p.name} value={p.name}>
+              {p.name}
+            </option>
+          ))}
+        </select>
+        <select
           className="register-input"
-          type="text"
-          placeholder="Ciudad"
           value={city}
           onChange={(e) => setCity(e.target.value)}
           required
-        />
+        >
+          <option value="">Seleccionar ciudad</option>
+          {getCityOptions()}
+        </select>
         <input
           className="register-input"
           type="text"
@@ -106,6 +137,7 @@ function Register() {
           type="text"
           placeholder="Código Postal"
           value={postalCode}
+          onChange={(e) => setPostalCode(e.target.value)}
           required
         />
         <button className="register-button" type="submit">Registrarse</button>
