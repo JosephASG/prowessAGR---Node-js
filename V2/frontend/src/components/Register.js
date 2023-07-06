@@ -2,10 +2,30 @@ import React, { useState } from 'react';
 import './Register.css'; // Importa el archivo de estilos CSS
 
 const provinces = [
-  { name: 'Tungurahua', cities: ['Ambato', 'Pelileo', 'Cevallos'] },
-  { name: 'Pichincha', cities: ['Quito', 'Machachi', 'Cayambe'] },
-  { name: 'Provincia 3', cities: ['Ciudad 7', 'Ciudad 8', 'Ciudad 9'] },
-  // Agrega más provincias y ciudades según tus necesidades
+  { "name": "Azuay", "cities": ["Cuenca"] },
+  { "name": "Bolívar", "cities": ["Guaranda"] },
+  { "name": "Cañar", "cities": ["Azogues"] },
+  { "name": "Carchi", "cities": ["Tulcán"] },
+  { "name": "Chimborazo", "cities": ["Riobamba"] },
+  { "name": "Cotopaxi", "cities": ["Latacunga"] },
+  { "name": "El Oro", "cities": ["Machala"] },
+  { "name": "Esmeraldas", "cities": ["Esmeraldas"] },
+  { "name": "Galápagos", "cities": ["Puerto Baquerizo Moreno"] },
+  { "name": "Guayas", "cities": ["Guayaquil"] },
+  { "name": "Imbabura", "cities": ["Ibarra"] },
+  { "name": "Loja", "cities": ["Loja"] },
+  { "name": "Los Ríos", "cities": ["Babahoyo"] },
+  { "name": "Manabí", "cities": ["Portoviejo"] },
+  { "name": "Morona Santiago", "cities": ["Macas"] },
+  { "name": "Napo", "cities": ["Tena"] },
+  { "name": "Orellana", "cities": ["Francisco de Orellana"] },
+  { "name": "Pastaza", "cities": ["Puyo"] },
+  { "name": "Pichincha", "cities": ["Quito"] },
+  { "name": "Santa Elena", "cities": ["Santa Elena"] },
+  { "name": "Santo Domingo de los Tsáchilas", "cities": ["Santo Domingo"] },
+  { "name": "Sucumbíos", "cities": ["Nueva Loja"] },
+  { "name": "Tungurahua", "cities": ["Ambato", "Pelileo", "Cevallos"] },
+  { "name": "Zamora Chinchipe", "cities": ["Zamora"] }
 ];
 
 function Register() {
