@@ -92,6 +92,7 @@ function StorePage() {
   ]);
 
   const [sortOption, setSortOption] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const addToCart = (productId) => {
     console.log(`Producto agregado al carrito: ${productId}`);
@@ -108,6 +109,10 @@ function StorePage() {
     setSortOption(event.target.value);
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   const sortedProducts = [...products].sort((a, b) => {
     if (sortOption === 'name') {
       return a.name.localeCompare(b.name);
@@ -117,6 +122,10 @@ function StorePage() {
       return 0;
     }
   });
+
+  const filteredProducts = sortedProducts.filter((product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="store-page">
@@ -131,15 +140,19 @@ function StorePage() {
 
       <div className="product-list">
         <div className="product-list-header">
-          <h3>Productos</h3>
+          <input
+            type="text"
+            placeholder="Buscar productos"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
           <select value={sortOption} onChange={handleSortChange}>
             <option value="">Ordenar por</option>
             <option value="name">Nombre</option>
             <option value="price">Precio</option>
           </select>
         </div>
-
-        {sortedProducts.map((product) => (
+        {filteredProducts.map((product) => (
           <div key={product.id} className="product-card">
             <img src={product.image} alt={product.name} className="product-image" />
             <h3>{product.name}</h3>

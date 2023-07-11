@@ -48,10 +48,11 @@
 
 .product-list-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
   width: 100%;
+  margin-left: 32px;
 }
 
 .product-list-header h3 {
@@ -61,11 +62,21 @@
 
 .product-list-header select {
   padding: 5px;
-  margin-left: 10px;
-  margin: 5px;
   background-color: orange;
   color: white;
   border-radius: 4px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.search-bar input {
+  padding: 5px;
+  margin-right: 10px;
 }
 
 .product-card {
