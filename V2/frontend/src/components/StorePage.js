@@ -81,13 +81,6 @@ function StorePage() {
       image: 'https://example.com/product3.jpg',
       description: 'Descripción del producto 10',
     },
-    {
-      id: 11,
-      name: 'Producto 11',
-      price: 6.99,
-      image: 'https://example.com/product3.jpg',
-      description: 'Descripción del producto 11',
-    },
     // Agrega más productos según sea necesario
   ]);
 
@@ -140,18 +133,21 @@ function StorePage() {
 
       <div className="product-list">
         <div className="product-list-header">
+        <div className="search-bar">
           <input
             type="text"
             placeholder="Buscar productos"
             value={searchTerm}
             onChange={handleSearch}
           />
+        </div>
           <select value={sortOption} onChange={handleSortChange}>
             <option value="">Ordenar por</option>
             <option value="name">Nombre</option>
             <option value="price">Precio</option>
           </select>
         </div>
+
         {filteredProducts.map((product) => (
           <div key={product.id} className="product-card">
             <img src={product.image} alt={product.name} className="product-image" />
