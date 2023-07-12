@@ -44,15 +44,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  overflow-y: auto; /* Aplica desbordamiento vertical si es necesario */
+  width: 2500px ;
 }
-
 .product-list-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 10px;
   width: 100%;
-  margin-left: 32px;
+  margin-left: 30px;
 }
 
 .product-list-header h3 {
@@ -69,23 +70,31 @@
 
 .search-bar {
   display: flex;
-  align-items: center;
-  margin-left: auto;
-  margin-right: 20px;
+  
 }
 
 .search-bar input {
   padding: 5px;
   margin-right: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  width: 200px;
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: #ff8000;
+  box-shadow: 0 0 5px rgba(255, 128, 0, 0.5);
 }
 
 .product-card {
   width: 200px;
   border-radius: 4px;
   padding: 10px;
-  margin: 8px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin: 8px auto; /* Modificación */
   background-color: rgb(47, 134, 166);
   border: 1px solid orange;
   color: white;
@@ -128,4 +137,36 @@
 .product-card .product-info-icon {
   font-size: 20px;
   cursor: pointer;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 767px) {
+  .product-card {
+    width: 150px;
+    padding: 8px;
+  }
+  
+  .product-card img {
+    max-width: 150px;
+    max-height: 150px;
+    margin-bottom: 8px;
+  }
+  
+  .product-card h3 {
+    font-size: 16px;
+  }
+  
+  .product-card p {
+    font-size: 14px;
+  }
+  
+  .product-card button {
+    font-size: 12px;
+    padding: 3px 6px;
+    margin-top: 8px;
+  }
+  
+  .product-card .product-info-icon {
+    font-size: 16px;
+  }
 }
