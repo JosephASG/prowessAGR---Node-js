@@ -2,7 +2,6 @@
 
 .store-page {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -44,21 +43,22 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  overflow-y: auto; /* Aplica desbordamiento vertical si es necesario */
-  width: 2500px ;
+  min-height: 300px;
 }
+
 .product-list-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
   width: 100%;
-  margin-left: 30px;
+  margin-left: 32px;
 }
 
 .product-list-header h3 {
   margin: 0;
   color: white;
+  font-size: 16px;
 }
 
 .product-list-header select {
@@ -70,11 +70,12 @@
 
 .search-bar {
   display: flex;
-  
+  align-items: center;
+  margin-left: 30px;
 }
 
 .search-bar input {
-  padding: 5px;
+  padding: 8px 10px;
   margin-right: 10px;
   background-color: #f5f5f5;
   border: 1px solid #ddd;
@@ -94,7 +95,9 @@
   width: 200px;
   border-radius: 4px;
   padding: 10px;
-  margin: 8px auto; /* Modificación */
+  margin: 8px;
+  margin-right: 10px;
+  margin-bottom: 10px;
   background-color: rgb(47, 134, 166);
   border: 1px solid orange;
   color: white;
@@ -139,34 +142,28 @@
   cursor: pointer;
 }
 
-/* Estilos para dispositivos móviles */
-@media (max-width: 767px) {
-  .product-card {
-    width: 150px;
-    padding: 8px;
-  }
-  
-  .product-card img {
-    max-width: 150px;
-    max-height: 150px;
-    margin-bottom: 8px;
-  }
-  
-  .product-card h3 {
-    font-size: 16px;
-  }
-  
-  .product-card p {
-    font-size: 14px;
-  }
-  
-  .product-card button {
-    font-size: 12px;
-    padding: 3px 6px;
-    margin-top: 8px;
-  }
-  
-  .product-card .product-info-icon {
-    font-size: 16px;
-  }
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.page-number {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: orange;
+  color: white;
+  border-radius: 4px;
+}
+
+.page-number.active {
+  background-color: #ff8000;
+}
+
+.product-list-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
