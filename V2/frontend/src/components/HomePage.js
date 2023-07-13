@@ -8,9 +8,11 @@
   import image3 from '../imagenes/crecimiento.png'
   function HomePage() {
     const images = [
-      'https://img.goraymi.com/2019/11/13/05c5f5558728050d787f37c15dc37bb6_xl.jpg',
-      'https://transferencia.tec.mx/wp-content/uploads/2021/05/AdobeStock_288676847.jpeg',
-      'https://www2.ucsm.edu.pe/wp-content/uploads/2021/09/la-necesidad-de-la-produccion-agricola.jpg ',
+      require('../imagenes/agr3.jpg'),
+      require('../imagenes/agr2.jpg'),
+      require('../imagenes/agr5.jpg'),
+      require('../imagenes/agr4.jpg'),
+      require('../imagenes/agr1.jpg'),
     ];
 
     return (
