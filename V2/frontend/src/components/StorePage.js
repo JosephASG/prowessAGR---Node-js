@@ -81,11 +81,20 @@ function StorePage() {
       image: 'https://example.com/product3.jpg',
       description: 'Descripción del producto 10',
     },
+    {
+      id: 11,
+      name: 'Producto 10',
+      price: 6.99,
+      image: 'https://example.com/product3.jpg',
+      description: 'Descripción del producto 10',
+    },
     // Agrega más productos según sea necesario
   ]);
 
   const [sortOption, setSortOption] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
 
   const addToCart = (productId) => {
     console.log(`Producto agregado al carrito: ${productId}`);
@@ -106,6 +115,10 @@ function StorePage() {
     setSearchTerm(event.target.value);
   };
 
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const sortedProducts = [...products].sort((a, b) => {
     if (sortOption === 'name') {
       return a.name.localeCompare(b.name);
@@ -120,8 +133,14 @@ function StorePage() {
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
   return (
-    <div className="store-page">
+       <div className="store-page">
       <div className="sidebar">
         <h2>Categorías</h2>
         <ul>
@@ -133,14 +152,14 @@ function StorePage() {
 
       <div className="product-list">
         <div className="product-list-header">
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Buscar productos"
-            value={searchTerm}
-            onChange={handleSearch}
-          />
-        </div>
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Buscar productos"
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </div>
           <select value={sortOption} onChange={handleSortChange}>
             <option value="">Ordenar por</option>
             <option value="name">Nombre</option>
@@ -148,7 +167,7 @@ function StorePage() {
           </select>
         </div>
 
-        {filteredProducts.map((product) => (
+        {currentProducts.map((product) => (
           <div key={product.id} className="product-card">
             <img src={product.image} alt={product.name} className="product-image" />
             <h3>{product.name}</h3>
@@ -161,13 +180,24 @@ function StorePage() {
             </div>
           </div>
         ))}
+
+        <div className="product-list-footer">
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
+            <span
+              key={pageNumber}
+              className={`page-number ${pageNumber === currentPage ? 'active' : ''}`}
+              onClick={() => handlePageChange(pageNumber)}
+            >
+              {pageNumber}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
 
 export default StorePage;
-
 
 
 
