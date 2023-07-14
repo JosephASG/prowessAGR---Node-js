@@ -45,7 +45,7 @@
   flex-wrap: wrap;
   justify-content: center;
   min-height: 400px;
-
+  min-width: 83%;
 }
 
 .product-list-header {
