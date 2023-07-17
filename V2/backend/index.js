@@ -3,10 +3,10 @@ import { initializeApp } from "firebase/app";
 import {getFirestore} from "firebase/firestore";
 import {getStorage} from "firebase/storage";
 
-//import express from "express";
+import express from "express";
 
-//const app = express();
-//const port = 5000;
+const app = express();
+const port = 5000;
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -22,11 +22,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const fiapp = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
-const storage = getStorage(app);
+const db = getFirestore(fiapp);
+const storage = getStorage(fiapp);
 
-/*app.listen(port,() =>{
+app.listen(port,() =>{
     console.log("Servidor en operación (Puerto 5000).")
-})*/
+})
