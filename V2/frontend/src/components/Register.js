@@ -32,6 +32,7 @@ function Register() {
   const [name, setName] = useState('');
   const [userType, setUserType] = useState('');
   const [nPhone, setNPhone] = useState('');
+  const [nCedula, setNCedula] = useState('');
   const [password, setPassword] = useState('');
   const [photo, setPhoto] = useState(null);
   const [province, setProvince] = useState('');
@@ -42,7 +43,7 @@ function Register() {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log('Registro de usuario:', name, userType, nPhone, password, photo, province, city, mainStreet, secondaryStreet, postalCode);
+    console.log('Registro de usuario:', name, userType, nPhone, nCedula ,password, photo, province, city, mainStreet, secondaryStreet, postalCode);
   };
 
   const handlePhotoUpload = (e) => {
@@ -100,6 +101,14 @@ function Register() {
         />
         <input
           className="register-input"
+          type="text"
+          placeholder="Número de Cedula"
+          value={nCedula}
+          onChange={(e) => setNCedula(e.target.value)}
+          required
+        />
+        <input
+          className="register-input"
           type="password"
           placeholder="Contraseña"
           value={password}
@@ -112,7 +121,7 @@ function Register() {
           accept="image/*"
           onChange={handlePhotoUpload}
         />
-        {photo && <img src={photo} alt="Foto de perfil" />}
+        {photo && <img src={photo} alt="Foto de perfil" className='image-show'/>}
         <h3 className="register-subtitle">Dirección</h3>
         <select
           className="register-inputS"

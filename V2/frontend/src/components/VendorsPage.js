@@ -10,7 +10,7 @@ function VendorsPage() {
       address: 'Dirección 1',
       phoneNumber: '123456789',
       whatsappNumber: '987654321',
-      image: 'https://example.com/vendor1.jpg',
+      image: 'https://static.vecteezy.com/system/resources/previews/022/932/692/non_2x/pleading-face-emoji-yellow-face-emoji-with-a-small-frown-and-large-eyes-as-if-begging-or-pleading-popular-chat-elements-free-vector.jpg',
     },
     {
       id: 2,
@@ -42,6 +42,15 @@ function VendorsPage() {
     {
       id: 5,
       name: 'Juan Carlos',
+      city: 'Ambato',
+      address: 'Dirección 2',
+      phoneNumber: '123456789',
+      whatsappNumber: '987654321',
+      image: 'https://example.com/vendor2.jpg',
+    },
+    {
+      id: 6,
+      name: 'Gabriel',
       city: 'Ambato',
       address: 'Dirección 2',
       phoneNumber: '123456789',
