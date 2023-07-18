@@ -1,39 +1,81 @@
+/* VendorsPage.css */
 
-  .vendors-page {
-    padding: 20px;
-  }
-  
-  .vendors-page-title {
-    font-size: 24px;
-    color: #ffffff;
-  }
-  
-  .vendors-cards {
-    padding: 15px;
-    margin: 10px;
-    display: grid;
-    align-items: center;
-    justify-content: center; /* Agregado para centrar horizontalmente */
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: 450px;
-  }
-  
-  .vendor-card {
-    background-color: rgb(47, 134, 166);
-    border: 5px solid orange;
-    max-width: 250px;
-    max-height: 400px;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 15px;
-  }
-  
-  .vendor-data {
-    color: white;
-    font-size: 20px;
-  }
-  
-  .vendor-card img {
-    max-width: 200px;
-    justify-content: center;
-  }
+.vendors-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+h2 {
+  margin-top: 20px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.search-bar input {
+  padding: 8px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.search-bar select {
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.vendor-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.vendor-card {
+  width: 200px;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 8px;
+  background-color: rgb(47, 134, 166);
+  border: 1px solid orange;
+  color: white;
+  text-align: center;
+}
+
+.vendor-card img {
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.vendor-card h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.vendor-card p {
+  margin: 0;
+  color: #fff;
+}
+
+.whatsapp-button {
+  background-color: #4ac959;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-button:hover {
+  background-color: #449b50;
+}
