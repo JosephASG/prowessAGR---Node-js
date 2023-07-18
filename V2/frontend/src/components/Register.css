@@ -31,6 +31,7 @@
 
 .register-input[type="file"] {
   padding: 0;
+  width: 100%;
 }
 
 .register-button {
@@ -59,6 +60,7 @@
 
 .register-input[type="file"]::-webkit-file-upload-button:hover {
   background-color: #45a049;
+
 }
 
 .register-image-container {
@@ -75,7 +77,7 @@
     /* Ajusta el tamaño máximo de la imagen según tus preferencias */
 }
 
-.image-Show{
+.image-show{
   max-width: 400px;
   min-width: 350px;
   max-height: auto;
