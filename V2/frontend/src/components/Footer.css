@@ -10,8 +10,8 @@
     margin: 0 auto;
   }
   
-  .icons img{
-    max-width: 40px;
+  .icon{
+    max-width: 45px;
     filter: invert(100%);
   }
 
