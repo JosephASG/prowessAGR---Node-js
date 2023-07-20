@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './NavigationBar.css';
 import logo from '../imagenes/prowess-logo1.png';
@@ -7,13 +7,30 @@ import { faUser, faShoppingCart, faBars } from '@fortawesome/free-solid-svg-icon
 
 function NavigationBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
+  useEffect(() => {
+    // Función que maneja el evento de scroll
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setScrolled(scrollPosition > 0);
+    };
+
+    // Agregar el event listener al montar el componente
+    window.addEventListener('scroll', handleScroll);
+
+    // Eliminar el event listener al desmontar el componente
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="navigation-bar">
+    <nav className={`navigation-bar ${scrolled ? 'scrolled' : ''}`}>
       <div className="navigation-container">
         <div className="logo">
           <img src={logo} alt="Logo" />
