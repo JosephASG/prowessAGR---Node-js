@@ -1,6 +1,8 @@
 .register-container {
   width: 400px;
   margin: 0 auto;
+  margin-top: 7px;
+  margin-bottom: 5px;
   padding: 20px;
   border-radius: 4px;
   background-color: rgba(47, 134, 166, 0.6);
