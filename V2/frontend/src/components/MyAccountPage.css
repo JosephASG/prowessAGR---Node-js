@@ -1,9 +1,24 @@
 .my-account-page {
-    padding: 20px;
-  }
-  
-  .my-account-page-title {
-    font-size: 24px;
-    color: #333;
-  }
-  
+  padding: 20px;
+}
+
+.my-account-page-title {
+  font-size: 24px;
+  color: #333;
+}
+
+.my-account-info {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 7px;
+  margin-bottom: 5px;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: rgba(47, 134, 166, 0.6);
+  color: white;
+}
+
+.info-image {
+  max-width: 100%;
+  max-height: auto;
+}
