@@ -7,35 +7,52 @@
   color: #333;
 }
 
+/* Contenedor de los elementos de la página */
 .my-account-container {
+  max-width: 850px;
+  max-height: auto;
   display: grid;
-  max-width: 750px;
-  grid-template-columns: 45% 55%;
-  grid-template-rows: auto;
+  grid-template-areas:
+    "image-inf image-inf image-inf"
+    "data-inf text-inf text-inf"; /* Ajusta el grid para que la imagen aparezca arriba y el resto abajo */
   margin: 0 auto;
   margin-top: 7px;
   margin-bottom: 5px;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: rgba(47, 134, 166, 0.6);
   color: white;
 }
-.my-account-img{
+
+/* Imagen del usuario */
+.my-account-img {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
   margin: 5px;
-}
-.my-account-img h2{
-  text-align: center;
+  padding: 5px;
+  grid-area: image-inf;
 }
 
 .info-image {
   max-width: 300px;
   max-height: auto;
-  border-radius: 5px;
+  border-radius: 50%;
 }
-.my-account-info{
-  padding: 5px;
+/* Información de la cuenta */
+.my-account-info {
   margin: 5px;
+  padding: 5px;
+  grid-area: data-inf;
 }
+
 .my-account-info h2 {
   text-align: center;
+}
+
+/* Texto de relleno */
+.my-account-text {
+  grid-area: text-inf;
+  margin: 5px;
+  padding: 5px;
 }

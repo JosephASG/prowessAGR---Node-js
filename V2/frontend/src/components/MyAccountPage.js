@@ -22,16 +22,19 @@ function MyAccountPage() {
     <div className="my-account-page">
       <div className='my-account-container'>
         <div className='my-account-img'>
-          <h2>{vendor.name}</h2>
           <img src={vendor.image} alt={vendor.name} className='info-image' />
         </div>
         <div className='my-account-info'>
-          <br/><br/><br/>
+          <h2>{vendor.name}</h2>
           <p><strong>Provincia: </strong>{vendor.provincia}</p>
           <p><strong>Ciudad: </strong> {vendor.city}</p>
           <p><strong>Direccion: </strong> {vendor.callePrincipal} y {vendor.calleSecundaria}</p>
           <p><strong>Numero de Telefono: </strong>{vendor.phoneNumber}</p>
           <p><strong>WhathsApp: </strong>{vendor.whatsappNumber}</p>
+        </div>
+        <div className='my-account-text'>
+          <h2>Informacion adicional</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipiscing elit magnis tristique est taciti congue, elementum curae justo turpis cras primis nisi tincidunt tortor mus vehicula. Suscipit ut eros viverra nulla elementum mollis facilisi natoque hac, eu arcu fringilla imperdiet ante nisi tincidunt class. Parturient nibh egestas curae hendrerit rutrum purus nec tempus vehicula pretium id luctus quam ante, metus posuere suscipit platea facilisis et erat sed viverra sagittis scelerisque enim turpis.</p>
         </div>
       </div>
     </div>
