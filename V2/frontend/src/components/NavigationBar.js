@@ -30,8 +30,8 @@ function NavigationBar() {
   }, []);
 
   return (
-    <nav className={`navigation-bar ${scrolled ? 'scrolled' : ''}`}>
-    <div className={`navigation-container ${scrolled ? 'scrolled' : ''}`}>
+<nav className={`navigation-bar ${scrolled ? 'scrolled' : ''}`}>
+      <div className={`navigation-container ${scrolled ? 'scrolled' : ''}`}>
         <div className="logo">
           <img src={logo} alt="Logo" />
         </div>
