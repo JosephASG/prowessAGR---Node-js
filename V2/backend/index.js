@@ -6,6 +6,7 @@ import {getStorage} from "firebase/storage";*/
 import express from "express";
 
 const app = express();
+app.use(express.json())
 const port = 5000;
 /*
 // TODO: Add SDKs for Firebase products that you want to use
@@ -57,7 +58,7 @@ app.get('/fb/producto/get',(req,res) =>{
 // Import Firebase and Firestore
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
-import * as producto from './producto.js';
+import * as producto from './Src/controller/productController.js';
 
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
@@ -79,7 +80,7 @@ app.get('/fb/producto/get', producto.getProducts);
 
 
 // Obtener un producto específico
-app.get('/fb/producto/get/:id', (req,res)=>{producto.getProductByID});
+app.get('/fb/producto/get/:id', producto.getProductByID);
 
 // Agregar un nuevo producto
 

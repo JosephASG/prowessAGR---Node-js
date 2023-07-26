@@ -1,5 +1,5 @@
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import * as firebase from 'firebase/app';
+import * as firestore from 'firebase/firestore';
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
 const firebaseConfig = {
@@ -12,13 +12,13 @@ const firebaseConfig = {
 };
 
 // Inicializar Firebase y Firestore
-const fiapp = initializeApp(firebaseConfig);
-const firestore = getFirestore(fiapp);
+const fiapp = firebase.initializeApp(firebaseConfig);
+const fs = firestore.getFirestore(fiapp);
 
 //Obtener todos los productos.
 const getProducts =  async (req, res) => {
   try {
-    const querySnapshot = await getDocs(collection(firestore, 'producto'));
+    const querySnapshot = await firestore.getDocs(firestore.collection(fs, 'producto'));
     const productos = [];
     querySnapshot.forEach((doc) => {
       productos.push({ id: doc.id, ...doc.data() });
@@ -36,7 +36,8 @@ const getProducts =  async (req, res) => {
 const getProductByID = async (req, res) => {
   try {
     const productId = req.params.id;
-    const productDoc = await getDoc(doc(firestore, 'producto', productId));
+    console.log(productId)
+    const productDoc = await firestore.getDoc(firestore.doc(fs, 'producto', productId));
     if (productDoc.exists()) {
       res.json({ id: productDoc.id, ...productDoc.data() });
     } else {
@@ -53,7 +54,8 @@ const getProductByID = async (req, res) => {
 const createProduct =  async (req, res) => {
   try {
     const newProductData = req.body; // Los datos del nuevo producto deben estar en el cuerpo de la solicitud (request body)
-    const docRef = await addDoc(collection(firestore, 'producto'), newProductData);
+    console.log(newProductData);
+    const docRef = await firestore.addDoc(firestore.collection(fs, 'producto'), newProductData);
     res.json({ id: docRef.id, ...newProductData });
   } catch (error) {
     console.error('Error al crear el producto:', error);
@@ -66,7 +68,7 @@ const updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
     const updatedProductData = req.body; // Los datos actualizados deben estar en el cuerpo de la solicitud (request body)
-    await updateDoc(doc(firestore, 'producto', productId), updatedProductData);
+    await firestore.updateDoc(firestore.doc(fs, 'producto', productId), updatedProductData);
     res.json({ id: productId, ...updatedProductData });
   } catch (error) {
     console.error('Error al actualizar el producto:', error);
@@ -77,7 +79,7 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
-    await deleteDoc(doc(firestore, 'producto', productId));
+    await firestore.deleteDoc(firestore.doc(fs, 'producto', productId));
     res.json({ id: productId, message: 'Producto eliminado exitosamente.' });
   } catch (error) {
     console.error('Error al eliminar el producto:', error);
