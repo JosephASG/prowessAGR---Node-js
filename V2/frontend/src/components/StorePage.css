@@ -2,8 +2,9 @@
 
 .store-page {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  }
+}
 
 .store-page-title {
   margin-right: 20px;
@@ -40,12 +41,10 @@
 }
 
 .product-list {
-  position: relative;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   min-height: 400px;
   min-width: 83%;
+  align-items: flex-start;
 }
 
 .product-list-header {
@@ -53,7 +52,6 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  width: 100%; 
   margin-left: 3px;
 }
 
@@ -63,20 +61,29 @@
   font-size: 16px;
 }
 
-.product-list-header select {
+.filter-container {
+  display: flex;
+  margin: 5px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+select {
   padding: 5px;
+  max-height: 30px;
   background-color: orange;
   color: white;
   border-radius: 4px;
 }
 
-.search-bar {
+.search-bar-products {
   display: flex;
   align-items: center;
   margin-left: 30px;
 }
 
-.search-bar input {
+.search-bar-products input {
   padding: 8px 10px;
   margin-right: 10px;
   background-color: #f5f5f5;
@@ -87,10 +94,16 @@
   width: 200px;
 }
 
-.search-bar input:focus {
+.search-bar-products input:focus {
   outline: none;
   border-color: #ff8000;
   box-shadow: 0 0 5px rgba(255, 128, 0, 0.5);
+}
+
+.products-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .product-card {
@@ -165,22 +178,61 @@
 }
 
 .product-list-footer {
-  position: absolute; /* Fijar posición */
-  bottom: -50px; /* Mantener en la parte inferior */
-  width: 100%; /* Ancho completo */
   padding: 10px;
   text-align: center;
 }
 
 @media (max-width: 600px) {
-  .search-bar input {
+  .search-bar-products input {
     width: 150px;
   }
+
+  .product-list {
+    display: block;
+    min-height: 400px;
+    min-width: 83%;
+    align-items: flex-start;
+}
+
+.product-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  margin-bottom: 0;
+  margin-left: 0;
+}
   .product-card {
     transform: scale(0.8);
   }
 
   .sidebar {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 0;
+    margin-left: 0;
     transform: scale(0.8);
   }
+
+  .sidebar h2 {
+    margin: 0;
+    padding: 2px;
+    margin-right: 2px;
+    border-right: 2px solid white;
+  }
+  .sidebar ul {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    width: 100%;
+    align-items: center;
+  }
+
+  .sidebar li {
+    margin: 0;
+    padding: 2px;
+  }
+
 }

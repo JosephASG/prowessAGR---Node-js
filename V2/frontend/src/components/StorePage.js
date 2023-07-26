@@ -140,48 +140,52 @@ function StorePage() {
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   return (
-       <div className="store-page">
-      <div className="sidebar">
-        <h2>Categorías</h2>
-        <ul>
-          {categories.map((category) => (
-            <li key={category}>{category}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div className="product-list">
-        <div className="product-list-header">
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Buscar productos"
-              value={searchTerm}
-              onChange={handleSearch}
-            />
-          </div>
+    <div className="store-page">
+      <div className='filter-container'>
+        <div className="search-bar-products">
+          <input
+            type="text"
+            placeholder="Buscar productos"
+            value={searchTerm}
+            onChange={handleSearch}
+          />
+        </div>
+        <div>
           <select value={sortOption} onChange={handleSortChange}>
-            <option value="">Ordenar por</option>
-            <option value="name">Nombre</option>
-            <option value="price">Precio</option>
+                <option value="">Ordenar por</option>
+                <option value="name">Nombre</option>
+                <option value="price">Precio</option>
           </select>
         </div>
-
-        {currentProducts.map((product) => (
-          <div key={product.id} className="product-card">
-            <img src={product.image} alt={product.name} className="product-image" />
-            <h3>{product.name}</h3>
-            <p>Precio: ${product.price}</p>
-            <div className="product-actions">
-              <button onClick={() => addToCart(product.id)}>Agregar al carrito</button>
-              <span className="product-info-icon" onClick={() => showProductDetails(product.id)}>
-                ℹ️
-              </span>
-            </div>
+      </div>
+      <div className="product-list">
+        <div className="product-list-header">
+          <div className="sidebar">
+            <h2>Categorías</h2>
+            <ul>
+              {categories.map((category) => (
+                <li key={category}>{category}</li>
+              ))}
+            </ul>
           </div>
-        ))}
-
-        <div className="product-list-footer">
+        </div>
+        <div className='products-container'>
+          {currentProducts.map((product) => (
+            <div key={product.id} className="product-card">
+              <img src={product.image} alt={product.name} className="product-image" />
+              <h3>{product.name}</h3>
+              <p>Precio: ${product.price}</p>
+              <div className="product-actions">
+                <button onClick={() => addToCart(product.id)}>Agregar al carrito</button>
+                <span className="product-info-icon" onClick={() => showProductDetails(product.id)}>
+                  ℹ️
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="product-list-footer">
           {Array.from({ length: totalPages }, (_, index) => index + 1).map((pageNumber) => (
             <span
               key={pageNumber}
@@ -192,7 +196,6 @@ function StorePage() {
             </span>
           ))}
         </div>
-      </div>
     </div>
   );
 }
