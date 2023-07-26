@@ -80,3 +80,23 @@ h2 {
 .whatsapp-button:hover {
   background-color: #449b50;
 }
+
+@media screen and (max-width: 768px) {
+  .vendor-list {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajustamos el tamaño para pantallas más pequeñas */
+  }
+
+  .vendor-card {
+    max-width: 150px; /* Limitamos el ancho máximo para pantallas más pequeñas */
+  }
+
+  /* Si deseas ajustar el tamaño de fuente del nombre del vendedor en pantallas más pequeñas, puedes agregar esto: */
+  .vendor-card h3 {
+    font-size: 16px; /* Ajusta el tamaño de fuente según tus necesidades */
+  }
+
+  /* Si deseas ajustar el tamaño de fuente del texto en las tarjetas en pantallas más pequeñas, puedes agregar esto: */
+  .vendor-card p {
+    font-size: 12px; /* Ajusta el tamaño de fuente según tus necesidades */
+  }
+}
