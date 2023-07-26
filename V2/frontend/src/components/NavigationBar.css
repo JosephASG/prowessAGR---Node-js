@@ -93,9 +93,12 @@
     flex-direction: column; /* Alinea los elementos en una columna vertical */
     background-color: #333; /* Puedes ajustar el color de fondo a tu gusto */
     position: absolute; /* Coloca la lista encima del botón del menú hamburguesa */
-    top: 50px; /* Ajusta la posición vertical de la lista */
+    top: 20px; /* Ajusta la posición vertical de la lista */
     right: 10px; /* Ajusta la posición horizontal de la lista */
     z-index: 1; /* Asegura que la lista aparezca por encima del contenido */
+    border-radius: 20px;
+    padding: 25px;
+    margin: 10px;
   }
 
   .navigation-list.active li {
