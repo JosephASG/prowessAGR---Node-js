@@ -56,25 +56,10 @@ app.get('/fb/producto/get',(req,res) =>{
   }
 })*/
 // Import Firebase and Firestore
-import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import * as producto from './Src/controller/productController.js';
 
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
-const firebaseConfig = {
-  apiKey: "AIzaSyAqnpF_ppBXsSawkDiVzYzm2oAV1zLvGWQ",
-  authDomain: "prowess-web-database.firebaseapp.com",
-  projectId: "prowess-web-database",
-  storageBucket: "prowess-web-database.appspot.com",
-  messagingSenderId: "519296320778",
-  appId: "1:519296320778:web:739cc55990bd1a6e4866f3"
-};
-
-// Inicializar Firebase y Firestore
-const fiapp = initializeApp(firebaseConfig);
-const firestore = getFirestore(fiapp);
-
 //Obtener todos los productos.
 app.get('/fb/producto/get', producto.getProducts);
 
