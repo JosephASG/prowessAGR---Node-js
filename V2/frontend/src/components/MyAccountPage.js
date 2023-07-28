@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import './MyAccountPage.css'; // Importa el archivo de estilos CSS
+import Modal from './ModalAccountPage';
+import './MyAccountPage.css';
 
 function MyAccountPage() {
   const [userType, setUserType] = useState('vendor');
+  const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
 
   const vendors = [
     {
@@ -17,27 +19,6 @@ function MyAccountPage() {
     }
   ];
 
-  const buyers = [
-    {
-      name: 'Juan Perez',
-      city: 'Quito',
-      provincia: 'Dirección 1',
-      callePrincipal: 'calle principal',
-      calleSecundaria: 'calle secundaria',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      purchaseSatatus: 'Pendiente',
-      products: [
-        'Milk',
-        'Eggs',
-        'Cheese',
-        'Bread',
-        'Butter',
-        'Yogurt',
-      ],
-      image: 'https://previews.123rf.com/images/yupiramos/yupiramos1605/yupiramos160521144/57463141-dise%C3%B1o-comprador-avatar-ejemplo-gr%C3%A1fico-del-vector-eps10.jpg',
-    }
-  ];
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -54,16 +35,42 @@ function MyAccountPage() {
       description: 'Descripción del producto 2',
     },
 
-   // Agrega más productos según sea necesario
+    // Agrega más productos según sea necesario
   ]);
 
-  // Obtiene el primer objeto (usuario) del arreglo según el tipo
+  const buyers = [
+    {
+      name: 'Juan Perez',
+      city: 'Quito',
+      provincia: 'Dirección 1',
+      callePrincipal: 'calle principal',
+      calleSecundaria: 'calle secundaria',
+      phoneNumber: '123456789',
+      whatsappNumber: '987654321',
+      purchaseStatus: 'Pendiente',
+      productIds: [1, 2],
+      image: 'https://previews.123rf.com/images/yupiramos/yupiramos1605/yupiramos160521144/57463141-dise%C3%B1o-comprador-avatar-ejemplo-gr%C3%A1fico-del-vector-eps10.jpg',
+    }
+  ];
+
+  const handleOpenPurchaseModal = () => {
+    setIsPurchaseModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsPurchaseModalOpen(false);
+  };
+
   const user = userType === 'vendor' ? vendors[0] : buyers[0];
+  const userProductIds = user.productIds && Array.isArray(user.productIds) ? user.productIds : [];
+  const userProducts = userProductIds.map((productId) =>
+    products.find((product) => product.id === productId)
+  );
 
   console.log(user);
   return (
     <div className="my-account-page">
-      <div className={`my-account-container ${userType === 'vendor' ? 'vendor-info' : 'buyer-info'}` }>
+      <div className={`my-account-container ${userType === 'vendor' ? 'vendor-info' : 'buyer-info'}`}>
         <div className='my-account-img'>
           <img src={user.image} alt={user.name} className='info-image' />
         </div>
@@ -74,10 +81,10 @@ function MyAccountPage() {
           <p><strong>Direccion: </strong> {user.callePrincipal} y {user.calleSecundaria}</p>
           {userType === 'buyer' && (
             <div className='my-account-info'>
-              <p><strong>Estado de Compra: </strong> {user.purchaseSatatus}</p>
-              {user.products.map((product, index) => (
-                <p key={index}><strong>Producto {index + 1}: </strong> {product}</p>
-              ))}
+              <p><strong>Estado de Compra: </strong> {user.purchaseStatus}</p>
+              <span className='span-purchases' onClick={handleOpenPurchaseModal}>
+                <h4>Ver compras</h4>
+              </span>
             </div>
           )}
           {userType === 'vendor' && (
@@ -91,15 +98,8 @@ function MyAccountPage() {
         <div className='my-account-text'>
           {userType === 'vendor' && (
             <>
-              <h2>Mis Productos</h2>
-              {products.map(product => (
-                 <div key={product.id} className="product-item">
-                 <img src={product.image} alt={product.name} className="product-image" />
-                 <h3>{product.name}</h3>
-                 <p>{product.description}</p>
-                 <p>Precio: ${product.price}</p>
-                </div>
-              ))}
+              <h2>Informacion adicional</h2>
+              <p>Lorem ipsum dolor sit amet consectetur adipiscing elit magnis tristique est taciti congue, elementum curae justo turpis cras primis nisi tincidunt tortor mus vehicula. Suscipit ut eros viverra nulla elementum mollis facilisi natoque hac, eu arcu fringilla imperdiet ante nisi tincidunt class. Parturient nibh egestas curae hendrerit rutrum purus nec tempus vehicula pretium id luctus quam ante, metus posuere suscipit platea facilisis et erat sed viverra sagittis scelerisque enim turpis.</p>
             </>
           )}
         </div>
@@ -108,6 +108,17 @@ function MyAccountPage() {
         <button onClick={() => setUserType('vendor')}>Vendedor</button>
         <button onClick={() => setUserType('buyer')}>Comprador</button>
       </div>
+      {/* Modal de compras */}
+      {userType === 'buyer' && (
+        <Modal isOpen={isPurchaseModalOpen} onClose={() => setIsPurchaseModalOpen(false)}>
+          <h2>Compras realizadas</h2>
+          {userProducts.map((product, index) => (
+            <p key={index}>
+              <strong>Producto {index + 1}: </strong> {product ? product.name : 'Producto no encontrado'}
+            </p>
+          ))}
+        </Modal>
+      )}
     </div>
   );
 }
