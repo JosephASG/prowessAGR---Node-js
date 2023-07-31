@@ -83,11 +83,12 @@ h2 {
 
 @media screen and (max-width: 768px) {
   .vendor-list {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajustamos el tamaño para pantallas más pequeñas */
+    grid-template-columns: repeat(2, 1fr); /* Ajustamos el tamaño para pantallas más pequeñas */
   }
 
   .vendor-card {
-    max-width: 150px; /* Limitamos el ancho máximo para pantallas más pequeñas */
+    max-width: 125px; /* Ajustamos el ancho máximo de las tarjetas */
+    margin: 10px; /* Aumentamos un poco el margen entre las tarjetas */
   }
 
   /* Si deseas ajustar el tamaño de fuente del nombre del vendedor en pantallas más pequeñas, puedes agregar esto: */
