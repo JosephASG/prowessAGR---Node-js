@@ -83,20 +83,21 @@ h2 {
 
 @media screen and (max-width: 768px) {
   .vendor-list {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajustamos el tamaño para pantallas más pequeñas */
+    grid-template-columns: repeat(2, 200px); /* Cambiamos a dos columnas de 200px cada una */
+    justify-content: center; /* Centramos las tarjetas en la pantalla */
   }
 
   .vendor-card {
-    max-width: 150px; /* Limitamos el ancho máximo para pantallas más pequeñas */
+    max-width: 150px; /* Limitamos el ancho máximo a 200px */
+    width: 100%; /* Ajustamos el ancho de la tarjeta al 100% del contenedor */
+    margin: 5px; /* Aumentamos el margen para separar las tarjetas del borde */
   }
 
-  /* Si deseas ajustar el tamaño de fuente del nombre del vendedor en pantallas más pequeñas, puedes agregar esto: */
   .vendor-card h3 {
     font-size: 16px; /* Ajusta el tamaño de fuente según tus necesidades */
   }
 
-  /* Si deseas ajustar el tamaño de fuente del texto en las tarjetas en pantallas más pequeñas, puedes agregar esto: */
   .vendor-card p {
-    font-size: 12px; /* Ajusta el tamaño de fuente según tus necesidades */
+    font-size: 10px; /* Ajusta el tamaño de fuente según tus necesidades */
   }
 }
