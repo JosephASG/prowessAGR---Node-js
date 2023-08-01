@@ -81,6 +81,27 @@ h2 {
   background-color: #449b50;
 }
 
+@media screen and (max-width: 900px) {
+  .vendor-list {
+    grid-template-columns: repeat(3, 225px); /* Cambiamos a dos columnas de 225px cada una para pantallas de 750px a 850px */
+    justify-content: center; /* Centramos las tarjetas en la pantalla */
+  }
+
+  .vendor-card {
+    max-width: 150px; /* Limitamos el ancho máximo a 225px para pantallas de 750px a 850px */
+    width: 100%; /* Ajustamos el ancho de la tarjeta al 100% del contenedor */
+    margin: 5px; /* Aumentamos el margen para separar las tarjetas del borde */
+  }
+
+  .vendor-card h3 {
+    font-size: 16px; /* Ajusta el tamaño de fuente según tus necesidades */
+  }
+
+  .vendor-card p {
+    font-size: 10px; /* Ajusta el tamaño de fuente según tus necesidades */
+  }
+}
+
 @media screen and (max-width: 768px) {
   .vendor-list {
     grid-template-columns: repeat(2, 200px); /* Cambiamos a dos columnas de 200px cada una */
