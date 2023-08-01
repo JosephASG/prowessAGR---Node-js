@@ -31,7 +31,9 @@ function ShoppingCart() {
 
   return (
     <div className="shopping-cart">
-      <input
+      <h1>Carrito de Compras</h1>
+      Buscar: <input
+      className='search'
         type="text"
         placeholder="Buscar producto..."
         value={searchQuery}
@@ -40,12 +42,20 @@ function ShoppingCart() {
       <div className='show-products'>
         {filteredProducts.map((product, index) => (
           <div className='producto-cart' key={index}>
-            <img src={product.imagen} alt={product.nombre} />
-            <div className='info-product'>
-              <h3>{product.nombre}</h3>
-              <p>Precio: ${product.precio}</p>
-              <p>Cantidad: {product.cantidad}</p>
+            <div className='img-product'>
+              <img src={product.imagen} alt={product.nombre} />
             </div>
+            <div className='name-product'>
+              <h3>{product.nombre}</h3>
+            </div>
+            <div className='price-product'>
+              <p>Precio: ${product.precio}</p>
+            </div>
+            <div className='cantidad-product'>
+              <button className='btn-add'>+</button>
+              <span className='product-amount'>{product.cantidad}</span>
+              <button className='btn-remove'>-</button>
+              </div>
           </div>
         ))}
       </div>
