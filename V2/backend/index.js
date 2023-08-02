@@ -5,7 +5,7 @@ import {getStorage} from "firebase/storage";*/
 
 import express from "express";
 
-const app = express();
+
 app.use(express.json())
 const port = 5000;
 /*
@@ -79,3 +79,125 @@ app.delete('/fb/producto/delete/:id', producto.deleteProduct);
 app.listen(port,() =>{
     console.log("Servidor en operación (Puerto 5000).")
 })
+
+
+// Importar el módulo express
+import express from 'express';
+
+// Importar las funciones relacionadas con los pedidos desde './orders'
+import { crearPedido, obtenerMisPedidos, eliminarPedido, obtenerPedido, marcarPagado, marcarEntregado, obtenerPedidos } from './orders';
+
+// Crear una instancia de Express
+const app = express();
+
+// Definir el número de puerto en el que el servidor escuchará
+const PUERTO = 3000;
+
+// Rutas para las funciones relacionadas con los pedidos
+
+// Ruta para manejar la creación de un pedido usando el método HTTP POST
+app.post('/crearPedido', crearPedido);
+
+// Ruta para manejar la obtención de los pedidos relacionados con un usuario específico usando el método HTTP GET
+app.get('/obtenerMisPedidos/:id', obtenerMisPedidos);
+
+// Ruta para manejar la eliminación de un pedido usando el método HTTP DELETE
+app.delete('/eliminarPedido/:id', eliminarPedido);
+
+// Ruta para manejar la obtención de un pedido específico por su ID usando el método HTTP GET
+app.get('/obtenerPedido/:id', obtenerPedido);
+
+// Ruta para manejar la marca de un pedido como pagado usando el método HTTP PUT
+app.put('/marcarPagado/:id', marcarPagado);
+
+// Ruta para manejar la marca de un pedido como entregado usando el método HTTP PUT
+app.put('/marcarEntregado/:id', marcarEntregado);
+
+// Ruta para manejar la obtención de todos los pedidos relacionados con un usuario específico usando el método HTTP GET
+app.get('/obtenerPedidos/:id', obtenerPedidos);
+
+// Iniciar el servidor y hacer que escuche en el puerto definido
+app.listen(PUERTO, () => {
+  console.log(`Servidor escuchando en el puerto ${PUERTO}`);
+});
+// Rutas para las funciones relacionadas con los pedidos
+
+// Ruta para manejar la creación de un pedido usando el método HTTP POST
+export const crearPedido = (req, res) => {
+  // Implementar lógica para crear un pedido aquí
+};
+
+// Ruta para manejar la obtención de los pedidos relacionados con un usuario específico usando el método HTTP GET
+export const obtenerMisPedidos = (req, res) => {
+  // Implementar lógica para obtener los pedidos de un usuario específico aquí
+};
+
+// Ruta para manejar la eliminación de un pedido usando el método HTTP DELETE
+export const eliminarPedido = (req, res) => {
+  // Implementar lógica para eliminar un pedido aquí
+};
+
+// Ruta para manejar la obtención de un pedido específico por su ID usando el método HTTP GET
+export const obtenerPedido = (req, res) => {
+  // Implementar lógica para obtener un pedido específico por su ID aquí
+};
+
+// Ruta para manejar la marca de un pedido como pagado usando el método HTTP PUT
+export const marcarPagado = (req, res) => {
+  // Implementar lógica para marcar un pedido como pagado aquí
+};
+
+// Ruta para manejar la marca de un pedido como entregado usando el método HTTP PUT
+export const marcarEntregado = (req, res) => {
+  // Implementar lógica para marcar un pedido como entregado aquí
+};
+
+// Ruta para manejar la obtención de todos los pedidos relacionados con un usuario específico usando el método HTTP GET
+export const obtenerPedidos = (req, res) => {
+  // Implementar lógica para obtener todos los pedidos de un usuario específico aquí
+};
+
+
+// index.js
+
+// Importar el módulo express
+import express from 'express';
+
+// Importar las funciones relacionadas con los pedidos desde './orders'
+import { createOrder, getMyOrders, deleteOrder, getOrder, paid, delivered, getOrders } from './orders';
+
+// Crear una instancia de Express
+
+
+// Definir el número de puerto en el que el servidor escuchará
+const PORT = 3000;
+
+// Configurar las rutas para las funciones relacionadas con pedidos
+
+// Ruta para manejar la creación de un pedido usando el método HTTP POST
+app.post('/createOrder', createOrder);
+
+// Ruta para manejar la obtención de los pedidos relacionados con un usuario específico usando el método HTTP GET
+app.get('/getMyOrders/:id', getMyOrders);
+
+// Ruta para manejar la eliminación de un pedido usando el método HTTP DELETE
+app.delete('/deleteOrder/:id', deleteOrder);
+
+// Ruta para manejar la obtención de un pedido específico por su ID usando el método HTTP GET
+app.get('/getOrder/:id', getOrder);
+
+// Ruta para manejar la marca de un pedido como pagado usando el método HTTP PUT
+app.put('/paid/:id', paid);
+
+// Ruta para manejar la marca de un pedido como entregado usando el método HTTP PUT
+app.put('/delivered/:id', delivered);
+
+// Ruta para manejar la obtención de todos los pedidos relacionados con un usuario específico usando el método HTTP GET
+app.get('/getOrders/:id', getOrders);
+
+// Iniciar el servidor y hacer que escuche en el puerto definido
+app.listen(PORT, () => {
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
+});
+
+
