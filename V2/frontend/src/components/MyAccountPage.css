@@ -50,6 +50,7 @@
   max-width: 300px;
   max-height: auto;
   border-radius: 50%;
+  border: 5px solid #000;
 }
 /* Información de la cuenta */
 .buyer-info .my-account-info {
@@ -63,6 +64,13 @@
 
 .my-account-info h2 {
   text-align: center;
+  font-size: 24px; 
+  color: white; /* Color del texto */
+  text-shadow: 
+    -1px -1px 0 #000, /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */
+    1px -1px 0 #000, /* Sombra en la esquina superior derecha (x, y, tamaño, color) */
+    -1px 1px 0 #000, /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
+    1px 1px 0 #000; /* Sombra en la esquina inferior derecha (x, y, tamaño, color) */
 }
 
 /* Texto de relleno */
