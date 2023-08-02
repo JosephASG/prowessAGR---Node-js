@@ -24,10 +24,10 @@
     color: #f5f5f5;
   }
   .producto-cart{
-    align-items: center;
     border-radius: 5px;
     max-width: 1400px;
     background-color: rgba(23, 80, 145, 0.563);
+    margin: 10px;
     margin-bottom: 10px;
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -45,50 +45,6 @@
     border-radius: 10px;
     margin: 10px;
   }
-
-  .total-price {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    max-width: 1400px;
-    margin: 10px;
-    color: #ffffff;
-    background-color: rgba(23, 80, 145, 0.563);
-  }
-
-  .total-price p {
-    margin-left: 10px;
-  }
-
-  .btn-buy {
-    font-size: 20px;
-    color: #ffffff;
-    background-color: #ff8000;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    cursor: pointer;
-  }
-
-  .btn-delete {
-    max-width: 35px !important;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
-  .btn-buy:hover {
-    background-color: #e4770a;
-  }
-
-  .btn-buy:active {
-    background-color: #c97521;
-  }
-
   .cantidad-product{
     padding-left: 20px;
   }
