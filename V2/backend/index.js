@@ -4,9 +4,10 @@ import {getFirestore} from "firebase/firestore";
 import {getStorage} from "firebase/storage";*/
 
 import express from "express";
-
-
+import cors from "cors";
+const app = express();
 app.use(express.json())
+app.use(cors());
 const port = 5000;
 /*
 // TODO: Add SDKs for Firebase products that you want to use
@@ -87,8 +88,6 @@ import express from 'express';
 // Importar las funciones relacionadas con los pedidos desde './orders'
 import { crearPedido, obtenerMisPedidos, eliminarPedido, obtenerPedido, marcarPagado, marcarEntregado, obtenerPedidos } from './orders';
 
-// Crear una instancia de Express
-const app = express();
 
 // Definir el número de puerto en el que el servidor escuchará
 const PUERTO = 3000;
