@@ -1,0 +1,10 @@
+.AboutUsInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+  }
+  
+  .AboutUsInfo h2 {
+    margin-top: 20px;
+  }
