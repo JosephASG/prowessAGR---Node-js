@@ -55,6 +55,11 @@ function NavigationBar() {
             </Link>
           </li>
           <li>
+            <Link to='/Nosotros' onClick={toggleMenu}>
+              ¿Quines Somos?
+            </Link>
+          </li>
+          <li>
             <Link to="/mi-cuenta" onClick={toggleMenu}>
               <FontAwesomeIcon icon={faUser} />
             </Link>
