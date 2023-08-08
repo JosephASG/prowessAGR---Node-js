@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import './StorePage.css'; // Importa el archivo de estilos CSS
+import Axios from 'axios';
 
 function StorePage() {
   const [categories, setCategories] = useState([
@@ -10,7 +11,7 @@ function StorePage() {
     // Agrega más categorías según sea necesario
   ]);
 
-  const [products, setProducts] = useState([
+  /*const [products, setProducts] = useState([
     {
       id: 1,
       name: 'Producto 1',
@@ -89,12 +90,21 @@ function StorePage() {
       description: 'Descripción del producto 10',
     },
     // Agrega más productos según sea necesario
-  ]);
+  ]);*/
 
   const [sortOption, setSortOption] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10;
+  
+  const [products,setProducts] = useState([])
+
+  useEffect(()=>{
+    Axios.get("http://localhost:5000/fb/producto/get")
+    .then(res=>{setProducts(res.data)
+    console.log("Los productos se han guardado.\n",products)})
+    .catch(err=>console.log(err,"\nNo se han podido cargar los datos."))
+  },[])
 
   const addToCart = (productId) => {
     console.log(`Producto agregado al carrito: ${productId}`);
@@ -121,16 +131,16 @@ function StorePage() {
 
   const sortedProducts = [...products].sort((a, b) => {
     if (sortOption === 'name') {
-      return a.name.localeCompare(b.name);
+      return a.pro_nombre.localeCompare(b.pro_nombre);
     } else if (sortOption === 'price') {
-      return a.price - b.price;
+      return a.pro_precio - b.pro_precio;
     } else {
       return 0;
     }
   });
 
   const filteredProducts = sortedProducts.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    product.pro_nombre.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -172,9 +182,9 @@ function StorePage() {
         <div className='products-container'>
           {currentProducts.map((product) => (
             <div key={product.id} className="product-card">
-              <img src={product.image} alt={product.name} className="product-image" />
-              <h3>{product.name}</h3>
-              <p>Precio: ${product.price}</p>
+              <img src={product.pro_imagen} alt={product.pro_nombre} className="product-image" />
+              <h3>{product.pro_nombre}</h3>
+              <p>Precio: ${product.pro_precio}</p>
               <div className="product-actions">
                 <button onClick={() => addToCart(product.id)}>Agregar al carrito</button>
                 <span className="product-info-icon" onClick={() => showProductDetails(product.id)}>
