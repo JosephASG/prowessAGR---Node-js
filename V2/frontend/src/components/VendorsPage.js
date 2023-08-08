@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './VendorsPage.css'; // Importa el archivo de estilos CSS
+import './VendorsPage.css';
+import SearchBar from './SearchBar';
 
 function VendorsPage() {
   const [vendors, setVendors] = useState([
@@ -57,35 +58,57 @@ function VendorsPage() {
       whatsappNumber: '987654321',
       image: 'https://example.com/vendor2.jpg',
     },
-  
+
     // Agrega más vendedores según sea necesario
   ]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const vendorsPerPage = 8;
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortOption, setSortOption] = useState('');
+
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value);
+  };
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  const filteredVendors = vendors.filter((vendor) =>
+    vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const sortedVendors = [...filteredVendors].sort((a, b) => {
+    if (sortOption === 'name') {
+      return a.name.localeCompare(b.name);
+    } else if (sortOption === 'city') {
+      return a.city.localeCompare(b.city);
+    } else {
+      return 0;
+    }
+  });
+
   const indexOfLastVendor = currentPage * vendorsPerPage;
   const indexOfFirstVendor = indexOfLastVendor - vendorsPerPage;
-  const currentVendors = vendors.slice(indexOfFirstVendor, indexOfLastVendor);
+  const currentVendors = sortedVendors.slice(indexOfFirstVendor, indexOfLastVendor);
 
-  const totalPages = Math.ceil(vendors.length / vendorsPerPage);
+  const totalPages = Math.ceil(sortedVendors.length / vendorsPerPage);
 
   return (
     <div className="vendors-page">
       <h2>Listado de Vendedores</h2>
-
-      <div className="search-bar">
-        <input type="text" placeholder="Buscar vendedores" />
-        <select>
-          <option value="">Ordenar por</option>
-          <option value="name">Nombre</option>
-          <option value="city">Ciudad</option>
-        </select>
-      </div>
+      <SearchBar
+        searchTerm={searchTerm}
+        sortOption={sortOption}
+        handleSearch={handleSearch}
+        handleSortChange={handleSortChange}
+      />
 
       <div className="vendor-list">
         {currentVendors.map((vendor) => (
