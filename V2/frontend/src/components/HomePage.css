@@ -73,7 +73,7 @@ body {
 
   .RegistroHome {
     height: 50px;
-    width: 140px;
+    width: 170px;
     background: linear-gradient(45deg, orange, #FF8C00);
     color: white;
     border-radius: 5px;
@@ -83,6 +83,8 @@ body {
     border-width: 0px;
     top:80%;
     font-size: 19px;
+    margin: 5px;
+    padding: 5px;
   }
   
   .RegistroHome:hover {

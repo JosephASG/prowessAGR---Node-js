@@ -37,6 +37,9 @@
           <Link to="/registro">
           <button className='RegistroHome'>Registro</button>
           </Link>
+          <Link to="/Login">
+          <button className='RegistroHome'>Iniciar Sesion</button>
+          </Link>
         </div>
         <div className="paragraphs-container">
           <div className="paragraph">
