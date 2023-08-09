@@ -18,12 +18,12 @@ const initialProducts = [
         imagen: 'https://statics-cuidateplus.marca.com/cms/styles/natural/azblob/platanos_0.jpg.webp?itok=Nm5QVrwg',
     },
     {
-      nombre: 'Producto 2',
-      marca: 'marca3',
-      precio: 25,
-      cantidad: 1,
-      imagen: 'https://statics-cuidateplus.marca.com/cms/styles/natural/azblob/platanos_0.jpg.webp?itok=Nm5QVrwg',
-  },
+        nombre: 'Producto 2',
+        marca: 'marca3',
+        precio: 25,
+        cantidad: 1,
+        imagen: 'https://statics-cuidateplus.marca.com/cms/styles/natural/azblob/platanos_0.jpg.webp?itok=Nm5QVrwg',
+    },
     // Agrega más productos si es necesario
 ];
 
@@ -84,6 +84,8 @@ function ShoppingCart() {
                         sortOption={sortOption}
                         handleSearch={handleSearchChange}
                         handleSortChange={handleSortChange}
+                        showPriceOption={true}
+                        showCategoryOption={true}
                     />
                 </div>
             </div>

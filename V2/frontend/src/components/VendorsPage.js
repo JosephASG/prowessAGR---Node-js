@@ -108,6 +108,8 @@ function VendorsPage() {
         sortOption={sortOption}
         handleSearch={handleSearch}
         handleSortChange={handleSortChange}
+        showPriceOption={false}
+        showCategoryOption={false}
       />
 
       <div className="vendor-list">
