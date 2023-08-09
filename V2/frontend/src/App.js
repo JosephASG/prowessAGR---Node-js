@@ -21,7 +21,7 @@ function App() {
           <HomePage />
           <StorePage />
           <VendorsPage />
-          <AboutUs/>
+          <AboutUs />
           <MyAccountPage />
           <ShoppingCart />
         </>
