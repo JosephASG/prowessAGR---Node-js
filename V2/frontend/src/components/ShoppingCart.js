@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './ShoppingCart.css';
 import SearchBar from './SearchBar';
 
@@ -109,7 +111,7 @@ function ShoppingCart() {
                             <div className='price-product'>
                                 <p><b>Total:</b> ${product.precio * product.cantidad}</p>
                                 <div>
-                                    <img className='btn-delete' src='https://img.icons8.com/?size=512&id=102550&format=png' alt='delete' />
+                                    <FontAwesomeIcon className='fa-icon-trash' icon={faTrash} />
                                 </div>
                             </div>
                         </div>
