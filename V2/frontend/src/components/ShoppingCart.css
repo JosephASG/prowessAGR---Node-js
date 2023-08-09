@@ -164,6 +164,20 @@
   background-color: #cccaca;
 }
 
+.fa-icon-trash {
+  font-size: 1.5em;
+  color: red;
+  cursor: pointer;
+}
+
+.fa-icon-trash:hover {
+  color: #ff0000;
+}
+
+.fa-icon-trash:active {
+  color: #cc0000;
+}
+
 .product-amount {
   font-size: 20px;
   color: #f5f5f5;
@@ -198,10 +212,6 @@
     max-width: 100px;
     margin: 5px;
   }
-
-  .btn-delete {
-    max-width: 25px !important;
-  }
 }
 
 /* Estilos para pantallas de 480px o menos (celulares pequeños) */
@@ -230,9 +240,5 @@
   .producto-cart img {
     max-width: 80px;
     margin: 3px;
-  }
-
-  .btn-delete {
-    max-width: 18px !important;
   }
 }
