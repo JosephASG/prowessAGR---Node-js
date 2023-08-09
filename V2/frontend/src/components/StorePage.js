@@ -147,6 +147,8 @@ function StorePage() {
         sortOption={sortOption}
         handleSearch={handleSearch}
         handleSortChange={handleSortChange}
+        showPriceOption={true}
+        showCategoryOption={true}
       />
       <div className="product-list">
         <div className="product-list-header">

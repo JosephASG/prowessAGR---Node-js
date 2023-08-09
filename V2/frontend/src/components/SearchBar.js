@@ -1,6 +1,8 @@
 import React from 'react';
 
-function SearchBar({ searchTerm, sortOption, handleSearch, handleSortChange }) {
+function SearchBar({ searchTerm, sortOption, handleSearch, handleSortChange, showPriceOption, showCategoryOption }) {
+
+  console.log(showCategoryOption);
   return (
     <div className='filter-container'>
       <div className="search-bar-products">
@@ -11,17 +13,21 @@ function SearchBar({ searchTerm, sortOption, handleSearch, handleSortChange }) {
           onChange={handleSearch}
         />
       </div>
-      <div>
+      
+        <div>
         <select value={sortOption} onChange={handleSortChange}>
           <option value="">Ordenar por</option>
           <option value="name">Nombre</option>
-          <option value="price">Precio</option>
-          <option value="category">Categoria</option>
+          {showPriceOption && (
+            <option value="price">Precio</option>
+          )}
+          {showCategoryOption && (
+            <option value="category">Categoria</option>
+          )}
         </select>
       </div>
     </div>
   );
 }
-
 
 export default SearchBar;
