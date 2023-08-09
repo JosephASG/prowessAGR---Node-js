@@ -55,7 +55,7 @@ function NavigationBar() {
             </Link>
           </li>
           <li>
-            <Link to='/Nosotros' onClick={toggleMenu}>
+            <Link to="/nosotros" onClick={toggleMenu}>
               ¿Quines Somos?
             </Link>
           </li>
