@@ -5,6 +5,18 @@ import HTTP_STATUS from "http-status-codes";
 import admin from "firebase-admin";
 import { uploadImageUser, deleteImageUser } from "../utils/cloudinaryConfig.js";
 import fs from "fs-extra";
+import express from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import crypto from "crypto";
+import HTTP_STATUS from "http-status-codes";
+import admin from "firebase-admin";
+import { uploadImageUser, deleteImageUser } from "../utils/cloudinaryConfig.js";
+import fs from "fs-extra";
+import express from "express";
+import HTTP_STATUS from "http-status-codes";
+import admin from "firebase-admin";
+
 
 // Configurar Firebase Admin SDK con tus credenciales
 const serviceAccount = require('./ruta/de/tu/credencial.json');
@@ -224,3 +236,74 @@ export const deleteUser = async (req, res) => {
       .json({ message: "Error al eliminar el usuario" });
   }
 };
+
+
+const app = express();
+app.use(express.json());
+
+// Configurar Firebase Admin SDK con tus credenciales
+const serviceAccount = require('./ruta/de/tu/credencial.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://tu-proyecto.firebaseio.com'
+});
+
+
+const JWT_SECRET = crypto.randomBytes(64).toString("hex");
+
+// Inicio de sesion de usuario
+app.post("/login", async (req, res) => {
+});
+
+// Crear usuario
+app.post("/usuarios", async (req, res) => {
+});
+
+// Metodo GET
+app.get("/usuarios", async (req, res) => {
+});
+
+// Obtener usuario por ID
+app.get("/usuarios/:id", async (req, res) => {
+});
+
+// Metodo PUT para actualizar usuarios
+app.put("/usuarios/:id", async (req, res) => {
+});
+
+// Metodo DELETE
+app.delete("/usuarios/:id", async (req, res) => {
+});
+
+// Iniciar el servidor
+
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado en el puerto ${PORT}`);
+});
+
+
+
+app.use(express.json());
+
+// Configurar Firebase Admin SDK con tus credenciales
+const serviceAccount = require('./ruta/de/tu/credencial.json');
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://tu-proyecto.firebaseio.com'
+});
+
+
+// Obtener categoria por el Id
+app.get("/categories/:id", async (req, res) => {
+  const id = req.params.id;
+});
+
+// OBTENER TODAS LAS CATEGORÍAS
+app.get("/categories", async (req, res) => {
+});
+
+// Iniciar el servidor
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado en el puerto ${PORT}`);
+});
