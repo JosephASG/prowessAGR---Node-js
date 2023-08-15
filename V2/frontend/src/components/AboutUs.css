@@ -1,64 +1,52 @@
 .AboutUsInfo {
-  padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
+.AboutUsInfo h1 {
+  color: white;
+}
+.AboutUsInfo p {
+  text-align: justify;
+  justify-content: center;
+  color: white;
+}
 .about-section {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto;
   text-align: center;
-  width: 1000px;
-  height: 200px;
+  gap: 25px;
   border-radius: 4px;
   padding: 10px;
   margin: 8px;
   margin-right: 10px;
   margin-bottom: 10px;
   background-color: rgba(47, 134, 166, 0.6); /* Color de fondo con transparencia */
-  border: 1px solid rgb(139, 80, 139);
+  border: 2px solid orange;
   color: white;
 }
 
-.about-section:hover{
-  transform: scale(1.10);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-}
-.product-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.mision,
+.objetives{
+  max-width: 90%;
+  max-height: auto;
+  margin: 5px;
+  text-align: justify;
 }
 
-.product-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
+.about-image {
+  display: block;
+  margin: 0 auto; /* Centrar horizontalmente */
+  align-self: center; /* Centrar verticalmente */
 }
 
-.product-item:hover {
-  transform: translateY(-5px);
-}
-
-h2, h3 {
-  color: #ffffff;
-  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-}
-
-p {
-  color: #ffffff;
-  margin-top: 10px;
-}
 
 @media (min-width: 768px) {
   .AboutUsInfo {
-    padding: 80px;
+    padding: 60px;
   }
 
   .product-grid {
