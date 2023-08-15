@@ -9,6 +9,7 @@ import MyAccountPage from './components/MyAccountPage';
 import ShoppingCart from './components/ShoppingCart';
 import AboutUs from './components/AboutUs';
 import Footer from './components/Footer'; // Importa el componente Footer
+import ProductList from './components/ProductList';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +25,7 @@ function App() {
           <AboutUs />
           <MyAccountPage />
           <ShoppingCart />
+          <ProductList />
         </>
       ) : (
         <>

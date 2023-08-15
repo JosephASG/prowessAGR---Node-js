@@ -1,0 +1,74 @@
+body {
+    color: #fff;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(47, 134, 166, 0.832);
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 1px solid white;
+}
+
+.container-products {
+    display: grid;
+    gap: 10px;
+}
+
+.product {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+    border: 1px solid orange;
+    border-radius: 5px;
+    padding: 5px;
+    align-items: center;
+}
+
+h1 {
+    margin-top: 0;
+}
+
+.actions-container {
+    display: flex;
+    justify-content: center;
+}
+
+.fa-icon-trash {
+    margin: 1px;
+    font-size: 1.5em;
+    color: red;
+    cursor: pointer;
+}
+
+.fa-icon-trash:hover {
+    color: #ff0000;
+}
+
+.fa-icon-trash:active {
+    color: #cc0000;
+}
+
+.fa-icon-edit {
+    margin: 1px;
+    font-size: 1.5em;
+    color: rgb(131, 170, 189);
+    cursor: pointer;
+}
+
+.fa-icon-edit:hover {
+    color: rgb(180, 199, 207);
+}
+
+.fa-icon-edit:active {
+    color: rgb(138, 152, 158);
+}
