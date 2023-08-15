@@ -10,6 +10,7 @@ import AboutUs from './components/AboutUs';
 import MyAccountPage from './components/MyAccountPage';
 import ShoppingCart from './components/ShoppingCart';
 import RegisterPage from './components/Register'; // Importa el componente RegisterPage (registro.js)
+import ProductList from './components/ProductList';
 
 ReactDOM.render(
   <Router>
@@ -23,6 +24,7 @@ ReactDOM.render(
       <Route path="/mi-cuenta" element={<MyAccountPage />} />
       <Route path="/carrito" element={<ShoppingCart />} />
       <Route path="/registro" element={<RegisterPage />} /> {/* Agrega la ruta para la página de registro */}
+      <Route path="productList" element={<ProductList />} />
     </Routes>
 
     <Footer /> {/* Agrega el componente Footer */}
