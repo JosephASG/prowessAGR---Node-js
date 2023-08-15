@@ -1,21 +1,23 @@
-import firebase from 'firebase/app';
+/*import * as firebase from 'firebase/app';
 import 'firebase/database';
+import * as firebase from 'firebase/app';
+import * as firestore from 'firebase/firestore';
 
 // Reemplace la siguiente configuración con la configuración de su proyecto Firebase
 const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_AUTH_DOMAIN',
-  databaseURL: 'YOUR_DATABASE_URL',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_STORAGE_BUCKET',
-  messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
-  appId: 'YOUR_APP_ID',
+  apiKey: "AIzaSyAqnpF_ppBXsSawkDiVzYzm2oAV1zLvGWQ",
+  authDomain: "prowess-web-database.firebaseapp.com",
+  projectId: "prowess-web-database",
+  storageBucket: "prowess-web-database.appspot.com",
+  messagingSenderId: "519296320778",
+  appId: "1:519296320778:web:739cc55990bd1a6e4866f3"
 };
 
-firebase.initializeApp(firebaseConfig);
+const fiapp = firebase.initializeApp(firebaseConfig);
+const fs = firestore.getFirestore(fiapp);
+*/
 
-// Get a reference to the Firebase Realtime Database
-const database = firebase.database();
+import {fs} from "../../firebase.js";
 
 // Create an order in the Firebase Realtime Database
 export const createOrder = async (req, res) => {
