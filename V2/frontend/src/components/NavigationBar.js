@@ -60,6 +60,11 @@ function NavigationBar() {
             </Link>
           </li>
           <li>
+            <Link to="/productList" onClick={toggleMenu}>
+              Lista de Productos
+            </Link>
+          </li>
+          <li>
             <Link to="/mi-cuenta" onClick={toggleMenu}>
               <FontAwesomeIcon icon={faUser} />
             </Link>
