@@ -35,20 +35,12 @@ const ModalAddProducts = ({ children, isOpen, onClose }) => {
                 <input type="number" className="form-control" />
               </div>
               <div>
-                <label className='form-check-label' htmlFor='category'>Vendedor</label>
-                <select className='form-control'>
-                  <option value='1'>Vendedor 1</option>
-                  <option value='2'>Vendedor 2</option>
-                  <option value='3'>Vendedor 3</option>
-                </select>
+                <label htmlFor="description">Description</label>
+                <textarea className="form-control" />
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="description">Description</label>
-              <textarea className="form-control" />
-            </div>
-            <div className="form-group">
-              <label className='input-file-container'>
+              <label className='btn-file-container'>
                 Subir imagen
                 <input className="img-input" type="file" />
               </label>
