@@ -39,12 +39,16 @@ label {
     display: none;
 }
 
-.input-file-container {
+.btn-file-container {
     padding: 0.5em;
     background-color: #007bff;
     border-color: #007bff;
     color: #fff;
     border-radius: 0.25rem;
+}
+
+.btn-file-container:hover {
+    cursor: pointer;
 }
 
 .btn-save {
@@ -79,7 +83,7 @@ label {
     font-weight: bold;
     font-size: 2em;
     position: relative;
-    bottom: 318px;
+    bottom: 250px;
     left: 383px;
 }
 
