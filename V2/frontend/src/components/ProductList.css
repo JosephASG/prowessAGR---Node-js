@@ -36,19 +36,55 @@ body {
 
 h1 {
     margin-top: 0;
-    text-shadow: 
-    -1px -1px 0 #000, /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */
-    1px -1px 0 #000, /* Sombra en la esquina superior derecha (x, y, tamaño, color) */
-    -1px 1px 0 #000, /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
-    1px 1px 0 #000; /* Sombra en la esquina inferior derecha (x, y, tamaño, color) */
+    text-shadow:
+        -1px -1px 0 #000,
+        /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */
+        1px -1px 0 #000,
+        /* Sombra en la esquina superior derecha (x, y, tamaño, color) */
+        -1px 1px 0 #000,
+        /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
+        1px 1px 0 #000;
+    /* Sombra en la esquina inferior derecha (x, y, tamaño, color) */
 }
 
-b{
-    text-shadow: 
-    -1px -1px 0 #000, /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */
-    1px -1px 0 #000, /* Sombra en la esquina superior derecha (x, y, tamaño, color) */
-    -1px 1px 0 #000, /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
-    1px 1px 0 #000; /* Sombra en la esquina inferior derecha (x, y, tamaño, color) */
+b {
+    text-shadow:
+        -1px -1px 0 #000,
+        /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */
+        1px -1px 0 #000,
+        /* Sombra en la esquina superior derecha (x, y, tamaño, color) */
+        -1px 1px 0 #000,
+        /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
+        1px 1px 0 #000;
+    /* Sombra en la esquina inferior derecha (x, y, tamaño, color) */
+}
+
+.btn-add-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.btn-add-product {
+    height: 50px;
+    width: 170px;
+    background: linear-gradient(45deg, orange, #FF8C00);
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    border-width: 0px;
+    top: 80%;
+    font-size: 19px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.btn-add-product:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 }
 
 .actions-container {
@@ -57,14 +93,14 @@ b{
 }
 
 .fa-icon-trash {
-    margin: 1px;
+    margin-left: 3px;
     font-size: 1.5em;
-    color: red;
+    color: rgb(255, 41, 41);
     cursor: pointer;
 }
 
 .fa-icon-trash:hover {
-    color: #ff0000;
+    color: rgb(255, 0, 0);
 }
 
 .fa-icon-trash:active {
@@ -72,50 +108,50 @@ b{
 }
 
 .fa-icon-edit {
-    margin: 1px;
+    margin-right: 3px;
     font-size: 1.5em;
-    color: rgb(131, 170, 189);
+    color: white;
     cursor: pointer;
 }
 
 .fa-icon-edit:hover {
-    color: rgb(180, 199, 207);
+    color: rgb(159, 226, 255);
 }
 
 .fa-icon-edit:active {
-    color: rgb(138, 152, 158);
+    color: rgb(127, 179, 201);
 }
 
 .filter-row {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-  }
-  
-  .filter-row label {
+}
+
+.filter-row label {
     margin-right: 10px;
-  }
-  
-  .filter-row input[type='text'] {
+}
+
+.filter-row input[type='text'] {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 200px;
-  }
-  
-  .filter-row input[type='text']:focus {
+}
+
+.filter-row input[type='text']:focus {
     outline: none;
     border-color: #007bff;
-  }
-  
-  .pagination {
+}
+
+.pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 10px;
-  }
-  
-  .pagination button {
+}
+
+.pagination button {
     padding: 8px 16px;
     background-color: #007bff;
     color: white;
@@ -123,14 +159,13 @@ b{
     border-radius: 5px;
     cursor: pointer;
     margin: 0 5px;
-  }
-  
-  .pagination button:hover {
+}
+
+.pagination button:hover {
     background-color: #eeeb3e;
-  }
-  
-  .pagination span {
+}
+
+.pagination span {
     font-size: 16px;
     margin: 0 10px;
-  }
-  
+}
