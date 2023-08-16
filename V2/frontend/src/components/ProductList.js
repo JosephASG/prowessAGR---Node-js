@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './ProductList.css';
 import ModalAddProducts from './ModalAddProducts';
+import ModalEditProduct from './ModalEditProduct';
 
 const initialProducts = [
   {
@@ -93,7 +94,9 @@ const initialProducts = [
 
 const ProductList = () => {
   const [products, setProducts] = useState(initialProducts);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddModalOpen, setisAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const ITEMS_PER_PAGE = 5; // Número de productos por página
 
   const [sortCriteria, setSortCriteria] = useState(null);
@@ -104,12 +107,20 @@ const ProductList = () => {
     setProducts(products.filter((product) => product.id !== productId));
   };
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
+  const handleOpenAddModal = () => {
+    setisAddModalOpen(true);
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
+  const handleModalAddClose = () => {
+    setisAddModalOpen(false);
+  };
+
+  const handleOpenEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const handleModalEditClose = () => {
+    setIsEditModalOpen(false);
   };
 
   const handleSort = (criteria) => {
@@ -143,10 +154,13 @@ const ProductList = () => {
     <div className="container">
       <h1>Lista de Productos</h1>
       <div className='btn-add-container'>
-        <button onClick={handleOpenModal} className='btn-add-product'>Agregar Producto</button>
+        <button onClick={handleOpenAddModal} className='btn-add-product'>Agregar Producto</button>
       </div>
       <div>
-        <ModalAddProducts isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <ModalAddProducts isOpen={isAddModalOpen} onClose={() => setisAddModalOpen(false)} />
+      </div>
+      <div>
+        <ModalEditProduct isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
       </div>
       <div className="header-row">
         <b onClick={() => handleSort('name')}>Nombre</b>
@@ -174,6 +188,7 @@ const ProductList = () => {
               <FontAwesomeIcon
                 className="fa-icon-edit"
                 icon={faPenToSquare}
+                onClick={handleOpenEditModal}
               />
               <FontAwesomeIcon
                 className="fa-icon-trash"
