@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './ProductList.css';
+import ModalAddProducts from './ModalAddProducts';
 
 const initialProducts = [
   {
@@ -90,17 +91,25 @@ const initialProducts = [
   },
 ];
 
-
-const ITEMS_PER_PAGE = 5; // Número de productos por página
-
 const ProductList = () => {
   const [products, setProducts] = useState(initialProducts);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const ITEMS_PER_PAGE = 5; // Número de productos por página
+
   const [sortCriteria, setSortCriteria] = useState(null);
   const [filterVendor, setFilterVendor] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleDelete = (productId) => {
     setProducts(products.filter((product) => product.id !== productId));
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   const handleSort = (criteria) => {
@@ -133,6 +142,12 @@ const ProductList = () => {
   return (
     <div className="container">
       <h1>Lista de Productos</h1>
+      <div className='btn-add-container'>
+        <button onClick={handleOpenModal} className='btn-add-product'>Agregar Producto</button>
+      </div>
+      <div>
+        <ModalAddProducts isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      </div>
       <div className="header-row">
         <b onClick={() => handleSort('name')}>Nombre</b>
         <b onClick={() => handleSort('price')}>Precio</b>
