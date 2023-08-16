@@ -1,6 +1,10 @@
 import React from 'react';
 import './AboutUs.css';
 
+import vision from '../imagenes/vision.jpg';
+import ObjG from '../imagenes/obj.jpg';
+import ObjE from '../imagenes/objEs.jpg';
+
 function AboutUs() {
   return (
     <div className='AboutUsInfo'>
@@ -11,7 +15,7 @@ function AboutUs() {
         <br/>
         <p>Prowess Agronomia es una plataforma creada para aumentar el desarrollo y comercialización de la producción agrícola de todo el país. Nuestro equipo trabaja arduamente para difundir el concepto de la agronomía como sistema.</p>
         <br/>
-        <img src="imagen_quienes_somos.jpg" alt="Imagen Quienes Somos" className="about-image" />
+        <img src='' alt="Imagen Quienes Somos" className="about-image" />
       </div>
       
       <div className='about-section'>
@@ -23,7 +27,7 @@ function AboutUs() {
         <div className='mision'>
           <h2>Visión</h2>
           <p>Al 2024 ser una plataforma estable y ser considerados por nuestros benefactores como una opción viable para comercializar sus productos a todo el país.</p>
-          <img src="imagen_vision.jpg" alt="Imagen Visión" className="about-image" />
+          <img src={vision} alt="Imagen Visión" className="about-image" />
         </div>
       </div>
       
@@ -32,7 +36,7 @@ function AboutUs() {
           <h2>Objetivos Generales</h2>
           
           <p>Establecer alianzas con los productores para que a través de Prowess Agrícola puedan incrementar exponencialmente las ventas de sus productos agrícolas ganando así mayor mercado de consumo.</p>
-          <img src="imagen_objetivos_generales.jpg" alt="Imagen Objetivos Generales" className="about-image" />
+          <img src={ObjG} alt="Imagen Objetivos Generales" className="about-image" />
         </div>
         <div className='objetives'>
           <h2>Objetivos Específicos</h2>
@@ -41,7 +45,7 @@ function AboutUs() {
             <li>Impulsar la compra y venta de productos mediante la plataforma Prowess Agrícola.</li>
             <li>Desarrollar nuevas estrategias de negociación y comercialización con los consumidores.</li>
           </ul>
-          <img src="imagen_objetivos_especificos.jpg" alt="Imagen Objetivos Específicos" className="about-image" />
+          <img src={ObjE} alt="Imagen Objetivos Específicos" className="about-image" />
         </div>
       </div>
     </div>
