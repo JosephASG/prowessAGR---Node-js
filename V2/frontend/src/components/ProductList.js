@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './ProductList.css';
 import ModalAddProducts from './ModalAddProducts';
-import ModalEditProduct from './ModalEditProduct';
 
 const initialProducts = [
   {
@@ -94,41 +93,31 @@ const initialProducts = [
 
 const ProductList = () => {
   const [products, setProducts] = useState(initialProducts);
-  const [isAddModalOpen, setisAddModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const ITEMS_PER_PAGE = 5; // Número de productos por página
 
   const [sortCriteria, setSortCriteria] = useState(null);
-  const [filterVendor, setFilterVendor] = useState('');
+  const [filterProduct, setFilterProduct] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleDelete = (productId) => {
     setProducts(products.filter((product) => product.id !== productId));
   };
 
-  const handleOpenAddModal = () => {
-    setisAddModalOpen(true);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
   };
 
-  const handleModalAddClose = () => {
-    setisAddModalOpen(false);
-  };
-
-  const handleOpenEditModal = () => {
-    setIsEditModalOpen(true);
-  };
-
-  const handleModalEditClose = () => {
-    setIsEditModalOpen(false);
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   const handleSort = (criteria) => {
     setSortCriteria(criteria);
   };
 
-  const handleFilter = (vendor) => {
-    setFilterVendor(vendor);
+  const handleFilter = (product) => { 
+    setFilterProduct(product);
   };
 
   let sortedAndFilteredProducts = [...products];
@@ -139,9 +128,9 @@ const ProductList = () => {
     );
   }
 
-  if (filterVendor) {
+  if (filterProduct) { 
     sortedAndFilteredProducts = sortedAndFilteredProducts.filter(
-      (product) => product.vendor.toLowerCase().includes(filterVendor.toLowerCase())
+      (product) => product.name.toLowerCase().includes(filterProduct.toLowerCase())
     );
   }
 
@@ -154,26 +143,22 @@ const ProductList = () => {
     <div className="container">
       <h1>Lista de Productos</h1>
       <div className='btn-add-container'>
-        <button onClick={handleOpenAddModal} className='btn-add-product'>Agregar Producto</button>
+        <button onClick={handleOpenModal} className='btn-add-product'>Agregar Producto</button>
       </div>
       <div>
-        <ModalAddProducts isOpen={isAddModalOpen} onClose={() => setisAddModalOpen(false)} />
-      </div>
-      <div>
-        <ModalEditProduct isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
+        <ModalAddProducts isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
       <div className="header-row">
         <b onClick={() => handleSort('name')}>Nombre</b>
         <b onClick={() => handleSort('price')}>Precio</b>
         <b onClick={() => handleSort('stock')}>Stock</b>
-        <b onClick={() => handleSort('vendor')}>Vendedor</b>
         <b>Acciones</b>
       </div>
       <div className="filter-row">
-        <label>Filtrar por Vendedor:</label>
+        <label>Filtrar por Producto:</label>
         <input
           type="text"
-          value={filterVendor}
+          value={filterProduct}
           onChange={(e) => handleFilter(e.target.value)}
         />
       </div>
@@ -183,12 +168,10 @@ const ProductList = () => {
             <div>{product.name}</div>
             <div>${product.price}</div>
             <div>{product.stock}</div>
-            <div>{product.vendor}</div>
             <div className='actions-container'>
               <FontAwesomeIcon
                 className="fa-icon-edit"
                 icon={faPenToSquare}
-                onClick={handleOpenEditModal}
               />
               <FontAwesomeIcon
                 className="fa-icon-trash"
