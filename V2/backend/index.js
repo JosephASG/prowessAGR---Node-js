@@ -77,12 +77,8 @@ app.put('/fb/producto/update/:id', producto.updateProduct);
 // Eliminar
 app.delete('/fb/producto/delete/:id', producto.deleteProduct);
 
-app.listen(port,() =>{
-    console.log("Servidor en operación (Puerto 5000).")
-})
 
-// Definir el número de puerto en el que el servidor escuchará
-const PUERTO = 3000;
+
 
 
 // Importar las funciones relacionadas con los pedidos desde './orders'
@@ -91,8 +87,6 @@ import { createOrder, getMyOrders, deleteOrder, getOrder, paid, delivered, getOr
 // Crear una instancia de Express
 
 
-// Definir el número de puerto en el que el servidor escuchará
-const PORT = 3000;
 
 // Configurar las rutas para las funciones relacionadas con pedidos
 
@@ -118,8 +112,9 @@ app.put('/delivered/:id', delivered);
 app.get('/getOrders/:id', getOrders);
 
 // Iniciar el servidor y hacer que escuche en el puerto definido
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
 
 
+
+app.listen(port,() =>{
+  console.log("Servidor en operación (Puerto 5000).")
+})

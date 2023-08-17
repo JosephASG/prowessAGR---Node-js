@@ -1,4 +1,3 @@
-import * as firebase from 'firebase/app';
 import 'firebase/database';
 import * as firebase from 'firebase/app';
 import * as firestore from 'firebase/firestore';
@@ -16,7 +15,6 @@ const firebaseConfig = {
 const fiapp = firebase.initializeApp(firebaseConfig);
 const fs = firestore.getFirestore(fiapp);
 
-import {fs} from "../../firebase.js";
 
 // Create an order in the Firebase Realtime Database
 export const createOrder = async (req, res) => {
