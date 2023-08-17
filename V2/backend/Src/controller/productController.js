@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app';
+/*import * as firebase from 'firebase/app';
 import * as firestore from 'firebase/firestore';
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
@@ -13,10 +13,10 @@ const firebaseConfig = {
 
 // Inicializar Firebase y Firestore
 const fiapp = firebase.initializeApp(firebaseConfig);
-const fs = firestore.getFirestore(fiapp);
+const fs = firestore.getFirestore(fiapp);*/
 
 
-//import {fs} from "../../firebase.js";
+import {fs} from "../../firebase.js";
 
 //Obtener todos los productos.
 const getProducts =  async (req, res) => {

@@ -97,7 +97,7 @@ const ProductList = () => {
   const ITEMS_PER_PAGE = 5; // Número de productos por página
 
   const [sortCriteria, setSortCriteria] = useState(null);
-  const [filterVendor, setFilterVendor] = useState('');
+  const [filterProduct, setFilterProduct] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleDelete = (productId) => {
@@ -116,8 +116,8 @@ const ProductList = () => {
     setSortCriteria(criteria);
   };
 
-  const handleFilter = (vendor) => {
-    setFilterVendor(vendor);
+  const handleFilter = (product) => { 
+    setFilterProduct(product);
   };
 
   let sortedAndFilteredProducts = [...products];
@@ -128,9 +128,9 @@ const ProductList = () => {
     );
   }
 
-  if (filterVendor) {
+  if (filterProduct) { 
     sortedAndFilteredProducts = sortedAndFilteredProducts.filter(
-      (product) => product.vendor.toLowerCase().includes(filterVendor.toLowerCase())
+      (product) => product.name.toLowerCase().includes(filterProduct.toLowerCase())
     );
   }
 
@@ -152,14 +152,13 @@ const ProductList = () => {
         <b onClick={() => handleSort('name')}>Nombre</b>
         <b onClick={() => handleSort('price')}>Precio</b>
         <b onClick={() => handleSort('stock')}>Stock</b>
-        <b onClick={() => handleSort('vendor')}>Vendedor</b>
         <b>Acciones</b>
       </div>
       <div className="filter-row">
-        <label>Filtrar por Vendedor:</label>
+        <label>Filtrar por Producto:</label>
         <input
           type="text"
-          value={filterVendor}
+          value={filterProduct}
           onChange={(e) => handleFilter(e.target.value)}
         />
       </div>
@@ -169,7 +168,6 @@ const ProductList = () => {
             <div>{product.name}</div>
             <div>${product.price}</div>
             <div>{product.stock}</div>
-            <div>{product.vendor}</div>
             <div className='actions-container'>
               <FontAwesomeIcon
                 className="fa-icon-edit"
