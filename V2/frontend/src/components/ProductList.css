@@ -9,6 +9,8 @@ body {
     background-color: rgba(47, 134, 166, 0.832);
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 2px solid #FF8C00; /* Borde de 3px de ancho y color azul */
+
 }
 
 .header-row {
@@ -37,6 +39,7 @@ body {
 
 h1 {
     margin-top: 0;
+    text-align: center;
     text-shadow:
         -1px -1px 0 #000,
         /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */
@@ -127,6 +130,15 @@ b {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    text-shadow:
+        -1px -1px 0 #000,
+        /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */
+        1px -1px 0 #000,
+        /* Sombra en la esquina superior derecha (x, y, tamaño, color) */
+        -1px 1px 0 #000,
+        /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
+        1px 1px 0 #000;
+    /* Sombra en la esquina inferior derecha (x, y, tamaño, color) */
 }
 
 .filter-row label {
@@ -169,4 +181,23 @@ b {
 .pagination span {
     font-size: 16px;
     margin: 0 10px;
+}
+/* Consultas de medios para pantallas de 300px, 500px y 700px */
+@media (max-width: 700px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .product {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Consultas de medios para pantallas de 300px a 500px */
+@media (max-width: 400px) {
+    .container {
+        padding: 10px;
+    }
+
+
 }
