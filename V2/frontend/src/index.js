@@ -11,6 +11,7 @@ import MyAccountPage from './components/MyAccountPage';
 import ShoppingCart from './components/ShoppingCart';
 import RegisterPage from './components/Register'; // Importa el componente RegisterPage (registro.js)
 import ProductList from './components/ProductList';
+import TermsConditions from './components/TermsConditions';
 
 ReactDOM.render(
   <Router>
@@ -25,6 +26,7 @@ ReactDOM.render(
       <Route path="/carrito" element={<ShoppingCart />} />
       <Route path="/registro" element={<RegisterPage />} /> {/* Agrega la ruta para la página de registro */}
       <Route path="productList" element={<ProductList />} />
+      <Route path="/terms&conditions" element={<TermsConditions />} />
     </Routes>
 
     <Footer /> {/* Agrega el componente Footer */}
