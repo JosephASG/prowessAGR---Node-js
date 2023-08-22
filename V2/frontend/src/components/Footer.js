@@ -17,7 +17,7 @@ function Footer() {
             <a href='#' className='icons'> <img src={ig} alt='ig' className='icon'></img></a>
         </div>
         <p>Todos los derechos reservados &copy; {new Date().getFullYear()} Prowess</p>
-        <p>Revisa nuestros<a href='terms&conditions'>Términos y Condiciones</a></p>
+        <p>Revisa nuestros <a href='terms&conditions'>Términos y Condiciones</a></p>
       </div>
     </footer>
   );
