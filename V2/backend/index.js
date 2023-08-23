@@ -64,12 +64,10 @@ import * as producto from './Src/controller/productController.js';
 //Obtener todos los productos.
 app.get('/fb/producto/get', producto.getProducts);
 
-
 // Obtener un producto específico
 app.get('/fb/producto/get/:id', producto.getProductByID);
 
 // Agregar un nuevo producto
-
 app.post('/fb/producto/post', producto.createProduct);
 
 // Actualizar el producto
@@ -82,39 +80,35 @@ app.delete('/fb/producto/delete/:id', producto.deleteProduct);
 
 
 // Importar las funciones relacionadas con los pedidos desde './orders'
-import { createOrder, getMyOrders, deleteOrder, getOrder, paid, delivered, getOrders } from './Src/controller/orderController.js';
+import * as order from './Src/controller/orderController.js';
 
 // Crear una instancia de Express
-
 
 
 // Configurar las rutas para las funciones relacionadas con pedidos
 
 // Ruta para manejar la creación de un pedido usando el método HTTP POST
-app.post('/createOrder', createOrder);
+app.post('/fb/order/createOrder', order.createOrder);
 
 // Ruta para manejar la obtención de los pedidos relacionados con un usuario específico usando el método HTTP GET
-app.get('/getMyOrders/:id', getMyOrders);
+app.get('/fb/order/getMyOrders/:id', order.getMyOrders);
 
 // Ruta para manejar la eliminación de un pedido usando el método HTTP DELETE
-app.delete('/deleteOrder/:id', deleteOrder);
+app.delete('/fb/order/deleteOrder/:id', order.deleteOrder);
 
 // Ruta para manejar la obtención de un pedido específico por su ID usando el método HTTP GET
-app.get('/getOrder/:id', getOrder);
+app.get('/fb/order/getOrder/:id', order.getOrder);
 
 // Ruta para manejar la marca de un pedido como pagado usando el método HTTP PUT
-app.put('/paid/:id', paid);
+app.put('/fb/order/paid/:id', order.paid);
 
 // Ruta para manejar la marca de un pedido como entregado usando el método HTTP PUT
-app.put('/delivered/:id', delivered);
+app.put('/fb/order/delivered/:id', order.delivered);
 
 // Ruta para manejar la obtención de todos los pedidos relacionados con un usuario específico usando el método HTTP GET
-app.get('/getOrders/:id', getOrders);
+app.get('/fb/order/getOrders/:id', order.getOrders);
 
 // Iniciar el servidor y hacer que escuche en el puerto definido
-
-
-
 app.listen(port,() =>{
   console.log("Servidor en operación (Puerto 5000).")
 })
