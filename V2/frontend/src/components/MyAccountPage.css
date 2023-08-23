@@ -24,6 +24,7 @@
   color: white;
 }
 
+
 .buyer-info {
   max-width: 850px;
   max-height: auto; /* Ajusta el grid para que la imagen aparezca arriba y el resto abajo */
@@ -78,6 +79,7 @@
   grid-area: text-inf;
   margin: 5px;
   padding: 5px;
+  text-align: justify;
 }
 
 .product-item {

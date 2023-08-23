@@ -77,3 +77,27 @@
     font-size: 24px;
   }
 }
+
+  @media (min-width: 300px) and (max-width: 700px) {
+    .AboutUsInfo {
+      padding: 30px; /* Ajuste de espaciado para pantallas medianas */
+    }
+  
+    .about-section {
+      display: grid;
+      grid-template-columns: 1fr; /* Cambio a una sola columna en pantallas pequeñas */
+      text-align: center;
+      gap: 15px; /* Reducción del espacio entre elementos */
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px; /* Ajuste de márgenes para pantallas medianas */
+      background-color: rgba(47, 134, 166, 0.6);
+      border: 2px solid orange;
+      color: white;
+    }
+  
+    h2, h3 {
+      font-size: 20px; /* Reducción del tamaño de fuente para pantallas pequeñas */
+    }
+  
+}
