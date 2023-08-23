@@ -242,3 +242,30 @@
     margin: 3px;
   }
 }
+  @media (max-width: 750px) {
+    .shopping-cart-title {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+  
+    .presentation,
+    .producto-cart,
+    .total-price {
+      margin: 10px;
+    }
+  
+    .presentation select,
+    .btn-add,
+    .btn-remove {
+      margin: 3px;
+    }
+  
+    .show-products {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  
+    .producto-cart img {
+      max-width: 80px;
+      margin: 3px;
+    }
+}
