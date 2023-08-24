@@ -105,8 +105,8 @@ function MyAccountPage() {
         </div>
       </div>
       <div className="user-type-buttons">
-        <button onClick={() => setUserType('vendor')}>Vendedor</button>
-        <button onClick={() => setUserType('buyer')}>Comprador</button>
+        <button className="user-type-button" onClick={() => setUserType('vendor')}>Vendedor</button>
+        <button className="user-type-button" onClick={() => setUserType('buyer')}>Comprador</button>
       </div>
       {/* Modal de compras */}
       {userType === 'buyer' && (
