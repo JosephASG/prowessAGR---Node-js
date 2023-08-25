@@ -16,6 +16,7 @@ const fiapp = firebase.initializeApp(firebaseConfig);
 const fs = firestore.getFirestore(fiapp);
 
 
+
 // Create an order in the Firebase Realtime Database
 export const createOrder = async (req, res) => {
     try {
@@ -36,9 +37,9 @@ export const createOrder = async (req, res) => {
         paidAt: req.body.paidAt,
       };
       await newOrderRef.set(newOrder);
-      return res.status(HTTP_STATUS.OK).send({ message: 'New Order Created', order: newOrder });
+      return res.status(201).send({ message: 'New Order Created', order: newOrder });
     } catch (error) {
-      return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Error creating order' });
+      return res.status(500).json({ message: 'Error creating order' });
     }
   };
   
@@ -49,7 +50,7 @@ export const createOrder = async (req, res) => {
       const orders = snapshot.val();
       return res.status(HTTP_STATUS.OK).send(orders);
     } catch (error) {
-      return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Error getting orders' });
+      return res.status(500).json({ message: 'Error getting order' });
     }
   };
   
