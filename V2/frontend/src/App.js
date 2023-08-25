@@ -10,6 +10,8 @@ import ShoppingCart from './components/ShoppingCart';
 import AboutUs from './components/AboutUs';
 import Footer from './components/Footer'; // Importa el componente Footer
 import ProductList from './components/ProductList';
+import SaleDetailsPage from './components/SaleDetailsPage';
+import SalesPage from './components/SalesPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,6 +28,8 @@ function App() {
           <MyAccountPage />
           <ShoppingCart />
           <ProductList />
+          <SaleDetailsPage />
+          <SalesPage />
         </>
       ) : (
         <>

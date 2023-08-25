@@ -60,6 +60,11 @@ function NavigationBar() {
             </Link>
           </li>
           <li>
+            <Link to="/sales" onClick={toggleMenu}>
+              Ventas
+            </Link>
+          </li>
+          <li>
             <Link to="/productList" onClick={toggleMenu}>
               Lista de Productos
             </Link>
