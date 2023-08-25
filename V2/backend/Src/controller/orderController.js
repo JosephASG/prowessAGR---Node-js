@@ -15,12 +15,12 @@ const firebaseConfig = {
 const fiapp = firebase.initializeApp(firebaseConfig);
 const fs = firestore.getFirestore(fiapp);
 
-
-
+// Agregar una nueva orden
+/*
 // Create an order in the Firebase Realtime Database
 export const createOrder = async (req, res) => {
     try {
-      const newOrderRef = database.ref('orders').push();
+      const newOrderRef = database.ref('orden').push();
       const newOrder = {
         id: newOrderRef.key,
         name: req.body.name,
@@ -42,7 +42,38 @@ export const createOrder = async (req, res) => {
       return res.status(500).json({ message: 'Error creating order' });
     }
   };
+*/
+export const createOrder = async (req, res) => {
+  try {
+    const newOrder2tData = req.body; // Los datos de la nueva orden deben estar en el cuerpo de la solicitud (request body)
+    console.log(newOrder2tData);
+    const docRef = await firestore.addDoc(firestore.collection(fs, 'orden'), newOrder2tData);
+    res.json({ id: docRef.id, ...newOrder2tData });
+  } catch (error) {
+    console.error('Error al crear el order:', error);
+    res.status(500).json({ error: 'Error al crear el order.' });
+  }
+};
   
+/*
+Modelo crear orden PostMan
+
+{
+  "name": "Nombre de la orden 5",
+  "email": "correo@ejemplo.com",
+  "address": "Dirección del orden 1",
+  "phone": "1234567890",
+  "sellerId": "ID 1 del vendedor",
+  "itemsPrice": 100,
+  "taxPrice": 10,
+  "totalPrice": 110,
+  "isPaid": true,
+  "isDelivered": false,
+  "deliveredAt": null
+}
+
+*/
+
   // Obtenga todos los pedidos para un ID de usuario determinado de Firebase Realtime Database
   export const getMyOrders = async (req, res) => {
     try {
@@ -55,6 +86,7 @@ export const createOrder = async (req, res) => {
   };
   
   // Eliminar un pedido de Firebase Realtime Database
+  /*
   export const deleteOrder = async (req, res) => {
     try {
       const { id } = req.params;
@@ -65,16 +97,32 @@ export const createOrder = async (req, res) => {
       res.status(500).json({ message: 'Server error' });
     }
   };
+*/
+export const deleteOrder = async (req, res) => {
+  try {
+    const ordenId = req.params.id;
+    await firestore.deleteDoc(firestore.doc(fs, 'orden', ordenId));
+    res.json({ id: ordenId, message: 'Orden eliminada exitosamente.' });
+  } catch (error) {
+    console.error('Error al eliminar el orden:', error);
+    res.status(500).json({ error: 'Error al eliminar el Orden.' });
+  }
+};
   
   // Obtenga un pedido específico por ID de Firebase Realtime Database
   export const getOrder = async (req, res) => {
     try {
-      const { id } = req.params;
-      const snapshot = await database.ref('orders').child(id).once('value');
-      const order = snapshot.val();
-      return res.status(HTTP_STATUS.OK).send(order);
+      const ordenId = req.params.id;
+      console.log(ordenId)
+      const ordenDoc = await firestore.getDoc(firestore.doc(fs, 'orden', ordenId));
+      if (ordenDoc.exists()) {
+        res.json({ id: ordenDoc.id, ...ordenDoc.data() });
+      } else {
+        res.status(404).json({ error: 'Orden no encontrado.' });
+      }
     } catch (error) {
-      return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ message: 'Error getting order' });
+      console.error('Error al obtener el orden:', error);
+      res.status(500).json({ error: 'Error al obtener el Orden.' });
     }
   };
   
@@ -83,7 +131,7 @@ export const createOrder = async (req, res) => {
     const fechaHoraActual = moment().format('MMMM DD, YYYY HH:mm:ss');
     try {
       const { id } = req.params;
-      const orderRef = database.ref('orders').child(id);
+      const orderRef = database.ref('orden').child(id);
       const snapshot = await orderRef.once('value');
       const order = snapshot.val();
       if (!order) {
