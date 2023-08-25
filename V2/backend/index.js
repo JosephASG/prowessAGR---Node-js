@@ -112,3 +112,11 @@ app.get('/fb/order/getOrders/:id', order.getOrders);
 app.listen(port,() =>{
   console.log("Servidor en operación (Puerto 5000).")
 })
+
+// CategoryController
+/*
+import * as categoria from './Src/controller/categoryController.js';
+
+// Obtener todas las categorías
+app.get('/fb/category/get', categoria.getCategories);
+*/
