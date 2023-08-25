@@ -12,6 +12,8 @@ import ShoppingCart from './components/ShoppingCart';
 import RegisterPage from './components/Register'; // Importa el componente RegisterPage (registro.js)
 import ProductList from './components/ProductList';
 import TermsConditions from './components/TermsConditions';
+import SaleDetailsPage from './components/SaleDetailsPage';
+import SalesPage from './components/SalesPage';
 
 ReactDOM.render(
   <Router>
@@ -27,6 +29,8 @@ ReactDOM.render(
       <Route path="/registro" element={<RegisterPage />} /> {/* Agrega la ruta para la página de registro */}
       <Route path="productList" element={<ProductList />} />
       <Route path="/terms&conditions" element={<TermsConditions />} />
+      <Route path="/sale:id" element={<SaleDetailsPage />} />
+      <Route path="/sales" element={<SalesPage />} />
     </Routes>
 
     <Footer /> {/* Agrega el componente Footer */}
