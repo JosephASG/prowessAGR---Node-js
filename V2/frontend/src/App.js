@@ -30,6 +30,7 @@ function App() {
           <ProductList />
           <SaleDetailsPage />
           <SalesPage />
+          <Login />
         </>
       ) : (
         <>
