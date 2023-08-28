@@ -14,6 +14,7 @@ import ProductList from './components/ProductList';
 import TermsConditions from './components/TermsConditions';
 import SaleDetailsPage from './components/SaleDetailsPage';
 import SalesPage from './components/SalesPage';
+import Login from './components/Login';
 
 ReactDOM.render(
   <Router>
@@ -31,6 +32,7 @@ ReactDOM.render(
       <Route path="/terms&conditions" element={<TermsConditions />} />
       <Route path="/sale:id" element={<SaleDetailsPage />} />
       <Route path="/sales" element={<SalesPage />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
 
     <Footer /> {/* Agrega el componente Footer */}

@@ -79,6 +79,11 @@ function NavigationBar() {
               <FontAwesomeIcon icon={faShoppingCart} />
             </Link>
           </li>
+          <li>
+            <Link to="/login" onClick={toggleMenu}>
+              Iniciar Sesión
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
