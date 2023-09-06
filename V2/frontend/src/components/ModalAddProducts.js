@@ -1,7 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ModalAddProducts.css';
 
-const ModalAddProducts = ({ children, isOpen, onClose }) => {
+const ModalAddProducts = ({ isOpen, onClose, handleAddProduct }) => {
+  const [newProduct, setNewProduct] = useState({
+    pro_nombre: '',
+    pro_precio: '',
+    pro_stock: '',
+    pro_descripcion: '',
+  });
+
   useEffect(() => {
     if (isOpen) {
       const body = document.body;
@@ -12,6 +19,35 @@ const ModalAddProducts = ({ children, isOpen, onClose }) => {
     }
   }, [isOpen]);
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewProduct({
+      ...newProduct,
+      [name]: value,
+    });
+  };
+
+  const handleSave = () => {
+    fetch('http://localhost:5000/fb/producto/post', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newProduct),
+    })
+      .then((response) => {
+        if (response.ok) {
+          handleAddProduct(newProduct);
+          onClose();
+        } else {
+          console.error('Error al agregar el producto en el servidor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red al agregar el producto', error);
+      });
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -21,40 +57,58 @@ const ModalAddProducts = ({ children, isOpen, onClose }) => {
           <form className='modal-form'>
             <div className="form-group-pair">
               <div>
-                <label htmlFor="name">Name</label>
-                <input type="text" className="form-control" />
+                <label htmlFor="pro_nombre">Nombre</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="pro_nombre"
+                  value={newProduct.pro_nombre}
+                  onChange={handleInputChange}
+                />
               </div>
               <div>
-                <label htmlFor="price">Price</label>
-                <input type="number" className="form-control" />
+                <label htmlFor="pro_precio">Precio</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  name="pro_precio"
+                  value={newProduct.pro_precio}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
             <div className="form-group-pair">
               <div>
-                <label htmlFor="category">Stock</label>
-                <input type="number" className="form-control" />
+                <label htmlFor="pro_stock">Stock</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  name="pro_stock"
+                  value={newProduct.pro_stock}
+                  onChange={handleInputChange}
+                />
               </div>
               <div>
-                <label htmlFor="description">Description</label>
-                <textarea className="form-control" />
+
+                <div>
+                  <label htmlFor="pro_descripcion">Descripción</label>
+                  <textarea
+                    className="form-control"
+                    name="pro_descripcion"
+                    value={newProduct.pro_descripcion}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
             </div>
             <div className="form-group">
-              <label className='btn-file-container'>
-                Subir imagen
-                <input className="img-input" type="file" />
-              </label>
-            </div>
-            <div className="form-group">
-              <label className='btn-save-container'>Guardar</label>
-              <button className="btn-save">Guardar</button>
+              <label className='btn-save-container' onClick={handleSave}>Guardar</label>
             </div>
           </form>
         </div>
         <span className="modal-close-product" onClick={onClose}>
           &times;
         </span>
-        {children}
       </div>
     </div>
   );
