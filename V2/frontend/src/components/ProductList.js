@@ -1,122 +1,114 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './ProductList.css';
 import ModalAddProducts from './ModalAddProducts';
-
-const initialProducts = [
-  {
-    id: 1,
-    name: 'Producto 1',
-    price: 10,
-    stock: 20,
-    vendor: 'Vendedor A',
-  },
-  {
-    id: 2,
-    name: 'Producto 2',
-    price: 15,
-    stock: 15,
-    vendor: 'Vendedor B',
-  },
-  {
-    id: 3,
-    name: 'Producto 3',
-    price: 25,
-    stock: 10,
-    vendor: 'Vendedor C',
-  },
-  {
-    id: 4,
-    name: 'Producto 4',
-    price: 12,
-    stock: 5,
-    vendor: 'Vendedor A',
-  },
-  {
-    id: 5,
-    name: 'Producto 5',
-    price: 18,
-    stock: 8,
-    vendor: 'Vendedor D',
-  },
-  {
-    id: 6,
-    name: 'Producto 6',
-    price: 30,
-    stock: 3,
-    vendor: 'Vendedor B',
-  },
-  {
-    id: 7,
-    name: 'Producto 7',
-    price: 22,
-    stock: 12,
-    vendor: 'Vendedor C',
-  },
-  {
-    id: 8,
-    name: 'Producto 8',
-    price: 28,
-    stock: 6,
-    vendor: 'Vendedor A',
-  },
-  {
-    id: 9,
-    name: 'Producto 9',
-    price: 14,
-    stock: 18,
-    vendor: 'Vendedor D',
-  },
-  {
-    id: 10,
-    name: 'Producto 10',
-    price: 17,
-    stock: 9,
-    vendor: 'Vendedor B',
-  },
-  {
-    id: 11,
-    name: 'Producto 11',
-    price: 21,
-    stock: 14,
-    vendor: 'Vendedor C',
-  },
-  {
-    id: 12,
-    name: 'Producto 12',
-    price: 8,
-    stock: 22,
-    vendor: 'Vendedor A',
-  },
-];
+import ModalEditProduct from './ModalEditProduct';
 
 const ProductList = () => {
-  const [products, setProducts] = useState(initialProducts);
+  const [products, setProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const ITEMS_PER_PAGE = 5; // Número de productos por página
+
+  const ITEMS_PER_PAGE = 5;
+
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [productToEdit, setProductToEdit] = useState(null);
 
   const [sortCriteria, setSortCriteria] = useState(null);
   const [filterProduct, setFilterProduct] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
 
+  const [productToUpdate, setProductToUpdate] = useState(null);
+
+  //Obtener todos los productos.
+  useEffect(() => {
+    fetch(`http://localhost:5000/fb/producto/get`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Error en la solicitud al servidor');
+        }
+        console.log(response);
+        return response.json();
+      })
+      .then((data) => setProducts(data))
+      .catch((error) => console.error('Error al cargar los productos', error));
+  }, []);
+
+  //Eliminar producto 
   const handleDelete = (productId) => {
-    setProducts(products.filter((product) => product.id !== productId));
+    fetch(`http://localhost:5000/fb/producto/delete/${productId}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          setProducts(products.filter((product) => product.id !== productId));
+        } else {
+          console.error('Error al eliminar el producto en el servidor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red al eliminar el producto', error);
+      });
   };
+
+  //Editar producto - Mover a ModalEditProduct.js
+  const handleEdit = (productId) => {
+    fetch(`http://localhost:5000/fb/producto/update/${productId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      if (response.ok) {
+        setProducts(products.filter((product) => product.id !== productId));
+      } else {
+        console.error('Error al editar el producto en el servidor');
+      }
+    })
+  };
+
 
   const handleOpenModal = () => {
-    setIsModalOpen(true);
+    setIsAddModalOpen(true);
   };
 
-  const handleModalClose = () => {
-    setIsModalOpen(false);
+  const handleEditProduct = (product) => {
+    setProductToEdit(product);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSave = () => {
+    if (!productToUpdate) {
+      return;
+    }
+
+    fetch(`http://localhost:5000/fb/producto/update/${productToUpdate.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(productToUpdate),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setIsModalOpen(false);
+          setProductToUpdate(null);
+        } else {
+          console.error('Error al guardar los cambios en el servidor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red al guardar los cambios', error);
+      });
   };
 
   const handleSort = (criteria) => {
     setSortCriteria(criteria);
   };
 
-  const handleFilter = (product) => { 
+  const handleFilter = (product) => {
     setFilterProduct(product);
   };
 
@@ -128,9 +120,10 @@ const ProductList = () => {
     );
   }
 
-  if (filterProduct) { 
+  if (filterProduct) {
     sortedAndFilteredProducts = sortedAndFilteredProducts.filter(
-      (product) => product.name.toLowerCase().includes(filterProduct.toLowerCase())
+      (product) =>
+        product.pro_nombre.toLowerCase().includes(filterProduct.toLowerCase())
     );
   }
 
@@ -146,12 +139,16 @@ const ProductList = () => {
         <button onClick={handleOpenModal} className='btn-add-product'>Agregar Producto</button>
       </div>
       <div>
-        <ModalAddProducts isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <ModalAddProducts isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
+          <ModalEditProduct
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+          />
       </div>
       <div className="header-row">
-        <b onClick={() => handleSort('name')}>Nombre</b>
-        <b onClick={() => handleSort('price')}>Precio</b>
-        <b onClick={() => handleSort('stock')}>Stock</b>
+        <b onClick={() => handleSort('pro_nombre')}>Nombre</b>
+        <b onClick={() => handleSort('pro_precio')}>Precio</b>
+        <b onClick={() => handleSort('pro_stock')}>Stock</b>
         <b>Acciones</b>
       </div>
       <div className="filter-row">
@@ -165,14 +162,16 @@ const ProductList = () => {
       <div className="container-products">
         {productsToDisplay.map((product) => (
           <div className="product" key={product.id}>
-            <div>{product.name}</div>
-            <div>${product.price}</div>
-            <div>{product.stock}</div>
+            <div>{product.pro_nombre}</div>
+            <div>${product.pro_precio}</div>
+            <div>{product.pro_stock}</div>
             <div className='actions-container'>
               <FontAwesomeIcon
                 className="fa-icon-edit"
                 icon={faPenToSquare}
+                onClick={() => handleEditProduct(product)} // Abre el modal de edición al hacer clic en el ícono de edición
               />
+
               <FontAwesomeIcon
                 className="fa-icon-trash"
                 icon={faTrash}
