@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ModalAddProducts.css';
 
-const ModalAddProducts = ({ isOpen, onClose, handleAddProduct }) => {
+const ModalAddProducts = ({ isOpen, onClose }) => {
   const [newProduct, setNewProduct] = useState({
     pro_nombre: '',
     pro_precio: '',
@@ -37,7 +37,6 @@ const ModalAddProducts = ({ isOpen, onClose, handleAddProduct }) => {
     })
       .then((response) => {
         if (response.ok) {
-          handleAddProduct(newProduct);
           onClose();
         } else {
           console.error('Error al agregar el producto en el servidor');
@@ -102,7 +101,7 @@ const ModalAddProducts = ({ isOpen, onClose, handleAddProduct }) => {
               </div>
             </div>
             <div className="form-group">
-              <label className='btn-save-container' onClick={handleSave}>Guardar</label>
+              <label className='btn-save-container' onClick={handleSave} >Guardar</label>
             </div>
           </form>
         </div>
