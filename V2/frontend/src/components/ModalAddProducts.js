@@ -88,7 +88,6 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                 />
               </div>
               <div>
-
                 <div>
                   <label htmlFor="pro_descripcion">Descripción</label>
                   <textarea
@@ -98,6 +97,18 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                     onChange={handleInputChange}
                   />
                 </div>
+              </div>
+            </div>
+            <div className="form-group-pair">
+              <div>
+                <label htmlFor="pro_imagen">Imagen</label>
+                <input
+                  type="file"
+                  className="form-control"
+                  name="pro_imagen"
+                  value={newProduct.pro_imagen}
+                  onChange={handleInputChange}
+                />
               </div>
             </div>
             <div className="form-group">
