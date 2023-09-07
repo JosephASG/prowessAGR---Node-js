@@ -11,6 +11,50 @@ admin.initializeApp({
 // Referencia a la base de datos de Firebase
 const db = admin.firestore();
 
+// Crear una nueva categoría
+export const createCategory = async (req, res) => {
+  const { name, description } = req.body;
+
+  try {
+      const newCategory = {
+          name,
+          description
+      };
+
+      // Guardar en Firestore
+      const categoryRef = await db.collection('categories').add(newCategory);
+      return res.status(201).json({ id: categoryRef.id, ...newCategory });
+  } catch (error) {
+      return res.status(500).json({ message: "Error creating category.", error: error.message });
+  }
+};
+
+// Actualizar una categoría existente
+export const updateCategory = async (req, res) => {
+  const { id } = req.params;
+  const { name, description } = req.body;
+
+  try {
+      const categoryRef = db.collection('categories').doc(id);
+      await categoryRef.update({ name, description });
+      return res.status(200).json({ id, name, description });
+  } catch (error) {
+      return res.status(500).json({ message: "Error updating category.", error: error.message });
+  }
+};
+
+// Eliminar una categoría
+export const deleteCategory = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      await db.collection('categories').doc(id).delete();
+      return res.status(200).json({ message: "Category successfully deleted." });
+  } catch (error) {
+      return res.status(500).json({ message: "Error deleting category.", error: error.message });
+  }
+};
+
 // Obtener categoria por el Id
 export const getCategoryById = async (req, res) => {
   // Obtener el id de la solicitud
