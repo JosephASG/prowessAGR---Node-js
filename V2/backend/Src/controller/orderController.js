@@ -77,13 +77,29 @@ Modelo crear orden PostMan
   // Obtenga todos los pedidos para un ID de usuario determinado de Firebase Realtime Database
   export const getMyOrders = async (req, res) => {
     try {
-      const snapshot = await database.ref('orders').orderByChild('id').equalTo(req.params.id).once('value');
-      const orders = snapshot.val();
-      return res.status(HTTP_STATUS.OK).send(orders);
+      const userId = String(req.params.userId);
+      const ordenesCollection = firestore.collection(fs, 'orden');
+      
+      // Consulta las órdenes que tienen el mismo userId
+      const querySnapshot = await firestore.getDocs(
+        firestore.query(
+          ordenesCollection,
+          firestore.where('userId', '==', userId)
+        )
+      );
+  
+      const ordenes = [];
+      querySnapshot.forEach((ordenDoc) => {
+        ordenes.push({ id: ordenDoc.id, ...ordenDoc.data() });
+      });
+  
+      res.json(ordenes);
     } catch (error) {
-      return res.status(500).json({ message: 'Error getting order' });
+      console.error('Error al obtener las órdenes:', error);
+      res.status(500).json({ error: 'Error al obtener las órdenes.' });
     }
   };
+  
   
   // Eliminar un pedido de Firebase Realtime Database
   /*
