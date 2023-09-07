@@ -59,6 +59,8 @@ export const loginUser = async (req, res) => {
   }
 };
 
+
+
 // Crear usuario
 export const postUser = async (req, res) => {
   try {
@@ -116,6 +118,21 @@ export const postUser = async (req, res) => {
       .json({ message: "Error al crear el usuario" });
   }
 };
+
+
+// Solicitar reinicio de contraseña
+export const requestPasswordReset = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+      // Envía un correo electrónico de reinicio de contraseña al usuario
+      await auth.sendPasswordResetEmail(email);
+      return res.status(200).json({ message: "Correo electrónico de reinicio de contraseña enviado exitosamente." });
+  } catch (error) {
+      return res.status(500).json({ message: "Error al enviar el correo electrónico de reinicio de contraseña.", error: error.message });
+  }
+}; 
+
 
 // Metodo GET
 export const getUsers = async (req, res) => {
