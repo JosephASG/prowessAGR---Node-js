@@ -52,6 +52,30 @@ const getProductByID = async (req, res) => {
   }
 };
 
+// Obtener productos por categoría
+export const getProductsByCategory = async (req, res) => {
+  const { category } = req.params;
+
+  try {
+      // Consulta productos de una categoría específica
+      const snapshot = await db.collection('products').where('category', '==', category).get();
+      
+      const products = [];
+      snapshot.forEach(doc => {
+          products.push({ id: doc.id, ...doc.data() });
+      });
+
+      // Verifica si hay productos para la categoría solicitada
+      if (products.length === 0) {
+          return res.status(404).json({ message: `No products found for category: ${category}` });
+      }
+
+      return res.status(200).json(products);
+  } catch (error) {
+      return res.status(500).json({ message: "Error fetching products by category.", error: error.message });
+  }
+};
+
 // Agregar un nuevo producto
 
 const createProduct =  async (req, res) => {
