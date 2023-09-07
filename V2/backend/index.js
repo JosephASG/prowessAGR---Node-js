@@ -57,7 +57,7 @@ app.get('/fb/producto/get',(req,res) =>{
   }
 })*/
 // Import Firebase and Firestore
-import * as producto from './Src/controller/productController.js';
+import * as producto from '../../V2/backend/Src/controller/productController.js';
 
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
@@ -119,4 +119,30 @@ import * as categoria from './Src/controller/categoryController.js';
 
 // Obtener todas las categorías
 app.get('/fb/category/get', categoria.getCategories);
+
+
+// userController
+import * as usuario from './Src/controller/userController.js';
+
+// Crear un nuevo usuario
+app.post('/fb/usuario/post', usuario.createUser);
 */
+
+// Importar las funciones relacionadas con los vendedores desde './sellerController'
+
+import * as vendedor from './Src/controller/sellerController.js';
+
+// Crear nuevo vendedor
+app.post('/fb/vendedor/createSeller', vendedor.createSeller);
+
+//Obtener todos los vendedores.
+app.get('/fb/vendedor/getSeller', vendedor.getSeller);
+
+// Obtener un vendedor específico
+app.get('/fb/vendedor/getSeller/:id', vendedor.getSellerByID);
+
+// Actualizar el vendedor
+app.put('/fb/vendedor/updateSeller/:id', vendedor.updateSeller);
+
+// Eliminar el vendedor
+app.delete('/fb/vendedor/deleteSeller/:id', vendedor.deleteSeller);

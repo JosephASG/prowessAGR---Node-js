@@ -76,7 +76,7 @@ export const postUser = async (req, res) => {
         .json({ message: "Todos los campos son requeridos" });
     }
 
-    const snapshot = await db.collection('users').where('email', '==', req.body.email).get();
+    const snapshot = await db.collection('usuario').where('email', '==', req.body.email).get();
     if (!snapshot.empty) {
       return res
         .status(HTTP_STATUS.BAD_REQUEST)
@@ -108,7 +108,7 @@ export const postUser = async (req, res) => {
       await fs.unlink(req.files.image.tempFilePath);
     }
 
-    const docRef = await db.collection('users').add(newUser);
+    const docRef = await db.collection('usuario').add(newUser);
     newUser._id = docRef.id;
     delete newUser.password;
     return res.status(HTTP_STATUS.CREATED).json(newUser);
