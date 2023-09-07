@@ -1,4 +1,5 @@
 import * as firebase from 'firebase/app';
+import 'firebase/storage'; // Línea para importar Firebase Storage
 import * as firestore from 'firebase/firestore';
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
