@@ -7,7 +7,6 @@ import ModalEditProduct from './ModalEditProduct';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const ITEMS_PER_PAGE = 5;
 
@@ -21,7 +20,6 @@ const ProductList = () => {
 
   const [productToUpdate, setProductToUpdate] = useState(null);
 
-  //Obtener todos los productos.
   useEffect(() => {
     fetch(`http://localhost:5000/fb/producto/get`)
       .then((response) => {
@@ -35,7 +33,6 @@ const ProductList = () => {
       .catch((error) => console.error('Error al cargar los productos', error));
   }, []);
 
-  //Eliminar producto 
   const handleDelete = (productId) => {
     fetch(`http://localhost:5000/fb/producto/delete/${productId}`, {
       method: 'DELETE',
@@ -52,24 +49,6 @@ const ProductList = () => {
       });
   };
 
-  //Editar producto - Mover a ModalEditProduct.js
-  const handleEdit = (productId) => {
-    fetch(`http://localhost:5000/fb/producto/update/${productId}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then((response) => {
-      if (response.ok) {
-        setProducts(products.filter((product) => product.id !== productId));
-      } else {
-        console.error('Error al editar el producto en el servidor');
-      }
-    })
-  };
-
-
   const handleOpenModal = () => {
     setIsAddModalOpen(true);
   };
@@ -79,10 +58,17 @@ const ProductList = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleEdit = (editedProduct) => {
+    setProductToUpdate(editedProduct);
+    handleUpdateProduct(); // Llamar a la función para guardar los cambios
+  };
+
+  const handleUpdateProduct = () => {
     if (!productToUpdate) {
       return;
     }
+
+    console.log('productToUpdate:', productToUpdate.id);
 
     fetch(`http://localhost:5000/fb/producto/update/${productToUpdate.id}`, {
       method: 'PUT',
@@ -93,8 +79,13 @@ const ProductList = () => {
     })
       .then((response) => {
         if (response.ok) {
-          setIsModalOpen(false);
-          setProductToUpdate(null);
+          // Actualiza la lista de productos después de la actualización en el backend
+          setProducts((prevProducts) =>
+            prevProducts.map((product) =>
+              product.id === productToUpdate.id ? productToUpdate : product
+            )
+          );
+          setIsEditModalOpen(false);
         } else {
           console.error('Error al guardar los cambios en el servidor');
         }
@@ -140,15 +131,19 @@ const ProductList = () => {
       </div>
       <div>
         <ModalAddProducts isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
-          <ModalEditProduct
-            isOpen={isEditModalOpen}
-            onClose={() => setIsEditModalOpen(false)}
-          />
+        <ModalEditProduct
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          productToEdit={productToEdit} // Asegúrate de pasar productToEdit
+          handleEdit={handleEdit} // Asegúrate de pasar la función handleEdit
+        />
+
       </div>
       <div className="header-row">
         <b onClick={() => handleSort('pro_nombre')}>Nombre</b>
         <b onClick={() => handleSort('pro_precio')}>Precio</b>
         <b onClick={() => handleSort('pro_stock')}>Stock</b>
+        <b>Descripción</b>
         <b>Acciones</b>
       </div>
       <div className="filter-row">
@@ -165,12 +160,14 @@ const ProductList = () => {
             <div>{product.pro_nombre}</div>
             <div>${product.pro_precio}</div>
             <div>{product.pro_stock}</div>
+            <div>{product.pro_descripcion}</div>
             <div className='actions-container'>
               <FontAwesomeIcon
                 className="fa-icon-edit"
                 icon={faPenToSquare}
-                onClick={() => handleEditProduct(product)} // Abre el modal de edición al hacer clic en el ícono de edición
+                onClick={() => handleEditProduct(product)} // Asegúrate de que `product` contenga el ID
               />
+
 
               <FontAwesomeIcon
                 className="fa-icon-trash"

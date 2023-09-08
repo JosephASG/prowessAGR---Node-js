@@ -78,6 +78,9 @@ function NavigationBar() {
             <Link to="/carrito" onClick={toggleMenu}>
               <FontAwesomeIcon icon={faShoppingCart} />
             </Link>
+            <div className='cuantity-shopping-cart-container'>
+              <span className='cuantity-shopping-cart'>0</span>
+            </div>
           </li>
           <li>
             <Link to="/login" onClick={toggleMenu}>
