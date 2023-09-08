@@ -157,6 +157,10 @@ select {
   cursor: pointer;
 }
 
+.product-card > p {
+  color: white;
+}
+
 .pagination {
   display: flex;
   justify-content: center;

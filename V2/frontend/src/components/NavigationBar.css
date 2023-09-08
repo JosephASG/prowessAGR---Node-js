@@ -73,6 +73,18 @@
   color: white;
 }
 
+
+.cuantity-shopping-cart {
+  background-color: rgba(47, 134, 166, 0.832);
+  position: relative;
+  font-weight: bolder;
+  font-size: 0.9em;
+  left: 10px;
+  bottom: 35px;
+  border-radius: 5px;
+  padding: 1px;
+}
+
 @media screen and (min-width: 769px) {
   .hamburger-menu {
     display: none; /* Oculta el botón del menú hamburguesa para tamaños mayores a 768px */
