@@ -117,7 +117,7 @@ function StorePage() {
         <div className='products-container'>
           {currentProducts.map((product) => (
             <div key={product.id} className="product-card">
-              <img src={product.image} alt={product.pro_name} className="product-image" />
+              <img src={product.pro_imagen} alt={product.pro_name} className="product-image" />
               <h3>{product.pro_nombre}</h3>
               <p><b>Precio:</b> ${product.pro_precio}</p>
               <div className="product-actions">

@@ -128,7 +128,8 @@ import * as usuario from './Src/controller/userController.js';
 app.post('/fb/usuario/post', usuario.createUser);
 */
 
-// Importar las funciones relacionadas con los vendedores desde './sellerController'
+
+// Importar las funciones relacionadas con los VENDEDORES desde './sellerController'
 
 import * as vendedor from './Src/controller/sellerController.js';
 
