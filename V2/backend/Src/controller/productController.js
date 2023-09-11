@@ -1,6 +1,7 @@
 import * as firebase from 'firebase/app';
-import 'firebase/storage'; // Línea para importar Firebase Storage
+import 'firebase/storage';
 import * as firestore from 'firebase/firestore';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
 const firebaseConfig = {
@@ -15,9 +16,33 @@ const firebaseConfig = {
 // Inicializar Firebase y Firestore
 const fiapp = firebase.initializeApp(firebaseConfig);
 const fs = firestore.getFirestore(fiapp);
-
+const storage = getStorage(); // Obtén una referencia al servicio de almacenamiento
 
 //import {fs} from "../../firebase.js";
+
+// Agregar un nuevo producto
+const createProduct = async (req, res) => {
+  try {
+    const newProductData = req.body; // Los datos del nuevo producto deben estar en el cuerpo de la solicitud (request body)
+    const imageFile = req.file; // Aquí asumimos que el archivo de imagen se encuentra en req.file
+
+    // Sube la imagen al Firebase Storage
+    if (imageFile) {
+      const storageRef = ref(storage, `productos/${imageFile.originalname}`);
+      await uploadBytes(storageRef, imageFile.buffer); // Aquí asumimos que el archivo de imagen está en req.file.buffer
+      newProductData.pro_imagen = await getDownloadURL(storageRef);
+    }
+
+    // Agrega los datos del producto a Firestore
+    const docRef = await firestore.addDoc(firestore.collection(fs, 'producto'), newProductData);
+
+    res.json({ id: docRef.id, ...newProductData });
+  } catch (error) {
+    console.error('Error al crear el producto:', error);
+    res.status(500).json({ error: 'Error al crear el producto.' });
+  }
+};
+
 
 //Obtener todos los productos.
 const getProducts =  async (req, res) => {
@@ -77,19 +102,7 @@ export const getProductsByCategory = async (req, res) => {
   }
 };
 
-// Agregar un nuevo producto
 
-const createProduct =  async (req, res) => {
-  try {
-    const newProductData = req.body; // Los datos del nuevo producto deben estar en el cuerpo de la solicitud (request body)
-    console.log(newProductData);
-    const docRef = await firestore.addDoc(firestore.collection(fs, 'producto'), newProductData);
-    res.json({ id: docRef.id, ...newProductData });
-  } catch (error) {
-    console.error('Error al crear el producto:', error);
-    res.status(500).json({ error: 'Error al crear el producto.' });
-  }
-};
 
 // Actualizar el producto
 const updateProduct = async (req, res) => {
