@@ -1,65 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './VendorsPage.css';
 import SearchBar from './SearchBar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import ModalEditVendors from './ModalEditVendors'; // Importa el componente ModalEditVendors
 
 function VendorsPage() {
   const [vendors, setVendors] = useState([
-    {
-      id: 1,
-      name: 'Juan',
-      city: 'Quito',
-      address: 'Dirección 1',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      image: 'https://static.vecteezy.com/system/resources/previews/022/932/692/non_2x/pleading-face-emoji-yellow-face-emoji-with-a-small-frown-and-large-eyes-as-if-begging-or-pleading-popular-chat-elements-free-vector.jpg',
-    },
-    {
-      id: 2,
-      name: 'Pedro',
-      city: 'Ambato',
-      address: 'Dirección 2',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      image: 'https://example.com/vendor2.jpg',
-    },
-    {
-      id: 3,
-      name: 'Carlos',
-      city: 'Quito',
-      address: 'Dirección 1',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      image: 'https://example.com/vendor1.jpg',
-    },
-    {
-      id: 4,
-      name: 'Ricardo',
-      city: 'Ambato',
-      address: 'Dirección 2',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      image: 'https://example.com/vendor2.jpg',
-    },
-    {
-      id: 5,
-      name: 'Juan Carlos',
-      city: 'Ambato',
-      address: 'Dirección 2',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      image: 'https://example.com/vendor2.jpg',
-    },
-    {
-      id: 6,
-      name: 'Gabriel',
-      city: 'Ambato',
-      address: 'Dirección 2',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      image: 'https://example.com/vendor2.jpg',
-    },
-
-    // Agrega más vendedores según sea necesario
+    // Tu lista de vendedores existente...
   ]);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,6 +15,9 @@ function VendorsPage() {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
+  
+  const [showEditModal, setShowEditModal] = useState(false); // Estado para mostrar/ocultar el modal
+  const [editingVendorId, setEditingVendorId] = useState(null); // ID del vendedor que se está editando
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -78,6 +29,36 @@ function VendorsPage() {
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  const handleAddVendor = () => {
+    // Aquí puedes abrir un formulario o realizar cualquier otra acción para agregar un nuevo vendedor.
+    // Luego, obtén los detalles ingresados y crea un nuevo vendedor.
+    // Por ejemplo:
+    const newVendor = {
+      id: vendors.length + 1,
+      name: 'Nuevo Vendedor',
+      city: 'Ciudad Nueva',
+      address: 'Dirección Nueva',
+      phoneNumber: '9876543210',
+      whatsappNumber: '1234567890',
+      image: 'https://example.com/new_vendor.jpg',
+    };
+
+    // Actualiza el estado de la lista de vendedores agregando el nuevo vendedor.
+    setVendors([...vendors, newVendor]);
+  };
+
+  const handleEdit = (vendorId) => {
+    // Abre el modal de edición al hacer clic en el botón de editar
+    setShowEditModal(true);
+    setEditingVendorId(vendorId);
+  };
+
+  const handleDelete = (vendorId) => {
+    // Aquí puedes implementar la lógica para eliminar un vendedor.
+    // Debes proporcionar el ID del vendedor que se debe eliminar.
+    console.log(`Eliminar vendedor con ID ${vendorId}`);
   };
 
   const filteredVendors = vendors.filter((vendor) =>
@@ -103,6 +84,10 @@ function VendorsPage() {
   return (
     <div className="vendors-page">
       <h2>Listado de Vendedores</h2>
+      <button className="add-vendor-button" onClick={handleAddVendor}>
+        Agregar Vendedor
+      </button>
+      
       <SearchBar
         searchTerm={searchTerm}
         sortOption={sortOption}
@@ -123,6 +108,12 @@ function VendorsPage() {
             <a href={`https://wa.me/${vendor.whatsappNumber}`}>
               <button className="whatsapp-button">WhatsApp</button>
             </a>
+            <button className="edit-button" onClick={() => handleEdit(vendor.id)}>
+              <FontAwesomeIcon icon={faEdit} /> {/* Ícono de editar */}
+            </button>
+            <button className="delete-button" onClick={() => handleDelete(vendor.id)}>
+              <FontAwesomeIcon icon={faTrash} /> {/* Ícono de eliminar */}
+            </button>
           </div>
         ))}
       </div>
@@ -138,6 +129,22 @@ function VendorsPage() {
           </span>
         ))}
       </div>
+
+      {/* Renderiza el modal de edición si showEditModal es true */}
+      {showEditModal && (
+        <ModalEditVendors
+          isOpen={showEditModal}
+          onClose={() => {
+            setShowEditModal(false); // Cierra el modal al hacer clic en "Cerrar"
+            setEditingVendorId(null); // Limpia el ID del vendedor
+          }}
+          vendorToEdit={vendors.find((vendor) => vendor.id === editingVendorId)}
+          handleEdit={(editedVendor) => {
+            // Aquí puedes manejar la lógica de edición del vendedor
+            console.log('Editar vendedor', editedVendor);
+          }}
+        />
+      )}
     </div>
   );
 }
