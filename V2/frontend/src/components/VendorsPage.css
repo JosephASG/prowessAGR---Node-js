@@ -81,6 +81,22 @@ h2 {
   background-color: #449b50;
 }
 
+.add-vendor-button{
+  height: 50px;
+  width: 170px;
+  background: linear-gradient(45deg, orange, #FF8C00);
+  color: white;
+  border-radius: 5px;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  border-width: 0px;
+  top: 80%;
+  font-size: 19px;
+  margin: 5px;
+  padding: 5px;
+}
+
 @media screen and (max-width: 900px) {
   .vendor-list {
     grid-template-columns: repeat(3, 225px); /* Cambiamos a dos columnas de 225px cada una para pantallas de 750px a 850px */
