@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import ShoppingCart from './ShoppingCart';
 import './StorePage.css';
 import SearchBar from './SearchBar';
 
-function StorePage() {
+function StorePage({ cart, addToCart, removeFromCart }) {
   const [categories, setCategories] = useState([
     'Frutas',
     'Verduras',
     'Cereales',
     'Hortalizas',
   ]);
+
+  console.log('StorePage', arguments)
 
   const [products, setProducts] = useState([]);
 
@@ -21,14 +24,14 @@ function StorePage() {
   const [sortCriteria, setSortCriteria] = useState(null);
 
   const productsPerPage = 10;
-  
+
   let sortedAndFilteredProducts = [...products];
 
   const startIndex = (currentPage - 1) * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const currentProducts = sortedAndFilteredProducts.slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil(filterProduct.length / productsPerPage);
+  const totalPages = Math.ceil(sortedAndFilteredProducts.length / productsPerPage);
 
   useEffect(() => {
     fetch(`http://localhost:5000/fb/producto/get`)
@@ -41,26 +44,7 @@ function StorePage() {
       .then((data) => setProducts(data))
       .catch((error) => console.error('Error al cargar los productos', error));
   }, []);
-
-/** Obtener cateegorías
-    useEffect(() => {
-    fetch(`http://localhost:5000/fb/category/get`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Error en la solicitud al servidor');
-      }
-      console.log(response);
-      return response.json();
-    })
-    .then((data) => setCategories(data))
-    .catch((error) => console.error('Error al cargar las categorías', error));
-  }, []);
- */
-
-  const addToCart = (productId) => {
-    console.log(`Producto agregado al carrito: ${productId}`);
-  };
-
+  
   const showProductDetails = (productId) => {
     const product = products.find((p) => p.id === productId);
     if (product) {
@@ -121,16 +105,17 @@ function StorePage() {
               <h3>{product.pro_nombre}</h3>
               <p><b>Precio:</b> ${product.pro_precio}</p>
               <div className="product-actions">
-                <button onClick={() => addToCart(product.id)}>
+                <button onClick={() => addToCart(product)}>
                   Agregar al carrito
                   <FontAwesomeIcon className="fa-ican-cartshopping" icon={faCartShopping} />
-                  </button>
+                </button>
                 <span className="product-info-icon" onClick={() => showProductDetails(product.id)}>
                 </span>
               </div>
             </div>
           ))}
         </div>
+        <ShoppingCart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />
       </div>
       <div className="pagination">
         <button
