@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, children }) => {
-  const [editedProduct, setEditedProduct] = useState(productToEdit);
+  const initialProduct = productToEdit ? productToEdit : {
+    pro_nombre: "",
+    pro_precio: 0,
+    pro_stock: 0,
+    pro_descripcion: "",
+  };
+
+  const [editedProduct, setEditedProduct] = useState(initialProduct);
 
   useEffect(() => {
     if (isOpen) {
