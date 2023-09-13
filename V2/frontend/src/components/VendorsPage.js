@@ -56,9 +56,11 @@ function VendorsPage() {
   };
 
   const handleDelete = (vendorId) => {
-    // Aquí puedes implementar la lógica para eliminar un vendedor.
-    // Debes proporcionar el ID del vendedor que se debe eliminar.
-    console.log(`Eliminar vendedor con ID ${vendorId}`);
+    // Filtra la lista de vendedores para excluir el vendedor con el ID especificado.
+    const updatedVendors = vendors.filter((vendor) => vendor.id !== vendorId);
+
+    // Actualiza el estado de la lista de vendedores con la nueva lista sin el vendedor eliminado.
+    setVendors(updatedVendors);
   };
 
   const filteredVendors = vendors.filter((vendor) =>
