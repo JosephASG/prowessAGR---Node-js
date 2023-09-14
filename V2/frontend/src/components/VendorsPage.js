@@ -107,12 +107,12 @@ function VendorsPage() {
             <p>Ciudad: {vendor.city}</p>
             <p>Dirección: {vendor.address}</p>
             <p>Teléfono: {vendor.phoneNumber}</p>
-            <a href={`https://wa.me/${vendor.whatsappNumber}`}>
-              <button className="whatsapp-button">WhatsApp</button>
-            </a>
             <button className="edit-button" onClick={() => handleEdit(vendor.id)}>
               <FontAwesomeIcon icon={faEdit} /> {/* Ícono de editar */}
             </button>
+            <a href={`https://wa.me/${vendor.whatsappNumber}`}>
+              <button className="whatsapp-button">WhatsApp</button>
+            </a>
             <button className="delete-button" onClick={() => handleDelete(vendor.id)}>
               <FontAwesomeIcon icon={faTrash} /> {/* Ícono de eliminar */}
             </button>

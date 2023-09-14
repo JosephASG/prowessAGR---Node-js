@@ -97,6 +97,39 @@ h2 {
   padding: 5px;
 }
 
+.delete-button {
+  margin-left: 3px;
+  font-size: 1.5em;
+  color: rgb(255, 41, 41);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.delete-button:hover {
+  color: rgb(255, 0, 0);
+}
+
+.delete-button:active {
+  color: #cc0000;
+}
+
+.edit-button {
+  margin-right: 3px;
+  font-size: 1.5em;
+  color: white;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.edit-button:hover {
+  color: rgb(159, 226, 255);
+}
+
+.edit-button:active {
+  color: rgb(127, 179, 201);
+}
 @media screen and (max-width: 900px) {
   .vendor-list {
     grid-template-columns: repeat(3, 225px); /* Cambiamos a dos columnas de 225px cada una para pantallas de 750px a 850px */
