@@ -19,7 +19,7 @@ const SalesPage = () => {
           <li className="li-customers" key={sale.id}>
             {/** Cuando esten los servicios */}
             {/**<Link to={`/sale/${sale.id}`}> */}
-            <Link to={`/sale:id`}>
+            <Link to={`/sales:id`}>
               <div>
                 <FontAwesomeIcon className="fa-user-customer" icon={faUser} />
               </div>
