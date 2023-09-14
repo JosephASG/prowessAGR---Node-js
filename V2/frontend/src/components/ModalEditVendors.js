@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './ModalEditVendors.css';
 
 const ModalEditVendors = ({ isOpen, onClose, vendorToEdit, handleEdit }) => {
   const [editedVendor, setEditedVendor] = useState(vendorToEdit);
