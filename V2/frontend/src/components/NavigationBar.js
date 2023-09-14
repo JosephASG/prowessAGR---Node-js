@@ -65,7 +65,7 @@ function NavigationBar() {
             </Link>
           </li>
           <li>
-            <Link to="/productList" onClick={toggleMenu}>
+            <Link to="/product-list" onClick={toggleMenu}>
               Lista de Productos
             </Link>
           </li>
