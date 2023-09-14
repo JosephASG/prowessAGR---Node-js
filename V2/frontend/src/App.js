@@ -43,8 +43,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/tienda" element={<StorePage cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
-        <Route path="/carrito" element={<ShoppingCart cart={cart} removeFromCart={removeFromCart} />} />
-        <Route path="/carrito-pagina" element={<ShoppingCartPage cart={cart} removeFromCart={removeFromCart} />} />
+        <Route path="/carrito" element={<ShoppingCart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
+        <Route path="/carrito-pagina" element={<ShoppingCartPage cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
         <Route path="/vendedores" element={<VendorsPage />} />
         <Route path="/nosotros" element={<AboutUs />} />
         <Route path="/mi-cuenta" element={<MyAccountPage />} />
