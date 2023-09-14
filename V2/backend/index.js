@@ -76,9 +76,6 @@ app.put('/fb/producto/update/:id', producto.updateProduct);
 app.delete('/fb/producto/delete/:id', producto.deleteProduct);
 
 
-
-
-
 // Importar las funciones relacionadas con los pedidos desde './orders'
 import * as order from './Src/controller/orderController.js';
 

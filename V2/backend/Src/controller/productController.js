@@ -1,7 +1,7 @@
 import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import * as firestore from 'firebase/firestore';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
 const firebaseConfig = {
@@ -28,15 +28,15 @@ const createProduct = async (req, res) => {
 
     // Sube la imagen al Firebase Storage
     if (imageFile) {
-      const storageRef = ref(storage, `productos/${imageFile.originalname}`);
+      const storageRef = ref(storage, `Productos Web Agricola/${imageFile.originalname}`);
       await uploadBytes(storageRef, imageFile.buffer); // Aquí asumimos que el archivo de imagen está en req.file.buffer
-      newProductData.pro_imagen = await getDownloadURL(storageRef);
+      newProductData.pro_imagen = await getDownloadURL(storageRef); // Obtén la URL de la imagen
     }
 
     // Agrega los datos del producto a Firestore
     const docRef = await firestore.addDoc(firestore.collection(fs, 'producto'), newProductData);
 
-    res.json({ id: docRef.id, ...newProductData });
+    res.json({ id: docRef.id, ...newProductData }); 
   } catch (error) {
     console.error('Error al crear el producto:', error);
     res.status(500).json({ error: 'Error al crear el producto.' });
