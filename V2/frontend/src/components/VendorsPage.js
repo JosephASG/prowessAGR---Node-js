@@ -4,6 +4,7 @@ import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ModalEditVendors from './ModalEditVendors'; // Importa el componente ModalEditVendors
+import ModalAddVendor from './ModalAddVendor'; // Importa el componente ModalAddVendor
 
 function VendorsPage() {
   const [vendors, setVendors] = useState([
@@ -16,11 +17,18 @@ function VendorsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortOption, setSortOption] = useState('');
   
-  const [showEditModal, setShowEditModal] = useState(false); // Estado para mostrar/ocultar el modal
+  const [showEditModal, setShowEditModal] = useState(false); // Estado para mostrar/ocultar el modal de edición
   const [editingVendorId, setEditingVendorId] = useState(null); // ID del vendedor que se está editando
 
+  const [showAddModal, setShowAddModal] = useState(false); // Estado para mostrar/ocultar el modal de agregar
+
   const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
+    const { value } = event.target;
+    if (value) {
+      setSearchTerm(value.toLowerCase());
+    } else {
+      setSearchTerm('');
+    }
   };
 
   const handleSortChange = (event) => {
@@ -31,22 +39,12 @@ function VendorsPage() {
     setCurrentPage(pageNumber);
   };
 
-  const handleAddVendor = () => {
-    // Aquí puedes abrir un formulario o realizar cualquier otra acción para agregar un nuevo vendedor.
-    // Luego, obtén los detalles ingresados y crea un nuevo vendedor.
-    // Por ejemplo:
-    const newVendor = {
-      id: vendors.length + 1,
-      name: 'Nuevo Vendedor',
-      city: 'Ciudad Nueva',
-      address: 'Dirección Nueva',
-      phoneNumber: '9876543210',
-      whatsappNumber: '1234567890',
-      image: 'https://example.com/new_vendor.jpg',
-    };
-
-    // Actualiza el estado de la lista de vendedores agregando el nuevo vendedor.
+  const handleAddVendor = (newVendor) => {
+    // Agrega el nuevo vendedor a la lista de vendedores en el estado
     setVendors([...vendors, newVendor]);
+  
+    // Cierra el modal de agregar
+    setShowAddModal(false);
   };
 
   const handleEdit = (vendorId) => {
@@ -64,8 +62,8 @@ function VendorsPage() {
   };
 
   const filteredVendors = vendors.filter((vendor) =>
-    vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  vendor.name && searchTerm && vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
 
   const sortedVendors = [...filteredVendors].sort((a, b) => {
     if (sortOption === 'name') {
@@ -86,7 +84,7 @@ function VendorsPage() {
   return (
     <div className="vendors-page">
       <h2>Listado de Vendedores</h2>
-      <button className="add-vendor-button" onClick={handleAddVendor}>
+      <button className="add-vendor-button" onClick={() => setShowAddModal(true)}>
         Agregar Vendedor
       </button>
       
@@ -144,6 +142,21 @@ function VendorsPage() {
           handleEdit={(editedVendor) => {
             // Aquí puedes manejar la lógica de edición del vendedor
             console.log('Editar vendedor', editedVendor);
+          }}
+        />
+      )}
+
+      {/* Renderiza el modal de agregar si showAddModal es true */}
+      {showAddModal && (
+        <ModalAddVendor
+          isOpen={showAddModal}
+          onClose={() => setShowAddModal(false)} // Cierra el modal al hacer clic en "Cerrar"
+          handleAddVendor={(newVendor) => {
+            // Aquí puedes manejar la lógica de agregación del nuevo vendedor
+            console.log('Agregar vendedor', newVendor);
+
+            // Cierra el modal de agregar
+            setShowAddModal(false);
           }}
         />
       )}
