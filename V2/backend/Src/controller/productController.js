@@ -26,11 +26,16 @@ const createProduct = async (req, res) => {
     const newProductData = req.body; // Los datos del nuevo producto deben estar en el cuerpo de la solicitud (request body)
     const imageFile = req.file; // Aquí asumimos que el archivo de imagen se encuentra en req.file
 
-    // Sube la imagen al Firebase Storage
     if (imageFile) {
-      const storageRef = ref(storage, `Productos Web Agricola/${imageFile.originalname}`);
-      await uploadBytes(storageRef, imageFile.buffer); // Aquí asumimos que el archivo de imagen está en req.file.buffer
-      newProductData.pro_imagen = await getDownloadURL(storageRef); // Obtén la URL de la imagen
+      const storageRef = firebase.storage().ref(`Productos Web Agricola/${imageFile.originalname}`);
+      try {
+        await uploadBytes(storageRef, imageFile.buffer);
+        console.log('Imagen cargada con éxito');
+        newProductData.pro_imagen = await getDownloadURL(storageRef);
+        console.log('URL de imagen obtenida con éxito');
+      } catch (error) {
+        console.error('Error al cargar la imagen o obtener la URL de la imagen:', error);
+      }
     }
 
     // Agrega los datos del producto a Firestore
