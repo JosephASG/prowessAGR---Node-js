@@ -67,7 +67,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
                 <button className='btn-remove' onClick={() => handleRemoveFromCart(product)}>-</button>
               </div>
               <div className='price-product'>
-                <p><b>Total:</b> ${product.pro_precio * product.cantidad}</p>
+                <p><b>Total:</b> ${(product.pro_precio * product.cantidad).toFixed(2)}</p>
                 <div>
                   <FontAwesomeIcon
                     className='fa-icon-trash'
@@ -80,7 +80,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
           ))}
           <div className="total-price">
             <p>
-              <b>Precio Total de la Compra:</b> ${calculateTotalPrice()}
+              <b>Precio Total de la Compra:</b> ${calculateTotalPrice().toFixed(2)}
             </p>
             <button className="btn-buy">
               <b>Comprar</b>
