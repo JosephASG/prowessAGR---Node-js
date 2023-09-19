@@ -28,6 +28,26 @@ const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
     });
   };
 
+  const handleSave = () => {
+    fetch('http://localhost:5000/fb/vendedor/createSeller', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newVendor),
+    })
+      .then((response) => {
+        if (response.ok) {
+          onClose();
+        } else {
+          console.error('Error al agregar el vendedor en el servidor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red al agregar el vendedor', error);
+      });
+  };
+
   const onSave = (e) => {
     e.preventDefault();
     // Llama a la función handleAddVendor y pasa el nuevo vendedor como argumento
@@ -105,7 +125,7 @@ const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
               />
             </div>
             <div className="form-group">
-              <button type="submit" className="btn-save">Guardar</button>
+            <label className='btn-save-container' onClick={handleSave} >Guardar</label>
             </div>
           </form>
         </div>
