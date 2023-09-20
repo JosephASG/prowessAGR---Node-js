@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './ModalEditVendors.css';
 
-const ModalEditVendors = ({ isOpen, onClose, vendorToEdit, handleEdit }) => {
-  const [editedVendor, setEditedVendor] = useState(vendorToEdit);
+const ModalEditVendor = ({ isOpen, onClose, vendorData, handleEditVendor }) => {
+  const [editedVendor, setEditedVendor] = useState(vendorData || {});
 
   useEffect(() => {
     if (isOpen) {
@@ -22,10 +21,31 @@ const ModalEditVendors = ({ isOpen, onClose, vendorToEdit, handleEdit }) => {
     });
   };
 
+  const handleSave = () => {
+    fetch('http://localhost:5000/fb/vendedor/updateSeller', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(editedVendor),
+    })
+      .then((response) => {
+        if (response.ok) {
+          onClose();
+        } else {
+          console.error('Error al editar el vendedor en el servidor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red al editar el vendedor', error);
+      });
+  };
+
   const onSave = (e) => {
     e.preventDefault();
-    handleEdit(editedVendor);
-    onClose();
+    // Call the handleEditVendor function and pass the edited vendor data as an argument
+    handleEditVendor(editedVendor);
+    onClose(); // Close the modal after editing the vendor
   };
 
   if (!isOpen) return null;
@@ -88,7 +108,17 @@ const ModalEditVendors = ({ isOpen, onClose, vendorToEdit, handleEdit }) => {
               />
             </div>
             <div className="form-group">
-              <button type="submit" className="btn-save">Guardar</button>
+              <label htmlFor="image">URL de la Imagen</label>
+              <input
+                type="text"
+                className="form-control"
+                name="image"
+                value={editedVendor.image}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="form-group">
+              <label className='btn-save-container' onClick={handleSave}>Guardar</label>
             </div>
           </form>
         </div>
@@ -100,4 +130,4 @@ const ModalEditVendors = ({ isOpen, onClose, vendorToEdit, handleEdit }) => {
   );
 };
 
-export default ModalEditVendors;
+export default ModalEditVendor;
