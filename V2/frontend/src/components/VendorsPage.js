@@ -3,13 +3,16 @@ import './VendorsPage.css';
 import SearchBar from './SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import ModalEditVendors from './ModalEditVendors';
+import ModalEditVendor from './ModalEditVendors';
 import ModalAddVendor from './ModalAddVendor';
 
 function VendorsPage() {
   const [vendors, setVendors] = useState([]);
   const [showAddModal, setShowAddModal] = useState(false); // Define setShowAddModal
+  const [showEditModal, setShowEditModal] = useState(false); // Define showEditModal
   const [editingVendorId, setEditingVendorId] = useState(null); // Define editingVendorId
+  const [editingVendorData, setEditingVendorData] = useState(null);
+
 
   const [sortOption, setSortOption] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -37,13 +40,6 @@ function VendorsPage() {
       .catch((error) => console.error('Error al cargar los vendedores', error));
   }, []);
 
-  const showVendorDetails = (vendorId) => {
-    const vendor = vendors.find((p) => p.id === vendorId);
-    if (vendor) {
-      console.log(`Detalles del vendedor ${vendorId}:`, vendor);
-    }
-  };
-
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
   };
@@ -56,9 +52,12 @@ function VendorsPage() {
     setCurrentPage(pageNumber);
   };
 
-  
-  const handleEdit = (vendorId) => { // Define handleEdit
-    // Implementa la lógica de edición aquí
+  const handleEditVendor = (vendorId) => {
+    const vendor = vendors.find((p) => p.id === vendorId);
+    if (vendor) {
+      setEditingVendorData(vendor);
+      setShowEditModal(true);
+    }
   };
 
   const handleDelete = (vendorId) => { // Define handleDelete
@@ -109,10 +108,14 @@ function VendorsPage() {
             <p>Teléfono: {vendor.phoneNumber}</p>
             <button
               className="edit-button"
-              onClick={() => handleEdit(vendor.id)}
+              onClick={() => {
+                setEditingVendorId(vendor.id); // Guarda el ID del vendedor que se va a editar
+                setShowEditModal(true); // Abre el modal de edición
+              }}
             >
               <FontAwesomeIcon icon={faEdit} />
             </button>
+
             <a href={`https://wa.me/${vendor.whatsappNumber}`}>
               <button className="whatsapp-button">WhatsApp</button>
             </a>
@@ -142,19 +145,16 @@ function VendorsPage() {
         )}
       </div>
 
-      {/*
-      <ModalEditVendors
+      <ModalEditVendor
         isOpen={showEditModal}
-        onClose={() => {
+        onClose={() => setShowEditModal(false)}
+        vendorData={vendors.find((vendor) => vendor.id === editingVendorId)} // Pasa los datos del vendedor
+        handleEditVendor={(editVendor) => {
+          console.log('Editar vendedor', editVendor);
           setShowEditModal(false);
-          setEditingVendorId(null);
-        }}
-        vendorToEdit={vendors.find((vendor) => vendor.id === editingVendorId)}
-        handleEdit={(editedVendor) => {
-          console.log('Editar vendedor', editedVendor);
         }}
       />
-*/}
+
       <ModalAddVendor
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
