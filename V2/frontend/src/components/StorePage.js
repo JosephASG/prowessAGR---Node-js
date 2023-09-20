@@ -5,6 +5,8 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import './StorePage.css';
 import SearchBar from './SearchBar';
 
+
+
 function StorePage({ cart, addToCart, removeFromCart }) {
   const [categories, setCategories] = useState([
     'Frutas',
@@ -79,6 +81,7 @@ function StorePage({ cart, addToCart, removeFromCart }) {
 
   return (
     <div className="store-page">
+      <h2 className='text-center'>Tienda de Productos</h2>
       <SearchBar
         searchTerm={searchTerm}
         sortOption={sortOption}
@@ -87,6 +90,7 @@ function StorePage({ cart, addToCart, removeFromCart }) {
         showPriceOption={true}
         showCategoryOption={true}
       />
+      
       <div className="product-list">
         <div className="product-list-header">
           <div className="sidebar">
