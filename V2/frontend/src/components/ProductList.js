@@ -60,8 +60,14 @@ const ProductList = () => {
 
   const handleEdit = (editedProduct) => {
     setProductToUpdate(editedProduct);
-    handleUpdateProduct(); // Llamar a la función para guardar los cambios
+    //handleUpdateProduct(); // Llamar a la función para guardar los cambios
   };
+
+  useEffect(() => {
+    if (productToUpdate) {
+      handleUpdateProduct();
+    }
+  }, [productToUpdate]);
 
   const handleUpdateProduct = () => {
     if (!productToUpdate) {
