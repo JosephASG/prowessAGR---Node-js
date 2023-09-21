@@ -11,15 +11,11 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, children
   const [editedProduct, setEditedProduct] = useState(initialProduct);
 
   useEffect(() => {
-    if (isOpen) {
-      setEditedProduct(initialProduct);
-      const body = document.body;
-      body.classList.add('modal-open');
-      return () => {
-        body.classList.remove('modal-open');
-      };
+    // Cuando productToEdit cambia, actualiza el estado del modal
+    if (productToEdit) {
+      setEditedProduct(productToEdit);
     }
-  }, [isOpen, initialProduct]);
+  }, [productToEdit]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
