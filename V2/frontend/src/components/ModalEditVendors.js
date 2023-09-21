@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 
-const ModalEditVendor = ({ isOpen, onClose, vendorData, handleEditVendor }) => {
-  const [editedVendor, setEditedVendor] = useState(vendorData || {});
+const ModalEditVendor = ({ isOpen, onClose, VendorToEdit, handleEdit, children }) => {
+  const initialVendor = VendorToEdit ? VendorToEdit : {
+    name: "",
+    city: "",
+    address: "",
+    phoneNumber: "",
+    whatsappNumber: "",
+  };
+
+  const [editedVendor, setEditedVendor] = useState(initialVendor);
 
   useEffect(() => {
     if (isOpen) {
+      setEditedVendor(initialVendor);
       const body = document.body;
       body.classList.add('modal-open');
       return () => {
@@ -12,6 +21,7 @@ const ModalEditVendor = ({ isOpen, onClose, vendorData, handleEditVendor }) => {
       };
     }
   }, [isOpen]);
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,31 +31,10 @@ const ModalEditVendor = ({ isOpen, onClose, vendorData, handleEditVendor }) => {
     });
   };
 
-  const handleSave = () => {
-    fetch('http://localhost:5000/fb/vendedor/updateSeller', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(editedVendor),
-    })
-      .then((response) => {
-        if (response.ok) {
-          onClose();
-        } else {
-          console.error('Error al editar el vendedor en el servidor');
-        }
-      })
-      .catch((error) => {
-        console.error('Error de red al editar el vendedor', error);
-      });
-  };
-
   const onSave = (e) => {
     e.preventDefault();
-    // Call the handleEditVendor function and pass the edited vendor data as an argument
-    handleEditVendor(editedVendor);
-    onClose(); // Close the modal after editing the vendor
+    handleEdit(editedVendor);
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -108,17 +97,7 @@ const ModalEditVendor = ({ isOpen, onClose, vendorData, handleEditVendor }) => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="image">URL de la Imagen</label>
-              <input
-                type="text"
-                className="form-control"
-                name="image"
-                value={editedVendor.image}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
-              <label className='btn-save-container' onClick={handleSave}>Guardar</label>
+              <button type="submit" className="btn-save">Guardar</button>
             </div>
           </form>
         </div>

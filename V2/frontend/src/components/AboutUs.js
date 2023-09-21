@@ -4,6 +4,8 @@ import './AboutUs.css';
 import vision from '../imagenes/vision.jpg';
 import ObjG from '../imagenes/obj.jpg';
 import ObjE from '../imagenes/objEs.jpg';
+import Quienes from '../imagenes/quienes_somos.jpeg';
+import mision from '../imagenes/MISION.jpeg';
 
 function AboutUs() {
   return (
@@ -15,14 +17,14 @@ function AboutUs() {
         <br/>
         <p>Prowess Agronomia es una plataforma creada para aumentar el desarrollo y comercialización de la producción agrícola de todo el país. Nuestro equipo trabaja arduamente para difundir el concepto de la agronomía como sistema.</p>
         <br/>
-        <img src='' alt="Imagen Quienes Somos" className="about-image" />
+        <img src={Quienes} alt="Imagen Quienes Somos" className="about-image" />
       </div>
       
       <div className='about-section'>
         <div className='mision'>
           <h2>Misión</h2>
           <p>Ayudar al crecimiento económico y productivo de los agricultores, siendo Prowess Agrícola un intermediario directo con buena capacidad de negociación y desarrollo de estrategias de comercialización, el mismo que se encargará de la distribución de los productos, en buenas condiciones sin perder su calidad al momento de ser trasladados.</p>
-          <img src="imagen_mision.jpg" alt="Imagen Misión" className="about-image" />
+          <img src={mision} alt="Imagen Misión" className="about-image" />
         </div>
         <div className='mision'>
           <h2>Visión</h2>
