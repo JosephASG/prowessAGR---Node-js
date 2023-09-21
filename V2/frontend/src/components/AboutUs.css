@@ -7,7 +7,19 @@
 
 .AboutUsInfo h1 {
   color: white;
+  text-shadow: -1px -1px 0 orange, /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 
+  1px -1px 0 orange, /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ 
+  -1px 1px 0 orange, /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
+   1px 1px 0 orange;
 }
+
+.AboutUsInfo h2{
+  text-shadow: -1px -1px 0 #000, /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 
+  1px -1px 0 #000, /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ 
+  -1px 1px 0 #000, /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
+  1px 1px 0 #000;
+}
+
 .AboutUsInfo p {
   text-align: justify;
   justify-content: center;
@@ -42,6 +54,7 @@
   margin: 0 auto; /* Centrar horizontalmente */
   align-self: center; /* Centrar verticalmente */
   max-width: 250px;
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 5px;
 }
 

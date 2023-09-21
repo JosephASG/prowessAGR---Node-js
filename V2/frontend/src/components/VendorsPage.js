@@ -11,7 +11,9 @@ function VendorsPage() {
   const [showAddModal, setShowAddModal] = useState(false); // Define setShowAddModal
   const [showEditModal, setShowEditModal] = useState(false); // Define showEditModal
   const [editingVendorId, setEditingVendorId] = useState(null); // Define editingVendorId
-  const [editingVendorData, setEditingVendorData] = useState(null);
+
+  const [VendorToEdit, setVendorToEdit] = useState(null);
+  const [vendorToUpdate, setVendorToUpdate] = useState(null);
 
 
   const [sortOption, setSortOption] = useState('');
@@ -52,16 +54,22 @@ function VendorsPage() {
     setCurrentPage(pageNumber);
   };
 
-  const handleEditVendor = (vendorId) => {
-    const vendor = vendors.find((p) => p.id === vendorId);
-    if (vendor) {
-      setEditingVendorData(vendor);
-      setShowEditModal(true);
-    }
-  };
+  
 
-  const handleDelete = (vendorId) => { // Define handleDelete
-    // Implementa la lógica de eliminación aquí
+  const handleDelete = (vendorId) => {
+    fetch(`http://localhost:3000/fb/vendedor/deleteSeller/${vendorId}`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          setVendors(vendors.filter((vendor) => vendor.id !== vendorId));
+        } else {
+          console.error('Error al eliminar el vendedor en el servidor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red al eliminar el vendedor', error);
+      });
   };
 
   if (sortCriteria) {
@@ -74,6 +82,55 @@ function VendorsPage() {
         vendor.pro_nombre.toLowerCase().includes(filterVendor.toLowerCase())
     );
   }
+
+  const handleEditVendor = (vendor) => {
+    console.log('Editando vendedor:', vendor); // Agrega esta línea para depurar
+    setVendorToEdit(vendor);
+    setShowEditModal(true);
+  };
+
+  const handleEdit = (editedVendor) => {
+    // Actualiza el vendedor editado en la lista de vendedores
+    const updatedVendors = vendors.map((vendor) =>
+      vendor.id === editedVendor.id ? editedVendor : vendor
+    );
+    setVendors(updatedVendors);
+    setShowEditModal(false);
+    handleUpdateVendor(); // Llamar a la función para guardar los cambios
+
+  };
+
+  const handleUpdateVendor = () => {
+    if (!vendorToUpdate) {
+      return;
+    }
+
+    console.log('vendorToUpdate:', vendorToUpdate.id);
+
+    fetch(`http://localhost:3000/fb/vendedor/updateSeller/${vendorToUpdate.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(vendorToUpdate),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Actualiza la lista de productos después de la actualización en el backend
+          setVendors((prevVendors) =>
+            prevVendors.map((vendor) =>
+              vendor.id === vendorToUpdate.id ? vendorToUpdate : vendor
+            )
+          );
+          setShowEditModal(false);
+        } else {
+          console.error('Error al guardar los cambios en el servidor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red al guardar los cambios', error);
+      });
+  };
 
   return (
     <div className="vendors-page">
@@ -94,24 +151,28 @@ function VendorsPage() {
         showCategoryOption={false}
       />
 
+    <div>
+    <ModalEditVendor
+        isOpen={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        VendorToEdit={VendorToEdit} // Make sure `vendorToEdit` has the correct data
+        handleEdit={handleEdit}
+      />
+
+      </div>
+
       <div className="vendor-list">
         {currentVendors.map((vendor) => (
           <div key={vendor.id} className="vendor-card">
-            <img
-              src={vendor.image}
-              alt={vendor.name}
-              className="vendor-image"
-            />
+            
             <h3>{vendor.name}</h3>
             <p>Ciudad: {vendor.city}</p>
             <p>Dirección: {vendor.address}</p>
             <p>Teléfono: {vendor.phoneNumber}</p>
+            
             <button
               className="edit-button"
-              onClick={() => {
-                setEditingVendorId(vendor.id); // Guarda el ID del vendedor que se va a editar
-                setShowEditModal(true); // Abre el modal de edición
-              }}
+              onClick={() => handleEditVendor(vendor)} // Asegúrate de que `vendor` contenga los datos que necesitas editar
             >
               <FontAwesomeIcon icon={faEdit} />
             </button>
@@ -119,6 +180,7 @@ function VendorsPage() {
             <a href={`https://wa.me/${vendor.whatsappNumber}`}>
               <button className="whatsapp-button">WhatsApp</button>
             </a>
+            
             <button
               className="delete-button"
               onClick={() => handleDelete(vendor.id)}
@@ -145,15 +207,8 @@ function VendorsPage() {
         )}
       </div>
 
-      <ModalEditVendor
-        isOpen={showEditModal}
-        onClose={() => setShowEditModal(false)}
-        vendorData={vendors.find((vendor) => vendor.id === editingVendorId)} // Pasa los datos del vendedor
-        handleEditVendor={(editVendor) => {
-          console.log('Editar vendedor', editVendor);
-          setShowEditModal(false);
-        }}
-      />
+
+      
 
       <ModalAddVendor
         isOpen={showAddModal}

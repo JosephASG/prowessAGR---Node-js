@@ -12,13 +12,14 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, children
 
   useEffect(() => {
     if (isOpen) {
+      setEditedProduct(initialProduct);
       const body = document.body;
       body.classList.add('modal-open');
       return () => {
         body.classList.remove('modal-open');
       };
     }
-  }, [isOpen]);
+  }, [isOpen, initialProduct]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

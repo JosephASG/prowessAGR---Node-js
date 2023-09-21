@@ -22,6 +22,12 @@
   margin-left: 14px;
 }
 
+.text-center{
+  text-align: center;
+  text-shadow: -1px -1px 0 rgb(47, 134, 166), /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px 0 rgb(47, 134, 166), /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0 rgb(47, 134, 166), /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px 0 rgb(47, 134, 166);
+
+}
+
 .sidebar h2 {
   margin-bottom: 10px;
 }
@@ -129,6 +135,7 @@ select {
 .product-card h3 {
   margin-top: 0;
   margin-bottom: 5px;
+  text-shadow: -1px -1px 0 #000, /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px 0 #000, /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0 #000, /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px 0 #000;
 }
 
 .product-card p {
