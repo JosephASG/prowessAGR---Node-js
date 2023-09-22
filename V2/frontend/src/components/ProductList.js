@@ -143,15 +143,6 @@ const ProductList = () => {
           productToEdit={productToEdit} // Asegúrate de pasar productToEdit
           handleEdit={handleEdit} // Asegúrate de pasar la función handleEdit
         />
-
-      </div>
-      <div className="header-row">
-        <b onClick={() => handleSort('pro_nombre')}>Nombre</b>
-        <b onClick={() => handleSort('pro_precio')}>Precio</b>
-        <b onClick={() => handleSort('pro_stock')}>Stock</b>
-        <b>Descripción</b>
-        <b>Acciones</b>
-      </div>
       <div className="filter-row">
         <label>Filtrar por Producto:</label>
         <input
@@ -160,12 +151,23 @@ const ProductList = () => {
           onChange={(e) => handleFilter(e.target.value)}
         />
       </div>
+      </div>
+      <div className="header-row">
+        <b onClick={() => handleSort('pro_nombre')}>Nombre</b>
+        <b onClick={() => handleSort('pro_precio')}>Precio</b>
+        <b onClick={() => handleSort('pro_stock')}>Stock</b>
+        <b onClick={() => handleSort('pro_categoria')}>Categoría</b>
+        <b>Descripción</b>
+        <b>Acciones</b>
+      </div>
+
       <div className="container-products">
         {productsToDisplay.map((product) => (
           <div className="product" key={product.id}>
             <div>{product.pro_nombre}</div>
             <div>${product.pro_precio}</div>
             <div>{product.pro_stock}</div>
+            <div>{product.pro_categoria}</div>
             <div>{product.pro_descripcion}</div>
             <div className='actions-container'>
               <FontAwesomeIcon

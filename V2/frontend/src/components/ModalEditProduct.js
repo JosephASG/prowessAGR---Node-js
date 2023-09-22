@@ -6,6 +6,7 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, children
     pro_precio: 0,
     pro_stock: 0,
     pro_descripcion: "",
+    pro_categoria: "",
   };
 
   const [editedProduct, setEditedProduct] = useState(initialProduct);
@@ -81,6 +82,20 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, children
                 />
               </div>
             </div>
+            <div className='btn-add-container'>
+              <label htmlFor="pro_categoria">Categoría:</label>
+                  <select
+                    id="pro_categoria"
+                    name="pro_categoria"
+                    value={editedProduct.pro_categoria}
+                    onChange={handleInputChange}
+                  >
+                    <option value="Frutas">Frutas</option>
+                    <option value="Verduras">Verduras</option>
+                    <option value="Cereales">Cereales</option>
+                    <option value="Hortalizas">Hortalizas</option>
+                  </select>
+              </div>
             <div className="form-group">
               <button type="submit" className="btn-save">Guardar</button>
             </div>

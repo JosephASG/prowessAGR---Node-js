@@ -7,6 +7,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     pro_precio: '',
     pro_stock: '',
     pro_descripcion: '',
+    pro_categoria: '',
   });
 
   useEffect(() => {
@@ -97,8 +98,35 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                     onChange={handleInputChange}
                   />
                 </div>
+
+                
               </div>
+              
+                
+
+               
+              
             </div>
+
+            <div className='btn-add-container'>
+              <label htmlFor="pro_categoria">Categoría:</label>
+                  <select
+                    id="pro_categoria"
+                    name="pro_categoria"
+                    value={newProduct.pro_categoria}
+                    onChange={handleInputChange}
+                  >
+                    <option value="Frutas">Frutas</option>
+                    <option value="Verduras">Verduras</option>
+                    <option value="Cereales">Cereales</option>
+                    <option value="Hortalizas">Hortalizas</option>
+                  </select>
+              </div>
+
+        <div className='btn-add-container'>
+
+
+      </div>
             <div className="form-group-pair">
               <div>
                 <label htmlFor="pro_imagen">Imagen</label>
