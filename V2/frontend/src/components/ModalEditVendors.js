@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 const ModalEditVendor = ({ isOpen, onClose, VendorToEdit, handleEdit, children }) => {
-  const initialVendor = VendorToEdit ? VendorToEdit : {
-    name: "",
-    city: "",
-    address: "",
-    phoneNumber: "",
-    whatsappNumber: "",
-  };
+  const initialVendor = VendorToEdit
+    ? VendorToEdit
+    : {
+        name: '',
+        city: '',
+        address: '',
+        phoneNumber: '',
+        whatsappNumber: '',
+      };
 
   const [editedVendor, setEditedVendor] = useState(initialVendor);
 
+  const resetModal = () => {
+    setEditedVendor(initialVendor);
+  };
+
   useEffect(() => {
     if (isOpen) {
-      setEditedVendor(initialVendor);
+      resetModal();
       const body = document.body;
       body.classList.add('modal-open');
       return () => {
@@ -21,7 +27,6 @@ const ModalEditVendor = ({ isOpen, onClose, VendorToEdit, handleEdit, children }
       };
     }
   }, [isOpen]);
-  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +39,7 @@ const ModalEditVendor = ({ isOpen, onClose, VendorToEdit, handleEdit, children }
   const onSave = (e) => {
     e.preventDefault();
     handleEdit(editedVendor);
+    resetModal(); // Reset the modal when the form is submitted
     onClose();
   };
 

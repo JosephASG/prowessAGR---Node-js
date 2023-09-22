@@ -57,7 +57,7 @@ function VendorsPage() {
   
 
   const handleDelete = (vendorId) => {
-    fetch(`http://localhost:3000/fb/vendedor/deleteSeller/${vendorId}`, {
+    fetch(`http://localhost:5000/fb/vendedor/deleteSeller/${vendorId}`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -90,15 +90,15 @@ function VendorsPage() {
   };
 
   const handleEdit = (editedVendor) => {
-    // Actualiza el vendedor editado en la lista de vendedores
-    const updatedVendors = vendors.map((vendor) =>
-      vendor.id === editedVendor.id ? editedVendor : vendor
-    );
-    setVendors(updatedVendors);
-    setShowEditModal(false);
-    handleUpdateVendor(); // Llamar a la función para guardar los cambios
+    setVendorToUpdate(editedVendor);
 
   };
+
+  useEffect(() => {
+    if (vendorToUpdate) {
+      handleUpdateVendor();
+    }
+  }, [vendorToUpdate]);
 
   const handleUpdateVendor = () => {
     if (!vendorToUpdate) {
@@ -107,7 +107,7 @@ function VendorsPage() {
 
     console.log('vendorToUpdate:', vendorToUpdate.id);
 
-    fetch(`http://localhost:3000/fb/vendedor/updateSeller/${vendorToUpdate.id}`, {
+    fetch(`http://localhost:5000/fb/vendedor/updateSeller/${vendorToUpdate.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
