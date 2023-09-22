@@ -54,12 +54,13 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
           {addedProducts.map((product, index) => (
             <div className='producto-cart' key={index}>
               <div className='img-product'>
-                <img src={product.imagen} alt={product.pro_nombre} />
+                <img src={product.pro_imagen} alt={product.pro_nombre} />
               </div>
               <div className='name-product'>
                 <h3>{product.pro_nombre}</h3>
-                <p><b>Categoria:</b> {product.marca}</p>
+                <p><b>Categoria:</b> {product.pro_categoria}</p>
                 <p><b>Precio:</b> ${product.pro_precio}</p>
+                <p><b>Cantidad disponible:</b> {product.pro_stock}</p>
               </div>
               <div className='cantidad-product'>
                 <button className='btn-add' onClick={() => addToCart(product)}>+</button>

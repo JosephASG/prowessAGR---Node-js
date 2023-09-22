@@ -98,14 +98,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                     onChange={handleInputChange}
                   />
                 </div>
-
-                
-              </div>
-              
-                
-
-               
-              
+              </div>  
             </div>
 
             <div className='btn-add-container'>
