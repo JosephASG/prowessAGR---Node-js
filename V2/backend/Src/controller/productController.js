@@ -27,11 +27,14 @@ const createProduct = async (req, res) => {
     const imageFile = req.file; // Aquí asumimos que el archivo de imagen se encuentra en req.file
 
     if (imageFile) {
-      const storageRef = firebase.storage().ref(`Productos Web Agricola/${imageFile.originalname}`);
+      const storageRef = firebase.storage().ref(`agricola${imageFile.originalname}`);
       try {
         await uploadBytes(storageRef, imageFile.buffer);
+        const snapshot = await storageRef.put(imageFile.buffer);
         console.log('Imagen cargada con éxito');
-        newProductData.pro_imagen = await getDownloadURL(storageRef);
+
+
+        newProductData.pro_imagen = await snapshot.ref.getDownloadURL();
         console.log('URL de imagen obtenida con éxito');
       } catch (error) {
         console.error('Error al cargar la imagen o obtener la URL de la imagen:', error);
