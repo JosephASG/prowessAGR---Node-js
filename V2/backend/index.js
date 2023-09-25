@@ -111,13 +111,25 @@ app.listen(port,() =>{
 })
 
 // CategoryController
-/*
+
 import * as categoria from './Src/controller/categoryController.js';
 
+// Crear categorías
+app.post('/fb/categoria/post', categoria.createCategory);
+
 // Obtener todas las categorías
-app.get('/fb/category/get', categoria.getCategories);
+app.get('/fb/categoria/get', categoria.getCategories);
 
+// Obtener una categoría específica
+app.get('/fb/categoria/get/:id', categoria.getCategoryByID);
 
+// Actualizar la categoría
+app.put('/fb/categoria/update/:id', categoria.updateCategory);
+
+// Eliminar la categoría
+app.delete('/fb/categoria/delete/:id', categoria.deleteCategory);
+
+/*
 // userController
 import * as usuario from './Src/controller/userController.js';
 

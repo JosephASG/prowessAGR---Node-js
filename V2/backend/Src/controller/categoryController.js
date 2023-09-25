@@ -1,106 +1,91 @@
-import HTTP_STATUS from "http-status-codes";
-import admin from "firebase-admin";
+import 'firebase/database';
+import * as firebase from 'firebase/app';
+import * as firestore from 'firebase/firestore';
 
-// Configurar Firebase Admin SDK con tus credenciales
-const serviceAccount = require('./ruta/de/tu/credencial.json');
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://tu-proyecto.firebaseio.com'
-});
-
-// Referencia a la base de datos de Firebase
-const db = admin.firestore();
-
-// Crear una nueva categoría
-export const createCategory = async (req, res) => {
-  const { name, description } = req.body;
-
-  try {
-      const newCategory = {
-          name,
-          description
-      };
-
-      // Guardar en Firestore
-      const categoryRef = await db.collection('categories').add(newCategory);
-      return res.status(201).json({ id: categoryRef.id, ...newCategory });
-  } catch (error) {
-      return res.status(500).json({ message: "Error creating category.", error: error.message });
-  }
+// Reemplace la siguiente configuración con la configuración de su proyecto Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyAqnpF_ppBXsSawkDiVzYzm2oAV1zLvGWQ",
+  authDomain: "prowess-web-database.firebaseapp.com",
+  projectId: "prowess-web-database",
+  storageBucket: "prowess-web-database.appspot.com",
+  messagingSenderId: "519296320778",
+  appId: "1:519296320778:web:739cc55990bd1a6e4866f3"
 };
 
-// Actualizar una categoría existente
-export const updateCategory = async (req, res) => {
-  const { id } = req.params;
-  const { name, description } = req.body;
+const fiapp = firebase.initializeApp(firebaseConfig);
+const fs = firestore.getFirestore(fiapp);
 
-  try {
-      const categoryRef = db.collection('categories').doc(id);
-      await categoryRef.update({ name, description });
-      return res.status(200).json({ id, name, description });
-  } catch (error) {
-      return res.status(500).json({ message: "Error updating category.", error: error.message });
-  }
-};
+// Crear una nueva categoria
 
-// Eliminar una categoría
-export const deleteCategory = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-      await db.collection('categories').doc(id).delete();
-      return res.status(200).json({ message: "Category successfully deleted." });
-  } catch (error) {
-      return res.status(500).json({ message: "Error deleting category.", error: error.message });
-  }
-};
-
-// Obtener categoria por el Id
-export const getCategoryById = async (req, res) => {
-  // Obtener el id de la solicitud
-  const id = req.params.id;
-  try {
-    // Buscar la categoria por el Id en la base de datos
-    const docRef = db.collection('categories').doc(id);
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      return res
-        .status(HTTP_STATUS.NOT_FOUND)
-        .json({ message: `No category found by id ${id}` });
+const createCategory=  async (req, res) => {
+    try {
+      const newCategoryData = req.body; // Los datos del nuevo vendedor deben estar en el cuerpo de la solicitud (request body)
+      console.log(newCategoryData);
+      const docRef = await firestore.addDoc(firestore.collection(fs, 'categoria'), newCategoryData);
+      res.json({ id: docRef.id, ...newCategoryData });
+    } catch (error) {
+      console.error('Error al crear el categoria:', error);
+      res.status(500).json({ error: 'Error al crear el categoria.' });
     }
-    // Si se encuentra la categoría, devuelve un estado 200
-    return res.status(HTTP_STATUS.OK).json(doc.data());
-  } catch (error) {
-    // Si hay un error, devuelve un estado 500
-    return res
-      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
-      .json({ message: error.message });
-  }
-};
+  };
 
-// OBTENER TODAS LAS CATEGORÍAS
-export const getCategories = async (req, res) => {
+  //Obtener todas las categorias.
+const getCategories =  async (req, res) => {
   try {
-    // Obtener todas las categorías de la base de datos
-    const snapshot = await db.collection('categories').get();
-    const categories = [];
-    snapshot.forEach((doc) => {
-      categories.push(doc.data());
+    const querySnapshot = await firestore.getDocs(firestore.collection(fs, 'categoria'));
+    const categorias = [];
+    querySnapshot.forEach((doc) => {
+      categorias.push({ id: doc.id, ...doc.data() });
     });
 
-    // Si no se encuentra ninguna categoría, envía una respuesta 404
-    if (categories.length === 0) {
-      return res
-        .status(HTTP_STATUS.NOT_FOUND)
-        .json({ message: "No categories found" });
-    }
-
-    // Enviar las categorías encontradas en una respuesta JSON
-    return res.status(HTTP_STATUS.OK).json(categories);
+    res.json(categorias);
   } catch (error) {
-    // Si se produce un error, envíe el mensaje de error en formato JSON
-    return res
-      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
-      .json({ message: error.message });
+    console.error('Error al obtener categorias:', error);
+    res.status(500).json({ error: 'Error al obtener categorias.' });
   }
 };
+
+// Obtener una categoria en específico
+const getCategoryByID = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    console.log(categoryId)
+    const categoryDoc = await firestore.getDoc(firestore.doc(fs, 'categoria', categoryId));
+    if (categoryDoc.exists()) {
+      res.json({ id: categoryDoc.id, ...categoryDoc.data() });
+    } else {
+      res.status(404).json({ error: 'Categoria no encontrado.' });
+    }
+  } catch (error) {
+    console.error('Error al obtener el categoria:', error);
+    res.status(500).json({ error: 'Error al obtener el categoria.' });
+  }
+};
+
+
+// Actualizar la categoria
+const updateCategory = async (req, res) => {
+  try {
+    const CategoryId = req.params.id;
+    const updatedCategoryData = req.body; // Los datos actualizados deben estar en el cuerpo de la solicitud (request body)
+    await firestore.updateDoc(firestore.doc(fs, 'categoria', CategoryId), updatedCategoryData);
+    res.json({ id: CategoryId, ...updatedCategoryData });
+  } catch (error) {
+    console.error('Error al actualizar ka categoria:', error);
+    res.status(500).json({ error: 'Error al actualizar la categoria.' });
+  }
+};
+
+// Eliminar
+const deleteCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    await firestore.deleteDoc(firestore.doc(fs, 'categoria', categoryId));
+    res.json({ id: categoryId, message: 'Categoria eliminado exitosamente.' });
+  } catch (error) {
+    console.error('Error al eliminar el categoria:', error);
+    res.status(500).json({ error: 'Error al eliminar el categoria.' });
+  }
+};
+
+  export {createCategory, getCategories, getCategoryByID, updateCategory, deleteCategory};

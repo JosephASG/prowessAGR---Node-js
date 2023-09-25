@@ -124,6 +124,7 @@ const updateProduct = async (req, res) => {
     res.status(500).json({ error: 'Error al actualizar el producto.' });
   }
 };
+
 // Eliminar
 const deleteProduct = async (req, res) => {
   try {
