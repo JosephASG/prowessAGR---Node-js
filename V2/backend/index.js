@@ -156,3 +156,24 @@ app.put('/fb/vendedor/updateSeller/:id', vendedor.updateSeller);
 
 // Eliminar el vendedor
 app.delete('/fb/vendedor/deleteSeller/:id', vendedor.deleteSeller);
+
+
+//==================================//
+
+// SupplierController
+import * as proveedor from './Src/controller/supplierController.js';
+
+// Crear un nuevo proveedor
+app.post('/fb/proveedor/post', proveedor.createSupplier);
+
+// Obtener todos los proveedores
+app.get('/fb/proveedor/get', proveedor.getSupplier);
+
+// Obtener un proveedor específico
+app.get('/fb/proveedor/get/:id', proveedor.getSupplierByID);
+
+// Actualizar el proveedor
+app.put('/fb/proveedor/update/:id', proveedor.updateSupplier);
+
+// Eliminar el proveedor
+app.delete('/fb/proveedor/delete/:id', proveedor.deleteSupplier);
