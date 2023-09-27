@@ -7,6 +7,7 @@ import ModalEditProduct from './ModalEditProduct';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
+  const [categorias, setCategorias] = useState([]); // Agrega este estado
 
   const ITEMS_PER_PAGE = 5;
 
@@ -32,6 +33,18 @@ const ProductList = () => {
       .then((data) => setProducts(data))
       .catch((error) => console.error('Error al cargar los productos', error));
   }, []);
+
+  useEffect(() => {
+    // Hacer la solicitud GET para obtener las categorías desde tu servidor backend
+    fetch('http://localhost:5000/fb/categoria/get')
+      .then((response) => response.json())
+      .then((data) => {
+        setCategorias(data);
+      })
+      .catch((error) => {
+        console.error('Error al cargar las categorías', error);
+      });
+  }, []); // Este efecto se ejecutará una vez al montar el componente
 
   const handleDelete = (productId) => {
     fetch(`http://localhost:5000/fb/producto/delete/${productId}`, {
@@ -138,11 +151,12 @@ const ProductList = () => {
       <div>
         <ModalAddProducts isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
         <ModalEditProduct
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          productToEdit={productToEdit} // Asegúrate de pasar productToEdit
-          handleEdit={handleEdit} // Asegúrate de pasar la función handleEdit
-        />
+  isOpen={isEditModalOpen}
+  onClose={() => setIsEditModalOpen(false)}
+  productToEdit={productToEdit}
+  handleEdit={handleEdit}
+  categorias={categorias} // Pasa las categorías aquí
+/>
       <div className="filter-row">
         <label>Filtrar por Producto:</label>
         <input
