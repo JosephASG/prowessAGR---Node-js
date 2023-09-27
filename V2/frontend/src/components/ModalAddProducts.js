@@ -9,6 +9,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     pro_descripcion: '',
     pro_categoria: '',
   });
+  const [categorias, setCategorias] = useState([]); // Estado para almacenar las categorías
 
   useEffect(() => {
     if (isOpen) {
@@ -18,6 +19,16 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
         body.classList.remove('modal-open');
       };
     }
+
+    // Aquí hacemos la solicitud para obtener las categorías cuando el componente se monta
+    fetch('http://localhost:5000/fb/categoria/get')
+      .then((response) => response.json())
+      .then((data) => {
+        setCategorias(data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las categorías', error);
+      });
   }, [isOpen]);
 
   const handleInputChange = (e) => {
@@ -103,18 +114,19 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
 
             <div className='btn-add-container'>
               <label htmlFor="pro_categoria">Categoría:</label>
-                  <select
-                    id="pro_categoria"
-                    name="pro_categoria"
-                    value={newProduct.pro_categoria}
-                    onChange={handleInputChange}
-                  >
-                    <option value="Frutas">Frutas</option>
-                    <option value="Verduras">Verduras</option>
-                    <option value="Cereales">Cereales</option>
-                    <option value="Hortalizas">Hortalizas</option>
-                  </select>
-              </div>
+              <select
+                id="pro_categoria"
+                name="pro_categoria"
+                value={newProduct.pro_categoria}
+                onChange={handleInputChange}
+              >
+                {categorias.map((categoria) => (
+                  <option key={categoria.id} value={categoria.cat_nombre}>
+                    {categoria.cat_nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
 
         <div className='btn-add-container'>
 

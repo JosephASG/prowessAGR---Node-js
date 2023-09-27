@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, children }) => {
+const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categorias }) => {
   const initialProduct = productToEdit ? productToEdit : {
     pro_nombre: "",
     pro_precio: 0,
@@ -84,17 +84,19 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, children
             </div>
             <div className='btn-add-container'>
               <label htmlFor="pro_categoria">Categoría:</label>
-                  <select
-                    id="pro_categoria"
-                    name="pro_categoria"
-                    value={editedProduct.pro_categoria}
-                    onChange={handleInputChange}
-                  >
-                    <option value="Frutas">Frutas</option>
-                    <option value="Verduras">Verduras</option>
-                    <option value="Cereales">Cereales</option>
-                    <option value="Hortalizas">Hortalizas</option>
-                  </select>
+              <select
+                id="pro_categoria"
+                name="pro_categoria"
+                value={editedProduct.pro_categoria}
+                onChange={handleInputChange}
+              >
+                {categorias.map((categoria) => (
+                  <option key={categoria.id} value={categoria.cat_nombre}>
+                    {categoria.cat_nombre}
+                  </option>
+                ))}
+              </select>
+
               </div>
             <div className="form-group">
               <button type="submit" className="btn-save">Guardar</button>
