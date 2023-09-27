@@ -50,6 +50,11 @@ function NavigationBar() {
             </Link>
           </li>
           <li>
+            <Link to="/supplier-list" onClick={toggleMenu}>
+              Proveedores
+            </Link>
+          </li>
+          <li>
             <Link to="/vendedores" onClick={toggleMenu}>
               Vendedores
             </Link>
