@@ -5,6 +5,7 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categori
     pro_nombre: "",
     pro_precio: 0,
     pro_stock: 0,
+    pro_medida: "",
     pro_descripcion: "",
     pro_categoria: "",
   };
@@ -83,6 +84,21 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categori
               </div>
             </div>
             <div className='btn-add-container'>
+
+            <label htmlFor="pro_medida">Medida:</label>
+                  <select
+                    id="pro_medida"
+                    name="pro_medida"
+                    value={editedProduct.pro_medida}
+                    onChange={handleInputChange}
+                  >
+                    <option value=""></option>
+                    <option value="Kg">Kilogramo</option>
+                    <option value="g">Gramo</option>
+                    <option value="Lb">Libra</option>
+                    <option value="Oz">Onza</option>
+                  </select>
+                  
               <label htmlFor="pro_categoria">Categoría:</label>
               <select
                 id="pro_categoria"
@@ -97,7 +113,9 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categori
                 ))}
               </select>
 
+              
               </div>
+
             <div className="form-group">
               <button type="submit" className="btn-save">Guardar</button>
             </div>

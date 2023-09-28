@@ -113,6 +113,21 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
             </div>
 
             <div className='btn-add-container'>
+
+            <label htmlFor="pro_medida">Medida:</label>
+                  <select
+                    id="pro_medida"
+                    name="pro_medida"
+                    value={newProduct.pro_medida}
+                    onChange={handleInputChange}
+                  >
+                    <option value=""></option>
+                    <option value="Kg">Kilogramo</option>
+                    <option value="g">Gramo</option>
+                    <option value="Lb">Libra</option>
+                    <option value="Oz">Onza</option>
+                  </select>
+
               <label htmlFor="pro_categoria">Categoría:</label>
               <select
                 id="pro_categoria"
