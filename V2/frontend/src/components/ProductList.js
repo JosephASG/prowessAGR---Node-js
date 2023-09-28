@@ -171,6 +171,7 @@ const ProductList = () => {
         <b onClick={() => handleSort('pro_precio')}>Precio</b>
         <b onClick={() => handleSort('pro_stock')}>Stock</b>
         <b onClick={() => handleSort('pro_categoria')}>Categoría</b>
+        <b onClick={() => handleSort('pro_medida')}>Medida</b>
         <b>Descripción</b>
         <b>Acciones</b>
       </div>
@@ -180,8 +181,9 @@ const ProductList = () => {
           <div className="product" key={product.id}>
             <div>{product.pro_nombre}</div>
             <div>${product.pro_precio}</div>
-            <div>{product.pro_stock}</div>
+            <div>{product.pro_stock + ' ' + product.pro_medida}</div> {/* Concatena categoría y medida */}
             <div>{product.pro_categoria}</div>
+
             <div>{product.pro_descripcion}</div>
             <div className='actions-container'>
               <FontAwesomeIcon
