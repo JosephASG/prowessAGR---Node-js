@@ -123,9 +123,10 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                   >
                     <option value=""></option>
                     <option value="Kg">Kilogramo</option>
-                    <option value="g">Gramo</option>
+                    <option value="Gr">Gramo</option>
                     <option value="Lb">Libra</option>
                     <option value="Oz">Onza</option>
+                    <option value="Ud">Unidad</option>
                   </select>
 
               <label htmlFor="pro_categoria">Categoría:</label>

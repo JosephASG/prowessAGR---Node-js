@@ -16,16 +16,21 @@
   padding: 10px;
   background-color: rgb(47, 134, 166);
   border: 0.5px solid orange;
-  color: white; 
+  color: white;
   border-radius: 10px;
   margin-top: 10px;
   margin-left: 14px;
 }
 
-.text-center{
+.text-center {
   text-align: center;
-  text-shadow: -1px -1px 0 rgb(47, 134, 166), /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px 0 rgb(47, 134, 166), /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0 rgb(47, 134, 166), /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px 0 rgb(47, 134, 166);
-
+  text-shadow: -1px -1px 0 rgb(47, 134, 166),
+    /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
+      0 rgb(47, 134, 166),
+    /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
+      rgb(47, 134, 166),
+    /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px
+      0 rgb(47, 134, 166);
 }
 
 .sidebar h2 {
@@ -113,7 +118,7 @@ select {
 }
 
 .product-card {
-  width: 200px;
+  width: 220px;
   border-radius: 4px;
   padding: 10px;
   margin: 8px;
@@ -135,7 +140,13 @@ select {
 .product-card h3 {
   margin-top: 0;
   margin-bottom: 5px;
-  text-shadow: -1px -1px 0 #000, /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px 0 #000, /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0 #000, /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px 0 #000;
+  text-shadow: -1px -1px 0 #000,
+    /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
+      0 #000,
+    /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
+      #000,
+    /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px
+      0 #000;
 }
 
 .product-card p {
@@ -203,16 +214,16 @@ select {
     min-height: 400px;
     min-width: 83%;
     align-items: flex-start;
-}
+  }
 
-.product-list-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
-  margin-bottom: 0;
-  margin-left: 0;
-}
+  .product-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    margin-bottom: 0;
+    margin-left: 0;
+  }
   .product-card {
     transform: scale(0.8);
   }
@@ -245,5 +256,4 @@ select {
     margin: 0;
     padding: 2px;
   }
-
 }
