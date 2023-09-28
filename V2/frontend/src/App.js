@@ -13,6 +13,7 @@ import ProductList from './components/ProductList';
 import SupplierList from './components/SupplierList';
 import AboutUs from './components/AboutUs';
 import Footer from './components/Footer';
+import Categories from './components/Categories';
 import SaleDetailsPage from './components/SaleDetailsPage';
 import SalesPage from './components/SalesPage';
 
@@ -55,6 +56,7 @@ function App() {
         <Route path="/sales" element={<SalesPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
+        <Route path="/categories" element={<Categories />} />
       </Routes>
       <Footer />
     </Router>
