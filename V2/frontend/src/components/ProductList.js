@@ -143,7 +143,7 @@ const ProductList = () => {
   const productsToDisplay = sortedAndFilteredProducts.slice(startIndex, endIndex);
 
   return (
-    <div className="container">
+    <div className="container-product-list">
       <h1>Lista de Productos</h1>
       <div className='btn-add-container'>
         <button onClick={handleOpenModal} className='btn-add-product'>Agregar Producto</button>
@@ -151,27 +151,28 @@ const ProductList = () => {
       <div>
         <ModalAddProducts isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
         <ModalEditProduct
-  isOpen={isEditModalOpen}
-  onClose={() => setIsEditModalOpen(false)}
-  productToEdit={productToEdit}
-  handleEdit={handleEdit}
-  categorias={categorias} // Pasa las categorías aquí
-/>
-      <div className="filter-row">
-        <label>Filtrar por Producto:</label>
-        <input
-          type="text"
-          value={filterProduct}
-          onChange={(e) => handleFilter(e.target.value)}
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          productToEdit={productToEdit}
+          handleEdit={handleEdit}
+          categorias={categorias} // Pasa las categorías aquí
         />
+        <div className="filter-row">
+          <label>Filtrar por Producto:</label>
+          <input
+            type="text"
+            value={filterProduct}
+            onChange={(e) => handleFilter(e.target.value)}
+          />
+        </div>
       </div>
-      </div>
-      <div className="header-row">
+      <div className="header-row-product-list">
         <b onClick={() => handleSort('pro_nombre')}>Nombre</b>
         <b onClick={() => handleSort('pro_precio')}>Precio</b>
         <b onClick={() => handleSort('pro_stock')}>Stock</b>
         <b onClick={() => handleSort('pro_categoria')}>Categoría</b>
         <b onClick={() => handleSort('pro_medida')}>Medida</b>
+        <b>Imagen</b>
         <b>Descripción</b>
         <b>Acciones</b>
       </div>
@@ -181,9 +182,14 @@ const ProductList = () => {
           <div className="product" key={product.id}>
             <div>{product.pro_nombre}</div>
             <div>${product.pro_precio}</div>
-            <div>{product.pro_stock + ' ' + product.pro_medida}</div> {/* Concatena categoría y medida */}
+            {product.pro_medida != null ? (
+              <div>{product.pro_stock + ' ' + product.pro_medida}</div>
+            ) : (
+              <div>{product.pro_stock}</div>
+            )}
             <div>{product.pro_categoria}</div>
-
+            <div>{product.pro_medida}</div>
+            <div><img src={product.pro_imagen} alt={product.pro_name} className="product-image-list" /></div>
             <div>{product.pro_descripcion}</div>
             <div className='actions-container'>
               <FontAwesomeIcon
@@ -191,8 +197,6 @@ const ProductList = () => {
                 icon={faPenToSquare}
                 onClick={() => handleEditProduct(product)} // Asegúrate de que `product` contenga el ID
               />
-
-
               <FontAwesomeIcon
                 className="fa-icon-trash"
                 icon={faTrash}
