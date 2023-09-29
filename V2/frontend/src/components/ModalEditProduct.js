@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import ReactSelect from "react-select";
 
-const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categorias }) => {
+const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categorias, vendedores }) => {
   const initialProduct = productToEdit ? productToEdit : {
     pro_nombre: "",
     pro_precio: 0,
@@ -8,6 +9,8 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categori
     pro_medida: "",
     pro_descripcion: "",
     pro_categoria: "",
+    pro_vendedor: ""
+
   };
 
   const [editedProduct, setEditedProduct] = useState(initialProduct);
@@ -112,10 +115,31 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categori
                     {categoria.cat_nombre}
                   </option>
                 ))}
-              </select>
-
-              
+              </select>              
               </div>
+
+              <div class="form-group">
+              <label htmlFor="pro_vendedor">Vendedor:</label>
+              <ReactSelect
+                  defaultValue={{ value: 'Vendedor', label: 'None' }}
+                  id="pro_vendedor"
+                  name="pro_vendedor"
+                  value={{ value: editedProduct.pro_vendedor, label: editedProduct.pro_vendedor }}
+                  onChange={(selectedOption) => {
+                    setEditedProduct({ ...editedProduct, pro_vendedor: selectedOption.value });
+                  }}
+                  options={vendedores.map((vendedor) => ({
+                    value: vendedor.name,
+                    label: vendedor.name,
+                  }))}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      width: '200px', 
+                    }),
+                  }}
+                />
+            </div>
 
             <div className="form-group">
               <button type="submit" className="btn-save">Guardar</button>
