@@ -1,33 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import './ModalAddProducts.css';
+import React, { useState, useEffect } from "react";
+import "./ModalAddProducts.css";
+import ReactSelect from "react-select";
 
 const ModalAddProducts = ({ isOpen, onClose }) => {
   const [newProduct, setNewProduct] = useState({
-    pro_nombre: '',
-    pro_precio: '',
-    pro_stock: '',
-    pro_descripcion: '',
-    pro_categoria: '',
+    pro_nombre: "",
+    pro_precio: "",
+    pro_stock: "",
+    pro_descripcion: "",
+    pro_categoria: "",
+    pro_medida: "",
+    pro_vendedor: ""
   });
   const [categorias, setCategorias] = useState([]); // Estado para almacenar las categorías
+  const [vendedores, setVendedores] = useState([]); // Estado para almacenar los vendedores
 
   useEffect(() => {
     if (isOpen) {
       const body = document.body;
-      body.classList.add('modal-open');
+      body.classList.add("modal-open");
       return () => {
-        body.classList.remove('modal-open');
+        body.classList.remove("modal-open");
       };
     }
 
-    // Aquí hacemos la solicitud para obtener las categorías cuando el componente se monta
-    fetch('http://localhost:5000/fb/categoria/get')
+    fetch("http://localhost:5000/fb/categoria/get")
       .then((response) => response.json())
       .then((data) => {
         setCategorias(data);
       })
       .catch((error) => {
-        console.error('Error al obtener las categorías', error);
+        console.error("Error al obtener las categorías", error);
+      });
+
+    // Nueva solicitud para obtener la lista de vendedores
+    fetch("http://localhost:5000/fb/vendedor/getSeller")
+      .then((response) => response.json())
+      .then((data) => {
+        setVendedores(data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener la lista de vendedores", error);
       });
   }, [isOpen]);
 
@@ -35,27 +48,27 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     const { name, value } = e.target;
     setNewProduct({
       ...newProduct,
-      [name]: value,
+      [name]: value
     });
   };
 
   const handleSave = () => {
-    fetch('http://localhost:5000/fb/producto/post', {
-      method: 'POST',
+    fetch("http://localhost:5000/fb/producto/post", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify(newProduct),
+      body: JSON.stringify(newProduct)
     })
       .then((response) => {
         if (response.ok) {
           onClose();
         } else {
-          console.error('Error al agregar el producto en el servidor');
+          console.error("Error al agregar el producto en el servidor");
         }
       })
       .catch((error) => {
-        console.error('Error de red al agregar el producto', error);
+        console.error("Error de red al agregar el producto", error);
       });
   };
 
@@ -64,8 +77,8 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content-product">
-        <div className='form-container'>
-          <form className='modal-form'>
+        <div className="form-container">
+          <form className="modal-form">
             <div className="form-group-pair">
               <div>
                 <label htmlFor="pro_nombre">Nombre</label>
@@ -109,25 +122,24 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                     onChange={handleInputChange}
                   />
                 </div>
-              </div>  
+              </div>
             </div>
 
-            <div className='btn-add-container'>
-
-            <label htmlFor="pro_medida">Medida:</label>
-                  <select
-                    id="pro_medida"
-                    name="pro_medida"
-                    value={newProduct.pro_medida}
-                    onChange={handleInputChange}
-                  >
-                    <option value=""></option>
-                    <option value="Kg">Kilogramo</option>
-                    <option value="Gr">Gramo</option>
-                    <option value="Lb">Libra</option>
-                    <option value="Oz">Onza</option>
-                    <option value="Ud">Unidad</option>
-                  </select>
+            <div className="btn-add-container">
+              <label htmlFor="pro_medida">Medida:</label>
+              <select
+                id="pro_medida"
+                name="pro_medida"
+                value={newProduct.pro_medida}
+                onChange={handleInputChange}
+              >
+                <option value=""></option>
+                <option value="Kg">Kilogramo</option>
+                <option value="Gr">Gramo</option>
+                <option value="Lb">Libra</option>
+                <option value="Oz">Onza</option>
+                <option value="Ud">Unidad</option>
+              </select>
 
               <label htmlFor="pro_categoria">Categoría:</label>
               <select
@@ -144,10 +156,28 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
               </select>
             </div>
 
-        <div className='btn-add-container'>
-
-
-      </div>
+            <div class="form-group">
+              <label htmlFor="pro_vendedor">Vendedor:</label>
+              <ReactSelect
+                  defaultValue={{ value: 'Vendedor', label: 'None' }}
+                  id="pro_vendedor"
+                  name="pro_vendedor"
+                  value={{ value: newProduct.pro_vendedor, label: newProduct.pro_vendedor }}
+                  onChange={(selectedOption) => {
+                    setNewProduct({ ...newProduct, pro_vendedor: selectedOption.value });
+                  }}
+                  options={vendedores.map((vendedor) => ({
+                    value: vendedor.name,
+                    label: vendedor.name,
+                  }))}
+                  styles={{
+                    control: (provided) => ({
+                      ...provided,
+                      width: '200px', // Cambia el ancho según tus necesidades, p. ej., '300px'
+                    }),
+                  }}
+                />
+            </div>
             <div className="form-group-pair">
               <div>
                 <label htmlFor="pro_imagen">Imagen</label>
@@ -161,7 +191,9 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
               </div>
             </div>
             <div className="form-group">
-              <label className='btn-save-container' onClick={handleSave} >Guardar</label>
+              <label className="btn-save-container" onClick={handleSave}>
+                Guardar
+              </label>
             </div>
           </form>
         </div>
