@@ -7,7 +7,8 @@ import ModalEditProduct from './ModalEditProduct';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
-  const [categorias, setCategorias] = useState([]); // Agrega este estado
+  const [categorias, setCategorias] = useState([]);
+  const [vendedores, setVendedores] = useState([]); 
 
   const ITEMS_PER_PAGE = 5;
 
@@ -43,6 +44,18 @@ const ProductList = () => {
       })
       .catch((error) => {
         console.error('Error al cargar las categorías', error);
+      });
+  }, []); // Este efecto se ejecutará una vez al montar el componente
+  
+  useEffect(() => {
+    // Hacer la solicitud GET para obtener los vendedores desde tu servidor backend
+    fetch('http://localhost:5000/fb/vendedor/getSeller')
+      .then((response) => response.json())
+      .then((data) => {
+        setVendedores(data);
+      })
+      .catch((error) => {
+        console.error('Error al cargar los vendedores', error);
       });
   }, []); // Este efecto se ejecutará una vez al montar el componente
 
@@ -156,6 +169,7 @@ const ProductList = () => {
   productToEdit={productToEdit}
   handleEdit={handleEdit}
   categorias={categorias} // Pasa las categorías aquí
+  vendedores={vendedores} // Pasa los vendedores aquí
 />
       <div className="filter-row">
         <label>Filtrar por Producto:</label>
@@ -171,7 +185,6 @@ const ProductList = () => {
         <b onClick={() => handleSort('pro_precio')}>Precio</b>
         <b onClick={() => handleSort('pro_stock')}>Stock</b>
         <b onClick={() => handleSort('pro_categoria')}>Categoría</b>
-        <b onClick={() => handleSort('pro_medida')}>Medida</b>
         <b>Descripción</b>
         <b>Acciones</b>
       </div>
