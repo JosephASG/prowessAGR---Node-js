@@ -201,7 +201,6 @@ const ProductList = () => {
               <div>{product.pro_stock}</div>
             )}
             <div>{product.pro_categoria}</div>
-            <div>{product.pro_medida}</div>
             <div><img src={product.pro_imagen} alt={product.pro_name} className="product-image-list" /></div>
             <div>{product.pro_descripcion}</div>
             <div className='actions-container'>
