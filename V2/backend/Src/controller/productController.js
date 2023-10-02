@@ -1,7 +1,11 @@
 import * as firebase from 'firebase/app';
-import 'firebase/storage';
 import * as firestore from 'firebase/firestore';
+import 'firebase/storage';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import multer from 'multer';
+const almacenamiento = multer.memoryStorage();
+const upload = multer({ storage: almacenamiento });
+
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
 const firebaseConfig = {
@@ -16,7 +20,7 @@ const firebaseConfig = {
 // Inicializar Firebase y Firestore
 const fiapp = firebase.initializeApp(firebaseConfig);
 const fs = firestore.getFirestore(fiapp);
-const storage = getStorage(); // Obtén una referencia al servicio de almacenamiento
+const storage = getStorage(fiapp);
 
 //import {fs} from "../../firebase.js";
 
@@ -24,27 +28,47 @@ const storage = getStorage(); // Obtén una referencia al servicio de almacenami
 const createProduct = async (req, res) => {
   try {
     const newProductData = req.body; // Los datos del nuevo producto deben estar en el cuerpo de la solicitud (request body)
-    const imageFile = req.file; // Aquí asumimos que el archivo de imagen se encuentra en req.file
+    const imageFile = req.file; // El archivo de imagen debe estar en el cuerpo de la solicitud (request body)
+    const jsonProduct = {};
+    newProductData.pro_imagen = null;
 
     if (imageFile) {
-      const storageRef = firebase.storage().ref(`agricola${imageFile.originalname}`);
+      const metadata = {
+        contentType: imagenFile.mimetype,
+      };
+      // ! La imagen se esta guardando como application/octet-stream, no como contentType: imagenFile.mimetype. NO AFECTA EL FUNCIONAMIENTO.
+      //TODO 1: Comprobar si la imagen existe en el storage de Firebase, para evitar reemplazo de imágenes o asignar un nombre único a la imagen.
+      const storageRef = ref(storage, `Productos Web Agricola/Imagenes_Agricola/${imageFile.originalname}`,metadata);
       try {
-        await uploadBytes(storageRef, imageFile.buffer);
-        const snapshot = await storageRef.put(imageFile.buffer);
+        const uploadtask = await uploadBytes(storageRef, imageFile.buffer);
         console.log('Imagen cargada con éxito');
-
-
-        newProductData.pro_imagen = await snapshot.ref.getDownloadURL();
-        console.log('URL de imagen obtenida con éxito');
+        try{
+          const url = await getDownloadURL(uploadtask.ref);
+          console.log(url);
+          newProductData.pro_imagen = url;
+          console.log('URL de imagen obtenida con éxito');
+        }
+        catch(error){
+          console.error('Error al obtener la URL de la imagen:', error);
+        }
       } catch (error) {
         console.error('Error al cargar la imagen o obtener la URL de la imagen:', error);
       }
     }
-
+    for(const [key,value] of Object.entries(newProductData)){
+      if(value){
+        jsonProduct[key] = value;
+      }
+    }
     // Agrega los datos del producto a Firestore
-    const docRef = await firestore.addDoc(firestore.collection(fs, 'producto'), newProductData);
-
-    res.json({ id: docRef.id, ...newProductData }); 
+    try{
+      const docRef = await firestore.addDoc(firestore.collection(fs, 'producto'), jsonProduct);
+      res.json({ id: docRef.id, ...jsonProduct }); 
+    }
+    catch{
+      console.error('Error al agregar el producto a la base de datos:', error);
+      res.status(500).json({ error: 'Error al agregar el producto a la base de datos.' });
+    }
   } catch (error) {
     console.error('Error al crear el producto:', error);
     res.status(500).json({ error: 'Error al crear el producto.' });
@@ -126,6 +150,7 @@ const updateProduct = async (req, res) => {
 };
 
 // Eliminar
+
 const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;

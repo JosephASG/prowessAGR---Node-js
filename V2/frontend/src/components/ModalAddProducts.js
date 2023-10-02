@@ -10,10 +10,14 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     pro_descripcion: "",
     pro_categoria: "",
     pro_medida: "",
-    pro_vendedor: ""
+    pro_vendedor: "",
+    pro_imagen: null
   });
   const [categorias, setCategorias] = useState([]); // Estado para almacenar las categorías
   const [vendedores, setVendedores] = useState([]); // Estado para almacenar los vendedores
+
+
+
 
   useEffect(() => {
     if (isOpen) {
@@ -45,20 +49,38 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
   }, [isOpen]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewProduct({
-      ...newProduct,
-      [name]: value
-    });
+    const { name, value, file } = e.target;
+    if (name === "pro_imagen") {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append("pro_imagen", file);
+      setNewProduct((prevState) => ({
+        ...prevState,
+        pro_imagen: formData
+      }));
+    }
+    else {
+      setNewProduct({
+        ...newProduct,
+        [name]: value
+      });
+    }
   };
 
   const handleSave = () => {
+    const {pro_imagen,...otrosDatos} = newProduct;
+    const formData = new FormData();
+    var imagen = pro_imagen.get("pro_imagen");
+    formData.append("pro_imagen", imagen);
+    Object.entries(otrosDatos).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+
+    console.log(newProduct);
     fetch("http://localhost:5000/fb/producto/post", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(newProduct)
+      body: formData
     })
       .then((response) => {
         if (response.ok) {
@@ -78,7 +100,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     <div className="modal-overlay">
       <div className="modal-content-product">
         <div className="form-container">
-          <form className="modal-form">
+          <form className="modal-form" encType="multipart/form-data">
             <div className="form-group-pair">
               <div>
                 <label htmlFor="pro_nombre">Nombre</label>
@@ -159,24 +181,24 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
             <div class="form-group">
               <label htmlFor="pro_vendedor">Vendedor:</label>
               <ReactSelect
-                  defaultValue={{ value: 'Vendedor', label: 'None' }}
-                  id="pro_vendedor"
-                  name="pro_vendedor"
-                  value={{ value: newProduct.pro_vendedor, label: newProduct.pro_vendedor }}
-                  onChange={(selectedOption) => {
-                    setNewProduct({ ...newProduct, pro_vendedor: selectedOption.value });
-                  }}
-                  options={vendedores.map((vendedor) => ({
-                    value: vendedor.name,
-                    label: vendedor.name,
-                  }))}
-                  styles={{
-                    control: (provided) => ({
-                      ...provided,
-                      width: '200px', // Cambia el ancho según tus necesidades, p. ej., '300px'
-                    }),
-                  }}
-                />
+                defaultValue={{ value: 'Vendedor', label: 'None' }}
+                id="pro_vendedor"
+                name="pro_vendedor"
+                value={{ value: newProduct.pro_vendedor, label: newProduct.pro_vendedor }}
+                onChange={(selectedOption) => {
+                  setNewProduct({ ...newProduct, pro_vendedor: selectedOption.value });
+                }}
+                options={vendedores.map((vendedor) => ({
+                  value: vendedor.name,
+                  label: vendedor.name,
+                }))}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    width: '200px', // Cambia el ancho según tus necesidades, p. ej., '300px'
+                  }),
+                }}
+              />
             </div>
             <div className="form-group-pair">
               <div>
@@ -185,7 +207,6 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                   type="file"
                   className="form-control"
                   name="pro_imagen"
-                  value={newProduct.pro_imagen}
                   onChange={handleInputChange}
                 />
               </div>

@@ -56,6 +56,10 @@ app.get('/fb/producto/get',(req,res) =>{
     console.log("ERROR. RECUPERACIÓN DE DATOS FALLIDA.",err)
   }
 })*/
+
+import multer from 'multer';
+const almacenamiento = multer.memoryStorage();
+const upload = multer({ storage: almacenamiento });
 // Import Firebase and Firestore
 import * as producto from '../../V2/backend/Src/controller/productController.js';
 
@@ -68,7 +72,7 @@ app.get('/fb/producto/get', producto.getProducts);
 app.get('/fb/producto/get/:id', producto.getProductByID);
 
 // Agregar un nuevo producto
-app.post('/fb/producto/post', producto.createProduct);
+app.post('/fb/producto/post',upload.single('pro_imagen'),producto.createProduct);
 
 // Actualizar el producto
 app.put('/fb/producto/update/:id', producto.updateProduct);
