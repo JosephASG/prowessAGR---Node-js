@@ -15,12 +15,13 @@ body {
 
 .header-row-product-list {
     display: grid;
-    grid-template-columns: 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    grid-template-columns: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
     font-weight: bold;
     margin-bottom: 15px;
     padding: 5px;
     text-align: center;
     border-bottom: 1px solid white;
+    cursor:pointer;
 }
 
 .container-products {
@@ -30,7 +31,7 @@ body {
 
 .product {
     display: grid;
-    grid-template-columns: 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
+    grid-template-columns: 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr 3fr;
     border: 1px solid orange;
     border-radius: 5px;
     padding: 10px;
@@ -192,7 +193,7 @@ b {
     
     .product {
         display: grid;
-        grid-template-columns: 3fr 3fr 2fr 3fr 3fr  3fr;
+        grid-template-columns: 3fr 3fr 2fr 3fr 3fr  3fr 3fr 3fr 3fr;
         border: 1px solid orange;
         border-radius: 5px;
         padding: 10px;
@@ -207,4 +208,9 @@ b {
     max-height: 100px;
     object-fit: cover;
     border-radius: 4px;
+  }
+
+  .sorted{
+    cursor:default;
+    color:orange;
   }

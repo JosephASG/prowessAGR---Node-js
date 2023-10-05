@@ -11,6 +11,9 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     pro_categoria: "",
     pro_medida: "",
     pro_vendedor: "",
+    pro_fechaFinal: "",
+    pro_fechaInicio:"",
+    pro_estado:"",
     pro_imagen: null
   });
   const [categorias, setCategorias] = useState([]); // Estado para almacenar las categorías
@@ -99,6 +102,9 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content-product">
+      <span className="modal-close-product-list" onClick={onClose}>
+          &times;
+        </span>
         <div className="form-container">
           <form className="modal-form" encType="multipart/form-data">
             <div className="form-group-pair">
@@ -177,7 +183,26 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                 ))}
               </select>
             </div>
-
+            <div className="form-group-pair">
+              <div>
+                <label htmlFor="pro_fechaInicio">Fecha Inicio</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  name="pro_fechaInicio"
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="pro_fechaFinal">Fecha Final</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  name="pro_fechaFinal"
+                  onChange={handleInputChange}
+                />
+              </div>
+            </div>
             <div class="form-group">
               <label htmlFor="pro_vendedor">Vendedor:</label>
               <ReactSelect
@@ -195,7 +220,38 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                 styles={{
                   control: (provided) => ({
                     ...provided,
-                    width: '200px', // Cambia el ancho según tus necesidades, p. ej., '300px'
+                    width: '230px', // Cambia el ancho según tus necesidades, p. ej., '300px'
+                  }),
+                  option: (provided) => ({
+                    ...provided,
+                    color: 'black',
+                  }),
+                }}
+              />
+            </div>
+            <div class="form-group">
+              <label htmlFor="pro_estado">Estado:</label>
+              <ReactSelect
+                defaultValue={{ value: 'Vendedor', label: 'None' }}
+                id="pro_estado"
+                name="pro_estado"
+                value={{ value: newProduct.pro_estado, label: newProduct.pro_estado }}
+                onChange={(selectedOption) => {
+                  setNewProduct({ ...newProduct, pro_estado: selectedOption.value });
+                }}
+                options={['Disponible','No disponible','Reservado'].map((estado) => ({
+                  value: estado,
+                  label: estado,
+                }))}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    width: '230px',
+                     // Cambia el ancho según tus necesidades, p. ej., '300px'
+                  }),
+                  option: (provided) => ({
+                    ...provided,
+                    color: 'black',
                   }),
                 }}
               />
@@ -218,9 +274,6 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
             </div>
           </form>
         </div>
-        <span className="modal-close-product" onClick={onClose}>
-          &times;
-        </span>
       </div>
     </div>
   );

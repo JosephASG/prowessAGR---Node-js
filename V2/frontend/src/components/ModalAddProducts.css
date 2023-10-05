@@ -89,15 +89,14 @@ label {
   color: white;
 }
 
-.modal-close-product {
+.modal-close-product-list {
   font-weight: bold;
   font-size: 2em;
   position: relative;
-  bottom: 250px;
-  left: 383px;
+  float:right;
 }
 
-.modal-close-product:hover {
+.modal-close-product-list:hover {
   cursor: pointer;
 }
 
