@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
-import './ProductList.css';
-import ModalAddProducts from './ModalAddProducts';
-import ModalEditProduct from './ModalEditProduct';
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import "./ProductList.css";
+import ModalAddProducts from "./ModalAddProducts";
+import ModalEditProduct from "./ModalEditProduct";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [categorias, setCategorias] = useState([]);
-  const [vendedores, setVendedores] = useState([]); 
+  const [vendedores, setVendedores] = useState([]);
 
   const ITEMS_PER_PAGE = 5;
 
@@ -17,7 +17,8 @@ const ProductList = () => {
   const [productToEdit, setProductToEdit] = useState(null);
 
   const [sortCriteria, setSortCriteria] = useState(null);
-  const [filterProduct, setFilterProduct] = useState('');
+  const [sortedColumn, setSortedColumn] = useState(null); // Estado para almacenar la columna por la que se ordena [nombre, precio, stock, categoria
+  const [filterProduct, setFilterProduct] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   const [productToUpdate, setProductToUpdate] = useState(null);
@@ -26,52 +27,52 @@ const ProductList = () => {
     fetch(`http://localhost:5000/fb/producto/get`)
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Error en la solicitud al servidor');
+          throw new Error("Error en la solicitud al servidor");
         }
         console.log(response);
         return response.json();
       })
       .then((data) => setProducts(data))
-      .catch((error) => console.error('Error al cargar los productos', error));
+      .catch((error) => console.error("Error al cargar los productos", error));
   }, []);
 
   useEffect(() => {
     // Hacer la solicitud GET para obtener las categorías desde tu servidor backend
-    fetch('http://localhost:5000/fb/categoria/get')
+    fetch("http://localhost:5000/fb/categoria/get")
       .then((response) => response.json())
       .then((data) => {
         setCategorias(data);
       })
       .catch((error) => {
-        console.error('Error al cargar las categorías', error);
+        console.error("Error al cargar las categorías", error);
       });
   }, []); // Este efecto se ejecutará una vez al montar el componente
-  
+
   useEffect(() => {
     // Hacer la solicitud GET para obtener los vendedores desde tu servidor backend
-    fetch('http://localhost:5000/fb/vendedor/getSeller')
+    fetch("http://localhost:5000/fb/vendedor/getSeller")
       .then((response) => response.json())
       .then((data) => {
         setVendedores(data);
       })
       .catch((error) => {
-        console.error('Error al cargar los vendedores', error);
+        console.error("Error al cargar los vendedores", error);
       });
   }, []); // Este efecto se ejecutará una vez al montar el componente
 
   const handleDelete = (productId) => {
     fetch(`http://localhost:5000/fb/producto/delete/${productId}`, {
-      method: 'DELETE',
+      method: "DELETE",
     })
       .then((response) => {
         if (response.ok) {
           setProducts(products.filter((product) => product.id !== productId));
         } else {
-          console.error('Error al eliminar el producto en el servidor');
+          console.error("Error al eliminar el producto en el servidor");
         }
       })
       .catch((error) => {
-        console.error('Error de red al eliminar el producto', error);
+        console.error("Error de red al eliminar el producto", error);
       });
   };
 
@@ -100,12 +101,12 @@ const ProductList = () => {
       return;
     }
 
-    console.log('productToUpdate:', productToUpdate.id);
+    console.log("productToUpdate:", productToUpdate.id);
 
     fetch(`http://localhost:5000/fb/producto/update/${productToUpdate.id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(productToUpdate),
     })
@@ -119,16 +120,17 @@ const ProductList = () => {
           );
           setIsEditModalOpen(false);
         } else {
-          console.error('Error al guardar los cambios en el servidor');
+          console.error("Error al guardar los cambios en el servidor");
         }
       })
       .catch((error) => {
-        console.error('Error de red al guardar los cambios', error);
+        console.error("Error de red al guardar los cambios", error);
       });
   };
 
   const handleSort = (criteria) => {
     setSortCriteria(criteria);
+    setSortedColumn(criteria);
   };
 
   const handleFilter = (product) => {
@@ -144,49 +146,93 @@ const ProductList = () => {
   }
 
   if (filterProduct) {
-    sortedAndFilteredProducts = sortedAndFilteredProducts.filter(
-      (product) =>
-        product.pro_nombre.toLowerCase().includes(filterProduct.toLowerCase())
+    sortedAndFilteredProducts = sortedAndFilteredProducts.filter((product) =>
+      product.pro_nombre.toLowerCase().includes(filterProduct.toLowerCase())
     );
   }
 
-  const totalPages = Math.ceil(sortedAndFilteredProducts.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(
+    sortedAndFilteredProducts.length / ITEMS_PER_PAGE
+  );
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const productsToDisplay = sortedAndFilteredProducts.slice(startIndex, endIndex);
+  const productsToDisplay = sortedAndFilteredProducts.slice(
+    startIndex,
+    endIndex
+  );
 
   return (
     <div className="container-product-list">
       <h1>Lista de Productos</h1>
-      <div className='btn-add-container'>
-        <button onClick={handleOpenModal} className='btn-add-product'>Agregar Producto</button>
+      <div className="btn-add-container">
+        <button onClick={handleOpenModal} className="btn-add-product">
+          Agregar Producto
+        </button>
       </div>
       <div>
-        <ModalAddProducts isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
-        <ModalEditProduct
-  isOpen={isEditModalOpen}
-  onClose={() => setIsEditModalOpen(false)}
-  productToEdit={productToEdit}
-  handleEdit={handleEdit}
-  categorias={categorias} // Pasa las categorías aquí
-  vendedores={vendedores} // Pasa los vendedores aquí
-/>
-      <div className="filter-row">
-        <label>Filtrar por Producto:</label>
-        <input
-          type="text"
-          value={filterProduct}
-          onChange={(e) => handleFilter(e.target.value)}
+        <ModalAddProducts
+          isOpen={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
         />
-      </div>
+        <ModalEditProduct
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          productToEdit={productToEdit}
+          handleEdit={handleEdit}
+          categorias={categorias} // Pasa las categorías aquí
+          vendedores={vendedores} // Pasa los vendedores aquí
+        />
+        <div className="filter-row">
+          <label>Filtrar por Producto:</label>
+          <input
+            type="text"
+            value={filterProduct}
+            onChange={(e) => handleFilter(e.target.value)}
+          />
+        </div>
       </div>
       <div className="header-row-product-list">
-        <b onClick={() => handleSort('pro_nombre')}>Nombre</b>
-        <b onClick={() => handleSort('pro_precio')}>Precio</b>
-        <b onClick={() => handleSort('pro_stock')}>Stock</b>
-        <b onClick={() => handleSort('pro_categoria')}>Categoría</b>
-        <b>Imagen</b>
-        <b>Descripción</b>
+        <b
+          className={sortedColumn === "pro_nombre" ? "sorted" : ""}
+          onClick={() => handleSort("pro_nombre")}
+        >
+          Nombre
+        </b>
+        <b
+          className={sortedColumn === "pro_precio" ? "sorted" : ""}
+          onClick={() => handleSort("pro_precio")}
+        >
+          Precio
+        </b>
+        <b
+          className={sortedColumn === "pro_stock" ? "sorted" : ""}
+          onClick={() => handleSort("pro_stock")}
+        >
+          Stock
+        </b>
+        <b
+          className={sortedColumn === "pro_categoria" ? "sorted" : ""}
+          onClick={() => handleSort("pro_categoria")}
+        >
+          Categoría
+        </b>
+        <b
+          className={sortedColumn === "pro_fechaInicio" ? "sorted" : ""}
+          onClick={() => handleSort("pro_fechaInicio")}>Ingreso</b>
+        <b
+        className={sortedColumn === "pro_fechaFinal" ? "sorted" : ""}
+        onClick={() => handleSort("pro_fechaFinal")}
+        >Caducidad</b>
+        <b
+         className={sortedColumn === "pro_vendedor" ? "sorted" : ""}
+         onClick={() => handleSort("pro_vendedor")}
+        >Vendedor</b>
+        <b
+        className={sortedColumn === "pro_estado" ? "sorted" : ""}
+        onClick={() => handleSort("pro_estado")}
+        >Estado</b>
+        <b
+        >Imagen</b>
         <b>Acciones</b>
       </div>
 
@@ -196,14 +242,23 @@ const ProductList = () => {
             <div>{product.pro_nombre}</div>
             <div>${product.pro_precio}</div>
             {product.pro_medida != null ? (
-              <div>{product.pro_stock + ' ' + product.pro_medida}</div>
+              <div>{product.pro_stock + " " + product.pro_medida}</div>
             ) : (
               <div>{product.pro_stock}</div>
             )}
             <div>{product.pro_categoria}</div>
-            <div><img src={product.pro_imagen} alt={product.pro_name} className="product-image-list" /></div>
-            <div>{product.pro_descripcion}</div>
-            <div className='actions-container'>
+            <div>{product.pro_fechaInicio}</div>
+            <div>{product.pro_fechaFinal}</div>
+            <div>{product.pro_vendedor}</div>
+            <div>{product.pro_estado}</div>
+            <div>
+              <img
+                src={product.pro_imagen}
+                alt={product.pro_name}
+                className="product-image-list"
+              />
+            </div>
+            <div className="actions-container">
               <FontAwesomeIcon
                 className="fa-icon-edit"
                 icon={faPenToSquare}

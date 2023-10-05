@@ -34,7 +34,7 @@ const createProduct = async (req, res) => {
 
     if (imageFile) {
       const metadata = {
-        contentType: imagenFile.mimetype,
+        contentType: imageFile.mimetype,
       };
       // ! La imagen se esta guardando como application/octet-stream, no como contentType: imagenFile.mimetype. NO AFECTA EL FUNCIONAMIENTO.
       //TODO 1: Comprobar si la imagen existe en el storage de Firebase, para evitar reemplazo de imágenes o asignar un nombre único a la imagen.
