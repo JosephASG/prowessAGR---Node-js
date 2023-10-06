@@ -162,8 +162,9 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                 onChange={handleInputChange}
               >
                 <option value=""></option>
+                <option value="Qm">Quintal</option>
                 <option value="Kg">Kilogramo</option>
-                <option value="Gr">Gramo</option>
+                <option value="gr">Gramo</option>
                 <option value="Lb">Libra</option>
                 <option value="Oz">Onza</option>
                 <option value="Ud">Unidad</option>

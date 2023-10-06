@@ -110,6 +110,8 @@ function StorePage({ cart, addToCart, removeFromCart }) {
               <p><b>Precio:</b> ${product.pro_precio}</p>
               <p><b>Categoría:</b> {product.pro_categoria}</p>
               <p><b>Cantidad disponible:</b> {product.pro_stock + ' ' + product.pro_medida}</p>
+              <p><b>Vendedor:</b> {product.pro_vendedor}</p>
+
               <div className="product-actions">
                 <button onClick={() => addToCart(product)}>
                   Agregar al carrito

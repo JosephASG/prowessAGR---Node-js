@@ -81,7 +81,7 @@
   margin-bottom: 20px;
   border-radius: 5px;
   max-width: 1400px;
-  margin: 10px;
+  margin: 0px;
   color: #ffffff;
   background-color: rgba(47, 134, 166, 0.832);
   border: 1px solid orange;
@@ -89,6 +89,10 @@
 
 .total-price p {
   margin-left: 10px;
+}
+
+.separador-p {
+  line-height: 0.3;
 }
 
 .btn-buy {
@@ -242,30 +246,30 @@
     margin: 3px;
   }
 }
-  @media (max-width: 750px) {
-    .shopping-cart-title {
-      font-size: 16px;
-      margin-bottom: 10px;
-    }
-  
-    .presentation,
-    .producto-cart,
-    .total-price {
-      margin: 10px;
-    }
-  
-    .presentation select,
-    .btn-add,
-    .btn-remove {
-      margin: 3px;
-    }
-  
-    .show-products {
-      grid-template-columns: repeat(1, 1fr);
-    }
-  
-    .producto-cart img {
-      max-width: 80px;
-      margin: 3px;
-    }
+@media (max-width: 750px) {
+  .shopping-cart-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .presentation,
+  .producto-cart,
+  .total-price {
+    margin: 10px;
+  }
+
+  .presentation select,
+  .btn-add,
+  .btn-remove {
+    margin: 3px;
+  }
+
+  .show-products {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  .producto-cart img {
+    max-width: 80px;
+    margin: 3px;
+  }
 }
