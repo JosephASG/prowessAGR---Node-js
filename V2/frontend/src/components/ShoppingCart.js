@@ -58,9 +58,10 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
               </div>
               <div className='name-product'>
                 <h3>{product.pro_nombre}</h3>
-                <p><b>Categoria:</b> {product.pro_categoria}</p>
-                <p><b>Precio:</b> ${product.pro_precio}</p>
-                <p><b>Cantidad disponible:</b> {product.pro_stock}</p>
+                <p className='separador-p'><b>Categoria:</b> {product.pro_categoria}</p>
+                <p className='separador-p'><b>Precio:</b> ${product.pro_precio} x {product.pro_medida}</p>
+                <p className='separador-p'><b>Cantidad disponible:</b> {product.pro_stock} {product.pro_medida}</p>
+                <p className='separador-p'><b>Vendedor:</b> {product.pro_vendedor}</p>
               </div>
               <div className='cantidad-product'>
                 <button className='btn-add' onClick={() => addToCart(product)}>+</button>
