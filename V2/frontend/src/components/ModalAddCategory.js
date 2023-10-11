@@ -49,7 +49,7 @@ const ModalAddCategory = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content-supplier">
+      <div className="modal-content-product">
         <div className='form-container'>
           <form className='modal-form'>
             <div className="form-group-pair">
@@ -80,7 +80,7 @@ const ModalAddCategory = ({ isOpen, onClose }) => {
             </div>
           </form>
         </div>
-        <span className="modal-close-supplier" onClick={onClose}>
+        <span className="modal-close-product" onClick={onClose}>
           &times;
         </span>
       </div>

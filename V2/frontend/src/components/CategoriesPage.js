@@ -125,7 +125,7 @@ const CategoryList = () => {
   const categoriesToDisplay = sortedAndFilteredCategories.slice(startIndex, endIndex);
 
   return (
-    <div className="container">
+    <div className="container-product-list">
       <h1>Lista de Categorías</h1>
       <div className='btn-add-container'>
         <button onClick={handleOpenModal} className='btn-add-product'>Agregar Categoría</button>
