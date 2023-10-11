@@ -21,6 +21,12 @@ function HomePage() {
         <div className="home-page-subtitle">
           <h2>Productos Agrícolas 100% Naturales Y Frescos</h2>
           <p>De la mata a la olla</p>
+          <Link to="/registro">
+          <button className='RegistroHome'>Registro</button>
+        </Link>
+        <Link to="/Login">
+          <button className='RegistroHome'>Iniciar Sesion</button>
+        </Link>
         </div>
         <div className="home-page-carousel">
           <Carousel showThumbs={false} infiniteLoop autoPlay>
@@ -34,25 +40,20 @@ function HomePage() {
       </div>
       <div className='part2'>
         <p className='p1'>Vende y compra los mejores productos del país</p>
-        <Link to="/registro">
-          <button className='RegistroHome'>Registro</button>
-        </Link>
-        <Link to="/Login">
-          <button className='RegistroHome'>Iniciar Sesion</button>
-        </Link>
+        
       </div>
       <div className="paragraphs-container">
         <div className="paragraph">
           <img src={image1} alt="Imagen 1" />
-          <p>Disponibilidad las 24 horas: Tu página web estará disponible en todo momento, lo que significa que los clientes pueden navegar y comprar tus productos en cualquier momento del día, incluso fuera del horario comercial.</p>
+          <p>Disponibilidad 24/7: Tu sitio web permite a los clientes explorar y comprar productos en cualquier momento, incluso fuera de horario comercial.</p>
         </div>
         <div className="paragraph">
           <img src={image2} alt="Imagen 2" />
-          <p>Información detallada: Puedes proporcionar información detallada sobre cada producto, incluyendo especificaciones, beneficios, usos, y consejos de cultivo. Esto ayuda a los clientes a tomar decisiones informadas y aumenta la confianza en tu marca.</p>
+          <p>Información detallada: Ofrece info detallada por producto para ayudar a los clientes a decidir y generar confianza en tu marca.</p>
         </div>
         <div className="paragraph">
           <img src={image3} alt="Imagen 3" />
-          <p>Crecimiento a largo plazo: La presencia en línea es esencial en la era digital actual. Una página web bien establecida puede contribuir al crecimiento sostenible de tu negocio agrícola a lo largo del tiempo.</p>
+          <p>Presencia en línea crucial hoy día. Un sitio web robusto favorece el crecimiento sostenido de tu negocio agrícola a largo plazo.</p>
         </div>
       </div>
     </div>
