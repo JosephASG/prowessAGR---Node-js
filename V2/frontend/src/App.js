@@ -10,7 +10,6 @@ import ShoppingCartPage from './components/ShoppingCartPage';
 import VendorsPage from './components/VendorsPage';
 import MyAccountPage from './components/MyAccountPage';
 import ProductList from './components/ProductList';
-import SupplierList from './components/SupplierList';
 import AboutUs from './components/AboutUs';
 import Footer from './components/Footer';
 import CategoriesPage from './components/CategoriesPage';
@@ -48,7 +47,6 @@ function App() {
         <Route path="/carrito" element={<ShoppingCart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
         <Route path="/carrito-pagina" element={<ShoppingCartPage cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
         <Route path="/vendedores" element={<VendorsPage />} />
-        <Route path="/supplier-list" element={<SupplierList />} />
         <Route path="/nosotros" element={<AboutUs />} />
         <Route path="/mi-cuenta" element={<MyAccountPage />} />
         <Route path="/product-list" element={<ProductList />} />

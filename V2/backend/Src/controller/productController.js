@@ -150,7 +150,6 @@ const updateProduct = async (req, res) => {
 };
 
 // Eliminar
-
 const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
