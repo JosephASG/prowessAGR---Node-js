@@ -32,7 +32,11 @@ function Login() {
         />
         <button className="login-button" type="submit">Iniciar sesión</button>
       </form>
-    </div>
+    <div className="login-message">
+        <p>¿Necesitas ayuda con tu cuenta? <a href="#">Recuperar cuenta</a></p>
+        <p>¿Olvidaste tu contraseña? <a href="#">Recuperar contraseña</a></p>
+      </div>
+    </div> 
   );
 }
 
