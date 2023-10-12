@@ -133,15 +133,6 @@ app.put('/fb/categoria/update/:id', categoria.updateCategory);
 // Eliminar la categoría
 app.delete('/fb/categoria/delete/:id', categoria.deleteCategory);
 
-/*
-// userController
-import * as usuario from './Src/controller/userController.js';
-
-// Crear un nuevo usuario
-app.post('/fb/usuario/post', usuario.createUser);
-*/
-
-
 // Importar las funciones relacionadas con los VENDEDORES desde './sellerController'
 
 import * as vendedor from './Src/controller/sellerController.js';
@@ -181,3 +172,12 @@ app.put('/fb/proveedor/update/:id', proveedor.updateSupplier);
 
 // Eliminar el proveedor
 app.delete('/fb/proveedor/delete/:id', proveedor.deleteSupplier);
+
+//==================================//
+
+// Importar las funciones relacionadas con los usuarios desde './userController'
+import * as usuario from './Src/controller/userController.js';
+
+// Crear un nuevo usuario
+app.post('/fb/usuario/login', usuario.loginUser);
+app.post('/fb/usuario/register', upload.none(), usuario.registerUser);
