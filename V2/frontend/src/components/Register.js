@@ -44,7 +44,28 @@ function Register() {
   const handleRegister = (e) => {
     e.preventDefault();
     console.log('Registro de usuario:', name, userType, nPhone, nCedula ,password, photo, province, city, mainStreet, secondaryStreet, postalCode);
+    const formData = new FormData();
+    formData.append("email", name);
+    formData.append("password", password);
+    formData.append("role", userType);
+    formData.append("phone", nPhone);
+    formData.append("direccion",province + ' ' + city + ' ' + mainStreet + ' ' + secondaryStreet + ' ' + postalCode);
+    fetch('http://localhost:5000/fb/usuario/register', {
+      method: "POST",
+      body: formData
+    })
+      .then((response) => {
+        if (response.ok) {
+        } else {
+          console.error('Error al agregar el proveedor en el servidor');
+        }
+      })
+      .catch((error) => {
+        console.error('Error de red al agregar el proveedor', error);
+      });
   };
+
+    
 
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
