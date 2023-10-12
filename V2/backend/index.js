@@ -177,7 +177,8 @@ app.delete('/fb/proveedor/delete/:id', proveedor.deleteSupplier);
 
 // Importar las funciones relacionadas con los usuarios desde './userController'
 import * as usuario from './Src/controller/userController.js';
+import * as tokencontroller from "./Src/middleware/verifyToken.js";
 
 // Crear un nuevo usuario
-app.post('/fb/usuario/login', usuario.loginUser);
+app.post('/fb/usuario/login',upload.none(), usuario.loginUser);
 app.post('/fb/usuario/register', upload.none(), usuario.registerUser);

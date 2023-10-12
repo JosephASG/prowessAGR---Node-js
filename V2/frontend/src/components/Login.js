@@ -8,17 +8,19 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
+    e.preventDefault();
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
 
-    fetch('http://localhost:5000/fb/usuarios/login', {
+    fetch('http://localhost:5000/fb/usuario/login', {
       method: 'POST',
       body: formData
     })
       .then((response) => {
         if (response.ok) {
-          Navigate('/');
+          console.log("Login exitoso");
+          
         } else {
           console.error('Error al agregar el proveedor en el servidor');
         }
