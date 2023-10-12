@@ -1,8 +1,9 @@
-import * as firebase from 'firebase/app';
-import * as firestore from 'firebase/firestore';
-import {query,where,  getDocs, collection} from 'firebase/firestore';
-import multer from 'multer';
-import bcrypt from 'bcrypt';
+import * as firebase from "firebase/app";
+import * as firestore from "firebase/firestore";
+import { query, where, getDocs, collection } from "firebase/firestore";
+import multer from "multer";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 // Reemplace la siguiente configuración con la configuración de su proyecto Firebase
 const firebaseConfig = {
@@ -11,7 +12,7 @@ const firebaseConfig = {
   projectId: "prowess-web-database",
   storageBucket: "prowess-web-database.appspot.com",
   messagingSenderId: "519296320778",
-  appId: "1:519296320778:web:739cc55990bd1a6e4866f3"
+  appId: "1:519296320778:web:739cc55990bd1a6e4866f3",
 };
 
 const fiapp = firebase.initializeApp(firebaseConfig);
@@ -21,11 +22,14 @@ const saltRounds = 10;
 
 //Registro de usuario
 const registerUser = async (req, res) => {
-  try{
+  try {
     const userData = req.body;
     const jsonUser = {};
     try {
-      const snapshot = await query(firestore.collection(fs, 'usuario'), where("email", "==", userData.email))
+      const snapshot = await query(
+        firestore.collection(fs, "usuario"),
+        where("email", "==", userData.email)
+      );
       const querySnapshot = await getDocs(snapshot);
       console.log(querySnapshot);
       if (!querySnapshot.empty) {
@@ -35,15 +39,18 @@ const registerUser = async (req, res) => {
       }
       const newUser = {
         email: userData.email,
-        password: bcrypt.hashSync(userData.password,saltRounds),
+        password: bcrypt.hashSync(userData.password, saltRounds),
         rol: userData.role,
       };
-      for(const [key,value] of Object.entries(newUser)){
-        if(value){
+      for (const [key, value] of Object.entries(newUser)) {
+        if (value) {
           jsonUser[key] = value;
         }
       }
-      var docRef = await firestore.addDoc(firestore.collection(fs, 'usuario'), jsonUser);
+      var docRef = await firestore.addDoc(
+        firestore.collection(fs, "usuario"),
+        jsonUser
+      );
       newUser._id = docRef.id;
 
       return res.status(201).json(newUser);
@@ -52,38 +59,31 @@ const registerUser = async (req, res) => {
         .status(500)
         .json({ message: "Error al crear el usuario", error: error.message });
     }
-  }
-  catch(err){
+  } catch (error) {
     return res
-        .status(500)
-        .json({ message: "Error al crear el usuario", error: error.message });
+      .status(500)
+      .json({ message: "Error al crear el usuario", error: error.message });
   }
 };
 
-
-
 // Inicio de sesion de usuario
 const loginUser = async (req, res) => {
-  try{
-    const email = req.body.email;
-    const password = req.body.password;
-
-  }
-  catch(err){
-
-  }
-  /*try {
-    const snapshot = await db
-      .collection("users")
-      .where("email", "==", req.body.email)
-      .get();
-    if (snapshot.empty) {
+  try {
+    const userData = req.body;
+    const jsonUser = {};
+    const snapshot = await query(
+      firestore.collection(fs, "usuario"),
+      where("email", "==", userData.email)
+    );
+    const querySnapshot = await getDocs(snapshot);
+    console.log(querySnapshot);
+    if (querySnapshot.empty) {
       return res.status(401).send({ message: "Email o Contraseña Inválidos" });
     }
-
-    const user = snapshot.docs[0].data();
+    const user = querySnapshot.docs[0].data();
     if (bcrypt.compareSync(req.body.password, user.password)) {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET);
+      const token = jwt.sign({ _id: user._id }, "secreto" //! Cambiar secreto
+      );
       res.send({
         token,
         _id: user._id,
@@ -99,8 +99,10 @@ const loginUser = async (req, res) => {
       res.status(401).send({ message: "Email o Contraseña Inválidos" });
     }
   } catch (error) {
-    res.status(500).json({ error: "Error al iniciar sesión" });
-  }*/
+    return res
+      .status(500)
+      .json({ message: "Error al crear el usuario", error: error.message });
+  }
 };
 
 /*
