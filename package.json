@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "react-select": "^5.7.5",
-    "uuid": "^9.0.0"
-  }
-}
