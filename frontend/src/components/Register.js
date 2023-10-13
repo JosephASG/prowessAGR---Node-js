@@ -30,6 +30,7 @@ const provinces = [
 
 function Register() {
   const [name, setName] = useState('');
+  const [lastName, setlastName] = useState('');
   const [userType, setUserType] = useState('');
   const [nPhone, setNPhone] = useState('');
   const [nCedula, setNCedula] = useState('');
@@ -102,30 +103,28 @@ function Register() {
           onChange={(e) => setName(e.target.value)}
           required
         />
-        <select
-          className="register-inputS"
-          value={userType}
-          onChange={(e) => setUserType(e.target.value)}
-          required
-        >
-          <option value="">Seleccionar tipo de usuario</option>
-          <option value="Vendedor">Vendedor</option>
-          <option value="Cliente">Cliente</option>
-        </select>
         <input
           className="register-input"
           type="text"
-          placeholder="Número de teléfono"
-          value={nPhone}
-          onChange={(e) => setNPhone(e.target.value)}
+          placeholder="Apellidos"
+          value={lastName}
+          onChange={(e) => setlastName(e.target.value)}
           required
         />
         <input
           className="register-input"
           type="text"
-          placeholder="Número de Cedula"
+          placeholder="Número de Cedula - Pasaporte"
           value={nCedula}
           onChange={(e) => setNCedula(e.target.value)}
+          required
+        />
+        <input
+          className="register-input"
+          type="text"
+          placeholder="Número de Teléfono"
+          value={nPhone}
+          onChange={(e) => setNPhone(e.target.value)}
           required
         />
         <input
