@@ -41,6 +41,11 @@ function Register() {
   const [mainStreet, setMainStreet] = useState('');
   const [secondaryStreet, setSecondaryStreet] = useState('');
   const [postalCode, setPostalCode] = useState('');
+  const [showAdditionalFields, setShowAdditionalFields] = useState(false);
+  const [additionalField1, setAdditionalField1] = useState(''); // Campo adicional 1
+  const [additionalField2, setAdditionalField2] = useState(''); // Campo adicional 2
+
+
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -189,6 +194,32 @@ function Register() {
           onChange={(e) => setPostalCode(e.target.value)}
           required
         />
+        <input
+          type="checkbox"
+          onChange={() => setShowAdditionalFields(!showAdditionalFields)}
+        />
+        <label>Deseo ser vendedor</label>
+        {showAdditionalFields && (
+          <div>
+            <input
+              className="register-input"
+              type="text"
+              placeholder="Campo adicional 1"
+              value={additionalField1}
+              onChange={(e) => setAdditionalField1(e.target.value)}
+              required
+            />
+            <input
+              className="register-input"
+              type="text"
+              placeholder="Campo adicional 2"
+              value={additionalField2}
+              onChange={(e) => setAdditionalField2(e.target.value)}
+              required
+            />
+          </div>
+        )}
+
         <button className="register-button" type="submit">Registrarse</button>
       </form>
     </div>
