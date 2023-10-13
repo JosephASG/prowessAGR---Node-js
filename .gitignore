@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 V2/frontend/node_modules/.cache/.eslintcache
 V2/frontend/node_modules/.cache
+
+/backend/node_modules
+/frontend/node_modules
