@@ -61,8 +61,7 @@ import multer from 'multer';
 const almacenamiento = multer.memoryStorage();
 const upload = multer({ storage: almacenamiento });
 // Import Firebase and Firestore
-import * as producto from '../../V2/backend/Src/controller/productController.js';
-
+import * as producto from './Src/controller/productController.js';
 
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
 //Obtener todos los productos.
