@@ -1,5 +1,5 @@
 .register-container {
-  width: 400px;
+  width: 30em;
   margin: 0 auto;
   margin-top: 7px;
   margin-bottom: 5px;
@@ -9,6 +9,14 @@
   color: white;
 }
 
+.register-container-2{
+  display: flex;
+}
+.register-container-2 > input {
+  width: 50%;
+  margin-right:0.3625em;
+  margin-bottom: 0.625rem;
+}
 .register-title {
   text-align: center;
   margin-bottom: 20px;

@@ -1,5 +1,7 @@
 import * as firebase from "firebase/app";
 import * as firestore from "firebase/firestore";
+import 'firebase/storage';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { query, where, getDocs, collection } from "firebase/firestore";
 import multer from "multer";
 import bcrypt from "bcrypt";
@@ -17,6 +19,8 @@ const firebaseConfig = {
 
 const fiapp = firebase.initializeApp(firebaseConfig);
 const fs = firestore.getFirestore(fiapp);
+const storage = getStorage(fiapp);
+
 
 const saltRounds = 10;
 
@@ -24,25 +28,46 @@ const saltRounds = 10;
 const registerUser = async (req, res) => {
   try {
     const userData = req.body;
+    const imageFile = req.file;
     const jsonUser = {};
+    if (imageFile) {
+      const metadata = {
+        contentType: imageFile.mimetype,
+      };
+      // ! La imagen se esta guardando como application/octet-stream, no como contentType: imagenFile.mimetype. NO AFECTA EL FUNCIONAMIENTO.
+      //TODO 1: Comprobar si la imagen existe en el storage de Firebase, para evitar reemplazo de imágenes o asignar un nombre único a la imagen.
+      const storageRef = ref(storage, `agricola/${imageFile.originalname}`,metadata);
+      try {
+        const uploadtask = await uploadBytes(storageRef, imageFile.buffer);
+        console.log('Imagen cargada con éxito');
+        try{
+          const url = await getDownloadURL(uploadtask.ref);
+          console.log(url);
+          userData.imagenUsuario = url;
+          console.log('URL de imagen obtenida con éxito');
+        }
+        catch(error){
+          console.error('Error al obtener la URL de la imagen:', error);
+        }
+      } catch (error) {
+        console.error('Error al cargar la imagen o obtener la URL de la imagen:', error);
+      }
+    }
+
+
     try {
       const snapshot = await query(
         firestore.collection(fs, "usuario"),
-        where("email", "==", userData.email)
+        where("correoUsuario", "==", userData.correoUsuario)
       );
-      const querySnapshot = await getDocs(snapshot);
-      console.log(querySnapshot);
+      const querySnapshot = await getDocs(snapshot); //!Probar
       if (!querySnapshot.empty) {
         return res
           .status(401)
           .send({ message: "El correo electrónico ya está en uso" });
       }
-      const newUser = {
-        email: userData.email,
-        password: bcrypt.hashSync(userData.password, saltRounds),
-        rol: userData.role,
-      };
-      for (const [key, value] of Object.entries(newUser)) {
+      userData.claveUsuario = bcrypt.hashSync(userData.claveUsuario, saltRounds);
+      for (const [key, value] of Object.entries(userData)) {
         if (value) {
           jsonUser[key] = value;
         }
@@ -51,9 +76,7 @@ const registerUser = async (req, res) => {
         firestore.collection(fs, "usuario"),
         jsonUser
       );
-      newUser._id = docRef.id;
-
-      return res.status(201).json(newUser);
+      return res.status(201).json(jsonUser);
     } catch (error) {
       return res
         .status(500)

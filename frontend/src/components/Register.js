@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Importa el hook de navegación
 import './Register.css'; // Importa el archivo de estilos CSS
 
 const provinces = [
@@ -30,7 +31,10 @@ const provinces = [
 
 function Register() {
   const [name, setName] = useState('');
+  const [name2, setName2] = useState('');
   const [lastName, setlastName] = useState('');
+  const [lastName2, setlastName2] = useState('');
+  const [email, setEmail] = useState(''); 
   const [userType, setUserType] = useState('');
   const [nPhone, setNPhone] = useState('');
   const [nCedula, setNCedula] = useState('');
@@ -38,30 +42,45 @@ function Register() {
   const [photo, setPhoto] = useState(null);
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
+  const [latitud,setLatitud] = useState(0);
+  const [altitud,setAltitud] = useState(0);
   const [mainStreet, setMainStreet] = useState('');
   const [secondaryStreet, setSecondaryStreet] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [additionalField1, setAdditionalField1] = useState(''); // Campo adicional 1
-  const [additionalField2, setAdditionalField2] = useState(''); // Campo adicional 2
 
-
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
+    var image = photo.get('user-image');
     e.preventDefault();
     console.log('Registro de usuario:', name, userType, nPhone, nCedula ,password, photo, province, city, mainStreet, secondaryStreet, postalCode);
     const formData = new FormData();
-    formData.append("email", name);
-    formData.append("password", password);
-    formData.append("role", userType);
-    formData.append("phone", nPhone);
-    formData.append("direccion",province + ' ' + city + ' ' + mainStreet + ' ' + secondaryStreet + ' ' + postalCode);
+    formData.append("nombreUsuario", name);
+    formData.append("apellidoUsuario", lastName);
+    formData.append("nombreUsuarioS", name2);
+    formData.append("apellidoUsuarioS", lastName2);
+    formData.append("cedulaUsuario", nCedula);
+    formData.append("direccionUsuario", province + ' ' + city + ' ' + mainStreet + ' ' + secondaryStreet + ' ' + postalCode);
+    formData.append("telefonoUsuario", nPhone);
+    formData.append("correoUsuario", email);
+    formData.append("latitudUsuario",latitud);
+    formData.append("altitudUsuario",altitud);
+    formData.append("categoriaUsuario", showAdditionalFields ? 'vendedor' : 'cliente');
+    formData.append("tipoAsociacionUsuario", additionalField1);
+    formData.append("claveUsuario", password);
+    formData.append("imagenUsuario", image);
+    //TODO: AGREGAR UBICACION CORRECTAMENTE
+
     fetch('http://localhost:5000/fb/usuario/register', {
       method: "POST",
       body: formData
     })
       .then((response) => {
         if (response.ok) {
+          console.log('Usuario agregado correctamente');
+          navigate('/login');
         } else {
           console.error('Error al agregar el proveedor en el servidor');
         }
@@ -70,12 +89,11 @@ function Register() {
         console.error('Error de red al agregar el proveedor', error);
       });
   };
-
-    
-
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
-    setPhoto(URL.createObjectURL(file));
+    const formData = new FormData();
+    formData.append("user-image", file);
+    setPhoto(formData);
   };
 
   const handleProvinceChange = (e) => {
@@ -100,20 +118,48 @@ function Register() {
     <div className="register-container">
       <h2 className="register-title">Registro de usuarios</h2>
       <form onSubmit={handleRegister}>
+        <div className="register-container-2">
         <input
           className="register-input"
           type="text"
-          placeholder="Nombres"
+          placeholder="Primer Nombre"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
         />
+          <input
+          className="register-input"
+          type="text"
+          placeholder="Segundo Nombre"
+          value={name2}
+          onChange={(e) => setName2(e.target.value)}
+          required
+        />
+        </div>
+        <div className="register-container-2">
         <input
           className="register-input"
           type="text"
-          placeholder="Apellidos"
+          placeholder="Primer Apellido"
           value={lastName}
           onChange={(e) => setlastName(e.target.value)}
+          required
+        />
+          <input
+          className="register-input"
+          type="text"
+          placeholder="Segundo Apellido"
+          value={lastName2}
+          onChange={(e) => setlastName2(e.target.value)}
+          required
+        />
+        </div>
+        <input
+          className="register-input"
+          type="email"
+          placeholder="Correo"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input
@@ -144,9 +190,32 @@ function Register() {
           className="register-input"
           type="file"
           accept="image/*"
+          name="user-image"
           onChange={handlePhotoUpload}
         />
+        {//TODO: Arreglar vista de Foto de perfil
+        }
+
         {photo && <img src={photo} alt="Foto de perfil" className='image-show'/>}
+        <h3 className="register-subtitle">Ubicación</h3>
+        <div className="register-container-2">
+        <input
+          className="register-input"
+          type="number"
+          placeholder="Altitud"
+          value={altitud}
+          onChange={(e) => setAltitud(e.target.value)}
+          required
+        />
+          <input
+          className="register-input"
+          type="number"
+          placeholder="Latitud"
+          value={latitud}
+          onChange={(e) => setLatitud(e.target.value)}
+          required
+        />
+        </div>
         <h3 className="register-subtitle">Dirección</h3>
         <select
           className="register-inputS"
@@ -204,22 +273,13 @@ function Register() {
             <input
               className="register-input"
               type="text"
-              placeholder="Campo adicional 1"
+              placeholder="tipo Asosiacion"
               value={additionalField1}
               onChange={(e) => setAdditionalField1(e.target.value)}
               required
             />
-            <input
-              className="register-input"
-              type="text"
-              placeholder="Campo adicional 2"
-              value={additionalField2}
-              onChange={(e) => setAdditionalField2(e.target.value)}
-              required
-            />
           </div>
         )}
-
         <button className="register-button" type="submit">Registrarse</button>
       </form>
     </div>
