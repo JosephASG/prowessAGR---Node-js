@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Navigate, redirect, Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './Login.css'; // Importa el archivo de estilos CSS
 
 
@@ -7,27 +7,33 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
+  const navigate = useNavigate();
+
+
+  const login = async(user) =>{
+    try{
+      const res = await fetch('http://localhost:5000/fb/usuario/login',{
+        method: 'POST',
+        body: user
+      });
+      const { data } = res;
+      console.log(data);
+      setTimeout(() => {
+        localStorage.setItem("token", data.usuario.token);
+        navigate(`/welcome`);
+      }, 1500);
+    }
+    catch(error){
+      console.log(error);
+    }
+  }
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-
-    fetch('http://localhost:5000/fb/usuario/login', {
-      method: 'POST',
-      body: formData
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Login exitoso");
-          
-        } else {
-          console.error('Error al agregar el proveedor en el servidor');
-        }
-      })
-      .catch((error) => {
-        console.error('Error de red al agregar el proveedor', error);
-      });
+    await login(formData);
   };
 
   return (

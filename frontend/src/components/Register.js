@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa el hook de navegación
 import './Register.css'; // Importa el archivo de estilos CSS
+import Mapa from './Mapa.js';
 
 const provinces = [
   { "name": "Azuay", "cities": ["Cuenca"] },
@@ -198,24 +199,8 @@ function Register() {
 
         {photo && <img src={photo} alt="Foto de perfil" className='image-show'/>}
         <h3 className="register-subtitle">Ubicación</h3>
-        <div className="register-container-2">
-        <input
-          className="register-input"
-          type="number"
-          placeholder="Altitud"
-          value={altitud}
-          onChange={(e) => setAltitud(e.target.value)}
-          required
-        />
-          <input
-          className="register-input"
-          type="number"
-          placeholder="Latitud"
-          value={latitud}
-          onChange={(e) => setLatitud(e.target.value)}
-          required
-        />
-        </div>
+        <Mapa>
+        </Mapa>
         <h3 className="register-subtitle">Dirección</h3>
         <select
           className="register-inputS"

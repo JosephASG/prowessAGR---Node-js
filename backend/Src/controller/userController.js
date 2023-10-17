@@ -67,6 +67,7 @@ const registerUser = async (req, res) => {
           .send({ message: "El correo electrónico ya está en uso" });
       }
       userData.claveUsuario = bcrypt.hashSync(userData.claveUsuario, saltRounds);
+
       for (const [key, value] of Object.entries(userData)) {
         if (value) {
           jsonUser[key] = value;
@@ -96,7 +97,7 @@ const loginUser = async (req, res) => {
     const jsonUser = {};
     const snapshot = await query(
       firestore.collection(fs, "usuario"),
-      where("email", "==", userData.email)
+      where("correoUsuario", "==", userData.email)
     );
     const querySnapshot = await getDocs(snapshot);
     console.log(querySnapshot);
@@ -104,19 +105,20 @@ const loginUser = async (req, res) => {
       return res.status(401).send({ message: "Email o Contraseña Inválidos" });
     }
     const user = querySnapshot.docs[0].data();
-    if (bcrypt.compareSync(req.body.password, user.password)) {
-      const token = jwt.sign({ _id: user._id }, "secreto" //! Cambiar secreto
+    user.id = querySnapshot.docs[0].id;
+    if (bcrypt.compareSync(req.body.password, user.claveUsuario)) {
+      const token = jwt.sign({ id: user.id }, "secreto" //! Cambiar secreto
       );
-      res.send({
-        token,
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        address: user.address,
-        phone: user.phone,
-        image: user.image,
-        isAdmin: user.isAdmin,
-        commission: user.commission,
+      res.json({
+        mensaje: "Usuario Logeado Correctamente",
+        usuario: {
+          token,
+          id: user.id,
+          nombre: user.nombreUsuario,
+          email: user.correoUsuario,
+          address: user.direccionUsuario,
+          rol: user.categoriaUsuario,
+        }
       });
     } else {
       res.status(401).send({ message: "Email o Contraseña Inválidos" });
@@ -127,6 +129,27 @@ const loginUser = async (req, res) => {
       .json({ message: "Error al crear el usuario", error: error.message });
   }
 };
+
+const getUserById = async (req, res) => {
+  const { id } = req.user;
+
+  if (id.length === 24) {
+    Usuario.findById(id).then((usuario) => {
+      if (!usuario) {
+        return res.json({
+          mensaje: "No se encontro ningun usuario con esa ID en la base de datos",
+        });
+      } else {
+        const { contraseña, __v, ...resto } = usuario._doc;
+        res.json(resto);
+      }
+    });
+  } else {
+    res.json({ mensaje: "Estas enviando una contraseña incorrecta" });
+  }
+};
+
+
 
 /*
 // Crear usuario
@@ -373,4 +396,4 @@ app.get("/categories/:id", async (req, res) => {
 // OBTENER TODAS LAS CATEGORÍAS
 app.get("/categories", async (req, res) => {});*/
 
-export { loginUser, registerUser };
+export { loginUser, registerUser,getUserById };
