@@ -19,8 +19,8 @@ function HomePage() {
     <div className="home-page">
       <div className="home-page-content">
         <div className="home-page-subtitle">
-          <h2>Productos Agrícolas 100% Naturales Y Frescos</h2>
-          <p>De la mata a la olla</p>
+          <h1>Productos Agrícolas 100% Naturales y Frescos</h1>
+          <p>De la mata a la olla, un viaje que nos conecta con la esencia de la cocina, donde los ingredientes frescos y naturales son transformados por manos expertas en deliciosos platillos que satisfacen nuestros sentidos y nos transportan a un mundo de sabores y tradiciones culinarias únicas.</p>
           <Link to="/registro">
           <button className='RegistroHome'>Registro</button>
         </Link>
