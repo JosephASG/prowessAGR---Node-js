@@ -179,10 +179,12 @@ import * as usuario from './Src/controller/userController.js';
 import * as tokencontroller from "./Src/middleware/verifyToken.js";
 
 // Crear un nuevo usuario
-app.post('/fb/usuario/login',upload.none(), usuario.loginUser);
+app.post('/fb/usuario/login',upload.none(),usuario.loginUser);
+app.get('fb/usuario',tokencontroller.verifyToken,usuario.getUserById);
 app.post('/fb/usuario/register', upload.single("imagenUsuario"), usuario.registerUser);
 
 
 //Importar las funciones relacionadas con la ubicación desde './locationController'
 
 import * as ubicacion from './Src/controller/locationController.js';
+
