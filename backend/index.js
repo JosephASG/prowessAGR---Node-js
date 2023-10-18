@@ -14,14 +14,7 @@ const port = 5000;
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAqnpF_ppBXsSawkDiVzYzm2oAV1zLvGWQ",
-  authDomain: "prowess-web-database.firebaseapp.com",
-  projectId: "prowess-web-database",
-  storageBucket: "prowess-web-database.appspot.com",
-  messagingSenderId: "519296320778",
-  appId: "1:519296320778:web:739cc55990bd1a6e4866f3"
-};
+
 
 // Initialize Firebase
 const fiapp = initializeApp(firebaseConfig);
@@ -180,7 +173,7 @@ import * as tokencontroller from "./Src/middleware/verifyToken.js";
 
 // Crear un nuevo usuario
 app.post('/fb/usuario/login',upload.none(),usuario.loginUser);
-app.get('fb/usuario',tokencontroller.verifyToken,usuario.getUserById);
+app.get('/fb/usuario',tokencontroller.verifyToken,usuario.getUserById);
 app.post('/fb/usuario/register', upload.single("imagenUsuario"), usuario.registerUser);
 
 

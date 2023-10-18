@@ -5,9 +5,10 @@ import logo from '../imagenes/prowess-logo1.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faShoppingCart, faBars } from '@fortawesome/free-solid-svg-icons';
 
-function NavigationBar() {
+function NavigationBar(isLoggedIn) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [logged,setLogged] = useState(false);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -15,6 +16,12 @@ function NavigationBar() {
 
   useEffect(() => {
     // Función que maneja el evento de scroll
+    if(isLoggedIn.isLoggedIn){
+        setLogged(true);
+    }
+    if(!isLoggedIn.isLoggedIn){
+      setLogged(false);
+    }
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setScrolled(scrollPosition > 0);
@@ -27,7 +34,7 @@ function NavigationBar() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <nav className={`navigation-bar ${scrolled ? 'scrolled' : ''}`}>
@@ -87,11 +94,16 @@ function NavigationBar() {
             <div className='cuantity-shopping-cart-container'>
               <span className='cuantity-shopping-cart'>0</span>
             </div>
+            <div>
+              <p>{logged}</p>
+            </div>
           </li>
           <li>
-            <Link to="/login" onClick={toggleMenu}>
-              Iniciar Sesión
-            </Link>
+
+            {logged ? ( <Link to="/mi-cuenta" onClick={toggleMenu}>
+              Iniciado
+            </Link>) : (<Link to="/login" onClick={toggleMenu}> Iniciar Sesion </Link>)}
+
           </li>
         </ul>
       </div>

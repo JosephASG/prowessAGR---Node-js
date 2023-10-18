@@ -1,24 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {useNavigate} from 'react-router-dom';
 import Modal from './ModalAccountPage';
 import './MyAccountPage.css';
 
-function MyAccountPage() {
+function MyAccountPage(props) {
+  const { setIsLoggedIn} = props;
+  const {userData} = props;
   const [userType, setUserType] = useState('vendor');
+  const [user,setUser] = useState([]);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
 
-  const vendors = [
-    {
-      name: 'Melisa Carbajal',
-      city: 'Quito',
-      provincia: 'Dirección 1',
-      callePrincipal: 'calle principal',
-      calleSecundaria: 'calle secundaria',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      image: 'https://estaticos-cdn.prensaiberica.es/clip/2aa4b303-331d-4ef6-98d5-55ef6c8da594_source-aspect-ratio_default_0.jpg',
-    }
-  ];
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    console.log("token removido");
+    setIsLoggedIn(false);
+    navigate('/login');
+  }
+
+  useEffect(() => {
+    if(userData){
+      setUser(userData);
+      if(userData.categoriaUsuario === 'vendedor'){
+        setUserType('vendor');
+      }
+    }  
+  }, [user,userType, userData]);
+  
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -38,21 +47,6 @@ function MyAccountPage() {
     // Agrega más productos según sea necesario
   ]);
 
-  const buyers = [
-    {
-      name: 'Juan Perez',
-      city: 'Quito',
-      provincia: 'Dirección 1',
-      callePrincipal: 'calle principal',
-      calleSecundaria: 'calle secundaria',
-      phoneNumber: '123456789',
-      whatsappNumber: '987654321',
-      purchaseStatus: 'Pendiente',
-      productIds: [1, 2],
-      image: 'https://previews.123rf.com/images/yupiramos/yupiramos1605/yupiramos160521144/57463141-dise%C3%B1o-comprador-avatar-ejemplo-gr%C3%A1fico-del-vector-eps10.jpg',
-    }
-  ];
-
   const handleOpenPurchaseModal = () => {
     setIsPurchaseModalOpen(true);
   };
@@ -61,24 +55,21 @@ function MyAccountPage() {
     setIsPurchaseModalOpen(false);
   };
 
-  const user = userType === 'vendor' ? vendors[0] : buyers[0];
   const userProductIds = user.productIds && Array.isArray(user.productIds) ? user.productIds : [];
   const userProducts = userProductIds.map((productId) =>
     products.find((product) => product.id === productId)
   );
-
-  console.log(user);
   return (
     <div className="my-account-page">
       <div className={`my-account-container ${userType === 'vendor' ? 'vendor-info' : 'buyer-info'}`}>
         <div className='my-account-img'>
-          <img src={user.image} alt={user.name} className='info-image' />
+          <img src={user.imagenUsuario} alt={user.nombreUsuario} className='info-image' />
         </div>
         <div className='my-account-info'>
-          <h2>{user.name}</h2>
-          <p><strong>Provincia: </strong>{user.provincia}</p>
+          <h2>{user.nombreUsuario}</h2>
+          <p><strong>Provincia: </strong>{user.provinciaUsuario}</p>
           <p><strong>Ciudad: </strong> {user.city}</p>
-          <p><strong>Direccion: </strong> {user.callePrincipal} y {user.calleSecundaria}</p>
+          <p><strong>Direccion: </strong> {user.callePrincipalUsuario} y {user.calleSecundariaUsuario}</p>
           {userType === 'buyer' && (
             <div className='my-account-info'>
               <p><strong>Estado de Compra: </strong> {user.purchaseStatus}</p>
@@ -105,8 +96,7 @@ function MyAccountPage() {
         </div>
       </div>
       <div className="user-type-buttons">
-        <button className="user-type-button" onClick={() => setUserType('vendor')}>Vendedor</button>
-        <button className="user-type-button" onClick={() => setUserType('buyer')}>Comprador</button>
+        <button className='user-type-button' onClick={() => handleLogout()}>Cerrar Sesión</button>
       </div>
       {/* Modal de compras */}
       {userType === 'buyer' && (
