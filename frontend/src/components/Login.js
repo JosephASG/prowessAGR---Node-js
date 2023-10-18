@@ -3,7 +3,9 @@ import {useNavigate} from 'react-router-dom';
 import './Login.css'; // Importa el archivo de estilos CSS
 
 
-function Login() {
+function Login(props) {
+  const { setIsLoggedIn } = props;
+  const {setToken} = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,12 +18,19 @@ function Login() {
         method: 'POST',
         body: user
       });
-      const { data } = res;
-      console.log(data);
-      setTimeout(() => {
-        localStorage.setItem("token", data.usuario.token);
-        navigate(`/welcome`);
-      }, 1500);
+      var data = await res.json();
+      if(data.estado===true){
+        console.log("Usuario logueado");
+        setIsLoggedIn(true);
+        setToken(data.usuario.token);
+        setTimeout(() => {
+          localStorage.setItem("token",data.usuario.token);
+          navigate(`/mi-cuenta`);
+        }, 1500);
+      }
+      else{
+        console.log("Usuario no logueado");
+      }      
     }
     catch(error){
       console.log(error);

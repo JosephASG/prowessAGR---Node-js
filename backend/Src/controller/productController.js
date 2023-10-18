@@ -5,22 +5,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import multer from 'multer';
 const almacenamiento = multer.memoryStorage();
 const upload = multer({ storage: almacenamiento });
-
-
-// Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
-const firebaseConfig = {
-  apiKey: "AIzaSyAqnpF_ppBXsSawkDiVzYzm2oAV1zLvGWQ",
-  authDomain: "prowess-web-database.firebaseapp.com",
-  projectId: "prowess-web-database",
-  storageBucket: "prowess-web-database.appspot.com",
-  messagingSenderId: "519296320778",
-  appId: "1:519296320778:web:739cc55990bd1a6e4866f3"
-};
-
-// Inicializar Firebase y Firestore
-const fiapp = firebase.initializeApp(firebaseConfig);
-const fs = firestore.getFirestore(fiapp);
-const storage = getStorage(fiapp);
+import {fs,storage} from '../database/firebase.js';
 
 //import {fs} from "../../firebase.js";
 

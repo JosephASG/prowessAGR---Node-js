@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
@@ -15,10 +15,37 @@ import Footer from './components/Footer';
 import CategoriesPage from './components/CategoriesPage';
 import SaleDetailsPage from './components/SaleDetailsPage';
 import SalesPage from './components/SalesPage';
+import { checkToken } from './services/api';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cart, setCart] = useState([]);
+  const [user,setUser] = useState([]);
+  const [token,setToken] = useState(null);
+
+
+
+  useEffect(() => {
+    if(token===null){
+      if(localStorage.getItem("token")!==null){
+        setToken(localStorage.getItem("token"));
+      }
+    }
+    if (token !== null) {
+      checkAuth(token);
+      setIsLoggedIn(true);
+    }
+  }, [token]);
+    
+  const checkAuth = async (token) => {
+    let response = await checkToken(token);
+    if (response && response.data ) {
+      const usuario = response.data;
+      await setUser(usuario);
+    } else {
+      console.log("No se encontró 'response.data'");
+    }
+  };
 
   const addToCart = (product) => {
     const existingProductIndex = cart.findIndex((item) => item.id === product.id);
@@ -40,19 +67,19 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar />
-      <Routes>
+      <NavigationBar isLoggedIn={isLoggedIn} />
+      <Routes >
         <Route path="/" element={<HomePage />} />
         <Route path="/tienda" element={<StorePage cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
         <Route path="/carrito" element={<ShoppingCart cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
         <Route path="/carrito-pagina" element={<ShoppingCartPage cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
         <Route path="/vendedores" element={<VendorsPage />} />
         <Route path="/nosotros" element={<AboutUs />} />
-        <Route path="/mi-cuenta" element={<MyAccountPage />} />
+        <Route path="/mi-cuenta" element={<MyAccountPage userData={user} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="/product-list" element={<ProductList />} />
         <Route path="/sales:id" element={<SaleDetailsPage />} />
         <Route path="/sales" element={<SalesPage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="/registro" element={<Register />} />
         <Route path="/categories" element={<CategoriesPage />} />
       </Routes>

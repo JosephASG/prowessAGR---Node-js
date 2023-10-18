@@ -3,23 +3,9 @@ import * as firestore from "firebase/firestore";
 import 'firebase/storage';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { query, where, getDocs, collection } from "firebase/firestore";
-import multer from "multer";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
-// Reemplace la siguiente configuración con la configuración de su proyecto Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyAqnpF_ppBXsSawkDiVzYzm2oAV1zLvGWQ",
-  authDomain: "prowess-web-database.firebaseapp.com",
-  projectId: "prowess-web-database",
-  storageBucket: "prowess-web-database.appspot.com",
-  messagingSenderId: "519296320778",
-  appId: "1:519296320778:web:739cc55990bd1a6e4866f3",
-};
-
-const fiapp = firebase.initializeApp(firebaseConfig);
-const fs = firestore.getFirestore(fiapp);
-const storage = getStorage(fiapp);
+import {fs,storage} from '../database/firebase.js';
 
 
 const saltRounds = 10;
@@ -102,7 +88,7 @@ const loginUser = async (req, res) => {
     const querySnapshot = await getDocs(snapshot);
     console.log(querySnapshot);
     if (querySnapshot.empty) {
-      return res.status(401).send({ message: "Email o Contraseña Inválidos" });
+      return res.status(401).send({ message: "Email o Contraseña Inválidos", estado: false  });
     }
     const user = querySnapshot.docs[0].data();
     user.id = querySnapshot.docs[0].id;
@@ -111,6 +97,7 @@ const loginUser = async (req, res) => {
       );
       res.json({
         mensaje: "Usuario Logeado Correctamente",
+        estado: true,
         usuario: {
           token,
           id: user.id,
@@ -121,32 +108,34 @@ const loginUser = async (req, res) => {
         }
       });
     } else {
-      res.status(401).send({ message: "Email o Contraseña Inválidos" });
+      res.status(401).send({ message: "Email o Contraseña Inválidos", estado: false });
     }
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Error al crear el usuario", error: error.message });
+      .json({ message: "Error al crear el usuario", error: error.message , estado: false });
   }
 };
 
 const getUserById = async (req, res) => {
   const { id } = req.user;
-
-  if (id.length === 24) {
-    Usuario.findById(id).then((usuario) => {
-      if (!usuario) {
-        return res.json({
-          mensaje: "No se encontro ningun usuario con esa ID en la base de datos",
-        });
-      } else {
-        const { contraseña, __v, ...resto } = usuario._doc;
-        res.json(resto);
-      }
-    });
-  } else {
-    res.json({ mensaje: "Estas enviando una contraseña incorrecta" });
+  try {
+    const docRef = firestore.doc(fs, "usuario", id);
+    const docSnap = await firestore.getDoc(docRef);
+    if (docSnap.exists()) {
+      const user = docSnap.data();
+      user.id = docSnap.id;
+      delete user.claveUsuario;
+      return res.status(200).json(user);
+    } else {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Error al obtener el usuario", error: error.message });
   }
+  
 };
 
 
