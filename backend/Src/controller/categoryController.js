@@ -2,12 +2,7 @@ import 'firebase/database';
 import * as firebase from 'firebase/app';
 import * as firestore from 'firebase/firestore';
 import {fs,storage} from '../database/firebase.js';
-
-
-
-
 // Crear una nueva categoria
-
 const createCategory=  async (req, res) => {
     try {
       const newCategoryData = req.body; // Los datos del nuevo vendedor deben estar en el cuerpo de la solicitud (request body)
@@ -79,4 +74,4 @@ const deleteCategory = async (req, res) => {
   }
 };
 
-  export {createCategory, getCategories, getCategoryByID, updateCategory, deleteCategory};
+export {createCategory, getCategories, getCategoryByID, updateCategory, deleteCategory};

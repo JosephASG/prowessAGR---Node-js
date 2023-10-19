@@ -6,8 +6,9 @@ import { query, where, getDocs, collection } from "firebase/firestore";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import {fs,storage} from '../database/firebase.js';
+import dotenv from 'dotenv';
 
-
+dotenv.config();
 const saltRounds = 10;
 
 //Registro de usuario
@@ -92,9 +93,9 @@ const loginUser = async (req, res) => {
     }
     const user = querySnapshot.docs[0].data();
     user.id = querySnapshot.docs[0].id;
+    const secret = process.env.JWT_SECRET
     if (bcrypt.compareSync(req.body.password, user.claveUsuario)) {
-      const token = jwt.sign({ id: user.id }, "secreto" //! Cambiar secreto
-      );
+      const token = jwt.sign({ id: user.id }, secret );
       res.json({
         mensaje: "Usuario Logeado Correctamente",
         estado: true,
