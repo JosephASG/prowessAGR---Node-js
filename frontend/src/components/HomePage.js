@@ -19,14 +19,16 @@ function HomePage() {
     <div className="home-page">
       <div className="home-page-content">
         <div className="home-page-subtitle">
-          <h1>Productos Agrícolas 100% Naturales y Frescos</h1>
-          <p>De la mata a la olla, un viaje que nos conecta con la esencia de la cocina, donde los ingredientes frescos y naturales son transformados por manos expertas en deliciosos platillos que satisfacen nuestros sentidos y nos transportan a un mundo de sabores y tradiciones culinarias únicas.</p>
+          <center>
+          <h3>Productos Agrícolas 100% Naturales y Frescos</h3>
+          <p>Desde la cosecha de ingredientes frescos hasta su hábil transformación en manos expertas en la cocina, nos adentramos en un viaje que nos sumerge en el corazón de la gastronomía. Este recorrido culinario nos lleva a explorar un mundo de sabores únicos, donde cada ingrediente natural se convierte en una puerta hacia un universo de posibilidades culinarias. Desde la recolección hasta el plato, este viaje culinario es un tributo a la cocina artesanal, donde la pasión y la destreza se unen para encantar nuestros paladares y enriquecer nuestras vidas.</p>
           <Link to="/registro">
           <button className='RegistroHome'>Registro</button>
         </Link>
         <Link to="/Login">
           <button className='RegistroHome'>Iniciar Sesion</button>
         </Link>
+        </center>
         </div>
         <div className="home-page-carousel">
           <Carousel showThumbs={false} infiniteLoop autoPlay>
