@@ -1,38 +1,34 @@
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom';
-import './Login.css'; // Importa el archivo de estilos CSS
-
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 function Login(props) {
   const { setIsLoggedIn } = props;
-  const {setToken} = props;
+  const { setToken } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
 
-
-  const login = async(user) =>{
-    try{
-      const res = await fetch('http://localhost:5000/fb/usuario/login',{
+  const login = async (user) => {
+    try {
+      const res = await fetch('http://localhost:5000/fb/usuario/login', {
         method: 'POST',
-        body: user
+        body: user,
       });
       var data = await res.json();
-      if(data.estado===true){
+      if (data.estado === true) {
         console.log("Usuario logueado");
         setIsLoggedIn(true);
         setToken(data.usuario.token);
         setTimeout(() => {
-          localStorage.setItem("token",data.usuario.token);
+          localStorage.setItem("token", data.usuario.token);
           navigate(`/mi-cuenta`);
         }, 1500);
-      }
-      else{
+      } else {
         console.log("Usuario no logueado");
-      }      
-    }
-    catch(error){
+      }
+    } catch (error) {
       console.log(error);
     }
   }
@@ -43,6 +39,16 @@ function Login(props) {
     formData.append('email', email);
     formData.append('password', password);
     await login(formData);
+  };
+
+  const handleAccountRecovery = () => {
+    // Agrega lógica para manejar la recuperación de cuenta aquí
+    console.log("Recuperar cuenta");
+  };
+
+  const handlePasswordRecovery = () => {
+    // Agrega lógica para manejar la recuperación de contraseña aquí
+    console.log("Recuperar contraseña");
   };
 
   return (
@@ -67,11 +73,10 @@ function Login(props) {
         />
         <button className="login-button" type="submit">Iniciar sesión</button>
       </form>
-    <div className="login-message">
-        <p>¿Necesitas ayuda con tu cuenta? <a href="#">Recuperar cuenta</a></p>
-        <p>¿Olvidaste tu contraseña? <a href="#">Recuperar contraseña</a></p>
+      <div className="login-message">
+        <p><center>¿Necesitas ayuda con tu cuenta o contraseña? <a href="#" onClick={handleAccountRecovery}>Recuperar cuenta/contraseña</a></center></p>
       </div>
-    </div> 
+    </div>
   );
 }
 
