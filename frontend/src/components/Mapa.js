@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+
+import customIcon from "../imagenes/marcador.png"; // Importa tu imagen de marcador personalizada
+
+const customMarkerIcon = new L.Icon({
+  iconUrl: customIcon, // Ruta a tu imagen personalizada
+  iconSize: [32, 32], // Tamaño del icono
+  iconAnchor: [16, 32], // Punto de anclaje del icono
+  popupAnchor: [0, -32], // Punto de anclaje del popup
+});
+
 
 const Map = () => {
   const [clickedLocation, setClickedLocation] = useState(null);
@@ -17,7 +28,7 @@ const Map = () => {
         />
 <LocationMarker setClickedLocation={setClickedLocation} />
         {clickedLocation && (
-          <Marker position={clickedLocation}>
+          <Marker position={clickedLocation} icon={customMarkerIcon}>
             <Popup>
               Latitud: {clickedLocation.lat.toFixed(4)}, Longitud:{" "}
               {clickedLocation.lng.toFixed(4)}

@@ -1,4 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&family=Oswald&family=Roboto:wght@300&display=swap');
+
 .register-container {
+  font-family: 'Electrolize', sans-serif;
   width: 30em;
   margin: 0 auto;
   margin-top: 7px;
