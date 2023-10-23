@@ -14,9 +14,12 @@ function Login(props) {
     try {
       const res = await fetch('http://localhost:5000/fb/usuario/login', {
         method: 'POST',
-        body: user,
+        body: JSON.stringify(user),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
-      var data = await res.json();
+      const data = await res.json();
       if (data.estado === true) {
         console.log("Usuario logueado");
         setIsLoggedIn(true);
@@ -35,9 +38,7 @@ function Login(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
+    const formData = { email, password };
     await login(formData);
   };
 
@@ -45,7 +46,7 @@ function Login(props) {
     try {
       const res = await fetch('http://localhost:5000/fb/usuario/recuperar-cuenta', {
         method: 'POST',
-        body: { email },
+        body: JSON.stringify({ email }),
       });
       const data = await res.json();
       if (data.success) {
@@ -68,7 +69,10 @@ function Login(props) {
     try {
       const res = await fetch('http://localhost:5000/fb/usuario/resetear-contrasena', {
         method: 'POST',
-        body: { email },
+        body: JSON.stringify({ email }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       });
       const data = await res.json();
       if (data.success) {
