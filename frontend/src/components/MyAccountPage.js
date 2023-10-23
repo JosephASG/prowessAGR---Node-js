@@ -4,7 +4,7 @@ import Modal from './ModalAccountPage';
 import './MyAccountPage.css';
 
 function MyAccountPage(props) {
-  const { setIsLoggedIn} = props;
+  const { setIsLoggedIn, setRole} = props;
   const {userData} = props;
   const [userType, setUserType] = useState('vendor');
   const [user,setUser] = useState([]);
@@ -16,6 +16,7 @@ function MyAccountPage(props) {
     localStorage.removeItem("token");
     console.log("token removido");
     setIsLoggedIn(false);
+    setRole('');
     navigate('/login');
   }
 
@@ -26,7 +27,7 @@ function MyAccountPage(props) {
         setUserType('vendor');
       }
     }  
-  }, [user,userType, userData]);
+  }, [user, userData]);
   
   const [products, setProducts] = useState([
     {
@@ -66,10 +67,10 @@ function MyAccountPage(props) {
           <img src={user.imagenUsuario} alt={user.nombreUsuario} className='info-image' />
         </div>
         <div className='my-account-info'>
-          <h2>{user.nombreUsuario}</h2>
+          <h2>{user.nombreUsuario} {user.nombreUsuarioS} {user.apellidoUsuario} {user.apellidoUsuarioS} </h2>
           <p><strong>Provincia: </strong>{user.provinciaUsuario}</p>
-          <p><strong>Ciudad: </strong> {user.city}</p>
-          <p><strong>Direccion: </strong> {user.callePrincipalUsuario} y {user.calleSecundariaUsuario}</p>
+          <p><strong>Ciudad: </strong> {user.ciudadUsuario}</p>
+          <p><strong>Direccion: </strong> {user.direccionUsuario}</p>
           {userType === 'buyer' && (
             <div className='my-account-info'>
               <p><strong>Estado de Compra: </strong> {user.purchaseStatus}</p>
@@ -80,7 +81,7 @@ function MyAccountPage(props) {
           )}
           {userType === 'vendor' && (
             <div className='my-account-info'>
-              <a href={`https://wa.me/${user.whatsappNumber}`}>
+              <a href={`https://wa.me/${user.telefonoUsuario}`}>
                 <button className="whatsapp-button">WhatsApp</button>
               </a>
             </div>

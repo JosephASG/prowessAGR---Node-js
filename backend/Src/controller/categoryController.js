@@ -5,7 +5,7 @@ import {fs,storage} from '../database/firebase.js';
 // Crear una nueva categoria
 const createCategory=  async (req, res) => {
     try {
-      const newCategoryData = req.body; // Los datos del nuevo vendedor deben estar en el cuerpo de la solicitud (request body)
+      const newCategoryData = req.body;
       console.log(newCategoryData);
       const docRef = await firestore.addDoc(firestore.collection(fs, 'categoria'), newCategoryData);
       res.json({ id: docRef.id, ...newCategoryData });

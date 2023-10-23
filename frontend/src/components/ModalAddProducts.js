@@ -178,8 +178,8 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                 onChange={handleInputChange}
               >
                 {categorias.map((categoria) => (
-                  <option key={categoria.id} value={categoria.cat_nombre}>
-                    {categoria.cat_nombre}
+                  <option key={categoria.id} value={categoria.nombreCategoria}>
+                    {categoria.nombreCategoria}
                   </option>
                 ))}
               </select>

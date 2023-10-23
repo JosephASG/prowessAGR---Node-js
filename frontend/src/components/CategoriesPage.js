@@ -156,8 +156,8 @@ const CategoryList = () => {
       <div className="container-products">
         {categoriesToDisplay.map((category) => (
           <div className="category" key={category.id}>
-            <div>{category.cat_nombre}</div>
-            <div>{category.cat_descripcion}</div>
+            <div>{category.nombreCategoria}</div>
+            <div>{category.descripcionCategoria}</div>
             <div className='actions-container'>
               <FontAwesomeIcon
                 className="fa-icon-edit"

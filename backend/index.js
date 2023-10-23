@@ -1,61 +1,15 @@
-// Import the functions you need from the SDKs you need
-/*import { initializeApp } from "firebase/app";
-import {getFirestore} from "firebase/firestore";
-import {getStorage} from "firebase/storage";*/
-
 import express from "express";
 import cors from "cors";
 const app = express();
 app.use(express.json())
 app.use(cors());
 const port = 5000;
-/*
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-
-
-// Initialize Firebase
-const fiapp = initializeApp(firebaseConfig);
-
-const db = getFirestore(fiapp);
-const storage = getStorage(fiapp);
-
-
-app.post('/fb/producto/post',(req,res) =>{
-  const novProduct = req.body.novProduct;
-  try{
-    const productRef = db.collection('producto').add(novProduct)
-    console.log(productRef)
-    return productRef;
-  }catch(err){
-    console.log("ERROR. INSERCIÓN FALLIDA",err)
-  }
-
-
-})
-
-app.get('/fb/producto/get',(req,res) =>{
-  try{
-    const productRef = db.collection('producto').get()
-    const productos = []
-    productRef.forEach((productDoc)=>{
-      productos.push({id: productDoc.id,...productDoc.data()});
-    })
-    console.log(productos)
-    return productos;
-  }catch(err){
-    console.log("ERROR. RECUPERACIÓN DE DATOS FALLIDA.",err)
-  }
-})*/
 
 import multer from 'multer';
 const almacenamiento = multer.memoryStorage();
 const upload = multer({ storage: almacenamiento });
 // Import Firebase and Firestore
 import * as producto from './Src/controller/productController.js';
-
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
 //Obtener todos los productos.
 app.get('/fb/producto/get', producto.getProducts);
@@ -68,15 +22,16 @@ app.post('/fb/producto/post',upload.single('pro_imagen'),producto.createProduct)
 
 // Actualizar el producto
 app.put('/fb/producto/update/:id', producto.updateProduct);
+
+// Obtener productos por categoria
+app.get('/fb/producto/getByCategory/:category', producto.getProductsByCategory);
+
 // Eliminar
 app.delete('/fb/producto/delete/:id', producto.deleteProduct);
 
 
 // Importar las funciones relacionadas con los pedidos desde './orders'
 import * as order from './Src/controller/orderController.js';
-
-// Crear una instancia de Express
-
 
 // Configurar las rutas para las funciones relacionadas con pedidos
 
@@ -175,6 +130,12 @@ import * as tokencontroller from "./Src/middleware/verifyToken.js";
 app.post('/fb/usuario/login',upload.none(),usuario.loginUser);
 app.get('/fb/usuario',tokencontroller.verifyToken,usuario.getUserById);
 app.post('/fb/usuario/register', upload.single("imagenUsuario"), usuario.registerUser);
+app.post('/fb/usuario/password',tokencontroller.verifyToken,usuario.requestPasswordReset);
+app.get('/fb/usuarios',usuario.getUsers);
+app.put('/fb/usuario/update',usuario.updateUser);
+
+//Retornar Datos de Token
+app.get('/fb/auth',tokencontroller.getUserDataFromToken);
 
 
 //Importar las funciones relacionadas con la ubicación desde './locationController'

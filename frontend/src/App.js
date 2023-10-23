@@ -22,7 +22,7 @@ function App() {
   const [cart, setCart] = useState([]);
   const [user,setUser] = useState([]);
   const [token,setToken] = useState(null);
-
+  const [role,setRole] = useState('');
 
 
   useEffect(() => {
@@ -35,12 +35,14 @@ function App() {
       checkAuth(token);
       setIsLoggedIn(true);
     }
+
   }, [token]);
     
   const checkAuth = async (token) => {
     let response = await checkToken(token);
     if (response && response.data ) {
       const usuario = response.data;
+      setRole(usuario.categoriaUsuario);
       await setUser(usuario);
     } else {
       console.log("No se encontró 'response.data'");
@@ -67,7 +69,7 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar isLoggedIn={isLoggedIn} />
+      <NavigationBar isLoggedIn={isLoggedIn} role={role} />
       <Routes >
         <Route path="/" element={<HomePage />} />
         <Route path="/tienda" element={<StorePage cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
@@ -75,7 +77,7 @@ function App() {
         <Route path="/carrito-pagina" element={<ShoppingCartPage cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />} />
         <Route path="/vendedores" element={<VendorsPage />} />
         <Route path="/nosotros" element={<AboutUs />} />
-        <Route path="/mi-cuenta" element={<MyAccountPage userData={user} setIsLoggedIn={setIsLoggedIn}/>} />
+        <Route path="/mi-cuenta" element={<MyAccountPage userData={user} setIsLoggedIn={setIsLoggedIn} setRole={setRole}/>} />
         <Route path="/product-list" element={<ProductList />} />
         <Route path="/sales:id" element={<SaleDetailsPage />} />
         <Route path="/sales" element={<SalesPage />} />
