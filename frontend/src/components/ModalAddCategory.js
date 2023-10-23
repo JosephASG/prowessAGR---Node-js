@@ -3,8 +3,8 @@ import './ModalAddCategory.css';
 
 const ModalAddCategory = ({ isOpen, onClose }) => {
   const [newSupplier, setNewSupplier] = useState({
-    cat_nombre: '',
-    cat_descripcion: '',
+    nombreCategoria: '',
+    descripcionCategoria: '',
   });
 
   useEffect(() => {
@@ -54,22 +54,22 @@ const ModalAddCategory = ({ isOpen, onClose }) => {
           <form className='modal-form'>
             <div className="form-group-pair">
               <div>
-                <label htmlFor="cat_nombre">Nombre</label>
+                <label htmlFor="nombreCategoria">Nombre</label>
                 <input
                   type="text"
                   className="form-control"
-                  name="cat_nombre"
-                  value={newSupplier.cat_nombre}
+                  name="nombreCategoria"
+                  value={newSupplier.nombreCategoria}
                   onChange={handleInputChange}
                 />
               </div>
               <div>
                 <div>
-                  <label htmlFor="cat_descripcion">Descripción</label>
+                  <label htmlFor="descripcionCategoria">Descripción</label>
                   <textarea
                     className="form-control"
-                    name="cat_descripcion"
-                    value={newSupplier.cat_descripcion}
+                    name="descripcionCategoria"
+                    value={newSupplier.descripcionCategoria}
                     onChange={handleInputChange}
                   />
                 </div>

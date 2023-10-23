@@ -95,17 +95,12 @@ const loginUser = async (req, res) => {
     user.id = querySnapshot.docs[0].id;
     const secret = process.env.JWT_SECRET
     if (bcrypt.compareSync(req.body.password, user.claveUsuario)) {
-      const token = jwt.sign({ id: user.id }, secret );
+      const token = jwt.sign({ id: user.id, rol: user.categoriaUsuario}, secret );
       res.json({
         mensaje: "Usuario Logeado Correctamente",
         estado: true,
         usuario: {
-          token,
-          id: user.id,
-          nombre: user.nombreUsuario,
-          email: user.correoUsuario,
-          address: user.direccionUsuario,
-          rol: user.categoriaUsuario,
+          token
         }
       });
     } else {
@@ -140,133 +135,58 @@ const getUserById = async (req, res) => {
 };
 
 
-
-/*
-// Crear usuario
-const postUser = async (req, res) => {
+// Solicitar reinicio de contraseña
+const requestPasswordReset = async (req, res) => {
+  const { id } = req.user;
+  const {password, newPassword} = req.body;
   try {
-    if (
-      (!req.body.name,
-      !req.body.email,
-      !req.body.password,
-      !req.body.address,
-      !req.body.phone)
-    ) {
-      return res
-        .status(HTTP_STATUS.BAD_REQUEST)
-        .json({ message: "Todos los campos son requeridos" });
+    const docRef = firestore.doc(fs, "usuario", id);
+    const docSnap = await firestore.getDoc(docRef);
+    if (docSnap.exists()) {
+      const user = docSnap.data();
+      user.id = docSnap.id;
+      if (bcrypt.compareSync(password, user.claveUsuario)) {
+        const newHashedPassword = bcrypt.hashSync(newPassword, saltRounds);
+        await firestore.updateDoc(docRef, {claveUsuario: newHashedPassword});
+        return res.status(200).json({message: "Contraseña actualizada correctamente"});
+      }else{
+        return res.status(401).json({message: "Contraseña incorrecta"});
+      }
+    } else {
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
-
-    const snapshot = await db
-      .collection("usuario")
-      .where("email", "==", req.body.email)
-      .get();
-    if (!snapshot.empty) {
-      return res
-        .status(HTTP_STATUS.BAD_REQUEST)
-        .json({ message: "El correo electrónico ya está en uso" });
-    }
-
-    const newUser = {
-      name: req.body.name,
-      email: req.body.email,
-      password: bcrypt.hashSync(req.body.password),
-      address: req.body.address,
-      phone: req.body.phone,
-      image: {
-        public_id: req.body.public_id || "prowess/seller_tlpqnm",
-        secure_url:
-          req.body.secure_url ||
-          "https://res.cloudinary.com/primalappsje/image/upload/v1671478343/primal/seller_tlpqnm.png",
-      },
-      isAdmin: false,
-      commission: 0,
-    };
-
-    if (req.files?.image) {
-      const result = await uploadImage(req.files.image.tempFilePath);
-      newUser.image = {
-        public_id: result.public_id,
-        secure_url: result.secure_url,
-      };
-      await fs.unlink(req.files.image.tempFilePath);
-    }
-
-    const docRef = await db.collection("usuario").add(newUser);
-    newUser._id = docRef.id;
-    delete newUser.password;
-    return res.status(HTTP_STATUS.CREATED).json(newUser);
   } catch (error) {
     return res
-      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
-      .json({ message: "Error al crear el usuario" });
-  }
-};
-
-// Solicitar reinicio de contraseña
-export const requestPasswordReset = async (req, res) => {
-  const { email } = req.body;
-
-  try {
-    // Envía un correo electrónico de reinicio de contraseña al usuario
-    await auth.sendPasswordResetEmail(email);
-    return res.status(200).json({
-      message:
-        "Correo electrónico de reinicio de contraseña enviado exitosamente.",
-    });
-  } catch (error) {
-    return res.status(500).json({
-      message:
-        "Error al enviar el correo electrónico de reinicio de contraseña.",
-      error: error.message,
-    });
+      .status(500)
+      .json({ message: "Error al obtener el usuario", error: error.message });
   }
 };
 
 // Metodo GET
-export const getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
-    const snapshot = await db.collection("users").get();
+    const snapshot = await firestore.getDocs(firestore.collection(fs, "usuario"));
     const users = [];
     snapshot.forEach((doc) => {
       const user = doc.data();
       user._id = doc.id;
-      delete user.password;
+      delete user.claveUsuario;
       users.push(user);
     });
-    return res.status(HTTP_STATUS.OK).json(users);
+    return res.status(301).json({message:"Usuarios Encontrados",users})
   } catch (error) {
     return res
-      .status(HTTP_STATUS.NOT_FOUND)
+      .status(500)
       .json({ message: "Error al obtener la lista de usuarios" });
   }
 };
 
-// Obtener usuario por ID
-export const getUserById = async (req, res) => {
-  try {
-    const docRef = db.collection("users").doc(req.params.id);
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      return res
-        .status(HTTP_STATUS.NOT_FOUND)
-        .json({ message: "Usuario no encontrado" });
-    }
-    const user = doc.data();
-    user._id = doc.id;
-    delete user.password;
-    return res.status(HTTP_STATUS.OK).json(user);
-  } catch (error) {
-    return res
-      .status(HTTP_STATUS.NOT_FOUND)
-      .json({ message: "Error al obtener el usuario" });
-  }
-};
-
 // Metodo PUT para actualizar usuarios
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
+  const user = req.body;
+
   try {
-    const docRef = db.collection("users").doc(req.params.id);
+    const docRef = db.collection("usuario").doc(user.id);
     const doc = await docRef.get();
     if (!doc.exists) {
       return res
@@ -312,9 +232,9 @@ export const updateUser = async (req, res) => {
       .json({ message: "Error al actualizar el usuario" });
   }
 };
-
+/*
 // Metodo DELETE
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
     const docRef = db.collection("users").doc(req.params.id);
     const doc = await docRef.get();
@@ -341,49 +261,6 @@ export const deleteUser = async (req, res) => {
       .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
       .json({ message: "Error al eliminar el usuario" });
   }
-};
+};*/
 
-const JWT_SECRET = crypto.randomBytes(64).toString("hex");
-
-// Inicio de sesion de usuario
-app.post("/login", async (req, res) => {});
-
-// Crear usuario
-app.post("/usuarios", async (req, res) => {});
-
-// Metodo GET
-app.get("/usuarios", async (req, res) => {});
-
-// Obtener usuario por ID
-app.get("/usuarios/:id", async (req, res) => {});
-
-// Metodo PUT para actualizar usuarios
-app.put("/usuarios/:id", async (req, res) => {});
-
-// Metodo DELETE
-app.delete("/usuarios/:id", async (req, res) => {});
-
-// Iniciar el servidor
-
-app.listen(PORT, () => {
-  console.log(`Servidor iniciado en el puerto ${PORT}`);
-});
-
-app.use(express.json());
-
-// Configurar Firebase Admin SDK con tus credenciales
-const serviceAccount = require("./ruta/de/tu/credencial.json");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://tu-proyecto.firebaseio.com",
-});
-
-// Obtener categoria por el Id
-app.get("/categories/:id", async (req, res) => {
-  const id = req.params.id;
-});
-
-// OBTENER TODAS LAS CATEGORÍAS
-app.get("/categories", async (req, res) => {});*/
-
-export { loginUser, registerUser,getUserById };
+export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser/*,deleteUser*/};

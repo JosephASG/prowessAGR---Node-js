@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 const ModalAddCategory = ({ isOpen, onClose, categoryToEdit, handleEdit, children }) => {
   const initialCategory = categoryToEdit ? categoryToEdit : {
-    cat_nombre: "",
-    cat_descripcion: ""
+    nombreCategoria: "",
+    descripcionCategoria: ""
   };
 
   const [editedCategory, setEditedCategory] = useState(initialCategory);
@@ -38,21 +38,21 @@ const ModalAddCategory = ({ isOpen, onClose, categoryToEdit, handleEdit, childre
           <form className='modal-form' onSubmit={onSave}>
             <div className="form-group-pair">
               <div>
-                <label htmlFor="cat_nombre">Nombre</label>
+                <label htmlFor="nombreCategoria">Nombre</label>
                 <input
                   type="text"
                   className="form-control"
-                  name="cat_nombre"
-                  value={editedCategory.cat_nombre}
+                  name="nombreCategoria"
+                  value={editedCategory.nombreCategoria}
                   onChange={handleInputChange}
                 />
               </div>
               <div>
-                <label htmlFor="cat_descripcion">Descripción</label>
+                <label htmlFor="descripcionCategoria">Descripción</label>
                 <textarea
                   className="form-control"
-                  name="cat_descripcion"
-                  value={editedCategory.cat_descripcion}
+                  name="descripcionCategoria"
+                  value={editedCategory.descripcionCategoria}
                   onChange={handleInputChange}
                 />
               </div>

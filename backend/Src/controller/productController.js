@@ -1,10 +1,8 @@
 import * as firebase from 'firebase/app';
 import * as firestore from 'firebase/firestore';
 import 'firebase/storage';
+import { query, where, getDocs, collection } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import multer from 'multer';
-const almacenamiento = multer.memoryStorage();
-const upload = multer({ storage: almacenamiento });
 import {fs,storage} from '../database/firebase.js';
 
 //import {fs} from "../../firebase.js";
@@ -96,30 +94,27 @@ const getProductByID = async (req, res) => {
 };
 
 // Obtener productos por categoría
-export const getProductsByCategory = async (req, res) => {
+const getProductsByCategory = async (req, res) => {
   const { category } = req.params;
 
   try {
       // Consulta productos de una categoría específica
-      const snapshot = await db.collection('products').where('category', '==', category).get();
-      
-      const products = [];
-      snapshot.forEach(doc => {
-          products.push({ id: doc.id, ...doc.data() });
+      const querySnapshot = await firestore.getDocs(query(firestore.collection(fs, 'producto'),where('pro_categoria', '==', category)));
+      const productos = [];
+      querySnapshot.forEach((doc) => {
+        productos.push({ id: doc.id, ...doc.data() });
       });
-
+  
       // Verifica si hay productos para la categoría solicitada
-      if (products.length === 0) {
+      if (productos.length === 0) {
           return res.status(404).json({ message: `No products found for category: ${category}` });
       }
 
-      return res.status(200).json(products);
+      return res.status(200).json(productos);
   } catch (error) {
       return res.status(500).json({ message: "Error fetching products by category.", error: error.message });
   }
 };
-
-
 
 // Actualizar el producto
 const updateProduct = async (req, res) => {
@@ -146,4 +141,4 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-export {getProducts,getProductByID,createProduct,updateProduct,deleteProduct};
+export {getProducts,getProductByID,getProductsByCategory,createProduct,updateProduct,deleteProduct};

@@ -64,6 +64,8 @@ function Register() {
     formData.append("apellidoUsuarioS", lastName2);
     formData.append("cedulaUsuario", nCedula);
     formData.append("direccionUsuario", province + ' ' + city + ' ' + mainStreet + ' ' + secondaryStreet + ' ' + postalCode);
+    formData.append("ciudadUsuario", city);
+    formData.append("provinciaUsuario", province);
     formData.append("telefonoUsuario", nPhone);
     formData.append("correoUsuario", email);
     formData.append("latitudUsuario",latitud);
