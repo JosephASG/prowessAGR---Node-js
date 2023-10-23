@@ -88,7 +88,7 @@
 }
 
 .image-show{
-  max-width: 400px;
-  min-width: 350px;
+  max-width: 150px;
+  min-width: 150px;
   max-height: auto;
 }
