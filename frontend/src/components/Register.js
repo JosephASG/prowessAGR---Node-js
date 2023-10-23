@@ -197,7 +197,11 @@ function Register() {
         {//TODO: Arreglar vista de Foto de perfil
         }
 
-        {photo && <img src={photo} alt="Foto de perfil" className='image-show'/>}
+        {photo && (
+          <div>
+            <img src={URL.createObjectURL(photo.get('user-image'))} alt="Foto de perfil" className="image-show" />
+          </div>
+        )}
         <h3 className="register-subtitle">Ubicación</h3>
         <Mapa>
         </Mapa>
