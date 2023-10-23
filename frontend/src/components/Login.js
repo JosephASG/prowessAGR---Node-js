@@ -41,14 +41,50 @@ function Login(props) {
     await login(formData);
   };
 
-  const handleAccountRecovery = () => {
-    // Agrega lógica para manejar la recuperación de cuenta aquí
-    console.log("Recuperar cuenta");
+  const recuperarCuenta = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/fb/usuario/recuperar-cuenta', {
+        method: 'POST',
+        body: { email },
+      });
+      const data = await res.json();
+      if (data.success) {
+        console.log('Correo electrónico de recuperación de cuenta enviado.');
+        // Puedes mostrar un mensaje de éxito al usuario.
+      } else {
+        console.log('La recuperación de cuenta falló.');
+        // Puedes mostrar un mensaje de error al usuario.
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handlePasswordRecovery = () => {
-    // Agrega lógica para manejar la recuperación de contraseña aquí
-    console.log("Recuperar contraseña");
+  const manejarRecuperacionCuenta = () => {
+    recuperarCuenta();
+  };
+
+  const resetearContrasena = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/fb/usuario/resetear-contrasena', {
+        method: 'POST',
+        body: { email },
+      });
+      const data = await res.json();
+      if (data.success) {
+        console.log('Correo electrónico de restablecimiento de contraseña enviado.');
+        // Puedes mostrar un mensaje de éxito al usuario.
+      } else {
+        console.log('El restablecimiento de contraseña falló.');
+        // Puedes mostrar un mensaje de error al usuario.
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const manejarRecuperacionContrasena = () => {
+    resetearContrasena();
   };
 
   return (
@@ -74,7 +110,7 @@ function Login(props) {
         <button className="login-button" type="submit">Iniciar sesión</button>
       </form>
       <div className="login-message">
-        <p><center>¿Necesitas ayuda con tu cuenta o contraseña? <a href="#" onClick={handleAccountRecovery}>Recuperar cuenta/contraseña</a></center></p>
+        <p><center>¿Necesitas ayuda con tu cuenta o contraseña? <a href="#" onClick={manejarRecuperacionCuenta}>Recuperar cuenta</a> / <a href="#" onClick={manejarRecuperacionContrasena}>Recuperar contraseña</a></center></p>
       </div>
     </div>
   );
