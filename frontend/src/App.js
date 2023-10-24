@@ -16,6 +16,7 @@ import CategoriesPage from './components/CategoriesPage';
 import SaleDetailsPage from './components/SaleDetailsPage';
 import SalesPage from './components/SalesPage';
 import { checkToken } from './services/api';
+import AccessDenied from './components/AccessDenied';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -84,6 +85,7 @@ function App() {
         <Route path="/login" element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route path="/registro" element={<Register />} />
         <Route path="/categories" element={<CategoriesPage />} />
+        <Route path="/AccessDenied" element={<AccessDenied />} />
       </Routes>
       <Footer />
     </Router>

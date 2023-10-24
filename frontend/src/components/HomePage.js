@@ -20,8 +20,9 @@ function HomePage() {
       <div className="home-page-content">
         <div className="home-page-subtitle">
           <center>
-          <h3>Productos Agrícolas 100% Naturales y Frescos</h3>
-          <p>Desde la cosecha de ingredientes frescos hasta su hábil transformación en manos expertas en la cocina, nos adentramos en un viaje que nos sumerge en el corazón de la gastronomía. Este recorrido culinario nos lleva a explorar un mundo de sabores únicos, donde cada ingrediente natural se convierte en una puerta hacia un universo de posibilidades culinarias. Desde la recolección hasta el plato, este viaje culinario es un tributo a la cocina artesanal, donde la pasión y la destreza se unen para encantar nuestros paladares y enriquecer nuestras vidas.</p>
+          <h3>Prowess Agrícola</h3>
+          <h4>Productos Agrícolas 100% Naturales y Frescos</h4>
+          <h4>Nutriendo tu vida, del campo a  tu mesa.</h4>
           <Link to="/registro">
           <button className='RegistroHome'>Registro</button>
         </Link>
