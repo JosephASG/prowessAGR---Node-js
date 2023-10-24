@@ -1,5 +1,6 @@
 /* Estilos para el contenedor del formulario de inicio de sesión */
 .login-container {
+  font-family: 'Electrolize', sans-serif;
   max-width: 350px;
   margin: 0 auto;
   padding: 20px;
@@ -18,7 +19,7 @@
   text-align: center;
   margin-bottom: 20px;
   font-size: 24px;
-  color: #333;
+  color: #fff;
 }
 
 /* Estilos para los campos de entrada */

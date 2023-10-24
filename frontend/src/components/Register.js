@@ -127,7 +127,12 @@ function Register() {
           type="text"
           placeholder="Primer Nombre"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[A-Za-z]+$/.test(value) || value === '') {
+              setName(value);
+            }
+          }}
           required
         />
           <input
@@ -135,7 +140,12 @@ function Register() {
           type="text"
           placeholder="Segundo Nombre"
           value={name2}
-          onChange={(e) => setName2(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[A-Za-z]+$/.test(value) || value === '') {
+              setName2(value);
+            }
+          }}
           required
         />
         </div>
@@ -145,7 +155,12 @@ function Register() {
           type="text"
           placeholder="Primer Apellido"
           value={lastName}
-          onChange={(e) => setlastName(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[A-Za-z]+$/.test(value) || value === '') {
+              setlastName(value);
+            }
+          }}
           required
         />
           <input
@@ -153,7 +168,12 @@ function Register() {
           type="text"
           placeholder="Segundo Apellido"
           value={lastName2}
-          onChange={(e) => setlastName2(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[A-Za-z]+$/.test(value) || value === '') {
+              setlastName2(value);
+            }
+          }}
           required
         />
         </div>
@@ -170,7 +190,12 @@ function Register() {
           type="text"
           placeholder="Número de Cedula - Pasaporte"
           value={nCedula}
-          onChange={(e) => setNCedula(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[0-9]+$/.test(value) || value === '') {
+              setNCedula(value);
+            }
+          }}
           required
         />
         <input
@@ -178,7 +203,12 @@ function Register() {
           type="text"
           placeholder="Número de Teléfono"
           value={nPhone}
-          onChange={(e) => setNPhone(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[0-9]+$/.test(value) || value === '') {
+              setNPhone(value);
+            }
+          }}
           required
         />
         <input
@@ -196,7 +226,7 @@ function Register() {
           name="user-image"
           onChange={handlePhotoUpload}
         />
-        {//TODO: Arreglar vista de Foto de perfil
+        {
         }
 
         {photo && (
@@ -235,7 +265,12 @@ function Register() {
           type="text"
           placeholder="Calle Principal"
           value={mainStreet}
-          onChange={(e) => setMainStreet(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[A-Za-z]+$/.test(value) || value === '') {
+              setMainStreet(value);
+            }
+          }}
           required
         />
         <input
@@ -243,7 +278,12 @@ function Register() {
           type="text"
           placeholder="Calle Secundaria"
           value={secondaryStreet}
-          onChange={(e) => setSecondaryStreet(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[A-Za-z]+$/.test(value) || value === '') {
+              setSecondaryStreet(value);
+            }
+          }}
           required
         />
         <input
@@ -251,7 +291,12 @@ function Register() {
           type="text"
           placeholder="Código Postal"
           value={postalCode}
-          onChange={(e) => setPostalCode(e.target.value)}
+          onChange={(e) => {
+            const value = e.target.value;
+            if (/^[0-9]+$/.test(value) || value === '') {
+              setPostalCode(value);
+            }
+          }}
           required
         />
         <input
@@ -266,7 +311,12 @@ function Register() {
               type="text"
               placeholder="Tipo de Asosiacion"
               value={additionalField1}
-              onChange={(e) => setAdditionalField1(e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^[A-Za-z]+$/.test(value) || value === '') {
+                  setAdditionalField1(value);
+                }
+              }}
               required
             />
           </div>
