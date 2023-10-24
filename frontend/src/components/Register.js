@@ -264,7 +264,7 @@ function Register() {
             <input
               className="register-input"
               type="text"
-              placeholder="tipo Asosiacion"
+              placeholder="Tipo de Asosiacion"
               value={additionalField1}
               onChange={(e) => setAdditionalField1(e.target.value)}
               required
