@@ -129,7 +129,7 @@ function Register() {
           value={name}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-z]+$/.test(value) || value === '') {
+            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
               setName(value);
             }
           }}
@@ -142,7 +142,7 @@ function Register() {
           value={name2}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-z]+$/.test(value) || value === '') {
+            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
               setName2(value);
             }
           }}
@@ -157,7 +157,7 @@ function Register() {
           value={lastName}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-z]+$/.test(value) || value === '') {
+            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
               setlastName(value);
             }
           }}
@@ -170,7 +170,7 @@ function Register() {
           value={lastName2}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-z]+$/.test(value) || value === '') {
+            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
               setlastName2(value);
             }
           }}
@@ -192,7 +192,7 @@ function Register() {
           value={nCedula}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[0-9]+$/.test(value) || value === '') {
+            if (/^[0-9\s]+$/.test(value) || value === '') {
               setNCedula(value);
             }
           }}
@@ -205,7 +205,7 @@ function Register() {
           value={nPhone}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[0-9]+$/.test(value) || value === '') {
+            if (/^[0-9\s]+$/.test(value) || value === '') {
               setNPhone(value);
             }
           }}
@@ -267,7 +267,7 @@ function Register() {
           value={mainStreet}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-z]+$/.test(value) || value === '') {
+            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
               setMainStreet(value);
             }
           }}
@@ -280,7 +280,7 @@ function Register() {
           value={secondaryStreet}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-z]+$/.test(value) || value === '') {
+            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
               setSecondaryStreet(value);
             }
           }}
@@ -293,7 +293,7 @@ function Register() {
           value={postalCode}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[0-9]+$/.test(value) || value === '') {
+            if (/^[0-9\s]+$/.test(value) || value === '') {
               setPostalCode(value);
             }
           }}
