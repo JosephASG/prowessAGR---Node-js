@@ -116,6 +116,11 @@ function Login(props) {
       <div className="login-message">
         <p><center>¿Necesitas ayuda con tu cuenta o contraseña? <a href="#" onClick={manejarRecuperacionCuenta}>Recuperar cuenta</a> / <a href="#" onClick={manejarRecuperacionContrasena}>Recuperar contraseña</a></center></p>
       </div>
+      <div className="login-register-button">
+        <button className="login-button" onClick={() => navigate('/registro')}>
+          Registrarse
+        </button>
+      </div>
     </div>
   );
 }
