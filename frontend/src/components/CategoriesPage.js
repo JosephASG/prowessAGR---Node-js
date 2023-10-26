@@ -33,7 +33,7 @@ const CategoryList = () => {
   }, []);
 
   const handleDelete = (categoryId) => {
-    fetch(`http://localhost:5000/fb/categoria/delete/${categoryId}`, {
+    fetch(`${process.env.REACT_APP_API_URL}${categoryId}`, {
       method: 'DELETE',
     })
       .then((response) => {

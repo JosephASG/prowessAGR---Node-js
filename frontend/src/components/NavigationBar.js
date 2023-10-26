@@ -8,7 +8,7 @@ import {
   faShoppingCart,
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
-import { checkToken, getTokenData } from "../services/api";
+
 
 function NavigationBar(props) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -21,8 +21,8 @@ function NavigationBar(props) {
     setMenuOpen(!menuOpen);
   };
 
+
   useEffect(() => {
-    // Función que maneja el evento de scroll
     if (props.isLoggedIn) {
       setLogged(true);
       setRole(props.role);
@@ -31,6 +31,9 @@ function NavigationBar(props) {
       setLogged(false);
       setRole("");
     }
+  }, [props]);
+  useEffect(() => {
+    // Función que maneja el evento de scroll
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setScrolled(scrollPosition > 0);
@@ -43,7 +46,7 @@ function NavigationBar(props) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [props]);
+  },[]);
 
   return (
     <nav className={`navigation-bar ${scrolled ? "scrolled" : ""}`}>
