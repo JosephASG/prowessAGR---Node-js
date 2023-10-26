@@ -1,9 +1,9 @@
 import axios from "axios"
-
+const WEBURL = process.env.REACT_APP_API_URL
 
 export const checkToken = async(token) => {
     try{
-        const response = await axios.get('http://localhost:5000/fb/usuario',{
+        const response = await axios.get(`${WEBURL}fb/usuario`,{
             headers: {
               token: token,
             },
@@ -17,7 +17,7 @@ export const checkToken = async(token) => {
 export const getTokenData = async(token) => {
   try{
     const response = await axios.get('http://localhost:5000/fb/auth',{
-      header:{
+      headers:{
         token: token,
       },
     })
