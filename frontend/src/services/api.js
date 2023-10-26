@@ -16,7 +16,7 @@ export const checkToken = async(token) => {
 
 export const getTokenData = async(token) => {
   try{
-    const response = await axios.get('http://localhost:5000/fb/auth',{
+    const response = await axios.get(`${WEBURL}fb/auth`,{
       headers:{
         token: token,
       },
