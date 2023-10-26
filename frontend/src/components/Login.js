@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+const WEBURL = process.env.REACT_APP_API_URL;
 
 function Login(props) {
   const { setIsLoggedIn } = props;
@@ -12,7 +13,7 @@ function Login(props) {
 
   const login = async (user) => {
     try {
-      const res = await fetch('http://localhost:5000/fb/usuario/login', {
+      const res = await fetch(`${WEBURL}fb/usuario/login`, {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
@@ -44,7 +45,7 @@ function Login(props) {
 
   const recuperarCuenta = async () => {
     try {
-      const res = await fetch('http://localhost:5000/fb/usuario/recuperar-cuenta', {
+      const res = await fetch(`${WEBURL}fb/usuario/recuperar-cuenta`, {
         method: 'POST',
         body: JSON.stringify({ email }),
       });
@@ -67,7 +68,7 @@ function Login(props) {
 
   const resetearContrasena = async () => {
     try {
-      const res = await fetch('http://localhost:5000/fb/usuario/resetear-contrasena', {
+      const res = await fetch(`${WEBURL}fb/usuario/resetear-contrasena`, {
         method: 'POST',
         body: JSON.stringify({ email }),
         headers: {
