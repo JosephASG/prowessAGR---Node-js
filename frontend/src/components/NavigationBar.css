@@ -10,7 +10,7 @@
   justify-content: space-between; /* Alinea el logo a la izquierda y el botón a la derecha */
   width: 100%;
   position: fixed;
-  z-index: 10000;
+  z-index: 5;
   transition: background-color 0.3s ease; /* Agrega una transición suave para el cambio de color de fondo */
 }
 
