@@ -168,7 +168,10 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
                 <option value="gr">Gramo</option>
                 <option value="Lb">Libra</option>
                 <option value="Oz">Onza</option>
-                <option value="Ud">Unidad</option>
+                <option value="Unidades">Unidad</option>
+                <option value="cubetas">Cubetas</option>
+                <option value="racimos">Racimos</option>
+                <option value="arrobas">Arrobas</option>          
               </select>
 
               <label htmlFor="pro_categoria">Categoría:</label>
