@@ -87,7 +87,7 @@ label {
   position: relative;
   max-width: 400px;
   color: white;
-  z-index:100000;
+  z-index:100000 !important;
 }
 
 .modal-close-product-list {
