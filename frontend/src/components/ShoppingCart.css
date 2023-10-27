@@ -63,14 +63,14 @@
 .price-product,
 .cantidad-product {
   justify-content: baseline;
-  margin: 5px;
-  padding: 5px;
+  margin: -30px;
+  padding: -30px;
 }
 
 .producto-cart img {
-  max-width: 200px;
+  max-width: 120px;
   border-radius: 10px;
-  margin: 10px;
+  margin: 50px;
 }
 
 .total-price {
