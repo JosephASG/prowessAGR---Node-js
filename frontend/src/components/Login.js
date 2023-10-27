@@ -21,10 +21,13 @@ function Login(props) {
       });
       const data = await res.json();
       if (data.estado === true) {
-        setIsLoggedIn(true);
         setToken(data.usuario.token);
-        localStorage.setItem("token", data.usuario.token);
-        navigate(`/mi-cuenta`);
+        setTimeout(() => {
+          localStorage.setItem("token", data.usuario.token);
+          navigate(`/mi-cuenta`);
+        }, 1500);
+        setIsLoggedIn(true);
+
       } else {
         console.log('Usuario no logueado');
       }
