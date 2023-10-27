@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa el hook de navegación
 import './Register.css'; // Importa el archivo de estilos CSS
 import Mapa from './Mapa.js';
-
+const WEBURL = process.env.REACT_APP_API_URL
 const provinces = [
   { "name": "Azuay", "cities": ["Cuenca"] },
   { "name": "Bolívar", "cities": ["Guaranda"] },
@@ -76,7 +76,7 @@ function Register() {
     formData.append("imagenUsuario", image);
     //TODO: AGREGAR UBICACION CORRECTAMENTE
 
-    fetch('http://localhost:5000/fb/usuario/register', {
+    fetch(`${WEBURL}fb/usuario/register`, {
       method: "POST",
       body: formData
     })

@@ -11,7 +11,7 @@ function VendorsPage() {
   const [showAddModal, setShowAddModal] = useState(false); // Define setShowAddModal
   const [showEditModal, setShowEditModal] = useState(false); // Define showEditModal
   const [editingVendorId, setEditingVendorId] = useState(null); // Define editingVendorId
-
+  const WEBURL = process.env.REACT_APP_API_URL
   const [VendorToEdit, setVendorToEdit] = useState(null);
   const [vendorToUpdate, setVendorToUpdate] = useState(null);
 
@@ -31,7 +31,7 @@ function VendorsPage() {
   const totalPages = Math.ceil(vendors.length / vendorsPerPage);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/fb/vendedor/getSeller`)
+    fetch(`${WEBURL}fb/vendedor/getSeller`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error en la solicitud al servidor');
@@ -57,7 +57,7 @@ function VendorsPage() {
   
 
   const handleDelete = (vendorId) => {
-    fetch(`http://localhost:5000/fb/vendedor/deleteSeller/${vendorId}`, {
+    fetch(`${WEBURL}fb/vendedor/deleteSeller/${vendorId}`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -107,7 +107,7 @@ function VendorsPage() {
 
     console.log('vendorToUpdate:', vendorToUpdate.id);
 
-    fetch(`http://localhost:5000/fb/vendedor/updateSeller/${vendorToUpdate.id}`, {
+    fetch(`${WEBURL}fb/vendedor/updateSeller/${vendorToUpdate.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

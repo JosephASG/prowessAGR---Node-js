@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+const WEBURL = process.env.REACT_APP_API_URL
 
 const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
   const [newVendor, setNewVendor] = useState({
@@ -29,7 +30,7 @@ const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
   };
 
   const handleSave = () => {
-    fetch('http://localhost:5000/fb/vendedor/createSeller', {
+    fetch(`${WEBURL}fb/vendedor/createSeller`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
