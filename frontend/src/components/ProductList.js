@@ -9,7 +9,7 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [vendedores, setVendedores] = useState([]);
-
+  const WEBURL = process.env.REACT_APP_API_URL
   const ITEMS_PER_PAGE = 5;
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -24,7 +24,7 @@ const ProductList = () => {
   const [productToUpdate, setProductToUpdate] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/fb/producto/get`)
+    fetch(`${WEBURL}fb/producto/get`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error en la solicitud al servidor");
@@ -38,7 +38,7 @@ const ProductList = () => {
 
   useEffect(() => {
     // Hacer la solicitud GET para obtener las categorías desde tu servidor backend
-    fetch("http://localhost:5000/fb/categoria/get")
+    fetch(`${WEBURL}fb/categoria/get`)
       .then((response) => response.json())
       .then((data) => {
         setCategorias(data);
@@ -50,7 +50,7 @@ const ProductList = () => {
 
   useEffect(() => {
     // Hacer la solicitud GET para obtener los vendedores desde tu servidor backend
-    fetch("http://localhost:5000/fb/vendedor/getSeller")
+    fetch(`${WEBURL}fb/vendedor/getSeller`)
       .then((response) => response.json())
       .then((data) => {
         setVendedores(data);
@@ -61,7 +61,7 @@ const ProductList = () => {
   }, []); // Este efecto se ejecutará una vez al montar el componente
 
   const handleDelete = (productId) => {
-    fetch(`http://localhost:5000/fb/producto/delete/${productId}`, {
+    fetch(`${WEBURL}fb/producto/delete/${productId}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -103,7 +103,7 @@ const ProductList = () => {
 
     console.log("productToUpdate:", productToUpdate.id);
 
-    fetch(`http://localhost:5000/fb/producto/update/${productToUpdate.id}`, {
+    fetch(`${WEBURL}fb/producto/update/${productToUpdate.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

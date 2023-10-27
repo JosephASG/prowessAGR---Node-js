@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ModalAddProducts.css";
 import ReactSelect from "react-select";
+const WEBURL = process.env.REACT_APP_API_URL
 
 const ModalAddProducts = ({ isOpen, onClose }) => {
   const [newProduct, setNewProduct] = useState({
@@ -31,7 +32,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
       };
     }
 
-    fetch("http://localhost:5000/fb/categoria/get")
+    fetch(`${WEBURL}fb/categoria/get`)
       .then((response) => response.json())
       .then((data) => {
         setCategorias(data);
@@ -41,7 +42,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
       });
 
     // Nueva solicitud para obtener la lista de vendedores
-    fetch("http://localhost:5000/fb/vendedor/getSeller")
+    fetch(`${WEBURL}fb/vendedor/getSeller`)
       .then((response) => response.json())
       .then((data) => {
         setVendedores(data);
@@ -81,7 +82,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
 
 
     console.log(newProduct);
-    fetch("http://localhost:5000/fb/producto/post", {
+    fetch(`${WEBURL}fb/producto/post`, {
       method: "POST",
       body: formData
     })

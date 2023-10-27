@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ModalAddCategory.css';
+const WEBURL = process.env.REACT_APP_API_URL
 
 const ModalAddCategory = ({ isOpen, onClose }) => {
   const [newSupplier, setNewSupplier] = useState({
@@ -26,7 +27,7 @@ const ModalAddCategory = ({ isOpen, onClose }) => {
   };
 
   const handleSave = () => {
-    fetch('http://localhost:5000/fb/categoria/post', {
+    fetch(`${WEBURL}fb/categoria/post`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

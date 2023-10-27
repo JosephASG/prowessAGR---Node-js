@@ -1,17 +1,11 @@
 import express from "express";
 import cors from "cors";
 import dotenv from 'dotenv';
-import fs from 'fs';
 const app = express();
 app.use(express.json())
 app.use(cors());
-if (fs.existsSync('.env.local')) {
-  dotenv.config({ path: '.env.local' });
-} else {
+dotenv.config();
 
-  console.log('.env.local not found. Using .env.');
-  dotenv.config(); // Cargar las variables de .env
-}
 const port = process.env.PORT || 5000;
 
 import multer from 'multer';

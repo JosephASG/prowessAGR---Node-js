@@ -7,7 +7,7 @@ import ModalEditCategory from './ModalEditCategory';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]); // Cambiamos a "categories" en lugar de "products"
-
+  const WEBURL = process.env.REACT_APP_API_URL
   const ITEMS_PER_PAGE = 5;
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -21,7 +21,7 @@ const CategoryList = () => {
   const [categoryToUpdate, setCategoryToUpdate] = useState(null); // Cambiamos a "categoryToUpdate"
 
   useEffect(() => {
-    fetch(`http://localhost:5000/fb/categoria/get`) // Cambiamos la URL para obtener categorías
+    fetch(`${WEBURL}fb/categoria/get`) // Cambiamos la URL para obtener categorías
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error en la solicitud al servidor');
@@ -72,7 +72,7 @@ const CategoryList = () => {
       return;
     }
 
-    fetch(`http://localhost:5000/fb/categoria/update/${categoryToUpdate.id}`, {
+    fetch(`${WEBURL}fb/categoria/update/${categoryToUpdate.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

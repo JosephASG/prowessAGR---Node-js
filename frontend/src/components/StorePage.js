@@ -24,7 +24,7 @@ function StorePage({ cart, addToCart, removeFromCart }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterProduct, setFilterProduct] = useState('');
   const [sortCriteria, setSortCriteria] = useState(null);
-
+  const WEBURL = process.env.REACT_APP_API_URL
   const productsPerPage = 10;
 
   let sortedAndFilteredProducts = [...products];
@@ -36,7 +36,7 @@ function StorePage({ cart, addToCart, removeFromCart }) {
   const totalPages = Math.ceil(sortedAndFilteredProducts.length / productsPerPage);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/fb/producto/get`)
+    fetch(`${WEBURL}fb/producto/get`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error en la solicitud al servidor');
