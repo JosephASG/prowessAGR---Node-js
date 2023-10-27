@@ -4,8 +4,7 @@ import './Login.css';
 const WEBURL = process.env.REACT_APP_API_URL;
 
 function Login(props) {
-  const { setIsLoggedIn } = props;
-  const { setToken } = props;
+  const { setIsLoggedIn, setToken } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -22,18 +21,15 @@ function Login(props) {
       });
       const data = await res.json();
       if (data.estado === true) {
-        console.log("Usuario logueado");
         setIsLoggedIn(true);
         setToken(data.usuario.token);
-        setTimeout(() => {
-          localStorage.setItem("token", data.usuario.token);
-          navigate(`/mi-cuenta`);
-        }, 1500);
+        localStorage.setItem("token", data.usuario.token);
+        navigate(`/mi-cuenta`);
       } else {
-        console.log("Usuario no logueado");
+        console.log('Usuario no logueado');
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -52,18 +48,12 @@ function Login(props) {
       const data = await res.json();
       if (data.success) {
         console.log('Correo electrónico de recuperación de cuenta enviado.');
-        // Puedes mostrar un mensaje de éxito al usuario.
       } else {
         console.log('La recuperación de cuenta falló.');
-        // Puedes mostrar un mensaje de error al usuario.
       }
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const manejarRecuperacionCuenta = () => {
-    recuperarCuenta();
   };
 
   const resetearContrasena = async () => {
@@ -78,18 +68,20 @@ function Login(props) {
       const data = await res.json();
       if (data.success) {
         console.log('Correo electrónico de restablecimiento de contraseña enviado.');
-        // Puedes mostrar un mensaje de éxito al usuario.
       } else {
         console.log('El restablecimiento de contraseña falló.');
-        // Puedes mostrar un mensaje de error al usuario.
       }
     } catch (error) {
       console.error(error);
     }
   };
 
+  const manejarRecuperacionCuenta = () => {
+    navigate('/recuperar?type=cuenta');
+  };
+
   const manejarRecuperacionContrasena = () => {
-    resetearContrasena();
+    navigate('/recuperar?type=contrasena');
   };
 
   return (
