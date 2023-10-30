@@ -181,6 +181,29 @@ const getUsers = async (req, res) => {
   }
 };
 
+
+//Funcion Provisional para enviar los documentos a los vendedores (solo para pruebas)
+const sendDocsToVendedor = async (req, res) => {
+  const snapshot = await query(
+    firestore.collection(fs, "vendedor"),
+    where("coords.role", "==",  "Emprendedor" )
+  );
+  const querySnapshot = await getDocs(snapshot);
+
+  querySnapshot.forEach(async (doc) => {
+    const data = doc.data();
+    console.log(data.coords.displayName);
+    if (data.coords && data.coords.displayName) {
+
+      await firestore.updateDoc(doc.ref, {name: data.coords.displayName});
+    }
+
+  });
+  return res.status(201).json({message:"Documentos enviados a los vendedores", querySnapshot});
+}
+
+
+
 // Metodo PUT para actualizar usuarios
 const updateUser = async (req, res) => {
   const user = req.body;
@@ -263,4 +286,5 @@ const deleteUser = async (req, res) => {
   }
 };*/
 
-export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser/*,deleteUser*/};
+
+export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser,sendDocsToVendedor/*,deleteUser*/};
