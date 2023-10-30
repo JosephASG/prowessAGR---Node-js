@@ -1,0 +1,82 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .modal-content-product {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: left;
+  }
+  
+  .form-container {
+    padding: 20px;
+  }
+  
+  .form-group-pair {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .form-group-pair div {
+    width: 48%;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+  }
+  
+  /* Button Container */
+  .btn-add-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Save Button */
+  .btn-save {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-save:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Close Button */
+  .modal-close-product {
+    position: absolute;
+    top: 100px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+  }
