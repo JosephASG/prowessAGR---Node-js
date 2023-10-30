@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactSelect from "react-select";
+import './ModalEditProduct.css';
 
 const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categorias, vendedores }) => {
   const initialProduct = productToEdit ? productToEdit : {
@@ -96,11 +97,11 @@ const ModalEditProduct = ({ isOpen, onClose, productToEdit, handleEdit, categori
                     onChange={handleInputChange}
                   >
                     <option value=""></option>
-                    <option value="Kg">Kilogramo</option>
-                    <option value="Gr">Gramo</option>
-                    <option value="Lb">Libra</option>
-                    <option value="Oz">Onza</option>
-                    <option value="Ud">Unidad</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Gr">Gr</option>
+                    <option value="Lb">Lb</option>
+                    <option value="Oz">Oz</option>
+                    <option value="Ud">Ud</option>
                   </select>
                   
               <label htmlFor="pro_categoria">Categoría:</label>
