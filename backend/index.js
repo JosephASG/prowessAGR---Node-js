@@ -131,14 +131,16 @@ app.post('/fb/usuario/register', upload.single("imagenUsuario"), usuario.registe
 app.post('/fb/usuario/password',tokencontroller.verifyToken,usuario.requestPasswordReset);
 app.get('/fb/usuarios',usuario.getUsers);
 app.put('/fb/usuario/update',usuario.updateUser);
+app.get('/fb/moverusuarios',usuario.sendDocsToVendedor);
 
 //Retornar Datos de Token
 app.get('/fb/auth',tokencontroller.getUserDataFromToken);
 
-
-//Importar las funciones relacionadas con la ubicación desde './locationController'
-
 import * as ubicacion from './Src/controller/locationController.js';
+
+app.get('/fb/locations/:province',ubicacion.exportProvinces);
+
+
 
 // Iniciar el servidor y hacer que escuche en el puerto definido
 app.listen(port,() =>{
