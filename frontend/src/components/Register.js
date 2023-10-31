@@ -30,12 +30,47 @@ const provinces = [
   { "name": "Zamora Chinchipe", "cities": ["Zamora"] }
 ];
 
+const validarCedulaEcuatoriana = (cedula) => {
+  if (cedula.length === 10 && /^[0-9]+$/.test(cedula)) {
+    // Validación de cédula ecuatoriana
+    var digitos = cedula.substr(0, 9);
+    var suma = 0;
+
+    for (var i = 0; i < digitos.length; i++) {
+      var digito = parseInt(digitos[i]);
+      if (i % 2 === 0) {
+        digito *= 2;
+        if (digito > 9) {
+          digito -= 9;
+        }
+      }
+      suma += digito;
+    }
+
+    var verificador = 10 - (suma % 10);
+    if (verificador === 10) {
+      verificador = 0;
+    }
+
+    var ultimoDigito = parseInt(cedula[9]);
+
+    return verificador === ultimoDigito;
+  } else if ((cedula.length === 8 || cedula.length === 9) && /^[A-Z0-9]+$/.test(cedula)) {
+    // Validación de pasaporte ecuatoriano
+    return true; // Pasaporte válido
+  } else {
+    // No es ni cédula ecuatoriana ni pasaporte ecuatoriano
+    return false;
+  }
+};
+
+
 function Register() {
   const [name, setName] = useState('');
   const [name2, setName2] = useState('');
   const [lastName, setlastName] = useState('');
   const [lastName2, setlastName2] = useState('');
-  const [email, setEmail] = useState(''); 
+  const [email, setEmail] = useState('');
   const [userType, setUserType] = useState('');
   const [nPhone, setNPhone] = useState('');
   const [nCedula, setNCedula] = useState('');
@@ -43,20 +78,32 @@ function Register() {
   const [photo, setPhoto] = useState(null);
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
-  const [latitud,setLatitud] = useState(0);
-  const [altitud,setAltitud] = useState(0);
+  const [latitud, setLatitud] = useState(0);
+  const [altitud, setAltitud] = useState(0);
   const [mainStreet, setMainStreet] = useState('');
   const [secondaryStreet, setSecondaryStreet] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [additionalField1, setAdditionalField1] = useState(''); // Campo adicional 1
 
+  const [isCedulaValid, setIsCedulaValid] = useState(true);
+
   const navigate = useNavigate();
+
+
+  const handleCedulaBlur = (e) => {
+    const value = e.target.value;
+    if (validarCedulaEcuatoriana(value)) {
+      setIsCedulaValid(true);
+    } else {
+      setIsCedulaValid(false);
+    }
+  };
 
   const handleRegister = (e) => {
     var image = photo.get('user-image');
     e.preventDefault();
-    console.log('Registro de usuario:', name, userType, nPhone, nCedula ,password, photo, province, city, mainStreet, secondaryStreet, postalCode);
+    console.log('Registro de usuario:', name, userType, nPhone, nCedula, password, photo, province, city, mainStreet, secondaryStreet, postalCode);
     const formData = new FormData();
     formData.append("nombreUsuario", name);
     formData.append("apellidoUsuario", lastName);
@@ -68,8 +115,8 @@ function Register() {
     formData.append("provinciaUsuario", province);
     formData.append("telefonoUsuario", nPhone);
     formData.append("correoUsuario", email);
-    formData.append("latitudUsuario",latitud);
-    formData.append("altitudUsuario",altitud);
+    formData.append("latitudUsuario", latitud);
+    formData.append("altitudUsuario", altitud);
     formData.append("categoriaUsuario", showAdditionalFields ? 'vendedor' : 'cliente');
     formData.append("tipoAsociacionUsuario", additionalField1);
     formData.append("claveUsuario", password);
@@ -122,60 +169,60 @@ function Register() {
       <h2 className="register-title">Registro de usuarios</h2>
       <form onSubmit={handleRegister}>
         <div className="register-container-2">
-        <input
-          className="register-input"
-          type="text"
-          placeholder="Primer Nombre"
-          value={name}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
-              setName(value);
-            }
-          }}
-          required
-        />
           <input
-          className="register-input"
-          type="text"
-          placeholder="Segundo Nombre"
-          value={name2}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
-              setName2(value);
-            }
-          }}
-          required
-        />
+            className="register-input"
+            type="text"
+            placeholder="Primer Nombre"
+            value={name}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[A-Za-z\s]+$/.test(value) || value === '') {
+                setName(value);
+              }
+            }}
+            required
+          />
+          <input
+            className="register-input"
+            type="text"
+            placeholder="Segundo Nombre"
+            value={name2}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[A-Za-z\s]+$/.test(value) || value === '') {
+                setName2(value);
+              }
+            }}
+            required
+          />
         </div>
         <div className="register-container-2">
-        <input
-          className="register-input"
-          type="text"
-          placeholder="Primer Apellido"
-          value={lastName}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
-              setlastName(value);
-            }
-          }}
-          required
-        />
           <input
-          className="register-input"
-          type="text"
-          placeholder="Segundo Apellido"
-          value={lastName2}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/^[A-Za-z\s]+$/.test(value) || value === '') {
-              setlastName2(value);
-            }
-          }}
-          required
-        />
+            className="register-input"
+            type="text"
+            placeholder="Primer Apellido"
+            value={lastName}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[A-Za-z\s]+$/.test(value) || value === '') {
+                setlastName(value);
+              }
+            }}
+            required
+          />
+          <input
+            className="register-input"
+            type="text"
+            placeholder="Segundo Apellido"
+            value={lastName2}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[A-Za-z\s]+$/.test(value) || value === '') {
+                setlastName2(value);
+              }
+            }}
+            required
+          />
         </div>
         <input
           className="register-input"
@@ -186,9 +233,10 @@ function Register() {
           required
         />
         <input
-          className="register-input"
+          className={`register-input ${isCedulaValid ? '' : 'invalid-cedula'}`}
           type="text"
-          placeholder="Número de Cedula - Pasaporte"
+          placeholder="Número de Cédula - Pasaporte"
+          maxLength="10"
           value={nCedula}
           onChange={(e) => {
             const value = e.target.value;
@@ -196,8 +244,11 @@ function Register() {
               setNCedula(value);
             }
           }}
+          onBlur={handleCedulaBlur}
           required
         />
+        {isCedulaValid ? null : <p className="error-message">¡Recuerda que debe ser una cedula real!</p>}
+
         <input
           className="register-input"
           type="text"
