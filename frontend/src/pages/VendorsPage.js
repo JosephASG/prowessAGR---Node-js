@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './VendorsPage.css';
-import SearchBar from './SearchBar';
+import SearchBar from '../components/SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import ModalEditVendor from './ModalEditVendors';
-import ModalAddVendor from './ModalAddVendor';
+import ModalEditVendor from '../components/ModalEditVendors';
+import ModalAddVendor from '../components/ModalAddVendor';
 
 function VendorsPage() {
   const [vendors, setVendors] = useState([]);

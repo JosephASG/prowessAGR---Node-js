@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './CategoriesPage.css';
-import ModalAddCategory from './ModalAddCategory';
-import ModalEditCategory from './ModalEditCategory';
+import ModalAddCategory from '../components/ModalAddCategory';
+import ModalEditCategory from '../components/ModalEditCategory';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]); // Cambiamos a "categories" en lugar de "products"
@@ -21,7 +21,9 @@ const CategoryList = () => {
   const [categoryToUpdate, setCategoryToUpdate] = useState(null); // Cambiamos a "categoryToUpdate"
 
   useEffect(() => {
-    fetch(`${WEBURL}fb/categoria/get`) // Cambiamos la URL para obtener categorías
+    fetch(`${WEBURL}fb/categoria/get`,{headers:{
+      token: localStorage.getItem("token")
+    }}) // Cambiamos la URL para obtener categorías
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error en la solicitud al servidor');

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {useNavigate} from 'react-router-dom';
-import Modal from './ModalAccountPage';
+import Modal from '../components/ModalAccountPage';
 import './MyAccountPage.css';
-import { checkToken } from '../services/api';
+import { checkToken } from '../services/auth';
 
 function MyAccountPage(props) {
   const { setIsLoggedIn, setRole} = props;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa el hook de navegación
 import './Register.css'; // Importa el archivo de estilos CSS
-import Mapa from './Mapa.js';
+import Mapa from '../components/Mapa.js';
 const WEBURL = process.env.REACT_APP_API_URL
 const provinces = [
   { "name": "Azuay", "cities": ["Cuenca"] },
