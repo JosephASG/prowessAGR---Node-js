@@ -16,6 +16,7 @@ function NavigationBar(props) {
   const [logged, setLogged] = useState(false);
   const [user, setUser] = useState([]);
   const [role, setRole] = useState("");
+  const [cartCount, setCartCount] = useState(0);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -31,7 +32,14 @@ function NavigationBar(props) {
       setLogged(false);
       setRole("");
     }
-  }, [props]);
+  }, [props.isLoggedIn, props.role]);
+
+  useEffect(() => {
+      setCartCount(props.cart.length);
+  }, [props.cart]);
+
+
+
   useEffect(() => {
     // Función que maneja el evento de scroll
     const handleScroll = () => {
@@ -95,7 +103,7 @@ function NavigationBar(props) {
                 <FontAwesomeIcon icon={faShoppingCart} />
               </Link>
               <div className="cuantity-shopping-cart-container">
-                <span className="cuantity-shopping-cart">0</span>
+                <span className="cuantity-shopping-cart">{cartCount}</span>
               </div>
               <div>
                 <p>{logged}</p>
@@ -156,7 +164,7 @@ function NavigationBar(props) {
                 <FontAwesomeIcon icon={faShoppingCart} />
               </Link>
               <div className="cuantity-shopping-cart-container">
-                <span className="cuantity-shopping-cart">0</span>
+                <span className="cuantity-shopping-cart">{cartCount}</span>
               </div>
               <div>
                 <p>{logged}</p>
@@ -207,7 +215,7 @@ function NavigationBar(props) {
                 <FontAwesomeIcon icon={faShoppingCart} />
               </Link>
               <div className="cuantity-shopping-cart-container">
-                <span className="cuantity-shopping-cart">0</span>
+                <span className="cuantity-shopping-cart">{cartCount}</span>
               </div>
               <div>
                 <p>{logged}</p>
@@ -249,7 +257,7 @@ function NavigationBar(props) {
                 <FontAwesomeIcon icon={faShoppingCart} />
               </Link>
               <div className="cuantity-shopping-cart-container">
-                <span className="cuantity-shopping-cart">0</span>
+                <span className="cuantity-shopping-cart">{cartCount}</span>
               </div>
               <div>
                 <p>{logged}</p>

@@ -70,7 +70,7 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar isLoggedIn={isLoggedIn} role={role} />
+      <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart}/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
