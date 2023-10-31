@@ -9,6 +9,7 @@ dotenv.config();
 const port = process.env.PORT || 5000;
 
 import multer from 'multer';
+import * as tokencontroller from "./Src/middleware/verifyToken.js";
 const almacenamiento = multer.memoryStorage();
 const upload = multer({ storage: almacenamiento });
 // Import Firebase and Firestore
@@ -64,10 +65,10 @@ app.get('/fb/order/getOrders/:id', order.getOrders);
 import * as categoria from './Src/controller/categoryController.js';
 
 // Crear categorías
-app.post('/fb/categoria/post', categoria.createCategory);
+app.post('/fb/categoria/post',tokencontroller.verifyTokenAdmin, categoria.createCategory);
 
 // Obtener todas las categorías
-app.get('/fb/categoria/get', categoria.getCategories);
+app.get('/fb/categoria/get',tokencontroller.verifyTokenAdmin, categoria.getCategories);
 
 // Obtener una categoría específica
 app.get('/fb/categoria/get/:id', categoria.getCategoryByID);
@@ -122,7 +123,7 @@ app.delete('/fb/proveedor/delete/:id', proveedor.deleteSupplier);
 
 // Importar las funciones relacionadas con los usuarios desde './userController'
 import * as usuario from './Src/controller/userController.js';
-import * as tokencontroller from "./Src/middleware/verifyToken.js";
+
 
 // Crear un nuevo usuario
 app.post('/fb/usuario/login',upload.none(),usuario.loginUser);

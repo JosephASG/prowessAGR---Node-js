@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import "./ProductList.css";
-import ModalAddProducts from "./ModalAddProducts";
-import ModalEditProduct from "./ModalEditProduct";
+import ModalAddProducts from "../components/ModalAddProducts";
+import ModalEditProduct from "../components/ModalEditProduct";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
