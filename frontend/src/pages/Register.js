@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa el hook de navegación
 import './Register.css'; // Importa el archivo de estilos CSS
 import Mapa from '../components/Mapa.js';
+import { registerApp } from '../services/auth';
 const WEBURL = process.env.REACT_APP_API_URL
 const provinces = [
   { "name": "Azuay", "cities": ["Cuenca"] },
@@ -100,7 +101,7 @@ function Register() {
     }
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     var image = photo.get('user-image');
     e.preventDefault();
     console.log('Registro de usuario:', name, userType, nPhone, nCedula, password, photo, province, city, mainStreet, secondaryStreet, postalCode);
@@ -122,23 +123,13 @@ function Register() {
     formData.append("claveUsuario", password);
     formData.append("imagenUsuario", image);
     //TODO: AGREGAR UBICACION CORRECTAMENTE
-
-    fetch(`${WEBURL}fb/usuario/register`, {
-      method: "POST",
-      body: formData
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log('Usuario agregado correctamente');
-          navigate('/login');
-        } else {
-          console.error('Error al agregar el proveedor en el servidor');
-        }
-      })
-      .catch((error) => {
-        console.error('Error de red al agregar el proveedor', error);
-      });
+    const response = await registerApp(formData);
+    console.log(response);
+    if (response.status === 201){
+      navigate(`/login`);
+    }
   };
+
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     const formData = new FormData();

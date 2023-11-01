@@ -1,39 +1,32 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import {loginApp} from '../services/auth';
 const WEBURL = process.env.REACT_APP_API_URL;
 
 function Login(props) {
   const { setIsLoggedIn, setToken } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [message, setMessage] = useState(''); // Cambiamos a "message"
 
   const navigate = useNavigate();
 
   const login = async (user) => {
-    try {
-      const res = await fetch(`${WEBURL}fb/usuario/login`, {
-        method: 'POST',
-        body: JSON.stringify(user),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const data = await res.json();
-      if (data.estado === true) {
+    const res = await loginApp(JSON.stringify(user));
+    const data = res.data;
+      if (data && data.estado === true) {
         setToken(data.usuario.token);
+        setMessage(data.mensaje);
         setTimeout(() => {
           localStorage.setItem("token", data.usuario.token);
           navigate(`/mi-cuenta`);
         }, 1500);
         setIsLoggedIn(true);
-
       } else {
-        console.log('Usuario no logueado');
+        setMessage(res.response.data.message)
+        console.log('Usuario no logueado',res.response.data.message);
       }
-    } catch (error) {
-      console.error(error);
-    }
   }
 
   const handleLogin = async (e) => {
@@ -116,6 +109,9 @@ function Login(props) {
         <button className="login-button" onClick={() => navigate('/registro')}>
           Registrarse
         </button>
+      </div>
+      <div >
+        {message}
       </div>
     </div>
   );
