@@ -4,6 +4,7 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './CategoriesPage.css';
 import ModalAddCategory from '../components/ModalAddCategory';
 import ModalEditCategory from '../components/ModalEditCategory';
+import { getCategories } from '../services/category';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]); // Cambiamos a "categories" en lugar de "products"
@@ -13,26 +14,33 @@ const CategoryList = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [categoryToEdit, setCategoryToEdit] = useState(null); // Cambiamos a "categoryToEdit"
-
   const [sortCriteria, setSortCriteria] = useState(null);
   const [filterCategory, setFilterCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const token = localStorage.getItem('token');
 
   const [categoryToUpdate, setCategoryToUpdate] = useState(null); // Cambiamos a "categoryToUpdate"
 
   useEffect(() => {
-    fetch(`${WEBURL}fb/categoria/get`,{headers:{
-      token: localStorage.getItem("token")
-    }}) // Cambiamos la URL para obtener categorías
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Error en la solicitud al servidor');
-        }
-        return response.json();
-      })
-      .then((data) => setCategories(data)) // Cambiamos "products" a "categories"
-      .catch((error) => console.error('Error al cargar las categorías', error));
+
+    getCategory(token);
+    if(categoriesToDisplay){
+      setIsLoading(true);
+    }
   }, []);
+
+  const getCategory= async (token) => {
+    try {
+      const res = await getCategories(token);
+      console.log(res);
+      const data = res.data;
+      setCategories(data);
+    } catch (error) {
+      console.error('Error al cargar las categorías', error);
+    }
+  };
 
   const handleDelete = (categoryId) => {
     fetch(`${process.env.REACT_APP_API_URL}${categoryId}`, {
@@ -69,11 +77,10 @@ const CategoryList = () => {
     }
   }, [categoryToUpdate]);
 
-  const handleUpdateCategory = () => {
+  const handleUpdateCategory = async(token) => {
     if (!categoryToUpdate) {
       return;
     }
-
     fetch(`${WEBURL}fb/categoria/update/${categoryToUpdate.id}`, {
       method: 'PUT',
       headers: {
@@ -127,70 +134,73 @@ const CategoryList = () => {
   const categoriesToDisplay = sortedAndFilteredCategories.slice(startIndex, endIndex);
 
   return (
-    <div className="container-product-list">
+     isLoading===false ? (<p>Cargando...</p>):(
+      <div className="container-product-list">
       <h1>Lista de Categorías</h1>
-      <div className='btn-add-container'>
-        <button onClick={handleOpenModal} className='btn-add-product'>Agregar Categoría</button>
-      </div>
-      <div>
-        <ModalAddCategory isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
-        <ModalEditCategory
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          categoryToEdit={categoryToEdit}
-          handleEdit={handleEdit}
-        />
-      <div className="filter-row">
-        <label>Filtrar por Categoría:</label>
-        <input
-          type="text"
-          value={filterCategory}
-          onChange={(e) => handleFilter(e.target.value)}
-        />
-      </div>
-      </div>
-      <div className="header-row-category-list">
-        <b onClick={() => handleSort('nombre')}>Nombre</b>
-        <b>Descripción</b>
-        <b>Acciones</b>
-      </div>
-
-      <div className="container-products">
-        {categoriesToDisplay.map((category) => (
-          <div className="category" key={category.id}>
-            <div>{category.nombreCategoria}</div>
-            <div>{category.descripcionCategoria}</div>
-            <div className='actions-container'>
-              <FontAwesomeIcon
-                className="fa-icon-edit"
-                icon={faPenToSquare}
-                onClick={() => handleEditCategory(category)}
-              />
-              <FontAwesomeIcon
-                className="fa-icon-trash"
-                icon={faTrash}
-                onClick={() => handleDelete(category.id)}
-              />
-            </div>
+            <div className='btn-add-container'>
+            <button onClick={handleOpenModal} className='btn-add-product'>Agregar Categoría</button>
           </div>
-        ))}
-      </div>
-      <div className="pagination">
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Anterior
-        </button>
-        <span>{currentPage}</span>
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Siguiente
-        </button>
-      </div>
+          <div>
+            <ModalAddCategory isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
+            <ModalEditCategory
+              isOpen={isEditModalOpen}
+              onClose={() => setIsEditModalOpen(false)}
+              categoryToEdit={categoryToEdit}
+              handleEdit={handleEdit}
+            />
+          <div className="filter-row">
+            <label>Filtrar por Categoría:</label>
+            <input
+              type="text"
+              value={filterCategory}
+              onChange={(e) => handleFilter(e.target.value)}
+            />
+          </div>
+          </div>
+          <div className="header-row-category-list">
+            <b onClick={() => handleSort('nombre')}>Nombre</b>
+            <b>Descripción</b>
+            <b>Acciones</b>
+          </div>
+    
+          <div className="container-products">
+            {categoriesToDisplay.map((category) => (
+              <div className="category" key={category.id}>
+                <div>{category.nombreCategoria}</div>
+                <div>{category.descripcionCategoria}</div>
+                <div className='actions-container'>
+                  <FontAwesomeIcon
+                    className="fa-icon-edit"
+                    icon={faPenToSquare}
+                    onClick={() => handleEditCategory(category)}
+                  />
+                  <FontAwesomeIcon
+                    className="fa-icon-trash"
+                    icon={faTrash}
+                    onClick={() => handleDelete(category.id)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="pagination">
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Anterior
+            </button>
+            <span>{currentPage}</span>
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Siguiente
+            </button>
+          </div>
+          
     </div>
+    ) 
   );
 };
 
