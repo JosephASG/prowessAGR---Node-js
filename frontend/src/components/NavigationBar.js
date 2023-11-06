@@ -105,9 +105,6 @@ function NavigationBar(props) {
               <div className="cuantity-shopping-cart-container">
                 <span className="cuantity-shopping-cart">{cartCount}</span>
               </div>
-              <div>
-                <p>{logged}</p>
-              </div>
             </li>
             <li>
               {logged ? (
@@ -166,9 +163,6 @@ function NavigationBar(props) {
               <div className="cuantity-shopping-cart-container">
                 <span className="cuantity-shopping-cart">{cartCount}</span>
               </div>
-              <div>
-                <p>{logged}</p>
-              </div>
             </li>
             <li>
               {logged ? (
@@ -217,9 +211,6 @@ function NavigationBar(props) {
               <div className="cuantity-shopping-cart-container">
                 <span className="cuantity-shopping-cart">{cartCount}</span>
               </div>
-              <div>
-                <p>{logged}</p>
-              </div>
             </li>
             <li>
               {logged ? (
@@ -258,9 +249,6 @@ function NavigationBar(props) {
               </Link>
               <div className="cuantity-shopping-cart-container">
                 <span className="cuantity-shopping-cart">{cartCount}</span>
-              </div>
-              <div>
-                <p>{logged}</p>
               </div>
             </li>
             <li>
