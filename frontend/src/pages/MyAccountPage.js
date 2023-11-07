@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Modal from '../components/ModalAccountPage';
 import './MyAccountPage.css';
 import { checkToken } from '../services/auth';
 
 function MyAccountPage(props) {
-  const { setIsLoggedIn, setRole} = props;
+  const { setIsLoggedIn, setRole } = props;
   const [userType, setUserType] = useState('vendor');
-  const [user,setUser] = useState([]);
+  const [user, setUser] = useState([]);
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const token = localStorage.getItem("token");
 
@@ -23,11 +23,11 @@ function MyAccountPage(props) {
 
   useEffect(() => {
     console.log()
-    if(token){
+    if (token) {
       showUserData(token);
     }
-  },[]);
-  
+  }, []);
+
   const showUserData = async (token) => {
     try {
       const res = await checkToken(token);
@@ -75,6 +75,7 @@ function MyAccountPage(props) {
             </div>
           )}
         </div>
+        {/*
         <div className='my-account-text'>
           {userType === 'vendor' && (
             <>
@@ -83,6 +84,7 @@ function MyAccountPage(props) {
             </>
           )}
         </div>
+          */}
       </div>
       <div className="user-type-buttons">
         <button className='user-type-button' onClick={() => handleLogout()}>Cerrar Sesión</button>
