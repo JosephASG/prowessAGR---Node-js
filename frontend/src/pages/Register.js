@@ -125,7 +125,7 @@ function Register() {
     //TODO: AGREGAR UBICACION CORRECTAMENTE
     const response = await registerApp(formData);
     console.log(response);
-    if (response.status === 201){
+    if (response.status === 201) {
       navigate(`/login`);
     }
   };
@@ -277,8 +277,10 @@ function Register() {
           </div>
         )}
         <h3 className="register-subtitle">Ubicación</h3>
-        <Mapa>
-        </Mapa>
+        <Mapa></Mapa>
+
+
+
         <h3 className="register-subtitle">Dirección</h3>
         <select
           className="register-inputS"

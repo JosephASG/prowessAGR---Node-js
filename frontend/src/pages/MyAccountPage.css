@@ -39,14 +39,19 @@
 }
 
 .my-account-container{
-  border: 3px solid #FF8C00; /* Borde de 3px de ancho */
+  border: 3px solid #FF8C00; 
+  border: 3px solid #FF8C00;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
 }
 
 /* Imagen del usuario */
 .my-account-img {
   display: flex;
-  justify-content: center; /* Centra horizontalmente el contenido */
-  align-items: center; /* Centra verticalmente el contenido */
+
   margin: 5px;
   padding: 5px;
   grid-area: image-inf;
@@ -74,6 +79,8 @@
   border-radius: 8px;
   text-align: center;
   border: 0px solid #000  ;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
 }
 
 .my-account-info p{
@@ -117,16 +124,18 @@
 
 .user-type-buttons {
   text-align: center;
+  
 }
 
 .user-type-button {
+  
   padding: 15px 20px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin: 0 5px;
+  margin: 18px 5px;
   text-align: center;
 }
 

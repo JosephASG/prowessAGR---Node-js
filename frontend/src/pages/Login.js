@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import {loginApp} from '../services/auth';
+import { loginApp } from '../services/auth';
 const WEBURL = process.env.REACT_APP_API_URL;
 
 function Login(props) {
@@ -15,18 +15,18 @@ function Login(props) {
   const login = async (user) => {
     const res = await loginApp(JSON.stringify(user));
     const data = res.data;
-      if (data && data.estado === true) {
-        setToken(data.usuario.token);
-        setMessage(data.mensaje);
-        setTimeout(() => {
-          localStorage.setItem("token", data.usuario.token);
-          navigate(`/mi-cuenta`);
-        }, 1500);
-        setIsLoggedIn(true);
-      } else {
-        setMessage(res.response.data.message)
-        console.log('Usuario no logueado',res.response.data.message);
-      }
+    if (data && data.estado === true) {
+      setToken(data.usuario.token);
+      setMessage(data.mensaje);
+      setTimeout(() => {
+        localStorage.setItem("token", data.usuario.token);
+        navigate(`/mi-cuenta`);
+      }, 1500);
+      setIsLoggedIn(true);
+    } else {
+      setMessage(res.response.data.message)
+      console.log('Usuario no logueado', res.response.data.message);
+    }
   }
 
   const handleLogin = async (e) => {
@@ -102,13 +102,18 @@ function Login(props) {
         />
         <button className="login-button" type="submit">Iniciar sesión</button>
       </form>
-      <div className="login-message">
-        <p><center>¿Necesitas ayuda con tu cuenta o contraseña? <a href="#" onClick={manejarRecuperacionCuenta}>Recuperar cuenta</a> / <a href="#" onClick={manejarRecuperacionContrasena}>Recuperar contraseña</a></center></p>
-      </div>
       <div className="login-register-button">
         <button className="login-button" onClick={() => navigate('/registro')}>
           Registrarse
         </button>
+      </div>
+      <div className="login-message">
+        <p><center>¿Necesitas ayuda con tu cuenta o contraseña?
+          <a href="#" onClick={manejarRecuperacionCuenta}>Recuperar cuenta</a>
+          /
+          <a href="#" onClick={manejarRecuperacionContrasena}>Recuperar contraseña</a>
+        </center>
+        </p>
       </div>
       <div >
         {message}
