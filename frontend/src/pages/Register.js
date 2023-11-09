@@ -76,6 +76,7 @@ function Register() {
   const [nPhone, setNPhone] = useState('');
   const [nCedula, setNCedula] = useState('');
   const [password, setPassword] = useState('');
+  const [validPassword, setValidPassword] = useState(false);
   const [photo, setPhoto] = useState(null);
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
@@ -86,10 +87,10 @@ function Register() {
   const [postalCode, setPostalCode] = useState('');
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [additionalField1, setAdditionalField1] = useState(''); // Campo adicional 1
-
   const [isCedulaValid, setIsCedulaValid] = useState(true);
 
   const navigate = useNavigate();
+
 
 
   const handleCedulaBlur = (e) => {
@@ -100,6 +101,15 @@ function Register() {
       setIsCedulaValid(false);
     }
   };
+
+  const handlePasswordBlur = (e) => {
+    const confirmPasswordValue = e.target.value;
+    if (password !== confirmPasswordValue) {
+      setValidPassword(true);
+    } else {
+      setValidPassword(false);
+    }
+  }
 
   const handleRegister = async (e) => {
     var image = photo.get('user-image');
@@ -214,6 +224,7 @@ function Register() {
             }}
             required
           />
+
         </div>
         <input
           className="register-input"
@@ -223,6 +234,7 @@ function Register() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
         <input
           className={`register-input ${isCedulaValid ? '' : 'invalid-cedula'}`}
           type="text"
@@ -261,6 +273,15 @@ function Register() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <input
+          className="register-input"
+          type="password"
+          placeholder="Confirme Contraseña"
+          onBlur={handlePasswordBlur}
+        />
+        {validPassword && (
+          <p className="error-message">Las contraseñas no coinciden</p>
+        )}
         <input
           className="register-input"
           type="file"
