@@ -12,14 +12,16 @@
   color: white;
 }
 
-.register-container-2{
+.register-container-2 {
   display: flex;
 }
-.register-container-2 > input {
+
+.register-container-2>input {
   width: 50%;
-  margin-right:0.3625em;
+  margin-right: 0.3625em;
   margin-bottom: 0.625rem;
 }
+
 .register-title {
   text-align: center;
   margin-bottom: 20px;
@@ -33,7 +35,8 @@
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-.register-inputS{
+
+.register-inputS {
   width: 100%;
   margin-bottom: 10px;
   padding: 5px;
@@ -45,6 +48,29 @@
 .register-input[type="file"] {
   padding: 0;
   width: 100%;
+}
+
+.custom-file-input-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.register-input-image {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.custom-file-input-label {
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #3498db;
+  color: #fff;
+  border-radius: 5px;
 }
 
 .register-button {
@@ -87,11 +113,14 @@
   max-height: 200px;
   object-fit: cover;
   object-fit: contain;
-    /* Ajusta el tamaño máximo de la imagen según tus preferencias */
+  /* Ajusta el tamaño máximo de la imagen según tus preferencias */
 }
 
-.image-show{
+.image-show {
+
   max-width: 150px;
   min-width: 150px;
   max-height: auto;
+  margin-top: 20px;
+  margin-left: 150px; 
 }
