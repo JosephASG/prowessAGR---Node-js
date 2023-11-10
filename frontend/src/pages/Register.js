@@ -88,6 +88,7 @@ function Register() {
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [additionalField1, setAdditionalField1] = useState(''); // Campo adicional 1
   const [isCedulaValid, setIsCedulaValid] = useState(true);
+  const [tipoDocumento, setTipoDocumento] = useState('cedula');
 
   const navigate = useNavigate();
 
@@ -95,11 +96,27 @@ function Register() {
 
   const handleCedulaBlur = (e) => {
     const value = e.target.value;
-    if (validarCedulaEcuatoriana(value)) {
+    let longitudValida;
+    let formatoValido;
+
+    if (tipoDocumento === 'cedula' || tipoDocumento === 'pasaporte') {
+      longitudValida = value.length === 10;
+      formatoValido = /^[0-9]+$/.test(value);
+    } else if (tipoDocumento === 'ruc') {
+      longitudValida = value.length === 13;
+      formatoValido = /^[0-9]+$/.test(value);
+    }
+
+    if (longitudValida && formatoValido) {
       setIsCedulaValid(true);
     } else {
       setIsCedulaValid(false);
     }
+  };
+
+  const handleTipoDocumentoChange = (e) => {
+    setTipoDocumento(e.target.value);
+    setNCedula(''); // Reiniciar el valor de la cédula cuando cambia el tipo de documento
   };
 
   const handlePasswordBlur = (e) => {
@@ -235,11 +252,22 @@ function Register() {
           required
         />
 
+        <select
+          className="register-inputS"
+          value={tipoDocumento}
+          onChange={(e) => setTipoDocumento(e.target.value)}
+          required
+        >
+          <option value="cedula">Cédula</option>
+          <option value="pasaporte">Pasaporte</option>
+          <option value="ruc">RUC</option>
+        </select>
+
         <input
           className={`register-input ${isCedulaValid ? '' : 'invalid-cedula'}`}
           type="text"
-          placeholder="Número de Cédula - Pasaporte"
-          maxLength="10"
+          placeholder={`Número de ${tipoDocumento === 'cedula' ? 'Cédula' : (tipoDocumento === 'pasaporte' ? 'Pasaporte' : 'RUC')}`}
+          maxLength={tipoDocumento === 'ruc' ? 13 : 10}
           value={nCedula}
           onChange={(e) => {
             const value = e.target.value;
@@ -250,7 +278,7 @@ function Register() {
           onBlur={handleCedulaBlur}
           required
         />
-        {isCedulaValid ? null : <p className="error-message">¡Recuerda que debe ser una cedula real!</p>}
+        {isCedulaValid ? null : <p className="error-message">¡Recuerde que debe ser un documento real!</p>}
 
         <input
           className="register-input"
