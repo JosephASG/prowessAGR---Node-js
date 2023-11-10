@@ -95,7 +95,9 @@ const loginUser = async (req, res) => {
     user.id = querySnapshot.docs[0].id;
     const secret = process.env.JWT_SECRET
     if (bcrypt.compareSync(req.body.password, user.claveUsuario)) {
-      const token = jwt.sign({ id: user.id, rol: user.categoriaUsuario}, secret );
+      const token = jwt.sign({ id: user.id, rol: user.categoriaUsuario}, secret, {
+        expiresIn: "20h",
+      });
       res.json({
         mensaje: "Usuario Logeado Correctamente",
         estado: true,
@@ -173,7 +175,7 @@ const getUsers = async (req, res) => {
       delete user.claveUsuario;
       users.push(user);
     });
-    return res.status(301).json({message:"Usuarios Encontrados",users})
+    return res.status(200).json({message:"Usuarios Encontrados",users})
   } catch (error) {
     return res
       .status(500)
@@ -182,109 +184,92 @@ const getUsers = async (req, res) => {
 };
 
 
-//Funcion Provisional para enviar los documentos a los vendedores (solo para pruebas)
-const sendDocsToVendedor = async (req, res) => {
-  const snapshot = await query(
-    firestore.collection(fs, "vendedor"),
-    where("coords.role", "==",  "Emprendedor" )
-  );
-  const querySnapshot = await getDocs(snapshot);
-
-  querySnapshot.forEach(async (doc) => {
-    const data = doc.data();
-    console.log(data.coords.displayName);
-    if (data.coords && data.coords.displayName) {
-
-      await firestore.updateDoc(doc.ref, {name: data.coords.displayName});
-    }
-
-  });
-  return res.status(201).json({message:"Documentos enviados a los vendedores", querySnapshot});
-}
-
-
-
 // Metodo PUT para actualizar usuarios
 const updateUser = async (req, res) => {
-  const user = req.body;
-
+  const { id } = req.user;
+  const userData = req.body;
+  console.log(userData);
   try {
-    const docRef = db.collection("usuario").doc(user.id);
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      return res
-        .status(HTTP_STATUS.NOT_FOUND)
-        .json({ message: "Usuario no encontrado" });
+    const docRef = firestore.doc(fs, "usuario", id);
+    const docSnap = await firestore.getDoc(docRef);
+    if (docSnap.exists()) {
+      const user = docSnap.data();
+      user.id = docSnap.id;
+      delete user.claveUsuario;
+      firestore.updateDoc(docRef, userData);
+      console.log(docSnap.data());
+      return res.status(200).json("Data Registrada");
     }
-    const user = doc.data();
-    if (!user.isAdmin) {
-      return res
-        .status(HTTP_STATUS.UNAUTHORIZED)
-        .json({ message: "No tiene permisos para actualizar este usuario" });
-    }
-
-    const updateUser = {
-      commission: req.body.commission ? req.body.commission : user.commission,
-      name: req.body.name ? req.body.name : user.name,
-      email: req.body.email ? req.body.email : user.email,
-      address: req.body.address ? req.body.address : user.address,
-      phone: req.body.phone ? req.body.phone : user.phone,
-    };
-
-    if (req.body.password) {
-      updateUser.password = bcrypt.hashSync(req.body.password);
-    }
-
-    if (req.files?.image) {
-      if (user.image?.public_id) {
-        await deleteImageUser(user.image.public_id);
-      }
-      const result = await uploadImageUser(req.files.image.tempFilePath);
-      updateUser.image = {
-        public_id: result.public_id,
-        secure_url: result.secure_url,
-      };
-      await fs.unlink(req.files.image.tempFilePath);
-    }
-
-    await docRef.update(updateUser);
-    return res.status(HTTP_STATUS.OK).json(updateUser);
   } catch (error) {
     return res
-      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
+      .status(500)
       .json({ message: "Error al actualizar el usuario" });
   }
 };
-/*
-// Metodo DELETE
-const deleteUser = async (req, res) => {
+
+const updateUserById = async (req, res) => {
+  const userData = req.body;
+  console.log(userData);
   try {
-    const docRef = db.collection("users").doc(req.params.id);
-    const doc = await docRef.get();
-    if (!doc.exists) {
-      return res
-        .status(HTTP_STATUS.NOT_FOUND)
-        .json({ message: "Usuario no encontrado" });
+    const docRef = firestore.doc(fs, "usuario", userData.id);
+    const docSnap = await firestore.getDoc(docRef);
+    if (docSnap.exists()) {
+      const user = docSnap.data();
+      user.id = docSnap.id;
+      delete user.claveUsuario;
+      console.log(docSnap.data());
+      return res.status(200).json("Data Registrada");
     }
-    const user = doc.data();
-    if (!user.isAdmin) {
-      return res
-        .status(HTTP_STATUS.UNAUTHORIZED)
-        .json({ message: "No tiene permisos para eliminar este usuario" });
-    }
-
-    if (user.image?.public_id) {
-      await deleteImageUser(user.image.public_id);
-    }
-
-    await docRef.delete();
-    return res.status(HTTP_STATUS.OK).json({ message: "Usuario eliminado" });
   } catch (error) {
     return res
-      .status(HTTP_STATUS.INTERNAL_SERVER_ERROR)
-      .json({ message: "Error al eliminar el usuario" });
+      .status(500)
+      .json({ message: "Error al actualizar el usuario" });
   }
-};*/
+
+}
+
+const deleteUser = async (req, res) => {
+  const { id } = req.user;
+  const userData = req.body;
+  console.log(userData);
+  try {
+    const docRef = firestore.doc(fs, "usuario", id);
+    const docSnap = await firestore.getDoc(docRef);
+    if (docSnap.exists()) {
+      const user = docSnap.data();
+      user.id = docSnap.id;
+      delete user.claveUsuario;
+      firestore.deleteDoc(docRef);
+      console.log(docSnap.data());
+      return res.status(200).json("Data Registrada");
+    }
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Error al actualizar el usuario" });
+  }
+}
+  const deleteUserById = async (req, res) => {
+    const userData = req.body;
+    console.log(userData);
+    try {
+      const docRef = firestore.doc(fs, "usuario", userData.id);
+      const docSnap = await firestore.getDoc(docRef);
+      if (docSnap.exists()) {
+        const user = docSnap.data();
+        user.id = docSnap.id;
+        delete user.claveUsuario;
+        firestore.deleteDoc(docRef);
+        console.log(docSnap.data());
+        return res.status(200).json("Data Eliminada");
+      }
+    } catch (error) {
+      return res
+        .status(500)
+        .json({ message: "Error al actualizar el usuario" });
+    }
+  }
 
 
-export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser,sendDocsToVendedor/*,deleteUser*/};
+
+export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser,deleteUser,updateUserById,deleteUserById};

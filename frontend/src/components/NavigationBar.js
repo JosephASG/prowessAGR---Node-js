@@ -165,6 +165,11 @@ function NavigationBar(props) {
               </div>
             </li>
             <li>
+              <Link to="/users" onClick={toggleMenu}>
+                Usuarios
+              </Link>
+            </li>
+            <li>
               {logged ? (
                 <Link to="/mi-cuenta" onClick={toggleMenu}>
                   <FontAwesomeIcon icon={faUser} />
