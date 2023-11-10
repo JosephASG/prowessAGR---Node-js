@@ -310,21 +310,26 @@ function Register() {
         {validPassword && (
           <p className="error-message">Las contraseñas no coinciden</p>
         )}
-        <input
-          className="register-input"
-          type="file"
-          accept="image/*"
-          name="user-image"
-          onChange={handlePhotoUpload}
-        />
-        {
-        }
 
-        {photo && (
-          <div>
-            <img src={URL.createObjectURL(photo.get('user-image'))} alt="Foto de perfil" className="image-show" />
-          </div>
-        )}
+        <div className="custom-file-input-container">
+
+          <input
+            className="register-input  register-input-image"
+            type="file"
+            accept="image/*"
+            name="user-image"
+            title="Selecciona una imagen de perfil"
+            onChange={handlePhotoUpload}
+          />
+          <span className="custom-file-input-label">Subir Imagen de Perfil</span>
+
+          {photo && (
+            <div> 
+              <img src={URL.createObjectURL(photo.get('user-image'))} alt="Foto de perfil" className="image-show" />
+            </div>
+          )}
+
+        </div>
         <h3 className="register-subtitle">Ubicación</h3>
         <Mapa></Mapa>
 
