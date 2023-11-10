@@ -17,6 +17,7 @@ import SaleDetailsPage from "./pages/SaleDetailsPage";
 import SalesPage from "./pages/SalesPage";
 import { getTokenData } from "./services/auth";
 import PrivateRoute from "./routes/PrivateRoute";
+import UserList from "./pages/UserList";
 import AccessDenied from "./pages/AccessDenied";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -180,6 +181,19 @@ function App() {
             />
           } /> 
         <Route path="/accessDenied" element={<AccessDenied />} />
+        <Route
+          path="/users"
+          element={
+            <PrivateRoute
+              userRole={role}
+              allowedRoles={[
+                "administrador"
+              ]}
+              element={<UserList />}
+            />
+          } 
+        /> 
+        
       </Routes>
       <Footer />
     </Router>
