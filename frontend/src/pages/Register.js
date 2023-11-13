@@ -84,7 +84,6 @@ function Register() {
   const [altitud, setAltitud] = useState(0);
   const [mainStreet, setMainStreet] = useState('');
   const [secondaryStreet, setSecondaryStreet] = useState('');
-  const [postalCode, setPostalCode] = useState('');
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [additionalField1, setAdditionalField1] = useState(''); // Campo adicional 1
   const [isCedulaValid, setIsCedulaValid] = useState(true);
@@ -131,14 +130,14 @@ function Register() {
   const handleRegister = async (e) => {
     var image = photo.get('user-image');
     e.preventDefault();
-    console.log('Registro de usuario:', name, userType, nPhone, nCedula, password, photo, province, city, mainStreet, secondaryStreet, postalCode);
+    console.log('Registro de usuario:', name, userType, nPhone, nCedula, password, photo, province, city, mainStreet, secondaryStreet);
     const formData = new FormData();
     formData.append("nombreUsuario", name);
     formData.append("apellidoUsuario", lastName);
     formData.append("nombreUsuarioS", name2);
     formData.append("apellidoUsuarioS", lastName2);
     formData.append("cedulaUsuario", nCedula);
-    formData.append("direccionUsuario", province + ' ' + city + ' ' + mainStreet + ' ' + secondaryStreet + ' ' + postalCode);
+    formData.append("direccionUsuario", province + ' ' + city + ' ' + mainStreet + ' ' + secondaryStreet);
     formData.append("ciudadUsuario", city);
     formData.append("provinciaUsuario", province);
     formData.append("telefonoUsuario", nPhone);
@@ -380,19 +379,6 @@ function Register() {
             const value = e.target.value;
             if (/^[A-Za-z\s]+$/.test(value) || value === '') {
               setSecondaryStreet(value);
-            }
-          }}
-          required
-        />
-        <input
-          className="register-input"
-          type="text"
-          placeholder="Código Postal"
-          value={postalCode}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/^[0-9\s]+$/.test(value) || value === '') {
-              setPostalCode(value);
             }
           }}
           required
