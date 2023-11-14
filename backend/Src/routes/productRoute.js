@@ -4,10 +4,11 @@ import multer from 'multer';
 const productoRouter = express.Router();
 const almacenamiento = multer.memoryStorage();
 const upload = multer({ storage: almacenamiento });
+import { verifyToken } from '../middleware/verifyToken.js';
 import * as producto from '../controller/productController.js';
 // Configuración de Firebase (reemplaza con la configuración real de tu proyecto)
 //Obtener todos los productos.
-productoRouter.get('/get', producto.getProducts);
+productoRouter.get('/get', verifyToken, producto.getProducts);
 
 // Obtener un producto específico
 productoRouter.get('/get/:id', producto.getProductByID);

@@ -42,9 +42,9 @@ export const updateUser = async(token,user) => {
   }
 }
 
-export const deleteUser = async(token,user) => {
+export const deleteUser = async(token,id) => {
   try{
-      const response = await axios.post(`${WEBURL}fb/usuario/post`,{
+      const response = await axios.post(`${WEBURL}fb/usuario/delete/${id}`,{
           headers: {
             token: token,
           },
