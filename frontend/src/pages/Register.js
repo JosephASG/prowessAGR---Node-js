@@ -10,7 +10,7 @@ const provinces = [
   { "name": "Cañar", "cities": ["Azogues"] },
   { "name": "Carchi", "cities": ["Tulcán"] },
   { "name": "Chimborazo", "cities": ["Riobamba"] },
-  { "name": "Cotopaxi", "cities": ["Latacunga"] },
+  { "name": "Cotopaxi", "cities": ["L atacunga"] },
   { "name": "El Oro", "cities": ["Machala"] },
   { "name": "Esmeraldas", "cities": ["Esmeraldas"] },
   { "name": "Galápagos", "cities": ["Puerto Baquerizo Moreno"] },
@@ -80,18 +80,23 @@ function Register() {
   const [photo, setPhoto] = useState(null);
   const [province, setProvince] = useState('');
   const [city, setCity] = useState('');
-  const [latitud, setLatitud] = useState(0);
-  const [altitud, setAltitud] = useState(0);
+  const [latitud, setLatitud] = useState('');
+  const [altitud, setAltitud] = useState('');
   const [mainStreet, setMainStreet] = useState('');
   const [secondaryStreet, setSecondaryStreet] = useState('');
   const [postalCode, setPostalCode] = useState('');
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
-  const [additionalField1, setAdditionalField1] = useState(''); // Campo adicional 1
+  const [additionalField1, setAdditionalField1] = useState('');
   const [isCedulaValid, setIsCedulaValid] = useState(true);
   const [tipoDocumento, setTipoDocumento] = useState('cedula');
 
   const navigate = useNavigate();
 
+  const handleLocationSelect = (latlng) => {
+    setLatitud(latlng.lat);
+    setAltitud(latlng.lng);
+  };
+  console.log(latitud, altitud)
 
 
   const handleCedulaBlur = (e) => {
@@ -324,16 +329,14 @@ function Register() {
           <span className="custom-file-input-label">Subir Imagen de Perfil</span>
 
           {photo && (
-            <div> 
+            <div>
               <img src={URL.createObjectURL(photo.get('user-image'))} alt="Foto de perfil" className="image-show" />
             </div>
           )}
 
         </div>
         <h3 className="register-subtitle">Ubicación</h3>
-        <Mapa></Mapa>
-
-
+        <Mapa onLocationSelect={handleLocationSelect} />
 
         <h3 className="register-subtitle">Dirección</h3>
         <select
