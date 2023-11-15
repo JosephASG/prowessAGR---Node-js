@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ModalAddCategory.css';
+import { postCategory } from '../services/category';
 const WEBURL = process.env.REACT_APP_API_URL
 
 const ModalAddCategory = ({ isOpen, onClose }) => {
@@ -25,26 +26,16 @@ const ModalAddCategory = ({ isOpen, onClose }) => {
       [name]: value,
     });
   };
-
-  const handleSave = () => {
-    fetch(`${WEBURL}fb/categoria/post`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newSupplier),
-    })
-      .then((response) => {
-        if (response.ok) {
-          onClose();
-        } else {
-          console.error('Error al agregar el proveedor en el servidor');
-        }
-      })
-      .catch((error) => {
-        console.error('Error de red al agregar el proveedor', error);
-      });
-  };
+const handleSave = async () => {
+  const token = localStorage.getItem('token');
+  const response = await postCategory(newSupplier, token);
+  if (response.status===200) {
+    console.log("aqui")
+    onClose();
+  } else {
+    console.error('Error al agregar el proveedor en el servidor');
+  }
+}
 
   if (!isOpen) return null;
 

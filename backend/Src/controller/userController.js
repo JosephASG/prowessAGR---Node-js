@@ -29,7 +29,6 @@ const registerUser = async (req, res) => {
         console.log('Imagen cargada con éxito');
         try{
           const url = await getDownloadURL(uploadtask.ref);
-          console.log(url);
           userData.imagenUsuario = url;
           console.log('URL de imagen obtenida con éxito');
         }
@@ -90,7 +89,6 @@ const loginUser = async (req, res) => {
       where("correoUsuario", "==", userData.email)
     );
     const querySnapshot = await getDocs(snapshot);
-    console.log(querySnapshot);
     if (querySnapshot.empty) {
       return res.status(401).send({ message: "Email o Contraseña Inválidos", estado: false  });
     }
@@ -191,7 +189,6 @@ const getUsers = async (req, res) => {
 const updateUser = async (req, res) => {
   const { id } = req.user;
   const userData = req.body;
-  console.log(userData);
   try {
     const docRef = firestore.doc(fs, "usuario", id);
     const docSnap = await firestore.getDoc(docRef);
@@ -200,7 +197,6 @@ const updateUser = async (req, res) => {
       user.id = docSnap.id;
       delete user.claveUsuario;
       firestore.updateDoc(docRef, userData);
-      console.log(docSnap.data());
       return res.status(200).json("Data Registrada");
     }
   } catch (error) {
@@ -212,7 +208,6 @@ const updateUser = async (req, res) => {
 
 const updateUserById = async (req, res) => {
   const userData = req.body;
-  console.log(userData);
   try {
     const docRef = firestore.doc(fs, "usuario", userData.id);
     const docSnap = await firestore.getDoc(docRef);
@@ -220,7 +215,6 @@ const updateUserById = async (req, res) => {
       const user = docSnap.data();
       user.id = docSnap.id;
       delete user.claveUsuario;
-      console.log(docSnap.data());
       return res.status(200).json("Data Registrada");
     }
   } catch (error) {
@@ -234,7 +228,6 @@ const updateUserById = async (req, res) => {
 const deleteUser = async (req, res) => {
   const { id } = req.user;
   const userData = req.body;
-  console.log(userData);
   try {
     const docRef = firestore.doc(fs, "usuario", id);
     const docSnap = await firestore.getDoc(docRef);
@@ -243,7 +236,6 @@ const deleteUser = async (req, res) => {
       user.id = docSnap.id;
       delete user.claveUsuario;
       firestore.deleteDoc(docRef);
-      console.log(docSnap.data());
       return res.status(200).json("Data Registrada");
     }
   } catch (error) {
@@ -254,7 +246,6 @@ const deleteUser = async (req, res) => {
 }
   const deleteUserById = async (req, res) => {
     const userData = req.body;
-    console.log(userData);
     try {
       const docRef = firestore.doc(fs, "usuario", userData.id);
       const docSnap = await firestore.getDoc(docRef);
@@ -263,7 +254,6 @@ const deleteUser = async (req, res) => {
         user.id = docSnap.id;
         delete user.claveUsuario;
         firestore.deleteDoc(docRef);
-        console.log(docSnap.data());
         return res.status(200).json("Data Eliminada");
       }
     } catch (error) {

@@ -18,3 +18,12 @@ export const deleteProduct = async (productId, token) => {
     });
     return response;
 }
+
+export const postProduct = async (product, token) => {
+    const response = await axios.post(`${WEBURL}fb/producto/post`, product, {
+        headers: {
+            token: token,
+        },
+    });
+    return response;
+}

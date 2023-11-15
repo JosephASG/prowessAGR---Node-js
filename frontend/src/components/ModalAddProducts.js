@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./ModalAddProducts.css";
 import ReactSelect from "react-select";
+import { getCategories } from "../services/category";
+import { getSellers } from "../services/seller";
+import { postProduct } from "../services/product";
 const WEBURL = process.env.REACT_APP_API_URL
 
 const ModalAddProducts = ({ isOpen, onClose }) => {
@@ -24,6 +27,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
 
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     if (isOpen) {
       const body = document.body;
       body.classList.add("modal-open");
@@ -32,25 +36,32 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
       };
     }
 
-    fetch(`${WEBURL}fb/categoria/get`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCategorias(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener las categorías", error);
-      });
+    getCategory(token);
+    getVendedores(token);
 
-    // Nueva solicitud para obtener la lista de vendedores
-    fetch(`${WEBURL}fb/vendedor/getSeller`)
-      .then((response) => response.json())
-      .then((data) => {
-        setVendedores(data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener la lista de vendedores", error);
-      });
   }, [isOpen]);
+
+  const getVendedores = async (token) => {
+    try {
+      const res = await getSellers(token);
+      console.log(res);
+      const data = res.data;
+      setVendedores(data);
+    } catch (error) {
+      console.error('Error al cargar los vendedores', error);
+    }
+  }
+
+  const getCategory = async (token) => {
+    try {
+      const res = await getCategories(token);
+      console.log(res);
+      const data = res.data;
+      setCategorias(data);
+    } catch (error) {
+      console.error('Error al cargar las categorías', error);
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value, file } = e.target;
@@ -71,32 +82,29 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     }
   };
 
-  const handleSave = () => {
+  const handleSave = async() => {
     const {pro_imagen,...otrosDatos} = newProduct;
     const formData = new FormData();
+    if(!pro_imagen) return alert("Debe seleccionar una imagen");
     var imagen = pro_imagen.get("pro_imagen");
     formData.append("pro_imagen", imagen);
     Object.entries(otrosDatos).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
-
-    console.log(newProduct);
-    fetch(`${WEBURL}fb/producto/post`, {
-      method: "POST",
-      body: formData
-    })
-      .then((response) => {
-        if (response.ok) {
-          onClose();
-        } else {
-          console.error("Error al agregar el producto en el servidor");
-        }
-      })
-      .catch((error) => {
-        console.error("Error de red al agregar el producto", error);
-      });
+    const token = localStorage.getItem("token");
+    postProducto(formData, token);
   };
+
+  const postProducto = async (product, token) => {
+    const response = await postProduct(product, token);
+    if ( response.status === 200) {
+      onClose();
+    } else {
+      console.error("Error al agregar el producto en el servidor");
+    }
+
+  }
+
 
   if (!isOpen) return null;
 
