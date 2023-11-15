@@ -274,14 +274,23 @@ const deleteUser = async (req, res) => {
   }
 
   const actualizarDatos = async (req, res) => {
-    try{
-      const docRef = firestore.doc(fs, "usuario", userData.id);
-      const docSnap = await firestore.getDoc(docRef);
-    }
-    catch(error){
+    try {
+      const snapshot = await firestore.getDocs(firestore.collection(fs, "usuario"));
+      const users = [];
+      snapshot.forEach((doc) => {
+        const user = doc.data();
+        user._id = doc.id;
+        if(user.coords){
+          
+        }
+        delete user.claveUsuario;
+        users.push(user);
+      });
+      return res.status(200).json({message:"Usuarios Encontrados",users})
+    } catch (error) {
       return res
         .status(500)
-        .json({ message: "Error al actualizar el usuario" });
+        .json({ message: "Error al obtener la lista de usuarios" });
     }
   }
 
