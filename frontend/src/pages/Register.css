@@ -77,16 +77,14 @@
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  background-color: #4CAF50;
+  background-color: red;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.register-button:hover {
-  background-color: #45a049;
-}
+
 
 .register-input[type="file"]::-webkit-file-upload-button {
   background-color: #4CAF50;
@@ -123,4 +121,11 @@
   max-height: auto;
   margin-top: 20px;
   margin-left: 150px; 
+}
+
+.error-message {
+  color: white;
+  margin-top: -8px;
+  margin-bottom: 1px;
+  padding: 5px;  
 }

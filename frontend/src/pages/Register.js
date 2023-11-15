@@ -31,9 +31,11 @@ const provinces = [
   { "name": "Zamora Chinchipe", "cities": ["Zamora"] }
 ];
 
+
+
 const validarCedulaEcuatoriana = (cedula) => {
   if (cedula.length === 10 && /^[0-9]+$/.test(cedula)) {
-    // Validación de cédula ecuatoriana
+
     var digitos = cedula.substr(0, 9);
     var suma = 0;
 
@@ -57,8 +59,8 @@ const validarCedulaEcuatoriana = (cedula) => {
 
     return verificador === ultimoDigito;
   } else if ((cedula.length === 8 || cedula.length === 9) && /^[A-Z0-9]+$/.test(cedula)) {
-    // Validación de pasaporte ecuatoriano
-    return true; // Pasaporte válido
+
+    return true;
   } else {
     // No es ni cédula ecuatoriana ni pasaporte ecuatoriano
     return false;
@@ -88,31 +90,13 @@ function Register() {
   const [additionalField1, setAdditionalField1] = useState('');
   const [isCedulaValid, setIsCedulaValid] = useState(true);
   const [tipoDocumento, setTipoDocumento] = useState('');
-  const [confirmationStatus, setConfirmationStatus] = useState(false);
-
+  const [isValidEmail, setIsValidEmail] = useState(true);
   const navigate = useNavigate();
 
   const handleLocationSelect = (latlng) => {
     setLatitud(latlng.lat);
     setAltitud(latlng.lng);
   };
-  console.log(latitud, altitud)
-  const validateField = (fieldName, value) => {
-    let errorMessage = '';
-
-    switch (fieldName) {
-      case 'name':
-        if (!/^[A-Za-z\s]+$/.test(value) && value !== '') {
-          errorMessage = '¡Recuerde que debe ser un nombre válido!';
-        }
-        break;
-      default:
-        break;
-    }
-    return errorMessage;
-  };
-
-
 
   const handleCedulaBlur = (e) => {
     const value = e.target.value;
@@ -133,21 +117,44 @@ function Register() {
     } else if (tipoDocumento === 'ruc') {
       const primerosDiezDigitos = value.substring(0, 10);
       const isPrimerosDiezDigitosValidos = validarCedulaEcuatoriana(primerosDiezDigitos);
-      
+
       const ultimosTresDigitos = value.substring(10);
       const isUltimosTresDigitosValidos = ultimosTresDigitos === '001';
 
       setIsCedulaValid(isPrimerosDiezDigitosValidos && isUltimosTresDigitosValidos);
     } else if (tipoDocumento === 'pasaporte') {
+      //No existe logica para validar pasaporte ya que no tiene un formato definido
       setIsCedulaValid(true);
     }
-    
   };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleEmailValidation = (e) => {
+    const email = e.target.value;
+    const emailRegex = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+
+    const isValidEmail = emailRegex.test(email);
+
+    setIsValidEmail(isValidEmail);
+  };
+
+  const isFormValid = () => {
+    const requiredFields = [name, name2, lastName, lastName2, email, nPhone, nCedula, password, province, city, mainStreet, secondaryStreet];
+    const hasEmptyFields = requiredFields.some(field => field === '');
+    const isCedulaOrRucValid = tipoDocumento === 'ruc' ? validarCedulaEcuatoriana(nCedula) : validarCedulaEcuatoriana(nCedula) || true; // Agrega la lógica para validar RUC
+    const arePasswordsValid = !validPassword; // La validación ahora se basa en el estado validPassword
+
+    return !hasEmptyFields && isCedulaOrRucValid && arePasswordsValid;
+  };
+
 
 
   const handleTipoDocumentoChange = (e) => {
     setTipoDocumento(e.target.value);
-    setNCedula(''); 
+    setNCedula('');
   };
 
   const handlePasswordBlur = (e) => {
@@ -160,6 +167,7 @@ function Register() {
   }
 
   const handleRegister = async (e) => {
+
     var image = photo.get('user-image');
     e.preventDefault();
     console.log('Registro de usuario:', name, userType, nPhone, nCedula, password, photo, province, city, mainStreet, secondaryStreet);
@@ -181,13 +189,7 @@ function Register() {
     formData.append("claveUsuario", password);
     formData.append("imagenUsuario", image);
 
-    const areNamesFilled = name.trim() !== '' && name2.trim() !== '';
 
-    const isValidCedula = validarCedulaEcuatoriana(nCedula);
-
-    const isDataConfirmed = areNamesFilled;
-
-    setConfirmationStatus(isDataConfirmed);
 
     const response = await registerApp(formData);
     console.log(response);
@@ -287,9 +289,12 @@ function Register() {
           type="email"
           placeholder="Correo"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmailChange}
+          onBlur={handleEmailValidation}
           required
         />
+        {isValidEmail ? null : <p className="error-message">¡Recuerde que debe ser un email real!
+          Formato: correo@dominio.com/net/ec</p>}
 
         <select
           className="register-inputS"
@@ -455,8 +460,25 @@ function Register() {
           </div>
         )}
 
-        <button className="register-button" type="submit">Registrarse</button>
+        <button
+          className={`register-button ${isFormValid() ? 'valid' : ''}`}
+          type="submit"
+          disabled={!isFormValid()}
+        >
+          {isFormValid() ? 'Registrarse' : '¡Alto! Verifica que todos los campos esten correctos'}
+        </button>
       </form>
+
+      {isFormValid() && (
+        <style>
+          {`
+            .register-button:hover,
+            .register-button.valid {
+              background-color: #45a049;
+            }
+          `}
+        </style>
+      )}
     </div>
   );
 }
