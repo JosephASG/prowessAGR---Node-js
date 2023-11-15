@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importa el hook de navegación
+import { useNavigate } from 'react-router-dom';
 import './Register.css'; // Importa el archivo de estilos CSS
 import Mapa from '../components/Mapa.js';
 import { registerApp } from '../services/auth';
@@ -88,12 +88,28 @@ function Register() {
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
   const [additionalField1, setAdditionalField1] = useState(''); // Campo adicional 1
   const [isCedulaValid, setIsCedulaValid] = useState(true);
-  const [tipoDocumento, setTipoDocumento] = useState('cedula');
+  const [tipoDocumento, setTipoDocumento] = useState('');
+  const [confirmationStatus, setConfirmationStatus] = useState(false);
 
   const navigate = useNavigate();
 
+  const validateField = (fieldName, value) => {
+    let errorMessage = '';
+
+    switch (fieldName) {
+      case 'name':
+        if (!/^[A-Za-z\s]+$/.test(value) && value !== '') {
+          errorMessage = '¡Recuerde que debe ser un nombre válido!';
+        }
+        break;
+      default:
+        break;
+    }
+    return errorMessage;
+  };
 
 
+  
   const handleCedulaBlur = (e) => {
     const value = e.target.value;
     let longitudValida;
@@ -149,7 +165,15 @@ function Register() {
     formData.append("tipoAsociacionUsuario", additionalField1);
     formData.append("claveUsuario", password);
     formData.append("imagenUsuario", image);
-    //TODO: AGREGAR UBICACION CORRECTAMENTE
+
+    const areNamesFilled = name.trim() !== '' && name2.trim() !== '';
+
+    const isValidCedula = validarCedulaEcuatoriana(nCedula);
+
+    const isDataConfirmed = areNamesFilled;
+
+    setConfirmationStatus(isDataConfirmed);
+
     const response = await registerApp(formData);
     console.log(response);
     if (response.status === 201) {
@@ -255,29 +279,40 @@ function Register() {
         <select
           className="register-inputS"
           value={tipoDocumento}
-          onChange={(e) => setTipoDocumento(e.target.value)}
+          onChange={handleTipoDocumentoChange}
           required
         >
+          <option value="">
+            Tipo de documento
+          </option>
           <option value="cedula">Cédula</option>
           <option value="pasaporte">Pasaporte</option>
           <option value="ruc">RUC</option>
         </select>
 
-        <input
-          className={`register-input ${isCedulaValid ? '' : 'invalid-cedula'}`}
-          type="text"
-          placeholder={`Número de ${tipoDocumento === 'cedula' ? 'Cédula' : (tipoDocumento === 'pasaporte' ? 'Pasaporte' : 'RUC')}`}
-          maxLength={tipoDocumento === 'ruc' ? 13 : 10}
-          value={nCedula}
-          onChange={(e) => {
-            const value = e.target.value;
-            if (/^[0-9\s]+$/.test(value) || value === '') {
-              setNCedula(value);
-            }
-          }}
-          onBlur={handleCedulaBlur}
-          required
-        />
+
+        {tipoDocumento && (
+          <input
+            className={`register-input ${isCedulaValid ? '' : 'invalid-cedula'}`}
+            type="text"
+            placeholder={`Número de ${tipoDocumento === 'cedula'
+              ? 'Cédula'
+              : tipoDocumento === 'pasaporte'
+                ? 'Pasaporte'
+                : 'RUC'
+              }`}
+            maxLength={tipoDocumento === 'ruc' ? 13 : 10}
+            value={nCedula}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[0-9\s]+$/.test(value) || value === '') {
+                setNCedula(value);
+              }
+            }}
+            onBlur={handleCedulaBlur}
+            required
+          />
+        )}
         {isCedulaValid ? null : <p className="error-message">¡Recuerde que debe ser un documento real!</p>}
 
         <input
@@ -324,7 +359,7 @@ function Register() {
           <span className="custom-file-input-label">Subir Imagen de Perfil</span>
 
           {photo && (
-            <div> 
+            <div>
               <img src={URL.createObjectURL(photo.get('user-image'))} alt="Foto de perfil" className="image-show" />
             </div>
           )}
@@ -419,6 +454,7 @@ function Register() {
             />
           </div>
         )}
+
         <button className="register-button" type="submit">Registrarse</button>
       </form>
     </div>
