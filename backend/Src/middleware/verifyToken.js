@@ -12,7 +12,6 @@ const verifyToken = async (req, res, next) => {
       if (error) return res.status(400).json({ mensaje: "Token invalido" });
       else {
         req.user = data;
-        console.log(data);
         next();
       }
     });
@@ -24,12 +23,10 @@ const verifyToken = async (req, res, next) => {
 const getUserDataFromToken = (req,res) => {
   const token = req.headers["token"];
   const secret = process.env.JWT_SECRET;
-  console.log(token);
   try {
     const data = jwt.verify(token, secret);
     return res.status(200).json({data});
   } catch (error) {
-    console.log(error.message);
     res.status(400).json({ mensaje: "Token invalido AQUI" });
   }
 };

@@ -28,7 +28,6 @@ const exportProvinces = async (req, res) => {
         }
     }
         if(cantones.length>0){
-            console.log(cantones);
         }
         if(state===true){
             return res.status(200).send({ message: cantones });
