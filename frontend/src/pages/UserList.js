@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import "./UserList.css";
-import { getUsers } from "../services/user";
+import { getUsers, deleteUser} from "../services/user";
 
 const UserList = () => {
     const [users,setUsers] = useState([]);
+
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [UserToEdit, setUserToEdit] = useState(null);
+
     const WEBURL = process.env.REACT_APP_API_URL
     const ITEMS_PER_PAGE = 5;
     const token = localStorage.getItem("token");
@@ -14,9 +19,19 @@ const UserList = () => {
         handleUsers(token);
     },[]);
 
+    const handleEditUsers = (user) => {
+      setUserToEdit(user);
+      setIsEditModalOpen(true);
+    };
+
     const handleUsers = async (token) => {
         const response = await getUsers(token);
         setUsers(response.data.users);
+    }
+
+    const handleDeleteUser = async (id) => {
+        const response = await deleteUser(token,id);
+        console.log(response);
     }
     return (
         <div className="container-user-list">
@@ -52,8 +67,8 @@ const UserList = () => {
               />
             </div>
             <div className="actions">
-            <FontAwesomeIcon icon={faPenToSquare} className="edit" />
-            <FontAwesomeIcon icon={faTrash} className="delete" />
+            <FontAwesomeIcon icon={faPenToSquare} className="edit" onClick={() => handleEditUsers(user)} />
+            <FontAwesomeIcon icon={faTrash} className="delete" onClick={() => handleDeleteUser(user.id)}/>
             </div>
             </div>
         ))}

@@ -4,12 +4,15 @@ import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import "./ProductList.css";
 import ModalAddProducts from "../components/ModalAddProducts";
 import ModalEditProduct from "../components/ModalEditProduct";
+import { getProductsFromApi, deleteProduct } from "../services/product";
+import { getCategories } from "../services/category";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [vendedores, setVendedores] = useState([]);
   const WEBURL = process.env.REACT_APP_API_URL
+  const token = localStorage.getItem("token");
   const ITEMS_PER_PAGE = 5;
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -24,28 +27,32 @@ const ProductList = () => {
   const [productToUpdate, setProductToUpdate] = useState(null);
 
   useEffect(() => {
-    fetch(`${WEBURL}fb/producto/get`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Error en la solicitud al servidor");
-        }
-        console.log(response);
-        return response.json();
-      })
-      .then((data) => setProducts(data))
-      .catch((error) => console.error("Error al cargar los productos", error));
+    handleProducts(token);
   }, []);
 
-  useEffect(() => {
-    // Hacer la solicitud GET para obtener las categorías desde tu servidor backend
-    fetch(`${WEBURL}fb/categoria/get`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCategorias(data);
-      })
-      .catch((error) => {
-        console.error("Error al cargar las categorías", error);
-      });
+  const handleProducts = async (token) => {
+    const response = await getProductsFromApi(token);
+    const data = await response.data;
+    if(response.data){
+      setProducts(data);
+    }
+    else {
+      console.log(response.data.message);
+    }
+  }
+
+  const hanldeCategories = async (token) => {
+    const response = await getCategories(token);
+    if(response.data.categories){
+      setCategorias(response.data);
+    }
+    else {
+      console.log(response.data.message);
+    }
+  }
+
+useEffect(() => {
+    hanldeCategories(token);
   }, []); // Este efecto se ejecutará una vez al montar el componente
 
   useEffect(() => {
@@ -60,21 +67,18 @@ const ProductList = () => {
       });
   }, []); // Este efecto se ejecutará una vez al montar el componente
 
-  const handleDelete = (productId) => {
-    fetch(`${WEBURL}fb/producto/delete/${productId}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (response.ok) {
-          setProducts(products.filter((product) => product.id !== productId));
-        } else {
-          console.error("Error al eliminar el producto en el servidor");
-        }
-      })
-      .catch((error) => {
-        console.error("Error de red al eliminar el producto", error);
-      });
+  const handleDelete = async (productId) => {
+    const response = await deleteProduct(productId, token);
+    console.log(response);
+    if(response.data){
+      setProducts(products.filter((product) => product.id !== productId));
+    }
+    else {
+      console.log(response.data.message);
+    }
+    
   };
+
 
   const handleOpenModal = () => {
     setIsAddModalOpen(true);
