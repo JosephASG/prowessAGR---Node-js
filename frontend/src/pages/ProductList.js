@@ -6,13 +6,14 @@ import ModalAddProducts from "../components/ModalAddProducts";
 import ModalEditProduct from "../components/ModalEditProduct";
 import { getProductsFromApi, deleteProduct } from "../services/product";
 import { getCategories } from "../services/category";
+import { getSellers } from "../services/seller";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [vendedores, setVendedores] = useState([]);
   const WEBURL = process.env.REACT_APP_API_URL
-  const token = localStorage.getItem("token");
+
   const ITEMS_PER_PAGE = 5;
 
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -27,7 +28,10 @@ const ProductList = () => {
   const [productToUpdate, setProductToUpdate] = useState(null);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
     handleProducts(token);
+    handleCategories(token);
+    handleVendedores(token);
   }, []);
 
   const handleProducts = async (token) => {
@@ -41,7 +45,7 @@ const ProductList = () => {
     }
   }
 
-  const hanldeCategories = async (token) => {
+  const handleCategories = async (token) => {
     const response = await getCategories(token);
     if(response.data.categories){
       setCategorias(response.data);
@@ -51,34 +55,33 @@ const ProductList = () => {
     }
   }
 
-useEffect(() => {
-    hanldeCategories(token);
-  }, []); // Este efecto se ejecutará una vez al montar el componente
-
-  useEffect(() => {
-    // Hacer la solicitud GET para obtener los vendedores desde tu servidor backend
-    fetch(`${WEBURL}fb/vendedor/getSeller`)
-      .then((response) => response.json())
-      .then((data) => {
-        setVendedores(data);
-      })
-      .catch((error) => {
-        console.error("Error al cargar los vendedores", error);
-      });
-  }, []); // Este efecto se ejecutará una vez al montar el componente
+  const handleVendedores = async(token) => {
+    const response = await getSellers(token);
+    if(response.data){
+      setVendedores(response.data);
+    }
+    else{
+      console.log(response.error);
+    }
+  }
 
   const handleDelete = async (productId) => {
-    const response = await deleteProduct(productId, token);
-    console.log(response);
-    if(response.data){
-      setProducts(products.filter((product) => product.id !== productId));
+    try {
+        const admintoken = localStorage.getItem("token");
+        const response = await deleteProduct(productId, admintoken);
+        console.log(response);
+        if(response.data){
+          setProducts(products.filter((product) => product.id !== productId));
+        }
+        else {
+          console.log(response.data.message);
+        }
     }
-    else {
-      console.log(response.data.message);
+    catch(error){
+      
     }
     
   };
-
 
   const handleOpenModal = () => {
     setIsAddModalOpen(true);
