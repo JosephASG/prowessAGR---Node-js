@@ -4,7 +4,7 @@ import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import './CategoriesPage.css';
 import ModalAddCategory from '../components/ModalAddCategory';
 import ModalEditCategory from '../components/ModalEditCategory';
-import { getCategories } from '../services/category';
+import { getCategories, deleteCategory, updateCategory} from '../services/category';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]); // Cambiamos a "categories" en lugar de "products"
@@ -42,21 +42,16 @@ const CategoryList = () => {
     }
   };
 
-  const handleDelete = (categoryId) => {
-    fetch(`${process.env.REACT_APP_API_URL}${categoryId}`, {
-      method: 'DELETE',
-    })
-      .then((response) => {
-        if (response.ok) {
-          setCategories(categories.filter((category) => category.id !== categoryId)); // Cambiamos "products" a "categories"
-        } else {
-          console.error('Error al eliminar la categoría en el servidor');
-        }
-      })
-      .catch((error) => {
-        console.error('Error de red al eliminar la categoría', error);
-      });
-  };
+  const handleDelete = async (categoryId) => {
+    const token = localStorage.getItem('token');
+    const response = await deleteCategory(categoryId, token);
+    if (response.status===200) {
+      setCategories(categories.filter((category) => category.id !== categoryId)); // Cambiamos "products" a "categories"
+    } else {
+      console.error('Error al eliminar la categoría en el servidor');
+    }
+  }
+
 
   const handleOpenModal = () => {
     setIsAddModalOpen(true);
@@ -77,32 +72,23 @@ const CategoryList = () => {
     }
   }, [categoryToUpdate]);
 
-  const handleUpdateCategory = async(token) => {
+  const handleUpdateCategory = async() => {
     if (!categoryToUpdate) {
       return;
     }
-    fetch(`${WEBURL}fb/categoria/update/${categoryToUpdate.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(categoryToUpdate),
-    })
-      .then((response) => {
-        if (response.ok) {
-          setCategories((prevCategories) =>
+    const token = localStorage.getItem('token');
+    const response = await updateCategory(categoryToUpdate, token);
+    if (response && response.status === 200) {
+      setCategories((prevCategories) =>
             prevCategories.map((category) =>
               category.id === categoryToUpdate.id ? categoryToUpdate : category
             )
           );
-          setIsEditModalOpen(false);
-        } else {
-          console.error('Error al guardar los cambios en el servidor');
-        }
-      })
-      .catch((error) => {
-        console.error('Error de red al guardar los cambios', error);
-      });
+      setIsEditModalOpen(false);
+    }
+    else {
+      console.error('Error al guardar los cambios en el servidor');
+    }
   };
 
   const handleSort = (criteria) => {
