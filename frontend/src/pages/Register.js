@@ -113,30 +113,41 @@ function Register() {
   };
 
 
-  
+
   const handleCedulaBlur = (e) => {
     const value = e.target.value;
+
     let longitudValida;
     let formatoValido;
 
-    if (tipoDocumento === 'cedula' || tipoDocumento === 'pasaporte') {
+    if (tipoDocumento === 'cedula') {
       longitudValida = value.length === 10;
       formatoValido = /^[0-9]+$/.test(value);
-    } else if (tipoDocumento === 'ruc') {
-      longitudValida = value.length === 13;
-      formatoValido = /^[0-9]+$/.test(value);
-    }
 
-    if (longitudValida && formatoValido) {
+      if (longitudValida && formatoValido) {
+        const isCedulaValid = validarCedulaEcuatoriana(value);
+        setIsCedulaValid(isCedulaValid);
+      } else {
+        setIsCedulaValid(false);
+      }
+    } else if (tipoDocumento === 'ruc') {
+      const primerosDiezDigitos = value.substring(0, 10);
+      const isPrimerosDiezDigitosValidos = validarCedulaEcuatoriana(primerosDiezDigitos);
+      
+      const ultimosTresDigitos = value.substring(10);
+      const isUltimosTresDigitosValidos = ultimosTresDigitos === '001';
+
+      setIsCedulaValid(isPrimerosDiezDigitosValidos && isUltimosTresDigitosValidos);
+    } else if (tipoDocumento === 'pasaporte') {
       setIsCedulaValid(true);
-    } else {
-      setIsCedulaValid(false);
     }
+    
   };
+
 
   const handleTipoDocumentoChange = (e) => {
     setTipoDocumento(e.target.value);
-    setNCedula(''); // Reiniciar el valor de la cédula cuando cambia el tipo de documento
+    setNCedula(''); 
   };
 
   const handlePasswordBlur = (e) => {
@@ -290,8 +301,8 @@ function Register() {
             Tipo de documento
           </option>
           <option value="cedula">Cédula</option>
-          <option value="pasaporte">Pasaporte</option>
           <option value="ruc">RUC</option>
+          <option value="pasaporte">Pasaporte</option>
         </select>
 
 
