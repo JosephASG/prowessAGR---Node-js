@@ -54,7 +54,10 @@ const registerUser = async (req, res) => {
           .send({ message: "El correo electrónico ya está en uso" });
       }
       userData.claveUsuario = bcrypt.hashSync(userData.claveUsuario, saltRounds);
-
+      if(userData.categoriaUsuario == "Administrador"){
+       console.log("Registra como administrador");
+       return res.status(401).send({ message: "No tienes permisos para registrar un administrador" });
+      }
       for (const [key, value] of Object.entries(userData)) {
         if (value) {
           jsonUser[key] = value;
@@ -270,6 +273,16 @@ const deleteUser = async (req, res) => {
     }
   }
 
+  const actualizarDatos = async (req, res) => {
+    try{
+      const docRef = firestore.doc(fs, "usuario", userData.id);
+      const docSnap = await firestore.getDoc(docRef);
+    }
+    catch(error){
+      return res
+        .status(500)
+        .json({ message: "Error al actualizar el usuario" });
+    }
+  }
 
-
-export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser,deleteUser,updateUserById,deleteUserById};
+export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser,deleteUser,updateUserById,deleteUserById,actualizarDatos};
