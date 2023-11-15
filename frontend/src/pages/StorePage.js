@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { getProductsFromApi } from '../services/product';
 
 import './StorePage.css';
 import SearchBar from '../components/SearchBar';
@@ -36,23 +37,34 @@ function StorePage({ cart, addToCart, removeFromCart }) {
   const totalPages = Math.ceil(sortedAndFilteredProducts.length / productsPerPage);
 
   useEffect(() => {
-    fetch(`${WEBURL}fb/producto/get`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Error en la solicitud al servidor');
-        }
-        return response.json();
-      })
-      .then((data) => setProducts(data))
-      .catch((error) => console.error('Error al cargar los productos', error));
+    getProductos();
   }, []);
   
+  const getProductos = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      const res = await getProductsFromApi(token);
+      console.log(res);
+      if(res.data){
+        const data = res.data;
+        setProducts(data);
+      }
+      else {
+        console.log('Error al cargar los productos');
+      }
+    } catch (error) {
+      console.error('Error al cargar los productos', error);
+    }
+  };
+
   const showProductDetails = (productId) => {
     const product = products.find((p) => p.id === productId);
     if (product) {
       console.log(`Detalles del producto ${productId}:`, product);
     }
   };
+
+
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value);
