@@ -1,35 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css'; // Importa el archivo de estilos CSS
 import Mapa from '../components/Mapa.js';
 import { registerApp } from '../services/auth';
 const WEBURL = process.env.REACT_APP_API_URL
-const provinces = [
-  { "name": "Azuay", "cities": ["Cuenca"] },
-  { "name": "Bolívar", "cities": ["Guaranda"] },
-  { "name": "Cañar", "cities": ["Azogues"] },
-  { "name": "Carchi", "cities": ["Tulcán"] },
-  { "name": "Chimborazo", "cities": ["Riobamba"] },
-  { "name": "Cotopaxi", "cities": ["L atacunga"] },
-  { "name": "El Oro", "cities": ["Machala"] },
-  { "name": "Esmeraldas", "cities": ["Esmeraldas"] },
-  { "name": "Galápagos", "cities": ["Puerto Baquerizo Moreno"] },
-  { "name": "Guayas", "cities": ["Guayaquil"] },
-  { "name": "Imbabura", "cities": ["Ibarra"] },
-  { "name": "Loja", "cities": ["Loja"] },
-  { "name": "Los Ríos", "cities": ["Babahoyo"] },
-  { "name": "Manabí", "cities": ["Portoviejo"] },
-  { "name": "Morona Santiago", "cities": ["Macas"] },
-  { "name": "Napo", "cities": ["Tena"] },
-  { "name": "Orellana", "cities": ["Francisco de Orellana"] },
-  { "name": "Pastaza", "cities": ["Puyo"] },
-  { "name": "Pichincha", "cities": ["Quito"] },
-  { "name": "Santa Elena", "cities": ["Santa Elena"] },
-  { "name": "Santo Domingo de los Tsáchilas", "cities": ["Santo Domingo"] },
-  { "name": "Sucumbíos", "cities": ["Nueva Loja"] },
-  { "name": "Tungurahua", "cities": ["Ambato", "Pelileo", "Cevallos"] },
-  { "name": "Zamora Chinchipe", "cities": ["Zamora"] }
-];
+
 
 
 
@@ -62,7 +37,6 @@ const validarCedulaEcuatoriana = (cedula) => {
 
     return true;
   } else {
-    // No es ni cédula ecuatoriana ni pasaporte ecuatoriano
     return false;
   }
 };
@@ -91,7 +65,36 @@ function Register() {
   const [isCedulaValid, setIsCedulaValid] = useState(true);
   const [tipoDocumento, setTipoDocumento] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
+  const [provinces, setProvinces] = useState([]);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://gist.githubusercontent.com/emamut/6626d3dff58598b624a1/raw/166183f4520c4603987c55498df8d2983703c316/provincias.json');
+        const data = await response.json();
+
+        const extractedProvinces = Object.keys(data).map((provinceCode) => {
+          const provinceData = data[provinceCode];
+          const cantones = Object.keys(provinceData.cantones).map((cantonCode) => {
+            return provinceData.cantones[cantonCode].canton;
+          });
+
+          return {
+            name: provinceData.provincia,
+            cities: cantones,
+          };
+        });
+
+        setProvinces(extractedProvinces);
+      } catch (error) {
+        console.error('Error fetching provinces:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleLocationSelect = (latlng) => {
     setLatitud(latlng.lat);
