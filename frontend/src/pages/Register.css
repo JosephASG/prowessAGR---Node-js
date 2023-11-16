@@ -129,3 +129,33 @@
   margin-bottom: 1px;
   padding: 5px;  
 }
+
+.vendedor-section label {
+  font-size: 20px;
+  color: #333;
+  display: block;
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease; /* Añade transición para opacidad */
+  background-color: #ffcc00;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 80%; /* Ocupa todo el ancho del contenedor */
+  float: left;
+}
+
+/* Estilos para el checkbox */
+.vendedor-section input[type="checkbox"] {
+  transform: scale(2); /* Ajusta el tamaño del checkbox */
+  margin-left: 25px;
+  margin-top: 25px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.vendedor-section label:hover {
+  background-color: rgba(255, 204, 0, 0.8); /* Hace el color de fondo semi-transparente */
+  color: #333;
+  opacity: 1; /* Cambia la opacidad al pasar el mouse */
+}

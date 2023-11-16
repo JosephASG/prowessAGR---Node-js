@@ -437,28 +437,32 @@ function Register() {
           }}
           required
         />
-        <input
-          type="checkbox"
-          onChange={() => setShowAdditionalFields(!showAdditionalFields)}
-        />
-        <label>Deseo ser vendedor</label>
-        {showAdditionalFields && (
-          <div>
-            <input
-              className="register-input"
-              type="text"
-              placeholder="Tipo de Asosiacion"
-              value={additionalField1}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (/^[A-Za-z]+$/.test(value) || value === '') {
-                  setAdditionalField1(value);
-                }
-              }}
-              required
-            />
-          </div>
-        )}
+        <div className="vendedor-section">
+          <input
+            type="checkbox"
+            onChange={() => setShowAdditionalFields(!showAdditionalFields)}
+            id="quieroSerVendedor"
+          />
+          <label htmlFor="quieroSerVendedor">Deseo ser vendedor</label>
+          {showAdditionalFields && (
+            <div>
+              <input
+                className="register-input"
+                type="text"
+                placeholder="Tipo de Asosiacion"
+                value={additionalField1}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (/^[A-Za-z]+$/.test(value) || value === '') {
+                    setAdditionalField1(value);
+                  }
+                }}
+                required
+              />
+            </div>
+          )}
+        </div>
+
 
         <button
           className={`register-button ${isFormValid() ? 'valid' : ''}`}
