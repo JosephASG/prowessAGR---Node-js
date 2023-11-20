@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -6,7 +6,12 @@ import './HomePage.css';
 import image1 from '../imagenes/24.png'
 import image2 from '../imagenes/info.png'
 import image3 from '../imagenes/crecimiento.png'
-function HomePage() {
+
+function HomePage(props) {
+  const [logged, setLogged] = useState(false);
+  const [role, setRole] = useState("");
+
+
   const images = [
     require('../imagenes/agr3.jpg'),
     require('../imagenes/agr2.jpg'),
@@ -15,21 +20,40 @@ function HomePage() {
     require('../imagenes/agr1.jpg'),
   ];
 
+  useEffect(() => {
+    if (props.isLoggedIn) {
+      setLogged(true);
+      setRole(props.role);
+    }
+    if (!props.isLoggedIn) {
+      setLogged(false);
+      setRole("");
+    }
+  }, [props.isLoggedIn]);
+
+  console.log("Topamos:", logged);
+
   return (
     <div className="home-page">
       <div className="home-page-content">
         <div className="home-page-subtitle">
           <center>
-          <h3>Prowess Agrícola</h3>
-          <h4>Productos Agrícolas 100% Naturales y Frescos</h4>
-          <h4>Nutriendo tu vida, del campo a  tu mesa.</h4>
-          <Link to="/registro">
-          <button className='RegistroHome'>Registro</button>
-        </Link>
-        <Link to="/Login">
-          <button className='RegistroHome'>Iniciar Sesion</button>
-        </Link>
-        </center>
+            <h3>Prowess Agrícola</h3>
+            <h4>Productos Agrícolas 100% Naturales y Frescos</h4>
+            <h4>Nutriendo tu vida, del campo a  tu mesa.</h4>
+            {logged ? (
+              <p>Hola bienvenido</p>
+            ) : (
+              <>
+                <Link to="/registro">
+                  <button className='RegistroHome'>Registro</button>
+                </Link>
+                <Link to="/Login">
+                  <button className='RegistroHome'>Iniciar Sesion</button>
+                </Link>
+              </>
+            )}
+          </center>
         </div>
         <div className="home-page-carousel">
           <Carousel showThumbs={false} infiniteLoop autoPlay>
@@ -43,7 +67,7 @@ function HomePage() {
       </div>
       <div className='part2'>
         <p className='p1'>Vende y compra los mejores productos del país</p>
-        
+
       </div>
       <div className="paragraphs-container">
         <div className="paragraph">

@@ -73,7 +73,7 @@ function App() {
     <Router>
       <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart}/>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route
           path="/tienda"
           element={
@@ -84,6 +84,7 @@ function App() {
             />
           }
         />
+        
         <Route
           path="/carrito"
           element={
@@ -170,6 +171,7 @@ function App() {
           path="/login"
           element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />}
         />
+
         <Route path="/registro" element={<Register />} />
         <Route path="/categories" element={
             <PrivateRoute
