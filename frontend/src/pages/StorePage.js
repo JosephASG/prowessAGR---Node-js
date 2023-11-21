@@ -6,25 +6,19 @@ import { getProductsFromApi } from '../services/product';
 import './StorePage.css';
 import SearchBar from '../components/SearchBar';
 
-
-
 function StorePage({ cart, addToCart, removeFromCart }) {
-  const [categories, setCategories] = useState([
-    'Frutas',
-    'Verduras',
-    'Cereales',
-    'Hortalizas',
-  ]);
 
   console.log('StorePage', arguments)
 
   const [products, setProducts] = useState([]);
-
   const [sortOption, setSortOption] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [filterProduct, setFilterProduct] = useState('');
   const [sortCriteria, setSortCriteria] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const WEBURL = process.env.REACT_APP_API_URL
   const productsPerPage = 10;
 
@@ -39,21 +33,36 @@ function StorePage({ cart, addToCart, removeFromCart }) {
   useEffect(() => {
     getProductos();
   }, []);
-  
+
   const getProductos = async () => {
     const token = localStorage.getItem('token');
     try {
       const res = await getProductsFromApi(token);
       console.log(res);
-      if(res.data){
+      if (res.data) {
         const data = res.data;
         setProducts(data);
-      }
-      else {
+
+        // Check if data is an array and has the expected structure
+        if (Array.isArray(data) && data.length > 0 && data[0].pro_categoria) {
+          const uniqueCategories = Array.from(new Set(data.map((product) => product.pro_categoria)));
+          setCategories(uniqueCategories);
+        } else {
+          console.log('Data structure is not as expected.');
+        }
+      } else {
         console.log('Error al cargar los productos');
       }
     } catch (error) {
       console.error('Error al cargar los productos', error);
+    }
+  };
+
+  const toggleCategory = (category) => {
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
     }
   };
 
@@ -63,7 +72,6 @@ function StorePage({ cart, addToCart, removeFromCart }) {
       console.log(`Detalles del producto ${productId}:`, product);
     }
   };
-
 
 
   const handleSortChange = (event) => {
@@ -91,9 +99,10 @@ function StorePage({ cart, addToCart, removeFromCart }) {
     );
   }
 
+  
   return (
     <div className="store-page">
-      <h2 className='text-center'>Tienda de Productos</h2>
+      <h2 className="text-center">Tienda de Productos</h2>
       <SearchBar
         searchTerm={searchTerm}
         sortOption={sortOption}
@@ -102,40 +111,49 @@ function StorePage({ cart, addToCart, removeFromCart }) {
         showPriceOption={true}
         showCategoryOption={true}
       />
-      
+
       <div className="product-list">
         <div className="product-list-header">
           <div className="sidebar">
             <h2>Categorías</h2>
             <ul>
               {categories.map((category) => (
-                <li key={category}>{category}</li>
+                <li
+                  key={category}
+                  className={selectedCategories.includes(category) ? 'selected' : ''}
+                  onClick={() => toggleCategory(category)}
+                >
+                  {category}
+                </li>
               ))}
             </ul>
           </div>
         </div>
-        <div className='products-container'>
-          {currentProducts.map((product) => (
-            <div key={product.id} className="product-card">
-              <img src={product.pro_imagen} alt={product.pro_name} className="product-image" />
-              <h3>{product.pro_nombre}</h3>
-              <p><b>Precio:</b> ${product.pro_precio}</p>
-              <p><b>Categoría:</b> {product.pro_categoria}</p>
-              <p><b>Cantidad disponible:</b> {product.pro_stock + ' ' + product.pro_medida}</p>
-              <p><b>Vendedor:</b> {product.pro_vendedor}</p>
+        <div className="products-container">
+          {currentProducts
+            .filter((product) =>
+              selectedCategories.length === 0 || selectedCategories.includes(product.pro_categoria)
+            )
+            .map((product) => (
+              <div key={product.id} className="product-card">
+                <img src={product.pro_imagen} alt={product.pro_name} className="product-image" />
+                <h3>{product.pro_nombre}</h3>
+                <p><b>Precio:</b> ${product.pro_precio}</p>
+                <p><b>Categoría:</b> {product.pro_categoria}</p>
+                <p><b>Cantidad disponible:</b> {product.pro_stock + ' ' + product.pro_medida}</p>
+                <p><b>Vendedor:</b> {product.pro_vendedor}</p>
 
-              <div className="product-actions">
-                <button onClick={() => addToCart(product)}>
-                  Agregar al carrito
-                  <FontAwesomeIcon className="fa-ican-cartshopping" icon={faCartShopping} />
-                </button>
-                <span className="product-info-icon" onClick={() => showProductDetails(product.id)}>
-                </span>
+                <div className="product-actions">
+                  <button onClick={() => addToCart(product)}>
+                    Agregar al carrito
+                    <FontAwesomeIcon className="fa-ican-cartshopping" icon={faCartShopping} />
+                  </button>
+                  <span className="product-info-icon" onClick={() => showProductDetails(product.id)}>
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
-        
       </div>
       <div className="pagination">
         <button
