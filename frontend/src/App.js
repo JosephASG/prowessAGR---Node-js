@@ -29,7 +29,6 @@ function App() {
   useEffect(() => {
     if (token !== null) {
       checkAuth(token);
-      setIsLoggedIn(true);
     }
     if (token === null) {
       if (localStorage.getItem("token") !== null) {
@@ -45,8 +44,12 @@ function App() {
     if (response && response.data) {
       const data = response.data;
       setRole(data.data.rol);
+      console.log(response.data);
+      setIsLoggedIn(true);
     } else {
-      console.log("No se encontró 'response.data'");
+      localStorage.removeItem("token");
+      setIsLoggedIn(false);
+
     }
   };
   const addToCart = (product) => {
@@ -71,9 +74,9 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart}/>
+      <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart} />
       <Routes>
-      <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
+        <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route
           path="/tienda"
           element={
@@ -84,7 +87,7 @@ function App() {
             />
           }
         />
-        
+
         <Route
           path="/carrito"
           element={
@@ -148,25 +151,25 @@ function App() {
             />
           }
         />
-        <Route path="/sales:id"          
-         element={
+        <Route path="/sales:id"
+          element={
             <PrivateRoute
               userRole={role}
               allowedRoles={[
-                "administrador","vendedor"
+                "administrador", "vendedor"
               ]}
               element={<SaleDetailsPage />}
             />
           } />
         <Route path="/sales" element={
-            <PrivateRoute
-              userRole={role}
-              allowedRoles={[
-                "administrador","vendedor"
-              ]}
-              element={<SalesPage />}
-            />
-          } /> 
+          <PrivateRoute
+            userRole={role}
+            allowedRoles={[
+              "administrador", "vendedor"
+            ]}
+            element={<SalesPage />}
+          />
+        } />
         <Route
           path="/login"
           element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />}
@@ -174,14 +177,14 @@ function App() {
 
         <Route path="/registro" element={<Register />} />
         <Route path="/categories" element={
-            <PrivateRoute
-              userRole={role}
-              allowedRoles={[
-                "administrador"
-              ]}
-              element={<CategoriesPage />}
-            />
-          } /> 
+          <PrivateRoute
+            userRole={role}
+            allowedRoles={[
+              "administrador"
+            ]}
+            element={<CategoriesPage />}
+          />
+        } />
         <Route path="/accessDenied" element={<AccessDenied />} />
         <Route
           path="/users"
@@ -193,9 +196,9 @@ function App() {
               ]}
               element={<UserList />}
             />
-          } 
-        /> 
-        
+          }
+        />
+
       </Routes>
       <Footer />
     </Router>
