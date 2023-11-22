@@ -1,8 +1,6 @@
 import React from 'react';
 
 function SearchBar({ searchTerm, sortOption, handleSearch, handleSortChange, showPriceOption, showCategoryOption }) {
-
-  console.log(showCategoryOption);
   return (
     <div className='filter-container'>
       <div className="search-bar-products">

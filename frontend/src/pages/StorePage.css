@@ -51,6 +51,10 @@
   color: #ff8000;
 }
 
+.sidebar li.selected {
+  color: #ff8000;
+}
+
 .product-list {
   display: flex;
   min-height: 400px;

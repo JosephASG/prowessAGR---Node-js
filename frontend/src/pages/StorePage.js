@@ -8,7 +8,6 @@ import SearchBar from '../components/SearchBar';
 
 function StorePage({ cart, addToCart, removeFromCart }) {
 
-  console.log('StorePage', arguments)
 
   const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState('');
@@ -38,23 +37,18 @@ function StorePage({ cart, addToCart, removeFromCart }) {
     const token = localStorage.getItem('token');
     try {
       const res = await getProductsFromApi(token);
-      console.log(res);
       if (res.data) {
         const data = res.data;
         setProducts(data);
 
-        // Check if data is an array and has the expected structure
         if (Array.isArray(data) && data.length > 0 && data[0].pro_categoria) {
           const uniqueCategories = Array.from(new Set(data.map((product) => product.pro_categoria)));
           setCategories(uniqueCategories);
         } else {
-          console.log('Data structure is not as expected.');
         }
       } else {
-        console.log('Error al cargar los productos');
       }
     } catch (error) {
-      console.error('Error al cargar los productos', error);
     }
   };
 
@@ -78,6 +72,38 @@ function StorePage({ cart, addToCart, removeFromCart }) {
     setSortOption(event.target.value);
   };
 
+  useEffect(() => {
+    const filteredProducts = products.filter((product) =>
+      product.pro_nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  
+    if (searchTerm === '') {
+      setProducts(products);
+    } else if (!arraysAreEqual(filteredProducts, products)) {
+      setProducts(filteredProducts);
+    } else {
+      getProductos();
+      setProducts(products);
+    }
+  }, [searchTerm, products]);
+  
+  
+
+
+  const arraysAreEqual = (arr1, arr2) => {
+    if (arr1.length !== arr2.length) {
+      return false;
+    }
+
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -99,7 +125,7 @@ function StorePage({ cart, addToCart, removeFromCart }) {
     );
   }
 
-  
+
   return (
     <div className="store-page">
       <h2 className="text-center">Tienda de Productos</h2>
