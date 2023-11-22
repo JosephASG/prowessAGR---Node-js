@@ -31,8 +31,6 @@ function HomePage(props) {
     }
   }, [props.isLoggedIn]);
 
-  console.log("Topamos:", logged);
-
   return (
     <div className="home-page">
       <div className="home-page-content">
