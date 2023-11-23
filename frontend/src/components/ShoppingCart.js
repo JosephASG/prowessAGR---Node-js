@@ -24,6 +24,43 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
     }
   };
 
+  const handleQuantityChange = (product, newQuantity) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
+
+    if (existingProductIndex !== -1) {
+      updatedCart[existingProductIndex].cantidad = newQuantity;
+      addToCart(updatedCart[existingProductIndex]);
+    }
+  };
+
+  const handleCartUpdate = (product, action) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
+
+    if (existingProductIndex !== -1) {
+      const existingProduct = updatedCart[existingProductIndex];
+
+      if (action === 'remove') {
+        // Reducir la cantidad o eliminar completamente si es 1
+        if (existingProduct.cantidad > 1) {
+          existingProduct.cantidad -= 1;
+        } else {
+          updatedCart.splice(existingProductIndex, 1);
+        }
+      } else if (action === 'delete') {
+        // Eliminar completamente el producto del carrito
+        updatedCart.splice(existingProductIndex, 1);
+      }
+
+      addToCart(existingProduct); // Utilizar addToCart para actualizar el estado
+    }
+  };
+
+  const handleRemoveOrDeleteFromCart = (product, action) => {
+    handleCartUpdate(product, action);
+    removeFromCart(product);
+  };
   const handleDeleteFromCart = (product) => {
     removeFromCart(product);
   };
@@ -65,7 +102,15 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
               </div>
               <div className='cantidad-product'>
                 <button className='btn-add' onClick={() => addToCart(product)}>+</button>
-                <span className='product-amount'>{product.cantidad}</span>
+                <div className='cantidad'>
+                  <label htmlFor="pro_stock">Cantidad</label>
+                  <input
+                    type="number"
+                    className="cantidad-producto"
+                    name="pro_stock"
+                    onChange={(e) => handleQuantityChange(product, e.target.value)}
+                  />
+                </div>
                 <button className='btn-remove' onClick={() => handleRemoveFromCart(product)}>-</button>
               </div>
               <div className='price-product'>
@@ -74,7 +119,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
                   <FontAwesomeIcon
                     className='fa-icon-trash'
                     icon={faTrash}
-                    onClick={() => handleDeleteFromCart(product)}
+                    onClick={() => handleRemoveOrDeleteFromCart(product, 'remove')}
                   />
                 </div>
               </div>

@@ -20,11 +20,8 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     pro_estado:"",
     pro_imagen: null
   });
-  const [categorias, setCategorias] = useState([]); // Estado para almacenar las categorías
-  const [vendedores, setVendedores] = useState([]); // Estado para almacenar los vendedores
-
-
-
+  const [categorias, setCategorias] = useState([]);
+  const [vendedores, setVendedores] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
