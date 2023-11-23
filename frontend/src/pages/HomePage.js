@@ -18,6 +18,7 @@ function HomePage(props) {
     require('../imagenes/agr5.jpg'),
     require('../imagenes/agr4.jpg'),
     require('../imagenes/agr1.jpg'),
+    require('../imagenes/agr.jpg'),
   ];
 
   useEffect(() => {
@@ -37,8 +38,8 @@ function HomePage(props) {
         <div className="home-page-subtitle">
           <center>
             <h3>Prowess Agrícola</h3>
-            <h4>Productos Agrícolas 100% Naturales y Frescos</h4>
-            <h4>Nutriendo tu vida, del campo a  tu mesa.</h4>
+            <h4>Descubre nuestra selección de productos agrícolas, cultivados con esmero y dedicación para ofrecerte lo mejor de la naturaleza.</h4>
+            <h4>Nutriendo tu vida, del campo a  tu mesa.</h4><br/>
             {logged ? (
               <p>Hola bienvenido</p>
             ) : (
