@@ -188,6 +188,19 @@
   margin: 10px;
 }
 
+.cantidad{
+  padding: 20px;
+  text-align: center;
+  display: inline-grid;
+}
+
+.cantidad-producto{
+  width: 25px;
+  height: 25px;
+  place-self: center;
+  text-align: center;
+}
+
 /* Estilos para pantallas de 750px o menos */
 @media (max-width: 750px) {
   .shopping-cart-title {
