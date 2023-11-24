@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./ModalEditCategory.css";
 
 const ModalAddCategory = ({ isOpen, onClose, categoryToEdit, handleEdit, children }) => {
   const initialCategory = categoryToEdit ? categoryToEdit : {
