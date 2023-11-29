@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './ShoppingCart.css';
-import SearchBar from './SearchBar';
 
 function ShoppingCart({ cart, addToCart, removeFromCart }) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortOption, setSortOption] = useState('');
+
   const [cartProducts, setCartProducts] = useState([]);
 
   const handleRemoveFromCart = (product) => {
@@ -42,18 +40,16 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
       const existingProduct = updatedCart[existingProductIndex];
 
       if (action === 'remove') {
-        // Reducir la cantidad o eliminar completamente si es 1
         if (existingProduct.cantidad > 1) {
           existingProduct.cantidad -= 1;
         } else {
           updatedCart.splice(existingProductIndex, 1);
         }
       } else if (action === 'delete') {
-        // Eliminar completamente el producto del carrito
         updatedCart.splice(existingProductIndex, 1);
       }
 
-      addToCart(existingProduct); // Utilizar addToCart para actualizar el estado
+      addToCart(existingProduct); 
     }
   };
 
@@ -61,6 +57,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
     handleCartUpdate(product, action);
     removeFromCart(product);
   };
+  
   const handleDeleteFromCart = (product) => {
     removeFromCart(product);
   };
