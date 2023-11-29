@@ -1,26 +1,48 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import './RecuperarCuenta.css'; // Asegúrate de tener un archivo CSS asociado
+import './RecuperarCuenta.css';
+import { recuperarCuenta } from '../services/auth';
 
 const RecuperarCuenta = () => {
   const { search } = useLocation();
   const queryParams = new URLSearchParams(search);
   const backupPhoneFromQuery = queryParams.get('backupPhone');
   const [backupPhoneNumber, setBackupPhoneNumber] = useState(backupPhoneFromQuery || '');
+  const [alternativeEmail, setAlternativeEmail] = useState('');
+  const [recoveryCodeSent, setRecoveryCodeSent] = useState(false);
 
-  const handleRecuperarCuenta = async () => {
-    // Aquí deberías implementar la lógica para enviar el código de recuperación
-    // al correo electrónico y/o número de teléfono de respaldo.
-    // Puedes utilizar una función similar a la de recuperarCuenta en Login.js.
+  const handleRecuperarCuenta = async (e) => {
+    e.preventDefault();
 
-    console.log('Recuperar cuenta con número de teléfono de respaldo:', backupPhoneNumber);
+    try {
+      // Llama a la función recuperarCuenta modificada
+      const result = await recuperarCuenta(alternativeEmail, backupPhoneNumber);
+
+      if (result.success) {
+        console.log('Código de recuperación enviado correctamente.');
+        setRecoveryCodeSent(true);
+      } else {
+        console.log('La recuperación de cuenta falló.');
+        // Muestra un mensaje de error al usuario si lo deseas
+      }
+    } catch (error) {
+      console.error('Error al intentar recuperar la cuenta:', error);
+      // Muestra un mensaje de error al usuario si lo deseas
+    }
   };
 
   return (
-    <div className="recuperar-cuenta-container">
+    <div className="recuperar-cuenta-container recuperar-cuenta-page">
       <h2 className="recuperar-cuenta-title">Recuperar Cuenta</h2>
       <form onSubmit={handleRecuperarCuenta}>
-        {/* Otros campos y elementos del formulario, si es necesario */}
+        <input
+          className="recuperar-cuenta-input"
+          type="email"
+          placeholder="Correo electrónico alternativo"
+          value={alternativeEmail}
+          onChange={(e) => setAlternativeEmail(e.target.value)}
+          required
+        />
         <input
           className="recuperar-cuenta-input"
           type="tel"
@@ -31,6 +53,9 @@ const RecuperarCuenta = () => {
         />
         <button className="recuperar-cuenta-button" type="submit">Recuperar Cuenta</button>
       </form>
+      {recoveryCodeSent && (
+        <p>Código de recuperación enviado correctamente. Por favor, revisa tu correo electrónico o número de teléfono.</p>
+      )}
     </div>
   );
 };
