@@ -77,14 +77,13 @@
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  background-color: red;
+  background-color: rgba(0, 0, 0, 0.1);
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-
-
 
 .register-input[type="file"]::-webkit-file-upload-button {
   background-color: #4CAF50;
@@ -132,14 +131,14 @@
 
 .vendedor-section label {
   font-size: 20px;
-  color: #333;
+  color: #ECF0F1;
   display: block;
   text-align: center;
-  padding: 15px;
-  margin-bottom: 15px;
+  padding: 5px;
+  margin-bottom: 5px;
   transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease; /* Añade transición para opacidad */
-  background-color: #ffcc00;
-  border-radius: 8px;
+  background-color: #3498db;
+  border-radius: 10px;
   cursor: pointer;
   width: 80%; /* Ocupa todo el ancho del contenedor */
   float: left;
@@ -148,14 +147,14 @@
 /* Estilos para el checkbox */
 .vendedor-section input[type="checkbox"] {
   transform: scale(2); /* Ajusta el tamaño del checkbox */
-  margin-left: 25px;
-  margin-top: 25px;
+  margin-left: 15px;
+  margin-top: 15px;
   cursor: pointer;
   align-self: center;
 }
 
 .vendedor-section label:hover {
-  background-color: rgba(255, 204, 0, 0.8); /* Hace el color de fondo semi-transparente */
-  color: #333;
+  background-color: rgba(0, 153, 255, 0.8); /* Hace el color de fondo semi-transparente */
+  color: #ECF0F1;
   opacity: 1; /* Cambia la opacidad al pasar el mouse */
 }
