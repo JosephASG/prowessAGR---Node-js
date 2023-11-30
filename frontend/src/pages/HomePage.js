@@ -38,10 +38,10 @@ function HomePage(props) {
         <div className="home-page-subtitle">
           <center>
             <h3>Prowess Agrícola</h3>
-            <h4>Descubre nuestra selección de productos agrícolas, cultivados con esmero y dedicación para ofrecerte lo mejor de la naturaleza.</h4>
-            <h4>Nutriendo tu vida, del campo a  tu mesa.</h4><br/>
+            <p1>Descubre nuestra selección de productos agrícolas, cultivados con esmero y dedicación para ofrecerte lo mejor de la naturaleza.</p1><br/><br/>
+            <p1>Nutriendo tu vida, del campo a  tu mesa.</p1><br/><br/>
             {logged ? (
-              <p>Hola bienvenido</p>
+              <h3>Hola bienvenido</h3>
             ) : (
               <>
                 <Link to="/registro">
