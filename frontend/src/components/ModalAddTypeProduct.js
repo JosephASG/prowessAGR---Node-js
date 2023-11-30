@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./ModalAddProducts.css";
+import "./ModalAddTypeProducts.css";
 import { getCategories } from "../services/category";
 import { getSellers } from "../services/seller";
 import { postProduct } from "../services/product";
