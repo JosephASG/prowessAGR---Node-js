@@ -48,11 +48,11 @@
 }
 
 .sidebar li:hover {
-  color: #ff8000;
+  color: greenyellow;
 }
 
 .sidebar li.selected {
-  color: #ff8000;
+  color: greenyellow;
 }
 
 .product-list {
