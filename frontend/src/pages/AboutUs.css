@@ -8,7 +8,7 @@
 
 .AboutUsInfo h1 {
   color: white;
-  text-shadow: -1px -1px 0 orange,
+  text-shadow: -1px -1px 0 greenyellow,
     /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
       0 orange,
     /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
