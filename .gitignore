@@ -12,6 +12,9 @@
 /build
 /frontend/build
 
+# docker
+compose-dev.yaml
+
 # misc
 .DS_Store
 .env.local
