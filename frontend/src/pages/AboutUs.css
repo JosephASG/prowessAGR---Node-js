@@ -47,7 +47,7 @@
     47,
     134,
     166,
-    0.6
+    0.3
   ); /* Color de fondo con transparencia */
   border: 2px solid orange;
   color: white;
@@ -120,7 +120,7 @@
     border-radius: 5px;
     padding: 10px;
     margin: 10px; /* Ajuste de márgenes para pantallas medianas */
-    background-color: rgba(47, 134, 166, 0.6);
+    background-color: rgba(47, 134, 166, 0.3);
     border: 2px solid orange;
     color: white;
   }

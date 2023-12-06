@@ -1,12 +1,12 @@
 .ul-customers {
   list-style: none;
-  background-color: rgba(47, 134, 166, 0.6);
+  background-color: rgba(47, 134, 166, 0.3);
   padding: 20px;
   margin: 0;
 }
 
 .li-customers {
-  background-color: rgba(47, 134, 166, 0.6);
+  background-color: rgba(47, 134, 166, 0.3);
   padding: 20px;
 }
 

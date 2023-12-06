@@ -14,7 +14,7 @@
   width: 154px;
   height: auto;
   padding: 10px;
-  background-color: rgb(47, 134, 166);
+  background-color: rgba(47, 134, 166, 0.3);
   border: 0.5px solid orange;
   color: white;
   border-radius: 10px;
@@ -87,7 +87,7 @@
 select {
   padding: 5px;
   max-height: 30px;
-  background-color: orange;
+  background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
   color: white;
   border-radius: 4px;
 }
@@ -128,7 +128,7 @@ select {
   margin: 8px;
   margin-right: 10px;
   margin-bottom: 10px;
-  background-color: rgb(47, 134, 166);
+  background-color: rgba(47, 134, 166, 0.3);
   border: 1px solid orange;
   color: white;
 }
@@ -165,7 +165,7 @@ select {
 }
 
 .product-card button {
-  background-color: #ff8000;
+  background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
   color: #fff;
   border: none;
   border-radius: 4px;

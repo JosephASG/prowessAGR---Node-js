@@ -6,7 +6,7 @@ body {
   max-width: 1300px;
   margin: 0 auto;
   padding: 20px;
-  background-color: rgba(47, 134, 166, 0.832);
+  background-color: rgba(47, 134, 166, 0.3);
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 2px solid #ff8c00; /* Borde de 3px de ancho y color azul */

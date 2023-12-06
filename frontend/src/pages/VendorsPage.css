@@ -42,7 +42,7 @@ h2 {
   border-radius: 6px;
   padding: 10px;
   margin: 8px;
-  background-color: rgb(47, 134, 166);
+  background-color: rgba(47, 134, 166, 0.3);
   border: 1px solid orange;
   color: white;
   text-align: center;
