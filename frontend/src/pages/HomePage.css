@@ -19,7 +19,7 @@ body {
     47,
     134,
     166,
-    0.6
+    0.3
   ); /* Color de fondo con transparencia */
   backdrop-filter: blur(5px); /* Efecto de desenfoque */
   border-radius: 10px;
@@ -83,7 +83,7 @@ body {
 .RegistroHome {
   height: 50px;
   width: 170px;
-  background: linear-gradient(45deg, orange, #ff8c00);
+  background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
   color: white;
   border-radius: 5px;
   padding: 10px 20px;
@@ -117,7 +117,7 @@ body {
   margin-bottom: 20px;
   color: #fff;
   margin: 10px 10px 0px 100px;
-  background: rgba(47, 134, 166, 0.6);
+  background: rgba(47, 134, 166, 0.3);
   border-radius: 20px;
   text-align: center;
 }

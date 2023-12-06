@@ -6,7 +6,7 @@
 }
 
 .presentation {
-  background-color: rgba(47, 134, 166, 0.832);
+  background-color: rgba(47, 134, 166, 0.3);
   border: 1px solid orange;
   color: white;
   border-radius: 10px;
@@ -45,7 +45,7 @@
   align-items: center;
   border-radius: 5px;
   max-width: 1400px;
-  background-color: rgba(47, 134, 166, 0.832);
+  background-color: rgba(47, 134, 166, 0.3);
   border: 1px solid orange;
   margin-bottom: 10px;
   display: grid;
@@ -83,7 +83,7 @@
   max-width: 1400px;
   margin: 0px;
   color: #ffffff;
-  background-color: rgba(47, 134, 166, 0.832);
+  background-color: rgba(47, 134, 166, 0.3);
   border: 1px solid orange;
 }
 
@@ -98,7 +98,7 @@
 .btn-buy {
   font-size: 20px;
   color: #ffffff;
-  background-color: #ff8000;
+  background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
   border: none;
   border-radius: 5px;
   padding: 10px;
