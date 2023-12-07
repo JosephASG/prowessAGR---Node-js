@@ -1,6 +1,6 @@
 // AdvertisementSection.js
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import "./AdvertisementSection.css"; // Puedes crear un archivo de estilo para esta sección si es necesario
 
 function AdvertisementSection() {
