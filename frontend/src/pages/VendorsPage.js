@@ -140,7 +140,7 @@ function VendorsPage() {
         onClick={() => setShowAddModal(true)}
       >
         Agregar Vendedor
-      </button>
+      </button><br/>
 
       <SearchBar
         searchTerm={searchTerm}
