@@ -3,12 +3,7 @@ import { Link } from "react-router-dom";
 import "./NavigationBar.css";
 import logo from "../imagenes/prowess-logo1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faUser,
-  faShoppingCart,
-  faBars,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { faUser, faShoppingCart, faBars, } from "@fortawesome/free-solid-svg-icons";
 
 function NavigationBar(props) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -245,6 +240,11 @@ function NavigationBar(props) {
             <li>
               <Link to="/nosotros" onClick={toggleMenu}>
                 ¿Quiénes Somos?
+              </Link>
+            </li>
+            <li>
+              <Link to="/Anuncios" onClick={toggleMenu}>
+                Anuncios
               </Link>
             </li>
 

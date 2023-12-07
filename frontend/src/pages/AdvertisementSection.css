@@ -1,0 +1,22 @@
+/* AdvertisementSection.css */
+
+.advertisement-section {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  
+  .advertisement-section h2 {
+    color: #333;
+  }
+  
+  .advertisement-item {
+    margin-bottom: 20px;
+  }
+  
+  .advertisement-item p {
+    font-size: 16px;
+    color: #666;
+  }
