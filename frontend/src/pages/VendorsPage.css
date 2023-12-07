@@ -67,7 +67,7 @@ h2 {
 }
 
 .whatsapp-button {
-  background-color: #4ac959;
+  background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -78,13 +78,13 @@ h2 {
 }
 
 .whatsapp-button:hover {
-  background-color: #449b50;
+  background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
 }
 
 .add-vendor-button{
   height: 50px;
   width: 170px;
-  background: linear-gradient(45deg, orange, #FF8C00);
+  background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
   color: white;
   border-radius: 5px;
   padding: 10px 20px;
