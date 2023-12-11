@@ -19,6 +19,7 @@ import { getTokenData } from "./services/auth";
 import PrivateRoute from "./routes/PrivateRoute";
 import UserList from "./pages/UserList";
 import AccessDenied from "./pages/AccessDenied";
+import AdvertisementSection from "./pages/AdvertisementSection";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cart, setCart] = useState([]);
@@ -77,6 +78,7 @@ function App() {
       <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart} />
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
+        <Route path="/Anuncios" element={<AdvertisementSection />} />
         <Route
           path="/tienda"
           element={
