@@ -1,22 +1,28 @@
 /* AdvertisementSection.css */
 
 .advertisement-section {
-    background-color: #f4f4f4;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-top: 20px;
-  }
-  
-  .advertisement-section h2 {
-    color: #333;
-  }
-  
-  .advertisement-item {
-    margin-bottom: 20px;
-  }
-  
-  .advertisement-item p {
-    font-size: 16px;
-    color: #666;
-  }
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(
+    47,
+    134,
+    166,
+    0.3
+  );
+  border: 2px solid orange;
+  margin: 8px;
+}
+
+.advertisement-section h2 {
+  color: whitesmoke;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.advertisement-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 150px;
+  border: 1px solid #ddd; /* Agrega un borde a la imagen */
+  border-radius: 8px; /* Agrega bordes redondeados a la imagen */
+}
