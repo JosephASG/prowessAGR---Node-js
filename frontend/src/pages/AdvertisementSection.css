@@ -43,7 +43,7 @@ p {
 
 /* Estilos para las imágenes de redes sociales */
 .footer-content img {
-  width: 20px; /* Ajusta el ancho según tus preferencias */
+  width: 30px; /* Ajusta el ancho según tus preferencias */
   height: auto; /* La altura se ajustará automáticamente para mantener la proporción original */
   border-radius: 50%; /* Da a las imágenes un borde redondeado */
 }

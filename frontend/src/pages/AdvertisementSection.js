@@ -13,9 +13,9 @@ function AdvertisementSection() {
         <p>Descubre la Excelencia en Agricultura con Prowess Agrícola</p>
         <p>¡Aumenta la productividad y optimiza tus cultivos con nuestras soluciones avanzadas!</p>
       </div>
-    <div className="advertisement-section">
-    <img src={Planes} alt="Imagen Planes" className="advertisement-image" />
-    </div>
+      <div className="advertisement-section">
+        <img src={Planes} alt="Imagen Planes" className="advertisement-image" />
+      </div>
     </center>
   );
 }
