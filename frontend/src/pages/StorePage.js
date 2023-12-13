@@ -163,8 +163,8 @@ function StorePage({ cart, addToCart, removeFromCart }) {
             )
             .map((product) => (
               <div key={product.id} className="product-card">
-                <img src={product.pro_imagen} alt={product.pro_name} className="product-image" />
                 <h3>{product.pro_nombre}</h3>
+                <img src={product.pro_imagen} alt={product.pro_name} className="product-image" />
                 <p><b>Precio:</b> ${product.pro_precio}</p>
                 <p><b>Categoría:</b> {product.pro_categoria}</p>
                 <p><b>Cantidad disponible:</b> {product.pro_stock + ' ' + product.pro_medida}</p>
