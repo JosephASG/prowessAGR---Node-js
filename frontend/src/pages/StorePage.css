@@ -133,12 +133,19 @@ select {
   color: white;
 }
 
+.product-card p {
+  text-align: left;
+}
+
 .product-card img {
   max-width: 200px;
   max-height: 200px;
   object-fit: cover;
   border-radius: 4px;
   margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .product-card h3 {
@@ -151,6 +158,7 @@ select {
     -1px 1px 0 #000,
     /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */
     1px 1px 0 #000;
+    text-align: center;
 }
 
 .product-card p {
@@ -160,7 +168,7 @@ select {
 
 .product-card .product-actions {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* Cambia la dirección de la fila a columna */
   align-items: center;
 }
 
@@ -263,4 +271,5 @@ select {
     margin: 0;
     padding: 2px;
   }
+
 }
