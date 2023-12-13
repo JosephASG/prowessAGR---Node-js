@@ -22,7 +22,8 @@ body {
     0.3
   ); /* Color de fondo con transparencia */
   backdrop-filter: blur(5px); /* Efecto de desenfoque */
-  border-radius: 10px;
+  border: 1px solid #FF8C00;
+  border-radius: 5px;
 }
 
 .home-page-subtitle {
@@ -74,11 +75,6 @@ body {
   text-align: center;
   color: #fff;
 }
-.p1 {
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
 
 .RegistroHome {
   height: 50px;
@@ -118,8 +114,9 @@ body {
   color: #fff;
   margin: 10px 10px 0px 100px;
   background: rgba(47, 134, 166, 0.3);
-  border-radius: 20px;
   text-align: center;
+  border: 1px solid #FF8C00;
+  border-radius: 5px;
 }
 
 .paragraph img {

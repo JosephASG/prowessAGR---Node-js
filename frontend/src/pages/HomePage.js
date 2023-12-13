@@ -65,7 +65,10 @@ function HomePage(props) {
         </div>
       </div>
       <div className='part2'>
-        <p className='p1'>Vende y compra los mejores productos del país</p>
+        <br/>
+        <br/>
+        <br/>
+        <h1>COMPRA Y VENTA DE LOS MEJORES PRODUCTOS DEL PAÌS</h1>
 
       </div>
       <div className="paragraphs-container">

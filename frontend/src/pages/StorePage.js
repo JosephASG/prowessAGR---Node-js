@@ -128,7 +128,7 @@ function StorePage({ cart, addToCart, removeFromCart }) {
 
   return (
     <div className="store-page">
-      <h2 className="text-center">Tienda de Productos</h2>
+      <h1 className="text-center">TIENDA DE PRODUCTOS</h1>
       <SearchBar
         searchTerm={searchTerm}
         sortOption={sortOption}
@@ -137,6 +137,7 @@ function StorePage({ cart, addToCart, removeFromCart }) {
         showPriceOption={true}
         showCategoryOption={true}
       />
+      <br/>
 
       <div className="product-list">
         <div className="product-list-header">
