@@ -5,17 +5,6 @@
   margin-bottom: 20px;
 }
 
-.presentation {
-  background-color: rgba(47, 134, 166, 0.3);
-  border: 1px solid orange;
-  color: white;
-  border-radius: 10px;
-  margin: 20px;
-  padding: 10px;
-  align-self: center;
-  max-width: 1600px;
-}
-
 .search,
 .presentation select {
   border-radius: 5px;
