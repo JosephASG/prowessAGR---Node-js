@@ -63,7 +63,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
     <div className="shopping-cart">
       <div className="presentation">
         <div className="tittle-page">
-          <h1>Carrito de compras</h1>
+          <h1>CARRITO DE COMPRAS</h1>
         </div>
       </div>
       <div className="shopping-cart-info">
