@@ -13,7 +13,7 @@ const SalesPage = () => {
 
   return (
     <div>
-      <h1>Notas de Venta</h1>
+      <h1>NOTAS DE VENTA</h1>
       <ul className="ul-customers">
         {sales.map((sale) => (
           <li className="li-customers" key={sale.id}>

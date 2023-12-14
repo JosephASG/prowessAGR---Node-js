@@ -34,8 +34,9 @@ const UserList = () => {
         console.log(response);
     }
     return (
+     
         <div className="container-user-list">
-        <h1>Lista de Usuarios</h1>
+        <h1>LISTA DE USUARIOS</h1>
         <div className="btn-add-container">
         </div>
         <div className="header-row-user-list">
@@ -48,6 +49,7 @@ const UserList = () => {
         <b>Imagen</b>
         <b>Acciones</b>
         </div>
+        
 
         <div className="container-users">
         {users.map((user) => (

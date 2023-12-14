@@ -170,7 +170,7 @@ const ProductList = () => {
 
   return (
     <div className="container-product-list">
-      <h1>Lista de Productos</h1>
+      <h1>LISTA DE PRODUCTOS</h1>
       <div className="btn-add-container">
         <button onClick={handleOpenModal} className="btn-add-product">
           Agregar Producto

@@ -134,7 +134,7 @@ function VendorsPage() {
 
   return (
     <div className="vendors-page">
-      <h2>Listado de Vendedores</h2>
+      <h1>LISTA DE VENDEDORES</h1>
       <button
         className="add-vendor-button"
         onClick={() => setShowAddModal(true)}
