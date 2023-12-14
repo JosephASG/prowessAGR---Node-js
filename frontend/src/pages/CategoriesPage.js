@@ -122,7 +122,7 @@ const CategoryList = () => {
   return (
      isLoading===false ? (<p>Cargando...</p>):(
       <div className="container-product-list">
-      <h1>Lista de Categorías</h1>
+      <h1>LISTA DE CATEGORIAS</h1>
             <div className='btn-add-container'>
             <button onClick={handleOpenModal} className='btn-add-product'>Agregar Categoría</button>
           </div>
