@@ -7,9 +7,10 @@
   margin-top: 7px;
   margin-bottom: 5px;
   padding: 20px;
-  border-radius: 4px;
+  border-radius: 1%;
   background-color: rgba(47, 134, 166, 0.3);
   color: white;
+  border: 1px solid #FF8C00;
 }
 
 .register-container-2 {
@@ -85,6 +86,11 @@
   transition: background-color 0.3s ease;
 }
 
+.register-button.valid {
+  background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00) !important;
+  color: white !important;
+}
+
 .register-input[type="file"]::-webkit-file-upload-button {
   background-color: #4CAF50;
   color: white;
@@ -138,9 +144,9 @@
   margin-bottom: 5px;
   transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease; /* Añade transición para opacidad */
   background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
-  border-radius: 10px;
+  border-radius: 4px;
   cursor: pointer;
-  width: 80%; /* Ocupa todo el ancho del contenedor */
+  width: 90%; /* Ocupa todo el ancho del contenedor */
   float: left;
 }
 
@@ -158,3 +164,4 @@
   color: #ECF0F1;
   opacity: 1; /* Cambia la opacidad al pasar el mouse */
 }
+
