@@ -15,6 +15,7 @@
       orange,
     /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px
       0 orange;
+    margin-top: -60px;
 }
 
 .AboutUsInfo h2 {
