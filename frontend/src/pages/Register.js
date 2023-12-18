@@ -67,6 +67,7 @@ function Register() {
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [provinces, setProvinces] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -172,6 +173,10 @@ function Register() {
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
   const handleRegister = async (e) => {
@@ -356,7 +361,6 @@ function Register() {
           }}
           required
         />
-      <div className="password-toggle-container">
         <input
           className="register-input"
           type={showPassword ? "text": "password"}
@@ -371,13 +375,22 @@ function Register() {
         >
           👁️
         </span>
-      </div>
+
         <input
           className="register-input"
-          type={showPassword ? "text": "password"}
+          type={showConfirmPassword ? "text": "password"}
           placeholder="Confirme Contraseña"
           onBlur={handlePasswordBlur}
+          required
         />
+        <span
+          className={`password-toggle ${showConfirmPassword ? "visible" : ""}`}
+          onClick={toggleConfirmPasswordVisibility}
+        >
+          👁️
+        </span>
+        <br/>
+        <br/>
         {validPassword && (
           <p className="error-message">Las contraseñas no coinciden</p>
         )}
