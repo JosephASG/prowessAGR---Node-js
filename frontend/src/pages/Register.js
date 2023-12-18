@@ -66,6 +66,7 @@ function Register() {
   const [tipoDocumento, setTipoDocumento] = useState('');
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [provinces, setProvinces] = useState([]);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
 
@@ -167,7 +168,11 @@ function Register() {
     } else {
       setValidPassword(false);
     }
-  }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleRegister = async (e) => {
 
@@ -351,17 +356,25 @@ function Register() {
           }}
           required
         />
+      <div className="password-toggle-container">
         <input
           className="register-input"
-          type="password"
+          type={showPassword ? "text": "password"}
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <span
+          className={`password-toggle ${showPassword ? "visible" : ""}`}
+          onClick={togglePasswordVisibility}
+        >
+          👁️
+        </span>
+      </div>
         <input
           className="register-input"
-          type="password"
+          type={showPassword ? "text": "password"}
           placeholder="Confirme Contraseña"
           onBlur={handlePasswordBlur}
         />
