@@ -392,8 +392,6 @@ function Register() {
           👁️
         </span>
       </div>
-        <br/>
-        <br/>
         {validPassword && (
           <p className="error-message">Las contraseñas no coinciden</p>
         )}
