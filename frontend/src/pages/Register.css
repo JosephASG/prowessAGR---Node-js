@@ -165,3 +165,14 @@
   opacity: 1; /* Cambia la opacidad al pasar el mouse */
 }
 
+.password-container {
+  position: relative;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px; /* Ajusta este valor según sea necesario */
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

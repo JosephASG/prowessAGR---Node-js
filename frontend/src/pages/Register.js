@@ -361,6 +361,7 @@ function Register() {
           }}
           required
         />
+      <div className="password-container">
         <input
           className="register-input"
           type={showPassword ? "text": "password"}
@@ -375,7 +376,8 @@ function Register() {
         >
           👁️
         </span>
-
+      </div>
+      <div className="password-container">
         <input
           className="register-input"
           type={showConfirmPassword ? "text": "password"}
@@ -389,6 +391,7 @@ function Register() {
         >
           👁️
         </span>
+      </div>
         <br/>
         <br/>
         {validPassword && (
