@@ -94,6 +94,8 @@
   padding: 10px;
   margin: 10px;
   cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
 }
 
 .btn-delete {
