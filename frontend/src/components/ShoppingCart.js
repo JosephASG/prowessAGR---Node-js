@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './ShoppingCart.css';
+import { Link } from 'react-router-dom';
 function ShoppingCart({ cart, addToCart, removeFromCart }) {
   const handleQuantityInput = (event, product) => {
     const inputValue = event.target.value;
@@ -115,7 +116,9 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
               <b>Precio Total de la Compra:</b> ${calculateTotalPrice().toFixed(2)}
             </p>
             <button className="btn-buy">
+            <Link to="/formulario-pago">
               <b>Comprar</b>
+            </Link>
             </button>
           </div>
         </div>
