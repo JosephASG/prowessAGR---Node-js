@@ -115,11 +115,11 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
             <p>
               <b>Precio Total de la Compra:</b> ${calculateTotalPrice().toFixed(2)}
             </p>
-            <button className="btn-buy">
             <Link to="./pago">
+            <button className="btn-buy">
               <b>Comprar</b>
-            </Link>
             </button>
+            </Link>
           </div>
         </div>
       </div>
