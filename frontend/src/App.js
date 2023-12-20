@@ -90,6 +90,17 @@ function App() {
           }
         />
 
+<Route
+  path="/pago"
+  element={
+    <PrivateRoute
+      userRole={role}
+      allowedRoles={["cliente"]}
+      element={<PagoPage />}
+    />
+  }
+  />
+
         <Route
           path="/carrito"
           element={
