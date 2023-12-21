@@ -233,11 +233,6 @@ function NavigationBar(props) {
               </Link>
             </li>
             <li>
-              <Link to="/tienda" onClick={toggleMenu}>
-                Tienda
-              </Link>
-            </li>
-            <li>
               <Link to="/nosotros" onClick={toggleMenu}>
                 ¿Quiénes Somos?
               </Link>
@@ -246,15 +241,6 @@ function NavigationBar(props) {
               <Link to="/Anuncios" onClick={toggleMenu}>
                 Anuncios
               </Link>
-            </li>
-
-            <li>
-              <Link to="/carrito" onClick={toggleMenu}>
-                <FontAwesomeIcon icon={faShoppingCart} />
-              </Link>
-              <div className="cuantity-shopping-cart-container">
-                <span className="cuantity-shopping-cart">{cartCount}</span>
-              </div>
             </li>
             <li>
               {logged ? (
