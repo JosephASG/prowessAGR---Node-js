@@ -80,6 +80,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/Anuncios" element={<AdvertisementSection />} />
+        <Route path="/pago" element={<PagoPage />} /> 
         <Route
           path="/tienda"
           element={
@@ -89,17 +90,6 @@ function App() {
               removeFromCart={removeFromCart}
             />
           }
-        />
-
-        <Route
-          path="/pago"
-          element={
-        <PrivateRoute
-          userRole={role}
-          allowedRoles={["cliente"]}
-          element={<PagoPage />}
-        />
-        }
         />
 
         <Route
