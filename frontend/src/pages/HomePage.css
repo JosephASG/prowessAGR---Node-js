@@ -76,7 +76,7 @@ body {
   color: #fff;
 }
 
-.RegistroHome {
+.RegistroHome, .IniciarSesionHome {
   height: 50px;
   width: 170px;
   background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
@@ -86,10 +86,9 @@ body {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-width: 0px;
-  top: 80%;
   font-size: 19px;
   margin: 5px;
-  padding: 5px;
+  margin-right: 35px;
 }
 
 .paragraphs-container,
@@ -98,9 +97,10 @@ body {
   padding: 1em; /* Añade un poco de relleno para espacio */
 }
 
-.RegistroHome:hover {
+.RegistroHome:hover, .IniciarSesionHome:hover {
   transform: scale(1.3);
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  margin-right: 35px;
 }
 
 .paragraphs-container {
