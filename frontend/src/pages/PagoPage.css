@@ -1,9 +1,14 @@
 /* PagoPage.css */
 .pago-page {
-  max-width: 800px;
+  font-family: 'Electrolize', sans-serif;
+  width: 30em;
   margin: 0 auto;
+  margin-top: 7px;
+  margin-bottom: 5px;
   padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 1%;
+  background-color: rgba(47, 134, 166, 0.3);
+  color: rgb(170, 50, 50);
+  border: 1px solid #FF8C00;
 }
+
