@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './ShoppingCart.css';
-import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 function ShoppingCart({ cart, addToCart, removeFromCart }) {
   const handleQuantityInput = (event, product) => {
     const inputValue = event.target.value;
@@ -32,6 +32,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
 
 
   const [cartProducts, setCartProducts] = useState([]);
+  const [redirect, setRedirect] = useState(false);
   const handleRemoveFromCart = (product) => {
     const updatedCart = [...cart];
     const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
@@ -45,6 +46,14 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
       setCartProducts(updatedCart);
     }
   };
+
+  const handleBuyButtonClick = () => {
+    setRedirect(true);
+  }
+
+  if (redirect) {
+    return <Navigate to="/pago" />;
+  }
 
   const handleDeleteFromCart = (product) => {
     removeFromCart(product);
@@ -115,11 +124,9 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
             <p>
               <b>Precio Total de la Compra:</b> ${calculateTotalPrice().toFixed(2)}
             </p>
-            <Link to="./pago">
-            <button className="btn-buy">
+            <button className="btn-buy" onClick={handleBuyButtonClick}>
               <b>Comprar</b>
             </button>
-            </Link>
           </div>
         </div>
       </div>
