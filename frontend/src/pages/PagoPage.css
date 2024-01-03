@@ -1,9 +1,37 @@
 /* PagoPage.css */
-.pago-page {
-  max-width: 800px;
+
+.pagopage {
+  font-family: 'Electrolize', sans-serif;
+  width: 400px; /* Ajusté el ancho para que coincida con el ejemplo anterior */
   margin: 0 auto;
+  margin-top: 20px; /* Modifiqué el margen superior */
+  margin-bottom: 20px; /* Modifiqué el margen inferior */
   padding: 20px;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 8px; /* Ajusté el radio de borde */
+  background-color: rgba(47, 134, 166, 0.3);
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Añadí sombra */
+  border: 1px solid #FF8C00;
+}
+
+.pagopage p {
+  margin: 10px 0;
+}
+
+.pagopage input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.pagopage-image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pagopage-image {
+  width: 70px; /* Ajusta el tamaño según tus necesidades */
+  height: auto; /* Mantiene la proporción original */
+  margin: 0 10px; /* Ajusta el margen según tus necesidades */
 }
