@@ -117,13 +117,12 @@
   padding-left: 20px;
 }
 
-/* Estilos base para ambos botones */
 .btn-add,
 .btn-remove {
   font-size: 18px;
   padding: 8px 15px;
   border: none;
-  border-radius: 25px; /* Bordes redondeados para un aspecto más suave */
+  border-radius: 25px;
   margin: 5px;
   cursor: pointer;
   color: white;
@@ -133,33 +132,30 @@
   align-items: center;
 }
 
-/* Estilos específicos para el botón de Añadir */
 .btn-add {
-  background-color: #ff5f6d; /* Rosa intenso para el botón de añadir */
+  background-color: #ff5f6d; 
 }
 
 .btn-add:hover {
-  background-color: #ff788c; /* Cambia el color al pasar el ratón por encima */
+  background-color: #ff788c; 
 }
 
 .btn-add:active {
-  background-color: #ff4857; /* Cambia el color al hacer clic */
+  background-color: #ff4857; 
 }
 
-/* Estilos específicos para el botón de Eliminar */
 .btn-remove {
-  background-color: #ffa94d; /* Amarillo brillante para el botón de eliminar */
-  margin-left: 10px; /* Añade un espacio entre los botones */
+  background-color: #ffa94d; 
+  margin-left: 10px; 
 }
 
 .btn-remove:hover {
-  background-color: #ffc16b; /* Cambia el color al pasar el ratón por encima */
+  background-color: #ffc16b;
 }
 
 .btn-remove:active {
-  background-color: #ff9733; /* Cambia el color al hacer clic */
+  background-color: #ff9733; 
 }
-
 
 .fa-icon-trash {
   font-size: 1.5em;
