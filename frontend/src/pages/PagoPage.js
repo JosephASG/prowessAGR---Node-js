@@ -24,10 +24,10 @@ function PagoPage() {
       <p>AGREGA UNA TARJETA DE CREDITO O DE DEBITO</p>
       <p>Todos los campos son obligatorios</p>
       <p>Se aceptan las siguientes tarjetas</p>
-      <div className="advertisement-images-container">
-        <img src={Visa} alt="Imagen Pago" className="advertisement-image" />
-        <img src={Mastercard} alt="Imagen Pago" className="advertisement-image" />
-        <img src={Paypal} alt="Imagen Pago" className="advertisement-image" />
+      <div className="pagopage-image-container">
+        <img src={Visa} alt="Imagen Pago" className="pagopage-image" />
+        <img src={Mastercard} alt="Imagen Pago" className="pagopage-image" />
+        <img src={Paypal} alt="Imagen Pago" className="pagopage-image" />
       </div>
       <br/>
       
