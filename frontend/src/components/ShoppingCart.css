@@ -161,6 +161,7 @@
   font-size: 1.5em;
   color: red;
   cursor: pointer;
+  margin-left: 50%;
 }
 
 .fa-icon-trash:hover {
