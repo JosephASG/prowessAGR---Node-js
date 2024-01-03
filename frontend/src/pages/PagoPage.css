@@ -25,12 +25,12 @@
   box-sizing: border-box;
 }
 
-.advertisement-images-container {
+.pagopage-image-container {
   display: flex;
   justify-content: center;
 }
 
-.advertisement-image {
+.pagopage-image {
   width: 70px; /* Ajusta el tamaño según tus necesidades */
   height: auto; /* Mantiene la proporción original */
   margin: 0 10px; /* Ajusta el margen según tus necesidades */
