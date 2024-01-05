@@ -18,9 +18,7 @@ function SearchBar({ searchTerm, sortOption, handleSearch, handleSortChange, sho
           {showPriceOption && (
             <option value="price">Precio</option>
           )}
-          {showCategoryOption && (
-            <option value="category">Categoria</option>
-          )}
+         
         </select>
       </div>
     </div>
