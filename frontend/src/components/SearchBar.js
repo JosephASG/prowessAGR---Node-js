@@ -14,7 +14,6 @@ function SearchBar({ searchTerm, sortOption, handleSearch, handleSortChange, sho
       
         <div>
         <select value={sortOption} onChange={handleSortChange}>
-          <option value="">Ordenar por</option>
           <option value="name">Nombre</option>
           {showPriceOption && (
             <option value="price">Precio</option>
