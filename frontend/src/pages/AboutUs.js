@@ -11,7 +11,7 @@ function AboutUs() {
   return (
     <div className='AboutUsInfo h1'>
       <h1>ACERCA DE NOSOTROS</h1>
-      <p>En esta sección podrás conocer más al respecto de quiénes somos, conjuntamente con la misión y visión del proyecto realizado a su vez de la unidad de vinculación de departamento de Ciencias Económicas, Administrativas y de Comercio - DCEA.</p>
+      <p>En esta sección podrás  si conocer más al respecto de quiénes somos, conjuntamente con la misión y visión del proyecto realizado a su vez de la unidad de vinculación de departamento de Ciencias Económicas, Administrativas y de Comercio - DCEA.</p>
       <div className='about-section'>
         <h2>¿Quienes Somos?</h2>
         <br/>
