@@ -11,7 +11,8 @@ function PagoPage() {
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
   const [cvv, setCVV] = useState('');
-  const [totalAmount, setTotalAmount] = useState(100);
+  const [totalAmount, setTotalAmount] = useState(0);
+
 
   const handlePayment = () => {
     // Aquí puedes agregar la lógica de procesamiento de pago.
