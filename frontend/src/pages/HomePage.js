@@ -11,6 +11,10 @@ function HomePage(props) {
   const [logged, setLogged] = useState(false);
   const [role, setRole] = useState("");
 
+  const handleClick = () => {
+    const url = 'https://informacion.prowessec.com/home';
+    window.location.href = url;
+  };
 
   const images = [
     require('../imagenes/agr3.jpg'),
@@ -84,6 +88,9 @@ function HomePage(props) {
           <img src={image3} alt="Imagen 3" />
           <p>Presencia en línea crucial hoy día. Un sitio web robusto favorece el crecimiento sostenido de tu negocio agrícola a largo plazo.</p>
         </div>
+      </div>
+      <div className='boton-documentacion'>
+            <button className='RegistroHome boton-docu' onClick={handleClick}>Levantamiento de la información</button>
       </div>
     </div>
   );
