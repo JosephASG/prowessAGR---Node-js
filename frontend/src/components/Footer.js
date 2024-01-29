@@ -26,8 +26,9 @@ function Footer() {
         <a href="https://api.whatsapp.com/send?phone=593992847677" target="_blank" rel="noopener noreferrer">
           <img src={whatsapp} alt="Whatsapp" />
         </a>
-        <p>Todos los derechos reservados &copy; {new Date().getFullYear()} Prowess</p>
-        <p>Revisa nuestros <a href='terms&conditions'>Términos y Condiciones</a></p>
+          <div className="footer-info">
+            <p>Prowess EC &copy; {new Date().getFullYear()} Todos los derechos reservados | Revisa nuestros <a href='terms&conditions'>Términos y Condiciones</a></p>
+          </div>
       </div>
     </footer>
   );
