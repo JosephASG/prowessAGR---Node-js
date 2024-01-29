@@ -9,7 +9,7 @@ const orderRoute = express.Router();
 orderRoute.post('/createOrder', order.createOrder);
 
 // Ruta para manejar la obtención de los pedidos relacionados con un usuario específico usando el método HTTP GET
-orderRoute.get('/getMyOrders/:id', order.getMyOrders);
+orderRoute.get('/getMyOrders/:userId', order.getMyOrders);
 
 // Ruta para manejar la eliminación de un pedido usando el método HTTP DELETE
 orderRoute.delete('/deleteOrder/:id', order.deleteOrder);

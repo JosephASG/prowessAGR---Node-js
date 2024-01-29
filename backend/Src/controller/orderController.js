@@ -72,7 +72,7 @@ Modelo crear orden PostMan
       const querySnapshot = await firestore.getDocs(
         firestore.query(
           ordenesCollection,
-          firestore.where('userId', '==', userId)
+          firestore.where('ord_idcliente', '==', userId)
         )
       );
   
@@ -80,7 +80,7 @@ Modelo crear orden PostMan
       querySnapshot.forEach((ordenDoc) => {
         ordenes.push({ id: ordenDoc.id, ...ordenDoc.data() });
       });
-  
+      ordenes.push({ id:"1"});
       res.json(ordenes);
     } catch (error) {
       console.error('Error al obtener las órdenes:', error);
