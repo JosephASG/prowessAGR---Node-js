@@ -168,19 +168,29 @@ const requestPasswordReset = async (req, res) => {
 // Metodo GET
 const getUsers = async (req, res) => {
   try {
-    const snapshot = await firestore.getDocs(firestore.collection(fs, "usuario"));
-    const users = [];
-    snapshot.forEach((doc) => {
+    // Obtén la referencia a la colección "usuario" directamente desde firestore
+    const userCollection = firestore.collection("usuario");
+    
+    // Obtén los documentos de la colección
+    const snapshot = await getDocs(userCollection);
+
+    // Mapea los documentos a un array de usuarios
+    const users = snapshot.docs.map((doc) => {
       const user = doc.data();
       user._id = doc.id;
-      delete user.claveUsuario;
-      users.push(user);
+      // Considera eliminar la clave "claveUsuario" solo si existe
+      if (user.claveUsuario) {
+        delete user.claveUsuario;
+      }
+      return user;
     });
-    return res.status(200).json({message:"Usuarios Encontrados",users})
+
+    // Envía la respuesta con el array de usuarios
+    return res.status(200).json({ message: "Usuarios Encontrados", users });
   } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Error al obtener la lista de usuarios" });
+    // Maneja el error y envía una respuesta con código de estado 500
+    console.error("Error al obtener la lista de usuarios", error);
+    return res.status(500).json({ message: "Error al obtener la lista de usuarios" });
   }
 };
 

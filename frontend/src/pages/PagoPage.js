@@ -1,74 +1,41 @@
+// PagoPage.js
+// Asegúrate de importar las dependencias necesarias
+
 import React, { useState, useEffect } from 'react';
 import './PagoPage.css';
 import { Navigate } from 'react-router-dom';
-
-import Check from '../imagenes/Check.png';
+import { addDoc, collection } from 'firebase/firestore';
+import { fs } from '../database/firebase';  // Importa la instancia de Firestore
 
 function PagoPage() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
-  // Utiliza useEffect para llamar a handlePayment cuando se monta el componente
   useEffect(() => {
     handlePayment();
-  }, []); // El segundo parámetro [] asegura que se llame solo una vez al montarse el componente
+  }, []);
 
-  const handlePayment = () => {
-    // Set the payment success state after successful payment
-    setPaymentSuccess(true);
+  const handlePayment = async () => {
+    // Realiza cualquier lógica de pago necesaria
+    // ...
+
+    // Después del pago, crea una nueva orden en la base de datos
+    const newOrderData = {
+      // ... Estructura de la nueva orden según tu modelo
+    };
+
+    try {
+      const docRef = await addDoc(collection(fs, 'orden'), newOrderData);
+      console.log('Orden creada con ID:', docRef.id);
+      setPaymentSuccess(true);
+    } catch (error) {
+      console.error('Error al crear la orden:', error);
+    }
   };
 
-  const [redirect, setRedirect] = useState(false);
-
-  const handleBuyButtonClick = () => {
-    setRedirect(true);
-  }
-
-  if (redirect) {
-    return <Navigate to="/tienda" />;
-  }
-
- 
+  // Resto del componente
 
   return (
-    <div className="pagopage-container">
-      <div className="pagopage-form">
-        
-        {paymentSuccess && (
-          <>
-          
-            <div className='AboutUsInfo h1'>
-              <h1>Su pago se ha completado correctamente</h1>
-            </div>
-            <div className="pagopage-factura-container">
-            <img src={Check} alt="Imagen Pago" className="pagopage-image" />
-              <p className="pagopage-factura-datos">
-                <span className="pagopage-factura-label">Número de Orden:</span>
-                349646148
-              </p>
-              <p className="pagopage-factura-datos">
-                <span className="pagopage-factura-label">Vendedor:</span>
-                Maria
-              </p>
-              <p className="pagopage-factura-datos">
-                <span className="pagopage-factura-label">Compra:</span>
-                Uvas
-              </p>
-              <p className="pagopage-factura-datos">
-                <span className="pagopage-factura-label">Cantidad:</span>
-                50 Lb
-              </p>
-              <p className="pagopage-gracias">A la brevedad recibirá su comprobante de pago</p>
-              <p className="pagopage-gracias">Gracias por su compra!</p>
-            </div>
-           
-            <button className="btn-buy" onClick={handleBuyButtonClick}>
-              <b>Seguir comprando</b>
-            </button>
-           
-          </>
-        )}
-      </div>
-    </div>
+    // JSX del componente
   );
 }
 
