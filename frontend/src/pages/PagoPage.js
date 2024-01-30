@@ -3,7 +3,6 @@ import './PagoPage.css';
 import { Navigate } from 'react-router-dom';
 import Check from '../imagenes/Check.png';
 import WhatsButton from '../components/WhatsButton'; 
-import whatsapp from '../imagenes/whatsapp.png';
 
 
 function PagoPage() {
