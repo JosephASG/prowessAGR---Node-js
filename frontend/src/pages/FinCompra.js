@@ -6,7 +6,7 @@ import WhatsButton from "../components/WhatsButton";
 
 function FinCompra(){
 
-    const num = '+593 998160293'
+    const num = '0998160293'
 
     return (
         <div className="container">
