@@ -21,6 +21,7 @@ import UserList from "./pages/UserList";
 import AccessDenied from "./pages/AccessDenied";
 import AdvertisementSection from "./pages/AdvertisementSection";
 import PagoPage from "./pages/PagoPage";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cart, setCart] = useState([]);
@@ -189,6 +190,7 @@ function App() {
             element={<CategoriesPage />}
           />
         } />
+
         <Route path="/accessDenied" element={<AccessDenied />} />
         <Route
           path="/users"

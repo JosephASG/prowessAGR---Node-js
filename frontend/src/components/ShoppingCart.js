@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './ShoppingCart.css';
 import { Navigate } from 'react-router-dom';
+
 function ShoppingCart({ cart, addToCart, removeFromCart }) {
   const handleQuantityInput = (event, product) => {
     const inputValue = event.target.value;
@@ -29,9 +30,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
     setCartProducts(updatedCart);
   };
   
-
-
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]); 
   const [redirect, setRedirect] = useState(false);
   const handleRemoveFromCart = (product) => {
     const updatedCart = [...cart];
