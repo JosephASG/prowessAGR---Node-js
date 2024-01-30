@@ -6,7 +6,6 @@ import './HomePage.css';
 import image1 from '../imagenes/24.png'
 import image2 from '../imagenes/info.png'
 import image3 from '../imagenes/crecimiento.png'
-import FinCompra from './FinCompra'
 
 function HomePage(props) {
   const [logged, setLogged] = useState(false);
@@ -76,8 +75,7 @@ function HomePage(props) {
         <br/>
         <h1>COMPRA Y VENTA DE LOS MEJORES PRODUCTOS DEL PAÌS</h1>
         
-        <FinCompra/>
-        <h1>Prueba</h1>
+        
 
       </div>
       <div className="paragraphs-container">
