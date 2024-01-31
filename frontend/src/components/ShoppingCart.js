@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './ShoppingCart.css';
 import { Navigate } from 'react-router-dom';
-
-function ShoppingCart({ cart, addToCart, removeFromCart, navigateToPago}) {
+function ShoppingCart({ cart, addToCart, removeFromCart }) {
   const handleQuantityInput = (event, product) => {
     const inputValue = event.target.value;
     const updatedCart = [...cart];
@@ -30,7 +29,9 @@ function ShoppingCart({ cart, addToCart, removeFromCart, navigateToPago}) {
     setCartProducts(updatedCart);
   };
   
-  const [cartProducts, setCartProducts] = useState([]); 
+
+
+  const [cartProducts, setCartProducts] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const handleRemoveFromCart = (product) => {
     const updatedCart = [...cart];
@@ -47,7 +48,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, navigateToPago}) {
   };
 
   const handleBuyButtonClick = () => {
-    navigateToPago(calculateTotalPrice(), addedProducts);
+    setRedirect(true);
   }
 
   if (redirect) {
