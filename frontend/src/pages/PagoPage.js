@@ -4,44 +4,40 @@ import { Navigate } from 'react-router-dom';
 import Check from '../imagenes/Check.png';
 import WhatsButton from '../components/WhatsButton'; 
 
-
-function PagoPage() {
+function PagoPage({ paymentData }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
-  // Utiliza useEffect para llamar a handlePayment cuando se monta el componente
   useEffect(() => {
-    handlePayment();
-  }, []); // El segundo parámetro [] asegura que se llame solo una vez al montarse el componente
+    if (paymentData) {
+      handlePayment(paymentData.totalPrice, paymentData.products);
+    }
+  }, [paymentData]);
 
-  const handlePayment = () => {
-    // Set the payment success state after successful payment
+  const handlePayment = (totalPrice, products) => {
     setPaymentSuccess(true);
+    console.log('Total Price:', totalPrice);
+    console.log('Products:', products);
   };
 
-  const [redirect, setRedirect] = useState(false);
+  if (!paymentData || redirect) {
+    return <Navigate to="/carrito" />;
+  }
 
   const handleBuyButtonClick = () => {
     setRedirect(true);
   }
 
-  if (redirect) {
-    return <Navigate to="/tienda" />;
-  }
-
- 
-
   return (
     <div className="pagopage-container">
       <div className="pagopage-form">
-        
         {paymentSuccess && (
           <>
-          
             <div className='AboutUsInfo h1'>
               <h1>Su pago se ha completado correctamente</h1>
             </div>
             <div className="pagopage-factura-container">
-            <img src={Check} alt="Imagen Pago" className="pagopage-image" />
+              <img src={Check} alt="Imagen Pago" className="pagopage-image" />
               <p className="pagopage-factura-datos">
                 <span className="pagopage-factura-label">Nº de orden:</span>
                 349646148
@@ -61,14 +57,11 @@ function PagoPage() {
               <p className="pagopage-gracias">¡Gracias por su compra!</p>
 
               <WhatsButton number="0998160293" message="Hola, he completado mi compra. ¿Podemos ponernos en contacto?" /> 
-    
               <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>
             </div>
-           
             <button className="btn-buy" onClick={handleBuyButtonClick}>
               <b>Seguir comprando</b>
             </button>
-           
           </>
         )}
       </div>

@@ -21,6 +21,9 @@ import UserList from "./pages/UserList";
 import AccessDenied from "./pages/AccessDenied";
 import AdvertisementSection from "./pages/AdvertisementSection";
 import PagoPage from "./pages/PagoPage";
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,6 +31,11 @@ function App() {
   const [user, setUser] = useState([]);
   const [token, setToken] = useState(null);
   const [role, setRole] = useState("default");
+  const [redirect, setRedirect] = useState(false);
+  const [paymentData, setPaymentData] = useState(null);
+  const [allowedRoles, setAllowedRoles] = useState([]); // Agrega allowedRoles
+
+  const navigate = useNavigate(); // Usa useNavigate para obtener la función de navegación
 
   useEffect(() => {
     if (token !== null) {
@@ -40,21 +48,22 @@ function App() {
         setRole("none");
       }
     }
-  }, [token]);
+  }, [token, allowedRoles]);
 
   const checkAuth = async (token) => {
     let response = await getTokenData(token);
     if (response && response.data) {
       const data = response.data;
       setRole(data.data.rol);
+      setAllowedRoles(data.data.allowedRoles); // Establece allowedRoles según la respuesta
       console.log(response.data);
       setIsLoggedIn(true);
     } else {
       localStorage.removeItem("token");
       setIsLoggedIn(false);
-
     }
   };
+
   const addToCart = (product) => {
     const existingProductIndex = cart.findIndex(
       (item) => item.id === product.id
@@ -75,14 +84,24 @@ function App() {
     setCart(updatedCart);
   };
 
+  const navigateToPago = (totalPrice, products) => {
+    setCart([]);
+    setRedirect(true);
+    setPaymentData({ totalPrice, products });
+    navigate('/pago'); // Utiliza la función de navegación en lugar de <Navigate>
+  };
+
+
   return (
     <Router>
       <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart} />
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/Anuncios" element={<AdvertisementSection />} />
-        <Route path="/pago" element={<PagoPage />} /> 
         <Route
+          path="/pago"
+          element={<PagoPage paymentData={paymentData} />}
+        />        <Route
           path="/tienda"
           element={
             <StorePage
@@ -93,13 +112,14 @@ function App() {
           }
         />
 
-        <Route
+<Route
           path="/carrito"
           element={
             <ShoppingCart
               cart={cart}
               addToCart={addToCart}
               removeFromCart={removeFromCart}
+              navigateToPago={navigateToPago}  // Asegúrate de pasar navigateToPago aquí
             />
           }
         />

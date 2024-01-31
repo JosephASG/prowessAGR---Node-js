@@ -4,7 +4,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import './ShoppingCart.css';
 import { Navigate } from 'react-router-dom';
 
-function ShoppingCart({ cart, addToCart, removeFromCart }) {
+function ShoppingCart({ cart, addToCart, removeFromCart, navigateToPago}) {
   const handleQuantityInput = (event, product) => {
     const inputValue = event.target.value;
     const updatedCart = [...cart];
@@ -47,7 +47,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart }) {
   };
 
   const handleBuyButtonClick = () => {
-    setRedirect(true);
+    navigateToPago(calculateTotalPrice(), addedProducts);
   }
 
   if (redirect) {
