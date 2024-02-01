@@ -61,7 +61,7 @@ function PagoPage({ cart, vendorWhatsApp }) {
                 </div>
               ))}
               <p className="pagopage-gracias">¡Gracias por su compra!</p>
-              <WhatsButton number={vendorWhatsApp} message="Hola, he completado mi compra. ¿Podemos ponernos en contacto?" />
+              <WhatsButton number="0998160293" message="Hola, he completado mi compra. ¿Podemos ponernos en contacto?" /> 
               <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>
             </div>
             <button className="btn-buy" onClick={handleBuyButtonClick}>
