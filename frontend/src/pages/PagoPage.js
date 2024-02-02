@@ -5,8 +5,9 @@ import Check from '../imagenes/Check.png';
 import WhatsButton from '../components/WhatsButton';
 import ModalEditVendors from '../components/ModalEditVendors';
 import VendorsPage from './VendorsPage';
+import FinCompra from './FinCompra';
 
-function PagoPage({ cart, vendorWhatsApp }) {
+function PagoPage({ cart, vendor }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
 
   useEffect(() => {
@@ -61,8 +62,10 @@ function PagoPage({ cart, vendorWhatsApp }) {
                 </div>
               ))}
               <p className="pagopage-gracias">¡Gracias por su compra!</p>
-              <WhatsButton number="0998160293" message="Hola, he completado mi compra. ¿Podemos ponernos en contacto?" /> 
-              <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>
+              <WhatsButton
+              number={vendor ? vendor.whatsappNumber : ''}
+              message="Hola, he completado mi compra. ¿Podemos ponernos en contacto?"
+            />              <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>
             </div>
             <button className="btn-buy" onClick={handleBuyButtonClick}>
               <b>Seguir comprando</b>
