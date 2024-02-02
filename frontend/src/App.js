@@ -27,6 +27,7 @@ function App() {
   const [user, setUser] = useState([]);
   const [token, setToken] = useState(null);
   const [role, setRole] = useState("default");
+  const [selectedVendor, setSelectedVendor] = useState(null);
 
   useEffect(() => {
     if (token !== null) {
@@ -80,8 +81,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/Anuncios" element={<AdvertisementSection />} />
-        <Route path="/pago" element={<PagoPage cart={cart} />} /> 
         <Route
+  path="/pago"
+  element={<PagoPage cart={cart} vendor={selectedVendor} />} // Pasa la información del vendedor
+/>        <Route
           path="/tienda"
           element={
             <StorePage

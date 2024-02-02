@@ -14,7 +14,8 @@ function VendorsPage() {
   const WEBURL = process.env.REACT_APP_API_URL
   const [VendorToEdit, setVendorToEdit] = useState(null);
   const [vendorToUpdate, setVendorToUpdate] = useState(null);
-
+  const [filteredVendors, setFilteredVendors] = useState([]); // Nuevo estado
+  const [selectedVendor, setSelectedVendor] = useState(null);
 
   const [sortOption, setSortOption] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -84,8 +85,12 @@ function VendorsPage() {
   }
 
   const handleEditVendor = (vendor) => {
-    console.log('Editando vendedor:', vendor); // Agrega esta línea para depurar
+    console.log('Editando vendedor:', vendor);
     setVendorToEdit(vendor);
+    setSelectedVendor({
+      name: vendor.name,
+      whatsappNumber: vendor.whatsappNumber,
+    }); // Guarda la información del vendedor seleccionado
     setShowEditModal(true);
   };
 
@@ -103,23 +108,16 @@ function VendorsPage() {
   useEffect(() => {
     // Filtra los vendedores según el término de búsqueda
     const filteredVendors = vendors.filter((vendor) =>
-      vendor.name && vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
+      vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
     // Actualiza la lista de vendedores según el término de búsqueda
-    setVendors(filteredVendors);
-    if (!searchTerm) {
-      fetch(`${WEBURL}fb/vendedor/getSeller`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Error en la solicitud al servidor');
-          }
-          return response.json();
-        })
-        .then((data) => setVendors(data))
-        .catch((error) => console.error('Error al cargar los vendedores', error));
-    }
-  }, [searchTerm]);
+    setFilteredVendors(filteredVendors);
+    setSelectedVendor(filteredVendors.length > 0 ? {
+      name: filteredVendors[0].name,
+      whatsappNumber: filteredVendors[0].whatsappNumber,
+    } : null);
+  }, [searchTerm, vendors]);
 
   const handleUpdateVendor = () => {
     if (!vendorToUpdate) {
