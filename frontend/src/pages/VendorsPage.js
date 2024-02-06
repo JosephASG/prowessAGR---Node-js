@@ -14,8 +14,7 @@ function VendorsPage() {
   const WEBURL = process.env.REACT_APP_API_URL
   const [VendorToEdit, setVendorToEdit] = useState(null);
   const [vendorToUpdate, setVendorToUpdate] = useState(null);
-  const [filteredVendors, setFilteredVendors] = useState([]); // Nuevo estado
-  const [selectedVendor, setSelectedVendor] = useState(null);
+
 
   const [sortOption, setSortOption] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -85,12 +84,8 @@ function VendorsPage() {
   }
 
   const handleEditVendor = (vendor) => {
-    console.log('Editando vendedor:', vendor);
+    console.log('Editando vendedor:', vendor); // Agrega esta línea para depurar
     setVendorToEdit(vendor);
-    setSelectedVendor({
-      name: vendor.name,
-      whatsappNumber: vendor.whatsappNumber,
-    }); // Guarda la información del vendedor seleccionado
     setShowEditModal(true);
   };
 
@@ -108,16 +103,23 @@ function VendorsPage() {
   useEffect(() => {
     // Filtra los vendedores según el término de búsqueda
     const filteredVendors = vendors.filter((vendor) =>
-      vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
+      vendor.name && vendor.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   
     // Actualiza la lista de vendedores según el término de búsqueda
-    setFilteredVendors(filteredVendors);
-    setSelectedVendor(filteredVendors.length > 0 ? {
-      name: filteredVendors[0].name,
-      whatsappNumber: filteredVendors[0].whatsappNumber,
-    } : null);
-  }, [searchTerm, vendors]);
+    setVendors(filteredVendors);
+    if (!searchTerm) {
+      fetch(`${WEBURL}fb/vendedor/getSeller`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Error en la solicitud al servidor');
+          }
+          return response.json();
+        })
+        .then((data) => setVendors(data))
+        .catch((error) => console.error('Error al cargar los vendedores', error));
+    }
+  }, [searchTerm]);
 
   const handleUpdateVendor = () => {
     if (!vendorToUpdate) {
@@ -196,7 +198,7 @@ function VendorsPage() {
               <FontAwesomeIcon icon={faEdit} />
             </button>
 
-            <a href={`https://wa.me/${vendor.whatsappNumber}`} target="_blank" rel="noopener noreferrer">
+            <a href={`https://wa.me/${vendor.whatsappNumber}`}>
               <button className="whatsapp-button">WhatsApp</button>
             </a>
             
@@ -226,9 +228,6 @@ function VendorsPage() {
         )}
       </div>
 
-
-      
-
       <ModalAddVendor
         isOpen={showAddModal}
         onClose={() => setShowAddModal(false)}
@@ -241,5 +240,4 @@ function VendorsPage() {
     </div>
   );
 }
-
 export default VendorsPage;

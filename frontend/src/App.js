@@ -81,10 +81,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/Anuncios" element={<AdvertisementSection />} />
-        <Route
-  path="/pago"
-  element={<PagoPage cart={cart} vendor={selectedVendor} />} // Pasa la información del vendedor
-/>        <Route
+        <Route path="/pago" element={<PagoPage cart={cart} />} /> 
+          
+          <Route
           path="/tienda"
           element={
             <StorePage
