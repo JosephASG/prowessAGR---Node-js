@@ -27,7 +27,6 @@ function App() {
   const [user, setUser] = useState([]);
   const [token, setToken] = useState(null);
   const [role, setRole] = useState("default");
-  const [selectedVendor, setSelectedVendor] = useState(null);
 
   useEffect(() => {
     if (token !== null) {
@@ -75,15 +74,19 @@ function App() {
     setCart(updatedCart);
   };
 
+
+  const clearCart = () => {
+    setCart([]); // Limpiar el carrito
+  };
+
   return (
     <Router>
-      <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart} />
+      <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart} clearCart={clearCart} />
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/Anuncios" element={<AdvertisementSection />} />
-        <Route path="/pago" element={<PagoPage cart={cart} />} /> 
-          
-          <Route
+        <Route path="/pago" element={<PagoPage cart={cart} clearCart={clearCart} />} /> 
+        <Route
           path="/tienda"
           element={
             <StorePage
