@@ -106,16 +106,6 @@ const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="whatsappNumber">Número de WhatsApp</label>
-              <input
-                type="text"
-                className="form-control"
-                name="whatsappNumber"
-                value={newVendor.whatsappNumber}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
               <label htmlFor="image">URL de la Imagen</label>
               <input
                 type="text"

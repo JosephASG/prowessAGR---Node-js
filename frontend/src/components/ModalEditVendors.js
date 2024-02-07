@@ -93,16 +93,6 @@ const ModalEditVendor = ({ isOpen, onClose, VendorToEdit, handleEdit, children }
               />
             </div>
             <div className="form-group">
-              <label htmlFor="whatsappNumber">Número de WhatsApp</label>
-              <input
-                type="text"
-                className="form-control"
-                name="whatsappNumber"
-                value={editedVendor.whatsappNumber}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className="form-group">
               <button type="submit" className="btn-save">Guardar</button>
             </div>
           </form>

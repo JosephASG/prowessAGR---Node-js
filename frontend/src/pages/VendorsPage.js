@@ -198,7 +198,7 @@ function VendorsPage() {
               <FontAwesomeIcon icon={faEdit} />
             </button>
 
-            <a href={`https://wa.me/${vendor.whatsappNumber}`}>
+            <a href={`https://wa.me/${vendor.phoneNumber}`}>
               <button className="whatsapp-button">WhatsApp</button>
             </a>
             
