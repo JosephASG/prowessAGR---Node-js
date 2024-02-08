@@ -24,9 +24,10 @@ import PagoPage from "./pages/PagoPage";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cart, setCart] = useState([]);
-  const [user, setUser] = useState([]);
   const [token, setToken] = useState(null);
   const [role, setRole] = useState("default");
+  const [total, setTotal] = useState(0);
+  const [orden,setOrden] = useState([]);
 
   useEffect(() => {
     if (token !== null) {
@@ -41,51 +42,62 @@ function App() {
     }
   }, [token]);
 
+  useEffect(() => {
+    const calculateTotal = () => {
+      if (!cart) {
+        return 0;
+      }
+      const totalAmount = cart.reduce(
+        (sum, product) => sum + product.pro_precio * product.cantidad,
+        0
+      );
+      setTotal(totalAmount);
+    };
+
+    calculateTotal();
+  }, [cart]);
+
   const checkAuth = async (token) => {
     let response = await getTokenData(token);
     if (response && response.data) {
       const data = response.data;
       setRole(data.data.rol);
-      console.log(response.data);
       setIsLoggedIn(true);
     } else {
       localStorage.removeItem("token");
       setIsLoggedIn(false);
+    }
+  };
 
-    }
-  };
-  const addToCart = (product) => {
-    const existingProductIndex = cart.findIndex(
-      (item) => item.id === product.id
-    );
-    if (existingProductIndex !== -1) {
-      const updatedCart = [...cart];
-      const existingProduct = updatedCart[existingProductIndex];
-      existingProduct.cantidad += 1;
-      setCart(updatedCart);
-    } else {
-      setCart([...cart, { ...product, cantidad: 1 }]);
-    }
-  };
+ const addToCart = (product, vendorWhatsApp) => {
+  const existingProductIndex = cart.findIndex((item) => item.id === product.id);
+  if (existingProductIndex !== -1) {
+    const updatedCart = [...cart];
+    const existingProduct = updatedCart[existingProductIndex];
+    existingProduct.cantidad += 1;
+    setCart(updatedCart);
+  } else {
+    // Agregar la información del vendedor al producto
+    const productWithVendor = { ...product, cantidad: 1, vendorWhatsApp: vendorWhatsApp };
+    setCart([...cart, productWithVendor]);
+  }
+};
 
   const removeFromCart = (productToRemove) => {
     const updatedCart = cart.filter((product) => product !== productToRemove);
-    console.log("App", updatedCart);
     setCart(updatedCart);
   };
-
-
   const clearCart = () => {
-    setCart([]); // Limpiar el carrito
+    setCart([]);
   };
 
   return (
     <Router>
-      <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart} clearCart={clearCart} />
+      <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart} orden={orden}/>
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/Anuncios" element={<AdvertisementSection />} />
-        <Route path="/pago" element={<PagoPage cart={cart} clearCart={clearCart} />} /> 
+        <Route path="/pago" element={<PagoPage clearCart={clearCart} cart={cart} total={total} token={token}/>} />
         <Route
           path="/tienda"
           element={
@@ -99,11 +111,14 @@ function App() {
 
         <Route
           path="/carrito"
+          render={() => <ShoppingCart /* ... pasar props según sea necesario */ vendedorId={65161651896} />}
+
           element={
             <ShoppingCart
               cart={cart}
               addToCart={addToCart}
               removeFromCart={removeFromCart}
+              setOrden = {setOrden}
             />
           }
         />

@@ -5,11 +5,12 @@ import Check from '../imagenes/Check.png';
 import WhatsButton from '../components/WhatsButton';
 import ModalEditVendors from '../components/ModalEditVendors';
 import VendorsPage from './VendorsPage';
+import { getTokenData } from '../services/auth';
+import { getUserData } from '../services/user.js';
 
-
-function PagoPage({ cart, vendor, clearCart }) {
+function PagoPage({ cart, vendor, clearCart, orden }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-
+  const [usuario, setUsuario] = useState([]);
 
   useEffect(() => {
     handlePayment();
@@ -18,6 +19,7 @@ function PagoPage({ cart, vendor, clearCart }) {
   const handlePayment = () => {
     setPaymentSuccess(true);
   };
+
 
   const [redirect, setRedirect] = useState(false);
 
@@ -37,6 +39,15 @@ function PagoPage({ cart, vendor, clearCart }) {
     clearCart();
     setRedirect(true);
   };
+
+  const enviarCorreo = () => {
+    if (usuario) {
+      window.location.href = `mailto:${usuario.email}?subject=Asunto&body=Cuerpo del correo`;
+    } else {
+      console.log('No hay usuario para enviar el correo');
+    }
+  }
+  
 
   return (
     <div className="pagopage-container">
@@ -76,6 +87,7 @@ function PagoPage({ cart, vendor, clearCart }) {
                 </div>
               ))}
                   <p className="pagopage-gracias">¡Gracias por su compra!</p>
+                  <button onClick={enviarCorreo}>Enviar correo</button>
                    <WhatsButton number={'+593998160293'} message="Hola, he completado mi compra. ¿Podemos ponernos en contacto?"/>              
                    <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>            
                    </div>
