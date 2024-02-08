@@ -87,7 +87,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                 </div>
               ))}
                   <p className="pagopage-gracias">¡Gracias por su compra!</p>
-                  <button onClick={enviarCorreo}>Enviar correo</button>
+                  <button class="boton-enviar" onClick={enviarCorreo}>Enviar correo</button>
                    <WhatsButton number={'+593998160293'} message="Hola, he completado mi compra. ¿Podemos ponernos en contacto?"/>              
                    <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>            
                    </div>
