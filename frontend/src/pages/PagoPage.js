@@ -7,6 +7,8 @@ import ModalEditVendors from '../components/ModalEditVendors';
 import VendorsPage from './VendorsPage';
 import { getTokenData } from '../services/auth';
 import { getUserData } from '../services/user.js';
+import whatsapp from '../imagenes/whatsapp.png';
+
 
 function PagoPage({ cart, vendor, clearCart, orden }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -81,14 +83,19 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                     <span className="pagopage-factura-label">Cantidad:</span>
                     {product.cantidad} {product.pro_medida}
                   </p>
-
-                  <p className="pagopage-factura-datos">
-                   </p>
+                  <p className="pagopage-gracias">¡Gracias por su compra!</p>
+                  <a href={`https://wa.me/${product.pro_numero}?text=Hola,%20he%20completado%20mi%20compra.%20¿Podemos%20ponernos%20en%20contacto%3F`} 
+                  target="_blank" rel="noopener noreferrer">
+                   <button className="btn btn-success btn-whatsapp">
+                   <i className="fab fa-whatsapp"></i> ¡Contáctanos! <div className="image-whatsapp">
+                  <img src={whatsapp} alt="Whatsapp" />
+                   </div>
+                  </button>
+                  </a>
+                  <p className="pagopage-factura-datos"></p>
                 </div>
               ))}
-                  <p className="pagopage-gracias">¡Gracias por su compra!</p>
                   <button class="boton-enviar" onClick={enviarCorreo}>Enviar correo</button>
-                   <WhatsButton number={'+593998160293'} message="Hola, he completado mi compra. ¿Podemos ponernos en contacto?"/>              
                    <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>            
                    </div>
                   <button className="btn-buy" onClick={handleContinueShoppingClick}>
