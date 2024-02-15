@@ -43,11 +43,14 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
   };
 
   const enviarCorreo = () => {
-    if (usuario) {
-      window.location.href = `mailto:${usuario.email}?subject=Asunto&body=Cuerpo del correo`;
-    } else {
-      console.log('No hay usuario para enviar el correo');
-    }
+    const cuerpoCorreo = cart.map(product => `
+      Nº de orden: ${generateRandomOrderNumber()}
+      Vendedor: ${product.pro_vendedor}
+      Compra: ${product.pro_nombre}
+      Cantidad: ${product.cantidad} ${product.pro_medida}
+    `).join('\n\n');
+  
+    window.location.href = `mailto:darwin.valdiviezo001@gmail.com?subject=Asunto&body=${encodeURIComponent(cuerpoCorreo)}`;
   }
   
 
@@ -95,7 +98,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                   <p className="pagopage-factura-datos"></p>
                 </div>
               ))}
-                  <button class="boton-enviar" onClick={enviarCorreo}>Enviar correo</button>
+                  <button className="boton-enviar" onClick={enviarCorreo}>Enviar correo</button>
                    <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>            
                    </div>
                   <button className="btn-buy" onClick={handleContinueShoppingClick}>
