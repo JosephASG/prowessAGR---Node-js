@@ -59,6 +59,7 @@ function MyAccountPage(props) {
           <p><strong>Provincia: </strong>{user.provinciaUsuario}</p>
           <p><strong>Ciudad: </strong> {user.ciudadUsuario}</p>
           <p><strong>Direccion: </strong> {user.direccionUsuario}</p>
+          <p><strong>Telefono: </strong> {user.telefonoUsuario}</p>
           {userType === 'buyer' && (
             <div className='my-account-info'>
               <p><strong>Estado de Compra: </strong> {user.purchaseStatus}</p>

@@ -63,21 +63,38 @@
 
 .total-price {
   display: flex;
+  justify-content: center; 
+  align-items: center; 
   font-size: 18px;
   margin-bottom: 20px;
   border-radius: 5px;
-  max-width: 230px;
-  margin: 25px;
+  padding: 10px 20px; 
   color: #ffffff;
   background-color: rgba(47, 134, 166, 0.3);
   border: 1px solid orange;
   border-bottom-width: 5px; 
-  margin-left: 610px; 
-  padding-left: 40px
+  max-width: 300px; 
+  margin: 0 auto; 
 }
 
 .total-price p {
   margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .total-price {
+    font-size: 15px; 
+    padding: 8px 16px; 
+    max-width: 250px; 
+  }
+}
+
+
+@media (max-width: 768px) {
+  .total-price {
+    font-size: 15px; /* Reducir el tamaño de fuente en dispositivos más pequeños si es necesario */
+    padding: 8px 16px; /* Ajustar el relleno para dispositivos más pequeños */
+  }
 }
 
 .separador-p {
@@ -86,25 +103,40 @@
 }
 
 .btn-buy {
-  font-size: 20px;
-  color: #ffffff;
   background: linear-gradient(45deg, rgb(0, 149, 255), #ff0000);
+  color: #ffffff;
   border: none;
-  border-radius: 7px;
-  padding: 10px;
+  padding: 14px 24px;
+  font-size: 17px;
+  border-radius: 8px;
+  transition: background-color 0.3s, box-shadow 0.3s;
   cursor: pointer;
-  max-width: 300px;
-  padding-right: 70px;
-  padding-left: 70px;
-  display: flex;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: block;
+  max-width: 300px; 
+  margin: 20px auto; /* Este es el margen que ajustaremos */
 }
 
-.btn-buy {
-
-padding: 17px;
-font-style: italic;
-margin: 20px;
+.btn-buy i {
+  margin-right: 8px;
+  font-size: 20px;
 }
+
+.btn-buy:hover {
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .btn-buy {
+    font-size: 15px; 
+    padding: 12px 20px; 
+    max-width: 250px; 
+  }
+}
+
+
 
 .btn-delete {
   max-width: 35px !important;

@@ -6,18 +6,23 @@ import { getUsers, deleteUser} from "../services/user";
 
 const UserList = () => {
     const [users,setUsers] = useState([]);
-
     const [isAddModalOpen, setIsAddModalOpen] = useState(false);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [UserToEdit, setUserToEdit] = useState(null);
-
-    const WEBURL = process.env.REACT_APP_API_URL
-    const ITEMS_PER_PAGE = 5;
-    const token = localStorage.getItem("token");
+    const [token, setToken] = useState(null); // Agrega el estado para token
 
     useEffect (() => {
-        handleUsers(token);
+        const tokenFromStorage = localStorage.getItem("token");
+        if (tokenFromStorage) {
+            setToken(tokenFromStorage);
+        }
     },[]);
+
+    useEffect (() => {
+        if (token) { // Verifica si token está definido
+            handleUsers(token);
+        }
+    },[token]); // Ejecuta solo cuando token cambie
 
     const handleEditUsers = (user) => {
       setUserToEdit(user);
@@ -25,14 +30,27 @@ const UserList = () => {
     };
 
     const handleUsers = async (token) => {
-        const response = await getUsers(token);
-        setUsers(response.data.users);
-    }
+      try {
+          const response = await getUsers(token);
+          console.log("Response from getUsers:", response);
+          if (response.data && response.data.users) {
+              setUsers(response.data.users);
+          } else {
+              console.error("Error: getUsers response data is missing or invalid:", response);
+          }
+      } catch (error) {
+          console.error("Error fetching users:", error);
+      }
+  }
 
     const handleDeleteUser = async (id) => {
-        const response = await deleteUser(token,id);
-        console.log(response);
-    }
+      const response = await deleteUser(token, id);
+      console.log(response);
+      if (response.status === 200) {
+          setUsers(users.filter(user => user.id !== id));
+      }
+  }
+  
     return (
      
         <div className="container-user-list">
