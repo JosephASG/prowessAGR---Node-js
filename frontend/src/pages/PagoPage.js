@@ -9,10 +9,10 @@ import { getTokenData } from '../services/auth';
 import { getUserData } from '../services/user.js';
 import whatsapp from '../imagenes/whatsapp.png';
 
-
 function PagoPage({ cart, vendor, clearCart, orden }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [usuario, setUsuario] = useState([]);
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   useEffect(() => {
     handlePayment();
@@ -21,7 +21,6 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
   const handlePayment = () => {
     setPaymentSuccess(true);
   };
-
 
   const [redirect, setRedirect] = useState(false);
 
@@ -65,10 +64,11 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
 
   const handleShareButtonClick = () => {
     const shareLink = 'whatsapp://send?text=¡Echa un vistazo a este producto que encontré en nuestra tienda!%0A%0AEncuentra más en: https://prowessagricola.prowessec.com';
-      navigator.clipboard.writeText(shareLink).then(() => {
-      alert('¡El enlace ha sido copiado al portapapeles!');
-        }).catch(error => {
-        console.error('Error al copiar al portapapeles:', error);
+    navigator.clipboard.writeText(shareLink).then(() => {
+      setShowCopiedMessage(true); // Mostrar el mensaje de enlace copiado
+      setTimeout(() => setShowCopiedMessage(false), 3000); // Ocultar el mensaje después de 3 segundos
+    }).catch(error => {
+      console.error('Error al copiar al portapapeles:', error);
     });
   };
   
@@ -127,6 +127,11 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
               <b>Seguir comprando</b>
             </button>
           </>
+        )}
+        {showCopiedMessage && (
+          <div className="copied-link-message">
+            <span className="copied-link-message-text">¡El enlace ha sido copiado al portapapeles!</span>
+          </div>
         )}
       </div>
     </div>

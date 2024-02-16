@@ -222,31 +222,24 @@ font-size: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-/* Estilo para el mensaje de enlace copiado */
 .copied-link-message {
   position: fixed;
-  top: 50%;
+  top: 20px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
+  transform: translateX(-50%);
+  background-color: #4caf50; 
   color: white;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
-/* Estilo para el texto dentro del mensaje */
 .copied-link-message-text {
   font-size: 16px;
 }
 
-/* Estilo para el botón de cerrar el mensaje */
-.copied-link-message-close {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  cursor: pointer;
-}
+
 
   
   
