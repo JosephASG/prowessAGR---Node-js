@@ -13,6 +13,13 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [usuario, setUsuario] = useState([]);
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const [orderNumber, setOrderNumber] = useState(null);
+
+
+  useEffect(() => {
+    const orderNum = generateRandomOrderNumber();
+    setOrderNumber(orderNum);
+  }, []);
 
   useEffect(() => {
     handlePayment();
@@ -42,25 +49,29 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
   };
 
   const enviarCorreo = () => {
+     // Asegúrate de tener una función para obtener el número de orden
+
     const cuerpoCorreo = cart.map(product => `
-    Estimado/a ${product.pro_vendedor},
+        <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+            <img src="https://austonetire.com.ec/wp-content/uploads/2018/02/pago_exitoso.jpg" alt="Imagen de factura" style="max-width: 100%; height: auto;">
 
-    Espero que este mensaje le encuentre bien. Me gustaría informarle que he completado exitosamente un pedido en su tienda.
+            <h2>Estimado/a ${product.pro_vendedor},</h2>
 
-    A continuación, encontrará los detalles del pedido:
+            <p>Espero que este mensaje le encuentre bien. Me gustaría informarle que he completado exitosamente un pedido en su tienda.</p>
 
-    Número de Orden: ${generateRandomOrderNumber()}
-    Producto: ${product.pro_nombre}
-    Cantidad: ${product.cantidad} ${product.pro_medida}
+            <p><strong>Nº de orden:</strong> ${orderNumber}</p>
+            <p><strong>Compra:</strong> ${product.pro_nombre}</p>
+            <p><strong>Cantidad:</strong> ${product.cantidad} ${product.pro_medida}</p>
 
-    Quedo a la espera de cualquier confirmación o instrucciones adicionales.
+            <p>Quedo a la espera de cualquier confirmación o instrucciones adicionales.</p>
 
-    Saludos cordiales,
-    [Tu nombre]
-`).join('\n\n');
+            <p>Saludos cordiales,<br/>[Tu nombre]</p>
+        </div>
+    `).join('\n\n');
 
     window.location.href = `mailto:darwin.valdiviezo001@gmail.com?subject=Asunto&body=${encodeURIComponent(cuerpoCorreo)}`;
-  }
+};
+
 
   const handleShareButtonClick = () => {
     const shareLink = 'whatsapp://send?text=¡Echa un vistazo a este producto que encontré en nuestra tienda!%0A%0AEncuentra más en: https://prowessagricola.prowessec.com';
@@ -90,7 +101,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                       <img src={product.pro_imagen} alt={product.pro_nombre} />
                     </div>
                     <span className="pagopage-factura-label">Nº de orden:</span>
-                    {generateRandomOrderNumber()}
+{orderNumber}
                   </p>
                   <p className="pagopage-factura-datos">
                     <span className="pagopage-factura-label">Vendedor:</span>
