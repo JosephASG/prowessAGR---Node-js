@@ -44,16 +44,34 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
 
   const enviarCorreo = () => {
     const cuerpoCorreo = cart.map(product => `
-      Nº de orden: ${generateRandomOrderNumber()}
-      Vendedor: ${product.pro_vendedor}
-      Compra: ${product.pro_nombre}
-      Cantidad: ${product.cantidad} ${product.pro_medida}
-    `).join('\n\n');
-  
+    Estimado/a ${product.pro_vendedor},
+
+    Espero que este mensaje le encuentre bien. Me gustaría informarle que he completado exitosamente un pedido en su tienda.
+
+    A continuación, encontrará los detalles del pedido:
+
+    Número de Orden: ${generateRandomOrderNumber()}
+    Producto: ${product.pro_nombre}
+    Cantidad: ${product.cantidad} ${product.pro_medida}
+
+    Quedo a la espera de cualquier confirmación o instrucciones adicionales.
+
+    Saludos cordiales,
+    [Tu nombre]
+`).join('\n\n');
+
     window.location.href = `mailto:darwin.valdiviezo001@gmail.com?subject=Asunto&body=${encodeURIComponent(cuerpoCorreo)}`;
   }
-  
 
+  const handleShareButtonClick = () => {
+    const shareLink = 'whatsapp://send?text=¡Echa un vistazo a este producto que encontré en nuestra tienda!%0A%0AEncuentra más en: https://prowessagricola.prowessec.com';
+      navigator.clipboard.writeText(shareLink).then(() => {
+      alert('¡El enlace ha sido copiado al portapapeles!');
+        }).catch(error => {
+        console.error('Error al copiar al portapapeles:', error);
+    });
+  };
+  
   return (
     <div className="pagopage-container">
       <div className="pagopage-form">
@@ -95,6 +113,10 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                    </div>
                   </button>
                   </a>
+                  <button className="btn btn-success btn-share" onClick={handleShareButtonClick}>
+                    <i className="fab fa-whatsapp"></i> Compartir 
+                    <div className="image-whatsapp"></div>
+                  </button>
                   <p className="pagopage-factura-datos"></p>
                 </div>
               ))}
