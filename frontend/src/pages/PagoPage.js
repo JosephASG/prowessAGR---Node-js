@@ -8,12 +8,33 @@ import VendorsPage from './VendorsPage';
 import { getTokenData } from '../services/auth';
 import { getUserData } from '../services/user.js';
 import whatsapp from '../imagenes/whatsapp.png';
+import { checkToken} from '../services/auth';  
+
 
 function PagoPage({ cart, vendor, clearCart, orden }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-  const [usuario, setUsuario] = useState([]);
+  const [usuario, setUsuario] = useState(null);
+
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const [orderNumber, setOrderNumber] = useState(null);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    const obtenerDatos = async () => {
+      const data = await checkToken(token);
+      const usuario = 
+      { 
+        id: data.data.id,
+        nombre: data.data.nombreUsuario,
+        apellido: data.data.apellidoUsuario,
+        email: data.data.correoUsuario,
+        telefono: data.data.telefonoUsuario
+      }
+      setUsuario(usuario);
+    };
+
+    obtenerDatos();
+  }, [token]);
 
 
   useEffect(() => {
@@ -49,29 +70,26 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
   };
 
   const enviarCorreo = () => {
-     // Asegúrate de tener una función para obtener el número de orden
+    // Asegúrate de tener una función para obtener el número de orden
 
     const cuerpoCorreo = cart.map(product => `
-        <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
-            <img src="https://austonetire.com.ec/wp-content/uploads/2018/02/pago_exitoso.jpg" alt="Imagen de factura" style="max-width: 100%; height: auto;">
 
-            <h2>Estimado/a ${product.pro_vendedor},</h2>
+        Estimado/a ${product.pro_vendedor},
 
-            <p>Espero que este mensaje le encuentre bien. Me gustaría informarle que he completado exitosamente un pedido en su tienda.</p>
+        Espero que este mensaje le encuentre bien. Me gustaría informarle que he completado exitosamente un pedido en su tienda.
 
-            <p><strong>Nº de orden:</strong> ${orderNumber}</p>
-            <p><strong>Compra:</strong> ${product.pro_nombre}</p>
-            <p><strong>Cantidad:</strong> ${product.cantidad} ${product.pro_medida}</p>
+        Nº de orden: ${orderNumber}
+        Compra: ${product.pro_nombre}
+        Cantidad: ${product.cantidad} ${product.pro_medida}
 
-            <p>Quedo a la espera de cualquier confirmación o instrucciones adicionales.</p>
+        Quedo a la espera de cualquier confirmación o instrucciones adicionales.
 
-            <p>Saludos cordiales,<br/>[Tu nombre]</p>
-        </div>
+        Saludos cordiales,
+        [Tu nombre]
     `).join('\n\n');
 
-    window.location.href = `mailto:darwin.valdiviezo001@gmail.com?subject=Asunto&body=${encodeURIComponent(cuerpoCorreo)}`;
-};
-
+    window.location.href = `mailto:${usuario.email}?subject=Asunto&body=${encodeURIComponent(cuerpoCorreo)}`;
+  };
 
   const handleShareButtonClick = () => {
     const shareLink = 'whatsapp://send?text=¡Echa un vistazo a este producto que encontré en nuestra tienda!%0A%0AEncuentra más en: https://prowessagricola.prowessec.com';

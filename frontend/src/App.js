@@ -102,6 +102,7 @@ function App() {
           path="/tienda"
           element={
             <StorePage
+            
               cart={cart}
               addToCart={addToCart}
               removeFromCart={removeFromCart}
