@@ -219,3 +219,28 @@
   margin-left: 89px;
 
 }
+
+.password-strength-indicator {
+  font-size: 14px;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.password-strength-indicator.weak {
+  background-color: #ff8080; 
+}
+
+.password-strength-indicator.medium {
+  background-color: #ffd966; 
+}
+
+.password-strength-indicator.strong {
+  background-color: #80d4ff; 
+}
+
+.password-strength-indicator.very-strong {
+  background-color: #00b300; 
+}
+

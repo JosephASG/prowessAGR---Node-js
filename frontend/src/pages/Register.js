@@ -132,7 +132,29 @@ function Register() {
       setIsCedulaValid(true);
     }
   };
+  const checkPasswordStrength = (password) => {
+    // Evaluar la longitud de la contraseña
+    if (password.length < 6) {
+      return 'Débil'; // Contraseña demasiado corta
+    }
 
+    // Evaluar la complejidad de la contraseña
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+
+    // Determinar la fuerza de la contraseña en función de la complejidad
+    if (hasNumber && hasSpecialChar && hasUpperCase && hasLowerCase) {
+      return 'Muy alta'; // Todos los criterios cumplidos
+    } else if ((hasNumber && hasUpperCase) || (hasNumber && hasSpecialChar) || (hasUpperCase && hasSpecialChar)) {
+      return 'Alta'; // Cumple con dos de los criterios
+    } else if (hasNumber || hasSpecialChar || hasUpperCase || hasLowerCase) {
+      return 'Media'; // Cumple con uno de los criterios
+    } else {
+      return 'Débil'; // No cumple con ninguno de los criterios
+    }
+  };
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -235,6 +257,8 @@ function Register() {
     }
     return null;
   };
+
+  const passwordStrength = checkPasswordStrength(password);
 
   return (
     <div className="register-container">
@@ -368,7 +392,7 @@ function Register() {
     value={password}
     onChange={(e) => setPassword(e.target.value)}
     minLength={6} 
-    maxLength={20}
+    maxLength={30}
     required
   />
   <span
@@ -378,6 +402,10 @@ function Register() {
     👁️‍🗨️
   </span>
 </div>
+<div className="password-strength-indicator">
+  Fuerza de la contraseña: {passwordStrength}
+</div>
+
 
       <div className="password-container">
         <input
