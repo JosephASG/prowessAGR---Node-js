@@ -73,20 +73,28 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     // Asegúrate de tener una función para obtener el número de orden
 
     const cuerpoCorreo = cart.map(product => `
+        
+        Confirmación del pedido
 
-        Estimado/a ${product.pro_vendedor},
+        Estimado/a ${usuario.nombre},
 
-        Espero que este mensaje le encuentre bien. Me gustaría informarle que he completado exitosamente un pedido en su tienda.
+        Gracias por comprar con nosotros. Tu pedido ${orderNumber} está confirmado. Te avisaremos cuando se envíe.
+
+        
+        Detalles del pedido
+        //Hora y fecha
 
         Nº de orden: ${orderNumber}
         Compra: ${product.pro_nombre}
         Cantidad: ${product.cantidad} ${product.pro_medida}
+        Comprado a: ${product.pro_vendedor}
 
         Quedo a la espera de cualquier confirmación o instrucciones adicionales.
 
         Saludos cordiales,
-        [Tu nombre]
-    `).join('\n\n');
+        
+        
+      `).join('\n\n');
 
     window.location.href = `mailto:${usuario.email}?subject=Asunto&body=${encodeURIComponent(cuerpoCorreo)}`;
   };
