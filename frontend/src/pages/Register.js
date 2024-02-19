@@ -300,7 +300,7 @@ function Register() {
         <input
           className="register-input"
           type="email"
-          placeholder="Correo"
+          placeholder="Correo Electrónico"
           value={email}
           onChange={handleEmailChange}
           onBlur={handleEmailValidation}
@@ -316,6 +316,7 @@ function Register() {
           onChange={handleTipoDocumentoChange}
           required
         >
+          <option value="select">Selecciona</option>
           <option value="cedula">Cédula</option>
           <option value="ruc">RUC</option>
           <option value="pasaporte">Pasaporte</option>
@@ -360,21 +361,24 @@ function Register() {
           required
         />
       <div className="password-container">
-        <input
-          className="register-input"
-          type={showPassword ? "text": "password"}
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <span
-          className={`password-toggle ${showPassword ? "visible" : ""}`}
-          onClick={togglePasswordVisibility}
-        >
-          👁️‍🗨️
-        </span>
-      </div>
+  <input
+    className="register-input"
+    type={showPassword ? "text" : "password"}
+    placeholder="Contraseña"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    minLength={6} 
+    maxLength={20}
+    required
+  />
+  <span
+    className={`password-toggle ${showPassword ? "visible" : ""}`}
+    onClick={togglePasswordVisibility}
+  >
+    👁️‍🗨️
+  </span>
+</div>
+
       <div className="password-container">
         <input
           className="register-input"
@@ -446,7 +450,7 @@ function Register() {
           value={mainStreet}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === '') {
+            if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-.,()#&'"/]+$/.test(value) || value === '') {
               setMainStreet(value);
             }
           }}
@@ -459,7 +463,7 @@ function Register() {
           value={secondaryStreet}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === '') {
+            if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-.,()#&'"/]+$/.test(value) || value === '') {
               setSecondaryStreet(value);
             }
           }}
