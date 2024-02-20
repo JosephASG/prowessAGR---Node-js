@@ -21,6 +21,7 @@ import UserList from "./pages/UserList";
 import AccessDenied from "./pages/AccessDenied";
 import AdvertisementSection from "./pages/AdvertisementSection";
 import PagoPage from "./pages/PagoPage";
+import TermsConditions from "./pages/TermsConditions";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cart, setCart] = useState([]);
@@ -102,7 +103,6 @@ function App() {
           path="/tienda"
           element={
             <StorePage
-            
               cart={cart}
               addToCart={addToCart}
               removeFromCart={removeFromCart}
@@ -164,6 +164,18 @@ function App() {
             />
           }
         />
+        <Route path="/terms&conditions" element={<TermsConditions />} />
+        <Route
+         path="/terms&conditions"
+         element={
+          <PrivateRoute
+              userRole={role}
+              allowedRoles={["administrador", "vendedor"]}
+              element={<TermsConditions />}
+             />
+             }
+         />
+
         <Route
           path="/product-list"
           element={
