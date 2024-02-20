@@ -71,6 +71,11 @@ function NavigationBar(props) {
               </Link>
             </li>
             <li>
+              <a href="https://informacion.prowessec.com/home" target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
+                Gestion de Vinculacion
+              </a>
+            </li>
+            <li>
               <Link to="/tienda" onClick={toggleMenu}>
                 Tienda
               </Link>
@@ -120,6 +125,11 @@ function NavigationBar(props) {
               <Link to="/" onClick={toggleMenu}>
                 Inicio
               </Link>
+            </li>
+            <li>
+              <a href="https://informacion.prowessec.com/home" target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
+                Gestion de Vinculacion
+              </a>
             </li>
             <li>
               <Link to="/tienda" onClick={toggleMenu}>
@@ -185,6 +195,11 @@ function NavigationBar(props) {
               </Link>
             </li>
             <li>
+              <a href="https://informacion.prowessec.com/home" target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
+                Gestion de Vinculacion
+              </a>
+            </li>
+            <li>
               <Link to="/tienda" onClick={toggleMenu}>
                 Tienda
               </Link>
@@ -231,6 +246,11 @@ function NavigationBar(props) {
               <Link to="/" onClick={toggleMenu}>
                 Inicio
               </Link>
+            </li>
+            <li>
+              <a href="https://informacion.prowessec.com/home" target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
+                Gestion de Vinculacion
+              </a>
             </li>
             <li>
               <Link to="/nosotros" onClick={toggleMenu}>
