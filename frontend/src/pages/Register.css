@@ -244,3 +244,44 @@
   background-color: #00b300; 
 }
 
+.condiciones-section {
+ margin-top: 15px;
+ margin-bottom: 15px;
+}
+
+.condiciones-section input[type="checkbox"] {
+  position: absolute; 
+  opacity: 0;
+}
+
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  background-color: #ccc;
+  border-radius: 3px;
+  margin-right: 10%; 
+  margin-left: 1%;
+}
+
+.condiciones-section input[type="checkbox"]:checked + label .checkmark {
+  background-color: #007bff; 
+}
+
+.condiciones-section label {
+  cursor: pointer; 
+  color: #ffffff; 
+  font-size: 11px;
+  margin-top: 10px;
+}
+
+.condiciones-section label a {
+  color: #ffffff; 
+}
+
+.condiciones-section label a:hover {
+  text-decoration: underline; 
+}
+
+

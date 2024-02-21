@@ -506,6 +506,19 @@ function Register() {
           <label htmlFor="quieroSerVendedor">Deseo ser vendedor</label>
         </div>
 
+        <div className="condiciones-section">
+      <input
+        type="checkbox"
+        onChange={() => setShowAdditionalFields(!showAdditionalFields)}
+        id="aceptoterminos"
+      />
+       <label htmlFor="aceptoterminos">
+       <span className="checkmark"></span> 
+       He leído y acepto los
+       <a href="/terms&conditions"> términos y condiciones</a>
+       <span > de uso</span> 
+      </label>
+        </div>
 
         <button
           className={`register-button ${isFormValid() ? 'valid' : ''}`}
