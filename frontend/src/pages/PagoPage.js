@@ -92,7 +92,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
         Quedo a la espera de cualquier confirmación o instrucciones adicionales.
 
         Saludos cordiales,
-        
+        https://www.ejemplo.com
         
       `).join('\n\n');
 
