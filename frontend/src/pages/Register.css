@@ -81,7 +81,7 @@
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.1); 
   color: white;
   border: none;
   border-radius: 4px;
@@ -93,6 +93,7 @@
   background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00) !important;
   color: white !important;
 }
+
 
 .register-input[type="file"]::-webkit-file-upload-button {
   background-color: #4CAF50;
@@ -272,7 +273,7 @@
 .condiciones-section label {
   cursor: pointer; 
   color: #ffffff; 
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 10px;
 }
 
