@@ -33,8 +33,19 @@ function NavigationBar(props) {
       setCartCount(props.cart.length);
   }, [props.cart]);
 
-
-
+  document.addEventListener('DOMContentLoaded', function() {
+    const gestionVinculacion = document.getElementById('gestionVinculacion');
+    const levantamientoInformacion = document.getElementById('levantamientoInformacion');
+  
+    gestionVinculacion.addEventListener('mouseenter', function() {
+      levantamientoInformacion.style.display = 'block';
+    });
+  
+    gestionVinculacion.addEventListener('mouseleave', function() {
+      levantamientoInformacion.style.display = 'none';
+    });
+  });
+  
   useEffect(() => {
     // Función que maneja el evento de scroll
     const handleScroll = () => {
@@ -247,11 +258,18 @@ function NavigationBar(props) {
                 Inicio
               </Link>
             </li>
-            <li>
-              <a href="https://informacion.prowessec.com/home" target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
-                Gestion de Vinculacion
-              </a>
-            </li>
+            <li id="gestionVinculacion">
+               Gestion de Vinculacion
+            <ul id="levantamientoInformacion" style={{ display: 'none', backgroundColor: '#ffffff', padding: '7px', borderRadius: '2px', 
+             position: 'absolute', top: '60px', left: '32.3%', zIndex: '999', boxShadow: '0px 0px 3px 0px rgba(0,0,0,0.3)' }}>
+              <li style={{ listStyle: 'none' }}>
+               <h4 style={{ margin: '0', marginBottom: '3px', fontSize: '8px', color: '#000', fontWeight: 'bold' }}></h4>
+              <a href="https://informacion.prowessec.com/" target="_blank" rel="noopener noreferrer" onClick={toggleMenu} style={{ color: '#000', fontSize: '12px', fontWeight: 'bold' }}>
+                   Levantamiento Información
+                 </a>
+                 </li>
+                </ul>
+               </li>
             <li>
               <Link to="/nosotros" onClick={toggleMenu}>
                 ¿Quiénes Somos?
