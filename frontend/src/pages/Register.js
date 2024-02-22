@@ -7,7 +7,6 @@ const WEBURL = process.env.REACT_APP_API_URL
 
 
 
-
 const validarCedulaEcuatoriana = (cedula) => {
   if (cedula.length === 10 && /^[0-9]+$/.test(cedula)) {
 
@@ -259,7 +258,11 @@ function Register() {
   };
 
   const passwordStrength = checkPasswordStrength(password);
+  const [showPopup, setShowPopup] = useState(false);
 
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
   return (
     <div className="register-container">
       <h2 className="register-title">Registro de usuarios</h2>
@@ -507,19 +510,36 @@ function Register() {
         </div>
 
         <div className="condiciones-section">
-      <input
-        type="checkbox"
-        onChange={() => setShowAdditionalFields(!showAdditionalFields)}
-        id="aceptoterminos"
-      />
-       <label htmlFor="aceptoterminos">
-       <span className="checkmark"></span> 
-       He leído y acepto los
-       <a href="/terms&conditions"> términos y condiciones</a>
-       <span > de uso</span> 
-      </label>
-        </div>
+  <input
+    type="checkbox"
+    onChange={() => setShowAdditionalFields(!showAdditionalFields)}
+    id="aceptoterminos"
+  />
+  <label htmlFor="aceptoterminos" onClick={togglePopup}>
+    <span className="checkmark"></span> 
+    He leído y acepto los
+    <span > términos y condiciones</span> 
+  </label>
+</div>
 
+<div className={`popup ${showPopup ? 'show' : ''}`}>
+  <div className="popup-content">
+    <h2>Términos y Condiciones de Uso</h2>
+    <div className="popup-info">
+      <p>Los términos y condiciones de uso establecen las pautas para interactuar con el sitio web de Prowess Agrícola, 
+        abarcando desde la adquisición de productos hasta el registro de usuarios. Se detallan responsabilidades del usuario, 
+        como la veracidad de la información proporcionada, así como las acciones prohibidas, como el uso no autorizado de dispositivos. 
+        Se abordan temas como la privacidad, la suspensión de cuentas por incumplimiento, la propiedad intelectual, 
+        y se establecen claramente las garantías y responsabilidades en las transacciones comerciales. </p>
+    </div>
+    <div className="popup-buttons">
+      <button type="button" onClick={togglePopup}>Cerrar</button>
+      <a href="/terms&conditions">
+        <button type="button">Ver más</button>
+      </a>
+    </div>
+  </div>
+</div>
         <button
           className={`register-button ${isFormValid() ? 'valid' : ''}`}
           type="submit"
