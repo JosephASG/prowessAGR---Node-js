@@ -9,6 +9,8 @@ import { getTokenData } from '../services/auth';
 import { getUserData } from '../services/user.js';
 import whatsapp from '../imagenes/whatsapp.png';
 import { checkToken} from '../services/auth';  
+import jsPDF from 'jspdf';
+
 
 
 function PagoPage({ cart, vendor, clearCart, orden }) {
@@ -69,35 +71,58 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     setRedirect(true);
   };
 
+  
+
   const enviarCorreo = () => {
-    // Asegúrate de tener una función para obtener el número de orden
-
-    const cuerpoCorreo = cart.map(product => `
-        
-        Confirmación del pedido
-
-        Estimado/a ${usuario.nombre},
-
-        Gracias por comprar con nosotros. Tu pedido ${orderNumber} está confirmado. Te avisaremos cuando se envíe.
-
-        
-        Detalles del pedido
-        //Hora y fecha
-
-        Nº de orden: ${orderNumber}
-        Compra: ${product.pro_nombre}
-        Cantidad: ${product.cantidad} ${product.pro_medida}
-        Comprado a: ${product.pro_vendedor}
-
-        Quedo a la espera de cualquier confirmación o instrucciones adicionales.
-
-        Saludos cordiales,
-        https://www.ejemplo.com
-        
-      `).join('\n\n');
-
-    window.location.href = `mailto:${usuario.email}?subject=Asunto&body=${encodeURIComponent(cuerpoCorreo)}`;
+      // Asegúrate de tener una función para obtener el número de orden
+  
+      // Crear instancia de jsPDF
+      const pdf = new jsPDF();
+  
+      // Configurar estilo del texto
+      pdf.setFont('times');
+      pdf.setFontSize(12);
+      pdf.setTextColor(0, 0, 0); // Color en RGB (negro)
+  
+      // Agregar el contenido del PDF
+      pdf.text('Confirmación del pedido', 10, 20);
+  
+      pdf.text(`Estimado/a ${usuario.nombre},`, 10, 30);
+  
+      pdf.text(`Gracias por comprar con nosotros. Tu pedido ${orderNumber} está confirmado. Te avisaremos cuando se envíe.`, 10, 40);
+  
+      pdf.text('Detalles del pedido', 10, 60);
+      // Hora y fecha
+      // ...
+  
+      pdf.text(`Nº de orden: ${orderNumber}`, 10, 70);
+      pdf.text(`Quedo a la espera de cualquier confirmación o instrucciones adicionales.`, 10, 80);
+  
+      // Agregar detalles de productos
+      let yPosition = 90; // Posición inicial para los detalles de productos
+      cart.forEach(product => {
+          pdf.text(`Compra: ${product.pro_nombre} - Cantidad: ${product.cantidad} ${product.pro_medida} - Comprado a: ${product.pro_vendedor}`, 10, yPosition);
+          yPosition += 10; // Incrementar la posición para el siguiente producto
+      });
+  
+      pdf.text('Saludos cordiales,', 10, yPosition + 10);
+      pdf.text('https://www.ejemplo.com', 10, yPosition + 20);
+  
+      // Obtener el contenido del PDF en formato base64
+      const pdfBase64 = pdf.output('datauristring');
+  
+      // Construir el enlace de descarga del PDF
+      const downloadLink = document.createElement('a');
+      downloadLink.href = pdfBase64;
+      downloadLink.download = `${orderNumber}_confirmacion_pedido.pdf`;
+  
+      // Simular el clic en el enlace para iniciar la descarga
+      downloadLink.click();
+  
+      // Enviar el correo
+      window.location.href = `mailto:${usuario.email}?subject=Asunto&body=Adjunto encontrarás la confirmación del pedido en formato PDF.`;
   };
+  
 
   const handleShareButtonClick = () => {
     const shareLink = 'whatsapp://send?text=¡Echa un vistazo a este producto que encontré en nuestra tienda!%0A%0AEncuentra más en: https://prowessagricola.prowessec.com';
