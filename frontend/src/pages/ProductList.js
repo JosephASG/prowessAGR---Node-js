@@ -203,7 +203,7 @@ const ProductList = () => {
           className={sortedColumn === "pro_nombre" ? "sorted" : ""}
           onClick={() => handleSort("pro_nombre")}
         >
-          Nombre
+          PRUEBA
         </b>
         <b
           className={sortedColumn === "pro_precio" ? "sorted" : ""}
