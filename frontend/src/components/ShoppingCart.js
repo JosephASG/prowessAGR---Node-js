@@ -186,6 +186,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
         <button className="btn-buy" onClick={handleBuyButtonClick}>
           <b>Generar compra</b>
         </button>
+
       </div>
     </div>
   );
