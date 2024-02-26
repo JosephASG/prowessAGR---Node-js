@@ -72,13 +72,17 @@ function Login(props) {
     }
   };
 
+
+  const manejarRecuperacionContrasena = () => {
+    navigate('/recuperar-contrasena');
+  };
+  
   const manejarRecuperacionCuenta = () => {
     navigate('/recuperar?type=cuenta');
   };
 
-  const manejarRecuperacionContrasena = () => {
-    navigate('/recuperar?type=contrasena');
-  };
+  
+  
 
   return (
     <div className="login-container">
