@@ -115,7 +115,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     // Mensaje adicional
     pdf.text('Quedo a la espera de cualquier confirmación o instrucciones adicionales.', 10, pdf.autoTable.previous.finalY + 10);
 
-  // Firma y enlaces tipo botón
+// Firma y enlaces tipo botón
 pdf.text('Saludos cordiales,', 10, pdf.autoTable.previous.finalY + 20);
 pdf.text('Tu Empresa', 10, pdf.autoTable.previous.finalY + 30);
 
@@ -128,10 +128,8 @@ const buttons = [
 ];
 
 buttons.forEach((button, index) => {
-    pdf.addLink(button.link, 10, pdf.autoTable.previous.finalY + 40 + (index * 12), 30, 10);
-    pdf.textWithLink(button.text, 10, { url: button.link, y: pdf.autoTable.previous.finalY + 40 + (index * 12) });
+    pdf.textWithLink(button.text, 10, pdf.autoTable.previous.finalY + 40 + (index * 12), { url: button.link });
 });
-
     // Obtener el contenido del PDF en formato base64
     const pdfBase64 = pdf.output('datauristring');
 

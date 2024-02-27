@@ -138,32 +138,32 @@ const getUserById = async (req, res) => {
 };
 
 
-// Solicitar reinicio de contraseña
-const requestPasswordReset = async (req, res) => {
-  const { id } = req.user;
-  const {password, newPassword} = req.body;
-  try {
-    const docRef = firestore.doc(fs, "usuario", id);
-    const docSnap = await firestore.getDoc(docRef);
-    if (docSnap.exists()) {
-      const user = docSnap.data();
-      user.id = docSnap.id;
-      if (bcrypt.compareSync(password, user.claveUsuario)) {
-        const newHashedPassword = bcrypt.hashSync(newPassword, saltRounds);
-        await firestore.updateDoc(docRef, {claveUsuario: newHashedPassword});
-        return res.status(200).json({message: "Contraseña actualizada correctamente"});
-      }else{
-        return res.status(401).json({message: "Contraseña incorrecta"});
-      }
-    } else {
-      return res.status(404).json({ message: "Usuario no encontrado" });
-    }
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Error al obtener el usuario", error: error.message });
-  }
-};
+// // Solicitar reinicio de contraseña
+// const requestPasswordReset = async (req, res) => {
+//   const { id } = req.user;
+//   const {password, newPassword} = req.body;
+//   try {
+//     const docRef = firestore.doc(fs, "usuario", id);
+//     const docSnap = await firestore.getDoc(docRef);
+//     if (docSnap.exists()) {
+//       const user = docSnap.data();
+//       user.id = docSnap.id;
+//       if (bcrypt.compareSync(password, user.claveUsuario)) {
+//         const newHashedPassword = bcrypt.hashSync(newPassword, saltRounds);
+//         await firestore.updateDoc(docRef, {claveUsuario: newHashedPassword});
+//         return res.status(200).json({message: "Contraseña actualizada correctamente"});
+//       }else{
+//         return res.status(401).json({message: "Contraseña incorrecta"});
+//       }
+//     } else {
+//       return res.status(404).json({ message: "Usuario no encontrado" });
+//     }
+//   } catch (error) {
+//     return res
+//       .status(500)
+//       .json({ message: "Error al obtener el usuario", error: error.message });
+//   }
+// };
 
 // Metodo GET
 const getUsers = async (req, res) => {
@@ -293,5 +293,27 @@ const deleteUser = async (req, res) => {
         .json({ message: "Error al obtener la lista de usuarios" });
     }
   }
+
+
+// Solicitar restablecimiento de contraseña
+export const requestPasswordReset = async (req, res) => {
+  const { email } = req.body;
+  // Aquí deberías buscar al usuario en tu base de datos usando el email
+  // Generar un token de restablecimiento de contraseña y guardarlo en la base de datos
+  // Enviar un email al usuario con el token de restablecimiento de contraseña
+  res.status(200).json({ message: 'Correo de restablecimiento de contraseña enviado' });
+};
+
+// Confirmar restablecimiento de contraseña
+export const confirmPasswordReset = async (req, res) => {
+  const { resetToken, newPassword } = req.body;
+  // Aquí deberías buscar al usuario en tu base de datos usando el resetToken
+  // Si el token es válido, actualizar la contraseña del usuario
+  const hashedPassword = bcrypt.hashSync(newPassword, 10);
+  // Actualizar la contraseña en la base de datos
+  res.status(200).json({ message: 'Contraseña actualizada correctamente' });
+};
+
+
 
 export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser,deleteUser,updateUserById,deleteUserById,actualizarDatos};
