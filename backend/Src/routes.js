@@ -11,13 +11,13 @@ import authRoute from './routes/authRoute.js';
 import * as tokencontroller from './middleware/verifyToken.js';
 const routes = express.Router();
 // backend\Src\routes.js
-import * as usuario from '../controller/userController.js';
+// import * as usuario from '../controller/userController.js';
 
-// Solicitar restablecimiento de contraseña
-userRoute.post('/request-password-reset', usuario.requestPasswordReset);
+// // Solicitar restablecimiento de contraseña
+// userRoute.post('/request-password-reset', usuario.requestPasswordReset);
 
-// Confirmar restablecimiento de contraseña
-userRoute.post('/confirm-password-reset', usuario.confirmPasswordReset);
+// // Confirmar restablecimiento de contraseña
+// userRoute.post('/confirm-password-reset', usuario.confirmPasswordReset);
 
 
 routes.use('/fb/categoria', categoriaroute);
