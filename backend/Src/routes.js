@@ -22,7 +22,7 @@ const routes = express.Router();
 
 routes.use('/fb/categoria', categoriaroute);
 routes.use('/fb/ubicacion', locationRoute);
-routes.use('/fb/motorizado', motorizadoRoute);
+//routes.use('/fb/motorizado', motorizadoRoute);
 routes.use('/fb/pedido', orderRoute);
 routes.use('/fb/producto', productoroute);
 routes.use('/fb/vendedor',sellerRoute);
