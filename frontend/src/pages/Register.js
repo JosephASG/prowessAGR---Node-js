@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './Register.css'; // Importa el archivo de estilos CSS
 import Mapa from '../components/Mapa.js';
 import { registerApp } from '../services/auth';
+import axios from "axios";
+import { getUsers } from '../services/user';
 const WEBURL = process.env.REACT_APP_API_URL
 
 
@@ -67,6 +69,11 @@ function Register() {
   const [provinces, setProvinces] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [emailExists, setEmailExists] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showEmailExistsMessage, setShowEmailExistsMessage] = useState(false);
+  const [showFullErrorMessage, setShowFullErrorMessage] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -154,9 +161,31 @@ function Register() {
       return 'Débil'; // No cumple con ninguno de los criterios
     }
   };
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const handleEmailChange = async (e) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+    setEmailExists(false);
+  
+    try {
+      const response = await getUsers();
+      const users = response.data;
+      const emailExists = users.some((user) => user.correoUsuario === newEmail);
+  
+      setEmailExists(emailExists);
+      setErrorMessage('');
+      
+      setShowEmailExistsMessage(emailExists);
+    } catch (error) {
+      console.error('Error al verificar el correo electrónico:', error);
+  
+      if (error.response && error.response.status === 404) {
+        setErrorMessage('El correo electrónico ya está registrado');
+      } else {
+        setErrorMessage('Error al verificar el correo electrónico');
+      }
+    }
   };
+  
 
   const handleEmailValidation = (e) => {
     const email = e.target.value;
@@ -201,8 +230,6 @@ function Register() {
   };
 
   const handleRegister = async (e) => {
-
-    var image = photo.get('user-image');
     e.preventDefault();
     console.log('Registro de usuario:', name, userType, nPhone, nCedula, password, photo, province, city, mainStreet, secondaryStreet);
     const formData = new FormData();
@@ -221,16 +248,27 @@ function Register() {
     formData.append("categoriaUsuario", showAdditionalFields ? 'vendedor' : 'cliente');
     formData.append("tipoAsociacionUsuario", additionalField1);
     formData.append("claveUsuario", password);
-    formData.append("imagenUsuario", image);
-
-
-
-    const response = await registerApp(formData);
-    console.log(response);
-    if (response.status === 201) {
-      navigate(`/login`);
+    formData.append("imagenUsuario", photo);
+  
+    try {
+      const response = await registerApp(formData);
+      console.log(response);
+  
+      if (response && response.status === 201) {
+        navigate(`/login`);
+      } else {
+        console.error('Error al registrar el usuario:', response);
+      }
+    } catch (error) {
+      console.error('Error al registrar el usuario:', error);
+  
+      if (error.response && error.response.status === 400 && error.response.data.message === "Email already registered") {
+        setShowFullErrorMessage(true); 
+      }
     }
   };
+  
+  
 
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
@@ -333,8 +371,13 @@ function Register() {
           onBlur={handleEmailValidation}
           required
         />
-        {isValidEmail ? null : <p className="error-message">¡Recuerde que debe ser un email real!
-          Formato: correo@dominio.com/net/ec</p>}
+        {showEmailExistsMessage && (
+  <div className="email-exists-message">
+    <p>¡El correo electrónico ya está registrado!</p>
+  </div>
+)}
+
+
        
         <p className="register-document">Tipo de documento:</p>
         <select
