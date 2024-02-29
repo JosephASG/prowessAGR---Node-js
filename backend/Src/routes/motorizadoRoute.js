@@ -1,21 +1,21 @@
-import * as motorizadoController from '../controller/motorizadoController.js';
+import * as motorizado from '../controller/motorizadoController.js';
 import express from 'express';
 
 const motorizadoRoute = express.Router();
 
-// Create a new motorized controller
-motorizadoRoute.post('/createmotorizadodController', motorizadoController.createmotorizadoController);
+// Crear un nuevo motorizado
+motorizadoRoute.post('/createmotorizado', motorizado.createMotorizado);
 
-// Get all motorized controllers
-motorizadoRoute.get('/getmotorizadoControllers', motorizadoController.getmotorizadoControllers);
+// Obtener todos los motorizados
+motorizadoRoute.get('/getmotorizado', motorizado.getMotorizado);
 
-// Get a specific motorized controller by ID
-motorizadoRoute.get('/getmotorizadoController/:id', motorizadoController.getmotorizadoControllerByID);
+// Obtener un motorizado específico
+motorizadoRoute.get('/getmotorizado/:id', motorizado.getMotorizadoByID);
 
-// Update a motorized controller
-motorizadoRoute.put('/updatemotorizadoController/:id', motorizadoController.updatemotorizadoController);
+// Actualizar un motorizado
+motorizadoRoute.put('/updatemotorizado/:id', motorizado.updateMotorizado);
 
-// Delete a motorized controller
-motorizadoRoute.delete('/deletemotorizadoController/:id', motorizadoController.deletemotorizadoController);
+// Eliminar un motorizado
+motorizadoRoute.delete('/deletemotorizado/:id', motorizado.deleteMotorizado);
 
 export default motorizadoRoute;
