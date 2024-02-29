@@ -117,7 +117,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
 
 // Firma y enlaces tipo botón
 pdf.text('Saludos cordiales,', 10, pdf.autoTable.previous.finalY + 20);
-pdf.text('Tu Empresa', 10, pdf.autoTable.previous.finalY + 30);
+pdf.text('ProwessAgrícola', 10, pdf.autoTable.previous.finalY + 30);
 
 // Agregar botones de enlace
 const buttons = [
