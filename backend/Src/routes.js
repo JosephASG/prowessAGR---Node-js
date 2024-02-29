@@ -31,3 +31,4 @@ routes.use('/fb/usuario',userRoute);
 routes.use('/fb/auth',authRoute);
 
 export default routes;
+//Error en la ruta al recuperar los datos
