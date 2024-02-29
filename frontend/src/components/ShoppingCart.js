@@ -7,7 +7,7 @@ import { createOrder } from '../services/order';
 import { checkToken} from '../services/auth';  
 
 function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState([]); 
   const [redirect, setRedirect] = useState(false);
   const [usuario, setUsuario] = useState([]);
   const token = localStorage.getItem("token");
@@ -165,7 +165,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
               </div>
               <div className='price-product'>
                 <p><b>Total:</b> ${(product.pro_precio * product.cantidad).toFixed(2)}</p>
-                <div>
+                <div className='trash-bin-img'>
                   <FontAwesomeIcon
                     className='fa-icon-trash'
                     icon={faTrash}
