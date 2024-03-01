@@ -119,8 +119,8 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
 pdf.text('Saludos cordiales,', 10, pdf.autoTable.previous.finalY + 20);
 pdf.text('ProwessAgrícola', 10, pdf.autoTable.previous.finalY + 30);
 
-// Agregar botones de enlace
-const buttons = [
+   // Agregar botones de enlace
+   const buttons = [
     { text: 'Facebook', link: 'https://www.facebook.com/profile.php?id=100094846861007&mibextid=gik2fB' },
     { text: 'Instagram', link: 'https://www.instagram.com/prowessec7?igshid=NGVhN2U2NjQ0Yg%3D%3D' },
     { text: 'Sitio Web', link: 'https://prowessec.com' },
@@ -130,19 +130,36 @@ const buttons = [
 buttons.forEach((button, index) => {
     pdf.textWithLink(button.text, 10, pdf.autoTable.previous.finalY + 40 + (index * 12), { url: button.link });
 });
-    // Obtener el contenido del PDF en formato base64
-    const pdfBase64 = pdf.output('datauristring');
 
-    // Construir el enlace de descarga del PDF
-    const downloadLink = document.createElement('a');
-    downloadLink.href = pdfBase64;
-    downloadLink.download = `${orderNumber}_confirmacion_pedido.pdf`;
+// Pie de página estilizado
+const footerText = 'Saludos cordiales,\nProwessAgrícola';
 
-    // Simular el clic en el enlace para iniciar la descarga
-    downloadLink.click();
+pdf.text(footerText, 10, pdf.autoTable.previous.finalY + 20);
 
-    // Enviar el correo
-    window.location.href = `mailto:${usuario.email}?subject=Confirmación de Pedido&body=Adjunto encontrarás la confirmación del pedido en formato PDF.`;
+const footerLinks = [
+    { text: 'Facebook', link: 'https://www.facebook.com/profile.php?id=100094846861007&mibextid=gik2fB' },
+    { text: 'Instagram', link: 'https://www.instagram.com/prowessec7?igshid=NGVhN2U2NjQ0Yg%3D%3D' },
+    { text: 'Sitio Web', link: 'https://prowessec.com' },
+    { text: 'TikTok', link: 'https://www.tiktok.com/@prowess.ec?is_from_webapp=1&sender_device=pc' }
+];
+
+footerLinks.forEach((link, index) => {
+    pdf.textWithLink(link.text, 70 + index * 30, pdf.autoTable.previous.finalY + 20, { url: link.link });
+});
+
+// Obtener el contenido del PDF en formato base64
+const pdfBase64 = pdf.output('datauristring');
+
+// Construir el enlace de descarga del PDF
+const downloadLink = document.createElement('a');
+downloadLink.href = pdfBase64;
+downloadLink.download = `${orderNumber}_confirmacion_pedido.pdf`;
+
+// Simular el clic en el enlace para iniciar la descarga
+downloadLink.click();
+
+// Enviar el correo
+window.location.href = `mailto:${usuario.email}?subject=Confirmación de Pedido&body=Adjunto encontrarás la confirmación del pedido en formato PDF.`;
 };
 
   
