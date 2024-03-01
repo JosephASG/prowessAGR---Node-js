@@ -1,80 +1,75 @@
+import 'firebase/database';
+import * as firebase from 'firebase/app';
 import * as firestore from 'firebase/firestore';
-import { fs } from '../database/firebase.js';
+import { fs, storage } from '../database/firebase.js';
 
-// Create a new motorized controller
-const createMotorizadoController = async (req, res) => {
+// Crear un nuevo motorizado
+const createMotorizado = async (req, res) => {
   try {
-    const newControllerData = req.body;
-    const docRef = await firestore.addDoc(firestore.collection(fs, 'motorizadoController'), newControllerData);
-    res.json({ id: docRef.id, ...newControllerData });
+    const newMotorizadoData = req.body;
+    const docRef = await firestore.addDoc(firestore.collection(fs, 'motorizado'), newMotorizadoData);
+    res.json({ id: docRef.id, ...newMotorizadoData });
   } catch (error) {
-    console.error('Error creating motorizado controller:', error);
-    res.status(500).json({ error: 'Error creating motorizado controller.' });
+    console.error('Error al crear el motorizado:', error);
+    res.status(500).json({ error: 'Error al crear el motorizado.' });
   }
 };
 
-// Get all motorized controllers
-const getMotorizadoControllers = async (req, res) => {
+// Obtener todos los motorizados
+const getMotorizado = async (req, res) => {
   try {
-    const querySnapshot = await firestore.getDocs(firestore.collection(fs, 'motorizadoController'));
-    const controllers = [];
+    const querySnapshot = await firestore.getDocs(firestore.collection(fs, 'motorizado'));
+    const motorizados = [];
     querySnapshot.forEach((doc) => {
-      controllers.push({ id: doc.id, ...doc.data() });
+      motorizados.push({ id: doc.id, ...doc.data() });
     });
 
-    res.json(controllers);
+    res.json(motorizados);
   } catch (error) {
-    console.error('Error getting motorizado controllers:', error);
-    res.status(500).json({ error: 'Error getting motorizado controllers.' });
+    console.error('Error al obtener motorizados:', error);
+    res.status(500).json({ error: 'Error al obtener motorizados.' });
   }
 };
 
-// Get a specific motorized controller by ID
-const getMotorizadoControllerByID = async (req, res) => {
+// Obtener un motorizado específico
+const getMotorizadoByID = async (req, res) => {
   try {
-    const controllerId = req.params.id;
-    const controllerDoc = await firestore.getDoc(firestore.doc(fs, 'motorizadoController', controllerId));
-
-    if (controllerDoc.exists()) {
-      res.json({ id: controllerDoc.id, ...controllerDoc.data() });
+    const motorizadoId = req.params.id;
+    const motorizadoDoc = await firestore.getDoc(firestore.doc(fs, 'motorizado', motorizadoId));
+    if (motorizadoDoc.exists()) {
+      res.json({ id: motorizadoDoc.id, ...motorizadoDoc.data() });
     } else {
-      res.status(404).json({ error: 'motorizado controller not found.' });
+      res.status(404).json({ error: 'Motorizado no encontrado.' });
     }
   } catch (error) {
-    console.error('Error getting motorizado controller:', error);
-    res.status(500).json({ error: 'Error getting motorizado controller.' });
+    console.error('Error al obtener el motorizado:', error);
+    res.status(500).json({ error: 'Error al obtener el motorizado.' });
   }
 };
 
-// Update a motorized controller
-const updateMotorizadoController = async (req, res) => {
+// Actualizar el motorizado
+const updateMotorizado = async (req, res) => {
   try {
-    const controllerId = req.params.id;
-    const updatedControllerData = req.body;
-    await firestore.updateDoc(firestore.doc(fs, 'motorizadoController', controllerId), updatedControllerData);
-    res.json({ id: controllerId, ...updatedControllerData });
+    const motorizadoId = req.params.id;
+    const updatedMotorizadoData = req.body;
+    await firestore.updateDoc(firestore.doc(fs, 'motorizado', motorizadoId), updatedMotorizadoData);
+    res.json({ id: motorizadoId, ...updatedMotorizadoData });
   } catch (error) {
-    console.error('Error updating motorizado controller:', error);
-    res.status(500).json({ error: 'Error updating motorizado controller.' });
+    console.error('Error al actualizar el motorizado:', error);
+    res.status(500).json({ error: 'Error al actualizar el motorizado.' });
   }
 };
 
-// Delete motorized controller
-const deleteMotorizadoController = async (req, res) => {
+// Eliminar motorizado
+const deleteMotorizado = async (req, res) => {
   try {
-    const controllerId = req.params.id;
-    await firestore.deleteDoc(firestore.doc(fs, 'motorizadoController', controllerId));
-    res.json({ id: controllerId, message: 'motorizado controller deleted successfully.' });
+    const motorizadoId = req.params.id;
+    await firestore.deleteDoc(firestore.doc(fs, 'motorizado', motorizadoId));
+    res.json({ id: motorizadoId, message: 'Motorizado eliminado exitosamente.' });
   } catch (error) {
-    console.error('Error deleting motorizado controller:', error);
-    res.status(500).json({ error: 'Error deleting motorizado controller.' });
+    console.error('Error al eliminar el motorizado:', error);
+    res.status(500).json({ error: 'Error al eliminar el motorizado.' });
   }
 };
 
-export {
-  createMotorizadoController,
-  getMotorizadoControllers,
-  getMotorizadoControllerByID,
-  updateMotorizadoController,
-  deleteMotorizadoController,
-};
+export { createMotorizado, getMotorizado, getMotorizadoByID, updateMotorizado, deleteMotorizado };

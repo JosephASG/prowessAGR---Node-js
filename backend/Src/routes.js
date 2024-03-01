@@ -10,6 +10,7 @@ import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
 import * as tokencontroller from './middleware/verifyToken.js';
 const routes = express.Router();
+
 // backend\Src\routes.js
 // import * as usuario from '../controller/userController.js';
 
