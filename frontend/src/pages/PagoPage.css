@@ -13,7 +13,8 @@ body {
 }
 
 .pagopage {
-  width: 90%; /* Cambié el ancho a 90% para hacerlo más delgado */
+  width: 90%;
+  /* Cambié el ancho a 90% para hacerlo más delgado */
   margin: 50px auto;
   padding: 20px;
   border-radius: 8px;
@@ -67,6 +68,25 @@ body {
   margin: 0 10px;
 }
 
+/* AQUÍ VA LO DEL CENTRAR LOS ELEMENTOS DEL DIV PEDIDO */
+.contenedor-alineado {
+  display: flex;
+  align-items: center;
+}
+
+.contenedor-alineado>div {
+  flex: 1;
+}
+
+.imagen-producto-factura {
+  width: auto !important;
+  height: 250px !important;
+}
+
+.datos-factura-centrada {
+  margin-left: 10px;
+}
+
 .pagopage-factura-container {
   margin-right: 10px;
   margin-bottom: 10px;
@@ -80,15 +100,21 @@ body {
   /*background-color: rgba(47, 134, 166, 0.3);*/
   border: 2px solid orange;
   color: white;
-  text-align: center; /* Agregado para centrar el contenido */
+  text-align: center;
+  /* Agregado para centrar el contenido */
 }
 
 .pagopage-factura-container img {
-  width: 100%; /* Hace la imagen ocupar el 100% del ancho del contenedor */
-  max-width: 500px; /* Establece un ancho máximo para la imagen si es necesario */
-  height: auto; /* Mantiene la proporción de aspecto de la imagen */
-  margin: 0 auto; /* Centra la imagen horizontalmente dentro del contenedor */
-  display: block; /* Elimina el espacio adicional debajo de la imagen */
+  width: 100%;
+  /* Hace la imagen ocupar el 100% del ancho del contenedor */
+  max-width: 500px;
+  /* Establece un ancho máximo para la imagen si es necesario */
+  height: auto;
+  /* Mantiene la proporción de aspecto de la imagen */
+  margin: 0 auto;
+  /* Centra la imagen horizontalmente dentro del contenedor */
+  display: block;
+  /* Elimina el espacio adicional debajo de la imagen */
 }
 
 
@@ -144,7 +170,7 @@ body {
   margin-left: 315px;
   margin-bottom: 30px;
   margin-top: -15px;
-  }
+}
 
 .boton-enviar {
   background-color: #56bbee;
@@ -164,78 +190,72 @@ body {
   text-decoration: none;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-align: left;
-    
-    i {
-      margin-right: 0px; 
-      font-size: 20px; 
-      
-    }
 
-       &:hover {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    }
-  }
-  
-  .btn-whatsapp a {
-    color: inherit;
-    text-decoration: none;
-  }
-  
-  .image-whatsapp {
-  
-    max-width: 25px;
-    margin-left: 120px;
-    margin-top: -23px;
-  }
-
-  .btn-share {
-    background-color: #56bbee;
-    color: #fff;
-    border: none;
-    padding: 24px 0px; 
-    font-size: 14px;
-    padding-top: 5px;
-    padding-bottom: 30px;
-    border-radius: 8px;
-    margin-left: -55%; 
-    margin-top: -35px; 
-    transition: background-color 0.3s, box-shadow 0.3s;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    text-align: center; /* Texto centrado */
-    display: inline-block; 
-  }
-  
-  .btn-share i {
-    margin-right: 0px; 
+  i {
+    margin-right: 0px;
     font-size: 20px;
+
   }
-  
-  .btn-share:hover {
+
+  &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
+}
+
+.btn-whatsapp a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.image-whatsapp {
+
+  max-width: 25px;
+  margin-left: 120px;
+  margin-top: -23px;
+}
+
+.btn-share {
+  background-color: #56bbee;
+  color: #fff;
+  border: none;
+  padding: 24px 0px;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-bottom: 30px;
+  border-radius: 8px;
+  margin-left: -55%;
+  margin-top: -35px;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  /* Texto centrado */
+  display: inline-block;
+}
+
+.btn-share i {
+  margin-right: 0px;
+  font-size: 20px;
+}
+
+.btn-share:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
 .copied-link-message {
   position: fixed;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4caf50; 
+  background-color: #4caf50;
   color: white;
   padding: 10px 20px;
   border-radius: 8px;
   z-index: 9999;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .copied-link-message-text {
   font-size: 16px;
 }
-
-
-
-  
-  
-  
-  
