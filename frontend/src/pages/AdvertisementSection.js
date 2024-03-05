@@ -14,22 +14,22 @@ function AdvertisementSection() {
       </div>
       <div className="advertisement-section">
       <img
-        src="https://media.discordapp.net/attachments/1157817962267426861/1204863847551344732/1.png?ex=65d647e6&is=65c3d2e6&hm=01b5b58c34341eaa542695f85b22261459fbf2826fed793c3aad8b50585fd58d&=&format=webp&quality=lossless&width=670&height=670"
+        src="https://media.discordapp.net/attachments/1157817962267426861/1204863847551344732/1.png?ex=65f1f766&is=65df8266&hm=5a3a0b82e9b657f70486c53a5eab43ea8de312e6648be4673e6b0b5200724b6c&=&format=webp&quality=lossless&width=587&height=587"
         alt="Imagen Planes"
         className="advertisement-image"
       /><br/><br/><br/>
       <img
-        src="https://media.discordapp.net/attachments/1157817962267426861/1204863847832223835/2.png?ex=65d647e6&is=65c3d2e6&hm=aba7a0d5dfd2cfca772527400a2c66340ad0e47b9a5acf10ce0e814204816ae5&=&format=webp&quality=lossless&width=670&height=670"
+        src="https://media.discordapp.net/attachments/1157817962267426861/1204863847832223835/2.png?ex=65f1f766&is=65df8266&hm=7b6e0c9aabf8c3580bb4f39b83c60f9c2a7f54367e2820e2ce753d731caebf3e&=&format=webp&quality=lossless&width=587&height=587"
         alt="Imagen Planes"
         className="advertisement-image"
       /><br/><br/><br/>      
       <img
-        src="https://media.discordapp.net/attachments/1157817962267426861/1204863848151261194/3.png?ex=65d647e6&is=65c3d2e6&hm=9bf2de6057bc9e997464af432ba55bb236558813cffc1f2f5f60ea8e780f1462&=&format=webp&quality=lossless&width=670&height=670"
+        src="https://media.discordapp.net/attachments/1157817962267426861/1204863848151261194/3.png?ex=65f1f766&is=65df8266&hm=556c149d311c3967b8b91880645281abd0a497d0acf183072ad7459e7cd37972&=&format=webp&quality=lossless&width=587&height=587"
         alt="Imagen Planes"
         className="advertisement-image"
       /><br/><br/><br/>
       <img
-        src="https://media.discordapp.net/attachments/1157817962267426861/1204863848478281809/4.png?ex=65d647e6&is=65c3d2e6&hm=841a268d2add34027c5b2e45078aed63ceaf9109b751cb1b670f5c786648a315&=&format=webp&quality=lossless&width=670&height=670"
+        src="https://media.discordapp.net/attachments/1157817962267426861/1204863848478281809/4.png?ex=65f1f766&is=65df8266&hm=6403080f772814d9d84fd50e60eee2ecca6211b5ec0ff4a2ae7963a9fdc4c144&=&format=webp&quality=lossless&width=587&height=587"
         alt="Imagen Planes"
         className="advertisement-image"
       /><br/><br/><br/>      
