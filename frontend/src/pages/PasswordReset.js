@@ -18,7 +18,7 @@ function PasswordReset() {
   return (
     <div className="password-reset-container">
       <h2 className="password-reset-title">Recuperación de Contraseña</h2>
-      <h3 className="password-reset-subtitle">¿Olvidaste tu contraseña? No te preocupes</h3>
+      <h3 className="password-reset-subtitle-2">¿Olvidaste tu contraseña? No te preocupes</h3>
       <h4 className="password-reset-subtitle">Puedes restablecerla ingresando el correo electrónico que registraste al crear tu cuenta en Prowess Agrícola</h4>
       <form onSubmit={handleSubmit} className="password-reset-form">
         <div className="password-reset-option">
