@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 import { loginApp } from '../services/auth';
+//Llamado a librería para alertar (SweetAlert)
+import Swal from 'sweetalert2';
 const WEBURL = process.env.REACT_APP_API_URL;
 
 function Login(props) {
@@ -18,10 +20,16 @@ function Login(props) {
     if (data && data.estado === true) {
       setToken(data.usuario.token);
       setMessage(data.mensaje);
-      setTimeout(() => {
-        localStorage.setItem("token", data.usuario.token);
-        navigate(`/mi-cuenta`);
-      }, 1500);
+
+      // Mostrar alerta de inicio de sesión exitoso con SweetAlert
+      await Swal.fire({
+        icon: 'success',
+        title: 'Inicio de sesión exitoso',
+        showConfirmButton: true,
+      });
+
+      localStorage.setItem("token", data.usuario.token);
+      navigate(`/mi-cuenta`);
       setIsLoggedIn(true);
     } else {
       setMessage(res.response.data.message)
@@ -76,13 +84,13 @@ function Login(props) {
   const manejarRecuperacionContrasena = () => {
     navigate('/recuperar-contrasena');
   };
-  
+
   const manejarRecuperacionCuenta = () => {
     navigate('/recuperar?type=cuenta');
   };
 
-  
-  
+
+
 
   return (
     <div className="login-container">

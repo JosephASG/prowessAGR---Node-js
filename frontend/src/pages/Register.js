@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Register.css'; // Importa el archivo de estilos CSS
 import Mapa from '../components/Mapa.js';
+//Llamado a librería para alertar (SweetAlert)
+import Swal from 'sweetalert2';
 import { registerApp } from '../services/auth';
 import axios from "axios";
 import { getUsers } from '../services/user';
@@ -165,19 +167,19 @@ function Register() {
     const newEmail = e.target.value;
     setEmail(newEmail);
     setEmailExists(false);
-  
+
     try {
       const response = await getUsers();
       const users = response.data;
       const emailExists = users.some((user) => user.correoUsuario === newEmail);
-  
+
       setEmailExists(emailExists);
       setErrorMessage('');
-      
+
       setShowEmailExistsMessage(emailExists);
     } catch (error) {
       console.error('Error al verificar el correo electrónico:', error);
-  
+
       if (error.response && error.response.status === 404) {
         setErrorMessage('El correo electrónico ya está registrado');
       } else {
@@ -185,7 +187,7 @@ function Register() {
       }
     }
   };
-  
+
 
   const handleEmailValidation = (e) => {
     const email = e.target.value;
@@ -249,11 +251,16 @@ function Register() {
     formData.append("tipoAsociacionUsuario", additionalField1);
     formData.append("claveUsuario", password);
     formData.append("imagenUsuario", photo);
-  
+
     try {
       const response = await registerApp(formData);
       console.log(response);
-  
+      //Coloco una alerta de registro exitoso mediante SweetAlert
+      await Swal.fire({
+        icon: 'success',
+        title: 'Registro Exitoso',
+        showConfirmButton: true,
+      });
       if (response && response.status === 201) {
         navigate(`/login`);
       } else {
@@ -261,14 +268,14 @@ function Register() {
       }
     } catch (error) {
       console.error('Error al registrar el usuario:', error);
-  
+
       if (error.response && error.response.status === 400 && error.response.data.message === "Email already registered") {
-        setShowFullErrorMessage(true); 
+        setShowFullErrorMessage(true);
       }
     }
   };
-  
-  
+
+
 
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
@@ -372,13 +379,13 @@ function Register() {
           required
         />
         {showEmailExistsMessage && (
-  <div className="email-exists-message">
-    <p>¡El correo electrónico ya está registrado!</p>
-  </div>
-)}
+          <div className="email-exists-message">
+            <p>¡El correo electrónico ya está registrado!</p>
+          </div>
+        )}
 
 
-       
+
         <p className="register-document">Tipo de documento:</p>
         <select
           className="register-inputS"
@@ -430,44 +437,44 @@ function Register() {
           }}
           required
         />
-      <div className="password-container">
-  <input
-    className="register-input"
-    type={showPassword ? "text" : "password"}
-    placeholder="Contraseña"
-    value={password}
-    onChange={(e) => setPassword(e.target.value)}
-    minLength={6} 
-    maxLength={30}
-    required
-  />
-  <span
-    className={`password-toggle ${showPassword ? "visible" : ""}`}
-    onClick={togglePasswordVisibility}
-  >
-    👁️‍🗨️
-  </span>
-</div>
-<div className="password-strength-indicator">
-  Fuerza de la contraseña: {passwordStrength}
-</div>
+        <div className="password-container">
+          <input
+            className="register-input"
+            type={showPassword ? "text" : "password"}
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            minLength={6}
+            maxLength={30}
+            required
+          />
+          <span
+            className={`password-toggle ${showPassword ? "visible" : ""}`}
+            onClick={togglePasswordVisibility}
+          >
+            👁️‍🗨️
+          </span>
+        </div>
+        <div className="password-strength-indicator">
+          Fuerza de la contraseña: {passwordStrength}
+        </div>
 
 
-      <div className="password-container">
-        <input
-          className="register-input"
-          type={showConfirmPassword ? "text": "password"}
-          placeholder="Confirme Contraseña"
-          onBlur={handlePasswordBlur}
-          required
-        />
-        <span
-          className={`password-toggle ${showConfirmPassword ? "visible" : ""}`}
-          onClick={toggleConfirmPasswordVisibility}
-        >
-          👁️‍🗨️
-        </span>
-      </div>
+        <div className="password-container">
+          <input
+            className="register-input"
+            type={showConfirmPassword ? "text" : "password"}
+            placeholder="Confirme Contraseña"
+            onBlur={handlePasswordBlur}
+            required
+          />
+          <span
+            className={`password-toggle ${showConfirmPassword ? "visible" : ""}`}
+            onClick={toggleConfirmPasswordVisibility}
+          >
+            👁️‍🗨️
+          </span>
+        </div>
         {validPassword && (
           <p className="error-message">Las contraseñas no coinciden</p>
         )}
@@ -553,36 +560,36 @@ function Register() {
         </div>
 
         <div className="condiciones-section">
-  <input
-    type="checkbox"
-    onChange={() => setShowAdditionalFields(!showAdditionalFields)}
-    id="aceptoterminos"
-  />
-  <label htmlFor="aceptoterminos" onClick={togglePopup}>
-    <span className="checkmark"></span> 
-    He leído y acepto los
-    <span > términos y condiciones</span> 
-  </label>
-</div>
+          <input
+            type="checkbox"
+            onChange={() => setShowAdditionalFields(!showAdditionalFields)}
+            id="aceptoterminos"
+          />
+          <label htmlFor="aceptoterminos" onClick={togglePopup}>
+            <span className="checkmark"></span>
+            He leído y acepto los
+            <span > términos y condiciones</span>
+          </label>
+        </div>
 
-<div className={`popup ${showPopup ? 'show' : ''}`}>
-  <div className="popup-content">
-    <h2>Términos y Condiciones de Uso</h2>
-    <div className="popup-info">
-      <p>Los términos y condiciones de uso establecen las pautas para interactuar con el sitio web de Prowess Agrícola, 
-        abarcando desde la adquisición de productos hasta el registro de usuarios. Se detallan responsabilidades del usuario, 
-        como la veracidad de la información proporcionada, así como las acciones prohibidas, como el uso no autorizado de dispositivos. 
-        Se abordan temas como la privacidad, la suspensión de cuentas por incumplimiento, la propiedad intelectual, 
-        y se establecen claramente las garantías y responsabilidades en las transacciones comerciales. </p>
-    </div>
-    <div className="popup-buttons">
-      <button type="button" onClick={togglePopup}>Cerrar</button>
-      <a href="/terms&conditions">
-        <button type="button">Ver más</button>
-      </a>
-    </div>
-  </div>
-</div>
+        <div className={`popup ${showPopup ? 'show' : ''}`}>
+          <div className="popup-content">
+            <h2>Términos y Condiciones de Uso</h2>
+            <div className="popup-info">
+              <p>Los términos y condiciones de uso establecen las pautas para interactuar con el sitio web de Prowess Agrícola,
+                abarcando desde la adquisición de productos hasta el registro de usuarios. Se detallan responsabilidades del usuario,
+                como la veracidad de la información proporcionada, así como las acciones prohibidas, como el uso no autorizado de dispositivos.
+                Se abordan temas como la privacidad, la suspensión de cuentas por incumplimiento, la propiedad intelectual,
+                y se establecen claramente las garantías y responsabilidades en las transacciones comerciales. </p>
+            </div>
+            <div className="popup-buttons">
+              <button type="button" onClick={togglePopup}>Cerrar</button>
+              <a href="/terms&conditions">
+                <button type="button">Ver más</button>
+              </a>
+            </div>
+          </div>
+        </div>
         <button
           className={`register-button ${isFormValid() ? 'valid' : ''}`}
           type="submit"
