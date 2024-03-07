@@ -124,10 +124,12 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
   };
   const addedProducts = cart ? cart.filter((product) => product.cantidad > 0) : [];
 
+  const totalPrice = calculateTotalPrice().total;
 
 
 
   return (
+    
     <div className="shopping-cart">
       <div className="presentation">
         <div className="tittle-page">
