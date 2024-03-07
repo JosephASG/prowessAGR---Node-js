@@ -48,3 +48,12 @@ p {
   border-radius: 50%; /* Da a las imágenes un borde redondeado */
 }
 
+.image-pair {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; 
+}
+
+.image-pair img {
+  margin: 0 10px; 
+}
