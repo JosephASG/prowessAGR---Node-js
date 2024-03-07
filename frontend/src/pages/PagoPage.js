@@ -12,15 +12,17 @@ import { checkToken } from '../services/auth';
 import jsPDF from 'jspdf';
 import "jspdf-autotable";
 
+import { Resend } from 'resend';
+
 
 
 function PagoPage({ cart, vendor, clearCart, orden }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [usuario, setUsuario] = useState(null);
-
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
   const [orderNumber, setOrderNumber] = useState(null);
   const token = localStorage.getItem("token");
+  const resend = new Resend('re_CVr7sDxZ_LdgtcXgTFKWQbDRdLpz723qA ');
 
   useEffect(() => {
     const obtenerDatos = async () => {
@@ -73,28 +75,22 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
   };
 
 
-
-
-  const handleSendEmail = () => {
-    fetch('http://localhost:5000/fb/email/send', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        to: 'destinatario@example.com',
-        subject: 'Asunto del correo',
-        text: 'Cuerpo del correo',
-      }),
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch((error) => {
-      console.error('Error:', error);
+  const handleSendEmail = async () => {
+    const { data, error } = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>',
+      to: [usuario.email], // Usar la dirección de correo del usuario obtenida en el estado
+      subject: 'Confirmación de compra',
+      html: '<strong>¡Gracias por tu compra!</strong>',
     });
+  
+    if (error) {
+      console.error('Error al enviar el correo electrónico:', error);
+      // Manejar el error, por ejemplo, mostrar un mensaje al usuario
+    } else {
+      console.log('Correo electrónico enviado con éxito:', data);
+      // Puedes mostrar un mensaje de éxito al usuario si lo deseas
+    }
   };
-
-
 
   const handleShareButtonClick = () => {
     const shareLink = 'whatsapp://send?text=¡Echa un vistazo a este producto que encontré en nuestra tienda!%0A%0AEncuentra más en: https://prowessagricola.prowessec.com';
@@ -105,6 +101,8 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
       console.error('Error al copiar al portapapeles:', error);
     });
   };
+
+
 
   return (
     <div className="pagopage-container">
@@ -157,7 +155,12 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                   <p className="pagopage-factura-datos"></p>
                 </div>
               ))}
-              <button className="boton-enviar" onClick={handleSendEmail}>Enviar correo</button>
+              <div>
+              <button onClick={handleSendEmail}>
+  Enviar correo electrónico
+</button>
+      
+    </div>
               <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>
             </div>
             <button className="btn-buy" onClick={handleContinueShoppingClick}>

@@ -10,6 +10,7 @@ import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
 
 
+
 import * as tokencontroller from './middleware/verifyToken.js';
 const routes = express.Router();
 
@@ -21,6 +22,8 @@ const routes = express.Router();
 
 // // Confirmar restablecimiento de contraseña
 // userRoute.post('/confirm-password-reset', usuario.confirmPasswordReset);
+
+//routes.use('/fb/ruta-correo', correoroute);
 
 
 routes.use('/fb/categoria', categoriaroute);
