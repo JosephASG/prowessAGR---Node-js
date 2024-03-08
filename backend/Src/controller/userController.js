@@ -168,29 +168,19 @@ const requestPasswordReset = async (req, res) => {
 // Metodo GET
 const getUsers = async (req, res) => {
   try {
-    // Obtén la referencia a la colección "usuario" directamente desde firestore
-    const userCollection = firestore.collection("usuario");
-    
-    // Obtén los documentos de la colección
-    const snapshot = await getDocs(userCollection);
-
-    // Mapea los documentos a un array de usuarios
-    const users = snapshot.docs.map((doc) => {
+    const snapshot = await firestore.getDocs(firestore.collection(fs, "usuario"));
+    const users = [];
+    snapshot.forEach((doc) => {
       const user = doc.data();
       user._id = doc.id;
-      // Considera eliminar la clave "claveUsuario" solo si existe
-      if (user.claveUsuario) {
-        delete user.claveUsuario;
-      }
-      return user;
+      delete user.claveUsuario;
+      users.push(user);
     });
-
-    // Envía la respuesta con el array de usuarios
-    return res.status(200).json({ message: "Usuarios Encontrados", users });
+    return res.status(200).json({message:"Usuarios Encontrados",users})
   } catch (error) {
-    // Maneja el error y envía una respuesta con código de estado 500
-    console.error("Error al obtener la lista de usuarios", error);
-    return res.status(500).json({ message: "Error al obtener la lista de usuarios" });
+    return res
+      .status(500)
+      .json({ message: "Error al obtener la lista de usuarios" });
   }
 };
 
@@ -293,27 +283,5 @@ const deleteUser = async (req, res) => {
         .json({ message: "Error al obtener la lista de usuarios" });
     }
   }
-
-
-// // Solicitar restablecimiento de contraseña
-// export const requestPasswordReset = async (req, res) => {
-//   const { email } = req.body;
-//   // Aquí deberías buscar al usuario en tu base de datos usando el email
-//   // Generar un token de restablecimiento de contraseña y guardarlo en la base de datos
-//   // Enviar un email al usuario con el token de restablecimiento de contraseña
-//   res.status(200).json({ message: 'Correo de restablecimiento de contraseña enviado' });
-// };
-
-// // Confirmar restablecimiento de contraseña
-// export const confirmPasswordReset = async (req, res) => {
-//   const { resetToken, newPassword } = req.body;
-//   // Aquí deberías buscar al usuario en tu base de datos usando el resetToken
-//   // Si el token es válido, actualizar la contraseña del usuario
-//   const hashedPassword = bcrypt.hashSync(newPassword, 10);
-//   // Actualizar la contraseña en la base de datos
-//   res.status(200).json({ message: 'Contraseña actualizada correctamente' });
-// };
-
-
 
 export { loginUser, registerUser,getUserById,requestPasswordReset,getUsers,updateUser,deleteUser,updateUserById,deleteUserById,actualizarDatos};
