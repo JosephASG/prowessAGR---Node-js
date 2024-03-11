@@ -3,7 +3,7 @@ const WEBURL = process.env.REACT_APP_API_URL
 
 export const getUsers = async(token) => {
     try{
-        const response = await axios.get(`${WEBURL}fb/usuario/getall`,{
+        const response = await axios.get('${WEBURL}fb/usuario/getall',{
             headers: {
               token: token,
             },
@@ -16,7 +16,7 @@ export const getUsers = async(token) => {
 
 export const postUser = async(token,user) => {
     try{
-        const response = await axios.post(`${WEBURL}fb/usuario/post`,user,{
+        const response = await axios.post('${WEBURL}fb/usuario/post',user,{
             headers: {
               token: token,
             },
@@ -30,7 +30,7 @@ export const postUser = async(token,user) => {
 
 export const updateUser = async(token,user) => {
   try{
-      const response = await axios.post(`${WEBURL}fb/usuario/post`,user,{
+      const response = await axios.post('${WEBURL}fb/usuario/post',user,{
           headers: {
             token: token,
           },

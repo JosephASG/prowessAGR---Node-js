@@ -3,8 +3,6 @@ import cors from "cors";
 import dotenv from 'dotenv';
 import multer from 'multer';
 import routes from "./Src/routes.js";
-
-
 const app = express();
 app.use(express.json())
 app.use(cors());
@@ -19,4 +17,3 @@ app.use('/', routes);
 app.listen(port,() =>{
   console.log(`Servidor en operación (Puerto ${port}).`)
 })
-

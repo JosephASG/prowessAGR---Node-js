@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
       };
       // ! La imagen se esta guardando como application/octet-stream, no como contentType: imagenFile.mimetype. NO AFECTA EL FUNCIONAMIENTO.
       //TODO 1: Comprobar si la imagen existe en el storage de Firebase, para evitar reemplazo de imágenes o asignar un nombre único a la imagen.
-      const storageRef = ref(storage, `agricola/${imageFile.originalname}`,metadata);
+      const storageRef = ref(storage, agricola/`${imageFile.originalname}`,metadata);
       try {
         const uploadtask = await uploadBytes(storageRef, imageFile.buffer);
         console.log('Imagen cargada con éxito');
