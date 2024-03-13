@@ -86,7 +86,7 @@ function Login(props) {
   };
 
   const manejarRecuperacionCuenta = () => {
-    navigate('/recuperar?type=cuenta');
+    navigate('/recuperar-cuenta');
   };
 
 
