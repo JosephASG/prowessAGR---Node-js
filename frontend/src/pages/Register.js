@@ -75,6 +75,8 @@ function Register() {
   const [errorMessage, setErrorMessage] = useState('');
   const [showEmailExistsMessage, setShowEmailExistsMessage] = useState(false);
   const [showFullErrorMessage, setShowFullErrorMessage] = useState(false);
+  const [showTermsPopup, setShowTermsPopup] = useState(false);
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
 
   const navigate = useNavigate();
@@ -560,17 +562,18 @@ function Register() {
         </div>
 
         <div className="condiciones-section">
-          <input
-            type="checkbox"
-            onChange={() => setShowAdditionalFields(!showAdditionalFields)}
-            id="aceptoterminos"
-          />
-          <label htmlFor="aceptoterminos" onClick={togglePopup}>
-            <span className="checkmark"></span>
-            He leído y acepto los
-            <span > términos y condiciones</span>
-          </label>
-        </div>
+        <input
+          type="checkbox"
+          id="aceptoterminos"
+          checked={isTermsAccepted}
+          onChange={() => setIsTermsAccepted(!isTermsAccepted)}
+        />
+        <label htmlFor="aceptoterminos" onClick={() => setShowTermsPopup(true)}>
+          <span className="checkmark"></span>
+          He leído y acepto los
+          <span > términos y condiciones</span>
+        </label>
+      </div>
 
         <div className={`popup ${showPopup ? 'show' : ''}`}>
           <div className="popup-content">
