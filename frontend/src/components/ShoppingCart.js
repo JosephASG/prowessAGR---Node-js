@@ -76,6 +76,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
     console.log(orden);
     comprar();
     setRedirect(true);
+   
 
   };
 

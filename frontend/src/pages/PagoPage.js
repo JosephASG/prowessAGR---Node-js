@@ -76,7 +76,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
 
 
   const enviarCorreo = () => {
-    const logoUrl = 'https://media.discordapp.net/attachments/1157817962267426861/1211753563168964680/IMG-20240226-WA0095.jpg?ex=65ef5872&is=65dce372&hm=2c661c46603ac6d61382d741a1c84dbd49ce6265dda70a2dcaa28218b22e1e20& ';
+    const logoUrl = 'https://media.discordapp.net/attachments/1157817962267426861/1217555996055048293/zyro-image_2.png?ex=66047462&is=65f1ff62&hm=229b05eccf55d81d23be809d04a26a73b7f1a5be0cf220f5a738e6b7760cd720&=&format=webp&quality=lossless&width=1252&height=587';
     const pdf = new jsPDF();
 
     // Configurar estilo del texto
@@ -151,32 +151,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     const buttonsMarginTop = 10; // Margen superior para los botones
     const buttonsY = footerY - buttonsMarginTop;
 
-    // Botones con enlaces
-    const footerLinks = [
-        { text: 'Facebook', link: 'https://www.facebook.com/profile.php?id=100094846861007&mibextid=gik2fB' },
-        { text: 'Instagram', link: 'https://www.instagram.com/prowessec7?igshid=NGVhN2U2NjQ0Yg%3D%3D' },
-        { text: 'Sitio Web', link: 'https://prowessec.com' },
-        { text: 'TikTok', link: 'https://www.tiktok.com/@prowess.ec?is_from_webapp=1&sender_device=pc' }
-    ];
-
-    // Añadir botones al documento
-    footerLinks.forEach((link, index) => {
-        const linkButton = document.createElement('a');
-        linkButton.href = link.link;
-        linkButton.target = '_blank';
-        linkButton.style.marginRight = '10px';
-        linkButton.textContent = link.text;
-        linkButton.style.color = 'white';
-        linkButton.style.textDecoration = 'none';
-        linkButton.style.position = 'absolute';
-        linkButton.style.top = `${buttonsY}px`;
-
-        // Insertar el botón antes de descargar el enlace
-        if (downloadLink.parentNode) {
-            downloadLink.parentNode.insertBefore(linkButton, downloadLink.nextSibling);
-        }
-    });
-
+  
     // Simular el clic en el enlace para iniciar la descarga
     downloadLink.click();
 
@@ -247,7 +222,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                   <p className="pagopage-factura-datos"></p>
                 </div>
               ))}
-                  <button className="boton-enviar" onClick={enviarCorreo}>Enviar correo</button>
+                  <button className="boton-enviar" onClick={enviarCorreo}>Enviar ccomprobante</button>
                    <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>            
                    </div>
                   <button className="btn-buy" onClick={handleContinueShoppingClick}>

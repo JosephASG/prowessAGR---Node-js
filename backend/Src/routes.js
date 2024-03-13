@@ -8,6 +8,7 @@ import sellerRoute from './routes/sellerRoute.js';
 import supplierRoute from './routes/supplierRoute.js';
 import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
+import resetRoute from './routes/resetRoute.js'; // Importa resetRoute
 
 
 
@@ -35,6 +36,7 @@ routes.use('/fb/vendedor',sellerRoute);
 routes.use('/fb/proveedor',supplierRoute);
 routes.use('/fb/usuario',userRoute);
 routes.use('/fb/auth',authRoute);
+routes.use('/fb/reset', resetRoute); // Añade resetRoute
 
 export default routes;
 //Error en la ruta al recuperar los datos
