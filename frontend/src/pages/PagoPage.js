@@ -157,7 +157,6 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
 
     // Posicionar los botones al final de la página
     const buttonsMarginTop = 10; // Margen superior para los botones
-    const buttonsY = footerY - buttonsMarginTop;
 
   
     // Simular el clic en el enlace para iniciar la descarga
@@ -230,7 +229,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                   <p className="pagopage-factura-datos"></p>
                 </div>
               ))}
-                  <button className="boton-enviar" onClick={enviarCorreo}>Enviar ccomprobante</button>
+                  <button className="boton-enviar" onClick={enviarCorreo}>Enviar comprobante</button>
                    <p className="pagopage-gracias">En breve nos pondremos en contacto con usted</p>            
                    </div>
                   <button className="btn-buy" onClick={handleContinueShoppingClick}>
