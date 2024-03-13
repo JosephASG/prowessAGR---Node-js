@@ -24,6 +24,7 @@ import PagoPage from "./pages/PagoPage";
 import TermsConditions from "./pages/TermsConditions";
 import PasswordReset from "./pages/PasswordReset";
 import PasswordSend from './pages//PasswordSend';
+import AccountReset from "./pages/AccountReset";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -103,6 +104,7 @@ function App() {
         <Route path="/Anuncios" element={<AdvertisementSection />} />
         <Route path="/pago" element={<PagoPage clearCart={clearCart} cart={cart} total={total} token={token}/>} />
         <Route path="/recuperar-contrasena" element={<PasswordReset />} />
+        <Route path="/recuperar-cuenta" element={<AccountReset />} /> 
         <Route path="/password-send" element={<PasswordSend />} /> 
 
         <Route
