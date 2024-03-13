@@ -80,16 +80,19 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     const pdf = new jsPDF();
 
     // Configurar estilo del texto
-    pdf.setFont('helvetica'); // Cambiar a 'times'
-    pdf.setFontSize(12);
+    pdf.setFont('times'); // Cambiar a 'times'
+    pdf.setFontSize(14);
     pdf.setTextColor(0, 0, 0); // Color en RGB (negro)
 
     // Agregar el logo
     pdf.addImage(logoUrl, 'JPEG', 10, 10, 50, 20);
 
-    // Agregar el título de la factura
-    pdf.setFontSize(20);
-    pdf.text('Confirmación del Pedido', 70, 30);
+ // Agregar el título de la factura en negrita y negro
+pdf.setFont('times', 'bold'); // Cambiar a 'times' y establecer el estilo en negrita
+pdf.setFontSize(22);
+pdf.setTextColor(0, 0, 0); // Negro
+pdf.text('Confirmación del Pedido', 70, 30);
+pdf.setFont('times', 'normal'); // Restaurar el estilo de fuente normal
 
     // Agregar los detalles del cliente
     pdf.setFontSize(12);
@@ -101,13 +104,15 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     pdf.text('Detalles del Pedido', 10, 90);
     pdf.text(`Nº de orden: ${orderNumber}`, 10, 100);
 
-    // Agregar los detalles de los productos en una tabla más estilizada
-    let yPosition = 110;
+    // Cambiar el color de la tabla a azul claro
+    pdf.setFillColor(173, 216, 230); // Color azul claro
+
+    // Definir las variables tableHeaders y tableData
     const tableHeaders = ['Producto', 'Cantidad', 'Precio Unitario', 'Total', 'Vendedor'];
     const tableData = cart.map(product => {
         const precio = product.precio || 15; // Si el precio no está definido, asignar 0
         return [
-            product.pro_nombre,
+            { content: product.pro_nombre, styles: { fillColor: [173, 216, 230] } }, // Establecer el color azul solo para la descripción
             `${product.cantidad} ${product.pro_medida}`,
             `$${precio.toFixed(2)}`,
             `$${(precio * product.cantidad).toFixed(2)}`,
@@ -115,15 +120,17 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
         ];
     });
 
+    // Agregar la tabla con estilos personalizados
     pdf.autoTable({
-        startY: yPosition,
+        startY: 110,
         head: [tableHeaders],
         body: tableData,
         theme: 'grid',
-        margin: { top: 10 }
+        margin: { top: 10 },
     });
 
     // Mensaje adicional
+    pdf.setTextColor(0, 0, 0); // Negro
     pdf.text('Quedo a la espera de cualquier confirmación o instrucciones adicionales.', 10, pdf.autoTable.previous.finalY + 10);
 
     // Footer empresarial
@@ -138,7 +145,6 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     pdf.text('ProwessAgrícola | Dr. Luis Simbaña Taipe | lesimbania@espe.edu.ec', 10, footerY + 15);
     pdf.text('Todos los derechos reservados - Prowess Ecuador © 2024 | Revisa nuestros Términos y Condiciones', 10, footerY + 25);
 
-
     // Obtener el contenido del PDF en formato base64
     const pdfBase64 = pdf.output('datauristring');
 
@@ -147,20 +153,18 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     downloadLink.href = pdfBase64;
     downloadLink.download = `${orderNumber}_confirmacion_pedido.pdf`;
 
-    // Posicionar los botones al final de la página
-    const buttonsMarginTop = 10; // Margen superior para los botones
-    const buttonsY = footerY - buttonsMarginTop;
-
-  
     // Simular el clic en el enlace para iniciar la descarga
     downloadLink.click();
 
+    // Restaurar los estilos originales para el correo electrónico
+    pdf.setFont('helvetica');
+    pdf.setFontSize(12);
+
     const confirmacionMensaje = `Hemos recibido tu pedido con el número de orden ${orderNumber}. Gracias por confiar en nosotros.`;
     const saludoPersonalizado = `Estimado/a ${usuario.nombre},`;
-   const despedidaMensaje = 'Gracias nuevamente por tu compra. Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en ponerte en contacto con nosotros. ¡Que tengas un excelente día!';
-   window.location.href = `mailto:${usuario.email}?subject=Confirmación de Pedido ${orderNumber} &body=${saludoPersonalizado}%0A%0A${confirmacionMensaje}%0A%0A${despedidaMensaje}`;
+    const despedidaMensaje = 'Gracias nuevamente por tu compra. Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en ponerte en contacto con nosotros. ¡Que tengas un excelente día!';
+    window.location.href = `mailto:${usuario.email}?subject=Confirmación de Pedido ${orderNumber} &body=${saludoPersonalizado}%0A%0A${confirmacionMensaje}%0A%0A${despedidaMensaje}`;
 };
-
 
   
 
