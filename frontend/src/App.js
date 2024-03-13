@@ -102,6 +102,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/Anuncios" element={<AdvertisementSection />} />
+        {/* <Route path="/carrito" element={<ShoppingCart clearCart={clearCart}/>} /> */}
         <Route path="/pago" element={<PagoPage clearCart={clearCart} cart={cart} total={total} token={token}/>} />
         <Route path="/recuperar-contrasena" element={<PasswordReset />} />
         <Route path="/recuperar-cuenta" element={<AccountReset />} /> 
