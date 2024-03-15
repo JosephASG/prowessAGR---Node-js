@@ -34,6 +34,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
         nombre: data.data.nombreUsuario,
         apellido: data.data.apellidoUsuario,
         email: data.data.correoUsuario,
+        claveUsuario: data.data.claveUsuario,
         telefono: data.data.telefonoUsuario
       }
       setUsuario(usuario);
