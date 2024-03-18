@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Register.css'; // Importa el archivo de estilos CSS
-import Mapa from '../components/Mapa.js';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Register.css"; // Importa el archivo de estilos CSS
+import Mapa from "../components/Mapa.js";
 //Llamado a librería para alertar (SweetAlert)
-import Swal from 'sweetalert2';
-import { registerApp } from '../services/auth';
+import Swal from "sweetalert2";
+import { registerApp } from "../services/auth";
 import axios from "axios";
-import { getUsers } from '../services/user';
-const WEBURL = process.env.REACT_APP_API_URL
-
-
+import { getUsers } from "../services/user";
+const WEBURL = process.env.REACT_APP_API_URL;
 
 const validarCedulaEcuatoriana = (cedula) => {
   if (cedula.length === 10 && /^[0-9]+$/.test(cedula)) {
-
     var digitos = cedula.substr(0, 9);
     var suma = 0;
 
@@ -36,62 +33,66 @@ const validarCedulaEcuatoriana = (cedula) => {
     var ultimoDigito = parseInt(cedula[9]);
 
     return verificador === ultimoDigito;
-  } else if ((cedula.length === 8 || cedula.length === 9) && /^[A-Z0-9]+$/.test(cedula)) {
-
+  } else if (
+    (cedula.length === 8 || cedula.length === 9) &&
+    /^[A-Z0-9]+$/.test(cedula)
+  ) {
     return true;
   } else {
     return false;
   }
 };
 
-
 function Register() {
-  const [name, setName] = useState('');
-  const [name2, setName2] = useState('');
-  const [lastName, setlastName] = useState('');
-  const [lastName2, setlastName2] = useState('');
-  const [email, setEmail] = useState('');
-  const [userType, setUserType] = useState('');
-  const [nPhone, setNPhone] = useState('');
-  const [nCedula, setNCedula] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [name2, setName2] = useState("");
+  const [lastName, setlastName] = useState("");
+  const [lastName2, setlastName2] = useState("");
+  const [email, setEmail] = useState("");
+  const [userType, setUserType] = useState("");
+  const [nPhone, setNPhone] = useState("");
+  const [nCedula, setNCedula] = useState("");
+  const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
   const [photo, setPhoto] = useState(null);
-  const [province, setProvince] = useState('');
-  const [city, setCity] = useState('');
-  const [latitud, setLatitud] = useState('');
-  const [altitud, setAltitud] = useState('');
-  const [mainStreet, setMainStreet] = useState('');
-  const [secondaryStreet, setSecondaryStreet] = useState('');
+  const [province, setProvince] = useState("");
+  const [city, setCity] = useState("");
+  const [latitud, setLatitud] = useState("");
+  const [altitud, setAltitud] = useState("");
+  const [mainStreet, setMainStreet] = useState("");
+  const [secondaryStreet, setSecondaryStreet] = useState("");
   const [showAdditionalFields, setShowAdditionalFields] = useState(false);
-  const [additionalField1, setAdditionalField1] = useState('');
+  const [additionalField1, setAdditionalField1] = useState("");
   const [isCedulaValid, setIsCedulaValid] = useState(true);
-  const [tipoDocumento, setTipoDocumento] = useState('');
+  const [tipoDocumento, setTipoDocumento] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [provinces, setProvinces] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [emailExists, setEmailExists] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [showEmailExistsMessage, setShowEmailExistsMessage] = useState(false);
   const [showFullErrorMessage, setShowFullErrorMessage] = useState(false);
-  const [showTermsPopup, setShowTermsPopup] = useState(false);
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
-
+  const [showTermsPopup, setShowTermsPopup] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://gist.githubusercontent.com/emamut/6626d3dff58598b624a1/raw/166183f4520c4603987c55498df8d2983703c316/provincias.json');
+        const response = await fetch(
+          "https://gist.githubusercontent.com/emamut/6626d3dff58598b624a1/raw/166183f4520c4603987c55498df8d2983703c316/provincias.json"
+        );
         const data = await response.json();
 
         const extractedProvinces = Object.keys(data).map((provinceCode) => {
           const provinceData = data[provinceCode];
-          const cantones = Object.keys(provinceData.cantones).map((cantonCode) => {
-            return provinceData.cantones[cantonCode].canton;
-          });
+          const cantones = Object.keys(provinceData.cantones).map(
+            (cantonCode) => {
+              return provinceData.cantones[cantonCode].canton;
+            }
+          );
 
           return {
             name: provinceData.provincia,
@@ -101,7 +102,7 @@ function Register() {
 
         setProvinces(extractedProvinces);
       } catch (error) {
-        console.error('Error fetching provinces:', error);
+        console.error("Error fetching provinces:", error);
       }
     };
 
@@ -119,7 +120,7 @@ function Register() {
     let longitudValida;
     let formatoValido;
 
-    if (tipoDocumento === 'cedula') {
+    if (tipoDocumento === "cedula") {
       longitudValida = value.length === 10;
       formatoValido = /^[0-9]+$/.test(value);
 
@@ -129,15 +130,18 @@ function Register() {
       } else {
         setIsCedulaValid(false);
       }
-    } else if (tipoDocumento === 'ruc') {
+    } else if (tipoDocumento === "ruc") {
       const primerosDiezDigitos = value.substring(0, 10);
-      const isPrimerosDiezDigitosValidos = validarCedulaEcuatoriana(primerosDiezDigitos);
+      const isPrimerosDiezDigitosValidos =
+        validarCedulaEcuatoriana(primerosDiezDigitos);
 
       const ultimosTresDigitos = value.substring(10);
-      const isUltimosTresDigitosValidos = ultimosTresDigitos === '001';
+      const isUltimosTresDigitosValidos = ultimosTresDigitos === "001";
 
-      setIsCedulaValid(isPrimerosDiezDigitosValidos && isUltimosTresDigitosValidos);
-    } else if (tipoDocumento === 'pasaporte') {
+      setIsCedulaValid(
+        isPrimerosDiezDigitosValidos && isUltimosTresDigitosValidos
+      );
+    } else if (tipoDocumento === "pasaporte") {
       //No existe logica para validar pasaporte ya que no tiene un formato definido
       setIsCedulaValid(true);
     }
@@ -145,7 +149,7 @@ function Register() {
   const checkPasswordStrength = (password) => {
     // Evaluar la longitud de la contraseña
     if (password.length < 6) {
-      return 'Débil'; // Contraseña demasiado corta
+      return "Débil"; // Contraseña demasiado corta
     }
 
     // Evaluar la complejidad de la contraseña
@@ -156,13 +160,17 @@ function Register() {
 
     // Determinar la fuerza de la contraseña en función de la complejidad
     if (hasNumber && hasSpecialChar && hasUpperCase && hasLowerCase) {
-      return 'Muy alta'; // Todos los criterios cumplidos
-    } else if ((hasNumber && hasUpperCase) || (hasNumber && hasSpecialChar) || (hasUpperCase && hasSpecialChar)) {
-      return 'Alta'; // Cumple con dos de los criterios
+      return "Muy alta"; // Todos los criterios cumplidos
+    } else if (
+      (hasNumber && hasUpperCase) ||
+      (hasNumber && hasSpecialChar) ||
+      (hasUpperCase && hasSpecialChar)
+    ) {
+      return "Alta"; // Cumple con dos de los criterios
     } else if (hasNumber || hasSpecialChar || hasUpperCase || hasLowerCase) {
-      return 'Media'; // Cumple con uno de los criterios
+      return "Media"; // Cumple con uno de los criterios
     } else {
-      return 'Débil'; // No cumple con ninguno de los criterios
+      return "Débil"; // No cumple con ninguno de los criterios
     }
   };
   const handleEmailChange = async (e) => {
@@ -176,24 +184,24 @@ function Register() {
       const emailExists = users.some((user) => user.correoUsuario === newEmail);
 
       setEmailExists(emailExists);
-      setErrorMessage('');
+      setErrorMessage("");
 
       setShowEmailExistsMessage(emailExists);
     } catch (error) {
-      console.error('Error al verificar el correo electrónico:', error);
+      console.error("Error al verificar el correo electrónico:", error);
 
       if (error.response && error.response.status === 404) {
-        setErrorMessage('El correo electrónico ya está registrado');
+        setErrorMessage("El correo electrónico ya está registrado");
       } else {
-        setErrorMessage('Error al verificar el correo electrónico');
+        setErrorMessage("Error al verificar el correo electrónico");
       }
     }
   };
 
-
   const handleEmailValidation = (e) => {
     const email = e.target.value;
-    const emailRegex = /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
+    const emailRegex =
+      /^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/;
 
     const isValidEmail = emailRegex.test(email);
 
@@ -201,19 +209,40 @@ function Register() {
   };
 
   const isFormValid = () => {
-    const requiredFields = [name, name2, lastName, lastName2, email, nPhone, nCedula, password, province, city, mainStreet, secondaryStreet];
-    const hasEmptyFields = requiredFields.some(field => field === '');
-    const isCedulaOrRucValid = tipoDocumento === 'ruc' ? validarCedulaEcuatoriana(nCedula) : validarCedulaEcuatoriana(nCedula) || true; // Agrega la lógica para validar RUC
+    const requiredFields = [
+      name,
+      name2,
+      lastName,
+      lastName2,
+      email,
+      nPhone,
+      nCedula,
+      password,
+      province,
+      city,
+      mainStreet,
+      secondaryStreet,
+      photo,
+    ];
+    const hasEmptyFields = requiredFields.some((field) => field === "");
+    const isCedulaOrRucValid =
+      tipoDocumento === "ruc"
+        ? validarCedulaEcuatoriana(nCedula)
+        : validarCedulaEcuatoriana(nCedula) || true; // Agrega la lógica para validar RUC
     const arePasswordsValid = !validPassword; // La validación ahora se basa en el estado validPassword
 
-    return !hasEmptyFields && isCedulaOrRucValid && arePasswordsValid;
+    return (
+      !hasEmptyFields &&
+      isCedulaOrRucValid &&
+      arePasswordsValid &&
+      photo !== null &&
+      isTermsAccepted
+    );
   };
-
-
 
   const handleTipoDocumentoChange = (e) => {
     setTipoDocumento(e.target.value);
-    setNCedula('');
+    setNCedula("");
   };
 
   const handlePasswordBlur = (e) => {
@@ -235,21 +264,39 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log('Registro de usuario:', name, userType, nPhone, nCedula, password, photo, province, city, mainStreet, secondaryStreet);
+    console.log(
+      "Registro de usuario:",
+      name,
+      userType,
+      nPhone,
+      nCedula,
+      password,
+      photo,
+      province,
+      city,
+      mainStreet,
+      secondaryStreet
+    );
     const formData = new FormData();
     formData.append("nombreUsuario", name);
     formData.append("apellidoUsuario", lastName);
     formData.append("nombreUsuarioS", name2);
     formData.append("apellidoUsuarioS", lastName2);
     formData.append("cedulaUsuario", nCedula);
-    formData.append("direccionUsuario", province + ' ' + city + ' ' + mainStreet + ' ' + secondaryStreet);
+    formData.append(
+      "direccionUsuario",
+      province + " " + city + " " + mainStreet + " " + secondaryStreet
+    );
     formData.append("ciudadUsuario", city);
     formData.append("provinciaUsuario", province);
     formData.append("telefonoUsuario", nPhone);
     formData.append("correoUsuario", email);
     formData.append("latitudUsuario", latitud);
     formData.append("altitudUsuario", altitud);
-    formData.append("categoriaUsuario", showAdditionalFields ? 'vendedor' : 'cliente');
+    formData.append(
+      "categoriaUsuario",
+      showAdditionalFields ? "vendedor" : "cliente"
+    );
     formData.append("tipoAsociacionUsuario", additionalField1);
     formData.append("claveUsuario", password);
     formData.append("imagenUsuario", photo);
@@ -257,27 +304,33 @@ function Register() {
     try {
       const response = await registerApp(formData);
       console.log(response);
+      const randomKey = generateRandomKey();
+
       //Coloco una alerta de registro exitoso mediante SweetAlert
       await Swal.fire({
-        icon: 'success',
-        title: 'Registro Exitoso',
+        icon: "success",
+        title: "Registro Exitoso",
+        html: `Tu palabra clave es: <span style="font-weight: bold; font-size: 1.2em;">${randomKey}</span>`,
         showConfirmButton: true,
       });
+
       if (response && response.status === 201) {
         navigate(`/login`);
       } else {
-        console.error('Error al registrar el usuario:', response);
+        console.error("Error al registrar el usuario:", response);
       }
     } catch (error) {
-      console.error('Error al registrar el usuario:', error);
+      console.error("Error al registrar el usuario:", error);
 
-      if (error.response && error.response.status === 400 && error.response.data.message === "Email already registered") {
+      if (
+        error.response &&
+        error.response.status === 400 &&
+        error.response.data.message === "Email already registered"
+      ) {
         setShowFullErrorMessage(true);
       }
     }
   };
-
-
 
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
@@ -289,7 +342,7 @@ function Register() {
   const handleProvinceChange = (e) => {
     const selectedProvince = e.target.value;
     setProvince(selectedProvince);
-    setCity('');
+    setCity("");
   };
 
   const getCityOptions = () => {
@@ -310,6 +363,36 @@ function Register() {
   const togglePopup = () => {
     setShowPopup(!showPopup);
   };
+
+  //APARTADO PARA GENERAR PALABRA CLAVE ALEATORIA:
+  const palabrasClave = [
+    "perro",
+    "gato",
+    "casa",
+    "auto",
+    "libro",
+    "jardín",
+    "playa",
+    "montaña",
+    "sol",
+    "luna",
+    "agua",
+    "fuego",
+    "aire",
+    "tierra",
+    "manzana",
+    "banana",
+    "naranja",
+    "computadora",
+    "teléfono",
+    "television",
+  ];
+
+  const generateRandomKey = () => {
+    const randomIndex = Math.floor(Math.random() * palabrasClave.length);
+    return palabrasClave[randomIndex];
+  };
+
   return (
     <div className="register-container">
       <h2 className="register-title">Registro de usuarios</h2>
@@ -322,7 +405,7 @@ function Register() {
             value={name}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === '') {
+              if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === "") {
                 setName(value);
               }
             }}
@@ -335,7 +418,7 @@ function Register() {
             value={name2}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === '') {
+              if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === "") {
                 setName2(value);
               }
             }}
@@ -350,7 +433,7 @@ function Register() {
             value={lastName}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === '') {
+              if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === "") {
                 setlastName(value);
               }
             }}
@@ -363,13 +446,12 @@ function Register() {
             value={lastName2}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === '') {
+              if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/.test(value) || value === "") {
                 setlastName2(value);
               }
             }}
             required
           />
-
         </div>
         <input
           className="register-input"
@@ -386,8 +468,6 @@ function Register() {
           </div>
         )}
 
-
-
         <p className="register-document">Tipo de documento:</p>
         <select
           className="register-inputS"
@@ -401,22 +481,24 @@ function Register() {
           <option value="pasaporte">Pasaporte</option>
         </select>
 
-
         {tipoDocumento && (
           <input
-            className={`register-input ${isCedulaValid ? '' : 'invalid-cedula'}`}
+            className={`register-input ${
+              isCedulaValid ? "" : "invalid-cedula"
+            }`}
             type="text"
-            placeholder={`Número de ${tipoDocumento === 'cedula'
-              ? 'Cédula'
-              : tipoDocumento === 'pasaporte'
-                ? 'Pasaporte'
-                : 'RUC'
-              }`}
-            maxLength={tipoDocumento === 'ruc' ? 13 : 10}
+            placeholder={`Número de ${
+              tipoDocumento === "cedula"
+                ? "Cédula"
+                : tipoDocumento === "pasaporte"
+                ? "Pasaporte"
+                : "RUC"
+            }`}
+            maxLength={tipoDocumento === "ruc" ? 13 : 10}
             value={nCedula}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^[0-9\s]+$/.test(value) || value === '') {
+              if (/^[0-9\s]+$/.test(value) || value === "") {
                 setNCedula(value);
               }
             }}
@@ -424,7 +506,11 @@ function Register() {
             required
           />
         )}
-        {isCedulaValid ? null : <p className="error-message">¡Recuerde que debe ser un documento real!</p>}
+        {isCedulaValid ? null : (
+          <p className="error-message">
+            ¡Recuerde que debe ser un documento real!
+          </p>
+        )}
 
         <input
           className="register-input"
@@ -433,7 +519,7 @@ function Register() {
           value={nPhone}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[0-9\s]+$/.test(value) || value === '') {
+            if (/^[0-9\s]+$/.test(value) || value === "") {
               setNPhone(value);
             }
           }}
@@ -461,7 +547,6 @@ function Register() {
           Fuerza de la contraseña: {passwordStrength}
         </div>
 
-
         <div className="password-container">
           <input
             className="register-input"
@@ -471,7 +556,9 @@ function Register() {
             required
           />
           <span
-            className={`password-toggle ${showConfirmPassword ? "visible" : ""}`}
+            className={`password-toggle ${
+              showConfirmPassword ? "visible" : ""
+            }`}
             onClick={toggleConfirmPasswordVisibility}
           >
             👁️‍🗨️
@@ -482,7 +569,6 @@ function Register() {
         )}
 
         <div className="custom-file-input-container">
-
           <input
             className="register-input  register-input-image"
             type="file"
@@ -490,15 +576,21 @@ function Register() {
             name="user-image"
             title="Selecciona una imagen de perfil"
             onChange={handlePhotoUpload}
+            //required
           />
-          <span className="custom-file-input-label">Subir Imagen de Perfil</span>
+          <span className="custom-file-input-label">
+            Subir Imagen de Perfil
+          </span>
 
           {photo && (
             <div>
-              <img src={URL.createObjectURL(photo.get('user-image'))} alt="Foto de perfil" className="image-show" />
+              <img
+                src={URL.createObjectURL(photo.get("user-image"))}
+                alt="Foto de perfil"
+                className="image-show"
+              />
             </div>
           )}
-
         </div>
         <p className="register-subtitle">Seleccione su ubicación: </p>
         <Mapa onLocationSelect={handleLocationSelect} />
@@ -533,7 +625,10 @@ function Register() {
           value={mainStreet}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-.,()#&'"/]+$/.test(value) || value === '') {
+            if (
+              /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-.,()#&'"/]+$/.test(value) ||
+              value === ""
+            ) {
               setMainStreet(value);
             }
           }}
@@ -546,7 +641,10 @@ function Register() {
           value={secondaryStreet}
           onChange={(e) => {
             const value = e.target.value;
-            if (/^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-.,()#&'"/]+$/.test(value) || value === '') {
+            if (
+              /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-.,()#&'"/]+$/.test(value) ||
+              value === ""
+            ) {
               setSecondaryStreet(value);
             }
           }}
@@ -562,31 +660,59 @@ function Register() {
         </div>
 
         <div className="condiciones-section">
-        <input
-          type="checkbox"
-          id="aceptoterminos"
-          checked={isTermsAccepted}
-          onChange={() => setIsTermsAccepted(!isTermsAccepted)}
-        />
-        <label htmlFor="aceptoterminos" onClick={() => setShowTermsPopup(true)}>
-          <span className="checkmark"></span>
-          He leído y acepto los
-          <span > términos y condiciones</span>
-        </label>
-      </div>
+          <input
+            type="checkbox"
+            id="aceptoterminos"
+            checked={isTermsAccepted}
+            onChange={() => setIsTermsAccepted(!isTermsAccepted)}
+          />
+          <label htmlFor="aceptoterminos">
+            <span className="checkmark"></span>{" "}
+          </label>
+          <span>
+            He leído y acepto los{" "}
+            <a
+              onClick={() => {
+                setShowPopup(true);
+              }}
+              style={{ color: "blue", textDecoration: "underline" }}
+              onMouseEnter={(e) => {
+                e.target.style.cursor = "pointer";
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.cursor = "auto";
+              }}
+            >
+              términos y condiciones
+            </a>{" "}
+          </span>
+        </div>
 
-        <div className={`popup ${showPopup ? 'show' : ''}`}>
+        <div className={`popup ${showPopup ? "show" : ""}`}>
           <div className="popup-content">
             <h2>Términos y Condiciones de Uso</h2>
             <div className="popup-info">
-              <p>Los términos y condiciones de uso establecen las pautas para interactuar con el sitio web de Prowess Agrícola,
-                abarcando desde la adquisición de productos hasta el registro de usuarios. Se detallan responsabilidades del usuario,
-                como la veracidad de la información proporcionada, así como las acciones prohibidas, como el uso no autorizado de dispositivos.
-                Se abordan temas como la privacidad, la suspensión de cuentas por incumplimiento, la propiedad intelectual,
-                y se establecen claramente las garantías y responsabilidades en las transacciones comerciales. </p>
+              <p>
+                Los términos y condiciones de uso establecen las pautas para
+                interactuar con el sitio web de Prowess Agrícola, abarcando
+                desde la adquisición de productos hasta el registro de usuarios.
+                Se detallan responsabilidades del usuario, como la veracidad de
+                la información proporcionada, así como las acciones prohibidas,
+                como el uso no autorizado de dispositivos. Se abordan temas como
+                la privacidad, la suspensión de cuentas por incumplimiento, la
+                propiedad intelectual, y se establecen claramente las garantías
+                y responsabilidades en las transacciones comerciales.{" "}
+              </p>
             </div>
             <div className="popup-buttons">
-              <button type="button" onClick={togglePopup}>Cerrar</button>
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPopup(false);
+                }}
+              >
+                Cerrar
+              </button>
               <a href="/terms&conditions">
                 <button type="button">Ver más</button>
               </a>
@@ -594,11 +720,13 @@ function Register() {
           </div>
         </div>
         <button
-          className={`register-button ${isFormValid() ? 'valid' : ''}`}
+          className={`register-button ${isFormValid() ? "valid" : ""}`}
           type="submit"
           disabled={!isFormValid()}
         >
-          {isFormValid() ? 'Registrarse' : '¡Alto! Verifica que todos los campos esten correctos'}
+          {isFormValid()
+            ? "Registrarse"
+            : "¡Alto! Verifica que todos los campos esten correctos"}
         </button>
       </form>
 
