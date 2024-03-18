@@ -17,8 +17,8 @@ orderRoute.delete('/:id', order.deleteOrder);
 // Ruta para manejar la obtención de un pedido específico por su ID usando el método HTTP GET
 orderRoute.get('/getOrder/:id', order.getOrder);
 
-// Ruta para manejar la marca de un pedido como pagado usando el método HTTP PUT
-orderRoute.put('/paid/:id', order.paid);
+// // Ruta para manejar la marca de un pedido como pagado usando el método HTTP PUT
+// orderRoute.put('/paid/:id', order.paid);
 
 // Ruta para manejar la marca de un pedido como entregado usando el método HTTP PUT
 orderRoute.put('/delivered/:id', order.delivered);

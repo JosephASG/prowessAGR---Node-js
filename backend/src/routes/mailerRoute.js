@@ -1,16 +1,20 @@
-import express from 'express';
-import * from "../helpers/mailer.js"; 
-router.post('/send', mailer.sendEmail);
+import { sendEmail } from "../helpers/mailer.js";
+import express from "express";
 
-module.exports = router;
+const mailRoute = express.Router();
 
+mailRoute.post("/send-email", (req, res) => {
+  const { email, subject, htmlContent } = req.body;
+  sendEmail(email, subject, htmlContent, (error, info) => {
+    if (error) {
+      return res
+        .status(500)
+        .json({ success: false, message: "Error al enviar el correo", error });
+    }
+    res
+      .status(200)
+      .json({ success: true, message: "Correo enviado exitosamente", info });
+  });
+});
 
-
-import * as tokencontroller from "../middleware/verifyToken.js";
-import express from 'express';
-
-const authRoute = express.Router();
-//Retornar Datos de Token
-authRoute.get('/',tokencontroller.getUserDataFromToken);
-
-export default authRoute;
+export default mailRoute;

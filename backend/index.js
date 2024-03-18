@@ -38,7 +38,7 @@ app.put("/", (req, res) => {
 app.delete("/", (req, res) => {
   res.send("¡Bienvenido, PGA!");
 });
-// Iniciar el servidor y hacer que escuche en el puerto definido
+
 app.listen(port, () => {
   console.log(`Servidor iniciado exitosamente`);
 });
