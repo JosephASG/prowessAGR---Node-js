@@ -173,7 +173,7 @@ const getUsers = async (req, res) => {
     snapshot.forEach((doc) => {
       const user = doc.data();
       user._id = doc.id;
-      delete user.claveUsuario;
+      user.claveUsuario;
       users.push(user);
     });
     return res.status(200).json({message:"Usuarios Encontrados",users})

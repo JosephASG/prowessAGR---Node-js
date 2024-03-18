@@ -4,18 +4,18 @@ import express from 'express';
 const motorizadoRoute = express.Router();
 
 // Crear un nuevo motorizado
-motorizadoRoute.post('/createmotorizado', motorizado.createMotorizado);
+motorizadoRoute.post('/', motorizado.createMotorizado);
 
 // Obtener todos los motorizados
-motorizadoRoute.get('/getmotorizado', motorizado.getMotorizado);
+motorizadoRoute.get('/', motorizado.getMotorizado);
 
 // Obtener un motorizado específico
-motorizadoRoute.get('/getmotorizado/:id', motorizado.getMotorizadoByID);
+motorizadoRoute.get('/:id', motorizado.getMotorizadoByID);
 
 // Actualizar un motorizado
-motorizadoRoute.put('/updatemotorizado/:id', motorizado.updateMotorizado);
+motorizadoRoute.put('/:id', motorizado.updateMotorizado);
 
 // Eliminar un motorizado
-motorizadoRoute.delete('/deletemotorizado/:id', motorizado.deleteMotorizado);
+motorizadoRoute.delete('/:id', motorizado.deleteMotorizado);
 
 export default motorizadoRoute;

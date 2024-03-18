@@ -7,5 +7,5 @@ import multer from 'multer';
 const locationRoute = express.Router();
 
 locationRoute.get('/:province',ubicacion.exportProvinces);
-
+locationRoute.get('/', ubicacion.getAll);
 export default locationRoute;
