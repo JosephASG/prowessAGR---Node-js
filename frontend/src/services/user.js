@@ -55,3 +55,12 @@ export const deleteUser = async(token,id) => {
       console.log(error)
   }
 }
+
+export const recoveryPassword = async(email) => {
+  try{
+      const response = await axios.post(`${WEBURL}fb/usuario/password-recovery`,{email})
+      return response
+  }    catch(error){
+      console.log(error)
+  }
+}
