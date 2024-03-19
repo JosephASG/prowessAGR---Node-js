@@ -110,7 +110,7 @@ const ProductList = () => {
 
     console.log("productToUpdate:", productToUpdate.id);
 
-    fetch(`${WEBURL}fb/producto/update/${productToUpdate.id}`, {
+    fetch(`${WEBURL}fb/producto/${productToUpdate.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

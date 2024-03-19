@@ -39,6 +39,10 @@ app.delete("/", (req, res) => {
   res.send("¡Bienvenido, PGA!");
 });
 
+app.use((req, res) => {
+  res.status(404).send("Error 404 Not Found");
+});
+
 app.listen(port, () => {
   console.log(`Servidor iniciado exitosamente`);
 });

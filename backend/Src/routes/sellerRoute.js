@@ -1,6 +1,5 @@
 import * as vendedor from '../controller/sellerController.js';
 import express from 'express';
-import multer from 'multer';
 
 const sellerRoute = express.Router();
 // Crear nuevo vendedor
