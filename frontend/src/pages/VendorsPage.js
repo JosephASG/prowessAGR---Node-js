@@ -31,7 +31,7 @@ function VendorsPage() {
   const totalPages = Math.ceil(vendors.length / vendorsPerPage);
 
   useEffect(() => {
-    fetch(`${WEBURL}fb/vendedor/getSeller`)
+    fetch(`${WEBURL}fb/vendedor/`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Error en la solicitud al servidor');
@@ -57,7 +57,7 @@ function VendorsPage() {
   
 
   const handleDelete = (vendorId) => {
-    fetch(`${WEBURL}fb/vendedor/deleteSeller/${vendorId}`, {
+    fetch(`${WEBURL}fb/vendedor/${vendorId}`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -109,7 +109,7 @@ function VendorsPage() {
     // Actualiza la lista de vendedores según el término de búsqueda
     setVendors(filteredVendors);
     if (!searchTerm) {
-      fetch(`${WEBURL}fb/vendedor/getSeller`)
+      fetch(`${WEBURL}fb/vendedor/`)
         .then((response) => {
           if (!response.ok) {
             throw new Error('Error en la solicitud al servidor');
@@ -128,7 +128,7 @@ function VendorsPage() {
 
     console.log('vendorToUpdate:', vendorToUpdate.id);
 
-    fetch(`${WEBURL}fb/vendedor/updateSeller/${vendorToUpdate.id}`, {
+    fetch(`${WEBURL}fb/vendedor/${vendorToUpdate.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

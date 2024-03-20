@@ -3,7 +3,7 @@ const WEBURL = process.env.REACT_APP_API_URL
 
 export const getSellers = async(token) => {
     try {
-        const response = await axios.get(`${WEBURL}fb/vendedor/getSeller`, {
+        const response = await axios.get(`${WEBURL}fb/vendedor/`, {
           headers: {
             token: token,
           },

@@ -30,7 +30,7 @@ const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
   };
 
   const handleSave = () => {
-    fetch(`${WEBURL}fb/vendedor/createSeller`, {
+    fetch(`${WEBURL}fb/vendedor/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -235,18 +235,34 @@ const updateUser = async (req, res) => {
 };
 
 const updateUserById = async (req, res) => {
+  const { id } = req.params;
   const userData = req.body;
+
+  console.log(userData);
+
+  if (!id) {
+    return res.status(400).json({ message: "El ID del usuario es requerido" });
+  }
+
   try {
-    const docRef = firestore.doc(fs, "usuario", userData.id);
+    const docRef = firestore.doc(fs, "usuario", id);
     const docSnap = await firestore.getDoc(docRef);
-    if (docSnap.exists()) {
-      const user = docSnap.data();
-      user.id = docSnap.id;
-      delete user.claveUsuario;
-      return res.status(200).json("Data Registrada");
+
+    if (!docSnap.exists()) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
+
+    await firestore.updateDoc(docRef, userData);
+
+    return res.status(200).json({ message: "Usuario actualizado con éxito" });
   } catch (error) {
-    return res.status(500).json({ message: "Error al actualizar el usuario" });
+    console.error("Error al actualizar el usuario:", error);
+    return res
+      .status(500)
+      .json({
+        message: "Error al actualizar el usuario",
+        error: error.message,
+      });
   }
 };
 
@@ -267,44 +283,32 @@ const deleteUser = async (req, res) => {
     return res.status(500).json({ message: "Error al actualizar el usuario" });
   }
 };
+
 const deleteUserById = async (req, res) => {
-  const userData = req.body;
+  const { id } = req.params;
+
+  if (!id) {
+    return res.status(400).json({ message: "El ID del usuario es requerido" });
+  }
+
   try {
-    const docRef = firestore.doc(fs, "usuario", userData.id);
-    const docSnap = await firestore.getDoc(docRef);
-    if (docSnap.exists()) {
-      const user = docSnap.data();
-      user.id = docSnap.id;
-      delete user.claveUsuario;
-      firestore.deleteDoc(docRef);
-      return res.status(200).json("Data Eliminada");
+    const docRef = firestore.doc(fs, "usuario", id); 
+    const docSnap = await firestore.getDoc(docRef); 
+
+    if (!docSnap.exists()) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
     }
+
+    await firestore.deleteDoc(docRef);
+
+    return res.status(200).json({ message: "Usuario eliminado con éxito" });
   } catch (error) {
-    return res.status(500).json({ message: "Error al actualizar el usuario" });
+    console.error("Error al eliminar el usuario:", error);
+    return res.status(500).json({ message: "Error al eliminar el usuario", error: error.message });
   }
 };
 
-const actualizarDatos = async (req, res) => {
-  try {
-    const snapshot = await firestore.getDocs(
-      firestore.collection(fs, "usuario")
-    );
-    const users = [];
-    snapshot.forEach((doc) => {
-      const user = doc.data();
-      user._id = doc.id;
-      if (user.coords) {
-      }
-      delete user.claveUsuario;
-      users.push(user);
-    });
-    return res.status(200).json({ message: "Usuarios Encontrados", users });
-  } catch (error) {
-    return res
-      .status(500)
-      .json({ message: "Error al obtener la lista de usuarios" });
-  }
-};
+
 
 const sendRecoveryCode = async (req, res) => {
   const { email } = req.body;
@@ -428,7 +432,6 @@ const recoverAccountByCedula = async (req, res) => {
     const userDoc = querySnapshot.docs[0];
     const userEmail = userDoc.data().correoUsuario;
 
-    // Preparar y enviar el correo electrónico
     const subject = "Recuperación de Cuenta";
     const htmlContent = `
       <!DOCTYPE html>
@@ -453,11 +456,9 @@ const recoverAccountByCedula = async (req, res) => {
     sendEmail(userEmail, subject, htmlContent, (error, info) => {
       if (error) {
         console.error("Error al enviar email:", error);
-        res
-          .status(500)
-          .json({
-            message: "Error al enviar el correo de recuperación de cuenta",
-          });
+        res.status(500).json({
+          message: "Error al enviar el correo de recuperación de cuenta",
+        });
       } else {
         res.json({
           message: "Correo de recuperación de cuenta enviado con éxito",
@@ -466,11 +467,9 @@ const recoverAccountByCedula = async (req, res) => {
     });
   } catch (error) {
     console.error("Error al recuperar la cuenta:", error);
-    res
-      .status(500)
-      .json({
-        message: "Error al procesar la solicitud de recuperación de cuenta",
-      });
+    res.status(500).json({
+      message: "Error al procesar la solicitud de recuperación de cuenta",
+    });
   }
 };
 
@@ -525,9 +524,8 @@ export {
   deleteUser,
   updateUserById,
   deleteUserById,
-  actualizarDatos,
   sendRecoveryCode,
   verifyRecoveryCode,
   recoverAccountByCedula,
-  updatePasswordWithRecoveryCode
+  updatePasswordWithRecoveryCode,
 };

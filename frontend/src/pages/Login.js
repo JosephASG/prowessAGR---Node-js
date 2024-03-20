@@ -43,43 +43,6 @@ function Login(props) {
     await login(formData);
   };
 
-  const recuperarCuenta = async () => {
-    try {
-      const res = await fetch(`${WEBURL}fb/usuario/recuperar-cuenta`, {
-        method: 'POST',
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        console.log('Correo electrónico de recuperación de cuenta enviado.');
-      } else {
-        console.log('La recuperación de cuenta falló.');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const resetearContrasena = async () => {
-    try {
-      const res = await fetch(`${WEBURL}fb/usuario/resetear-contrasena`, {
-        method: 'POST',
-        body: JSON.stringify({ email }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const data = await res.json();
-      if (data.success) {
-        console.log('Correo electrónico de restablecimiento de contraseña enviado.');
-      } else {
-        console.log('El restablecimiento de contraseña falló.');
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
 
   const manejarRecuperacionContrasena = () => {
     navigate('/recuperar-contrasena');

@@ -3,18 +3,18 @@ import express from 'express';
 
 const sellerRoute = express.Router();
 // Crear nuevo vendedor
-sellerRoute.post('/createSeller', vendedor.createSeller);
+sellerRoute.post('/', vendedor.createSeller);
 
 //Obtener todos los vendedores.
-sellerRoute.get('/getSeller', vendedor.getSeller);
+sellerRoute.get('/', vendedor.getSeller);
 
 // Obtener un vendedor específico
-sellerRoute.get('/getSeller/:id', vendedor.getSellerByID);
+sellerRoute.get('/:id', vendedor.getSellerByID);
 
 // Actualizar el vendedor
-sellerRoute.put('/updateSeller/:id', vendedor.updateSeller);
+sellerRoute.put('/:id', vendedor.updateSeller);
 
 // Eliminar el vendedor
-sellerRoute.delete('/deleteSeller/:id', vendedor.deleteSeller);
+sellerRoute.delete('/:id', vendedor.deleteSeller);
 
 export default sellerRoute;
