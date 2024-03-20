@@ -74,8 +74,9 @@ function StorePage({ cart, addToCart, removeFromCart }) {
 
   useEffect(() => {
     const filteredProducts = products.filter((product) =>
-      product.pro_nombre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    product.pro_nombre && product.pro_nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
   
     if (searchTerm === '') {
       setProducts(products);

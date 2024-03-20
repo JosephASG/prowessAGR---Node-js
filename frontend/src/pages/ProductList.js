@@ -119,7 +119,6 @@ const ProductList = () => {
     })
       .then((response) => {
         if (response.ok) {
-          // Actualiza la lista de productos después de la actualización en el backend
           setProducts((prevProducts) =>
             prevProducts.map((product) =>
               product.id === productToUpdate.id ? productToUpdate : product
