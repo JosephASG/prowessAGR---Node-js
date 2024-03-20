@@ -130,7 +130,6 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
 
 
   return (
-    
     <div className="shopping-cart">
       <div className="presentation">
         <div className="tittle-page">
@@ -156,7 +155,9 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
                 <div className='cantidad'>
                   <label htmlFor="pro_stock">Cantidad</label>
                   <input
-                    type="text"
+                    type="number"
+                    min = "1"
+                    max = {product.pro_stock}
                     className="cantidad-producto"
                     name="pro_stock"
                     value={product.cantidad}
