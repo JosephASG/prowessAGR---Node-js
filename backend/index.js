@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import routes from "./src/routes.js";
 
 const app = express();
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
 
 const corsOptions = {
   origin: "*",
