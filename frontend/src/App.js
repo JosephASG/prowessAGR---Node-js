@@ -192,7 +192,7 @@ function App() {
             <PrivateRoute
               userRole={role}
               allowedRoles={[
-                "administrador",
+                "administrador","vendedor"
               ]}
               element={<ProductList />}
             />
@@ -227,7 +227,7 @@ function App() {
           <PrivateRoute
             userRole={role}
             allowedRoles={[
-              "administrador"
+              "administrador","vendedor"
             ]}
             element={<CategoriesPage />}
           />

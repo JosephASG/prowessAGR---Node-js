@@ -27,7 +27,7 @@ function Login(props) {
         title: 'Inicio de sesión exitoso',
         showConfirmButton: true,
       });
-
+      console.log("Entrando")
       localStorage.setItem("token", data.usuario.token);
       navigate('/mi-cuenta');
       setIsLoggedIn(true);

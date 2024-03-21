@@ -100,7 +100,7 @@ function NavigationBar(props) {
               {
                 //Por Hacer Ruta para agregar producto
               }
-              <Link to="/add-product" onClick={toggleMenu}>
+              <Link to="/product-list" onClick={toggleMenu}>
                 Gestionar Producto
               </Link>
             </li>

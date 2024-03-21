@@ -7,7 +7,7 @@ const categoriaRouter = express.Router();
 categoriaRouter.post('/post',tokencontroller.verifyTokenAdmin, categoria.createCategory);
 
 // Obtener todas las categorías
-categoriaRouter.get('/get',tokencontroller.verifyTokenAdmin, categoria.getCategories);
+categoriaRouter.get('/get', categoria.getCategories);
 
 // Obtener una categoría específica
 categoriaRouter.get('/get/:id', categoria.getCategoryByID);
