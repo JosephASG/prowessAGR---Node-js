@@ -1,3 +1,4 @@
+//Actualizacon en el hostinger 2024/3/21
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
