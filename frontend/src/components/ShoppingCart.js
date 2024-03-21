@@ -1,25 +1,55 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import './ShoppingCart.css';
-import { Navigate } from 'react-router-dom';
-import { createOrder } from '../services/order';
-import { checkToken} from '../services/auth';  
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./ShoppingCart.css";
+import { Navigate } from "react-router-dom";
+import { createOrder } from "../services/order";
+import { checkToken } from "../services/auth";
 
-function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
-  const [cartProducts, setCartProducts] = useState([]); 
+function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
+  const [cartProducts, setCartProducts] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const [usuario, setUsuario] = useState([]);
+  const [inputQuantity, setInputQuantity] = useState("");
   const token = localStorage.getItem("token");
 
   const handleQuantityInput = (event, product) => {
-    const inputValue = event.target.value;
+    let inputValue = parseInt(event.target.value);
+    console.log('CANTIDAD INPUT ->' + inputQuantity);
     const updatedCart = [...cart];
     const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
-
+  
+    // Si inputValue es NaN, establece el valor a 1
+    if (isNaN(inputValue)) {
+      inputValue = 1;
+    } else if (inputValue > product.pro_stock) {
+      inputValue = product.pro_stock;
+    }
+  
     updatedCart[existingProductIndex].cantidad = inputValue;
+    setInputQuantity(inputValue);
     setCartProducts(updatedCart);
   };
+
+  const handleAddButton = (product) => {
+    const updatedCart = [...cart];
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+  
+    if (existingProductIndex !== -1) {
+      const existingProduct = updatedCart[existingProductIndex];
+      // Asegúrate de que la cantidad no exceda product.pro_stock
+      if (existingProduct.cantidad < product.pro_stock) {
+        existingProduct.cantidad += 1; // Aumentar la cantidad en 1
+      }
+    } else {
+      updatedCart.push({ ...product, cantidad: 1 });
+    }
+  
+    setCartProducts(updatedCart);
+  };
+  
 
   useEffect(() => {
     if (token !== null) {
@@ -29,36 +59,40 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
 
   const obtenerDatos = async () => {
     const data = await checkToken(token);
-    const usuario = 
-    { 
+    const usuario = {
       id: data.data.id,
       nombre: data.data.nombreUsuario,
       apellido: data.data.apellidoUsuario,
       email: data.data.correoUsuario,
-      telefono: data.data.telefonoUsuario
-    }
+      telefono: data.data.telefonoUsuario,
+    };
     setUsuario(usuario);
-  }
+  };
 
   const handleQuantityBlur = (event, product) => {
-    const inputValue = event.target.value;
+    let inputValue = parseInt(event.target.value);
     const updatedCart = [...cart];
     const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
-
-    if (isNaN(inputValue) || inputValue < 1) {
-      updatedCart[existingProductIndex].cantidad = 1;
-    } else if (inputValue >= 1) {
-      updatedCart[existingProductIndex].cantidad = inputValue;
-    } else {
-      updatedCart[existingProductIndex].cantidad = 1;
+  
+    // Si inputValue es NaN, establece el valor a 1
+    if (isNaN(inputValue)) {
+      inputValue = 1;
+    } else if (inputValue > product.pro_stock) {
+      inputValue = product.pro_stock;
+    } else if (inputValue < 1) {
+      inputValue = 1;
     }
-
+  
+    updatedCart[existingProductIndex].cantidad = inputValue;
+    setInputQuantity(inputValue);
     setCartProducts(updatedCart);
   };
 
   const handleRemoveFromCart = (product) => {
     const updatedCart = [...cart];
-    const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
     if (existingProductIndex !== -1) {
       const existingProduct = updatedCart[existingProductIndex];
       if (existingProduct.cantidad > 1) {
@@ -66,6 +100,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
       } else {
         updatedCart.splice(existingProductIndex, 1);
       }
+      setInputQuantity(existingProduct.cantidad);
       setCartProducts(updatedCart);
     }
   };
@@ -76,11 +111,9 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
     console.log(orden);
     comprar();
     setRedirect(true);
-   
-
   };
 
-  const comprar = async() => {
+  const comprar = async () => {
     var orden = calculateTotalPrice();
     orden.ord_productos = cart;
     orden.ord_usuario = usuario;
@@ -88,12 +121,11 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
     console.log(orden);
     setOrden(orden);
     const response = await createOrder(orden);
-  }
+  };
 
   if (redirect) {
     return <Navigate to="/pago" />;
   }
-
 
   const handleDeleteFromCart = (product) => {
     removeFromCart(product);
@@ -123,11 +155,11 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
       total: total.toFixed(2),
     };
   };
-  const addedProducts = cart ? cart.filter((product) => product.cantidad > 0) : [];
+  const addedProducts = cart
+    ? cart.filter((product) => product.cantidad > 0)
+    : [];
 
   const totalPrice = calculateTotalPrice().total;
-
-
 
   return (
     <div className="shopping-cart">
@@ -139,25 +171,41 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
       <div className="shopping-cart-info">
         <div className="show-products">
           {addedProducts.map((product, index) => (
-            <div className='producto-cart' key={index}>
-              <div className='img-product'>
+            <div className="producto-cart" key={index}>
+              <div className="img-product">
                 <img src={product.pro_imagen} alt={product.pro_nombre} />
               </div>
-              <div className='name-product'>
+              <div className="name-product">
                 <h3>{product.pro_nombre}</h3>
-                <p className='separador-p'><b>Categoria:</b> {product.pro_categoria}</p>
-                <p className='separador-p'><b>Precio:</b> ${product.pro_precio} x {product.pro_medida}</p>
-                <p className='separador-p'><b>Cantidad disponible:</b> {product.pro_stock} {product.pro_medida}</p>
-                <p className='separador-p'><b>Vendedor:</b> {product.pro_vendedor}</p>
+                <p className="separador-p">
+                  <b>Categoria:</b> {product.pro_categoria}
+                </p>
+                <p className="separador-p">
+                  <b>Precio:</b> ${product.pro_precio} x {product.pro_medida}
+                </p>
+                <p className="separador-p">
+                  <b>Cantidad disponible:</b> {product.pro_stock}{" "}
+                  {product.pro_medida}
+                </p>
+                <p className="separador-p">
+                  <b>Vendedor:</b> {product.pro_vendedor}
+                </p>
               </div>
-              <div className='cantidad-product'>
-                <button className='btn-add' onClick={() => addToCart(product)}>+</button>
-                <div className='cantidad'>
+              <div className="cantidad-product">
+                <button
+                  className="btn-add"
+                  onClick={() => {
+                    handleAddButton(product);
+                  }}
+                >
+                  +
+                </button>
+                <div className="cantidad">
                   <label htmlFor="pro_stock">Cantidad</label>
                   <input
                     type="number"
-                    min = "1"
-                    max = {product.pro_stock}
+                    min="1"
+                    max={product.pro_stock}
                     className="cantidad-producto"
                     name="pro_stock"
                     value={product.cantidad}
@@ -165,13 +213,21 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
                     onBlur={(e) => handleQuantityBlur(e, product)}
                   />
                 </div>
-                <button className='btn-remove' onClick={() => handleRemoveFromCart(product)}>-</button>
+                <button
+                  className="btn-remove"
+                  onClick={() => handleRemoveFromCart(product)}
+                >
+                  -
+                </button>
               </div>
-              <div className='price-product'>
-                <p><b>Total:</b> ${(product.pro_precio * product.cantidad).toFixed(2)}</p>
-                <div className='trash-bin-img'>
+              <div className="price-product">
+                <p>
+                  <b>Total:</b> $
+                  {(product.pro_precio * product.cantidad).toFixed(2)}
+                </p>
+                <div className="trash-bin-img">
                   <FontAwesomeIcon
-                    className='fa-icon-trash'
+                    className="fa-icon-trash"
                     icon={faTrash}
                     onClick={() => handleDeleteFromCart(product)}
                   />
@@ -182,15 +238,20 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden}) {
         </div>
         <div className="total-price">
           <p>
-            <span><b>Subtotal:</b> $  {calculateTotalPrice().subtotal}</span>
-            <span><b>Precio envío:</b> ${calculateTotalPrice().shippingPrice}</span>
-            <span><b>Total a pagar:</b> ${calculateTotalPrice().total}</span>
+            <span>
+              <b>Subtotal:</b> $ {calculateTotalPrice().subtotal}
+            </span>
+            <span>
+              <b>Precio envío:</b> ${calculateTotalPrice().shippingPrice}
+            </span>
+            <span>
+              <b>Total a pagar:</b> ${calculateTotalPrice().total}
+            </span>
           </p>
         </div>
         <button className="btn-buy" onClick={handleBuyButtonClick}>
           <b>Generar compra</b>
         </button>
-
       </div>
     </div>
   );
