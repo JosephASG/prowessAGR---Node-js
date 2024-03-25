@@ -200,8 +200,8 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     navigator.clipboard
       .writeText(shareLink)
       .then(() => {
-        setShowCopiedMessage(true); 
-        setTimeout(() => setShowCopiedMessage(false), 3000); 
+        setShowCopiedMessage(true);
+        setTimeout(() => setShowCopiedMessage(false), 3000);
       })
       .catch((error) => {
         console.error("Error al copiar al portapapeles:", error);
@@ -220,31 +220,46 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
               <img src={Check} alt="Imagen Pago" className="pagopage-image" />
               {cart &&
                 cart.map((product, index, vendor) => (
-                  <div key={index}>
-                    <p className="pagopage-factura-datos">
-                      <div className="img-producto-factura">
+                  <div
+                    key={index}
+                    style={{ padding: "0px 40px", paddingBottom: "40px" }}
+                  >
+                    <div className="contenedor-alineado">
+                      <div>
                         <img
                           src={product.pro_imagen}
                           alt={product.pro_nombre}
+                          className="imagen-producto-factura"
                         />
                       </div>
-                      <span className="pagopage-factura-label">
-                        Nº de orden:
-                      </span>
-                      {orderNumber}
-                    </p>
-                    <p className="pagopage-factura-datos">
-                      <span className="pagopage-factura-label">Vendedor:</span>
-                      {product.pro_vendedor}
-                    </p>
-                    <p className="pagopage-factura-datos">
-                      <span className="pagopage-factura-label">Compra:</span>
-                      {product.pro_nombre}
-                    </p>
-                    <p className="pagopage-factura-datos">
-                      <span className="pagopage-factura-label">Cantidad:</span>
-                      {product.cantidad} {product.pro_medida}
-                    </p>
+                      <div>
+                        <p className="datos-factura-centrada">
+                          <span className="pagopage-factura-label">
+                            Nº de orden:
+                          </span>
+                          {orderNumber}
+                        </p>
+                        <p className="datos-factura-centrada">
+                          <span className="pagopage-factura-label">
+                            Vendedor:
+                          </span>
+                          {product.pro_vendedor}
+                        </p>
+                        <p className="datos-factura-centrada">
+                          <span className="pagopage-factura-label">
+                            Compra:
+                          </span>
+                          {product.pro_nombre}
+                        </p>
+                        <p className="datos-factura-centrada">
+                          <span className="pagopage-factura-label">
+                            Cantidad:
+                          </span>
+                          {product.cantidad} {product.pro_medida}
+                        </p>
+                      </div>
+                    </div>
+
                     <p className="pagopage-gracias">¡Gracias por su compra!</p>
                     <a
                       href={`https://wa.me/${product.pro_numero}?text=Hola,%20he%20completado%20mi%20compra.%20¿Podemos%20ponernos%20en%20contacto%3F`}
@@ -252,7 +267,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                       rel="noopener noreferrer"
                     >
                       <button className="btn btn-success btn-whatsapp">
-                        <i className="fab fa-whatsapp"></i> ¡Contáctanos!{" "}
+                        <i className=""></i> ¡Contáctanos!{" "}
                         <div className="image-whatsapp">
                           <img src={whatsapp} alt="Whatsapp" />
                         </div>
@@ -262,14 +277,16 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                       className="btn btn-success btn-share"
                       onClick={handleShareButtonClick}
                     >
-                      <i className="fab fa-whatsapp"></i> Compartir
-                      <div className="image-whatsapp"></div>
+                      <div>
+                        <i className="fab fa-whatsapp"></i> Compartir
+                        <div className="image-whatsapp"></div>
+                      </div>
                     </button>
                     <p className="pagopage-factura-datos"></p>
                   </div>
                 ))}
               <button className="boton-enviar" onClick={enviarCorreo}>
-                Enviar ccomprobante
+                Enviar Comprobante
               </button>
               <p className="pagopage-gracias">
                 En breve nos pondremos en contacto con usted

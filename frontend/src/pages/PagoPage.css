@@ -202,6 +202,13 @@ body {
   }
 }
 
+.btn-whatsapp{
+  background-color:#25d366;
+  color:#FFF;
+  border-radius:15px;
+  height:40px;
+}
+
 .btn-whatsapp a {
   color: inherit;
   text-decoration: none;

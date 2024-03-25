@@ -1,16 +1,17 @@
-// ModalPassword.js
-import React from "react";
-import "./ModalPassword.css"; // Asumiendo que tienes estilos específicos para el modal
+// Importaciones
+import React from 'react';
 
+// Declaración de componente
 const ModalPassword = ({ onClose, children }) => {
   return (
-    <div className="modalBackground">
+    <article className="modal-isOpen">
       <div className="modalContainer">
-        <button onClick={onClose}>Cerrar</button>
+        <button className="modal-close">X</button>
         {children}
       </div>
-    </div>
+    </article>
   );
 };
 
+// Exportación del componente
 export default ModalPassword;
