@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "./ModalPassword"; // Componente para mostrar los modales
 import "./PasswordReset.css";
+import ModalPassword from "./ModalPassword";
+import Modals from "../components/Modals"
 
 function PasswordReset() {
   const [email, setEmail] = useState("");
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
-  const [showCodeVerificationModal, setShowCodeVerificationModal] = useState(false);
+  const [showCodeVerificationModal, setShowCodeVerificationModal] =
+    useState(false);
   const [recoveryCode, setRecoveryCode] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,10 +24,10 @@ function PasswordReset() {
         body: JSON.stringify(data),
       });
 
-      if (response.status === 200) return await response.json(); // Petición exitosa
+      if (response.status === 200)
+        return await response.json(); // Petición exitosa
       else if (response.status === 400) throw new Error("Solicitud inválida.");
       else if (response.status === 500) throw new Error("Error de servidor.");
-
     } catch (err) {
       setError(err.message);
       throw err; // Relanzar para manejar en el catch del llamador
@@ -37,7 +39,10 @@ function PasswordReset() {
     setError("");
 
     try {
-      await fetchData("http://localhost:5000/fb/usuario/password-recovery", { email });
+      await fetchData("http://localhost:5000/fb/usuario/password-recovery", {
+        email,
+      });
+      alert("Se envió el correo electrónico :D");
       setShowCodeVerificationModal(true);
     } catch (err) {
       // El manejo de errores se realiza dentro de fetchData
@@ -49,7 +54,10 @@ function PasswordReset() {
     setError("");
 
     try {
-      await fetchData("http://localhost:5000/fb/usuario/password-verify", { email, code: recoveryCode });
+      await fetchData("http://localhost:5000/fb/usuario/password-verify", {
+        email,
+        code: recoveryCode,
+      });
       setShowCodeVerificationModal(false);
       setShowChangePasswordModal(true);
     } catch (err) {
@@ -62,7 +70,11 @@ function PasswordReset() {
     setError("");
 
     try {
-      await fetchData("http://localhost:5000/fb/usuario/password-reset", { email, code: recoveryCode, newPassword });
+      await fetchData("http://localhost:5000/fb/usuario/password-reset", {
+        email,
+        code: recoveryCode,
+        newPassword,
+      });
       setShowChangePasswordModal(false);
       navigate("/login"); // O muestra un mensaje de éxito
     } catch (err) {
@@ -84,42 +96,19 @@ function PasswordReset() {
           required
         />
         <div className="password-reset-buttons">
-          <button type="submit" className="password-reset-button">Enviar Código</button>
-          <button type="button" className="password-reset-cancel" onClick={handleCancel}>Cancelar</button>
+          <button type="submit" className="password-reset-button">
+            Enviar Código
+          </button>
+          <button
+            type="button"
+            className="password-reset-cancel"
+            onClick={handleCancel}
+          >
+            Cancelar
+          </button>
         </div>
       </form>
-
-      {showCodeVerificationModal && (
-        <Modal onClose={() => setShowCodeVerificationModal(false)}>
-          <h3>Verificar Código</h3>
-          <form onSubmit={handleVerifyCode}>
-            <input
-              type="text"
-              placeholder="Código de recuperación"
-              value={recoveryCode}
-              onChange={(e) => setRecoveryCode(e.target.value)}
-              required
-            />
-            <button type="submit">Verificar Código</button>
-          </form>
-        </Modal>
-      )}
-
-      {showChangePasswordModal && (
-        <Modal onClose={() => setShowChangePasswordModal(false)}>
-          <h3>Cambiar Contraseña</h3>
-          <form onSubmit={handleChangePassword}>
-            <input
-              type="password"
-              placeholder="Nueva contraseña"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-            />
-            <button type="submit">Cambiar Contraseña</button>
-          </form>
-        </Modal>
-      )}
+      <Modals title="Recuperar Contraseña"/>
     </div>
   );
 }
