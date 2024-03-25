@@ -107,12 +107,20 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
       "Vendedor",
     ];
     const tableData = cart.map((product) => {
-      const precio = product.precio || 15; // Si el precio no está definido, asignar 0
+      const precio = +product.pro_precio;
+
+      // Verifica si precio es NaN para manejar casos donde pro_precio no es un número válido.
+      if (isNaN(precio)) {
+        console.error("El precio no es un número válido:", product.pro_precio);
+        // Aquí puedes decidir cómo manejar este caso. Por ejemplo, podrías lanzar un error,
+        // retornar un valor específico que indique el problema, o simplemente saltarte este producto.
+        return null; // Por ejemplo, retornar null para este producto.
+      }// Si el precio no está definido, asignar 0
       return [
         { content: product.pro_nombre, styles: { fillColor: [173, 216, 230] } }, // Establecer el color azul solo para la descripción
         `${product.cantidad} ${product.pro_medida}`,
         `$${precio.toFixed(2)}`,
-        `$${(precio * product.cantidad).toFixed(2)}`,
+        `$${(precio * product.cantidad + 3).toFixed(2)}`,
         product.pro_vendedor,
       ];
     });

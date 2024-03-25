@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "./ModalPassword"; // Componente para mostrar los modales
+import Modal from "./ModalPassword";
 import "./PasswordReset.css";
 
 function PasswordReset() {

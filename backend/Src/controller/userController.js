@@ -391,7 +391,7 @@ const verifyRecoveryCode = async (req, res) => {
 
     if (user.recoveryCode === code) {
       await updateDoc(doc(fs, "usuario", userDoc.id), {
-        recoveryCode: null,
+        recoveryCode: code,
       });
 
       res.status(200).json({ message: "Código verificado correctamente" });

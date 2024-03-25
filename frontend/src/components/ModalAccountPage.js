@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import './ModalAccountPage.css';
+import React, { useEffect } from "react";
+import "./ModalAccountPage.css";
 
 const Modal = ({ children, isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       const body = document.body;
-      body.classList.add('modal-open');
+      body.classList.add("modal-open");
       return () => {
-        body.classList.remove('modal-open');
+        body.classList.remove("modal-open");
       };
     }
   }, [isOpen]);
