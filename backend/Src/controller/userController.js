@@ -38,11 +38,9 @@ const registerUser = async (req, res) => {
       );
       try {
         const uploadtask = await uploadBytes(storageRef, imageFile.buffer);
-        console.log("Imagen cargada con éxito");
         try {
           const url = await getDownloadURL(uploadtask.ref);
           userData.imagenUsuario = url;
-          console.log("URL de imagen obtenida con éxito");
         } catch (error) {
           console.error("Error al obtener la URL de la imagen:", error);
         }
@@ -70,7 +68,6 @@ const registerUser = async (req, res) => {
         saltRounds
       );
       if (userData.categoriaUsuario == "Administrador") {
-        console.log("Registra como administrador");
         return res.status(401).send({
           message: "No tienes permisos para registrar un administrador",
         });
@@ -195,7 +192,6 @@ const requestPasswordReset = async (req, res) => {
 
 // Metodo GET
 const getUsers = async (req, res) => {
-  console.log("Obteniendo usuarios");
   try {
     const snapshot = await firestore.getDocs(
       firestore.collection(fs, "usuario")
@@ -237,8 +233,6 @@ const updateUser = async (req, res) => {
 const updateUserById = async (req, res) => {
   const { id } = req.params;
   const userData = req.body;
-
-  console.log(userData);
 
   if (!id) {
     return res.status(400).json({ message: "El ID del usuario es requerido" });

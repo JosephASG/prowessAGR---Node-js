@@ -24,12 +24,9 @@ const createProduct = async (req, res) => {
       const storageRef = ref(storage, `Productos Web Agricola/Imagenes_Agricola/${imageFile.originalname}`,metadata);
       try {
         const uploadtask = await uploadBytes(storageRef, imageFile.buffer);
-        console.log('Imagen cargada con éxito');
         try{
           const url = await getDownloadURL(uploadtask.ref);
-          console.log(url);
           newProductData.pro_imagen = url;
-          console.log('URL de imagen obtenida con éxito');
         }
         catch(error){
           console.error('Error al obtener la URL de la imagen:', error);

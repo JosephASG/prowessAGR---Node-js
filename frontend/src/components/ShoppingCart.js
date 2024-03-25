@@ -15,17 +15,19 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
 
   const handleQuantityInput = (event, product) => {
     let inputValue = parseInt(event.target.value);
-    console.log('CANTIDAD INPUT ->' + inputQuantity);
+    console.log("CANTIDAD INPUT ->" + inputQuantity);
     const updatedCart = [...cart];
-    const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
-  
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+
     // Si inputValue es NaN, establece el valor a 1
     if (isNaN(inputValue)) {
       inputValue = 1;
     } else if (inputValue > product.pro_stock) {
       inputValue = product.pro_stock;
     }
-  
+
     updatedCart[existingProductIndex].cantidad = inputValue;
     setInputQuantity(inputValue);
     setCartProducts(updatedCart);
@@ -36,7 +38,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     const existingProductIndex = updatedCart.findIndex(
       (item) => item.id === product.id
     );
-  
+
     if (existingProductIndex !== -1) {
       const existingProduct = updatedCart[existingProductIndex];
       // Asegúrate de que la cantidad no exceda product.pro_stock
@@ -46,10 +48,9 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     } else {
       updatedCart.push({ ...product, cantidad: 1 });
     }
-  
+
     setCartProducts(updatedCart);
   };
-  
 
   useEffect(() => {
     if (token !== null) {
@@ -72,8 +73,10 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
   const handleQuantityBlur = (event, product) => {
     let inputValue = parseInt(event.target.value);
     const updatedCart = [...cart];
-    const existingProductIndex = updatedCart.findIndex((item) => item.id === product.id);
-  
+    const existingProductIndex = updatedCart.findIndex(
+      (item) => item.id === product.id
+    );
+
     // Si inputValue es NaN, establece el valor a 1
     if (isNaN(inputValue)) {
       inputValue = 1;
@@ -82,7 +85,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     } else if (inputValue < 1) {
       inputValue = 1;
     }
-  
+
     updatedCart[existingProductIndex].cantidad = inputValue;
     setInputQuantity(inputValue);
     setCartProducts(updatedCart);
@@ -249,9 +252,12 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
             </span>
           </p>
         </div>
-        <button className="btn-buy" onClick={handleBuyButtonClick}>
-          <b>Generar compra</b>
-        </button>
+
+        {addedProducts.length > 0 && (
+          <button className="btn-buy" onClick={handleBuyButtonClick}>
+            <b>Generar compra</b>
+          </button>
+        )}
       </div>
     </div>
   );

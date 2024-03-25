@@ -1,6 +1,7 @@
 import axios from "axios";
 const WEBURL = process.env.REACT_APP_API_URL;
 
+console.log(WEBURL);
 export const getUsers = async (token) => {
   try {
     const response = await axios.get(`${WEBURL}fb/usuario/getAll`, {

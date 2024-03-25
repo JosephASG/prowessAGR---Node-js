@@ -25,7 +25,6 @@ export const getTokenData = async(token) => {
     return response
       }
   catch(error){
-    console.log(error)
   }
 }
 

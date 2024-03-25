@@ -30,7 +30,6 @@ const handleSave = async () => {
   const token = localStorage.getItem('token');
   const response = await postCategory(newSupplier, token);
   if (response.status===200) {
-    console.log("aqui")
     onClose();
   } else {
     console.error('Error al agregar el proveedor en el servidor');

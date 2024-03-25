@@ -6,6 +6,7 @@ import whatsapp from "../imagenes/whatsapp.png";
 import { checkToken } from "../services/auth";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { sendMail } from '../services/mailer';
 
 function PagoPage({ cart, vendor, clearCart, orden }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -176,20 +177,13 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     };
 
   
-    fetch("http://localhost:5000/fb/mailer/send-mail-invoice", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(emailData),
+    sendMail(emailData)
+    .then((data) => {
+      console.log("Correo enviado exitosamente:", data);
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Correo enviado exitosamente:", data);
-      })
-      .catch((error) => {
-        console.error("Error al enviar el correo:", error);
-      });
+    .catch((error) => {
+      console.error("Error al enviar el correo:", error);
+    });
   };
 
   const handleShareButtonClick = () => {
