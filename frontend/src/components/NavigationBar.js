@@ -9,7 +9,6 @@ function NavigationBar(props) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [logged, setLogged] = useState(false);
-  const [user, setUser] = useState([]);
   const [role, setRole] = useState("");
   const [cartCount, setCartCount] = useState(0);
 

@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./PagoPage.css";
 import { Navigate } from "react-router-dom";
 import Check from "../imagenes/Check.png";
-import WhatsButton from "../components/WhatsButton";
-import ModalEditVendors from "../components/ModalEditVendors";
-import VendorsPage from "./VendorsPage";
-import { getTokenData } from "../services/auth";
-import { getUserData } from "../services/user.js";
 import whatsapp from "../imagenes/whatsapp.png";
 import { checkToken } from "../services/auth";
 import jsPDF from "jspdf";
@@ -86,7 +81,6 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     pdf.text("Confirmación del Pedido", 70, 30);
     pdf.setFont("times", "normal"); // Restaurar el estilo de fuente normal
 
-    // Agregar los detalles del cliente
     pdf.setFontSize(12);
     pdf.text(`Estimado/a ${usuario.nombre},`, 10, 60);
     pdf.text(

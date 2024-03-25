@@ -6,21 +6,18 @@ const PrivateRoute = ({ element, allowedRoles, userRole, ...rest }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect (() => { 
-    console.log("Rol del usuario",userRole);
     if(userRole==="default"){
-      console.log("Esperando...")
       setIsLoading(true);
     }else{
       if(allowedRoles.includes(userRole)){
-        setIsLoading(false); // Indica que la carga ha finalizado
+        setIsLoading(false);
       }
       else{
-        setIsLoading(false); // Indica que la carga ha finalizado
+        setIsLoading(false);
       }
     }
-  }, [userRole]);
+  }, [userRole, allowedRoles]);
   if (isLoading) {
-    // Muestra un componente de carga mientras se determina el rol
     return <div>Cargando...</div>;
   }
   if (allowedRoles.includes(userRole)) {

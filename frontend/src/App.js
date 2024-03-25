@@ -24,7 +24,7 @@ import AdvertisementSection from "./pages/AdvertisementSection";
 import PagoPage from "./pages/PagoPage";
 import TermsConditions from "./pages/TermsConditions";
 import PasswordReset from "./pages/PasswordReset";
-import PasswordSend from './pages//PasswordSend';
+import PasswordSend from "./pages//PasswordSend";
 import AccountReset from "./pages/AccountReset";
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
   const [token, setToken] = useState(null);
   const [role, setRole] = useState("default");
   const [total, setTotal] = useState(0);
-  const [orden,setOrden] = useState([]);
+  const [orden, setOrden] = useState([]);
 
   useEffect(() => {
     if (token !== null) {
@@ -75,19 +75,25 @@ function App() {
     }
   };
 
- const addToCart = (product, vendorWhatsApp) => {
-  const existingProductIndex = cart.findIndex((item) => item.id === product.id);
-  if (existingProductIndex !== -1) {
-    const updatedCart = [...cart];
-    const existingProduct = updatedCart[existingProductIndex];
-    existingProduct.cantidad += 1;
-    setCart(updatedCart);
-  } else {
-    // Agregar la información del vendedor al producto
-    const productWithVendor = { ...product, cantidad: 1, vendorWhatsApp: vendorWhatsApp };
-    setCart([...cart, productWithVendor]);
-  }
-};
+  const addToCart = (product, vendorWhatsApp) => {
+    const existingProductIndex = cart.findIndex(
+      (item) => item.id === product.id
+    );
+    if (existingProductIndex !== -1) {
+      const updatedCart = [...cart];
+      const existingProduct = updatedCart[existingProductIndex];
+      existingProduct.cantidad += 1;
+      setCart(updatedCart);
+    } else {
+      // Agregar la información del vendedor al producto
+      const productWithVendor = {
+        ...product,
+        cantidad: 1,
+        vendorWhatsApp: vendorWhatsApp,
+      };
+      setCart([...cart, productWithVendor]);
+    }
+  };
 
   const removeFromCart = (productToRemove) => {
     const updatedCart = cart.filter((product) => product !== productToRemove);
@@ -99,15 +105,29 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar isLoggedIn={isLoggedIn} role={role} cart={cart} orden={orden}/>
+      <NavigationBar
+        isLoggedIn={isLoggedIn}
+        role={role}
+        cart={cart}
+        orden={orden}
+      />
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/Anuncios" element={<AdvertisementSection />} />
-        {/* <Route path="/carrito" element={<ShoppingCart clearCart={clearCart}/>} /> */}
-        <Route path="/pago" element={<PagoPage clearCart={clearCart} cart={cart} total={total} token={token}/>} />
+        <Route
+          path="/pago"
+          element={
+            <PagoPage
+              clearCart={clearCart}
+              cart={cart}
+              total={total}
+              token={token}
+            />
+          }
+        />
         <Route path="/recuperar-contrasena" element={<PasswordReset />} />
-        <Route path="/recuperar-cuenta" element={<AccountReset />} /> 
-        <Route path="/password-send" element={<PasswordSend />} /> 
+        <Route path="/recuperar-cuenta" element={<AccountReset />} />
+        <Route path="/password-send" element={<PasswordSend />} />
 
         <Route
           path="/tienda"
@@ -122,17 +142,21 @@ function App() {
 
         <Route
           path="/carrito"
-          render={() => <ShoppingCart /* ... pasar props según sea necesario */ vendedorId={65161651896} />}
-
+          render={() => (
+            <ShoppingCart
+              /* ... pasar props según sea necesario */ vendedorId={65161651896}
+            />
+          )}
           element={
             <ShoppingCart
               cart={cart}
               addToCart={addToCart}
               removeFromCart={removeFromCart}
-              setOrden = {setOrden}
+              setOrden={setOrden}
             />
           }
         />
+
         <Route
           path="/carrito-pagina"
           element={
@@ -159,11 +183,7 @@ function App() {
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={[
-                "administrador",
-                "vendedor",
-                "cliente"
-              ]}
+              allowedRoles={["administrador", "vendedor", "cliente"]}
               element={
                 <MyAccountPage
                   userRole={role}
@@ -176,76 +196,73 @@ function App() {
         />
         <Route path="/terms&conditions" element={<TermsConditions />} />
         <Route
-         path="/terms&conditions"
-         element={
-          <PrivateRoute
+          path="/terms&conditions"
+          element={
+            <PrivateRoute
               userRole={role}
               allowedRoles={["administrador", "vendedor"]}
               element={<TermsConditions />}
-             />
-             }
-         />
+            />
+          }
+        />
 
         <Route
           path="/product-list"
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={[
-                "administrador","vendedor"
-              ]}
+              allowedRoles={["administrador", "vendedor"]}
               element={<ProductList />}
             />
           }
         />
-        <Route path="/sales:id"
+        <Route
+          path="/sales:id"
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={[
-                "administrador", "vendedor"
-              ]}
+              allowedRoles={["administrador", "vendedor"]}
               element={<SaleDetailsPage />}
             />
-          } />
-        <Route path="/sales" element={
-          <PrivateRoute
-            userRole={role}
-            allowedRoles={[
-              "administrador", "vendedor"
-            ]}
-            element={<SalesPage />}
-          />
-        } />
+          }
+        />
+        <Route
+          path="/sales"
+          element={
+            <PrivateRoute
+              userRole={role}
+              allowedRoles={["administrador", "vendedor"]}
+              element={<SalesPage />}
+            />
+          }
+        />
         <Route
           path="/login"
           element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />}
         />
 
         <Route path="/registro" element={<Register />} />
-        <Route path="/categories" element={
-          <PrivateRoute
-            userRole={role}
-            allowedRoles={[
-              "administrador","vendedor"
-            ]}
-            element={<CategoriesPage />}
-          />
-        } />
+        <Route
+          path="/categories"
+          element={
+            <PrivateRoute
+              userRole={role}
+              allowedRoles={["administrador", "vendedor"]}
+              element={<CategoriesPage />}
+            />
+          }
+        />
         <Route path="/accessDenied" element={<AccessDenied />} />
         <Route
           path="/users"
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={[
-                "administrador"
-              ]}
+              allowedRoles={["administrador"]}
               element={<UserList />}
             />
           }
         />
-
       </Routes>
       <Footer />
     </Router>
