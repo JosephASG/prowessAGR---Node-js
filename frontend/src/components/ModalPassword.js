@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Declaración de componente
-const ModalPassword = ({ onClose, children }) => {
+const ModalPassword = ({ children }) => {
   return (
     <article className="modal-isOpen">
       <div className="modalContainer">

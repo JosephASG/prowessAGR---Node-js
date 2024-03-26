@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./PasswordReset.css";
-import ModalPassword from "./ModalPassword";
-import Modals from "../components/Modals"
+import ModalPassword from "../components/ModalPassword";
 
 function PasswordReset() {
   const [email, setEmail] = useState("");
@@ -58,6 +57,7 @@ function PasswordReset() {
         email,
         code: recoveryCode,
       });
+      alert("Código Correcto! :P");
       setShowCodeVerificationModal(false);
       setShowChangePasswordModal(true);
     } catch (err) {
@@ -76,7 +76,8 @@ function PasswordReset() {
         newPassword,
       });
       setShowChangePasswordModal(false);
-      navigate("/login"); // O muestra un mensaje de éxito
+      //navigate("/login");
+      alert('La nueva Contraseña fue cambiada de manera satisfactoria! XD')
     } catch (err) {
       // El manejo de errores se realiza dentro de fetchData
     }
@@ -108,7 +109,32 @@ function PasswordReset() {
           </button>
         </div>
       </form>
-      <Modals title="Recuperar Contraseña"/>
+      {showCodeVerificationModal && (
+        <ModalPassword>
+          <h2>Código de Verificación</h2>
+          <p>Por favor, ingrese el código enviado a su correo electrónico</p>
+          <input
+            type="text"
+            onChange={(e) => {
+              setRecoveryCode(e.target.value);
+            }}
+          />
+          <button onClick={handleVerifyCode}>Enviar Código</button>
+        </ModalPassword>
+      )}
+      {showChangePasswordModal && (
+        <ModalPassword>
+          <h2>Cambio de Constraseña</h2>
+          <p>Por favor, ingrese la nueva contraseña</p>
+          <input
+            type="text"
+            onChange={(e) => {
+              setNewPassword(e.target.value);
+            }}
+          />
+          <button onClick={handleChangePassword}>Cambiar Contraseña</button>
+        </ModalPassword>
+      )}
     </div>
   );
 }
