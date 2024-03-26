@@ -325,9 +325,25 @@ function Register() {
 
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("user-image", file);
-    setPhoto(formData);
+    if (file) {
+      const imgURL = URL.createObjectURL(file);
+
+      const img = new Image();
+      img.src = imgURL;
+      img.onload = () => {
+        const width = img.width;
+        const height = img.height;
+
+        if (width <= 150 && height <= 150) {
+          setPhoto(file);
+        } else {
+          alert("La imagen debe tener un tamaño máximo de 150px por 150px.");
+          e.target.value = "";
+        }
+
+        URL.revokeObjectURL(imgURL);
+      };
+    }
   };
 
   const handleProvinceChange = (e) => {
@@ -534,7 +550,7 @@ function Register() {
             name="user-image"
             title="Selecciona una imagen de perfil"
             onChange={handlePhotoUpload}
-            //required
+            required
           />
           <span className="custom-file-input-label">
             Subir Imagen de Perfil
@@ -543,7 +559,7 @@ function Register() {
           {photo && (
             <div>
               <img
-                src={URL.createObjectURL(photo.get("user-image"))}
+                src={URL.createObjectURL(photo)}
                 alt="Foto de perfil"
                 className="image-show"
               />

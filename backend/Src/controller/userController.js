@@ -24,70 +24,75 @@ const registerUser = async (req, res) => {
   try {
     const userData = req.body;
     const imageFile = req.file;
+
+    if (!imageFile) {
+      return res.status(400).send({ message: "La imagen es obligatoria" });
+    }
+
+    if (imageFile.size > 1048576) {
+      return res
+        .status(400)
+        .send({ message: "La imagen supera el tamaño máximo de 1MB" });
+    }
+
     const jsonUser = {};
-    if (imageFile) {
-      const metadata = {
-        contentType: imageFile.mimetype,
-      };
-      // ! La imagen se esta guardando como application/octet-stream, no como contentType: imagenFile.mimetype. NO AFECTA EL FUNCIONAMIENTO.
-      //TODO 1: Comprobar si la imagen existe en el storage de Firebase, para evitar reemplazo de imágenes o asignar un nombre único a la imagen.
-      const storageRef = ref(
-        storage,
-        agricola / `${imageFile.originalname}`,
-        metadata
-      );
+    const metadata = {
+      contentType: imageFile.mimetype,
+    };
+    const storageRef = ref(
+      storage,
+      `agricola/${imageFile.originalname}`,
+      metadata
+    );
+    try {
+      const uploadtask = await uploadBytes(storageRef, imageFile.buffer);
+
       try {
-        const uploadtask = await uploadBytes(storageRef, imageFile.buffer);
-        try {
-          const url = await getDownloadURL(uploadtask.ref);
-          userData.imagenUsuario = url;
-        } catch (error) {
-          console.error("Error al obtener la URL de la imagen:", error);
-        }
+        const url = await getDownloadURL(uploadtask.ref);
+        userData.imagenUsuario = url;
       } catch (error) {
-        console.error(
-          "Error al cargar la imagen o obtener la URL de la imagen:",
-          error
-        );
+        console.error("Error al obtener la URL de la imagen:", error);
+      }
+    } catch (error) {
+      console.error(
+        "Error al cargar la imagen o obtener la URL de la imagen:",
+        error
+      );
+    }
+
+    const snapshot = await query(
+      firestore.collection(fs, "usuario"),
+      where("correoUsuario", "==", userData.correoUsuario)
+    );
+    const querySnapshot = await getDocs(snapshot);
+    if (!querySnapshot.empty) {
+      return res
+        .status(401)
+        .send({ message: "El correo electrónico ya está en uso" });
+    }
+
+    userData.claveUsuario = bcrypt.hashSync(userData.claveUsuario, saltRounds);
+
+    if (userData.categoriaUsuario === "Administrador") {
+      return res.status(401).send({
+        message: "No tienes permisos para registrar un administrador",
+      });
+    }
+
+    for (const [key, value] of Object.entries(userData)) {
+      if (value) {
+        jsonUser[key] = value;
       }
     }
 
-    try {
-      const snapshot = await query(
-        firestore.collection(fs, "usuario"),
-        where("correoUsuario", "==", userData.correoUsuario)
-      );
-      const querySnapshot = await getDocs(snapshot); //!Probar
-      if (!querySnapshot.empty) {
-        return res
-          .status(401)
-          .send({ message: "El correo electrónico ya está en uso" });
-      }
-      userData.claveUsuario = bcrypt.hashSync(
-        userData.claveUsuario,
-        saltRounds
-      );
-      if (userData.categoriaUsuario == "Administrador") {
-        return res.status(401).send({
-          message: "No tienes permisos para registrar un administrador",
-        });
-      }
-      for (const [key, value] of Object.entries(userData)) {
-        if (value) {
-          jsonUser[key] = value;
-        }
-      }
-      var docRef = await firestore.addDoc(
-        firestore.collection(fs, "usuario"),
-        jsonUser
-      );
-      return res.status(201).json(jsonUser);
-    } catch (error) {
-      return res
-        .status(500)
-        .json({ message: "Error al crear el usuario", error: error.message });
-    }
+    var docRef = await firestore.addDoc(
+      firestore.collection(fs, "usuario"),
+      jsonUser
+    );
+
+    return res.status(201).json(jsonUser);
   } catch (error) {
+    console.error("Error general al crear el usuario", error);
     return res
       .status(500)
       .json({ message: "Error al crear el usuario", error: error.message });
@@ -251,12 +256,10 @@ const updateUserById = async (req, res) => {
     return res.status(200).json({ message: "Usuario actualizado con éxito" });
   } catch (error) {
     console.error("Error al actualizar el usuario:", error);
-    return res
-      .status(500)
-      .json({
-        message: "Error al actualizar el usuario",
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: "Error al actualizar el usuario",
+      error: error.message,
+    });
   }
 };
 
@@ -286,8 +289,8 @@ const deleteUserById = async (req, res) => {
   }
 
   try {
-    const docRef = firestore.doc(fs, "usuario", id); 
-    const docSnap = await firestore.getDoc(docRef); 
+    const docRef = firestore.doc(fs, "usuario", id);
+    const docSnap = await firestore.getDoc(docRef);
 
     if (!docSnap.exists()) {
       return res.status(404).json({ message: "Usuario no encontrado" });
@@ -298,11 +301,11 @@ const deleteUserById = async (req, res) => {
     return res.status(200).json({ message: "Usuario eliminado con éxito" });
   } catch (error) {
     console.error("Error al eliminar el usuario:", error);
-    return res.status(500).json({ message: "Error al eliminar el usuario", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Error al eliminar el usuario", error: error.message });
   }
 };
-
-
 
 const sendRecoveryCode = async (req, res) => {
   const { email } = req.body;
