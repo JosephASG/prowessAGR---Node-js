@@ -12,7 +12,7 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [vendedores, setVendedores] = useState([]);
-  const WEBURL = process.env.REACT_APP_API_URL
+  const WEBURL = process.env.REACT_APP_API_URL;
 
   const ITEMS_PER_PAGE = 5;
 
@@ -37,50 +37,42 @@ const ProductList = () => {
   const handleProducts = async (token) => {
     const response = await getProductsFromApi(token);
     const data = await response.data;
-    if(response.data){
+    if (response.data) {
       setProducts(data);
-    }
-    else {
+    } else {
       console.log(response.data.message);
     }
-  }
+  };
 
   const handleCategories = async (token) => {
     const response = await getCategories(token);
-    if(response.data.categories){
+    if (response.data.categories) {
       setCategorias(response.data);
-    }
-    else {
+    } else {
       console.log(response.data.message);
     }
-  }
+  };
 
-  const handleVendedores = async(token) => {
+  const handleVendedores = async (token) => {
     const response = await getSellers(token);
-    if(response.data){
+    if (response.data) {
       setVendedores(response.data);
-    }
-    else{
+    } else {
       console.log(response.error);
     }
-  }
+  };
 
   const handleDelete = async (productId) => {
     try {
-        const admintoken = localStorage.getItem("token");
-        const response = await deleteProduct(productId, admintoken);
-        console.log(response);
-        if(response.data){
-          setProducts(products.filter((product) => product.id !== productId));
-        }
-        else {
-          console.log(response.data.message);
-        }
-    }
-    catch(error){
-      
-    }
-    
+      const admintoken = localStorage.getItem("token");
+      const response = await deleteProduct(productId, admintoken);
+      console.log(response);
+      if (response.data) {
+        setProducts(products.filter((product) => product.id !== productId));
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (error) {}
   };
 
   const handleOpenModal = () => {
@@ -152,8 +144,10 @@ const ProductList = () => {
   }
 
   if (filterProduct) {
-    sortedAndFilteredProducts = sortedAndFilteredProducts.filter((product) =>
-      product.pro_nombre.toLowerCase().includes(filterProduct.toLowerCase())
+    sortedAndFilteredProducts = sortedAndFilteredProducts.filter(
+      (product) =>
+        product.pro_nombre &&
+        product.pro_nombre.toLowerCase().includes(filterProduct.toLowerCase())
     );
   }
 
@@ -224,21 +218,29 @@ const ProductList = () => {
         </b>
         <b
           className={sortedColumn === "pro_fechaInicio" ? "sorted" : ""}
-          onClick={() => handleSort("pro_fechaInicio")}>Ingreso</b>
+          onClick={() => handleSort("pro_fechaInicio")}
+        >
+          Ingreso
+        </b>
         <b
-        className={sortedColumn === "pro_fechaFinal" ? "sorted" : ""}
-        onClick={() => handleSort("pro_fechaFinal")}
-        >Caducidad</b>
+          className={sortedColumn === "pro_fechaFinal" ? "sorted" : ""}
+          onClick={() => handleSort("pro_fechaFinal")}
+        >
+          Caducidad
+        </b>
         <b
-         className={sortedColumn === "pro_vendedor" ? "sorted" : ""}
-         onClick={() => handleSort("pro_vendedor")}
-        >Vendedor</b>
+          className={sortedColumn === "pro_vendedor" ? "sorted" : ""}
+          onClick={() => handleSort("pro_vendedor")}
+        >
+          Vendedor
+        </b>
         <b
-        className={sortedColumn === "pro_estado" ? "sorted" : ""}
-        onClick={() => handleSort("pro_estado")}
-        >Estado</b>
-        <b
-        >Imagen</b>
+          className={sortedColumn === "pro_estado" ? "sorted" : ""}
+          onClick={() => handleSort("pro_estado")}
+        >
+          Estado
+        </b>
+        <b>Imagen</b>
         <b>Acciones</b>
       </div>
 

@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import "./NavigationBar.css";
 import logo from "../imagenes/prowess-logo1.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faShoppingCart, faBars, } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faShoppingCart,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 
 function NavigationBar(props) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,7 +19,6 @@ function NavigationBar(props) {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
 
   useEffect(() => {
     if (props.isLoggedIn) {
@@ -29,22 +32,24 @@ function NavigationBar(props) {
   }, [props.isLoggedIn, props.role]);
 
   useEffect(() => {
-      setCartCount(props.cart.length);
+    setCartCount(props.cart.length);
   }, [props.cart]);
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const gestionVinculacion = document.getElementById('gestionVinculacion');
-    const levantamientoInformacion = document.getElementById('levantamientoInformacion');
-  
-    gestionVinculacion.addEventListener('mouseenter', function() {
-      levantamientoInformacion.style.display = 'block';
+  document.addEventListener("DOMContentLoaded", function () {
+    const gestionVinculacion = document.getElementById("gestionVinculacion");
+    const levantamientoInformacion = document.getElementById(
+      "levantamientoInformacion"
+    );
+
+    gestionVinculacion.addEventListener("mouseenter", function () {
+      levantamientoInformacion.style.display = "block";
     });
-  
-    gestionVinculacion.addEventListener('mouseleave', function() {
-      levantamientoInformacion.style.display = 'none';
+
+    gestionVinculacion.addEventListener("mouseleave", function () {
+      levantamientoInformacion.style.display = "none";
     });
   });
-  
+
   useEffect(() => {
     // Función que maneja el evento de scroll
     const handleScroll = () => {
@@ -59,7 +64,7 @@ function NavigationBar(props) {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  },[]);
+  }, []);
 
   return (
     <nav className={`navigation-bar ${scrolled ? "scrolled" : ""}`}>
@@ -81,7 +86,12 @@ function NavigationBar(props) {
               </Link>
             </li>
             <li>
-              <a href="https://informacion.prowessec.com/home" target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
+              <a
+                href="https://informacion.prowessec.com/home"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={toggleMenu}
+              >
                 Gestion de Vinculacion
               </a>
             </li>
@@ -137,7 +147,12 @@ function NavigationBar(props) {
               </Link>
             </li>
             <li>
-              <a href="https://informacion.prowessec.com/home" target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
+              <a
+                href="https://informacion.prowessec.com/home"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={toggleMenu}
+              >
                 Gestion de Vinculacion
               </a>
             </li>
@@ -205,7 +220,12 @@ function NavigationBar(props) {
               </Link>
             </li>
             <li>
-              <a href="https://informacion.prowessec.com/home" target="_blank" rel="noopener noreferrer" onClick={toggleMenu}>
+              <a
+                href="https://informacion.prowessec.com/home"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={toggleMenu}
+              >
                 Gestion de Vinculacion
               </a>
             </li>
@@ -238,14 +258,9 @@ function NavigationBar(props) {
               </div>
             </li>
             <li>
-              {logged ? (
-                <Link to="/mi-cuenta" onClick={toggleMenu}>
-                  Iniciado
-                </Link>
-              ) : (
+              {!logged && (
                 <Link to="/login" onClick={toggleMenu}>
-                  {" "}
-                  Iniciar Sesion{" "}
+                  Iniciar Sesión
                 </Link>
               )}
             </li>
@@ -258,17 +273,47 @@ function NavigationBar(props) {
               </Link>
             </li>
             <li id="gestionVinculacion">
-               Gestion de Vinculacion
-            <ul id="levantamientoInformacion" style={{ display: 'none', backgroundColor: '#ffffff', padding: '7px', borderRadius: '2px', 
-             position: 'absolute', top: '60px', left: '32.3%', zIndex: '999', boxShadow: '0px 0px 3px 0px rgba(0,0,0,0.3)' }}>
-              <li style={{ listStyle: 'none' }}>
-               <h4 style={{ margin: '0', marginBottom: '3px', fontSize: '8px', color: '#000', fontWeight: 'bold' }}></h4>
-              <a href="https://informacion.prowessec.com/" target="_blank" rel="noopener noreferrer" onClick={toggleMenu} style={{ color: '#000', fontSize: '12px', fontWeight: 'bold' }}>
-                   Levantamiento Información
-                 </a>
-                 </li>
-                </ul>
-               </li>
+              Gestion de Vinculacion
+              <ul
+                id="levantamientoInformacion"
+                style={{
+                  display: "none",
+                  backgroundColor: "#ffffff",
+                  padding: "7px",
+                  borderRadius: "2px",
+                  position: "absolute",
+                  top: "60px",
+                  left: "32.3%",
+                  zIndex: "999",
+                  boxShadow: "0px 0px 3px 0px rgba(0,0,0,0.3)",
+                }}
+              >
+                <li style={{ listStyle: "none" }}>
+                  <h4
+                    style={{
+                      margin: "0",
+                      marginBottom: "3px",
+                      fontSize: "8px",
+                      color: "#000",
+                      fontWeight: "bold",
+                    }}
+                  ></h4>
+                  <a
+                    href="https://informacion.prowessec.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={toggleMenu}
+                    style={{
+                      color: "#000",
+                      fontSize: "12px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Levantamiento Información
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li>
               <Link to="/nosotros" onClick={toggleMenu}>
                 ¿Quiénes Somos?

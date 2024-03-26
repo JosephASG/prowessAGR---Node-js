@@ -19,7 +19,6 @@ import dotenv from "dotenv";
 dotenv.config();
 const saltRounds = 10;
 
-//Registro de usuario
 const registerUser = async (req, res) => {
   try {
     const userData = req.body;
