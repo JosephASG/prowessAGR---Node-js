@@ -2,12 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Register.css"; // Importa el archivo de estilos CSS
 import Mapa from "../components/Mapa.js";
-//Llamado a librería para alertar (SweetAlert)
 import Swal from "sweetalert2";
 import { registerApp } from "../services/auth";
-import axios from "axios";
 import { getUsers } from "../services/user";
-const WEBURL = process.env.REACT_APP_API_URL;
+import { provincesApi } from "../services/ubication";
 
 const validarCedulaEcuatoriana = (cedula) => {
   if (cedula.length === 10 && /^[0-9]+$/.test(cedula)) {
@@ -81,16 +79,13 @@ function Register() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(
-          "https://gist.githubusercontent.com/emamut/6626d3dff58598b624a1/raw/166183f4520c4603987c55498df8d2983703c316/provincias.json"
-        );
-        const data = await response.json();
-
-        const extractedProvinces = Object.keys(data).map((provinceCode) => {
-          const provinceData = data[provinceCode];
+        const response = await provincesApi();
+        const data = response.data.message;
+        const extractedProvinces = Object.keys(data).map((key) => {
+          const provinceData = data[key];
           const cantones = Object.keys(provinceData.cantones).map(
-            (cantonCode) => {
-              return provinceData.cantones[cantonCode].canton;
+            (cantonKey) => {
+              return provinceData.cantones[cantonKey].canton;
             }
           );
 
@@ -303,14 +298,10 @@ function Register() {
 
     try {
       const response = await registerApp(formData);
-      console.log(response);
-      const randomKey = generateRandomKey();
 
-      //Coloco una alerta de registro exitoso mediante SweetAlert
       await Swal.fire({
         icon: "success",
         title: "Registro Exitoso",
-        html: `Tu palabra clave es: <span style="font-weight: bold; font-size: 1.2em;">${randomKey}</span>`,
         showConfirmButton: true,
       });
 
@@ -325,7 +316,7 @@ function Register() {
       if (
         error.response &&
         error.response.status === 400 &&
-        error.response.data.message === "Email already registered"
+        error.response.data.message === "Correo registrado"
       ) {
         setShowFullErrorMessage(true);
       }
@@ -359,39 +350,6 @@ function Register() {
 
   const passwordStrength = checkPasswordStrength(password);
   const [showPopup, setShowPopup] = useState(false);
-
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
-  //APARTADO PARA GENERAR PALABRA CLAVE ALEATORIA:
-  const palabrasClave = [
-    "perro",
-    "gato",
-    "casa",
-    "auto",
-    "libro",
-    "jardín",
-    "playa",
-    "montaña",
-    "sol",
-    "luna",
-    "agua",
-    "fuego",
-    "aire",
-    "tierra",
-    "manzana",
-    "banana",
-    "naranja",
-    "computadora",
-    "teléfono",
-    "television",
-  ];
-
-  const generateRandomKey = () => {
-    const randomIndex = Math.floor(Math.random() * palabrasClave.length);
-    return palabrasClave[randomIndex];
-  };
 
   return (
     <div className="register-container">

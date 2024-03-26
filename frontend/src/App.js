@@ -142,11 +142,6 @@ function App() {
 
         <Route
           path="/carrito"
-          render={() => (
-            <ShoppingCart
-              /* ... pasar props según sea necesario */ vendedorId={65161651896}
-            />
-          )}
           element={
             <ShoppingCart
               cart={cart}
