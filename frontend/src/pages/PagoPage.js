@@ -7,60 +7,51 @@ import { checkToken } from "../services/auth";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { sendMail } from "../services/mailer";
-
-function PagoPage({ cart, vendor, clearCart, orden }) {
+function PagoPage({ clearCart }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [usuario, setUsuario] = useState(null);
-  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
+  const [cart, setCart] = useState([]);
   const [orderNumber, setOrderNumber] = useState(null);
-  const token = localStorage.getItem("token");
+  const [subtotal, setSubtotal] = useState("");
+  const [shippingPrice, setShippingPrice] = useState("");
+  const [total, setTotal] = useState("");
+  const [redirect, setRedirect] = useState(false);
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
   useEffect(() => {
-    const obtenerDatos = async () => {
-      const data = await checkToken(token);
-      const usuario = {
-        id: data.data.id,
-        nombre: data.data.nombreUsuario,
-        apellido: data.data.apellidoUsuario,
-        email: data.data.correoUsuario,
-        telefono: data.data.telefonoUsuario,
-      };
-      setUsuario(usuario);
-    };
-
-    obtenerDatos();
-  }, [token]);
-
-  useEffect(() => {
-    const orderNum = generateRandomOrderNumber();
-    setOrderNumber(orderNum);
+    const ordenActual = localStorage.getItem("ordenActual");
+    if (ordenActual) {
+      const ordenData = JSON.parse(ordenActual);
+      setCart(ordenData.ord_productos);
+      setUsuario(ordenData.ord_usuario);
+      setSubtotal(ordenData.subtotal);
+      setShippingPrice(ordenData.shippingPrice);
+      setTotal(ordenData.total);
+      const orderNum = Math.floor(Math.random() * 900000) + 100000; // Example of generating a random order number
+      setOrderNumber(orderNum);
+    }
   }, []);
+  useEffect(() => {
+    if (orderNumber && usuario) {
+      enviarCorreo();
+    }
+  }, [orderNumber, usuario]);
+  const handlePayment = () => {
+    setPaymentSuccess(true);
+  };
 
   useEffect(() => {
     handlePayment();
   }, []);
 
-  const handlePayment = () => {
-    setPaymentSuccess(true);
-  };
-
-  const [redirect, setRedirect] = useState(false);
-
-  const handleBuyButtonClick = () => {
+  const handleContinueShoppingClick = () => {
+    clearCart();
     setRedirect(true);
-  };
-
-  const generateRandomOrderNumber = () => {
-    return Math.floor(Math.random() * 900000) + 100000;
   };
 
   if (redirect) {
     return <Navigate to="/tienda" />;
   }
-  const handleContinueShoppingClick = () => {
-    clearCart();
-    setRedirect(true);
-  };
 
   const enviarCorreo = () => {
     const logoUrl =
@@ -282,9 +273,7 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
                     <p className="pagopage-factura-datos"></p>
                   </div>
                 ))}
-              <button className="boton-enviar" onClick={enviarCorreo}>
-                Enviar Comprobante
-              </button>
+
               <p className="pagopage-gracias">
                 En breve nos pondremos en contacto con usted
               </p>

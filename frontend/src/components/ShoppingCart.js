@@ -108,12 +108,26 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     }
   };
 
-  const handleBuyButtonClick = () => {
-    var orden = calculateTotalPrice();
-    setOrden(orden);
-    console.log(orden);
-    comprar();
-    setRedirect(true);
+  const handleBuyButtonClick = async () => {
+    try {
+      // Calcula y establece la orden
+      var orden = calculateTotalPrice();
+      orden.ord_productos = cart;
+      orden.ord_usuario = usuario;
+      orden.ord_fecha = new Date();
+      
+      console.log(orden);
+      
+      setOrden(orden);
+  
+      const response = await comprar(orden);
+      
+      guardarOrdenEnLocalStorage(orden);
+      
+      setRedirect(true);
+    } catch (error) {
+      console.error("Error en el proceso de compra:", error);
+    }
   };
 
   const comprar = async () => {
@@ -124,10 +138,21 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     console.log(orden);
     setOrden(orden);
     const response = await createOrder(orden);
+    return response
   };
 
+  const guardarOrdenEnLocalStorage = (orden) => {
+    try {
+      const ordenEnString = JSON.stringify(orden);
+      localStorage.setItem("ordenActual", ordenEnString);
+    } catch (error) {
+      console.error("Error al guardar la orden en localStorage:", error);
+      
+      alert("No se pudo guardar la orden. Por favor, intenta de nuevo.");
+    }
+  };
   if (redirect) {
-    return <Navigate to="/pago" />;
+    window.location.href = "/pago";
   }
 
   const handleDeleteFromCart = (product) => {
