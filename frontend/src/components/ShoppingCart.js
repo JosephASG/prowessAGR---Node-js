@@ -110,7 +110,6 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
 
   const handleBuyButtonClick = async () => {
     try {
-      // Calcula y establece la orden
       var orden = calculateTotalPrice();
       orden.ord_productos = cart;
       orden.ord_usuario = usuario;
