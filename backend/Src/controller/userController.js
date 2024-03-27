@@ -475,7 +475,7 @@ const updatePasswordWithRecoveryCode = async (req, res) => {
   if (!email || !code || !newPassword) {
     return res
       .status(400)
-      .json({ message: "Información faltante para actualizar la contraseña." });
+      .json({ message: "Falta información." });
   }
 
   try {

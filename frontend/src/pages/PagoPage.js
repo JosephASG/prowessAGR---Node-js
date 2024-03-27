@@ -6,7 +6,7 @@ import whatsapp from "../imagenes/whatsapp.png";
 import { checkToken } from "../services/auth";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { sendMail } from '../services/mailer';
+import { sendMail } from "../services/mailer";
 
 function PagoPage({ cart, vendor, clearCart, orden }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
@@ -109,15 +109,13 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
     const tableData = cart.map((product) => {
       const precio = +product.pro_precio;
 
-      // Verifica si precio es NaN para manejar casos donde pro_precio no es un número válido.
       if (isNaN(precio)) {
         console.error("El precio no es un número válido:", product.pro_precio);
-        // Aquí puedes decidir cómo manejar este caso. Por ejemplo, podrías lanzar un error,
-        // retornar un valor específico que indique el problema, o simplemente saltarte este producto.
-        return null; // Por ejemplo, retornar null para este producto.
-      }// Si el precio no está definido, asignar 0
+
+        return null;
+      }
       return [
-        { content: product.pro_nombre, styles: { fillColor: [173, 216, 230] } }, // Establecer el color azul solo para la descripción
+        { content: product.pro_nombre, styles: { fillColor: [173, 216, 230] } },
         `${product.cantidad} ${product.pro_medida}`,
         `$${precio.toFixed(2)}`,
         `$${(precio * product.cantidad + 3).toFixed(2)}`,
@@ -184,14 +182,13 @@ function PagoPage({ cart, vendor, clearCart, orden }) {
       ],
     };
 
-  
     sendMail(emailData)
-    .then((data) => {
-      console.log("Correo enviado exitosamente:", data);
-    })
-    .catch((error) => {
-      console.error("Error al enviar el correo:", error);
-    });
+      .then((data) => {
+        console.log("Correo enviado exitosamente:", data);
+      })
+      .catch((error) => {
+        console.error("Error al enviar el correo:", error);
+      });
   };
 
   const handleShareButtonClick = () => {
