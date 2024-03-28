@@ -141,6 +141,7 @@ function Register() {
       setIsCedulaValid(true);
     }
   };
+  
   const checkPasswordStrength = (password) => {
     // Evaluar la longitud de la contraseña
     if (password.length < 6) {

@@ -1,17 +1,20 @@
-// Importaciones
-import React from 'react';
+import React from "react";
+import "./ModalPassword.css";
 
-// Declaración de componente
-const ModalPassword = ({ children }) => {
+const ModalPassword = ({ children, handleCancelModal }) => {
   return (
-    <article className="modal-isOpen">
-      <div className="modalContainer">
-        <button className="modal-close">X</button>
+    <article className="modalPassword">
+      <div className="modalPasswordContainer">
+        <button
+          className="modalPasswordClose"
+          onClick={() => handleCancelModal()}
+        >
+          X
+        </button>
         {children}
       </div>
     </article>
   );
 };
 
-// Exportación del componente
 export default ModalPassword;
