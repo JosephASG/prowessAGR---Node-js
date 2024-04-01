@@ -458,6 +458,7 @@ const recoverAccountByCedula = async (req, res) => {
       } else {
         res.json({
           message: "Correo de recuperación de cuenta enviado con éxito",
+          email: userEmail
         });
       }
     });

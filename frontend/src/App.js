@@ -11,7 +11,7 @@ import ShoppingCartPage from "./components/ShoppingCartPage";
 import VendorsPage from "./pages/VendorsPage";
 import MyAccountPage from "./pages/MyAccountPage";
 import ProductList from "./pages/ProductList";
-import AboutUs from "./pages/AboutUs";
+import AboutUs from "./pages/AboutUs/AboutUs.js";
 import Footer from "./components/Footer";
 import CategoriesPage from "./pages/CategoriesPage";
 import SaleDetailsPage from "./pages/SaleDetailsPage";
@@ -172,7 +172,7 @@ function App() {
             />
           }
         />
-        <Route path="/nosotros" element={<AboutUs />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route
           path="/mi-cuenta"
           element={
