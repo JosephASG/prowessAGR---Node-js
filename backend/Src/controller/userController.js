@@ -456,7 +456,7 @@ const recoverAccountByCedula = async (req, res) => {
           message: "Error al enviar el correo de recuperación de cuenta",
         });
       } else {
-        res.json({
+        res.status(200).json({
           message: "Correo de recuperación de cuenta enviado con éxito",
           email: userEmail
         });
