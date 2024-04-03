@@ -142,7 +142,9 @@ function MyAccountPage({ setIsLoggedIn, setRole }) {
     fileInputRef.current.click();
   };
   return (
-    <Container className="d-flex justify-content-center align-items-center">
+    <Container 
+    style={{marginTop: "8%"}}
+    className="d-flex justify-content-center align-items-center">
       <Card
         style={{ width: "100%", maxWidth: "800px" }}
         className="shadow-lg my-3"

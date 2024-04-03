@@ -1,0 +1,8 @@
+.text-custom-header {
+    color: white;
+}
+
+.navbar-toggler-icon[aria-expanded="true"] {
+    background-color: white !important;
+}
+
