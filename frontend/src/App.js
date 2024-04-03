@@ -1,7 +1,7 @@
 //Actualizacon en el hostinger 2024/3/21
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import NavigationBar from "./components/NavigationBar";
+import {NavigationBar} from "./components/Header";
 import Login from "./pages/Login";
 import Register from "./pages/Register.js";
 import HomePage from "./pages/HomePage";
