@@ -1,0 +1,23 @@
+.button-custom-account {
+    background-color: #008238;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button-custom-account:hover {
+    background-color: #003817;
+}
+
+.text-custom-account {
+    color: black;
+    text-shadow: none;
+}
+
+.text-custom-account-header-card{
+    color: black;
+    text-shadow: none;
+    font-size: 1.4rem;
+}
