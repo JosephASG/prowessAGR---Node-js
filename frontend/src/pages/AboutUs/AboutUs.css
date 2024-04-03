@@ -40,9 +40,7 @@
   color: white;
 }
 .about-section {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto;
+  
   text-align: center;
   gap: 25px;
   border-radius: 5px;
@@ -58,6 +56,13 @@
   ); /* Color de fondo con transparencia */
   border: 2px solid orange;
   color: white;
+}
+
+.about-section .col-md-6 {
+  display: inline-block; /* Cambiar el display a inline-block */
+  width: calc(40% - 12.5px); /* Establecer el ancho de cada columna */
+  margin-right: 125px; /* Añadir margen derecho para separar las columnas */
+  vertical-align: top; /* Alinear las columnas en la parte superior */
 }
 
 .objetives {
@@ -147,14 +152,14 @@
 
 .about-image-vision {
 
-max-width: 65%;
-border: 2px solid rgb(0, 0, 0);
-border-radius: 5px;
+  max-width: 50%; /* Ajusta el ancho máximo al 50% del contenedor */
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
 }
 
 .about-image-mision {
 
-  max-width: 85%;
+  max-width: 50%; /* Ajusta el ancho máximo al 50% del contenedor */
   border: 2px solid rgb(0, 0, 0);
   border-radius: 5px;
 }

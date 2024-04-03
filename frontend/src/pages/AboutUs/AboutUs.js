@@ -32,12 +32,12 @@ function AboutUs() {
         <Col md={6}>
           <h2>Misión</h2>
           <p>Ayudar al crecimiento económico y productivo de los agricultores, siendo Prowess Agrícola un intermediario directo con buena capacidad de negociación y desarrollo de estrategias de comercialización, el mismo que se encargará de la distribución de los productos, en buenas condiciones sin perder su calidad al momento de ser trasladados.</p>
-          <Image src={mision} alt="Imagen Misión" fluid />
+          <Image src={mision} alt="Imagen Misión" fluid className='about-image-mision'/>
         </Col>
         <Col md={6}>
           <h2>Visión</h2>
           <p>Al 2024 ser una plataforma estable y ser considerados por nuestros benefactores como una opción viable para comercializar sus productos a todo el país.</p>
-          <Image src={vision} alt="Imagen Visión" fluid />
+          <Image src={vision} alt="Imagen Visión" fluid className='about-image-vision'/>
         </Col>
       </Row>
 
