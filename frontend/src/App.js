@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Footer, Header } from "./components/General";
 import Login from "./pages/Login";
 import Register from "./pages/Register.js";
-import HomePage from "./pages/HomePage";
+import { Home } from "./pages/Home";
 import StorePage from "./pages/StorePage";
 import ShoppingCart from "./components/ShoppingCart";
 import ShoppingCartPage from "./components/ShoppingCartPage";
@@ -111,7 +111,7 @@ function App() {
         orden={orden}
       />
       <Routes>
-        <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
+        <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route path="/advertismenet" element={<Advertisement />} />
         <Route
           path="/pago"

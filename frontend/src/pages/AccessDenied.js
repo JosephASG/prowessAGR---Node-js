@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './HomePage.css';
 import image1 from '../imagenes/denegado.png'
 function HomePage() {
   const images = [
