@@ -1,29 +1,29 @@
 .advertisement-section-anuncios {
-    margin-top: 30px; /* Ajustar según sea necesario */
+    margin-top: 30px;
   }
   
   .image-pair-anuncios {
-    margin-bottom: 20px; /* Espacio entre cada par de imágenes */
+    margin-bottom: 20px;
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Mostrar 2 imágenes por fila */
-    grid-gap: 20px; /* Espacio entre las imágenes */
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 20px;
   }
   
   .advertisement-image-anuncios {
-    max-width: 100%; /* Cambia el tamaño de las imágenes aquí */
+    max-width: 100%;
     height: auto;
-    border: 2px solid black; /* Añadir borde según sea necesario */
-    border-radius: 5px; /* Añadir borde redondeado según sea necesario */
+    border: 2px;
+    border-radius: 5px;
   }
   
   h1 {
-    color: rgb(255, 255, 255); /* Color del texto del encabezado */
-    text-align: center; /* Alinear texto al centro */
+    color: rgb(255, 255, 255);
+    text-align: center;
   }
   
   .p-anuncios {
-    color: rgb(255, 255, 255); /* Color del texto del párrafo */
-    text-align: center; /* Alinear texto al centro */
+    color: rgb(255, 255, 255);
+    text-align: center;
   }
   
   
