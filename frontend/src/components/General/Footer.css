@@ -1,0 +1,14 @@
+.footer{
+    background-color: rgba(22, 201, 22, 0.6);
+}
+
+.footer a {
+    text-decoration: none; /* Elimina el subrayado */
+    color: white;
+  }
+
+  .footer-content{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }

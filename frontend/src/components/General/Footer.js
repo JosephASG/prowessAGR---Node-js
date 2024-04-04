@@ -1,14 +1,18 @@
 import React from "react";
 import { facebook, instagram, mundo, tiktok, whatsapp } from "./index";
 import { Container, Row, Col } from "react-bootstrap";
+import "./Footer.css";
 
 function Footer() {
   return (
-    <footer className="footer" style={{ backgroundColor: "white" }}>
+    <footer className="footer">
       <Container>
         <Row className="justify-content-center">
           <Col md={12}>
-            <div className="footer-title text-center" style={{ marginTop: "20px" }}>
+            <div
+              className="footer-title text-center"
+              style={{ marginTop: "20px" }}
+            >
               <p>¡Visita nuestras redes sociales para más información! </p>
             </div>
             <div className="footer-content">
@@ -22,7 +26,11 @@ function Footer() {
                     <img
                       src={facebook}
                       alt="Facebook"
-                      style={{ maxWidth: "20px", maxHeight: "20px", filter: "brightness(0) invert(1)" }}
+                      style={{
+                        maxWidth: "20px",
+                        maxHeight: "20px",
+                        filter: "brightness(0) invert(1)",
+                      }}
                     />
                     <p className="mb-1">Facebook</p>
                   </a>
@@ -36,7 +44,11 @@ function Footer() {
                     <img
                       src={instagram}
                       alt="Instagram"
-                      style={{ maxWidth: "20px", maxHeight: "20px", filter: "brightness(0) invert(1)" }}
+                      style={{
+                        maxWidth: "20px",
+                        maxHeight: "20px",
+                        filter: "brightness(0) invert(1)",
+                      }}
                     />
                     <p className="mb-1">Instagram</p>
                   </a>
@@ -50,7 +62,10 @@ function Footer() {
                     <img
                       src={mundo}
                       alt="Mundo"
-                      style={{ maxWidth: "20px", maxHeight: "20px", filter: "brightness(0) invert(1)" }}
+                      style={{
+                        maxWidth: "20px",
+                        maxHeight: "20px",
+                      }}
                     />
                     <p className="mb-1">ProwessEc</p>
                   </a>
@@ -64,7 +79,11 @@ function Footer() {
                     <img
                       src={tiktok}
                       alt="Tiktok"
-                      style={{ maxWidth: "20px", maxHeight: "20px", filter: "brightness(0) invert(1)" }}
+                      style={{
+                        maxWidth: "20px",
+                        maxHeight: "20px",
+                        filter: "brightness(0) invert(1)",
+                      }}
                     />
                     <p className="mb-1">TikTok</p>
                   </a>
@@ -78,7 +97,11 @@ function Footer() {
                     <img
                       src={whatsapp}
                       alt="Whatsapp"
-                      style={{ maxWidth: "20px", maxHeight: "20px", filter: "brightness(0) invert(1)" }}
+                      style={{
+                        maxWidth: "20px",
+                        maxHeight: "20px",
+                        filter: "brightness(0) invert(1)",
+                      }}
                     />
                     <p className="mb-1">WhatsApp</p>
                   </a>
