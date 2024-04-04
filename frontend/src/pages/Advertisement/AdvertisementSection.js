@@ -16,7 +16,7 @@ function AdvertisementSection() {
         </div>
       </center>
       <Row className="advertisement-section-anuncios">
-        <Col md={6}>
+        <Col md={12}>
           <Row className="image-pair-anuncios">
             <Col>
               <img
@@ -34,7 +34,7 @@ function AdvertisementSection() {
             </Col>
           </Row>
         </Col>
-        <Col md={6}>
+        <Col md={12}>
           <Row className="image-pair-anuncios">
             <Col>
               <img

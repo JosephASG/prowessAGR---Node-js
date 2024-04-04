@@ -1,30 +1,42 @@
 .advertisement-section-anuncios {
-    margin-top: 30px;
+    margin-top: 30px; /* Ajustar según sea necesario */
   }
   
-  .image-pair-anuncios {
+.image-pair-anuncios {
     margin-bottom: 20px;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 20px;
-  }
+    grid-template-columns: repeat(1, 1fr); /* Mostrar 2 imágenes por fila */
+    grid-gap: 20px; /* Espacio entre las imágenes */
+    justify-content: center;
+}
   
-  .advertisement-image-anuncios {
-    max-width: 100%;
+.advertisement-image-anuncios {
+    max-width: 100%; /* Cambia el tamaño de las imágenes aquí */
     height: auto;
-    border: 2px;
-    border-radius: 5px;
-  }
+    border: 0px solid rgb(255, 255, 255); /* Añadir borde según sea necesario */
+    border-radius: 5px; /* Añadir borde redondeado según sea necesario */
+}
   
   h1 {
-    color: rgb(255, 255, 255);
-    text-align: center;
+    color: rgb(255, 255, 255); /* Color del texto del encabezado */
+    text-align: center; /* Alinear texto al centro */
   }
   
   .p-anuncios {
-    color: rgb(255, 255, 255);
-    text-align: center;
+    color: rgb(255, 255, 255); /* Color del texto del párrafo */
+    text-align: center; /* Alinear texto al centro */
   }
   
   
-  
+@media (max-width: 767px) {
+    .image-pair-anuncios {
+      grid-template-columns: repeat(1, 1fr); /* Cambiar a 1 imagen por fila en dispositivos más pequeños */
+    }
+
+    .image-pair-anuncios > .col {
+        flex: 0 0 80%; /* Establece el ancho de cada columna al 50% */
+        width: 50%; /* Establece el ancho máximo de cada columna al 50% */
+        height: auto; /* Ajusta la altura automáticamente */
+        margin-bottom: 10px; /* Espacio entre cada par de imágenes */
+      }
+}
