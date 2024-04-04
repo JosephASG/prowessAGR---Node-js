@@ -1,7 +1,7 @@
 //Actualizacon en el hostinger 2024/3/21
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import {NavigationBar} from "./components/Header";
+import { Footer, Header } from "./components/General";
 import Login from "./pages/Login";
 import Register from "./pages/Register.js";
 import HomePage from "./pages/HomePage";
@@ -9,10 +9,9 @@ import StorePage from "./pages/StorePage";
 import ShoppingCart from "./components/ShoppingCart";
 import ShoppingCartPage from "./components/ShoppingCartPage";
 import VendorsPage from "./pages/VendorsPage";
-import {MyAccountPage} from "./pages/Account/";
+import { MyAccountPage } from "./pages/Account/";
 import ProductList from "./pages/ProductList";
 import AboutUs from "./pages/AboutUs/AboutUs.js";
-import Footer from "./components/Footer";
 import CategoriesPage from "./pages/CategoriesPage";
 import SaleDetailsPage from "./pages/SaleDetailsPage";
 import SalesPage from "./pages/SalesPage";
@@ -20,7 +19,7 @@ import { getTokenData } from "./services/auth";
 import PrivateRoute from "./routes/PrivateRoute";
 import UserList from "./pages/UserList";
 import AccessDenied from "./pages/AccessDenied";
-import AdvertisementSection from "./pages/AdvertisementSection";
+import { Advertisement } from "./pages/Advertisement";
 import PagoPage from "./pages/PagoPage";
 import TermsConditions from "./pages/TermsConditions";
 import PasswordReset from "./pages/PasswordReset";
@@ -105,7 +104,7 @@ function App() {
 
   return (
     <Router>
-      <NavigationBar
+      <Header
         isLoggedIn={isLoggedIn}
         role={role}
         cart={cart}
@@ -113,7 +112,7 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
-        <Route path="/Anuncios" element={<AdvertisementSection />} />
+        <Route path="/advertismenet" element={<Advertisement />} />
         <Route
           path="/pago"
           element={

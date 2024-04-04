@@ -22,13 +22,7 @@
 
 .text-center {
   color: white;
-  text-shadow: -1px -1px 0 greenyellow,
-    /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
-      0 orange,
-    /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
-      orange,
-    /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px
-      0 orange;
+
 }
 
 .sidebar h2 {

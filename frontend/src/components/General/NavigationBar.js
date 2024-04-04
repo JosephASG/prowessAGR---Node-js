@@ -66,6 +66,13 @@ function NavigationBar(props) {
               >
                 Vinculacion
               </Nav.Link>
+              <Nav.Link
+                as={Link}
+                style={{ color: "white" }}
+                to="/advertismenet"
+              >
+                Anuncios
+              </Nav.Link>
               {props.role === "vendedor" && (
                 <>
                   <Nav.Link
