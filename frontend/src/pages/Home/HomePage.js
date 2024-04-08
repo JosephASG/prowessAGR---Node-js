@@ -46,7 +46,7 @@ function HomePage(props) {
         <Card.Body>
           <Row>
             <Col md={6} className="d-flex flex-column justify-content-center">
-              <h3>Prowess Agrícola</h3>
+              <h3 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>Prowess Agrícola</h3>
               <p>
                 Descubre nuestra selección de productos agrícolas, cultivados
                 con esmero y dedicación para ofrecerte lo mejor de la
@@ -90,7 +90,7 @@ function HomePage(props) {
 
       <Row className="mb-4">
         <Col>
-          <h1 className="text-center" style={{textShadow: "none", color:"white"}}>
+          <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>
             COMPRA Y VENTA DE LOS MEJORES PRODUCTOS DEL PAÍS
           </h1>
         </Col>

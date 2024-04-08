@@ -42,7 +42,7 @@
     166,
     0.3
   ); /* Color de fondo con transparencia */
-  border: 2px solid orange;
+  border: 2px solid rgb(3, 90, 6);
   color: white;
 }
 

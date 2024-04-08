@@ -127,12 +127,12 @@ function StorePage() {
 
       <Row>
         <Col xs={12}>
-          <h1 className="text-center mt-4 mb-4">TIENDA DE PRODUCTOS</h1>
+          <h1 className="text-center mt-4 mb-4" style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>TIENDA DE PRODUCTOS</h1>
         </Col>
       </Row>
       <Row>
         <Col xs={12} md={3} style={{ marginBottom: "20px" }}>
-          <h2 style={{ color: "white" }}>Categorías</h2>
+          <h2 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>Categorías</h2>
           <ul className="list-group">
             {categories.map((category, index) => (
               <li
