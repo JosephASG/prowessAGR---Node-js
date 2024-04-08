@@ -8,13 +8,7 @@
 
 .AboutUsInfo h1 {
   color: white;
-  text-shadow: -1px -1px 0 greenyellow,
-    /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
-      0 orange,
-    /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
-      orange,
-    /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px
-      0 orange;
+  text-shadow: none;
     margin-top: -20px;
     margin-bottom: -4px;
 }
@@ -25,13 +19,7 @@
 }
 
 .AboutUsInfo h2 {
-  text-shadow: -1px -1px 0 #000,
-    /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
-      0 #000,
-    /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
-      #000,
-    /* Sombra en la esquina inferior izquierda (x, y, tamaño, color) */ 1px 1px
-      0 #000;
+  text-shadow: none;
 }
 
 .AboutUsInfo p {
@@ -54,7 +42,7 @@
     166,
     0.3
   ); /* Color de fondo con transparencia */
-  border: 2px solid orange;
+  border: 2px solid rgb(3, 90, 6);
   color: white;
 }
 
