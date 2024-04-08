@@ -11,6 +11,7 @@ import logo from "imagenes/prowess-logo1.png";
 import "./NavigationBar.css";
 function NavigationBar(props) {
   const [scrolled, setScrolled] = useState(false);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,6 +25,25 @@ function NavigationBar(props) {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === "cart") {
+        setCart(JSON.parse(event.newValue) || []);
+      }
+    };
+  
+    window.addEventListener("storage", handleStorageChange);
+  
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+  
+  useEffect(() => {
+    const loadedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(loadedCart);
+  }, [setCart]);
 
   return (
     <Container>
@@ -120,7 +140,7 @@ function NavigationBar(props) {
                   Tienda
                 </Nav.Link>
               )}
-              {props.cart.length > 0 ? (
+              {cart.length > 0 ? (
                 <Nav.Link
                   as={Link}
                   to="/carrito"
@@ -130,9 +150,9 @@ function NavigationBar(props) {
                     icon={faShoppingCart}
                     style={{ color: "white" }}
                   />
-                  {props.cart.length > 0 ? (
+                  {cart.length > 0 ? (
                     <Badge pill bg="danger" className="cart-badge-position">
-                      {props.cart.length}
+                      {cart.length}
                     </Badge>
                   ) : null}
                 </Nav.Link>

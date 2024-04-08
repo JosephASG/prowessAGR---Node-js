@@ -1,108 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { getProductsFromApi } from '../services/product';
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { getProductsFromApi } from "../services/product";
+import { Carousel, Container, Row, Col, Button, Card } from "react-bootstrap";
 
-import './StorePage.css';
-import SearchBar from '../components/SearchBar';
+import SearchBar from "../components/SearchBar";
 
-function StorePage({ cart, addToCart, removeFromCart }) {
-
-
+function StorePage() {
   const [products, setProducts] = useState([]);
-  const [sortOption, setSortOption] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterProduct, setFilterProduct] = useState('');
-  const [sortCriteria, setSortCriteria] = useState(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categories, setCategories] = useState([]);
-
-  const WEBURL = process.env.REACT_APP_API_URL
-  const productsPerPage = 10;
-
-  let sortedAndFilteredProducts = [...products];
-
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-  const currentProducts = sortedAndFilteredProducts.slice(startIndex, endIndex);
-
-  const totalPages = Math.ceil(sortedAndFilteredProducts.length / productsPerPage);
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
+  const productsPerPage = 20;
 
   useEffect(() => {
     getProductos();
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   const getProductos = async () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     try {
       const res = await getProductsFromApi(token);
       if (res.data) {
         const data = res.data;
         setProducts(data);
 
-        if (Array.isArray(data) && data.length > 0 && data[0].pro_categoria) {
-          const uniqueCategories = Array.from(new Set(data.map((product) => product.pro_categoria)));
-          setCategories(uniqueCategories);
-        } else {
-        }
-      } else {
+        const uniqueCategories = Array.from(
+          new Set(data.map((product) => product.pro_categoria))
+        );
+        setCategories(uniqueCategories);
       }
     } catch (error) {
+      console.error("Error fetching products", error);
     }
   };
 
-  const toggleCategory = (category) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter((c) => c !== category));
-    } else {
-      setSelectedCategories([...selectedCategories, category]);
-    }
-  };
-
-  const showProductDetails = (productId) => {
-    const product = products.find((p) => p.id === productId);
-    if (product) {
-      console.log(`Detalles del producto ${productId}:`, product);
-    }
-  };
-
-
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
-  };
-
-  useEffect(() => {
-    const filteredProducts = products.filter((product) =>
-    product.pro_nombre && product.pro_nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
-  
-    if (searchTerm === '') {
-      setProducts(products);
-    } else if (!arraysAreEqual(filteredProducts, products)) {
-      setProducts(filteredProducts);
-    } else {
-      getProductos();
-      setProducts(products);
-    }
-  }, [searchTerm, products]);
-  
-  
-
-
-  const arraysAreEqual = (arr1, arr2) => {
-    if (arr1.length !== arr2.length) {
-      return false;
-    }
-
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false;
+  const addToCart = (productToAdd) => {
+    setCart((prevCart) => {
+      const isProductInCart = prevCart.find(
+        (product) => product.id === productToAdd.id
+      );
+      if (!isProductInCart) {
+        const updatedCart = [...prevCart, productToAdd];
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        return updatedCart;
       }
-    }
+      return prevCart;
+    });
+  };
 
-    return true;
+  const removeFromCart = (productId) => {
+    setCart((prevCart) => {
+      const updatedCart = prevCart.filter(
+        (product) => product.id !== productId
+      );
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      return updatedCart;
+    });
   };
 
   const handleSearch = (event) => {
@@ -113,93 +75,132 @@ function StorePage({ cart, addToCart, removeFromCart }) {
     setCurrentPage(pageNumber);
   };
 
-  if (sortCriteria) {
-    sortedAndFilteredProducts.sort((a, b) =>
-      a[sortCriteria] > b[sortCriteria] ? 1 : -1
+  const toggleCategory = (category) => {
+    setSelectedCategories((prevSelectedCategories) => {
+      if (prevSelectedCategories.includes(category)) {
+        return prevSelectedCategories.filter((c) => c !== category);
+      } else {
+        return [...prevSelectedCategories, category];
+      }
+    });
+  };
+
+
+  let filteredProducts = products.filter(
+    (product) =>
+      selectedCategories.length === 0 ||
+      selectedCategories.includes(product.pro_categoria)
+  );
+
+  if (searchTerm) {
+    filteredProducts = filteredProducts.filter((product) =>
+      product.pro_nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }
 
-  if (filterProduct) {
-    sortedAndFilteredProducts = sortedAndFilteredProducts.filter(
-      (product) =>
-        product.pro_nombre.toLowerCase().includes(filterProduct.toLowerCase())
-    );
-  }
-
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   return (
-    <div className="store-page">
-      <h1 className="text-center">TIENDA DE PRODUCTOS</h1>
-      <SearchBar
-        searchTerm={searchTerm}
-        sortOption={sortOption}
-        handleSearch={handleSearch}
-        handleSortChange={handleSortChange}
-        showPriceOption={true}
-        showCategoryOption={true}
-      />
-      <br/>
-
-      <div className="product-list">
-        <div className="product-list-header">
-          <div className="sidebar">
-            <h2>Categorías</h2>
-            <ul>
-              {categories.map((category) => (
-                <li
-                  key={category}
-                  className={selectedCategories.includes(category) ? 'selected' : ''}
-                  onClick={() => toggleCategory(category)}
-                >
-                  {category}
-                </li>
-              ))}
-            </ul>
+    <Container fluid="lg" style={{ marginTop: "20px", marginBottom: "40px" }}>
+      <Row>
+        <Col xs={12}>
+          <h1 className="text-center mt-4 mb-4">TIENDA DE PRODUCTOS</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} md={3} style={{ marginBottom: "20px" }}>
+          <h2 style={{color:"white"}}>Categorías</h2>
+          <ul className="list-group">
+            {categories.map((category, index) => (
+              <li
+                key={index}
+                className={`list-group-item ${
+                  selectedCategories.includes(category) ? "active" : ""
+                }`}
+                onClick={() => toggleCategory(category)}
+                style={{ cursor: "pointer" }}
+              >
+                {category}
+              </li>
+            ))}
+          </ul>
+        </Col>
+        <Col xs={12} md={9}>
+          <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
+          <Row xs={2} md={3} lg={4} className="g-4 mt-3">
+            {currentProducts.map((product) => (
+              <Col key={product.id}>
+                <Card>
+                  <Card.Img
+                    variant="top"
+                    src={product.pro_imagen}
+                    alt={product.pro_nombre}
+                    style={{ height: "200px", objectFit: "cover" }}
+                  />
+                  <Card.Body>
+                    <Card.Title style={{ color: "black" }}>
+                      {product.pro_nombre}
+                    </Card.Title>
+                    <Card.Text style={{ color: "black", textShadow:"none" }}>
+                      {product.pro_descripcion && (
+                        <>
+                          {product.pro_descripcion}
+                          <br />
+                        </>
+                      )}
+                      {product.pro_categoria && (
+                        <>
+                          <b style={{textShadow:"none"}}>Categoría:</b> {product.pro_categoria}
+                          <br />
+                        </>
+                      )}
+                      {product.pro_precio && (
+                        <>
+                          <b style={{textShadow:"none"}} >Precio:</b> ${product.pro_precio}
+                          <br />
+                        </>
+                      )}
+                      {product.pro_fechaFinal && (
+                        <>
+                          <b style={{textShadow:"none"}}>Disponible hasta:</b> {product.pro_fechaFinal}
+                        </>
+                      )}
+                    </Card.Text>
+                    <Button
+                      variant="success"
+                      onClick={() => addToCart(product)}
+                    >
+                      Agregar al carrito{" "}
+                      <FontAwesomeIcon icon={faCartShopping} />
+                    </Button>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+          <div className="d-flex justify-content-center my-4">
+            <Button
+              variant="outline-primary"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              style={{ marginRight: "10px" }}
+            >
+              Anterior
+            </Button>
+            <Button
+              variant="outline-primary"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Siguiente
+            </Button>
           </div>
-        </div>
-        <div className="products-container">
-  {currentProducts
-    .filter((product) =>
-      selectedCategories.length === 0 || selectedCategories.includes(product.pro_categoria)
-    )
-    .map((product) => (
-      <div key={product.id} className="product-card">
-        <h3>{product.pro_nombre}</h3>
-        <img src={product.pro_imagen} alt={product.pro_name} className="product-image" />
-        <p><b>Información:</b> {product.pro_descripcion}</p>
-        <p><b>Categoría:</b> {product.pro_categoria}</p>
-        <p><b>Peso del producto:</b> {product.pro_stock + ' ' + product.pro_medida}</p>
-        <p><b>Precio:</b> ${product.pro_precio}</p>
-        <p className="disponible-hasta"><b>Disponible hasta:</b> {product.pro_fechaFinal}</p>
-        <div className="product-actions">
-          <button onClick={() => addToCart(product)}>
-            Agregar al carrito
-            <FontAwesomeIcon className="fa-ican-cartshopping" icon={faCartShopping} />
-          </button>
-          <span className="product-info-icon" onClick={() => showProductDetails(product.id)}>
-          </span>
-        </div>
-      </div>
-    ))}
-</div>
-      </div>
-      <div className="pagination">
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Anterior
-        </button>
-        <span>{currentPage}</span>
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Siguiente
-        </button>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 }
-
 export default StorePage;
