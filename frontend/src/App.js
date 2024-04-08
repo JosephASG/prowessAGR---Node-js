@@ -28,10 +28,8 @@ import AccountReset from "./pages/AccountReset";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [cart, setCart] = useState([]);
   const [token, setToken] = useState(null);
   const [role, setRole] = useState("default");
-  const [total, setTotal] = useState(0);
   const [orden, setOrden] = useState([]);
 
   useEffect(() => {
@@ -47,21 +45,6 @@ function App() {
     }
   }, [token]);
 
-  useEffect(() => {
-    const calculateTotal = () => {
-      if (!cart) {
-        return 0;
-      }
-      const totalAmount = cart.reduce(
-        (sum, product) => sum + product.pro_precio * product.cantidad,
-        0
-      );
-      setTotal(totalAmount);
-    };
-
-    calculateTotal();
-  }, [cart]);
-
   const checkAuth = async (token) => {
     let response = await getTokenData(token);
     if (response && response.data) {
@@ -74,93 +57,25 @@ function App() {
     }
   };
 
-  const addToCart = (product, vendorWhatsApp) => {
-    const existingProductIndex = cart.findIndex(
-      (item) => item.id === product.id
-    );
-    if (existingProductIndex !== -1) {
-      const updatedCart = [...cart];
-      const existingProduct = updatedCart[existingProductIndex];
-      existingProduct.cantidad += 1;
-      setCart(updatedCart);
-    } else {
-      // Agregar la información del vendedor al producto
-      const productWithVendor = {
-        ...product,
-        cantidad: 1,
-        vendorWhatsApp: vendorWhatsApp,
-      };
-      setCart([...cart, productWithVendor]);
-    }
-  };
-
-  const removeFromCart = (productToRemove) => {
-    const updatedCart = cart.filter((product) => product !== productToRemove);
-    setCart(updatedCart);
-  };
-  const clearCart = () => {
-    setCart([]);
-  };
-
   return (
     <Router>
-      <Header
-        isLoggedIn={isLoggedIn}
-        role={role}
-        cart={cart}
-        orden={orden}
-      />
+      <Header isLoggedIn={isLoggedIn} role={role} orden={orden} />
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route path="/advertismenet" element={<Advertisement />} />
         <Route
           path="/pago"
-          element={
-            <PagoPage
-              clearCart={clearCart}
-              cart={cart}
-              total={total}
-              token={token}
-            />
-          }
+          element={<PagoPage token={token} />}
         />
         <Route path="/recuperar-contrasena" element={<PasswordReset />} />
         <Route path="/recuperar-cuenta" element={<AccountReset />} />
         <Route path="/password-send" element={<PasswordSend />} />
 
-        <Route
-          path="/tienda"
-          element={
-            <StorePage
-              cart={cart}
-              addToCart={addToCart}
-              removeFromCart={removeFromCart}
-            />
-          }
-        />
+        <Route path="/tienda" element={<StorePage />} />
 
-        <Route
-          path="/carrito"
-          element={
-            <ShoppingCart
-              cart={cart}
-              addToCart={addToCart}
-              removeFromCart={removeFromCart}
-              setOrden={setOrden}
-            />
-          }
-        />
+        <Route path="/carrito" element={<ShoppingCart setOrden={setOrden} />} />
 
-        <Route
-          path="/carrito-pagina"
-          element={
-            <ShoppingCartPage
-              cart={cart}
-              addToCart={addToCart}
-              removeFromCart={removeFromCart}
-            />
-          }
-        />
+        <Route path="/carrito-pagina" element={<ShoppingCartPage />} />
         <Route
           path="/vendedores"
           element={

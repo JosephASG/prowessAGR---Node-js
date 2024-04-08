@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { getProductsFromApi } from "../services/product";
-import { Carousel, Container, Row, Col, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, Button, Card } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import SearchBar from "../components/SearchBar";
 
@@ -45,27 +47,44 @@ function StorePage() {
 
   const addToCart = (productToAdd) => {
     setCart((prevCart) => {
-      const isProductInCart = prevCart.find(
+      const productIndex = prevCart.findIndex(
         (product) => product.id === productToAdd.id
       );
-      if (!isProductInCart) {
-        const updatedCart = [...prevCart, productToAdd];
-        localStorage.setItem("cart", JSON.stringify(updatedCart));
-        return updatedCart;
+      let updatedCart;
+      if (productIndex !== -1) {
+        updatedCart = [...prevCart];
+        updatedCart[productIndex].pro_cantidad_cart =
+          (updatedCart[productIndex].pro_cantidad_cart || 0) + 1;
+      } else {
+        const newProduct = {
+          ...productToAdd,
+          pro_cantidad_cart: 1,
+          cart_cantidad: "1"
+        };
+        updatedCart = [...prevCart, newProduct];
       }
-      return prevCart;
-    });
-  };
-
-  const removeFromCart = (productId) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.filter(
-        (product) => product.id !== productId
-      );
+      
       localStorage.setItem("cart", JSON.stringify(updatedCart));
+      window.dispatchEvent(new CustomEvent("cartUpdated"));
+      
+      toast.success(
+        productIndex !== -1 ?
+        `Cantidad actualizada: ${updatedCart[productIndex].pro_nombre} x${updatedCart[productIndex].pro_cantidad_cart} en el carrito!` :
+        `${productToAdd.pro_nombre} agregado al carrito!`,
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
       return updatedCart;
     });
   };
+  
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -84,7 +103,6 @@ function StorePage() {
       }
     });
   };
-
 
   let filteredProducts = products.filter(
     (product) =>
@@ -105,6 +123,8 @@ function StorePage() {
 
   return (
     <Container fluid="lg" style={{ marginTop: "20px", marginBottom: "40px" }}>
+      <ToastContainer />
+
       <Row>
         <Col xs={12}>
           <h1 className="text-center mt-4 mb-4">TIENDA DE PRODUCTOS</h1>
@@ -112,7 +132,7 @@ function StorePage() {
       </Row>
       <Row>
         <Col xs={12} md={3} style={{ marginBottom: "20px" }}>
-          <h2 style={{color:"white"}}>Categorías</h2>
+          <h2 style={{ color: "white" }}>Categorías</h2>
           <ul className="list-group">
             {categories.map((category, index) => (
               <li
@@ -144,7 +164,7 @@ function StorePage() {
                     <Card.Title style={{ color: "black" }}>
                       {product.pro_nombre}
                     </Card.Title>
-                    <Card.Text style={{ color: "black", textShadow:"none" }}>
+                    <Card.Text style={{ color: "black", textShadow: "none" }}>
                       {product.pro_descripcion && (
                         <>
                           {product.pro_descripcion}
@@ -153,19 +173,24 @@ function StorePage() {
                       )}
                       {product.pro_categoria && (
                         <>
-                          <b style={{textShadow:"none"}}>Categoría:</b> {product.pro_categoria}
+                          <b style={{ textShadow: "none" }}>Categoría:</b>{" "}
+                          {product.pro_categoria}
                           <br />
                         </>
                       )}
                       {product.pro_precio && (
                         <>
-                          <b style={{textShadow:"none"}} >Precio:</b> ${product.pro_precio}
+                          <b style={{ textShadow: "none" }}>Precio:</b> $
+                          {product.pro_precio}
                           <br />
                         </>
                       )}
                       {product.pro_fechaFinal && (
                         <>
-                          <b style={{textShadow:"none"}}>Disponible hasta:</b> {product.pro_fechaFinal}
+                          <b style={{ textShadow: "none" }}>
+                            Disponible hasta:
+                          </b>{" "}
+                          {product.pro_fechaFinal}
                         </>
                       )}
                     </Card.Text>

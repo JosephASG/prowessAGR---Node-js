@@ -90,7 +90,7 @@ function HomePage(props) {
 
       <Row className="mb-4">
         <Col>
-          <h1 className="text-center">
+          <h1 className="text-center" style={{textShadow: "none", color:"white"}}>
             COMPRA Y VENTA DE LOS MEJORES PRODUCTOS DEL PAÍS
           </h1>
         </Col>
