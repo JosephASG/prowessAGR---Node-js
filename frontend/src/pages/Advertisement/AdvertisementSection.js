@@ -6,7 +6,7 @@ function AdvertisementSection() {
   return (
     <Container>
       <center>
-        <h1>PROWESS PLANES</h1>
+        <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>PROWESS PLANES</h1>
         <div className="p-anuncios">
           <p>Descubre la Excelencia en Agricultura con Prowess Agrícola</p>
           <p>
