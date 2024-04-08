@@ -75,7 +75,6 @@ function App() {
 
         <Route path="/carrito" element={<ShoppingCart setOrden={setOrden} />} />
 
-        <Route path="/carrito-pagina" element={<ShoppingCartPage />} />
         <Route
           path="/vendedores"
           element={

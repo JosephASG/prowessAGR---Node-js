@@ -19,14 +19,14 @@ function NavigationBar({ role, isLoggedIn }) {
       setCartCount(cart.length);
     };
 
-    updateCartCount();  // Actualizar al cargar el componente
+    updateCartCount();
 
-    const handleCartUpdate = () => updateCartCount();  // Función para actualizar cuando el carrito cambia
+    const handleCartUpdate = () => updateCartCount();
 
-    window.addEventListener("cartUpdated", handleCartUpdate);  // Escuchar el evento personalizado
+    window.addEventListener("cartUpdated", handleCartUpdate);
 
     return () => {
-      window.removeEventListener("cartUpdated", handleCartUpdate);  // Limpiar el listener
+      window.removeEventListener("cartUpdated", handleCartUpdate);
     };
   }, []);
 

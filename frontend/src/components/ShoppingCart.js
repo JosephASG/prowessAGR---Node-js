@@ -6,7 +6,11 @@ import { Navigate } from "react-router-dom";
 import { createOrder } from "../services/order";
 import { checkToken } from "../services/auth";
 
-function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
+function ShoppingCart({ setOrden }) {
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
+  console.log(cart);
   const [cartProducts, setCartProducts] = useState([]);
   const [redirect, setRedirect] = useState(false);
   const [usuario, setUsuario] = useState([]);
@@ -41,12 +45,11 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
 
     if (existingProductIndex !== -1) {
       const existingProduct = updatedCart[existingProductIndex];
-      // Asegúrate de que la cantidad no exceda product.pro_stock
-      if (existingProduct.cantidad < product.pro_stock) {
-        existingProduct.cantidad += 1; // Aumentar la cantidad en 1
+      if (existingProduct.pro_cantidad_cart < product.pro_stock) {
+        existingProduct.pro_cantidad_cart += 1; 
       }
     } else {
-      updatedCart.push({ ...product, cantidad: 1 });
+      updatedCart.push({ ...product, pro_cantidad_cart: 1 });
     }
 
     setCartProducts(updatedCart);
@@ -86,7 +89,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
       inputValue = 1;
     }
 
-    updatedCart[existingProductIndex].cantidad = inputValue;
+    updatedCart[existingProductIndex].pro_cantidad_cart = inputValue;
     setInputQuantity(inputValue);
     setCartProducts(updatedCart);
   };
@@ -98,12 +101,12 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     );
     if (existingProductIndex !== -1) {
       const existingProduct = updatedCart[existingProductIndex];
-      if (existingProduct.cantidad > 1) {
-        existingProduct.cantidad -= 1;
+      if (existingProduct.pro_cantidad_cart > 1) {
+        existingProduct.pro_cantidad_cart -= 1;
       } else {
         updatedCart.splice(existingProductIndex, 1);
       }
-      setInputQuantity(existingProduct.cantidad);
+      setInputQuantity(existingProduct.pro_cantidad_cart);
       setCartProducts(updatedCart);
     }
   };
@@ -114,15 +117,17 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
       orden.ord_productos = cart;
       orden.ord_usuario = usuario;
       orden.ord_fecha = new Date();
-      
+
       console.log(orden);
-      
+
       setOrden(orden);
-  
+
       const response = await comprar(orden);
-      
+
       guardarOrdenEnLocalStorage(orden);
-      
+
+      localStorage.removeItem('cart');
+
       setRedirect(true);
     } catch (error) {
       console.error("Error en el proceso de compra:", error);
@@ -137,7 +142,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     console.log(orden);
     setOrden(orden);
     const response = await createOrder(orden);
-    return response
+    return response;
   };
 
   const guardarOrdenEnLocalStorage = (orden) => {
@@ -146,7 +151,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
       localStorage.setItem("ordenActual", ordenEnString);
     } catch (error) {
       console.error("Error al guardar la orden en localStorage:", error);
-      
+
       alert("No se pudo guardar la orden. Por favor, intenta de nuevo.");
     }
   };
@@ -155,7 +160,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
   }
 
   const handleDeleteFromCart = (product) => {
-    removeFromCart(product);
+    console.log("PruebaRemover");
   };
 
   const calculateTotalPrice = () => {
@@ -168,7 +173,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     }
 
     const subtotal = cart.reduce(
-      (sum, product) => sum + product.pro_precio * product.cantidad,
+      (sum, product) => sum + product.pro_precio * product.pro_cantidad_cart,
       0
     );
 
@@ -183,7 +188,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
     };
   };
   const addedProducts = cart
-    ? cart.filter((product) => product.cantidad > 0)
+    ? cart.filter((product) => product.pro_cantidad_cart > 0)
     : [];
 
   const totalPrice = calculateTotalPrice().total;
@@ -197,7 +202,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
       </div>
       <div className="shopping-cart-info">
         <div className="show-products">
-          {addedProducts.map((product, index) => (
+          {cart.map((product, index) => (
             <div className="producto-cart" key={index}>
               <div className="img-product">
                 <img src={product.pro_imagen} alt={product.pro_nombre} />
@@ -235,7 +240,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
                     max={product.pro_stock}
                     className="cantidad-producto"
                     name="pro_stock"
-                    value={product.cantidad}
+                    value={product.pro_cantidad_cart}
                     onInput={(e) => handleQuantityInput(e, product)}
                     onBlur={(e) => handleQuantityBlur(e, product)}
                   />
@@ -250,7 +255,7 @@ function ShoppingCart({ cart, addToCart, removeFromCart, setOrden }) {
               <div className="price-product">
                 <p>
                   <b>Total:</b> $
-                  {(product.pro_precio * product.cantidad).toFixed(2)}
+                  {(product.pro_precio * product.pro_cantidad_cart).toFixed(2)}
                 </p>
                 <div className="trash-bin-img">
                   <FontAwesomeIcon
