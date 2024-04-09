@@ -122,9 +122,9 @@ const CategoryList = () => {
   return (
      isLoading===false ? (<p>Cargando...</p>):(
       <div className="container-product-list">
-      <h1>LISTA DE CATEGORIAS</h1>
+      <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>LISTA DE CATEGORIAS</h1>
             <div className='btn-add-container'>
-            <button onClick={handleOpenModal} className='btn-add-product'>Agregar Categoría</button>
+            <button onClick={handleOpenModal} className='btn-add-product' style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>Agregar Categoría</button>
           </div>
           <div>
             <ModalAddCategory isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
@@ -135,7 +135,7 @@ const CategoryList = () => {
               handleEdit={handleEdit}
             />
           <div className="filter-row">
-            <label>Filtrar por Categoría:</label>
+            <label style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".3px white", color: "white"}}>Filtrar por Categoría:</label>
             <input
               type="text"
               value={filterCategory}
@@ -144,9 +144,9 @@ const CategoryList = () => {
           </div>
           </div>
           <div className="header-row-category-list">
-            <b onClick={() => handleSort('nombre')}>Nombre</b>
-            <b>Descripción</b>
-            <b>Acciones</b>
+            <b onClick={() => handleSort('nombre')} style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Nombre</b>
+            <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Descripción</b>
+            <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Acciones</b>
           </div>
     
           <div className="container-products">

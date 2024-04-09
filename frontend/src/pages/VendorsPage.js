@@ -155,7 +155,7 @@ function VendorsPage() {
 
   return (
     <div className="vendors-page">
-      <h1>LISTA DE VENDEDORES</h1>
+      <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>LISTA DE VENDEDORES</h1>
       <button
         className="add-vendor-button"
         onClick={() => setShowAddModal(true)}
@@ -164,7 +164,7 @@ function VendorsPage() {
       </button><br/>
 
       <div className="search-bar-vendor">
-      <label>Filtrar por Nombre:</label>
+      <label style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".2px white", color: "white"}}>Filtrar por Nombre:</label>
       <input
         type="text"
         value={searchTerm}

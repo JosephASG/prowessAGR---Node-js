@@ -56,17 +56,17 @@ const UserList = () => {
 
   return (
     <div className="container-user-list">
-      <h1>LISTA DE USUARIOS</h1>
+      <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>LISTA DE USUARIOS</h1>
       <div className="btn-add-container"></div>
       <div className="header-row-user-list">
-        <b>Nombre</b>
-        <b>Direccion</b>
-        <b>Correo</b>
-        <b>Cedula</b>
-        <b>Telefono</b>
-        <b>Tipo</b>
-        <b>Imagen</b>
-        <b>Acciones</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Nombre</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Direccion</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Correo</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Cedula</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Telefono</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Tipo</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Imagen</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Acciones</b>
       </div>
       <div className="container-users">
         {users.map((user) => (

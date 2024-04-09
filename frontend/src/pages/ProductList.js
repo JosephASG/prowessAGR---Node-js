@@ -163,9 +163,9 @@ const ProductList = () => {
 
   return (
     <div className="container-product-list">
-      <h1>LISTA DE PRODUCTOS</h1>
+      <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>LISTA DE PRODUCTOS</h1>
       <div className="btn-add-container">
-        <button onClick={handleOpenModal} className="btn-add-product">
+        <button onClick={handleOpenModal} className="btn-add-product" style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".5px white", color: "white"}}>
           Agregar Producto
         </button>
       </div>
@@ -183,7 +183,7 @@ const ProductList = () => {
           vendedores={vendedores} // Pasa los vendedores aquí
         />
         <div className="filter-row">
-          <label>Filtrar por Producto:</label>
+          <label style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".2px white", color: "white"}}>Filtrar por Producto:</label>
           <input
             type="text"
             value={filterProduct}
@@ -195,53 +195,60 @@ const ProductList = () => {
         <b
           className={sortedColumn === "pro_nombre" ? "sorted" : ""}
           onClick={() => handleSort("pro_nombre")}
-        >
+          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>
           Nombre
         </b>
         <b
           className={sortedColumn === "pro_precio" ? "sorted" : ""}
           onClick={() => handleSort("pro_precio")}
+          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
         >
           Precio
         </b>
         <b
           className={sortedColumn === "pro_stock" ? "sorted" : ""}
           onClick={() => handleSort("pro_stock")}
+          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
         >
           Stock
         </b>
         <b
           className={sortedColumn === "pro_categoria" ? "sorted" : ""}
           onClick={() => handleSort("pro_categoria")}
+          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
         >
           Categoría
         </b>
         <b
           className={sortedColumn === "pro_fechaInicio" ? "sorted" : ""}
           onClick={() => handleSort("pro_fechaInicio")}
+          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
         >
           Ingreso
         </b>
         <b
           className={sortedColumn === "pro_fechaFinal" ? "sorted" : ""}
           onClick={() => handleSort("pro_fechaFinal")}
+          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
         >
           Caducidad
         </b>
         <b
           className={sortedColumn === "pro_vendedor" ? "sorted" : ""}
           onClick={() => handleSort("pro_vendedor")}
+          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
         >
           Vendedor
         </b>
         <b
           className={sortedColumn === "pro_estado" ? "sorted" : ""}
           onClick={() => handleSort("pro_estado")}
+          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
         >
           Estado
         </b>
-        <b>Imagen</b>
-        <b>Acciones</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Imagen</b>
+        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Acciones</b>
       </div>
 
       <div className="container-products">
