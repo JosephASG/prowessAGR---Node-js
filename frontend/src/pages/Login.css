@@ -54,7 +54,17 @@
   padding: 2%;
   border-radius: 20px;
 }
+.login-register-buttons{
+  display: flex;
+  flex-direction: column;
+}
+.login-register-buttons button{
+margin: 5px;
+}
 
+.login-button:hover {
+  background-color: #0056b3;
+}
 .breadcrumb{
   color: rgb(2, 2, 2);
 }
