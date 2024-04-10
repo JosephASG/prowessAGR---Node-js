@@ -1,112 +1,89 @@
+/* Modifica el CSS para hacer que el formulario sea responsive */
 .cuenta-reset-container {
-    font-family: 'Montserrat', sans-serif;
-    max-width: 400px;
-    margin: auto;
-    padding: 40px;
-    border: 3px solid #FF8C00;
-    border-radius: 10px;
-    background-color: rgba(47, 134, 166, 0.3);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    min-height: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .cuenta-reset-title {
-    font-size: 28px;
-    color: #FF8C00;
-    margin-bottom: 20px;
-  }
-  
-  .cuenta-reset-subtitle {
-    font-size: 14px; 
-    color: #f7f6f6;
-    margin-bottom: 15px;
-    text-align: justify; 
-  }
-  
-  .cuenta-reset-subtitle-2 {
-    font-size: 19px; 
-    color: #f7f6f6;
-    margin-bottom: 15px;
-    text-align: center; 
-  }
-  
-  .cuenta-reset-description {
-    font-size: 14px;
-    color: #777;
-    margin-bottom: 20px;
-  }
-  
-  .cuenta-reset-form {
-    width: 100%;
-  }
-  
-  .cuenta-reset-option {
-    margin-bottom: 15px;
-  }
-  
-  .cuenta-reset-option input[type="radio"] {
-    margin-right: 10px;
-  }
-  
-  .cuenta-reset-option label {
-    font-size: 16px;
-    color: #333;
-  }
-  
-  .cuenta-reset-input {
-    width: 80%;
-    max-width: 300px;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 2px solid #FF8C00;
-    border-radius: 5px;
-    font-size: 5px;
-    color: #333;
-    margin-left: 39px;
-  }
-  
-  .cuenta-reset-input::placeholder {
-    color: #999;
-  }
-  
-  .cuenta-reset-button,
-  .cuenta-reset-cancel {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .cuenta-reset-button {
-    background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
-    color: #fff;
-    margin-bottom: 10px;
-  }
-  
-  .cuenta-reset-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .cuenta-reset-cancel {
-    background-color: #FF6347;
-    color: #fff;
-  }
-  
-  .cuenta-reset-cancel:hover {
-    background-color: #FF4500;
-  }
-  
-  .cuenta-reset-message {
-    margin-top: auto;
-    text-align: center;
-    color: #777;
-    font-size: 12px;
-  }
-  
+  font-family: 'Montserrat', sans-serif;
+  max-width: 400px;
+  margin: auto;
+  padding: 40px;
+  border: 3px solid #167603;
+  border-radius: 10px;
+  background-color: rgba(47, 134, 166, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.cuenta-reset-title {
+  font-size: 28px;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.cuenta-reset-subtitle,
+.cuenta-reset-subtitle-2 {
+  font-size: 19px;
+  color: #f7f6f6;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.cuenta-reset-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cuenta-reset-option {
+  margin-bottom: 15px;
+  width: 100%; /* Ajusta el ancho del input para que se ajuste al contenedor */
+}
+
+.cuenta-reset-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #167603;
+  border-radius: 5px;
+  font-size: 16px; /* Ajusta el tamaño de la fuente */
+  color: #333;
+}
+
+.cuenta-reset-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Alinea los botones a los extremos */
+}
+
+.cuenta-reset-button,
+.cuenta-reset-cancel {
+  width: 48%; /* Establece el ancho de los botones */
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px; /* Ajusta el tamaño de la fuente */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cuenta-reset-button {
+  background: linear-gradient(45deg, rgb(2, 113, 17), #256c0b);
+  color: #fff;
+}
+
+.cuenta-reset-button:hover {
+  background-color: #0056b3;
+}
+
+.cuenta-reset-cancel {
+  background-color: #931600;
+  color: #fff;
+}
+
+.cuenta-reset-cancel:hover {
+  background-color: #931600;
+}
