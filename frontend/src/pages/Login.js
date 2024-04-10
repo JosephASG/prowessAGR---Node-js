@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Login.css';
-import { loginApp } from '../services/auth';
-//Llamado a librería para alertar (SweetAlert)
-import Swal from 'sweetalert2';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import { loginApp } from "../services/auth";
+import Swal from "sweetalert2";
+import { Button } from "react-bootstrap";
 const WEBURL = process.env.REACT_APP_API_URL;
 
 function Login(props) {
   const { setIsLoggedIn, setToken } = props;
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState(''); // Cambiamos a "message"
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,21 +21,20 @@ function Login(props) {
       setToken(data.usuario.token);
       setMessage(data.mensaje);
 
-      // Mostrar alerta de inicio de sesión exitoso con SweetAlert
       await Swal.fire({
-        icon: 'success',
-        title: 'Inicio de sesión exitoso',
+        icon: "success",
+        title: "Inicio de sesión exitoso",
         showConfirmButton: true,
       });
-      console.log("Entrando")
+      console.log("Entrando");
       localStorage.setItem("token", data.usuario.token);
-      navigate('/mi-cuenta');
+      navigate("/mi-cuenta");
       setIsLoggedIn(true);
     } else {
-      setMessage(res.response.data.message)
-      console.log('Usuario no logueado', res.response.data.message);
+      setMessage(res.response.data.message);
+      console.log("Usuario no logueado", res.response.data.message);
     }
-  }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -43,22 +42,18 @@ function Login(props) {
     await login(formData);
   };
 
-
   const manejarRecuperacionContrasena = () => {
-    navigate('/recuperar-contrasena');
+    navigate("/recuperar-contrasena");
   };
 
   const manejarRecuperacionCuenta = () => {
-    navigate('/recuperar-cuenta');
+    navigate("/recuperar-cuenta");
   };
-
-
-
 
   return (
     <div className="login-container">
-      <h2 className="login-title">Iniciar sesión</h2>
-      <form onSubmit={handleLogin}>
+      <h2 className="login-title">Iniciar Sesión</h2>
+      <form onSubmit={handleLogin} className="loginForm">
         <input
           className="login-input"
           type="email"
@@ -75,24 +70,32 @@ function Login(props) {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className="login-button" type="submit">Iniciar sesión</button>
+
+        <div className="login-register-buttons">
+          <Button type="submit" variant="success">
+            Iniciar Sesión
+          </Button>
+          <Button variant="light" onClick={() => navigate("/registro")}>
+            Registrarse
+          </Button>
+        </div>
       </form>
-      <div className="login-register-button">
-        <button className="login-button" onClick={() => navigate('/registro')}>
-          Registrarse
-        </button>
-      </div>
+
       <div className="login-message">
-        <p><center>¿Necesitas ayuda con tu cuenta o contraseña?
-          <a href="#" onClick={manejarRecuperacionCuenta}>Recuperar cuenta</a>
-          /
-          <a href="#" onClick={manejarRecuperacionContrasena}>Recuperar contraseña</a>
-        </center>
+        <p className="breadcrumb">
+          <center>
+            ¿Necesitas ayuda con tu cuenta o contraseña?
+            <a href="#" onClick={manejarRecuperacionCuenta}>
+              Recuperar cuenta
+            </a>{" "}
+            /{" "}
+            <a href="#" onClick={manejarRecuperacionContrasena}>
+              Recuperar contraseña
+            </a>
+          </center>
         </p>
       </div>
-      <div >
-        {message}
-      </div>
+      <div>{message}</div>
     </div>
   );
 }

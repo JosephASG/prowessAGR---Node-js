@@ -58,10 +58,10 @@ function HomePage(props) {
               ) : (
                 <div className="d-flex flex-column align-items-center">
                   <Link to="/registro" className="mb-2">
-                    <Button variant="primary">Registro</Button>
+                    <button className='buttonMain' variant="primary">Registro</button>
                   </Link>
                   <Link to="/login">
-                    <Button variant="secondary">Iniciar Sesión</Button>
+                    <button style={{color:"white"}}className='buttonMainRegistro' variant="secondary">Iniciar Sesión</button>
                   </Link>
                 </div>
               )}
