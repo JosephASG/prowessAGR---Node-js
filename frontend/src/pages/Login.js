@@ -4,6 +4,8 @@ import "./Login.css";
 import { loginApp } from "../services/auth";
 import Swal from "sweetalert2";
 import { Button } from "react-bootstrap";
+import Loading from "components/General/Loading";
+import Modal from "components/ModalAccountPage";
 const WEBURL = process.env.REACT_APP_API_URL;
 
 function Login(props) {
@@ -11,16 +13,17 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const login = async (user) => {
+    setIsLoading(true);
     const res = await loginApp(JSON.stringify(user));
     const data = res.data;
     if (data && data.estado === true) {
       setToken(data.usuario.token);
       setMessage(data.mensaje);
-
+      setIsLoading(false);
       await Swal.fire({
         icon: "success",
         title: "Inicio de sesión exitoso",
@@ -31,6 +34,7 @@ function Login(props) {
       navigate("/mi-cuenta");
       setIsLoggedIn(true);
     } else {
+      setIsLoading(false);
       setMessage(res.response.data.message);
       console.log("Usuario no logueado", res.response.data.message);
     }
@@ -52,6 +56,7 @@ function Login(props) {
 
   return (
     <div className="login-container">
+      {isLoading && <Loading></Loading>}
       <h2 className="login-title">Iniciar Sesión</h2>
       <form onSubmit={handleLogin} className="loginForm">
         <input
