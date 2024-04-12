@@ -68,6 +68,8 @@ function Register() {
         latitud: latitud,
         altitud: altitud,
         roleUser: roleUser,
+        address: address,
+        cellphone: cellphone,
       };
 
       try {
@@ -134,20 +136,6 @@ function Register() {
                   pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
                 />
               </Col>
-              <Col>
-                <UserInfoInput
-                  label="Dirección"
-                  value={address}
-                  setValue={setaddress}
-                  pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-                />
-                <UserInfoInput
-                  label="Telefono"
-                  value={cellphone}
-                  setValue={setCellphone}
-                  pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
-                />
-              </Col>
             </Row>
             <Row>
               <Col>
@@ -178,7 +166,22 @@ function Register() {
             </Row>
             <Mapa onLocationSelect={handleLocationSelect} />
             <Row className="mb-4 align-items-center">
-              <p className="register-subtitle">Seleccione su ubicación:</p>
+              <Col>
+                <UserInfoInput
+                  label="Teléfono"
+                  value={cellphone}
+                  setValue={setCellphone}
+                  pattern="^\d+$"
+                />
+
+                <UserInfoInput
+                  label="Dirección"
+                  value={address}
+                  setValue={setaddress}
+                  pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+                />
+              </Col>
+
               <UserLocationInput
                 provinces={provinces}
                 province={province}

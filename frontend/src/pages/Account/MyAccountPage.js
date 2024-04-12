@@ -7,7 +7,6 @@ import {
   Card,
   ListGroup,
   Button,
-  Image,
   Tab,
   Row,
   Col,
@@ -22,7 +21,6 @@ import {
   faPhone,
   faLock,
   faEnvelope,
-  faCamera,
   faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -30,19 +28,19 @@ const ProfileTab = ({ user }) => (
   <Tab.Pane eventKey="perfil">
     <p style={{ color: "black", textAlign: "left" }}>
       <FontAwesomeIcon icon={faAddressBook} /> <strong>Provincia:</strong>{" "}
-      {user.provinciaUsuario}
+      {user.province}
     </p>
     <p style={{ color: "black", textAlign: "left" }}>
       <FontAwesomeIcon icon={faCity} /> <strong>Ciudad:</strong>{" "}
-      {user.ciudadUsuario}
+      {user.city}
     </p>
     <p style={{ color: "black", textAlign: "left" }}>
       <FontAwesomeIcon icon={faAddressBook} /> <strong>Dirección:</strong>{" "}
-      {user.direccionUsuario}
+      {user.address}
     </p>
     <p style={{ color: "black", textAlign: "left" }}>
       <FontAwesomeIcon icon={faPhone} /> <strong>Teléfono:</strong>{" "}
-      {user.telefonoUsuario}
+      {user.cellphone}
     </p>
   </Tab.Pane>
 );
@@ -130,21 +128,12 @@ function MyAccountPage({ setIsLoggedIn, setRole }) {
 
   //Seccion Cambio de Imagen
   const fileInputRef = useRef();
-  const handleImageChange = (event) => {
-    // Aquí podrías subir la imagen a un servidor o actualizar el estado
-    // Por ejemplo, si estás usando un estado para manejar la imagen del usuario:
-    if (event.target.files && event.target.files[0]) {
-      // Suponiendo que tienes una función que actualiza la imagen del usuario
-      // uploadUserImage(event.target.files[0]);
-    }
-  };
-  const handleImageClick = () => {
-    fileInputRef.current.click();
-  };
+
   return (
-    <Container 
-    style={{marginTop: "8%"}}
-    className="d-flex justify-content-center align-items-center">
+    <Container
+      style={{ marginTop: "8%" }}
+      className="d-flex justify-content-center align-items-center"
+    >
       <Card
         style={{ width: "100%", maxWidth: "800px" }}
         className="shadow-lg my-3"
@@ -158,7 +147,7 @@ function MyAccountPage({ setIsLoggedIn, setRole }) {
             margin: "5px",
           }}
         >
-          Hola Bienvenido, {user.nombre} {user.apellido}
+          Hola Bienvenido, {user.name} {user.lastName}
         </Card.Header>
         <Card.Body>
           <Tab.Container id="account-tabs" defaultActiveKey="perfil">
@@ -167,53 +156,6 @@ function MyAccountPage({ setIsLoggedIn, setRole }) {
                 sm={3}
                 className="mb-3 mb-sm-0 d-flex flex-column align-items-center"
               >
-                <>
-                  <div
-                    className="image-container"
-                    onMouseEnter={() => setIsHovering(true)}
-                    onMouseLeave={() => setIsHovering(false)}
-                    onClick={handleImageClick}
-                    style={{
-                      width: "100px",
-                      height: "100px",
-                      position: "relative",
-                      cursor: "pointer",
-                      borderRadius: "50%",
-                      overflow: "hidden",
-                      backgroundColor: "gray",
-                    }}
-                  >
-                    <Image
-                      src={user.imagenUsuario}
-                      alt={user.nombreUsuario}
-                      roundedCircle
-                      className={`img-fluid mb-3 ${isHovering ? "hover" : ""}`}
-                    />
-                    {isHovering && (
-                      <FontAwesomeIcon
-                        icon={faCamera}
-                        className="image-icon"
-                        style={{
-                          position: "absolute",
-                          top: "50%",
-                          left: "50%",
-                          transform: "translate(-50%, -50%)",
-                          fontSize: "2em",
-
-                          color: "white",
-                          zIndex: 2,
-                        }}
-                      />
-                    )}
-                  </div>
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    style={{ display: "none" }}
-                    onChange={handleImageChange}
-                  />
-                </>
-
                 <ListGroup className="w-100">
                   <Nav
                     variant="pills"

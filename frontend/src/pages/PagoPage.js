@@ -73,13 +73,13 @@ function PagoPage({ clearCart }) {
     pdf.setFont("times", "normal"); // Restaurar el estilo de fuente normal
 
     pdf.setFontSize(12);
-    pdf.text(`Estimado/a ${usuario.nombre},`, 10, 60);
+    pdf.text(`Estimado/a ${usuario.name},`, 10, 60);
     pdf.text(
       `Gracias por comprar con nosotros. Tu pedido ${orderNumber} está confirmado. Te avisaremos cuando se envíe.`,
       10,
       70
     );
-    pdf.text(`Dirección de envío: ${usuario.direccion}`, 10, 80);
+    pdf.text(`Dirección de envío: ${usuario.address}`, 10, 80);
 
     // Agregar los detalles del pedido
     pdf.text("Detalles del Pedido", 10, 90);
@@ -153,7 +153,7 @@ function PagoPage({ clearCart }) {
     const pdfBase64 = pdf.output("datauristring").split("base64,")[1];
 
     const htmlContent = `
-    <p>Estimado/a ${usuario.nombre},</p>
+    <p>Estimado/a ${usuario.name},</p>
     <p>Gracias por tu compra. Adjunto encontrarás el comprobante de tu pedido.</p>
     <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
     <!-- Aquí puedes incluir más contenido HTML como desees -->

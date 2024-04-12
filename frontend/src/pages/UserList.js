@@ -6,6 +6,7 @@ import { getUsers, deleteUser } from "../services/user";
 
 const useUsers = (token) => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -65,47 +66,51 @@ const UserList = () => {
   );
 
   return (
-    <Container className="mt-4">
-      <h1>Lista de Usuarios</h1>
-      <Row xs={1} md={2} lg={3} className="g-4">
-        {users.map((user) => (
-          <Col key={user.id}>
-            <Card>
-              <Card.Body>
-                <Card.Title>{`${user.name} ${user.secondName} ${user.lastName} ${user.secondLastName}`}</Card.Title>
-                <Card.Text>
-                  Dirección: {user.province} {user.city}
-                  <br />
-                  Correo: {user.email}
-                  <br />
-                  Cédula: {user.nCedula}
-                  <br />
-                  Teléfono: {user.telefono}
-                  <br />
-                  Tipo: {user.roleUser}
-                </Card.Text>
-                <Button
-                  variant="info"
-                  onClick={() => handleEditUsers(user)}
-                  className="me-2"
-                >
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                </Button>
-                <Button
-                  variant="danger"
-                  onClick={() => handleDeleteUser(user.id)}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      {userToEdit && (
-        <p style={{ color: "white" }}>Se quiere editar xd, hagan el modal</p>
-      )}
-    </Container>
+    <>
+
+      <h1 style={{textAlign:"center"}}>Lista de Usuarios</h1>
+
+      <Container className="mt-4 d-flex justify-content-center">
+        <Row xs={1} md={2} lg={3} className="g-4">
+          {users.map((user) => (
+            <Col key={user.id}>
+              <Card>
+                <Card.Body>
+                  <Card.Title>{`${user.name} ${user.secondName} ${user.lastName} ${user.secondLastName}`}</Card.Title>
+                  <Card.Text>
+                    Dirección: {user.province} {user.city} {user.address}
+                    <br />
+                    Correo: {user.email}
+                    <br />
+                    Cédula: {user.nCedula}
+                    <br />
+                    Teléfono: {user.cellphone}
+                    <br />
+                    Tipo: {user.roleUser}
+                  </Card.Text>
+                  <Button
+                    variant="info"
+                    onClick={() => handleEditUsers(user)}
+                    className="me-2"
+                  >
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => handleDeleteUser(user.id)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                  </Button>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+        {userToEdit && (
+          <p style={{ color: "white" }}>Se quiere editar xd, hagan el modal</p>
+        )}
+      </Container>
+    </>
   );
 };
 

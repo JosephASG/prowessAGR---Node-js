@@ -65,10 +65,10 @@ function ShoppingCart({ setOrden }) {
     const data = await checkToken(token);
     const usuario = {
       id: data.data.id,
-      nombre: data.data.nombreUsuario,
-      apellido: data.data.apellidoUsuario,
+      nombre: data.data.name,
+      apellido: data.data.lastname,
       email: data.data.email,
-      telefono: data.data.telefonoUsuario,
+      telefono: data.data.cellphone,
     };
     setUsuario(usuario);
   };
