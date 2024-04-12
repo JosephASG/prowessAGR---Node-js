@@ -1,108 +1,111 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { Container, Col, Card, Row, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import "./UserList.css";
 import { getUsers, deleteUser } from "../services/user";
 
-const UserList = () => {
+const useUsers = (token) => {
   const [users, setUsers] = useState([]);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [UserToEdit, setUserToEdit] = useState(null);
-  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const tokenFromStorage = localStorage.getItem("token");
-    if (tokenFromStorage) {
-      setToken(tokenFromStorage);
-    }
-  }, []);
+    const fetchUsers = async () => {
+      if (!token) return;
+      try {
+        const response = await getUsers(token);
+        if (response.data && response.data.users) {
+          setUsers(response.data.users);
+        } else {
+          console.error(
+            "Error: getUsers response data is missing or invalid:",
+            response
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
 
-  useEffect(() => {
-    if (token) {
-      handleUsers(token);
-    }
+    fetchUsers();
   }, [token]);
+
+  const deleteUserById = async (id) => {
+    try {
+      const response = await deleteUser(token, id);
+      if (response.status === 200) {
+        setUsers((currentUsers) =>
+          currentUsers.filter((user) => user.id !== id)
+        );
+      } else {
+        console.error("Failed to delete user:", response);
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
+  return [users, deleteUserById];
+};
+
+const UserList = () => {
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [userToEdit, setUserToEdit] = useState(null);
+  const [users, deleteUserById] = useUsers(token);
 
   const handleEditUsers = (user) => {
     setUserToEdit(user);
     setIsEditModalOpen(true);
   };
 
-  const handleUsers = async (token) => {
-    try {
-      const response = await getUsers(token);
-      console.log(response);
-      if (response.data && response.data.users) {
-        setUsers(response.data.users);
-      } else {
-        console.error(
-          "Error: getUsers response data is missing or invalid:",
-          response
-        );
-      }
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  };
-
-  const handleDeleteUser = async (id) => {
-    const response = await deleteUser(token, id);
-    console.log(response);
-    if (response.status === 200) {
-      setUsers(users.filter((user) => user.id !== id));
-    }
-  };
+  const handleDeleteUser = useCallback(
+    (id) => {
+      deleteUserById(id);
+    },
+    [deleteUserById]
+  );
 
   return (
-    <div className="container-user-list">
-      <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>LISTA DE USUARIOS</h1>
-      <div className="btn-add-container"></div>
-      <div className="header-row-user-list">
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Nombre</b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Direccion</b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Correo</b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Cedula</b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Telefono</b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Tipo</b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Imagen</b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "0.1px white", color: "white"}}>Acciones</b>
-      </div>
-      <div className="container-users">
+    <Container className="mt-4">
+      <h1>Lista de Usuarios</h1>
+      <Row xs={1} md={2} lg={3} className="g-4">
         {users.map((user) => (
-          <div className="user" key={user.id}>
-            <div>
-              {user.nombreUsuario} {user.nombreUsuarioS} {user.apellidoUsuario}{" "}
-              {user.nombreUsuarioS}
-            </div>
-            <div>{user.direccionUsuario}</div>
-            <div>{user.correoUsuario}</div>
-            <div>{user.cedulaUsuario}</div>
-            <div>{user.telefonoUsuario}</div>
-            <div>{user.categoriaUsuario}</div>
-            <div>
-              <img
-                src={user.imagenUsuario}
-                alt={user.nombreUsuario}
-                className="user-image-list"
-              />
-            </div>
-            <div className="actions">
-              <FontAwesomeIcon
-                icon={faPenToSquare}
-                className="edit"
-                onClick={() => handleEditUsers(user)}
-              />
-              <FontAwesomeIcon
-                icon={faTrash}
-                className="delete"
-                onClick={() => handleDeleteUser(user.id)}
-              />
-            </div>
-          </div>
+          <Col key={user.id}>
+            <Card>
+              <Card.Body>
+                <Card.Title>{`${user.name} ${user.secondName} ${user.lastName} ${user.secondLastName}`}</Card.Title>
+                <Card.Text>
+                  Dirección: {user.province} {user.city}
+                  <br />
+                  Correo: {user.email}
+                  <br />
+                  Cédula: {user.nCedula}
+                  <br />
+                  Teléfono: {user.telefono}
+                  <br />
+                  Tipo: {user.roleUser}
+                </Card.Text>
+                <Button
+                  variant="info"
+                  onClick={() => handleEditUsers(user)}
+                  className="me-2"
+                >
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                </Button>
+                <Button
+                  variant="danger"
+                  onClick={() => handleDeleteUser(user.id)}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </div>
-    </div>
+      </Row>
+      {userToEdit && (
+        <p style={{ color: "white" }}>Se quiere editar xd, hagan el modal</p>
+      )}
+    </Container>
   );
 };
 

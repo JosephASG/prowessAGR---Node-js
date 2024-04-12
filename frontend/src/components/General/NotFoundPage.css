@@ -1,0 +1,47 @@
+.not-found-container {
+    position: relative;
+    overflow: hidden;
+    background-color: #282c34; /* Fondo oscuro */
+    color: white;
+  }
+  
+  .floating-icon {
+    position: absolute;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+  
+  .shuttle {
+    animation-name: floatShuttle;
+    left: 10%;
+    top: 10%;
+  }
+  
+  .satellite {
+    animation-name: floatSatellite;
+    right: 15%;
+    top: 50%;
+  }
+  
+  .rocket {
+    animation-name: floatRocket;
+    left: 50%;
+    bottom: 10%;
+  }
+  
+  @keyframes floatShuttle {
+    0%, 100% { transform: translatey(0px); }
+    50% { transform: translatey(-20px); }
+  }
+  
+  @keyframes floatSatellite {
+    0%, 100% { transform: translatey(0px); }
+    50% { transform: translatey(20px); }
+  }
+  
+  @keyframes floatRocket {
+    0%, 100% { transform: translatey(0px); }
+    50% { transform: translatey(-30px); }
+  }
+  

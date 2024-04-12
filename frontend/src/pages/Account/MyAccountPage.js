@@ -158,7 +158,7 @@ function MyAccountPage({ setIsLoggedIn, setRole }) {
             margin: "5px",
           }}
         >
-          Hola Bienvenido, {user.nombreUsuario} {user.apellidoUsuario}
+          Hola Bienvenido, {user.nombre} {user.apellido}
         </Card.Header>
         <Card.Body>
           <Tab.Container id="account-tabs" defaultActiveKey="perfil">
@@ -226,7 +226,7 @@ function MyAccountPage({ setIsLoggedIn, setRole }) {
                     <Nav.Item>
                       <Nav.Link eventKey="seguridad">Seguridad</Nav.Link>
                     </Nav.Item>
-                    {user.categoriaUsuario === "buyer" && (
+                    {user.role === "buyer" && (
                       <Nav.Item>
                         <Nav.Link eventKey="compras">Compras</Nav.Link>
                       </Nav.Item>

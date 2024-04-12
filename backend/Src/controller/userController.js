@@ -66,56 +66,41 @@ const registerUser = async (req, res) => {
   }
 };
 
-// Inicio de sesion de usuario
 const loginUser = async (req, res) => {
   try {
     const userData = req.body;
-    console.log(userData)
-    const jsonUser = {};
+    console.log("Datos recibidos:", userData);
+
     const snapshot = await query(
       firestore.collection(fs, "usuario"),
       where("email", "==", userData.email)
     );
     const querySnapshot = await getDocs(snapshot);
-    if (querySnapshot.empty) {
-      return res
-        .status(401)
-        .send({ message: "Email o Contraseña Inválidos", estado: false });
-    }
-    const user = querySnapshot.docs[0].data();
 
+    if (querySnapshot.empty) {
+      console.log("No se encontró usuario con ese email");
+      return res.status(401).send({ message: "Email o Contraseña Inválidos", estado: false });
+    }
+
+    const user = querySnapshot.docs[0].data();
     user.id = querySnapshot.docs[0].id;
-    
+    console.log("Usuario encontrado:", user);
+
     const secret = process.env.JWT_SECRET;
-    console.log(user.categoriaUsuario)
     if (bcrypt.compareSync(userData.password, user.password)) {
-      const token = jwt.sign(
-        { id: user.id, rol: user.categoriaUsuario },
-        secret,
-        {
-          expiresIn: "20h",
-        }
-      );
-      res.json({
-        mensaje: "Usuario Logeado Correctamente",
-        estado: true,
-        usuario: {
-          token,
-        },
-      });
+      const token = jwt.sign({ id: user.id, rol: user.roleUser }, secret, { expiresIn: "20h" });
+      console.log("Token generado:", token);
+      res.json({ mensaje: "Usuario Logeado Correctamente", estado: true, usuario: { token } });
     } else {
-      res
-        .status(401)
-        .send({ message: "Email o Contraseña Inválidos", estado: false });
+      console.log("Contraseña incorrecta");
+      res.status(401).send({ message: "Email o Contraseña Inválidos", estado: false });
     }
   } catch (error) {
-    return res.status(500).json({
-      message: "Error al crear el usuario",
-      error: error.message,
-      estado: false,
-    });
+    console.error("Error en el proceso de login:", error);
+    return res.status(500).json({ message: "Error al crear el usuario", error: error.message, estado: false });
   }
 };
+
 
 const getUserById = async (req, res) => {
   const { id } = req.user;
@@ -288,7 +273,7 @@ const sendRecoveryCode = async (req, res) => {
   try {
     const usersRef = collection(fs, "usuario");
     const querySnapshot = await getDocs(
-      query(usersRef, where("correoUsuario", "==", email))
+      query(usersRef, where("email", "==", email))
     );
 
     if (querySnapshot.empty) {
@@ -353,7 +338,7 @@ const verifyRecoveryCode = async (req, res) => {
   try {
     const usersRef = collection(fs, "usuario");
     const querySnapshot = await getDocs(
-      query(usersRef, where("correoUsuario", "==", email))
+      query(usersRef, where("email", "==", email))
     );
 
     if (querySnapshot.empty) {
@@ -398,7 +383,7 @@ const recoverAccountByCedula = async (req, res) => {
     }
 
     const userDoc = querySnapshot.docs[0];
-    const userEmail = userDoc.data().correoUsuario;
+    const userEmail = userDoc.data().email;
 
     const subject = "Recuperación de Cuenta";
     const htmlContent = `
@@ -452,7 +437,7 @@ const updatePasswordWithRecoveryCode = async (req, res) => {
   try {
     const usersRef = collection(fs, "usuario");
     const querySnapshot = await getDocs(
-      query(usersRef, where("correoUsuario", "==", email))
+      query(usersRef, where("email", "==", email))
     );
 
     if (querySnapshot.empty) {

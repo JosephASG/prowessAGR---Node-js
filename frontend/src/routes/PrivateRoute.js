@@ -1,29 +1,32 @@
-import React, {useEffect,useState} from 'react';
-import {useNavigate,} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PrivateRoute = ({ element, allowedRoles, userRole, ...rest }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect (() => { 
-    if(userRole==="default"){
+  useEffect(() => {
+    if (userRole === "default") {
       setIsLoading(true);
-    }else{
-      if(allowedRoles.includes(userRole)){
+    } else {
+      if (allowedRoles.includes(userRole)) {
         setIsLoading(false);
-      }
-      else{
+      } else {
         setIsLoading(false);
       }
     }
   }, [userRole, allowedRoles]);
+
   if (isLoading) {
     return <div>Cargando...</div>;
   }
+
   if (allowedRoles.includes(userRole)) {
     return element;
+
+
   } else {
-    navigate('/accessdenied');
+    navigate("/accessdenied");
     return null;
   }
 };

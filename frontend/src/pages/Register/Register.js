@@ -42,6 +42,8 @@ function Register() {
   const [altitud, setAltitud] = useState("");
   const [isPasswordsValid, setIsPasswordsValid] = useState(false);
   const [roleUser, setRoleUser] = useState("");
+  const [address, setaddress] = useState("");
+  const [cellphone, setCellphone] = useState("");
 
   const navigate = useNavigate();
 
@@ -72,6 +74,7 @@ function Register() {
         const response = await registerApp(formData);
         Swal.fire("Registro Exitoso", "", "success");
       } catch (error) {
+        console.error("Error en el registro:", error.message);
         Swal.fire("Error en el registro", error.message, "error");
       }
     } else {
@@ -128,6 +131,20 @@ function Register() {
                   label="Segundo Apellido"
                   value={secondLastName}
                   setValue={setSecondLastName}
+                  pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+                />
+              </Col>
+              <Col>
+                <UserInfoInput
+                  label="Dirección"
+                  value={address}
+                  setValue={setaddress}
+                  pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
+                />
+                <UserInfoInput
+                  label="Telefono"
+                  value={cellphone}
+                  setValue={setCellphone}
                   pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$"
                 />
               </Col>

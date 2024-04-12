@@ -67,7 +67,7 @@ function ShoppingCart({ setOrden }) {
       id: data.data.id,
       nombre: data.data.nombreUsuario,
       apellido: data.data.apellidoUsuario,
-      email: data.data.correoUsuario,
+      email: data.data.email,
       telefono: data.data.telefonoUsuario,
     };
     setUsuario(usuario);

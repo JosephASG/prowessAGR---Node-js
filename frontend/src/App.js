@@ -23,9 +23,8 @@ import { Advertisement } from "./pages/Advertisement";
 import PagoPage from "./pages/PagoPage";
 import TermsConditions from "./pages/TermsConditions";
 import PasswordReset from "./pages/PasswordReset";
-import PasswordSend from "./pages//PasswordSend";
 import AccountReset from "./pages/AccountReset";
-
+import NotFoundPage from "./components/General/404"
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
@@ -47,9 +46,11 @@ function App() {
 
   const checkAuth = async (token) => {
     let response = await getTokenData(token);
+    console.log("Token", response);
     if (response && response.data) {
       const data = response.data;
       setRole(data.data.rol);
+      console.log(role);
       setIsLoggedIn(true);
     } else {
       localStorage.removeItem("token");
@@ -63,10 +64,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
         <Route path="/advertismenet" element={<Advertisement />} />
-        <Route
-          path="/pago"
-          element={<PagoPage token={token} />}
-        />
+        <Route path="/pago" element={<PagoPage token={token} />} />
         <Route path="/recuperar-contrasena" element={<PasswordReset />} />
         <Route path="/recuperar-cuenta" element={<AccountReset />} />
 
@@ -85,6 +83,7 @@ function App() {
           }
         />
         <Route path="/about" element={<AboutUs />} />
+
         <Route
           path="/mi-cuenta"
           element={
@@ -154,7 +153,7 @@ function App() {
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={["administrador", "vendedor"]}
+              allowedRoles={["administrator", "vendedor"]}
               element={<CategoriesPage />}
             />
           }
@@ -170,6 +169,7 @@ function App() {
             />
           }
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </Router>
