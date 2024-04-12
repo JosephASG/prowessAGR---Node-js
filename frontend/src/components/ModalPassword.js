@@ -4,7 +4,7 @@ import "./ModalPassword.css";
 const ModalPassword = ({ children, handleCancelModal }) => {
   return (
     <article className="modalPassword">
-      <div className="modalPasswordContainer">
+      <div className="modalPasswordContainer" style={{backgroundColor:'seagreen'}}>
         <button
           className="modalPasswordClose"
           onClick={() => handleCancelModal()}
