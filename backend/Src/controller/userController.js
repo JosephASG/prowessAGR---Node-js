@@ -19,77 +19,45 @@ import dotenv from "dotenv";
 dotenv.config();
 const saltRounds = 10;
 
+
 const registerUser = async (req, res) => {
   try {
     const userData = req.body;
-    const imageFile = req.file;
 
-    if (!imageFile) {
-      return res.status(400).send({ message: "La imagen es obligatoria" });
-    }
+    const usersRef = firestore.collection(fs, "usuario");
 
-    if (imageFile.size > 1048576) {
-      return res
-        .status(400)
-        .send({ message: "La imagen supera el tamaño máximo de 1MB" });
-    }
-
-    const jsonUser = {};
-    const metadata = {
-      contentType: imageFile.mimetype,
-    };
-    const storageRef = ref(
-      storage,
-      `agricola/${imageFile.originalname}`,
-      metadata
+    const emailSnapshot = await query(
+      usersRef,
+      where("email", "==", userData.email)
     );
-    try {
-      const uploadtask = await uploadBytes(storageRef, imageFile.buffer);
-
-      try {
-        const url = await getDownloadURL(uploadtask.ref);
-        userData.imagenUsuario = url;
-      } catch (error) {
-        console.error("Error al obtener la URL de la imagen:", error);
-      }
-    } catch (error) {
-      console.error(
-        "Error al cargar la imagen o obtener la URL de la imagen:",
-        error
-      );
-    }
-
-    const snapshot = await query(
-      firestore.collection(fs, "usuario"),
-      where("correoUsuario", "==", userData.correoUsuario)
-    );
-    const querySnapshot = await getDocs(snapshot);
-    if (!querySnapshot.empty) {
+    const emailQuerySnapshot = await getDocs(emailSnapshot);
+    if (!emailQuerySnapshot.empty) {
+      console.log("El correo electrónico ya está en uso");
       return res
         .status(401)
         .send({ message: "El correo electrónico ya está en uso" });
     }
 
-    userData.claveUsuario = bcrypt.hashSync(userData.claveUsuario, saltRounds);
-
-    if (userData.categoriaUsuario === "Administrador") {
-      return res.status(401).send({
-        message: "No tienes permisos para registrar un administrador",
-      });
-    }
-
-    for (const [key, value] of Object.entries(userData)) {
-      if (value) {
-        jsonUser[key] = value;
-      }
-    }
-
-    var docRef = await firestore.addDoc(
-      firestore.collection(fs, "usuario"),
-      jsonUser
+    const cedulaSnapshot = await query(
+      usersRef,
+      where("nCedula", "==", userData.nCedula)
     );
+    const cedulaQuerySnapshot = await getDocs(cedulaSnapshot);
+    if (!cedulaQuerySnapshot.empty) {
+      return res.status(401).send({ message: "La cédula ya está registrada" });
+    }
 
-    return res.status(201).json(jsonUser);
+    userData.password = bcrypt.hashSync(userData.password, saltRounds);
+
+    const jsonUser = {};
+    for (const [key, value] of Object.entries(userData)) {
+      if (value) jsonUser[key] = value;
+    }
+
+    const docRef = await firestore.addDoc(usersRef, jsonUser);
+    return res
+      .status(201)
+      .json({ message: "Usuario registrado exitosamente", userId: docRef.id });
   } catch (error) {
     console.error("Error general al crear el usuario", error);
     return res
@@ -102,10 +70,11 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const userData = req.body;
+    console.log(userData)
     const jsonUser = {};
     const snapshot = await query(
       firestore.collection(fs, "usuario"),
-      where("correoUsuario", "==", userData.email)
+      where("email", "==", userData.email)
     );
     const querySnapshot = await getDocs(snapshot);
     if (querySnapshot.empty) {
@@ -114,9 +83,12 @@ const loginUser = async (req, res) => {
         .send({ message: "Email o Contraseña Inválidos", estado: false });
     }
     const user = querySnapshot.docs[0].data();
+
     user.id = querySnapshot.docs[0].id;
+    
     const secret = process.env.JWT_SECRET;
-    if (bcrypt.compareSync(req.body.password, user.claveUsuario)) {
+    console.log(user.categoriaUsuario)
+    if (bcrypt.compareSync(userData.password, user.password)) {
       const token = jwt.sign(
         { id: user.id, rol: user.categoriaUsuario },
         secret,
@@ -458,7 +430,7 @@ const recoverAccountByCedula = async (req, res) => {
       } else {
         res.status(200).json({
           message: "Correo de recuperación de cuenta enviado con éxito",
-          email: userEmail
+          email: userEmail,
         });
       }
     });
@@ -474,9 +446,7 @@ const updatePasswordWithRecoveryCode = async (req, res) => {
   const { email, code, newPassword } = req.body;
 
   if (!email || !code || !newPassword) {
-    return res
-      .status(400)
-      .json({ message: "Falta información." });
+    return res.status(400).json({ message: "Falta información." });
   }
 
   try {

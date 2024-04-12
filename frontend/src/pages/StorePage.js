@@ -59,18 +59,18 @@ function StorePage() {
         const newProduct = {
           ...productToAdd,
           pro_cantidad_cart: 1,
-          cart_cantidad: "1"
+          cart_cantidad: "1",
         };
         updatedCart = [...prevCart, newProduct];
       }
-      
+
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       window.dispatchEvent(new CustomEvent("cartUpdated"));
-      
+
       toast.success(
-        productIndex !== -1 ?
-        `Cantidad actualizada: ${updatedCart[productIndex].pro_nombre} x${updatedCart[productIndex].pro_cantidad_cart} en el carrito!` :
-        `${productToAdd.pro_nombre} agregado al carrito!`,
+        productIndex !== -1
+          ? `Cantidad actualizada: ${updatedCart[productIndex].pro_nombre} x${updatedCart[productIndex].pro_cantidad_cart} en el carrito!`
+          : `${productToAdd.pro_nombre} agregado al carrito!`,
         {
           position: "bottom-right",
           autoClose: 2000,
@@ -84,7 +84,6 @@ function StorePage() {
       return updatedCart;
     });
   };
-  
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -111,9 +110,15 @@ function StorePage() {
   );
 
   if (searchTerm) {
-    filteredProducts = filteredProducts.filter((product) =>
-      product.pro_nombre.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    filteredProducts = filteredProducts.filter((product) => {
+      if (!product.pro_nombre) {
+        console.error("Undefined product name", product);
+        return false;
+      }
+      return product.pro_nombre
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+    });
   }
 
   const startIndex = (currentPage - 1) * productsPerPage;
@@ -127,12 +132,31 @@ function StorePage() {
 
       <Row>
         <Col xs={12}>
-          <h1 className="text-center mt-4 mb-4" style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>TIENDA DE PRODUCTOS</h1>
+          <h1
+            className="text-center mt-4 mb-4"
+            style={{
+              textShadow: "none",
+              fontFamily: "Roboto",
+              WebkitTextStroke: "1.5px white",
+              color: "white",
+            }}
+          >
+            TIENDA DE PRODUCTOS
+          </h1>
         </Col>
       </Row>
       <Row>
         <Col xs={12} md={3} style={{ marginBottom: "20px" }}>
-          <h2 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>Categorías</h2>
+          <h2
+            style={{
+              textShadow: "none",
+              fontFamily: "Roboto",
+              WebkitTextStroke: "1.5px white",
+              color: "white",
+            }}
+          >
+            Categorías
+          </h2>
           <ul className="list-group">
             {categories.map((category, index) => (
               <li

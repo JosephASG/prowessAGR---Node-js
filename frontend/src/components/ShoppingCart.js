@@ -46,7 +46,7 @@ function ShoppingCart({ setOrden }) {
     if (existingProductIndex !== -1) {
       const existingProduct = updatedCart[existingProductIndex];
       if (existingProduct.pro_cantidad_cart < product.pro_stock) {
-        existingProduct.pro_cantidad_cart += 1; 
+        existingProduct.pro_cantidad_cart += 1;
       }
     } else {
       updatedCart.push({ ...product, pro_cantidad_cart: 1 });
@@ -80,7 +80,6 @@ function ShoppingCart({ setOrden }) {
       (item) => item.id === product.id
     );
 
-    // Si inputValue es NaN, establece el valor a 1
     if (isNaN(inputValue)) {
       inputValue = 1;
     } else if (inputValue > product.pro_stock) {
@@ -126,7 +125,7 @@ function ShoppingCart({ setOrden }) {
 
       guardarOrdenEnLocalStorage(orden);
 
-      localStorage.removeItem('cart');
+      localStorage.removeItem("cart");
 
       setRedirect(true);
     } catch (error) {
@@ -187,6 +186,7 @@ function ShoppingCart({ setOrden }) {
       total: total.toFixed(2),
     };
   };
+  
   const addedProducts = cart
     ? cart.filter((product) => product.pro_cantidad_cart > 0)
     : [];

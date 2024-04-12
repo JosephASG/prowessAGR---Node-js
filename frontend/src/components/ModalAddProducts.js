@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./ModalAddProducts.css";
-import ReactSelect from "react-select";
 import { getCategories } from "../services/category";
 import { getSellers } from "../services/seller";
 import { postProduct } from "../services/product";
-const WEBURL = process.env.REACT_APP_API_URL;
+import React, { useState, useEffect } from "react";
+import { Modal, Button, Form, InputGroup, FormControl } from "react-bootstrap";
+import ReactSelect from "react-select";
 
 const ModalAddProducts = ({ isOpen, onClose }) => {
   const [newProduct, setNewProduct] = useState({
@@ -19,57 +18,56 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     pro_fechaInicio: "",
     pro_estado: "",
     pro_imagen: null,
-    pro_numero: "", // Nuevo atributo pro_numero
+    pro_numero: "",
+    sub_measures: {}, // Almacena las medidas inferiores
   });
   const [categorias, setCategorias] = useState([]);
   const [vendedores, setVendedores] = useState([]);
 
+  const measuresSubunits = {
+    Qm: ["Kg", "gr"],
+    Kg: ["gr", "Lb"],
+    gr: [],
+    Lb: ["Oz"],
+    Oz: [],
+    Unidades: [],
+    cubetas: [],
+    racimos: [],
+    arrobas: ["Lb"],
+  };
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (isOpen) {
-      const body = document.body;
-      body.classList.add("modal-open");
-      return () => {
-        body.classList.remove("modal-open");
-      };
-    }
-
-    getCategory(token);
-    getVendedores(token);
+    if (!isOpen) return;
+    const fetchInitialData = async () => {
+      const token = localStorage.getItem("token");
+      await fetchCategories(token);
+      await fetchSellers(token);
+    };
+    fetchInitialData();
   }, [isOpen]);
 
-  const getVendedores = async (token) => {
-    try {
-      const res = await getSellers(token);
-      console.log(res);
-      const data = res.data;
-      setVendedores(data);
-    } catch (error) {
-      console.error("Error al cargar los vendedores", error);
-    }
+  const fetchSellers = async (token) => {
+    const res = await getSellers(token);
+    setVendedores(res.data);
   };
 
-  const getCategory = async (token) => {
-    try {
-      const res = await getCategories(token);
-      console.log(res);
-      const data = res.data;
-      setCategorias(data);
-    } catch (error) {
-      console.error("Error al cargar las categorías", error);
-    }
+  const fetchCategories = async (token) => {
+    const res = await getCategories(token);
+    setCategorias(res.data);
   };
 
   const handleInputChange = (e) => {
-    const { name, value, file } = e.target;
-    if (name === "pro_imagen") {
-      const file = e.target.files[0];
-      const formData = new FormData();
-      formData.append("pro_imagen", file);
-      setNewProduct((prevState) => ({
-        ...prevState,
-        pro_imagen: formData,
-      }));
+    const { name, value, files } = e.target;
+    if (name === "pro_imagen" && files) {
+      setNewProduct({
+        ...newProduct,
+        pro_imagen: files[0],
+      });
+    } else if (measuresSubunits[newProduct.pro_medida]?.includes(name)) {
+      const updatedSubMeasures = { ...newProduct.sub_measures, [name]: value };
+      setNewProduct({
+        ...newProduct,
+        sub_measures: updatedSubMeasures,
+      });
     } else {
       setNewProduct({
         ...newProduct,
@@ -77,22 +75,42 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
       });
     }
   };
-
-  const handleSave = async () => {
-    const { pro_imagen, ...otrosDatos } = newProduct;
-    const formData = new FormData();
-    if (!pro_imagen) return alert("Debe seleccionar una imagen");
-    var imagen = pro_imagen.get("pro_imagen");
-    formData.append("pro_imagen", imagen);
-    Object.entries(otrosDatos).forEach(([key, value]) => {
-      formData.append(key, value);
+  const handleMeasureChange = (e) => {
+    const { value } = e.target;
+    setNewProduct({
+      ...newProduct,
+      pro_medida: value,
+      sub_measures: {}, // Resetea medidas inferiores al cambiar la medida principal
     });
-    const token = localStorage.getItem("token");
-    postProducto(formData, token);
   };
 
-  const postProducto = async (product, token) => {
-    const response = await postProduct(product, token);
+  const renderSubMeasureInputs = () => {
+    const subMeasures = measuresSubunits[newProduct.pro_medida] || [];
+    return subMeasures.map((measure) => (
+      <InputGroup className="mb-3" key={measure}>
+        <InputGroup.Text>{measure}</InputGroup.Text>
+        <FormControl
+          type="number"
+          placeholder={`Valor en ${measure}`}
+          name={measure}
+          value={newProduct.sub_measures[measure] || ""}
+          onChange={handleInputChange}
+        />
+      </InputGroup>
+    ));
+  };
+
+  const handleSave = async () => {
+    if (!newProduct.pro_imagen) {
+      return alert("Debe seleccionar una imagen");
+    }
+    const formData = new FormData();
+    Object.entries(newProduct).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    const token = localStorage.getItem("token");
+    const response = await postProduct(formData, token);
     if (response.status === 200) {
       onClose();
     } else {
@@ -100,198 +118,183 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="modal-overlay">
-      <div className="modal-content-product">
-        <span className="modal-close-product-list" onClick={onClose}>
-          &times;
-        </span>
-        <div className="form-container">
-          <form className="modal-form" encType="multipart/form-data">
-            <div className="form-group-pair">
-              <div>
-                <label htmlFor="pro_nombre">Nombre</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="pro_nombre"
-                  value={newProduct.pro_nombre}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="pro_precio">Precio</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  name="pro_precio"
-                  value={newProduct.pro_precio}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            <div className="form-group-pair">
-              <div>
-                <label htmlFor="pro_stock">Stock</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  name="pro_stock"
-                  value={newProduct.pro_stock}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <div>
-                  <label htmlFor="pro_descripcion">Descripción</label>
-                  <textarea
-                    className="form-control"
-                    name="pro_descripcion"
-                    value={newProduct.pro_descripcion}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-            </div>
+    <Modal show={isOpen} onHide={onClose} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>Añadir Producto</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Nombre</InputGroup.Text>
+            <FormControl
+              type="text"
+              placeholder="Nombre del producto"
+              name="pro_nombre"
+              value={newProduct.pro_nombre}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Precio</InputGroup.Text>
+            <FormControl
+              type="number"
+              placeholder="Precio"
+              name="pro_precio"
+              value={newProduct.pro_precio}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Stock</InputGroup.Text>
+            <FormControl
+              type="number"
+              placeholder="Stock"
+              name="pro_stock"
+              value={newProduct.pro_stock}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
 
-            <div className="btn-add-container">
-              <label htmlFor="pro_medida">Medida:</label>
-              <select
-                id="pro_medida"
-                name="pro_medida"
-                value={newProduct.pro_medida}
-                onChange={handleInputChange}
-              >
-                <option value=""></option>
-                <option value="Qm">Quintal</option>
-                <option value="Kg">Kilogramo</option>
-                <option value="gr">Gramo</option>
-                <option value="Lb">Libra</option>
-                <option value="Oz">Onza</option>
-                <option value="Unidades">Unidad</option>
-                <option value="cubetas">Cubetas</option>
-                <option value="racimos">Racimos</option>
-                <option value="arrobas">Arrobas</option>
-              </select>
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Descripción</InputGroup.Text>
+            <FormControl
+              as="textarea"
+              placeholder="Descripción del producto"
+              name="pro_descripcion"
+              value={newProduct.pro_descripcion}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
+          <Form.Control
+            as="select"
+            name="pro_medida"
+            value={newProduct.pro_medida}
+            onChange={handleMeasureChange}
+          >
+            <option value="">Selecciona una medida</option>
+            <option value="Qm">Quintal</option>
+            <option value="Kg">Kilogramo</option>
+            <option value="gr">Gramo</option>
+            <option value="Lb">Libra</option>
+            <option value="Oz">Onza</option>
+            <option value="Unidades">Unidad</option>
+            <option value="cubetas">Cubetas</option>
+            <option value="racimos">Racimos</option>
+            <option value="arrobas">Arrobas</option>
+          </Form.Control>
 
-              <label htmlFor="pro_categoria">Categoría:</label>
-              <select
-                id="pro_categoria"
-                name="pro_categoria"
-                value={newProduct.pro_categoria}
-                onChange={handleInputChange}
-              >
-                {categorias.map((categoria) => (
-                  <option key={categoria.id} value={categoria.nombreCategoria}>
-                    {categoria.nombreCategoria}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="form-group-pair">
-              <div>
-                <label htmlFor="pro_fechaInicio">Fecha Inicio</label>
-                <input
-                  type="date"
-                  className="form-control"
-                  name="pro_fechaInicio"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div>
-                <label htmlFor="pro_fechaFinal">Fecha Final</label>
-                <input
-                  type="date"
-                  className="form-control"
-                  name="pro_fechaFinal"
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label htmlFor="pro_vendedor">Vendedor:</label>
-              <ReactSelect
-                defaultValue={{ value: "Vendedor", label: "None" }}
-                id="pro_vendedor"
-                name="pro_vendedor"
-                value={{ value: newProduct.pro_vendedor, label: newProduct.pro_vendedor }}
-                onChange={(selectedOption) => {
-                  setNewProduct({ ...newProduct, pro_vendedor: selectedOption.value });
-                }}
-                options={vendedores.map((vendedor) => ({
-                  value: vendedor.name,
-                  label: vendedor.name,
-                }))}
-                styles={{
-                  control: (provided) => ({
-                    ...provided,
-                    width: "230px", // Cambia el ancho según tus necesidades, p. ej., '300px'
-                  }),
-                  option: (provided) => ({
-                    ...provided,
-                    color: "black",
-                  }),
-                }}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="pro_estado">Estado:</label>
-              <ReactSelect
-                defaultValue={{ value: "Vendedor", label: "None" }}
-                id="pro_estado"
-                name="pro_estado"
-                value={{ value: newProduct.pro_estado, label: newProduct.pro_estado }}
-                onChange={(selectedOption) => {
-                  setNewProduct({ ...newProduct, pro_estado: selectedOption.value });
-                }}
-                options={["Disponible", "No disponible", "Reservado"].map((estado) => ({
+          {renderSubMeasureInputs()}
+
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Categoría</InputGroup.Text>
+            <Form.Control
+              as="select"
+              name="pro_categoria"
+              value={newProduct.pro_categoria}
+              onChange={handleInputChange}
+            >
+              {categorias.map((categoria) => (
+                <option key={categoria.id} value={categoria.nombreCategoria}>
+                  {categoria.nombreCategoria}
+                </option>
+              ))}
+            </Form.Control>
+          </InputGroup>
+
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Fecha de subida</InputGroup.Text>
+            <FormControl
+              type="date"
+              name="pro_fechaInicio"
+              value={newProduct.pro_fechaInicio}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
+
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Fecha de Vencimiento</InputGroup.Text>
+            <FormControl
+              type="date"
+              name="pro_fechaFinal"
+              value={newProduct.pro_fechaFinal}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
+
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Vendedor</InputGroup.Text>
+            <ReactSelect
+              id="pro_vendedor"
+              name="pro_vendedor"
+              value={{
+                value: newProduct.pro_vendedor,
+                label: newProduct.pro_vendedor || "Seleccione un vendedor",
+              }}
+              onChange={(selectedOption) => {
+                setNewProduct({
+                  ...newProduct,
+                  pro_vendedor: selectedOption.value,
+                });
+              }}
+              options={vendedores.map((vendedor) => ({
+                value: vendedor.name,
+                label: vendedor.name,
+              }))}
+              classNamePrefix="select"
+            />
+          </InputGroup>
+
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Estado</InputGroup.Text>
+            <ReactSelect
+              id="pro_estado"
+              name="pro_estado"
+              value={{
+                value: newProduct.pro_estado,
+                label: newProduct.pro_estado || "Seleccione estado",
+              }}
+              onChange={(selectedOption) => {
+                setNewProduct({
+                  ...newProduct,
+                  pro_estado: selectedOption.value,
+                });
+              }}
+              options={["Disponible", "No disponible", "Reservado"].map(
+                (estado) => ({
                   value: estado,
                   label: estado,
-                }))}
-                styles={{
-                  control: (provided) => ({
-                    ...provided,
-                    width: "230px", // Cambia el ancho según tus necesidades, p. ej., '300px'
-                  }),
-                  option: (provided) => ({
-                    ...provided,
-                    color: "black",
-                  }),
-                }}
-              />
-            </div>
-            <div>
-                <label htmlFor="pro_numero">Número vendedor</label>
-                <input
-                  type="number"
-                  className="form-control"
-                  name="pro_numero"
-                  value={newProduct.pro_numero}
-                  onChange={handleInputChange}
-                />
-              </div>
-            <div className="form-group-pair">
-              <div>
-                <label htmlFor="pro_imagen">Imagen</label>
-                <input
-                  type="file"
-                  className="form-control"
-                  name="pro_imagen"
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <label className="btn-save-container" onClick={handleSave}>
-                Guardar
-              </label>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+                })
+              )}
+              classNamePrefix="select"
+            />
+          </InputGroup>
+
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Número Vendedor</InputGroup.Text>
+            <FormControl
+              type="number"
+              placeholder="Número del vendedor"
+              name="pro_numero"
+              value={newProduct.pro_numero}
+              onChange={handleInputChange}
+            />
+          </InputGroup>
+
+          <InputGroup className="mb-3">
+            <InputGroup.Text>Imagen del Producto</InputGroup.Text>
+            <FormControl
+              type="file"
+              name="pro_imagen"
+              onChange={handleInputChange}
+            />
+          </InputGroup>
+          <Button variant="primary" onClick={handleSave}>
+            Guardar
+          </Button>
+        </Form>
+      </Modal.Body>
+    </Modal>
   );
 };
 

@@ -70,7 +70,7 @@ function NavigationBar({ role, isLoggedIn }) {
                   style={{ color: "white" }}
                   to="/product-list"
                 >
-                  Gestionar Producto
+                  Añadir Productos
                 </Nav.Link>
                 <Nav.Link as={Link} style={{ color: "white" }} to="/sales">
                   Ventas

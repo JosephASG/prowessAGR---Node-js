@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './VendorsPage.css';
-import SearchBar from '../components/SearchBar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ModalEditVendor from '../components/ModalEditVendors';
@@ -41,14 +40,6 @@ function VendorsPage() {
       .then((data) => setVendors(data))
       .catch((error) => console.error('Error al cargar los vendedores', error));
   }, []);
-
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value);
-  };
-
-  const handleSearch = (event) => {
-    setSearchTerm(event.target.value);
-  };
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);

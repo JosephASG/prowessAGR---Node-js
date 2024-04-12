@@ -10,7 +10,7 @@ const upload = multer({ storage: almacenamiento });
 
 // Crear un nuevo usuario
 userRoute.post('/login',upload.none(),usuario.loginUser);
-userRoute.post('/register', upload.single("imagenUsuario"), usuario.registerUser);
+userRoute.post('/register', usuario.registerUser);
 userRoute.get('/',tokencontroller.verifyToken,usuario.getUserById);
 userRoute.post('/password',tokencontroller.verifyToken,usuario.requestPasswordReset);
 userRoute.get('/getAll',tokencontroller.verifyToken,usuario.getUsers);

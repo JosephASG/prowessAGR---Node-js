@@ -42,11 +42,14 @@ export const registerApp = async (user) => {
   try {
     const response = await axios.post(`${WEBURL}fb/usuario/register`, user, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
     });
     return response;
   } catch (error) {
-    console.log(error);
+    if (process.env.REACT_APP_DEBUG_MODE === "true") {
+      console.log("Detailed error logging enabled", error);
+    }
+    throw error;
   }
 };

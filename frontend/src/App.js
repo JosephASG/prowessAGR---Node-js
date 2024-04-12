@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Footer, Header } from "./components/General";
 import Login from "./pages/Login";
-import Register from "./pages/Register.js";
+import Register from "./pages/Register/Register.js";
 import { Home } from "./pages/Home";
 import StorePage from "./pages/StorePage";
 import ShoppingCart from "./components/ShoppingCart";
@@ -69,7 +69,6 @@ function App() {
         />
         <Route path="/recuperar-contrasena" element={<PasswordReset />} />
         <Route path="/recuperar-cuenta" element={<AccountReset />} />
-        <Route path="/password-send" element={<PasswordSend />} />
 
         <Route path="/tienda" element={<StorePage />} />
 

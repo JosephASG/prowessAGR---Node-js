@@ -45,7 +45,6 @@ function PagoPage({ clearCart }) {
   }, []);
 
   const handleContinueShoppingClick = () => {
-    clearCart();
     setRedirect(true);
   };
 

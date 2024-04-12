@@ -21,7 +21,7 @@ const ProductList = () => {
   const [productToEdit, setProductToEdit] = useState(null);
 
   const [sortCriteria, setSortCriteria] = useState(null);
-  const [sortedColumn, setSortedColumn] = useState(null); // Estado para almacenar la columna por la que se ordena [nombre, precio, stock, categoria
+  const [sortedColumn, setSortedColumn] = useState(null);
   const [filterProduct, setFilterProduct] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -86,7 +86,6 @@ const ProductList = () => {
 
   const handleEdit = (editedProduct) => {
     setProductToUpdate(editedProduct);
-    //handleUpdateProduct(); // Llamar a la función para guardar los cambios
   };
 
   useEffect(() => {
@@ -179,8 +178,8 @@ const ProductList = () => {
           onClose={() => setIsEditModalOpen(false)}
           productToEdit={productToEdit}
           handleEdit={handleEdit}
-          categorias={categorias} // Pasa las categorías aquí
-          vendedores={vendedores} // Pasa los vendedores aquí
+          categorias={categorias}
+          vendedores={vendedores}
         />
         <div className="filter-row">
           <label style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".2px white", color: "white"}}>Filtrar por Producto:</label>

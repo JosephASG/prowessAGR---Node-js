@@ -1,45 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Register.css"; // Importa el archivo de estilos CSS
-import Mapa from "../components/Mapa.js";
+import Mapa from "../../components/Mapa.js";
 import Swal from "sweetalert2";
-import { registerApp } from "../services/auth";
-import { getUsers } from "../services/user";
-import { provincesApi } from "../services/ubication";
-
-const validarCedulaEcuatoriana = (cedula) => {
-  if (cedula.length === 10 && /^[0-9]+$/.test(cedula)) {
-    var digitos = cedula.substr(0, 9);
-    var suma = 0;
-
-    for (var i = 0; i < digitos.length; i++) {
-      var digito = parseInt(digitos[i]);
-      if (i % 2 === 0) {
-        digito *= 2;
-        if (digito > 9) {
-          digito -= 9;
-        }
-      }
-      suma += digito;
-    }
-
-    var verificador = 10 - (suma % 10);
-    if (verificador === 10) {
-      verificador = 0;
-    }
-
-    var ultimoDigito = parseInt(cedula[9]);
-
-    return verificador === ultimoDigito;
-  } else if (
-    (cedula.length === 8 || cedula.length === 9) &&
-    /^[A-Z0-9]+$/.test(cedula)
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-};
+import { registerApp } from "../../services/auth.js";
+import { getUsers } from "../../services/user.js";
+import { provincesApi } from "../../services/ubication.js";
+import { validarCedulaEcuatoriana } from "./utils/validator.js";
 
 function Register() {
   const [name, setName] = useState("");
@@ -52,7 +18,6 @@ function Register() {
   const [nCedula, setNCedula] = useState("");
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
-  const [photo, setPhoto] = useState(null);
   const [province, setProvince] = useState("");
   const [city, setCity] = useState("");
   const [latitud, setLatitud] = useState("");
@@ -141,7 +106,7 @@ function Register() {
       setIsCedulaValid(true);
     }
   };
-  
+
   const checkPasswordStrength = (password) => {
     // Evaluar la longitud de la contraseña
     if (password.length < 6) {
@@ -162,13 +127,14 @@ function Register() {
       (hasNumber && hasSpecialChar) ||
       (hasUpperCase && hasSpecialChar)
     ) {
-      return "Alta"; // Cumple con dos de los criterios
+      return "Alta";
     } else if (hasNumber || hasSpecialChar || hasUpperCase || hasLowerCase) {
-      return "Media"; // Cumple con uno de los criterios
+      return "Media";
     } else {
-      return "Débil"; // No cumple con ninguno de los criterios
+      return "Débil";
     }
   };
+
   const handleEmailChange = async (e) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
@@ -207,9 +173,9 @@ function Register() {
   const isFormValid = () => {
     const requiredFields = [
       name,
-      name2,
+
       lastName,
-      lastName2,
+
       email,
       nPhone,
       nCedula,
@@ -218,7 +184,6 @@ function Register() {
       city,
       mainStreet,
       secondaryStreet,
-      photo,
     ];
     const hasEmptyFields = requiredFields.some((field) => field === "");
     const isCedulaOrRucValid =
@@ -231,7 +196,6 @@ function Register() {
       !hasEmptyFields &&
       isCedulaOrRucValid &&
       arePasswordsValid &&
-      photo !== null &&
       isTermsAccepted
     );
   };
@@ -260,19 +224,7 @@ function Register() {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log(
-      "Registro de usuario:",
-      name,
-      userType,
-      nPhone,
-      nCedula,
-      password,
-      photo,
-      province,
-      city,
-      mainStreet,
-      secondaryStreet
-    );
+
     const formData = new FormData();
     formData.append("nombreUsuario", name);
     formData.append("apellidoUsuario", lastName);
@@ -295,7 +247,6 @@ function Register() {
     );
     formData.append("tipoAsociacionUsuario", additionalField1);
     formData.append("claveUsuario", password);
-    formData.append("imagenUsuario", photo);
 
     try {
       const response = await registerApp(formData);
@@ -321,29 +272,6 @@ function Register() {
       ) {
         setShowFullErrorMessage(true);
       }
-    }
-  };
-
-  const handlePhotoUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imgURL = URL.createObjectURL(file);
-
-      const img = new Image();
-      img.src = imgURL;
-      img.onload = () => {
-        const width = img.width;
-        const height = img.height;
-
-        if (width <= 150 && height <= 150) {
-          setPhoto(file);
-        } else {
-          alert("La imagen debe tener un tamaño máximo de 150px por 150px.");
-          e.target.value = "";
-        }
-
-        URL.revokeObjectURL(imgURL);
-      };
     }
   };
 
@@ -543,30 +471,6 @@ function Register() {
           <p className="error-message">Las contraseñas no coinciden</p>
         )}
 
-        <div className="custom-file-input-container">
-          <input
-            className="register-input  register-input-image"
-            type="file"
-            accept="image/*"
-            name="user-image"
-            title="Selecciona una imagen de perfil"
-            onChange={handlePhotoUpload}
-            required
-          />
-          <span className="custom-file-input-label">
-            Subir Imagen de Perfil
-          </span>
-
-          {photo && (
-            <div>
-              <img
-                src={URL.createObjectURL(photo)}
-                alt="Foto de perfil"
-                className="image-show"
-              />
-            </div>
-          )}
-        </div>
         <p className="register-subtitle">Seleccione su ubicación: </p>
         <Mapa onLocationSelect={handleLocationSelect} />
 
@@ -625,13 +529,35 @@ function Register() {
           }}
           required
         />
-        <div className="vendedor-section">
-          <input
-            type="checkbox"
-            onChange={() => setShowAdditionalFields(!showAdditionalFields)}
-            id="quieroSerVendedor"
-          />
-          <label htmlFor="quieroSerVendedor">Deseo ser vendedor</label>
+        <div>
+          <div className="vendedor-section">
+            <p>Seleccione su rol:</p>
+            <div>
+              <input
+                type="radio"
+                id="comprador"
+                name="role"
+                value="comprador"
+                checked={!showAdditionalFields}
+                onChange={() => setShowAdditionalFields(false)}
+              />
+              <label htmlFor="comprador">Comprador</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="vendedor"
+                name="role"
+                value="vendedor"
+                checked={showAdditionalFields}
+                onChange={() => setShowAdditionalFields(true)}
+              />
+              <label htmlFor="vendedor">Vendedor</label>
+            </div>
+          </div>
+          <br />
+          <br />
+          <br />
         </div>
 
         <div className="condiciones-section">
@@ -708,11 +634,11 @@ function Register() {
       {isFormValid() && (
         <style>
           {`
-            .register-button:hover,
-            .register-button.valid {
-              background-color: #45a049;
-            }
-          `}
+              .register-button:hover,
+              .register-button.valid {
+                background-color: #45a049;
+              }
+            `}
         </style>
       )}
     </div>
