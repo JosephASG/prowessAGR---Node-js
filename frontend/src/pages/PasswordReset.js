@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./PasswordReset.css";
+import { useNavigate } from "react-router-dom"; 
 import ModalPassword from "../components/ModalPassword";
 import Swal from "sweetalert2";
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';  
 
 function PasswordReset() {
   const [email, setEmail] = useState("");
@@ -17,7 +17,6 @@ function PasswordReset() {
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
   const [newPassword, setNewPassword] = useState("");
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
 
   const checkPasswordStrength = (newPassword) => {
@@ -165,124 +164,164 @@ function PasswordReset() {
   };
 
   return (
-    <div className="password-reset-container">
-      <h2 className="password-reset-title">Recuperación de Contraseña</h2>
-      <p style={{ fontSize: "15px", marginBottom: "10%" }}>
-        Por favor, ingrese su correo electrónico para recuperar su contraseña
-      </p>
-      {error && <p className="password-reset-error">{error}</p>}
-      <form onSubmit={handleSubmitEmail} className="password-reset-form">
-        <input
-          type="email"
-          placeholder="Ingresa tu correo electrónico"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="password-reset-input"
-          required
-        />
-        <div className="password-reset-buttons">
-          <button type="submit" className="password-reset-button">
-            Enviar Código
-          </button>
-          <button
-            type="button"
-            className="password-reset-cancel"
-            onClick={handleCancel}
-          >
-            Cancelar
-          </button>
-        </div>
-      </form>
-      {showCodeVerificationModal && (
-        <ModalPassword handleCancelModal={handleCancelModal}>
-          <h2 className="modalTitle">Código de Verificación</h2>
-          <p className="modalParagraph">
-            Por favor, ingrese el código enviado a su correo electrónico
-          </p>
-          <input
-            type="text"
-            className="modalInput"
-            onChange={(e) => {
-              setRecoveryCode(e.target.value);
-            }}
-          />
-          <button className="modalButton" onClick={handleVerifyCode}>
-            Enviar
-          </button>
-        </ModalPassword>
-      )}
-      {showChangePasswordModal && (
-        <ModalPassword handleCancelModal={handleCancelModal}>
-          <h2 className="modalChangePasswordTitle">Cambio de Contraseña</h2>
-          <p className="modalChangePasswordParagraph">
-            Por favor, ingrese la nueva contraseña
-          </p>
-          <div className="password-container">
-            <input
-              className="register-input"
-              type={showPassword ? "text" : "password"}
-              placeholder="Contraseña"
-              value={newPassword}
-              onChange={(e) => {
-                setNewPassword(e.target.value);
-                handlePasswordBlur(e);
-              }}
-              minLength={6}
-              maxLength={30}
-              required
-            />
-            <button
-              onClick={() => {
-                setShowPassword(!showPassword);
-              }}
-              style={{
-                height: "30px", // Establecer la altura del botón igual a la altura del input
-                marginLeft: "5px",
-                borderRadius: "10px", // Agregar un margen izquierdo para separar el botón del input
-              }}
-            >
-              👁
-            </button>
+    <Container>
+      <Row className="justify-content-center">
+        <Col md="6">
+          <div className="password-reset-container" style={{
+            fontFamily: 'Montserrat, sans-serif',
+            maxWidth: '400px',
+            margin: 'auto',
+            padding: '40px',
+            border: '3px solid #167603',
+            borderRadius: '10px',
+            backgroundColor: 'rgba(47, 134, 166, 0.4)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+            minHeight: '350px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginBottom: '45px'
+          }}>
+            <h2 className="password-reset-title" style={{
+              fontSize: '28px',
+              color: 'white',
+              marginBottom: '20px',
+              textAlign: 'center'
+            }}>Recuperación de Contraseña</h2>
+            <p style={{ fontSize: "15px", marginBottom: "10%" , color: 'white', textAlign:'center'}}>
+              Por favor, ingrese su correo electrónico para recuperar su contraseña
+            </p>
+            {error && <p className="password-reset-error">{error}</p>}
+            <Form onSubmit={handleSubmitEmail} className="password-reset-form">
+              <Form.Group controlId="formBasicEmail">
+                <Form.Control
+                  type="email"
+                  placeholder="Ingresa tu correo electrónico"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="password-reset-input"
+                  required
+                />
+              </Form.Group>
+              <div className="password-reset-buttons" style={{ marginTop: '10px' }}>
+  <Button type="submit" className="password-reset-button" style={{ backgroundColor: 'green', borderColor: 'green', marginRight: '5px' }}>
+    Enviar Código
+  </Button>
+  <Button
+    type="button"
+    className="password-reset-cancel"
+    onClick={handleCancel}
+    style={{ backgroundColor: 'red', borderColor: 'red' }}
+  >
+    Cancelar
+  </Button>
+</div>
+            </Form>
+            {showCodeVerificationModal && (
+              <ModalPassword handleCancelModal={handleCancelModal} className="custom-modal">
+              <div style={{ textAlign: 'center', backgroundColor:'seagreen', padding:'0px'}}>
+                <h2 className="modalTitle" style={{ color: 'white' }}>Código de Verificación</h2>
+                <p className="modalParagraph" style={{ color: 'white' }}>
+                  Por favor, ingrese el código enviado a su correo electrónico
+                </p>
+                <Form.Control
+                  type="text"
+                  className="modalInput"
+                  onChange={(e) => {
+                    setRecoveryCode(e.target.value);
+                  }}
+                  style={{ backgroundColor: 'white' }}
+                />
+                <Button onClick={handleVerifyCode} style={{backgroundColor: 'green', border: '2px solid green', borderRadius: '10px'}}>
+                  Enviar
+                </Button>
+              </div>
+            </ModalPassword>
+            
+            
+            )}
+            {showChangePasswordModal && (
+              <ModalPassword handleCancelModal={handleCancelModal} className="custom-modal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ textAlign: 'center' }}>
+                <h2 className="modalChangePasswordTitle" style={{ color: 'white' }}>Cambio de Contraseña</h2>
+                <p className="modalChangePasswordParagraph" style={{ color: 'white' }}>
+                  Por favor, ingrese la nueva contraseña
+                </p>
+                <div className="password-container">
+                  <Form.Control
+                    className="register-input"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Contraseña"
+                    value={newPassword}
+                    onChange={(e) => {
+                      setNewPassword(e.target.value);
+                      handlePasswordBlur(e);
+                    }}
+                    minLength={6}
+                    maxLength={30}
+                    required
+                  />
+                  <Button
+                    onClick={() => {
+                      setShowPassword(!showPassword);
+                    }}
+                    style={{
+                      height: "30px",
+                      marginLeft: "1px",
+                      borderRadius: "10px",
+                      backgroundColor: 'green',
+                      border: '2px solid green'
+                    }}
+                  >
+                    👁
+                  </Button>
+                </div>
+                <div className="password-strength-indicator" style={{ fontSize: "15px", marginBottom: "10%", color: 'white' }}>
+                  Fuerza de la contraseña: {passwordStrength}
+                </div>
+            
+                <div className="password-container">
+                  <Form.Control
+                    className="register-input"
+                    type={showPasswordConfirm ? "text" : "password"}
+                    placeholder="Confirme Contraseña"
+                    onChange={handlePasswordBlur}
+                    required
+                  />
+                  <Button
+                    onClick={() => {
+                      setShowPasswordConfirm(!showPasswordConfirm);
+                    }}
+                    style={{
+                      height: "30px",
+                      marginLeft: "5px",
+                      borderRadius: "10px",
+                      backgroundColor: 'green',
+                      border: '2px solid green'
+                    }}
+                  >
+                    👁
+                  </Button>
+                </div>
+                {error !== "" && (
+                  <p style={{ color: "red", fontSize: "15px" }}>Error: {error}</p>
+                )}
+                <Button
+                  disabled={!validPassword}
+                  onClick={handleChangePassword}
+                  style={{ backgroundColor: 'green', border: '2px solid green', borderRadius: '10px', marginTop: '10px', color: 'white' }}
+                >
+                  Cambiar Contraseña
+                </Button>
+              </div>
+            </ModalPassword>            
+            )}
           </div>
-          <div className="password-strength-indicator">
-            Fuerza de la contraseña: {passwordStrength}
-          </div>
+        </Col>
+      </Row>
+    </Container>
+  );  
 
-          <div className="password-container">
-            <input
-              className="register-input"
-              type={showPasswordConfirm ? "text" : "password"}
-              placeholder="Confirme Contraseña"
-              onChange={handlePasswordBlur}
-              required
-            />
-            <button
-              onClick={() => {
-                setShowPasswordConfirm(!showPasswordConfirm);
-              }}
-              style={{
-                height: "30px", // Establecer la altura del botón igual a la altura del input
-                marginLeft: "5px",
-                borderRadius: "10px", // Agregar un margen izquierdo para separar el botón del input
-              }}
-            >
-              👁
-            </button>
-          </div>
-          {error !== "" && (
-            <p style={{ color: "red", fontSize: "15px" }}>Error: {error}</p>
-          )}
-          <button
-            disabled={!validPassword}
-            className="modalButton"
-            onClick={handleChangePassword}
-          >
-            Cambiar Contraseña
-          </button>
-        </ModalPassword>
-      )}
-    </div>
-  );
 }
 
 export default PasswordReset;
