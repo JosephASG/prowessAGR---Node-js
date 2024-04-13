@@ -23,6 +23,7 @@ import {
   faEnvelope,
   faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
+import ModalChangeUserData from "components/User/ModalChangeUserData";
 
 const ProfileTab = ({ user }) => (
   <Tab.Pane eventKey="perfil">
@@ -31,8 +32,7 @@ const ProfileTab = ({ user }) => (
       {user.province}
     </p>
     <p style={{ color: "black", textAlign: "left" }}>
-      <FontAwesomeIcon icon={faCity} /> <strong>Ciudad:</strong>{" "}
-      {user.city}
+      <FontAwesomeIcon icon={faCity} /> <strong>Ciudad:</strong> {user.city}
     </p>
     <p style={{ color: "black", textAlign: "left" }}>
       <FontAwesomeIcon icon={faAddressBook} /> <strong>Dirección:</strong>{" "}
@@ -55,9 +55,10 @@ const SecurityTab = () => (
     </Row>
     <Row className="justify-content-center">
       <Col md={6} className="d-flex justify-content-center mb-3">
-        <Button variant="secondary" className="button-custom-account">
-          <FontAwesomeIcon icon={faLock} /> Cambiar Contraseña
-        </Button>
+        <ModalChangeUserData
+          faLock={faLock}
+          modalName={"Cambiar Contraseña"}
+        ></ModalChangeUserData>
       </Col>
       <Col md={6} className="d-flex justify-content-center mb-3">
         <Button variant="secondary" className="button-custom-account">
