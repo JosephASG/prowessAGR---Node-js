@@ -494,6 +494,11 @@ export const changeEmail = async (req, res) => {
   }
 }
 
+async function isEmailAvailable(newEmail) {
+  const userRef = collection(fs, "usuario");
+  const querySnapshot = await getDocs(query(userRef, where("email", "==", newEmail)));
+  return querySnapshot.empty; // Retorna true si el email no está en uso, false si ya está en uso
+}
 
 export const changeEmailVerification = async (req, res) => {
   const { email, securityCode, newEmail } = req.body;
@@ -502,12 +507,17 @@ export const changeEmailVerification = async (req, res) => {
     return res.status(400).json({ message: "Falta información." });
   }
 
+  const emailAvailable = await isEmailAvailable(newEmail);
+  if (!emailAvailable) {
+    return res.status(409).json({ message: "El nuevo correo electrónico ya está en uso por otro usuario." });
+  }
   try {
     const userRef = collection(fs, "usuario");
     const querySnapshot = await getDocs(
       query(userRef, where("email", "==", email))
     )
 
+    
     if (querySnapshot.empty) {
       return res.status(404).json({ message: "Usuario no encontrado." });
     }

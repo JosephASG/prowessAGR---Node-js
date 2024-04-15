@@ -40,7 +40,6 @@ const ProductList = () => {
     if (response.data) {
       setProducts(data);
     } else {
-      console.log(response.data.message);
     }
   };
 
@@ -99,7 +98,6 @@ const ProductList = () => {
       return;
     }
 
-    console.log("productToUpdate:", productToUpdate.id);
 
     fetch(`${WEBURL}fb/producto/${productToUpdate.id}`, {
       method: "PUT",

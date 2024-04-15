@@ -46,11 +46,9 @@ function App() {
 
   const checkAuth = async (token) => {
     let response = await getTokenData(token);
-    console.log("Token", response);
     if (response && response.data) {
       const data = response.data;
       setRole(data.data.rol);
-      console.log(role);
       setIsLoggedIn(true);
     } else {
       localStorage.removeItem("token");

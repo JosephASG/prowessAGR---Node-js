@@ -51,8 +51,7 @@ function PagoPage({ clearCart }) {
   if (redirect) {
     return <Navigate to="/tienda" />;
   }
-  console.log("si llega aquixd", usuario)
-  console.log("Nombre", usuario.nombre)
+
   const enviarCorreo = () => {
     const logoUrl =
       "https://media.discordapp.net/attachments/1157817962267426861/1217555996055048293/zyro-image_2.png?ex=66047462&is=65f1ff62&hm=229b05eccf55d81d23be809d04a26a73b7f1a5be0cf220f5a738e6b7760cd720&=&format=webp&quality=lossless&width=1252&height=587";
