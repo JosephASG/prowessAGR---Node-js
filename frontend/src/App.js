@@ -153,7 +153,7 @@ function App() {
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={["administrator", "vendedor"]}
+              allowedRoles={["administrador", "vendedor"]}
               element={<CategoriesPage />}
             />
           }

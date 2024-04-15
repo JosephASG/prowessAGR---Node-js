@@ -128,7 +128,6 @@ function VendorsPage() {
     })
       .then((response) => {
         if (response.ok) {
-          // Actualiza la lista de productos después de la actualización en el backend
           setVendors((prevVendors) =>
             prevVendors.map((vendor) =>
               vendor.id === vendorToUpdate.id ? vendorToUpdate : vendor

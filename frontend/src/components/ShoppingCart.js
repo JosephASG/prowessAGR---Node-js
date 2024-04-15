@@ -69,7 +69,9 @@ function ShoppingCart({ setOrden }) {
       apellido: data.data.lastname,
       email: data.data.email,
       telefono: data.data.cellphone,
+      direccion: data.data.address,
     };
+    console.log(usuario);
     setUsuario(usuario);
   };
 

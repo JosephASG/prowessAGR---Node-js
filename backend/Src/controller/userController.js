@@ -1,7 +1,5 @@
-import * as firebase from "firebase/app";
 import * as firestore from "firebase/firestore";
 import "firebase/storage";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   query,
   doc,
@@ -13,14 +11,14 @@ import {
 import { sendEmail } from "../helpers/mailer.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { fs, storage } from "../database/firebase.js";
+import { fs } from "../database/firebase.js";
 import dotenv from "dotenv";
 
 dotenv.config();
 const saltRounds = 10;
 
 
-const registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
   try {
     const userData = req.body;
 
@@ -363,7 +361,7 @@ const verifyRecoveryCode = async (req, res) => {
   }
 };
 
-const recoverAccountByCedula = async (req, res) => {
+export const recoverAccountByCedula = async (req, res) => {
   const { cedula } = req.body;
 
   if (!cedula) {
@@ -427,7 +425,159 @@ const recoverAccountByCedula = async (req, res) => {
   }
 };
 
-const updatePasswordWithRecoveryCode = async (req, res) => {
+
+export const changeEmail = async (req, res) => {
+  const { email } = req.body;
+
+  if (!email) {
+    return res.status(400).json({ message: "Falta información." });
+  }
+
+  try {
+    const userRef = collection(fs, "usuario");
+    const querySnapshot = await getDocs(
+      query(userRef, where("email", "==", email))
+    )
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "Usuario no encontrado." });
+    }
+    const userDoc = querySnapshot.docs[0];
+    const user = userDoc.data();
+
+    const tempToken = Math.random().toString(36).substr(2, 8);
+
+    await updateDoc(doc(fs, "usuario", userDoc.id), {
+      tempToken: tempToken,
+    });
+
+    const subject = "Cambio de Correo";
+    const htmlContent = `<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; padding: 0; color: #333; }
+            .container { max-width: 600px; margin: auto; background: #f8f8f8; padding: 20px; border-radius: 10px; border: 1px solid #eee; }
+            h2 { color: #4CAF50; }
+            p { margin: 20px 0; }
+            .code { font-size: 24px; font-weight: bold; color: #4CAF50; }
+            .footer { margin-top: 40px; font-size: 12px; text-align: center; color: #999; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Recuperación de Contraseña</h2>
+            <p>Has solicitado restablecer tu contraseña. Usa el siguiente código para continuar el proceso en nuestra aplicación:</p>
+            <p class="code">${tempToken}</p>
+            <p>Si no has solicitado cambiar tu contraseña, por favor ignora este correo electrónico o ponte en contacto con nosotros si tienes alguna duda.</p>
+            <div class="footer">
+                <p>Gracias por usar nuestra aplicación.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    `;
+
+    sendEmail(email, subject, htmlContent, (error, info) => {
+      if (error) {
+        console.error("Error al enviar email:", error);
+        res
+          .status(500)
+          .json({ message: "Error al enviar el código de recuperación" });
+      } else {
+        res.json({ message: "Código de recuperación enviado" });
+      }
+    });
+  } catch {
+    console.error("Error al actualizar la contraseña:", error);
+    res.status(500).json({ message: "Error interno del servidor." });
+  }
+}
+
+
+export const changeEmailVerification = async (req, res) => {
+  const { email, securityCode, newEmail } = req.body;
+
+  if (!email || !securityCode || !newEmail) {
+    return res.status(400).json({ message: "Falta información." });
+  }
+
+  try {
+    const userRef = collection(fs, "usuario");
+    const querySnapshot = await getDocs(
+      query(userRef, where("email", "==", email))
+    )
+
+    if (querySnapshot.empty) {
+      return res.status(404).json({ message: "Usuario no encontrado." });
+    }
+    const userDoc = querySnapshot.docs[0];
+    const user = userDoc.data();
+
+    if (user.email === newEmail) {
+      return res.status(401).json({ message: "El correo electronico debe ser diferente" });
+    };
+
+    if (user.tempToken === securityCode) {
+      await updateDoc(doc(fs, "usuario", userDoc.id), {
+        email: newEmail,
+        tempToken: null,
+      });
+
+      const subject = "Correo actualizado";
+      const htmlContent = `<!DOCTYPE html>
+      <html>
+      <head>
+          <style>
+              body { font-family: Arial, sans-serif; margin: 20px; padding: 0; color: #333; }
+              .container { max-width: 600px; margin: auto; background: #f8f8f8; padding: 20px; border-radius: 10px; border: 1px solid #eee; }
+              h2 { color: #4CAF50; }
+              p { margin: 20px 0; }
+              .code { font-size: 24px; font-weight: bold; color: #4CAF50; }
+              .footer { margin-top: 40px; font-size: 12px; text-align: center; color: #999; }
+          </style>
+      </head>
+      <body>
+          <div class="container">
+              <h2>Recuperación de Contraseña</h2>
+              <p>Has solicitado restablecer tu contraseña. Usa el siguiente código para continuar el proceso en nuestra aplicación:</p>
+              <p class="code">${newEmail}</p>
+              <p>Si no has solicitado cambiar tu contraseña, por favor ignora este correo electrónico o ponte en contacto con nosotros si tienes alguna duda.</p>
+              <div class="footer">
+                  <p>Gracias por usar nuestra aplicación.</p>
+              </div>
+          </div>
+      </body>
+      </html>
+      `;
+
+      sendEmail(newEmail, subject, htmlContent, (error, info) => {
+        if (error) {
+          console.error("Error al enviar email:", error);
+          res
+            .status(500)
+            .json({ message: "Error al enviar el código de recuperación" });
+        } else {
+          res.json({ message: "Código de recuperación enviado" });
+        }
+      });
+      res.json({ message: "El correo fue actualizado de manera exitosa" });
+    } else {
+      res
+        .status(400)
+        .json({ message: "Código de recuperación inválido o expirado." });
+    }
+  }
+
+  catch {
+    console.error("Error al actualizar la contraseña:");
+    res.status(500).json({ message: "Error interno del servidor." });
+  }
+
+}
+
+
+export const updatePasswordWithRecoveryCode = async (req, res) => {
   const { email, code, newPassword } = req.body;
 
   if (!email || !code || !newPassword) {
@@ -466,9 +616,10 @@ const updatePasswordWithRecoveryCode = async (req, res) => {
   }
 };
 
+
+
 export {
   loginUser,
-  registerUser,
   getUserById,
   requestPasswordReset,
   getUsers,
@@ -478,6 +629,5 @@ export {
   deleteUserById,
   sendRecoveryCode,
   verifyRecoveryCode,
-  recoverAccountByCedula,
-  updatePasswordWithRecoveryCode,
+
 };

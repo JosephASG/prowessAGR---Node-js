@@ -51,7 +51,8 @@ function PagoPage({ clearCart }) {
   if (redirect) {
     return <Navigate to="/tienda" />;
   }
-
+  console.log("si llega aquixd", usuario)
+  console.log("Nombre", usuario.nombre)
   const enviarCorreo = () => {
     const logoUrl =
       "https://media.discordapp.net/attachments/1157817962267426861/1217555996055048293/zyro-image_2.png?ex=66047462&is=65f1ff62&hm=229b05eccf55d81d23be809d04a26a73b7f1a5be0cf220f5a738e6b7760cd720&=&format=webp&quality=lossless&width=1252&height=587";
@@ -73,13 +74,13 @@ function PagoPage({ clearCart }) {
     pdf.setFont("times", "normal"); // Restaurar el estilo de fuente normal
 
     pdf.setFontSize(12);
-    pdf.text(`Estimado/a ${usuario.name},`, 10, 60);
+    pdf.text(`Estimado/a ${usuario.nombre},`, 10, 60);
     pdf.text(
       `Gracias por comprar con nosotros. Tu pedido ${orderNumber} está confirmado. Te avisaremos cuando se envíe.`,
       10,
       70
     );
-    pdf.text(`Dirección de envío: ${usuario.address}`, 10, 80);
+    pdf.text(`Dirección de envío: ${usuario.direccion}`, 10, 80);
 
     // Agregar los detalles del pedido
     pdf.text("Detalles del Pedido", 10, 90);
@@ -153,7 +154,7 @@ function PagoPage({ clearCart }) {
     const pdfBase64 = pdf.output("datauristring").split("base64,")[1];
 
     const htmlContent = `
-    <p>Estimado/a ${usuario.name},</p>
+    <p>Estimado/a ${usuario.nombre},</p>
     <p>Gracias por tu compra. Adjunto encontrarás el comprobante de tu pedido.</p>
     <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
     <!-- Aquí puedes incluir más contenido HTML como desees -->

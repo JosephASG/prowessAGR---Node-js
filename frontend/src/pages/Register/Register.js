@@ -72,8 +72,10 @@ function Register() {
         cellphone: cellphone,
       };
 
+      
       try {
         const response = await registerApp(formData);
+        navigate("/login");
         Swal.fire("Registro Exitoso", "", "success");
       } catch (error) {
         console.error("Error en el registro:", error.message);
