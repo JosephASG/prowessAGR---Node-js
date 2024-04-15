@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, Form, FormGroup, FormControl, InputGroup, Label } from 'react-bootstrap';
-
-const WEBURL = process.env.REACT_APP_API_URL;
+import { Modal, Button, Form, FormGroup, FormControl } from 'react-bootstrap';
+import { addVendor } from 'services/vendor';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
   const [newVendor, setNewVendor] = useState({
@@ -10,6 +11,9 @@ const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
     address: '',
     phoneNumber: '',
   });
+
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const body = document.body;
@@ -22,32 +26,34 @@ const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewVendor({
-      ...newVendor,
-      [name]: value,
-    });
+    setNewVendor(prev => ({ ...prev, [name]: value }));
   };
 
-  const onSave = (e) => {
+
+  const onSave = async (e) => {
     e.preventDefault();
-    fetch(`${WEBURL}/fb/vendedor/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newVendor),
-    })
-    .then((response) => {
-      if (response.ok) {
-        handleAddVendor(newVendor); // Assuming handleAddVendor updates the parent state
-        onClose();
-      } else {
-        console.error('Error al agregar el vendedor en el servidor');
-      }
-    })
-    .catch((error) => {
-      console.error('Error de red al agregar el vendedor', error);
-    });
+    try {
+      const data = await addVendor(newVendor);
+      Swal.fire({
+        title: 'Éxito!',
+        text: 'Vendedor registrado correctamente',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then((result) => {
+        if (result.isConfirmed || result.isDismissed) {
+          onClose();
+          navigate('/vendedores/');
+        }
+      });
+    } catch (error) {
+      console.error('Error al agregar el vendedor:', error);
+      Swal.fire({
+        title: 'Error',
+        text: 'No se pudo registrar el vendedor: ' + error.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
   };
 
   return (
@@ -58,46 +64,27 @@ const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
       <Modal.Body>
         <Form onSubmit={onSave}>
           <FormGroup>
-            <Form.Label htmlFor="name">Nombre</Form.Label>
-            <FormControl
-              type="text"
-              name="name"
-              required
-              value={newVendor.name}
-              onChange={handleInputChange}
-            />
+            <Form.Label>Nombre</Form.Label>
+            <FormControl type="text" name="name" required value={newVendor.name} onChange={handleInputChange} />
           </FormGroup>
           <FormGroup>
-            <Form.Label htmlFor="city">Ciudad</Form.Label>
-            <FormControl
-              type="text"
-              name="city"
-              required
-              value={newVendor.city}
-              onChange={handleInputChange}
-            />
+            <Form.Label>Ciudad</Form.Label>
+            <FormControl type="text" name="city" required value={newVendor.city} onChange={handleInputChange} />
           </FormGroup>
           <FormGroup>
-            <Form.Label htmlFor="address">Dirección</Form.Label>
-            <FormControl
-              type="text"
-              name="address"
-              required
-              value={newVendor.address}
-              onChange={handleInputChange}
-            />
+            <Form.Label>Cedula/RUC/Pasaporte</Form.Label>
+            <FormControl type="text" name="identification" required value={newVendor.identification} onChange={handleInputChange}>
+            </FormControl>
           </FormGroup>
           <FormGroup>
-            <Form.Label htmlFor="phoneNumber">Teléfono</Form.Label>
-            <FormControl
-              type="text"
-              name="phoneNumber"
-              required
-              value={newVendor.phoneNumber}
-              onChange={handleInputChange}
-            />
+            <Form.Label>Dirección</Form.Label>
+            <FormControl type="text" name="address" required value={newVendor.address} onChange={handleInputChange} />
           </FormGroup>
-          <Button variant="primary" style={{marginTop:"15px"}} type="submit">
+          <FormGroup>
+            <Form.Label>Teléfono</Form.Label>
+            <FormControl type="text" name="phoneNumber" required value={newVendor.phoneNumber} onChange={handleInputChange} />
+          </FormGroup>
+          <Button variant="primary" type="submit" style={{ marginTop: '15px' }}>
             Guardar
           </Button>
         </Form>

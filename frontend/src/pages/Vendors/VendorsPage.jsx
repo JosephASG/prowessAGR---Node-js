@@ -14,7 +14,6 @@ function VendorsPage() {
   const [vendorToEdit, setVendorToEdit] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const handleSearch = (term) => {
     const lowercasedTerm = term.toLowerCase();
     const filtered = vendors.filter(
@@ -44,7 +43,11 @@ function VendorsPage() {
       <Row>
         <Col>
           <h1 className="text-white">LISTA DE VENDEDORES</h1>
-          <Button variant="primary" style={{marginBottom:"15px"}} onClick={() => setShowAddModal(true)}>
+          <Button
+            variant="primary"
+            style={{ marginBottom: "15px" }}
+            onClick={() => setShowAddModal(true)}
+          >
             Agregar Vendedor
           </Button>
           <Col>
