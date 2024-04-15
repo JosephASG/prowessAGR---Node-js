@@ -8,7 +8,7 @@ import { Home } from "./pages/Home";
 import StorePage from "./pages/StorePage";
 import ShoppingCart from "./components/ShoppingCart";
 import ShoppingCartPage from "./components/ShoppingCartPage";
-import VendorsPage from "./pages/VendorsPage";
+import VendorsPage from "./pages/Vendors/VendorsPage";
 import { MyAccountPage } from "./pages/Account/";
 import ProductList from "./pages/ProductList";
 import AboutUs from "./pages/AboutUs/AboutUs.js";

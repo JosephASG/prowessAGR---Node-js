@@ -30,7 +30,6 @@ export const registerUser = async (req, res) => {
     );
     const emailQuerySnapshot = await getDocs(emailSnapshot);
     if (!emailQuerySnapshot.empty) {
-      console.log("El correo electrónico ya está en uso");
       return res
         .status(401)
         .send({ message: "El correo electrónico ya está en uso" });
@@ -67,7 +66,6 @@ export const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   try {
     const userData = req.body;
-    console.log("Datos recibidos:", userData);
 
     const snapshot = await query(
       firestore.collection(fs, "usuario"),
@@ -76,18 +74,15 @@ const loginUser = async (req, res) => {
     const querySnapshot = await getDocs(snapshot);
 
     if (querySnapshot.empty) {
-      console.log("No se encontró usuario con ese email");
       return res.status(401).send({ message: "Email o Contraseña Inválidos", estado: false });
     }
 
     const user = querySnapshot.docs[0].data();
     user.id = querySnapshot.docs[0].id;
-    console.log("Usuario encontrado:", user);
 
     const secret = process.env.JWT_SECRET;
     if (bcrypt.compareSync(userData.password, user.password)) {
       const token = jwt.sign({ id: user.id, rol: user.roleUser }, secret, { expiresIn: "20h" });
-      console.log("Token generado:", token);
       res.json({ mensaje: "Usuario Logeado Correctamente", estado: true, usuario: { token } });
     } else {
       console.log("Contraseña incorrecta");
