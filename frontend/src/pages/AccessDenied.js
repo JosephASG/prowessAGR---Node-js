@@ -1,39 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import image1 from '../imagenes/denegado.png'
-function HomePage() {
-  const images = [
-    require('../imagenes/agr3.jpg'),
-    require('../imagenes/agr2.jpg'),
-    require('../imagenes/agr5.jpg'),
-    require('../imagenes/agr4.jpg'),
-    require('../imagenes/agr1.jpg'),
-  ];
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';  // Si necesitas un carrusel, considera instalar 'react-bootstrap/Carousel'
+import image1 from '../imagenes/denegado.png';
 
+function AccessDeniedPage() {
   return (
-    <div className="home-page">
-
-      <div className='part2'>
-        <p className='p1'>Acceso Denegado</p>
-        <p className= 'p2'>No puedes acceder a esa pagina, ya que el rol que cumples tiene restringido ciertos lugares.</p>
-        <p className= 'p2'>Gracias por tu comprensión</p>
-        <img src={image1} alt="Imagen 1" />
-      </div>
-
-      <div className="home-page-subtitle">
-          <center>
+    <Container className="mt-5" style={{color:"white", marginBottom:"50px"}}>
+      <Row className="justify-content-center">
+        <Col md={6} className="text-center">
+          <h1 className="mb-3">Acceso Denegado</h1>
+          <p>No puedes acceder a esta página debido a las restricciones de tu rol.</p>
+          <p>Gracias por tu comprensión.</p>
+          <img src={image1} alt="Acceso Denegado" className="img-fluid" />
+        </Col>
+      </Row>
+      <Row className="mt-4 justify-content-center">
+        <Col xs={12} sm={6} md={4} className="text-center">
           <Link to="/registro">
-          <button className='RegistroHome'>Registro</button>
-        </Link>
-        <Link to="/Login">
-          <button className='RegistroHome'>Iniciar Sesion</button>
-        </Link>
-        </center>
-        </div>
-    </div>
+            <Button variant="primary" size="lg" className="mb-2 w-100">Registro</Button>
+          </Link>
+          <Link to="/login">
+            <Button variant="secondary" size="lg" className="w-100">Iniciar Sesión</Button>
+          </Link>
+        </Col>
+      </Row>
+    </Container>
   );
 }
 
-export default HomePage;
+export default AccessDeniedPage;
