@@ -12,6 +12,7 @@ const fetchApi = (url, options) => {
 
 export const fetchVendors = async () => {
   try {
+    
     const response = await axios.get(`${API_URL}fb/vendedor/`);
     return response.data;
   } catch (error) {

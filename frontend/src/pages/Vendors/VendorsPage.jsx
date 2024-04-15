@@ -5,6 +5,7 @@ import ModalAddVendor from "components/ModalAddVendor";
 import VendorList from "./VendorList";
 import { fetchVendors } from "services/vendor";
 import SearchBar from "./VendorSearch";
+import Loading from "components/General/Loading";
 
 function VendorsPage() {
   const [vendors, setVendors] = useState([]);
@@ -13,6 +14,7 @@ function VendorsPage() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [vendorToEdit, setVendorToEdit] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSearch = (term) => {
     const lowercasedTerm = term.toLowerCase();
@@ -25,6 +27,7 @@ function VendorsPage() {
     setFilteredVendors(filtered);
   };
   useEffect(() => {
+
     fetchVendors()
       .then((data) => {
         setVendors(data);
@@ -32,14 +35,23 @@ function VendorsPage() {
       })
       .catch((error) => console.error("Error al cargar los vendedores", error));
   }, []);
-  useEffect(() => {
+
+ useEffect(() => {
     fetchVendors()
-      .then(setVendors)
-      .catch((error) => console.error("Error al cargar los vendedores", error));
+      .then(data => {
+        setVendors(data);  // Actualiza el estado con los datos recibidos
+        setIsLoading(false);  // Establece isLoading a false después de cargar los datos
+      })
+      .catch((error) => {
+        console.error("Error al cargar los vendedores", error);
+        setIsLoading(false);  // También establece isLoading a false en caso de error
+      });
   }, []);
 
   return (
     <Container className="mt-5">
+      {isLoading && <Loading></Loading>}
+
       <Row>
         <Col>
           <h1 className="text-white">LISTA DE VENDEDORES</h1>

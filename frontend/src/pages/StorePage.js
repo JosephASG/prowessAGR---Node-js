@@ -14,6 +14,7 @@ function StorePage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [lastAddedTime, setLastAddedTime] = useState(0);
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -46,6 +47,12 @@ function StorePage() {
   };
 
   const addToCart = (productToAdd) => {
+    const now = new Date().getTime();
+    if (now - lastAddedTime < 2000) {
+      toast.error('Espera al menos dos segundos antes de añadir otro producto.');
+      return;
+    }
+    setLastAddedTime(now);
     setCart((prevCart) => {
       const productIndex = prevCart.findIndex(
         (product) => product.id === productToAdd.id
@@ -161,9 +168,8 @@ function StorePage() {
             {categories.map((category, index) => (
               <li
                 key={index}
-                className={`list-group-item ${
-                  selectedCategories.includes(category) ? "active" : ""
-                }`}
+                className={`list-group-item ${selectedCategories.includes(category) ? "active" : ""
+                  }`}
                 onClick={() => toggleCategory(category)}
                 style={{ cursor: "pointer" }}
               >
