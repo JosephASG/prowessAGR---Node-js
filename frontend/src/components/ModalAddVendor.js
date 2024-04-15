@@ -4,12 +4,13 @@ import { addVendor } from 'services/vendor';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 
-const ModalAddVendor = ({ isOpen, onClose, handleAddVendor }) => {
+const ModalAddVendor = ({ isOpen, onClose }) => {
   const [newVendor, setNewVendor] = useState({
     name: '',
     city: '',
     address: '',
     phoneNumber: '',
+    identification: ''
   });
 
   const navigate = useNavigate();
