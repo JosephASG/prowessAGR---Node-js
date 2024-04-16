@@ -172,13 +172,13 @@ function PagoPage({ clearCart }) {
       ],
     };
 
-    // sendMail(emailData)
-    //   .then((data) => {
-    //     console.log("Correo enviado exitosamente:", data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error al enviar el correo:", error);
-    //   });
+     sendMail(emailData)
+       .then((data) => {
+         console.log("Correo enviado exitosamente:", data);
+       })
+       .catch((error) => {
+         console.error("Error al enviar el correo:", error);
+       });
   };
 
   const handleShareButtonClick = () => {
