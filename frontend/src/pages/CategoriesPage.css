@@ -1,16 +1,14 @@
 body {
-  color: #fff;
+  color: #ffffff;
 }
 
 .container-product-list {
-  max-width: 1300px;
+  max-width: auto;
   margin: 0 auto;
   padding: 20px;
-  background-color: rgba(47, 134, 166, 0.3);
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 2px solid #ff8c00; /* Borde de 3px de ancho y color azul */
-
+  background-color: rgb(255, 255, 255);
+  border-radius: 6px;
+  border: 3px solid seagreen; /* Borde de 3px de ancho y color azul */
 }
 
 .header-row-category-list {
@@ -21,28 +19,32 @@ body {
   padding: 5px;
   text-align: center;
   border-bottom: 1px solid white;
+  margin-left: 8%;
+  margin-right: 8%;
 }
 
 .container-products {
   display: grid;
-  gap: 20px;
+  gap: 15px;
 }
 
 .category {
   display: grid;
   grid-template-columns: 3fr 3fr 3fr;
-  border: 1px solid orange;
-  border-radius: 5px;
-  padding: 10px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  padding: 15px;
   align-items: center;
   text-align: center;
-  gap: 1rem; /* Espacio entre columnas */
+  gap: 15%; /* Espacio entre columnas */
+  margin-left: 9%;
+  margin-right: 9%;
 }
 
 h1 {
   margin-top: 0;
   text-align: center;
-  text-shadow: -1px -1px 0 #000,
+  text-shadow: -1px -1px 0 #ffffff,
     /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
       0 #000,
     /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
@@ -53,7 +55,7 @@ h1 {
 }
 
 b {
-  text-shadow: -1px -1px 0 #000,
+  text-shadow: -1px -1px 0 #ffffff,
     /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
       0 #000,
     /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
@@ -65,18 +67,16 @@ b {
 
 .btn-add-container {
   display: flex;
-  justify-content: center;
   margin-bottom: 15px;
 }
 
 .btn-add-product {
-  height: 50px;
+  height: 40px;
   width: 170px;
-  background: linear-gradient(45deg, orange, #ff8c00);
+  background: seagreen;
   color: white;
   border-radius: 5px;
   padding: 10px 20px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
   border-width: 0px;
   top: 80%;
@@ -87,7 +87,6 @@ b {
 
 .btn-add-product:hover {
   transform: scale(1.1);
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
 
@@ -114,23 +113,23 @@ b {
 .fa-icon-edit {
   margin-right: 3px;
   font-size: 1.5em;
-  color: white;
+  color: rgb(2, 101, 71);
   cursor: pointer;
 }
 
 .fa-icon-edit:hover {
-  color: rgb(159, 226, 255);
+  color: rgb(152, 226, 161);
 }
 
 .fa-icon-edit:active {
-  color: rgb(127, 179, 201);
+  color: rgb(152, 226, 161);
 }
 
 .filter-row {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  text-shadow: -1px -1px 0 #000,
+  text-shadow: -1px -1px 0 #ffffff,
     /* Sombra en la esquina superior izquierda (x, y, tamaño, color) */ 1px -1px
       0 #000,
     /* Sombra en la esquina superior derecha (x, y, tamaño, color) */ -1px 1px 0
@@ -141,19 +140,21 @@ b {
 }
 
 .filter-row label {
-  margin-right: 10px;
+  margin-left: 15%;
+  margin-right: 5px;
 }
 
 .filter-row input[type="text"] {
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  width: 200px;
+  width: 300px;
+  margin-right: 1%;
 }
 
 .filter-row input[type="text"]:focus {
   outline: none;
-  border-color: #007bff;
+  border-color: green;
 }
 
 .pagination {
@@ -161,12 +162,13 @@ b {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  padding-bottom: 20px;
 }
 
 .pagination button {
   padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
+  background-color: green;
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -174,7 +176,7 @@ b {
 }
 
 .pagination button:hover {
-  background-color: #ff8c00;
+  background-color: #7fde9b;
 }
 
 .pagination span {
@@ -188,9 +190,10 @@ b {
   }
 
   .product {
+    background-color: #ffffff;
     display: grid;
     grid-template-columns: 3fr 3fr 2fr 3fr 3fr 3fr;
-    border: 1px solid orange;
+    border: 1px solid seagreen;
     border-radius: 5px;
     padding: 10px;
     align-items: center;

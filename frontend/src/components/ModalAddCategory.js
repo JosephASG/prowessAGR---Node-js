@@ -60,6 +60,7 @@ const handleSave = async () => {
                   <textarea
                     className="form-control"
                     name="descripcionCategoria"
+                    style={{width: '180%', height: '100px'}}	
                     value={newSupplier.descripcionCategoria}
                     onChange={handleInputChange}
                   />

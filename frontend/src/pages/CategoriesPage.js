@@ -5,6 +5,7 @@ import './CategoriesPage.css';
 import ModalAddCategory from '../components/ModalAddCategory';
 import ModalEditCategory from '../components/ModalEditCategory';
 import { getCategories, deleteCategory, updateCategory} from '../services/category';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]); // Cambiamos a "categories" en lugar de "products"
@@ -120,74 +121,88 @@ const CategoryList = () => {
   const categoriesToDisplay = sortedAndFilteredCategories.slice(startIndex, endIndex);
 
   return (
-     isLoading===false ? (<p>Cargando...</p>):(
-      <div className="container-product-list">
-      <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>LISTA DE CATEGORIAS</h1>
-            <div className='btn-add-container'>
-            <button onClick={handleOpenModal} className='btn-add-product' style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>Agregar Categoría</button>
-          </div>
-          <div>
-            <ModalAddCategory isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
-            <ModalEditCategory
-              isOpen={isEditModalOpen}
-              onClose={() => setIsEditModalOpen(false)}
-              categoryToEdit={categoryToEdit}
-              handleEdit={handleEdit}
-            />
-          <div className="filter-row">
-            <label style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".3px white", color: "white"}}>Filtrar por Categoría:</label>
-            <input
-              type="text"
-              value={filterCategory}
-              onChange={(e) => handleFilter(e.target.value)}
-            />
-          </div>
-          </div>
-          <div className="header-row-category-list">
-            <b onClick={() => handleSort('nombre')} style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Nombre</b>
-            <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Descripción</b>
-            <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Acciones</b>
-          </div>
-    
-          <div className="container-products">
-            {categoriesToDisplay.map((category) => (
-              <div className="category" key={category.id}>
-                <div>{category.nombreCategoria}</div>
-                <div>{category.descripcionCategoria}</div>
-                <div className='actions-container'>
-                  <FontAwesomeIcon
-                    className="fa-icon-edit"
-                    icon={faPenToSquare}
-                    onClick={() => handleEditCategory(category)}
-                  />
-                  <FontAwesomeIcon
-                    className="fa-icon-trash"
-                    icon={faTrash}
-                    onClick={() => handleDelete(category.id)}
-                  />
+    isLoading === false ? (
+      <p>Cargando...</p>
+    ) : (
+      <Container fluid>
+        <h1 style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white" }}>LISTA DE CATEGORIAS</h1>
+        <div className='btn-add-container'>
+          <Button onClick={handleOpenModal} className='btn-add-product' style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white" }}>Agregar Categoría</Button>
+        </div>
+        <Row>
+          <ModalAddCategory isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
+          <ModalEditCategory
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+            categoryToEdit={categoryToEdit}
+            handleEdit={handleEdit}
+          />
+          <Col>
+            <div className="filter-row">
+              <Form.Label style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white" }}>Filtrar por Categoría:</Form.Label>
+              <Form.Control
+                type="text"
+                value={filterCategory}
+                onChange={(e) => handleFilter(e.target.value)}
+              />
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="header-row-category-list">
+              <b onClick={() => handleSort('nombre')} style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white" }}>Nombre</b>
+              <b style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white" }}>Descripción</b>
+              <b style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white" }}>Acciones</b>
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="container-products" style={{color: 'black', margin: '10px 50px' }}>
+              {categoriesToDisplay.map((category) => (
+                <div className="category" style={{backgroundColor:'white'}} key={category.id}>
+                  <div>{category.nombreCategoria}</div>
+                  <div>{category.descripcionCategoria}</div>
+                  <div className='actions-container'>
+                    <FontAwesomeIcon
+                      className="fa-icon-edit"
+                      icon={faPenToSquare}
+                      onClick={() => handleEditCategory(category)}
+                    />
+                    <FontAwesomeIcon
+                      className="fa-icon-trash"
+                      icon={faTrash}
+                      onClick={() => handleDelete(category.id)}
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className="pagination">
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Anterior
-            </button>
-            <span>{currentPage}</span>
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-            >
-              Siguiente
-            </button>
-          </div>
-          
-    </div>
-    ) 
-  );
+              ))}
+            </div>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <div className="pagination">
+              <Button
+                onClick={() => setCurrentPage(currentPage - 1)}
+                disabled={currentPage === 1}
+              >
+                Anterior
+              </Button>
+              <span style={{color:"white"}}>{currentPage}</span>
+              <Button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                disabled={currentPage === totalPages}
+              >
+                Siguiente
+              </Button>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    )
+  );  
 };
 
 export default CategoryList;

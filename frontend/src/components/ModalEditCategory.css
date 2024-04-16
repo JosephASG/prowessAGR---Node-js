@@ -13,7 +13,7 @@
 }
 
 .modal-content-product {
-  background-color: rgba(47, 134, 166);
+  background-color: seagreen;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -46,7 +46,7 @@
 
 .btn-save {
   background-color: #007bff;
-  color: #000;
+  color: #ffffff;
   padding: 10px;
   border: none;
   border-radius: 4px;
