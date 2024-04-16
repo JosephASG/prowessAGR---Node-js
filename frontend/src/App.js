@@ -162,7 +162,7 @@ function App() {
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={[""]}
+              allowedRoles={["administrador"]}
               element={<UserList />}
             />
           }

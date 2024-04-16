@@ -172,13 +172,13 @@ function PagoPage({ clearCart }) {
       ],
     };
 
-    sendMail(emailData)
-      .then((data) => {
-        console.log("Correo enviado exitosamente:", data);
-      })
-      .catch((error) => {
-        console.error("Error al enviar el correo:", error);
-      });
+    // sendMail(emailData)
+    //   .then((data) => {
+    //     console.log("Correo enviado exitosamente:", data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error al enviar el correo:", error);
+    //   });
   };
 
   const handleShareButtonClick = () => {
@@ -261,12 +261,12 @@ function PagoPage({ clearCart }) {
                       </button>
                     </a>
                     <button
-                      className="btn btn-success btn-share"
+                    style={{ marginLeft:"15px"}}
+                      className="btn btn-success"
                       onClick={handleShareButtonClick}
                     >
                       <div>
                         <i className="fab fa-whatsapp"></i> Compartir
-                        <div className="image-whatsapp"></div>
                       </div>
                     </button>
                     <p className="pagopage-factura-datos"></p>
