@@ -7,6 +7,15 @@ import ModalEditProduct from "../components/ModalEditProduct";
 import { getProductsFromApi, deleteProduct } from "../services/product";
 import { getCategories } from "../services/category";
 import { getSellers } from "../services/seller";
+import {
+  Button,
+  Table,
+  Container,
+  Row,
+  Col,
+  Image,
+  Form,
+} from "react-bootstrap";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -23,7 +32,10 @@ const ProductList = () => {
   const [sortCriteria, setSortCriteria] = useState(null);
   const [sortedColumn, setSortedColumn] = useState(null);
   const [filterProduct, setFilterProduct] = useState("");
+  const [productsPerPage, setProductsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
+  const [startProductPage, setStartProductPage] = useState(null);
+  const [endProductPage, setEndProductPage] = useState(null);
 
   const [productToUpdate, setProductToUpdate] = useState(null);
 
@@ -40,6 +52,7 @@ const ProductList = () => {
     if (response.data) {
       setProducts(data);
     } else {
+      console.log(response.data.message);
     }
   };
 
@@ -98,6 +111,7 @@ const ProductList = () => {
       return;
     }
 
+    console.log("productToUpdate:", productToUpdate.id);
 
     fetch(`${WEBURL}fb/producto/${productToUpdate.id}`, {
       method: "PUT",
@@ -123,10 +137,38 @@ const ProductList = () => {
       });
   };
 
+  const filterPages = (products) => {
+    console.log(products.length);
+    console.log(currentPage);
+    console.log(productsPerPage);
+    console.log(
+      "Datos que se tiene:\n " +
+        "COMBOBOX:" +
+        Number(productsPerPage) +
+        "\nnumero de productos:" +
+        Number(products.length) +
+        "\nPÁGINA ACTUAL" +
+        Number(currentPage)
+    );
+    let inicio =
+      Number(productsPerPage) * Number(currentPage) - productsPerPage;
+    let final = inicio + Number(productsPerPage);
+    setStartProductPage(inicio);
+    setEndProductPage(final);
+    console.log("NÚMERO DE INICIO: " + inicio + "FINAL:" + final);
+  };
+  //PARA FILTRAR N ELEMENTOS POR PÁGINA.
+  useEffect(() => {
+    setProductsPerPage(productsPerPage);
+    filterPages(products);
+  }, [products, filterPages]);
+  //AQUÍ ESTÁN ALGUNOS FILTROS
   const handleSort = (criteria) => {
     setSortCriteria(criteria);
     setSortedColumn(criteria);
   };
+
+  // DEBES IMPLEMENTAR UNA FUNCIÓN DÓNDE LAS PÁGINAS NO SE HABILITEN PARA CAMBIAR SI NO EXISTEN SUFICIENTES ELEMENTOS A MOSTRAR.
 
   const handleFilter = (product) => {
     setFilterProduct(product);
@@ -159,34 +201,159 @@ const ProductList = () => {
   );
 
   return (
-    <div className="container-product-list">
-      <h1 style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white"}}>LISTA DE PRODUCTOS</h1>
+    <Container responsive>
+      <h1
+        style={{
+          textShadow: "none",
+          fontFamily: "Roboto",
+          WebkitTextStroke: "1.5px white",
+          color: "white",
+        }}
+      >
+        LISTA DE PRODUCTOS
+      </h1>
       <div className="btn-add-container">
-        <button onClick={handleOpenModal} className="btn-add-product" style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".5px white", color: "white"}}>
+        <Button
+          onClick={() => {
+            handleOpenModal();
+            console.log(products);
+          }}
+          variant="success"
+          size="lg"
+          style={{
+            textShadow: "none",
+            fontFamily: "Roboto",
+            WebkitTextStroke: ".5px white",
+            color: "white",
+          }}
+        >
           Agregar Producto
-        </button>
+        </Button>
       </div>
-      <div>
-        <ModalAddProducts
-          isOpen={isAddModalOpen}
-          onClose={() => setIsAddModalOpen(false)}
+
+      <div className="filter-row">
+        <label
+          style={{
+            textShadow: "none",
+            fontFamily: "Roboto",
+            WebkitTextStroke: ".2px white",
+            color: "white",
+          }}
+        >
+          Filtrar por Producto:
+        </label>
+        <input
+          type="text"
+          value={filterProduct}
+          onChange={(e) => handleFilter(e.target.value)}
         />
-        <ModalEditProduct
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          productToEdit={productToEdit}
-          handleEdit={handleEdit}
-          categorias={categorias}
-          vendedores={vendedores}
-        />
-        <div className="filter-row">
-          <label style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".2px white", color: "white"}}>Filtrar por Producto:</label>
-          <input
-            type="text"
-            value={filterProduct}
-            onChange={(e) => handleFilter(e.target.value)}
-          />
-        </div>
+      </div>
+      <Table
+        responsive="lg"
+        striped
+        bordered
+        hover
+        size="sm"
+        variant="light"
+        style={{
+          textAlign: "center",
+          verticalAlign: "middle",
+        }}
+      >
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Vendedor/a</th>
+            <th>Ingreso</th>
+            <th>Caducidad</th>
+            <th>Detalles</th>
+            <th>Stock</th>
+            <th>Precio</th>
+            {/* DETALLES: Dentro va lo de Descripción, Estado, Medida, N° Vendedor*/}
+            <th>Foto</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.slice(startProductPage, endProductPage).map((product) => (
+            <tr key={product.id}>
+              <td>{product.pro_nombre}</td>
+              <td>{product.pro_vendedor}</td>
+              <td>{product.pro_fechaInicio}</td>
+              <td>{product.pro_fechaFinal}</td>
+              <td>
+                <Button variant="primary" size="sm">
+                  Detalles
+                </Button>
+              </td>
+              <td>{product.pro_stock}</td>
+              <td>{product.pro_precio}</td>
+              <td>
+                <Image src={product.pro_imagen} className="min-max-img" />
+              </td>
+
+              <td>
+                <Button variant="success" size="sm" style={{ margin: "5px" }}>
+                  Editar
+                </Button>
+                <Button
+                  onClick={() => handleDelete(product.id)}
+                  variant="danger"
+                  size="sm"
+                  style={{ margin: "5px" }}
+                >
+                  Borrar
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+        <Form.Select
+          onChange={(e) => {
+            filterPages(products);
+            setProductsPerPage(e.target.value);
+          }}
+          size="sm"
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={50}>50</option>
+        </Form.Select>
+      </Table>
+
+      <ModalAddProducts
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+      />
+      <ModalEditProduct
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        productToEdit={productToEdit}
+        handleEdit={handleEdit}
+        categorias={categorias}
+        vendedores={vendedores}
+      />
+
+      <div className="pagination">
+        <Button
+          variant="success"
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Anterior
+        </Button>
+        <span style={{ color: "white" }}>{currentPage}</span>
+        <Button
+          variant="success"
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          Siguiente
+        </Button>
+      </div>
+
+      {/* <div>
       </div>
       <div className="header-row-product-list">
         <b
@@ -299,8 +466,8 @@ const ProductList = () => {
         >
           Siguiente
         </button>
-      </div>
-    </div>
+      </div> */}
+    </Container>
   );
 };
 

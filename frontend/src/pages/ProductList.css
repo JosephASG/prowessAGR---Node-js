@@ -214,3 +214,8 @@ b {
     cursor:default;
     color:orange;
   }
+
+  .min-max-img{
+    min-width: 100px; /* Tamaño mínimo de la imagen */
+    max-width: 100px; /* Tamaño máximo de la imagen */
+  }

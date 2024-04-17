@@ -222,7 +222,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
             />
           </InputGroup>
 
-          <InputGroup className="mb-3">
+          <InputGroup className="mb-3" style={{ color: "black" }}>
             <InputGroup.Text>Vendedor</InputGroup.Text>
             <ReactSelect
               id="pro_vendedor"
@@ -245,7 +245,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
             />
           </InputGroup>
 
-          <InputGroup className="mb-3">
+          <InputGroup className="mb-3" style={{ color: "black" }}>
             <InputGroup.Text>Estado</InputGroup.Text>
             <ReactSelect
               id="pro_estado"
@@ -289,7 +289,13 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
               onChange={handleInputChange}
             />
           </InputGroup>
-          <Button variant="primary" onClick={handleSave}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleSave();
+              onClose(true);
+            }}
+          >
             Guardar
           </Button>
         </Form>
