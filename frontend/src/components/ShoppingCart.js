@@ -5,6 +5,7 @@ import "./ShoppingCart.css";
 import { Navigate } from "react-router-dom";
 import { createOrder } from "../services/order";
 import { checkToken } from "../services/auth";
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 
 function ShoppingCart({ setOrden }) {
   const [cart, setCart] = useState(
@@ -195,69 +196,71 @@ function ShoppingCart({ setOrden }) {
 
   const totalPrice = calculateTotalPrice().total;
 
-  return (
-    <div className="shopping-cart">
-      <div className="presentation">
-        <div className="tittle-page">
-          <h1>CARRITO DE COMPRAS</h1>
-        </div>
-      </div>
-      <div className="shopping-cart-info">
-        <div className="show-products">
-          {cart.map((product, index) => (
-            <div className="producto-cart" key={index}>
+return (
+  <Container className="shopping-cart">
+    <Container className="presentation">
+      <h1 style={{ textShadow: "none", color: "white" }}>CARRITO DE COMPRAS</h1>
+    </Container>
+    <Container className="shopping-cart-info">
+      <Row className="show-products">
+        {cart.map((product, index) => (
+          <Col key={index} xs={12} md={6} lg={3}>
+            <div className="producto-cart">
               <div className="img-product">
                 <img src={product.pro_imagen} alt={product.pro_nombre} />
               </div>
               <div className="name-product">
                 <h3>{product.pro_nombre}</h3>
                 <p className="separador-p">
-                  <b>Categoria:</b> {product.pro_categoria}
+                  <b style={{ textShadow: "none", color: "black" }}>Categoria:</b> {product.pro_categoria}
                 </p>
                 <p className="separador-p">
-                  <b>Precio:</b> ${product.pro_precio} x {product.pro_medida}
+                  <b style={{ textShadow: "none", color: "black" }}>Precio:</b> ${product.pro_precio} x {product.pro_medida}
                 </p>
                 <p className="separador-p">
-                  <b>Cantidad disponible:</b> {product.pro_stock}{" "}
+                  <b style={{ textShadow: "none", color: "black" }}>Cantidad disponible:</b> {product.pro_stock}{' '}
                   {product.pro_medida}
                 </p>
                 <p className="separador-p">
-                  <b>Vendedor:</b> {product.pro_vendedor}
+                  <b style={{ textShadow: "none", color: "black" }}>Vendedor:</b> {product.pro_vendedor}
                 </p>
               </div>
               <div className="cantidad-product">
-                <button
+                <Button
                   className="btn-add"
                   onClick={() => {
                     handleAddButton(product);
                   }}
                 >
                   +
-                </button>
+                </Button>
                 <div className="cantidad">
-                  <label htmlFor="pro_stock">Cantidad</label>
-                  <input
-                    type="number"
-                    min="1"
-                    max={product.pro_stock}
-                    className="cantidad-producto"
-                    name="pro_stock"
-                    value={product.pro_cantidad_cart}
-                    onInput={(e) => handleQuantityInput(e, product)}
-                    onBlur={(e) => handleQuantityBlur(e, product)}
-                  />
+                  <Form.Group controlId="pro_stock">
+                    <Form.Label style={{ textShadow: "none", color: "black" }}>Cantidad</Form.Label>
+                    <Form.Control
+                      type="number"
+                      min="1"
+                      max={product.pro_stock}
+                      className="cantidad-producto"
+                      name="pro_stock"
+                      value={product.pro_cantidad_cart}
+                      onInput={(e) => handleQuantityInput(e, product)}
+                      onBlur={(e) => handleQuantityBlur(e, product)}
+                    />
+                  </Form.Group>
                 </div>
-                <button
+                <Button
                   className="btn-remove"
                   onClick={() => handleRemoveFromCart(product)}
                 >
                   -
-                </button>
+                </Button>
               </div>
               <div className="price-product">
                 <p>
-                  <b>Total:</b> $
-                  {(product.pro_precio * product.pro_cantidad_cart).toFixed(2)}
+                  <b style={{ textShadow: "none", color: "black" }}>Total:</b> ${(
+                    product.pro_precio * product.pro_cantidad_cart
+                  ).toFixed(2)}
                 </p>
                 <div className="trash-bin-img">
                   <FontAwesomeIcon
@@ -268,30 +271,32 @@ function ShoppingCart({ setOrden }) {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-        <div className="total-price">
-          <p>
-            <span>
-              <b>Subtotal:</b> $ {calculateTotalPrice().subtotal}
-            </span>
-            <span>
-              <b>Precio envío:</b> ${calculateTotalPrice().shippingPrice}
-            </span>
-            <span>
-              <b>Total a pagar:</b> ${calculateTotalPrice().total}
-            </span>
-          </p>
-        </div>
-
-        {addedProducts.length > 0 && (
-          <button className="btn-buy" onClick={handleBuyButtonClick}>
-            <b>Generar compra</b>
-          </button>
-        )}
+          </Col>
+        ))}
+      </Row>
+      <div className="total-price" style={{ marginTop: '20px' }}>
+        <p>
+          <span style={{ display: 'block' }}>
+            <b style={{ textShadow: "none", color: "black" }}>Subtotal:</b> $ {calculateTotalPrice().subtotal}
+          </span>
+          <span style={{ display: 'block' }}>
+            <b style={{ textShadow: "none", color: "black" }}>Precio envío:</b> ${calculateTotalPrice().shippingPrice}
+          </span>
+          <span style={{ display: 'block' }}>
+            <b style={{ textShadow: "none", color: "black" }}>Total a pagar:</b> ${calculateTotalPrice().total}
+          </span>
+        </p>
       </div>
-    </div>
-  );
+
+      {addedProducts.length > 0 && (
+        <Button className="btn-buy" style={{border:'none'}} onClick={handleBuyButtonClick}>
+          <b style={{ textShadow: "none", color: "white" }}>Generar compra</b>
+        </Button>
+      )}
+    </Container>
+  </Container>
+);
+
 }
 
 export default ShoppingCart;
