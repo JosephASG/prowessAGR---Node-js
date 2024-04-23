@@ -96,7 +96,7 @@ function PasswordReset() {
       await fetchData("http://localhost:5000/fb/usuario/password-recovery", {
         email,
       });
-      await Swal.fire({
+      await Swal.fire({ 
         icon: "success",
         title: "Correo Electrónico Enviado",
         html: "Revise el código en su correo electrónico",
