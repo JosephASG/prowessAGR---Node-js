@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Carousel, Container, Row, Col, Button, Card } from "react-bootstrap";
+import { Carousel, Container, Row, Col, Button, Card} from "react-bootstrap";
 import {
   image1,
   image2,
@@ -61,7 +61,7 @@ function HomePage(props) {
                     <button className='buttonMain' variant="primary">Registro</button>
                   </Link>
                   <Link to="/login">
-                    <button style={{color:"white"}}className='buttonMainRegistro' variant="secondary">Iniciar Sesión</button>
+                    <button className='buttonMainRegistro' variant="secondary">Iniciar Sesión</button>
                   </Link>
                 </div>
               )}

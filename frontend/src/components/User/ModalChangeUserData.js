@@ -49,15 +49,15 @@ function ModalChangeUserData({ faLock, modalName }) {
                 Ver
               </Button>
               <InputGroup className="mb-3">
-              <Form.Control
-                placeholder="Confirmar Contraseña"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-              />
-              <Button variant="outline-secondary" id="button-addon2">
-                Ver
-              </Button>
-            </InputGroup>
+                <Form.Control
+                  placeholder="Confirmar Contraseña"
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                />
+                <Button variant="outline-secondary" id="button-addon2">
+                  Ver
+                </Button>
+              </InputGroup>
             </InputGroup>
           </Modal.Body>
           <Modal.Footer>
@@ -65,6 +65,33 @@ function ModalChangeUserData({ faLock, modalName }) {
               Close
             </Button>
             <Button variant="primary">Understood</Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+      {modalName === "Actualizar Email" && (
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>{modalName}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <p>Por favor, ingrese el nuevo correo electrónico que quiere cambiar.</p>
+            <InputGroup className="mb-3">
+              <Form.Control
+                placeholder="Nuevo Correo Electrónico"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+              />
+
+            </InputGroup>
+
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary">Cambiar</Button>
           </Modal.Footer>
         </Modal>
       )}

@@ -11,6 +11,8 @@ import {
   Row,
   Col,
   Nav,
+  Modal,
+  Form
 } from "react-bootstrap";
 import "./MyAccountPage.css";
 import { checkToken } from "../../services/auth";
@@ -61,9 +63,10 @@ const SecurityTab = () => (
         ></ModalChangeUserData>
       </Col>
       <Col md={6} className="d-flex justify-content-center mb-3">
-        <Button variant="secondary" className="button-custom-account">
-          <FontAwesomeIcon icon={faEnvelope} /> Actualizar Email
-        </Button>
+        <ModalChangeUserData
+          faLock={faLock}
+          modalName={"Actualizar Email"}
+        ></ModalChangeUserData>
       </Col>
     </Row>
     <Row className="justify-content-center">
