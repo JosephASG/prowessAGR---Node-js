@@ -6,6 +6,7 @@ import ModalAddCategory from '../components/ModalAddCategory';
 import ModalEditCategory from '../components/ModalEditCategory';
 import { getCategories, deleteCategory, updateCategory} from '../services/category';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import Loading from "components/General/Loading";
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]); // Cambiamos a "categories" en lugar de "products"
@@ -19,6 +20,7 @@ const CategoryList = () => {
   const [filterCategory, setFilterCategory] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+
   
   const token = localStorage.getItem('token');
 
@@ -30,6 +32,7 @@ const CategoryList = () => {
     if(categoriesToDisplay){
       setIsLoading(true);
     }
+
   }, []);
 
   const getCategory= async (token) => {
@@ -38,6 +41,8 @@ const CategoryList = () => {
       console.log(res);
       const data = res.data;
       setCategories(data);
+      setIsLoading(false);
+
     } catch (error) {
       console.error('Error al cargar las categorías', error);
     }
@@ -121,10 +126,9 @@ const CategoryList = () => {
   const categoriesToDisplay = sortedAndFilteredCategories.slice(startIndex, endIndex);
 
   return (
-    isLoading === false ? (
-      <p>Cargando...</p>
-    ) : (
+
       <Container fluid>
+        {isLoading && <Loading></Loading>}
         <h1 style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white" }}>LISTA DE CATEGORIAS</h1>
         <div className='btn-add-container'>
           <Button onClick={handleOpenModal} className='btn-add-product' style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white" }}>Agregar Categoría</Button>
@@ -201,7 +205,7 @@ const CategoryList = () => {
           </Col>
         </Row>
       </Container>
-    )
+    
   );  
 };
 
