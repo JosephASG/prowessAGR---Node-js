@@ -4,24 +4,19 @@ body {
 }
 
 .AboutUsInfo h1 {
-  color: white;
-  text-shadow: -1px -1px 0 greenyellow,
-    1px -1px 0 orange,
-    -1px 1px 0 orange,
-    1px 1px 0 orange;
+  color: #fff;
   margin-top: -30px;
+  text-align: center;
 }
 
 .pagopage {
   width: 90%;
-  /* Cambié el ancho a 90% para hacerlo más delgado */
   margin: 50px auto;
   padding: 20px;
   border-radius: 8px;
-  background-color: rgba(47, 134, 166, 0.3);
-  color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #FF8C00;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid seagreen;
 }
 
 .pagopage h2 {
@@ -31,6 +26,7 @@ body {
 
 .pagopage p {
   margin: 10px 0;
+  text-align: center;
 }
 
 .pagopage input {
@@ -44,8 +40,8 @@ body {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #FF8C00;
-  color: white;
+  background-color: #ff8c00;
+  color: #000;
   font-size: 18px;
   border: none;
   border-radius: 4px;
@@ -63,24 +59,21 @@ body {
 }
 
 .pagopage-image {
-  width: 70px;
-  height: auto;
+  width: 50px; 
+  height: 50px;
   margin: 0 10px;
 }
 
-/* AQUÍ VA LO DEL CENTRAR LOS ELEMENTOS DEL DIV PEDIDO */
 .contenedor-alineado {
   display: flex;
   align-items: center;
-}
-
-.contenedor-alineado>div {
-  flex: 1;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .imagen-producto-factura {
-  width: auto !important;
-  height: 250px !important;
+  width: auto; 
+  height: 250px;
 }
 
 .datos-factura-centrada {
@@ -88,35 +81,26 @@ body {
 }
 
 .pagopage-factura-container {
-  margin-right: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
-  width: 50em;
+  border: 3px solid #ccc;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
   padding: 10px;
   border-radius: 5px;
-  display: grid;
-  background-color: rgba(47, 134, 166, 0.3);
-  /*background-color: rgba(47, 134, 166, 0.3);*/
-  border: 2px solid orange;
-  color: white;
+  background-color: #fff; 
+  border: 2px solid seagreen;
+  color: #000; 
   text-align: center;
-  /* Agregado para centrar el contenido */
 }
 
 .pagopage-factura-container img {
   width: 100%;
-  /* Hace la imagen ocupar el 100% del ancho del contenedor */
   max-width: 500px;
-  /* Establece un ancho máximo para la imagen si es necesario */
   height: auto;
-  /* Mantiene la proporción de aspecto de la imagen */
   margin: 0 auto;
-  /* Centra la imagen horizontalmente dentro del contenedor */
   display: block;
-  /* Elimina el espacio adicional debajo de la imagen */
 }
-
 
 .pagopage-factura-datos {
   margin-bottom: 10px;
@@ -138,8 +122,8 @@ body {
   width: 200px;
   padding: 10px;
   margin: 30px auto;
-  background-color: #008CBA;
-  color: white;
+  background-color: #008cba;
+  color: #fff;
   font-size: 18px;
   border: none;
   border-radius: 4px;
@@ -147,122 +131,18 @@ body {
 }
 
 .seguir-comprando:hover {
-  background-color: #007B9A;
+  background-color: #007b9a;
 }
 
-/* Estilos copiados y adaptados para pantallas de 750px o menos */
-@media (max-width: 750px) {
-  .pagopage {
-    width: 100%;
-    margin: 15px;
-  }
-
-  .pagopage input,
-  .pagopage button {
-    margin: 5px;
-  }
-}
-
-
-.img-producto-factura {
-
-  width: 180px;
-  margin-left: 315px;
-  margin-bottom: 30px;
-  margin-top: -15px;
-}
-
-.boton-enviar {
-  background-color: #56bbee;
+.btn-whatsapp {
+  background-color: #25d366;
   color: #fff;
-  border: none;
-  padding: 4px 12px;
-  padding-right: 10px;
-  font-size: 14px;
   border-radius: 8px;
-  margin-left: 650px;
-  text-align: center;
-  margin-top: -35px;
-  margin-right: 40px;
-
-  transition: background-color 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  text-align: left;
-
-  i {
-    margin-right: 0px;
-    font-size: 20px;
-
-  }
-
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
+  width: 40%;
+  padding: 10px;
+  font-size: 14px; 
 }
 
-.btn-whatsapp{
-  background-color:#25d366;
-  color:#FFF;
-  border-radius:15px;
-  height:40px;
-}
-
-.btn-whatsapp a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.image-whatsapp {
-
-  max-width: 25px;
-  margin-left: 120px;
-  margin-top: -23px;
-}
-
-.btn-share {
-  background-color: #56bbee;
-  color: #fff;
-  border: none;
-  padding: 24px 0px;
-  font-size: 14px;
-  padding-top: 5px;
-  padding-bottom: 30px;
-  border-radius: 8px;
-  margin-left: -55%;
-  margin-top: -35px;
-  transition: background-color 0.3s, box-shadow 0.3s;
-  cursor: pointer;
-  text-decoration: none;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  /* Texto centrado */
-  display: inline-block;
-}
-
-.btn-share i {
-  margin-right: 0px;
-  font-size: 20px;
-}
-
-.btn-share:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.copied-link-message {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
-  z-index: 9999;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.copied-link-message-text {
-  font-size: 16px;
+.btn-whatsapp img {
+  max-width: 20px; 
 }

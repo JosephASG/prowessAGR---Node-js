@@ -7,6 +7,8 @@ import { checkToken } from "../services/auth";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { sendMail } from "../services/mailer";
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+
 function PagoPage({ clearCart }) {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [usuario, setUsuario] = useState(null);
@@ -196,102 +198,117 @@ function PagoPage({ clearCart }) {
   };
 
   return (
-    <div className="pagopage-container">
-      <div className="pagopage-form">
+    <Container className="pagopage-container">
+      <Row className="pagopage-form">
         {paymentSuccess && (
           <>
-            <div className="AboutUsInfo h1">
+            <div className="AboutUsInfo h1" style={{ marginBottom: "0px" }}>
               <h1>Su pago se ha completado correctamente</h1>
             </div>
-            <div className="pagopage-factura-container">
-              <img src={Check} alt="Imagen Pago" className="pagopage-image" />
+            <img 
+              src={Check} 
+              alt="Imagen Pago" 
+              className="pagopage-image" 
+              style={{
+                width: "50%", // La imagen ocupará la mitad del ancho disponible
+                height: "auto", // La altura se ajustará automáticamente para mantener la relación de aspecto
+                display: "block", // Para centrar la imagen
+                margin: "0 auto", // Para centrar la imagen horizontalmente
+                padding: "0px"
+              }} 
+            />
+            <Container>
               {cart &&
-                cart.map((product, index, vendor) => (
-                  <div
-                    key={index}
-                    style={{ padding: "0px 40px", paddingBottom: "40px" }}
-                  >
-                    <div className="contenedor-alineado">
-                      <div>
-                        <img
-                          src={product.pro_imagen}
-                          alt={product.pro_nombre}
-                          className="imagen-producto-factura"
-                        />
-                      </div>
-                      <div>
-                        <p className="datos-factura-centrada">
-                          <span className="pagopage-factura-label">
-                            Nº de orden:
-                          </span>
-                          {orderNumber}
-                        </p>
-                        <p className="datos-factura-centrada">
-                          <span className="pagopage-factura-label">
-                            Vendedor:
-                          </span>
-                          {product.pro_vendedor}
-                        </p>
-                        <p className="datos-factura-centrada">
-                          <span className="pagopage-factura-label">
-                            Compra:
-                          </span>
-                          {product.pro_nombre}
-                        </p>
-                        <p className="datos-factura-centrada">
-                          <span className="pagopage-factura-label">
-                            Cantidad:
-                          </span>
-                          {product.cantidad} {product.pro_medida}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="pagopage-gracias">¡Gracias por su compra!</p>
-                    <a
-                      href={`https://wa.me/${product.pro_numero}?text=Hola,%20he%20completado%20mi%20compra.%20¿Podemos%20ponernos%20en%20contacto%3F`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <button className="btn btn-success btn-whatsapp">
-                        <i className=""></i> ¡Contáctanos!{" "}
-                        <div className="image-whatsapp">
-                          <img src={whatsapp} alt="Whatsapp" />
+                cart.map((product, index) => (
+                  <div key={index} style={{ backgroundColor: "#fff", padding: "20px", borderRadius: "8px", border: "1px solid seagreen", marginBottom: "20px" }}>
+                    <Row>
+                      <Col md={4} sm={12}>
+                        <div className="contenedor-alineado">
+                          <img
+                            src={product.pro_imagen}
+                            alt={product.pro_nombre}
+                            className="imagen-producto-factura"
+                            style={{ width: "100%", height: "auto", maxWidth: "150px" }}
+                          />
                         </div>
-                      </button>
-                    </a>
-                    <button
-                    style={{ marginLeft:"15px"}}
-                      className="btn btn-success"
-                      onClick={handleShareButtonClick}
-                    >
-                      <div>
-                        <i className="fab fa-whatsapp"></i> Compartir
-                      </div>
-                    </button>
-                    <p className="pagopage-factura-datos"></p>
+                      </Col>
+                      <Col md={8} sm={12}>
+                        <div className="contenedor-alineado">
+                          <div>
+                            <p className="datos-factura-centrada">
+                              <span className="pagopage-factura-label">
+                                Nº de orden:
+                              </span>
+                              {orderNumber}
+                            </p>
+                            <p className="datos-factura-centrada">
+                              <span className="pagopage-factura-label">
+                                Vendedor:
+                              </span>
+                              {product.pro_vendedor}
+                            </p>
+                            <p className="datos-factura-centrada">
+                              <span className="pagopage-factura-label">
+                                Compra:
+                              </span>
+                              {product.pro_nombre}
+                            </p>
+                            <p className="datos-factura-centrada">
+                              <span className="pagopage-factura-label">
+                                Cantidad:
+                              </span>
+                              {product.cantidad} {product.pro_medida}
+                            </p>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col>
+                        <div className="contenedor-alineado" style={{ marginTop: "10px" }}>
+                          <Button
+                            className="btn btn-success btn-whatsapp"
+                            href={`https://wa.me/${product.pro_numero}?text=Hola,%20he%20completado%20mi%20compra.%20¿Podemos%20ponernos%20en%20contacto%3F`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ width: "40%", marginRight: "10px", fontSize: "14px" }}
+                          >
+                            ¡Contáctanos!
+                            <img src={whatsapp} alt="Whatsapp" style={{ maxWidth: "20px", marginLeft: "5px" }} />
+                          </Button>
+                          <Button
+                            className="btn btn-success btn-share"
+                            onClick={handleShareButtonClick}
+                            style={{ width: "40%", fontSize: "14px" }}
+                          >
+                            Compartir
+                            <i className="fab fa-whatsapp" style={{ marginLeft: "5px" }}></i>
+                          </Button>
+                        </div>
+                      </Col>
+                    </Row>
                   </div>
                 ))}
-
-              <p className="pagopage-gracias">
-                En breve nos pondremos en contacto con usted
-              </p>
-            </div>
-            <button className="btn-buy" onClick={handleContinueShoppingClick}>
-              <b>Seguir comprando</b>
-            </button>
+            </Container>
+            <p className="pagopage-gracias" style={{ textAlign: "center", marginTop: "20px", color:'white' }}>
+              En breve nos pondremos en contacto con usted
+            </p>
+            <Button onClick={handleContinueShoppingClick} style={{ display: "block", width: "200px", padding: "10px", margin: "30px auto", backgroundColor: "seagreen", color: "#fff", fontSize: "18px", border: "none", borderRadius: "4px", cursor: "pointer" }}>
+              <b style={{textShadow:'none'}}>Seguir comprando</b>
+            </Button>
           </>
         )}
         {showCopiedMessage && (
-          <div className="copied-link-message">
-            <span className="copied-link-message-text">
+          <div className="copied-link-message" style={{ textAlign: "center" }}>
+            <span className="copied-link-message-text" style={{color:'white'}}>
               ¡El enlace ha sido copiado al portapapeles!
             </span>
           </div>
         )}
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
+  
 }
 
 export default PagoPage;
