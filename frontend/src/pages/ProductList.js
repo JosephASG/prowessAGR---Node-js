@@ -7,6 +7,7 @@ import ModalEditProduct from "../components/ModalEditProduct";
 import { getProductsFromApi, deleteProduct } from "../services/product";
 import { getCategories } from "../services/category";
 import { getSellers } from "../services/seller";
+import Loading from "components/General/Loading";
 import {
   Button,
   Table,
@@ -36,7 +37,7 @@ const ProductList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [startProductPage, setStartProductPage] = useState(null);
   const [endProductPage, setEndProductPage] = useState(null);
-
+  const [isLoading, setIsLoading] = useState(true);
   const [productToUpdate, setProductToUpdate] = useState(null);
 
   useEffect(() => {
@@ -46,6 +47,11 @@ const ProductList = () => {
     handleVendedores(token);
   }, []);
 
+  useEffect(() => {
+    if (products.length > 0) {
+      setIsLoading(false); // Establece isLoading en false cuando los productos se han cargado correctamente
+    }
+  }, [products]);
   const handleProducts = async (token) => {
     const response = await getProductsFromApi(token);
     const data = await response.data;
@@ -81,6 +87,7 @@ const ProductList = () => {
       console.log(response);
       if (response.data) {
         setProducts(products.filter((product) => product.id !== productId));
+        
       } else {
         console.log(response.data.message);
       }
@@ -195,13 +202,11 @@ const ProductList = () => {
   );
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const productsToDisplay = sortedAndFilteredProducts.slice(
-    startIndex,
-    endIndex
-  );
+  const productsToDisplay = sortedAndFilteredProducts.slice(startIndex,endIndex);
 
   return (
     <Container responsive>
+       {isLoading && <Loading></Loading>}
       <h1
         style={{
           textShadow: "none",
