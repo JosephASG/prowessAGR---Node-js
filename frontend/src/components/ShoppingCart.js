@@ -162,6 +162,8 @@ function ShoppingCart({ setOrden }) {
   }
 
   const handleDeleteFromCart = (product) => {
+    const updatedCart = cart.filter((item) => item.id !== product.id);
+    setCart(updatedCart);
     console.log("PruebaRemover");
   };
 
