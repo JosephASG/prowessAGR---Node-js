@@ -5,7 +5,7 @@ import { getProductsFromApi } from "../services/product";
 import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import Loading from "components/General/Loading";
 import SearchBar from "../components/SearchBar";
 
 function StorePage() {
@@ -15,6 +15,7 @@ function StorePage() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [categories, setCategories] = useState([]);
   const [lastAddedTime, setLastAddedTime] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const [cart, setCart] = useState(
     JSON.parse(localStorage.getItem("cart")) || []
   );
@@ -35,6 +36,7 @@ function StorePage() {
       if (res.data) {
         const data = res.data;
         setProducts(data);
+        setIsLoading(false);
 
         const uniqueCategories = Array.from(
           new Set(data.map((product) => product.pro_categoria))
@@ -135,6 +137,7 @@ function StorePage() {
 
   return (
     <Container fluid="lg" style={{ marginTop: "20px", marginBottom: "40px" }}>
+      {isLoading && <Loading />}
       <ToastContainer />
 
       <Row>
