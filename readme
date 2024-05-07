@@ -1,0 +1,34 @@
+Prowess Agrícola Web   07/05/2024
+
+Descripción: Proyecto de Página Web para venta de productos agrícolas Prowess
+
+Instrucciones para Ejecutar la Página Web del Proyecto:
+
+Instalación y Configuración Previa
+1.Clonar el repositorio del proyecto que contiene las carpetas y el código de frontend, backend y dependencias.
+2.Dirigirse al enlace: https://uespe-my.sharepoint.com/:f:/g/personal/proyectoacnur_espe_edu_ec/EtazlpZp9lxBmTxTtISte0YBFktvzONDaXZ6VXv9oyOQTw?e=iDS952 
+3.Abrir la carpeta "Dependencias Página Web"
+4.Copiar las variables de entorno de la carpeta "frontend" 
+5.Pegar las dependencias en la carpeta "src" del frontend del proyecto
+4.Copiar las variables de entorno de la carpeta "backend" y 
+6.Pegar las dependencias en la carpeta "src" del backend del proyecto
+
+Ejecución
+1.Abrir las carpetas "frontend" y backend en distintas terminales de VisualStudio Code.
+2.Instalar dependencias extras del proyecto con el comando -npm install en ambas terminales
+3.Ejecutar la página web del Proyecto con el comando -npm start
+
+Tecnologías Utilizadas
+    Lenguajes de Programación Web
+        - HTML/CSS
+        - JavaScript
+
+    Librerías
+        - React.js
+        - Bootstrap
+
+    IDE de Desarollo VisualStudio Code
+    Base de Datos Firebase
+
+Estado del Proyecto
+Este proyecto se encuentra actualmente en desarrollo activo

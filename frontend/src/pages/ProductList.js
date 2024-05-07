@@ -268,7 +268,7 @@ const ProductList = () => {
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>Vendedor/a</th>
+            <th>Vendedor</th>
             <th>Ingreso</th>
             <th>Caducidad</th>
             <th>Detalles</th>

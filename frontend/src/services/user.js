@@ -62,3 +62,14 @@ export const recoveryPassword = async (email) => {
     console.log(error);
   }
 };
+
+export const changeEmail = async (email) => {
+  try {
+    const response = await axios.post(`${WEBURL}fb/usuario/email-change`, {
+      email,
+    });
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};

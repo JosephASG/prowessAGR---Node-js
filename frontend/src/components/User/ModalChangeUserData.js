@@ -62,9 +62,9 @@ function ModalChangeUserData({ faLock, modalName }) {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
-              Close
+              Cerrar
             </Button>
-            <Button variant="primary">Understood</Button>
+            <Button variant="primary">Cambiar</Button>
           </Modal.Footer>
         </Modal>
       )}
@@ -79,7 +79,7 @@ function ModalChangeUserData({ faLock, modalName }) {
             <Modal.Title>{modalName}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Por favor, ingrese el nuevo correo electrónico que quiere cambiar.</p>
+            <p>Por favor, ingrese el nuevo correo electrónico.</p>
             <InputGroup className="mb-3">
               <Form.Control
                 placeholder="Nuevo Correo Electrónico"

@@ -129,7 +129,7 @@ const CategoryList = () => {
 
       <Container fluid>
         {isLoading && <Loading></Loading>}
-        <h1 style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white" }}>LISTA DE CATEGORIAS</h1>
+        <h1 style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: "1.5px white", color: "white" }}>LISTA DE CATEGORÍAS</h1>
         <div className='btn-add-container'>
           <Button onClick={handleOpenModal} className='btn-add-product' style={{ textShadow: "none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white" }}>Agregar Categoría</Button>
         </div>
