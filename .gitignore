@@ -8,15 +8,14 @@
 # testing
 /coverage
 
-*/build
-
 /frontend/build
-
+frontend\build
 
 # docker
 compose-dev.yaml
 
 # misc
+env
 .DS_Store
 .env.local
 .env
