@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import ModalPassword from "../components/ModalPassword";
 import Swal from "sweetalert2";
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';  
+import Loading from "../components/General/Loading";
+
 
 function PasswordReset() {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showCodeVerificationModal, setShowCodeVerificationModal] =
@@ -18,7 +21,7 @@ function PasswordReset() {
 
   const [newPassword, setNewPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
-
+  
   const checkPasswordStrength = (newPassword) => {
     // Evaluar la longitud de la contraseña
     if (newPassword.length < 6) {
@@ -91,7 +94,8 @@ function PasswordReset() {
   const handleSubmitEmail = async (e) => {
     e.preventDefault();
     setError("");
-
+    setLoading(true); // Establecer loading en true antes de enviar la solicitud
+  
     try {
       await fetchData("http://localhost:5000/fb/usuario/password-recovery", {
         email,
@@ -105,41 +109,56 @@ function PasswordReset() {
       setShowCodeVerificationModal(true);
     } catch (err) {
       // El manejo de errores se realiza dentro de fetchData
+    } finally {
+      setLoading(false); // Establecer loading en false después de recibir la respuesta
     }
   };
+  
 
   const handleVerifyCode = async (e) => {
     e.preventDefault();
     setError("");
-
+    setLoading(true); // Set loading to true before making the API request
+  
     try {
+      // API request to verify the code
       await fetchData("http://localhost:5000/fb/usuario/password-verify", {
         email,
         code: recoveryCode,
       });
+  
+      // Show success message
       Swal.fire({
         icon: "success",
         title: "Éxito",
         text: "Código Confirmado",
         showConfirmButton: false,
-        timer: 1500, // Tiempo en milisegundos (en este caso, 1.5 segundos)
+        timer: 1500,
       });
+  
+      // Close code verification modal and show change password modal
       setShowCodeVerificationModal(false);
       setShowChangePasswordModal(true);
     } catch (err) {
+      // Show error message if code verification fails
       Swal.fire({
         icon: "error",
         title: "Error",
         text: "Código de Verificación Incorrecto",
         showConfirmButton: false,
-        timer: 1500, // Tiempo en milisegundos (en este caso, 1.5 segundos)
+        timer: 1500,
       });
+    } finally {
+      setLoading(false); // Set loading back to false after receiving the response
     }
   };
+  
 
   const handleChangePassword = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true); // Establecer loading en true antes de enviar la solicitud
+
 
     try {
       await fetchData("http://localhost:5000/fb/usuario/password-reset", {
@@ -160,6 +179,8 @@ function PasswordReset() {
       });
     } catch (err) {
       // El manejo de errores se realiza dentro de fetchData
+    }finally {
+      setLoading(false); // Establecer loading en false después de recibir la respuesta
     }
   };
 
@@ -204,9 +225,19 @@ function PasswordReset() {
                 />
               </Form.Group>
               <div className="password-reset-buttons" style={{ marginTop: '10px' }}>
-  <Button type="submit" className="password-reset-button" style={{ backgroundColor: 'green', borderColor: 'green', marginRight: '5px' }}>
-    Enviar Código
-  </Button>
+              <Button 
+  type="submit" 
+  className="password-reset-button" 
+  style={{ backgroundColor: 'green', borderColor: 'green', marginRight: '5px', position: 'relative' }}
+>
+  Enviar Código
+  {loading && (
+    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+      <Loading />
+    </div>
+  )}
+</Button>
+
   <Button
     type="button"
     className="password-reset-cancel"
