@@ -28,7 +28,7 @@ export const postUser = async (token, user) => {
 
 export const updateUser = async (token, user) => {
   try {
-    const response = await axios.post(`${WEBURL}fb/usuario/post`, user, {
+    const response = await axios.put(`${WEBURL}fb/usuario/update`, user, {
       headers: {
         token: token,
       },
@@ -41,7 +41,7 @@ export const updateUser = async (token, user) => {
 
 export const deleteUser = async (token, id) => {
   try {
-    const response = await axios.post(`${WEBURL}fb/usuario/delete/${id}`, {
+    const response = await axios.delete(`${WEBURL}fb/usuario/delete/${id}`, {
       headers: {
         token: token,
       },
