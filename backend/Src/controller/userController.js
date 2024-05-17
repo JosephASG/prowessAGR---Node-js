@@ -366,7 +366,7 @@ export const recoverAccountByCedula = async (req, res) => {
   try {
     const usersRef = collection(fs, "usuario");
     const querySnapshot = await getDocs(
-      query(usersRef, where("cedulaUsuario", "==", cedula))
+      query(usersRef, where("nCedula", "==", cedula))
     );
 
     if (querySnapshot.empty) {
