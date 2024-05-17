@@ -6,6 +6,7 @@ import { getUsers, deleteUser, updateUser } from "../services/user"; // Import u
 import EditUserModal from "./EditUserModal"; // Import EditUserModal component
 import DeleteConfirmationModal from "./DeleteConfirmationModal"; // Import DeleteConfirmationModal component
 import UserSearchBox from "./UserSearchBox"; // Import UserSearchBox component
+import ReactPaginate from 'react-paginate'; // Import React Paginate
 import "./UserList.css"; // Import CSS file for styling
 
 // Custom hook to handle user-related logic
@@ -98,7 +99,7 @@ const useUsers = (token) => {
       setUsers(allUsers); // If the query is empty, show all users
     } else {
       setUsers(allUsers.filter((user) =>
-        user.nCedula.toLowerCase().includes(query.toLowerCase())|| 
+        user.nCedula.toLowerCase().includes(query.toLowerCase()) || 
         user.name.toLowerCase().includes(query.toLowerCase())
       ));
     }
@@ -116,6 +117,9 @@ const UserList = () => {
   const [userToEdit, setUserToEdit] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0); // Current page state
+  const [usersPerPage] = useState(5); // Users per page
+
   // Destructure data from useUsers custom hook
   const { users, isLoading, error, deleteUserById, updateUserById, searchUsers } = useUsers(token);
 
@@ -143,9 +147,18 @@ const UserList = () => {
     setIsDeleteModalOpen(false); // Close delete confirmation modal
   }, [deleteUserById]); // Dependency array with deleteUserById function
 
+  // Handle page click
+  const handlePageClick = (data) => {
+    setCurrentPage(data.selected);
+  };
+
+  // Calculate the current users to display
+  const offset = currentPage * usersPerPage;
+  const currentUsers = users.slice(offset, offset + usersPerPage);
+
   return (
     <>
-      <h1 style={{ textAlign: "center" , color: "white"}}>Lista de Usuarios</h1>
+      <h1 style={{ textAlign: "center", color: "white" }}>Lista de Usuarios</h1>
 
       <Container className="mt-4 container-user-list">
         <UserSearchBox onSearch={searchUsers} />
@@ -169,7 +182,7 @@ const UserList = () => {
               <div>Acciones</div>
             </div>
             <Row className="container-users">
-              {users.map((user) => (
+              {currentUsers.map((user) => (
                 <Col key={user.id} className="user">
                   <div>{user.name} {user.secondName} </div>
                   <div>{user.lastName} {user.secondLastName}</div>
@@ -196,6 +209,17 @@ const UserList = () => {
                 </Col>
               ))}
             </Row>
+            <ReactPaginate
+              previousLabel={"← Previous"}
+              nextLabel={"Next →"}
+              breakLabel={"..."}
+              pageCount={Math.ceil(users.length / usersPerPage)}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName={"pagination"}
+              activeClassName={"active"}
+            />
           </>
         )}
       </Container>
