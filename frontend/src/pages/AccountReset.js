@@ -1,21 +1,46 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Form, Spinner, Alert } from 'react-bootstrap';
 
 function AccountReset() {
     const [cedula, setCedula] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
+    const [email, setEmail] = useState('');
     const navigate = useNavigate();
-  
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí puedes agregar la lógica para enviar la cédula y procesarla
-        navigate('/password-send');
+        setLoading(true);
+        setMessage('');
+
+        try {
+            const response = await fetch('http://localhost:5000/fb/usuario/recovery-account', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ cedula: cedula.trim() }), // Asegurarse de que la cédula esté en el formato correcto
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setEmail(data.email);
+                setMessage(`Correo de recuperación enviado a: ${data.email}`);
+            } else {
+                setMessage('Error al enviar la solicitud. Por favor, inténtalo de nuevo.');
+            }
+        } catch (error) {
+            setMessage('Error de conexión. Inténtalo de nuevo.');
+        }
+
+        setLoading(false);
     };
-  
+
     const handleCancel = () => {
         navigate('/login');
     };
-  
+
     return (
         <Container>
             <Row className="justify-content-center">
@@ -88,7 +113,9 @@ function AccountReset() {
                                     transition: 'background-color 0.3s',
                                     background: 'linear-gradient(45deg, rgb(2, 113, 17), #256c0b)',
                                     color: '#fff'
-                                }}>Recuperar Usuarios</Button>
+                                }}>
+                                    {loading ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Recuperar Usuarios'}
+                                </Button>
                                 <Button type="button" onClick={handleCancel} style={{ 
                                     width: '48%',
                                     padding: '12px',
@@ -103,6 +130,7 @@ function AccountReset() {
                                 }}>Cancelar</Button>
                             </div>
                         </Form>
+                        {message && <Alert variant={message.includes('Error') ? 'danger' : 'success'} style={{ marginTop: '20px' }}>{message}</Alert>}
                     </div>
                 </Col>
             </Row>

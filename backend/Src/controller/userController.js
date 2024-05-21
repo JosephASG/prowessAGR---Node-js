@@ -358,7 +358,7 @@ const verifyRecoveryCode = async (req, res) => {
 
 export const recoverAccountByCedula = async (req, res) => {
   const { cedula } = req.body;
-
+  console.log(cedula)
   if (!cedula) {
     return res.status(400).json({ error: "Cédula no proporcionada" });
   }
