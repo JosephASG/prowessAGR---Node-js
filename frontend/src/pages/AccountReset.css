@@ -1,0 +1,118 @@
+.account-reset-container {
+    font-family: 'Montserrat', sans-serif;
+    max-width: 400px;
+    margin: auto;
+    padding: 40px;
+    border: 3px solid #FF8C00;
+    border-radius: 10px;
+    background-color: rgba(47, 134, 166, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-height: 350px;
+    display: flex;
+    font-size: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .account-reset-title {
+    font-size: 28px;
+    color: #FF8C00;
+    margin-bottom: 2%;
+  }
+  
+  .account-reset-subtitle {
+    font-size: 14px; 
+    color: #f7f6f6;
+    margin-bottom: 15px;
+    text-align: justify; 
+  }
+  
+  .account-reset-subtitle-2 {
+    font-size: 19px; 
+    color: #f7f6f6;
+    margin-bottom: 15px;
+    text-align: center; 
+  }
+  
+  .account-reset-description {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+  }
+  
+  .account-reset-form {
+    width: 100%;
+  }
+  
+  .account-reset-option {
+    margin-bottom: 15px;
+  }
+  
+  .account-reset-option input[type="radio"] {
+    margin-right: 10px;
+  }
+  
+  .account-reset-option label {
+    font-size: 16px;
+    color: #333;
+  }
+  
+  .account-reset-input {
+    width: 80%;
+    max-width: 300px;
+    padding: 10px;
+    margin-bottom: 10%;
+    border: 2px solid #FF8C00;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    margin-left: 39px;
+  }
+  
+  .account-container {
+    display: flex;
+    max-height: 40px;
+  }
+  
+  .account-reset-input::placeholder {
+    color: #999;
+  }
+  
+  .account-reset-button,
+  .account-reset-cancel {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .account-reset-button {
+    background: linear-gradient(45deg, rgb(0, 110, 255), #ff8c00);
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  
+  .account-reset-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .account-reset-cancel {
+    background-color: #FF6347;
+    color: #fff;
+  }
+  
+  .account-reset-cancel:hover {
+    background-color: #FF4500;
+  }
+  
+  .account-reset-message {
+    margin-top: auto;
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+  }
+  
