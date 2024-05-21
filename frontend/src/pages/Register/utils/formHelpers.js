@@ -37,11 +37,15 @@ export const checkPasswordStrength = (password) => {
     (hasUpper || hasLower) &&
     hasSpecialChars
   ) {
-    return "Alta";
+    return "Alta, Asegurate de contraseña contega Mayusculas, Minusculas, Numeros y Simbolos";
   } else if (length >= 6) {
-    return "Media";
-  } else {
-    return "Baja";
+    return "Media: Asegurate que  contenga Simbolos(. , :), Numeros y Mayusculas";
+  } else if(length == 0) {
+    return "";
+  }
+  else {
+    return "Contraseña Insegura, Asegurse de combinar Simbolos(. , :), Numeros y Mayusculas";
+    
   }
 };
 

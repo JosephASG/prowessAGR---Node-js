@@ -34,7 +34,7 @@ const PasswordInput = ({
     const strength = checkPasswordStrength(pwd);
     setPasswordStrength(strength);
     const match = pwd && confirmPwd && pwd === confirmPwd;
-    setPasswordsMatch(match);
+    setPasswordsMatch(pwd && confirmPwd ? match : null);
     setIsPasswordsValid(match && strength === "Muy alta"); // Assuming "Muy alta" is the only acceptable strength
   };
 
@@ -78,7 +78,7 @@ const PasswordInput = ({
             required
           />
         </InputGroup>
-        {passwordsMatch !== null && (
+        {password && confirmPassword && passwordsMatch !== null && (
           <Badge bg={passwordsMatch ? "success" : "danger"} className="mt-2">
             {passwordsMatch ? "Las contraseñas coinciden" : "Las contraseñas no coinciden"}
           </Badge>
