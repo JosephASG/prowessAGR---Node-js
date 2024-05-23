@@ -12,8 +12,6 @@ import {
   Button,
   Table,
   Container,
-  Row,
-  Col,
   Image,
   Form,
 } from "react-bootstrap";
@@ -33,10 +31,8 @@ const ProductList = () => {
   const [sortCriteria, setSortCriteria] = useState(null);
   const [sortedColumn, setSortedColumn] = useState(null);
   const [filterProduct, setFilterProduct] = useState("");
-  const [productsPerPage, setProductsPerPage] = useState(5);
+  const [productsPerPage, setProductsPerPage] = useState(ITEMS_PER_PAGE);
   const [currentPage, setCurrentPage] = useState(1);
-  const [startProductPage, setStartProductPage] = useState(null);
-  const [endProductPage, setEndProductPage] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [productToUpdate, setProductToUpdate] = useState(null);
 
@@ -49,9 +45,10 @@ const ProductList = () => {
 
   useEffect(() => {
     if (products.length > 0) {
-      setIsLoading(false); // Establece isLoading en false cuando los productos se han cargado correctamente
+      setIsLoading(false); 
     }
   }, [products]);
+
   const handleProducts = async (token) => {
     const response = await getProductsFromApi(token);
     const data = await response.data;
@@ -144,38 +141,10 @@ const ProductList = () => {
       });
   };
 
-  const filterPages = (products) => {
-    console.log(products.length);
-    console.log(currentPage);
-    console.log(productsPerPage);
-    console.log(
-      "Datos que se tiene:\n " +
-        "COMBOBOX:" +
-        Number(productsPerPage) +
-        "\nnumero de productos:" +
-        Number(products.length) +
-        "\nPÁGINA ACTUAL" +
-        Number(currentPage)
-    );
-    let inicio =
-      Number(productsPerPage) * Number(currentPage) - productsPerPage;
-    let final = inicio + Number(productsPerPage);
-    setStartProductPage(inicio);
-    setEndProductPage(final);
-    console.log("NÚMERO DE INICIO: " + inicio + "FINAL:" + final);
-  };
-  //PARA FILTRAR N ELEMENTOS POR PÁGINA.
-  useEffect(() => {
-    setProductsPerPage(productsPerPage);
-    filterPages(products);
-  }, [products, filterPages]);
-  //AQUÍ ESTÁN ALGUNOS FILTROS
   const handleSort = (criteria) => {
     setSortCriteria(criteria);
     setSortedColumn(criteria);
   };
-
-  // DEBES IMPLEMENTAR UNA FUNCIÓN DÓNDE LAS PÁGINAS NO SE HABILITEN PARA CAMBIAR SI NO EXISTEN SUFICIENTES ELEMENTOS A MOSTRAR.
 
   const handleFilter = (product) => {
     setFilterProduct(product);
@@ -193,15 +162,16 @@ const ProductList = () => {
     sortedAndFilteredProducts = sortedAndFilteredProducts.filter(
       (product) =>
         product.pro_nombre &&
-        product.pro_nombre.toLowerCase().includes(filterProduct.toLowerCase())
+        (product.pro_nombre.toLowerCase().includes(filterProduct.toLowerCase()) ||
+        product.pro_vendedor.toLowerCase().includes(filterProduct.toLowerCase()))
     );
   }
 
   const totalPages = Math.ceil(
-    sortedAndFilteredProducts.length / ITEMS_PER_PAGE
+    sortedAndFilteredProducts.length / productsPerPage
   );
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
   const productsToDisplay = sortedAndFilteredProducts.slice(startIndex,endIndex);
 
   return (
@@ -245,7 +215,7 @@ const ProductList = () => {
             color: "white",
           }}
         >
-          Filtrar por Producto:
+          Coloque el nombre del producto o vendedor:
         </label>
         <input
           type="text"
@@ -274,13 +244,12 @@ const ProductList = () => {
             <th>Detalles</th>
             <th>Stock</th>
             <th>Precio</th>
-            {/* DETALLES: Dentro va lo de Descripción, Estado, Medida, N° Vendedor*/}
             <th>Foto</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
-          {products.slice(startProductPage, endProductPage).map((product) => (
+          {productsToDisplay.map((product) => (
             <tr key={product.id}>
               <td>{product.pro_nombre}</td>
               <td>{product.pro_vendedor}</td>
@@ -298,7 +267,12 @@ const ProductList = () => {
               </td>
 
               <td>
-                <Button variant="success" size="sm" style={{ margin: "5px" }}>
+                <Button 
+                  variant="success" 
+                  size="sm" 
+                  style={{ margin: "5px" }}
+                  onClick={() => handleEditProduct(product)} // Ensure to edit product
+                >
                   Editar
                 </Button>
                 <Button
@@ -313,32 +287,7 @@ const ProductList = () => {
             </tr>
           ))}
         </tbody>
-        <Form.Select
-          onChange={(e) => {
-            filterPages(products);
-            setProductsPerPage(e.target.value);
-          }}
-          size="sm"
-        >
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-        </Form.Select>
       </Table>
-
-      <ModalAddProducts
-        isOpen={isAddModalOpen}
-        onClose={() => setIsAddModalOpen(false)}
-      />
-      <ModalEditProduct
-        isOpen={isEditModalOpen}
-        onClose={() => setIsEditModalOpen(false)}
-        productToEdit={productToEdit}
-        handleEdit={handleEdit}
-        categorias={categorias}
-        vendedores={vendedores}
-      />
 
       <div className="pagination">
         <Button
@@ -358,120 +307,29 @@ const ProductList = () => {
         </Button>
       </div>
 
-      {/* <div>
-      </div>
-      <div className="header-row-product-list">
-        <b
-          className={sortedColumn === "pro_nombre" ? "sorted" : ""}
-          onClick={() => handleSort("pro_nombre")}
-          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>
-          Nombre
-        </b>
-        <b
-          className={sortedColumn === "pro_precio" ? "sorted" : ""}
-          onClick={() => handleSort("pro_precio")}
-          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
-        >
-          Precio
-        </b>
-        <b
-          className={sortedColumn === "pro_stock" ? "sorted" : ""}
-          onClick={() => handleSort("pro_stock")}
-          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
-        >
-          Stock
-        </b>
-        <b
-          className={sortedColumn === "pro_categoria" ? "sorted" : ""}
-          onClick={() => handleSort("pro_categoria")}
-          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
-        >
-          Categoría
-        </b>
-        <b
-          className={sortedColumn === "pro_fechaInicio" ? "sorted" : ""}
-          onClick={() => handleSort("pro_fechaInicio")}
-          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
-        >
-          Ingreso
-        </b>
-        <b
-          className={sortedColumn === "pro_fechaFinal" ? "sorted" : ""}
-          onClick={() => handleSort("pro_fechaFinal")}
-          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
-        >
-          Caducidad
-        </b>
-        <b
-          className={sortedColumn === "pro_vendedor" ? "sorted" : ""}
-          onClick={() => handleSort("pro_vendedor")}
-          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
-        >
-          Vendedor
-        </b>
-        <b
-          className={sortedColumn === "pro_estado" ? "sorted" : ""}
-          onClick={() => handleSort("pro_estado")}
-          style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}
-        >
-          Estado
-        </b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Imagen</b>
-        <b style={{textShadow:"none", fontFamily: "Roboto", WebkitTextStroke: ".1px white", color: "white"}}>Acciones</b>
-      </div>
+      <Form.Select
+        onChange={(e) => setProductsPerPage(Number(e.target.value))}
+        size="sm"
+        style={{marginTop: '20px'}}
+      >
+        <option value={5}>5</option>
+        <option value={10}>10</option>
+        <option value={20}>20</option>
+        <option value={50}>50</option>
+      </Form.Select>
 
-      <div className="container-products">
-        {productsToDisplay.map((product) => (
-          <div className="product" key={product.id}>
-            <div>{product.pro_nombre}</div>
-            <div>${product.pro_precio}</div>
-            {product.pro_medida != null ? (
-              <div>{product.pro_stock + " " + product.pro_medida}</div>
-            ) : (
-              <div>{product.pro_stock}</div>
-            )}
-            <div>{product.pro_categoria}</div>
-            <div>{product.pro_fechaInicio}</div>
-            <div>{product.pro_fechaFinal}</div>
-            <div>{product.pro_vendedor}</div>
-            <div>{product.pro_estado}</div>
-            <div>
-              <img
-                src={product.pro_imagen}
-                alt={product.pro_name}
-                className="product-image-list"
-              />
-            </div>
-            <div className="actions-container">
-              <FontAwesomeIcon
-                className="fa-icon-edit"
-                icon={faPenToSquare}
-                onClick={() => handleEditProduct(product)} // Asegúrate de que `product` contenga el ID
-              />
-              <FontAwesomeIcon
-                className="fa-icon-trash"
-                icon={faTrash}
-                onClick={() => handleDelete(product.id)}
-              />
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="pagination">
-        <button
-          onClick={() => setCurrentPage(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          Anterior
-        </button>
-        <span>{currentPage}</span>
-        <button
-          onClick={() => setCurrentPage(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Siguiente
-        </button>
-      </div> */}
+      <ModalAddProducts
+        isOpen={isAddModalOpen}
+        onClose={() => setIsAddModalOpen(false)}
+      />
+      <ModalEditProduct
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        productToEdit={productToEdit}
+        handleEdit={handleEdit}
+        categorias={categorias}
+        vendedores={vendedores}
+      />
     </Container>
   );
 };
