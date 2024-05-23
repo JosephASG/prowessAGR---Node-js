@@ -9,7 +9,7 @@ function AccessDeniedPage() {
     <Container className="mt-5" style={{color:"white", marginBottom:"50px"}}>
       <Row className="justify-content-center">
         <Col md={6} className="text-center">
-          <h1 className="mb-3">Acceso Denegado</h1>
+          <h1 className="mb-3">Acceso Denegado.</h1>
           <p>No puedes acceder a esta página debido a las restricciones de tu rol.</p>
           <p>Gracias por tu comprensión.</p>
           <img src={image1} alt="Acceso Denegado" className="img-fluid" />
