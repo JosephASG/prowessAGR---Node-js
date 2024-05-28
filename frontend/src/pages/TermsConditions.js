@@ -1,11 +1,11 @@
 import "./TermsConditions.css";
 
 const TermsConditions = () => {
-
-
   return (
-    <div className="termsconditions-container">
-      <div className="general-descriptions-container">
+    <div className="termsconditions-page">
+      <div className="termsconditions-container">
+        <div className="scrollable-container">
+        <div className="general-descriptions-container">
         <h1>TÉRMINOS Y CONDICIONES DE USO </h1>
         <p>
           Este contrato describe los términos y condiciones generales aplicables
@@ -364,6 +364,8 @@ const TermsConditions = () => {
             diriman con celeridad y eficacia. Estableciendo como normas
             aplicables las de la República del Ecuador.{" "}
           </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
