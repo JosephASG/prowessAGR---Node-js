@@ -7,9 +7,9 @@ import { checkToken } from "../services/auth";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { sendMail } from "../services/mailer";
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
-function PagoPage({ clearCart }) {
+function PagoPage() {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [usuario, setUsuario] = useState(null);
   const [cart, setCart] = useState([]);
@@ -20,6 +20,7 @@ function PagoPage({ clearCart }) {
   const [redirect, setRedirect] = useState(false);
   const [showCopiedMessage, setShowCopiedMessage] = useState(false);
 
+  console.log("total", total)
   useEffect(() => {
     const ordenActual = localStorage.getItem("ordenActual");
     if (ordenActual) {
@@ -31,6 +32,7 @@ function PagoPage({ clearCart }) {
       setTotal(ordenData.total);
       const orderNum = Math.floor(Math.random() * 900000) + 100000; // Example of generating a random order number
       setOrderNumber(orderNum);
+      console.log(ordenActual)
     }
   }, []);
   useEffect(() => {
@@ -111,7 +113,7 @@ function PagoPage({ clearCart }) {
         `${product.cantidad} ${product.pro_medida}`,
         `$${precio.toFixed(2)}`,
         `$${(precio * product.cantidad + 3).toFixed(2)}`,
-        product.pro_vendedor,
+        product.pro_vendedor
       ];
     });
 
@@ -157,7 +159,7 @@ function PagoPage({ clearCart }) {
     const htmlContent = `
     <p>Estimado/a ${usuario.nombre},</p>
     <p>Gracias por tu compra. Adjunto encontrarás el comprobante de tu pedido.</p>
-    <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+    <p>Si tienes alguna pregunta, no dudes en contactarnos</p>
     <!-- Aquí puedes incluir más contenido HTML como desees -->
   `;
 
@@ -174,13 +176,13 @@ function PagoPage({ clearCart }) {
       ],
     };
 
-     sendMail(emailData)
-       .then((data) => {
-         console.log("Correo enviado exitosamente:", data);
-       })
-       .catch((error) => {
-         console.error("Error al enviar el correo:", error);
-       });
+    sendMail(emailData)
+      .then((data) => {
+        console.log("Correo enviado exitosamente:", data);
+      })
+      .catch((error) => {
+        console.error("Error al enviar el correo:", error);
+      });
   };
 
   const handleShareButtonClick = () => {
@@ -205,17 +207,17 @@ function PagoPage({ clearCart }) {
             <div className="AboutUsInfo h1" style={{ marginBottom: "0px" }}>
               <h1>Su pago se ha completado correctamente</h1>
             </div>
-            <img 
-              src={Check} 
-              alt="Imagen Pago" 
-              className="pagopage-image" 
+            <img
+              src={Check}
+              alt="Imagen Pago"
+              className="pagopage-image"
               style={{
                 width: "50%", // La imagen ocupará la mitad del ancho disponible
                 height: "auto", // La altura se ajustará automáticamente para mantener la relación de aspecto
                 display: "block", // Para centrar la imagen
                 margin: "0 auto", // Para centrar la imagen horizontalmente
                 padding: "0px"
-              }} 
+              }}
             />
             <Container>
               {cart &&
@@ -290,17 +292,17 @@ function PagoPage({ clearCart }) {
                   </div>
                 ))}
             </Container>
-            <p className="pagopage-gracias" style={{ textAlign: "center", marginTop: "20px", color:'white' }}>
+            <p className="pagopage-gracias" style={{ textAlign: "center", marginTop: "20px", color: 'white' }}>
               En breve nos pondremos en contacto con usted
             </p>
             <Button onClick={handleContinueShoppingClick} style={{ display: "block", width: "200px", padding: "10px", margin: "30px auto", backgroundColor: "seagreen", color: "#fff", fontSize: "18px", border: "none", borderRadius: "4px", cursor: "pointer" }}>
-              <b style={{textShadow:'none'}}>Seguir comprando</b>
+              <b style={{ textShadow: 'none' }}>Seguir comprando</b>
             </Button>
           </>
         )}
         {showCopiedMessage && (
           <div className="copied-link-message" style={{ textAlign: "center" }}>
-            <span className="copied-link-message-text" style={{color:'white'}}>
+            <span className="copied-link-message-text" style={{ color: 'white' }}>
               ¡El enlace ha sido copiado al portapapeles!
             </span>
           </div>
@@ -308,7 +310,7 @@ function PagoPage({ clearCart }) {
       </Row>
     </Container>
   );
-  
+
 }
 
 export default PagoPage;

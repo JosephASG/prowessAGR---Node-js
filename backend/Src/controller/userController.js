@@ -1,18 +1,18 @@
-import * as firestore from "firebase/firestore";
-import "firebase/storage";
-import {
-  query,
-  doc,
-  where,
-  updateDoc,
-  getDocs,
-  collection,
-} from "firebase/firestore";
-import { sendEmail } from "../helpers/mailer.js";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+import * as firestore from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
+import "firebase/storage";
 import jwt from "jsonwebtoken";
 import { fs } from "../database/firebase.js";
-import dotenv from "dotenv";
+import { sendEmail } from "../helpers/mailer.js";
 
 dotenv.config();
 const saltRounds = 10;
@@ -37,7 +37,7 @@ export const registerUser = async (req, res) => {
 
     const cedulaSnapshot = await query(
       usersRef,
-      where("nCedula", "==", userData.nCedula)
+      where("cedula", "==", userData.nCedula)
     );
     const cedulaQuerySnapshot = await getDocs(cedulaSnapshot);
     if (!cedulaQuerySnapshot.empty) {
@@ -512,7 +512,7 @@ export const changeEmailVerification = async (req, res) => {
       query(userRef, where("email", "==", email))
     )
 
-    
+
     if (querySnapshot.empty) {
       return res.status(404).json({ message: "Usuario no encontrado." });
     }
@@ -624,15 +624,6 @@ export const updatePasswordWithRecoveryCode = async (req, res) => {
 
 
 export {
-  loginUser,
-  getUserById,
-  requestPasswordReset,
-  getUsers,
-  updateUser,
-  deleteUser,
-  updateUserById,
-  deleteUserById,
-  sendRecoveryCode,
-  verifyRecoveryCode,
-
+  deleteUser, deleteUserById, getUserById, getUsers, loginUser, requestPasswordReset, sendRecoveryCode, updateUser, updateUserById, verifyRecoveryCode
 };
+
