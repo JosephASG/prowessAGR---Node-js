@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./ModalAddTypeProducts.css";
-import { getCategories } from "../services/category";
-import { getSellers } from "../services/seller";
 import { postProduct } from "../services/product";
 const WEBURL = process.env.REACT_APP_API_URL
 
@@ -14,12 +12,13 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
         pro_categoria: "",
         pro_medida: "",
         pro_vendedor: "",
+        pro_number: "",
         pro_fechaFinal: "",
         pro_fechaInicio: "",
         pro_estado: "",
         pro_imagen: null
     });
- 
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (isOpen) {
