@@ -22,17 +22,21 @@
 .scrollable-container {
   max-height: 100%;
   overflow-y: auto;
+  color: black;
 }
 
 .general-descriptions-container,
 .other-conditions-container {
   margin-bottom: 20px;
+  color: black;
 }
 
 .condition-container {
   margin-bottom: 20px;
+  color: black;
 }
 
 h1, h3 {
   margin-top: 0;
+  color: black;
 }
