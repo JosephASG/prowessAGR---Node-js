@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './SalesPage.css';
 
 const SalesPage = () => {
@@ -12,32 +13,24 @@ const SalesPage = () => {
   ]);
 
   return (
-    <div>
-      <h1>NOTAS DE VENTA</h1>
-      <ul className="ul-customers">
+    <div className="container mt-5 sales-page">
+      <h1 className="text-center mb-4">NOTAS DE VENTA</h1>
+      <ul className="list-group sales-list">
         {sales.map((sale) => (
-          <li className="li-customers" key={sale.id}>
-            {/** Cuando esten los servicios */}
-            {/**<Link to={`/sale/${sale.id}`}> */}
-            <Link to={`/sales:id`}>
+          <li className="list-group-item sales-item" key={sale.id}>
+            <Link to={`/sales/${sale.id}`} className="sale-link d-flex align-items-center">
               <div>
-                <FontAwesomeIcon className="fa-user-customer" icon={faUser} />
+                <FontAwesomeIcon className="fa-user-customer mr-3" icon={faUser} />
               </div>
-              <div>
-              <div>
-                {sale.customer}
-                {sale.products.map((product) => (
-                  <li className="li-products" key={product.id}>
-                    {product}
-                  </li>
-                ))}
-              </div>
-              </div>
-              <div>
-                Total: ${sale.amount}
-              </div>
-              <div>
-                Date: {sale.date}
+              <div className="flex-grow-1">
+                <h5>{sale.customer}</h5>
+                <ul className="list-unstyled">
+                  {sale.products.map((product, index) => (
+                    <li key={index}>{product}</li>
+                  ))}
+                </ul>
+                <p className="mb-0">Total: ${sale.amount}</p>
+                <p className="mb-0">Date: {sale.date}</p>
               </div>
             </Link>
           </li>
