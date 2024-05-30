@@ -164,7 +164,7 @@ function ShoppingCart({ setOrden }) {
   const handleDeleteFromCart = (product) => {
     const updatedCart = cart.filter((item) => item.id !== product.id);
     setCart(updatedCart);
-    console.log("PruebaRemover");
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   const calculateTotalPrice = () => {
