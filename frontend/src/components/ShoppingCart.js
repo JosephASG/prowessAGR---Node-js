@@ -161,6 +161,7 @@ function ShoppingCart({ setOrden }) {
     window.location.href = "/pago";
   }
 
+  //Apartado que elimina los productos del carrito
   const handleDeleteFromCart = (product) => {
     const updatedCart = cart.filter((item) => item.id !== product.id);
     setCart(updatedCart);
