@@ -40,6 +40,9 @@ body {
   margin-left: 9%;
   margin-right: 9%;
 }
+.category.selected {
+  background-color: blue; /* Cambia esto al color que desees */
+}
 
 h1 {
   margin-top: 0;
