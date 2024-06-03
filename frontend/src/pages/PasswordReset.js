@@ -190,7 +190,7 @@ function PasswordReset() {
         <Col md="6">
           <div className="password-reset-container" style={{
             fontFamily: 'Montserrat, sans-serif',
-            maxWidth: '400px',
+            maxWidth: '380px',
             margin: 'auto',
             padding: '40px',
             border: '3px solid #167603',
@@ -201,7 +201,7 @@ function PasswordReset() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            marginBottom: '45px'
+            marginBottom: '25px'
           }}>
             <h2 className="password-reset-title" style={{
               fontSize: '28px',
@@ -209,27 +209,33 @@ function PasswordReset() {
               marginBottom: '20px',
               textAlign: 'center'
             }}>Recuperación de Contraseña</h2>
-            <p style={{ fontSize: "15px", marginBottom: "10%" , color: 'white', textAlign:'center'}}>
-              Por favor, ingrese su correo electrónico para recuperar su contraseña
+            <p style={{ fontSize: "19px", marginBottom: "10px" , color: 'white', textAlign:'center'}}>
+              Por favor, ingresa tú correo electrónico para recuperar tú contraseña
             </p>
             {error && <p className="password-reset-error">{error}</p>}
-            <Form onSubmit={handleSubmitEmail} className="password-reset-form">
-              <Form.Group controlId="formBasicEmail">
+            <Form onSubmit={handleSubmitEmail} className="password-reset-form" style={{ width: '100%' }}>
+              <Form.Group controlId="formBasicEmail" >
                 <Form.Control
                   type="email"
-                  placeholder="Ingresa tu correo electrónico"
+                  placeholder="Correo electrónico"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="password-reset-input"
+                  style={{
+                  className:"password-reset-input",
+                  maxWidth: '317px',
+                  borderRadius: '10px',
+                  width: '100%',
+                  marginBottom: "15px" 
+                }}
                   required
                 />
               </Form.Group>
               <div className="password-reset-buttons" style={{ marginTop: '10px' }}>
               <Button 
-  type="submit" 
-  className="password-reset-button" 
-  style={{ backgroundColor: 'green', borderColor: 'green', marginRight: '5px', position: 'relative' }}
->
+                type="submit" 
+                className="password-reset-button" 
+                style={{ borderRadius: '10px', backgroundColor: 'green',  width: '63%', borderColor: 'green', marginRight: '4px', position: 'relative' }}
+              >
   Enviar Código
   {loading && (
     <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
@@ -242,7 +248,7 @@ function PasswordReset() {
     type="button"
     className="password-reset-cancel"
     onClick={handleCancel}
-    style={{ backgroundColor: 'red', borderColor: 'red' }}
+    style={{ borderRadius: '10px', backgroundColor: 'red', borderColor: 'red', width: '35%',}}
   >
     Cancelar
   </Button>

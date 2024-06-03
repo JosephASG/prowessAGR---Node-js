@@ -63,20 +63,21 @@ function AccountReset() {
                         <h2 style={{ 
                             fontSize: '28px',
                             color: '#ffffff',
-                            marginBottom: '20px'
+                            marginBottom: '20px',
+                            textAlign: 'center'
                         }}>Recuperación de Cuenta</h2>
                         <h3 style={{ 
                             fontSize: '19px',
                             color: '#f7f6f6',
                             marginBottom: '15px',
                             textAlign: 'center'
-                        }}>¿Olvidaste tu cuenta? <br />No te preocupes.</h3>
+                        }}>¿Olvidaste tu cuenta? <br />¡No te preocupes!</h3>
                         <h4 style={{ 
                             fontSize: '19px',
                             color: '#f7f6f6',
                             marginBottom: '15px',
                             textAlign: 'center'
-                        }}>Ingresa a continuación tu número de cédula</h4>
+                        }}>Por favor, ingresa tú número de cédula para recuperar tú cuenta</h4>
                         <Form onSubmit={handleSubmit} style={{ width: '100%' }}>
                             <Form.Group controlId="cedulaInput" style={{ marginBottom: '15px', width: '100%' }}>
                                 <Form.Control
@@ -86,13 +87,13 @@ function AccountReset() {
                                     placeholder="Número de cédula"
                                     style={{ 
                                         width: '100%',
-                                        maxWidth: '300px',
+                                        maxWidth: '317px',
                                         padding: '10px',
                                         marginBottom: '15px',
                                         border: '2px solid #167603',
-                                        borderRadius: '5px',
+                                        borderRadius: '10px',
                                         fontSize: '16px',
-                                        color: '#333'
+                                        color: '#333',
                                     }}
                                     required
                                 />
@@ -103,30 +104,27 @@ function AccountReset() {
                                 justifyContent: 'space-between'
                             }}>
                                 <Button type="submit" style={{ 
-                                    width: '48%',
+                                    width: '60%',
+                                    height: '30%',
+                                    marginRight: '5px',
                                     padding: '12px',
                                     border: 'none',
-                                    borderRadius: '5px',
-                                    fontSize: '16px',
-                                    fontWeight: 'bold',
+                                    borderRadius: '10px',
                                     cursor: 'pointer',
                                     transition: 'background-color 0.3s',
-                                    background: 'linear-gradient(45deg, rgb(2, 113, 17), #256c0b)',
+                                    background: 'green',
                                     color: '#fff'
                                 }}>
-                                    {loading ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Recuperar Usuarios'}
+                                    {loading ? <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" /> : 'Recuperar Cuenta'}
                                 </Button>
                                 <Button type="button" onClick={handleCancel} style={{ 
-                                    width: '48%',
-                                    padding: '12px',
+                                    width: '40%',
                                     border: 'none',
-                                    borderRadius: '5px',
-                                    fontSize: '16px',
-                                    fontWeight: 'bold',
+                                    borderRadius: '10px',
                                     cursor: 'pointer',
                                     transition: 'background-color 0.3s',
-                                    backgroundColor: '#931600',
-                                    color: '#fff'
+                                    backgroundColor: 'red',
+                                    color: 'white'
                                 }}>Cancelar</Button>
                             </div>
                         </Form>
