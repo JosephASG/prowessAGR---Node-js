@@ -5,11 +5,9 @@ import { loginApp } from "../services/auth";
 import Swal from "sweetalert2";
 import { Button } from "react-bootstrap";
 import Loading from "components/General/Loading";
-import Modal from "components/ModalAccountPage";
-const WEBURL = process.env.REACT_APP_API_URL;
 
 function Login(props) {
-  const { setIsLoggedIn, setToken } = props;
+  const { setIsLoggedIn, setToken, setRole } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -22,6 +20,7 @@ function Login(props) {
     const data = res.data;
     if (data && data.estado === true) {
       setToken(data.usuario.token);
+      setRole(data.usuario.role);  // Asignar el rol del usuario
       setMessage(data.mensaje);
       setIsLoading(false);
       await Swal.fire({
@@ -30,8 +29,15 @@ function Login(props) {
         showConfirmButton: true,
       });
       localStorage.setItem("token", data.usuario.token);
-      navigate("/mi-cuenta");
+      localStorage.setItem("role", data.usuario.role);  // Guardar el rol en localStorage
       setIsLoggedIn(true);
+      
+      // Redirigir según el rol
+      if (data.usuario.role === 'vendor') {
+        navigate("/cuenta-vendor");
+      } else {
+        navigate("/mi-cuenta");
+      }
     } else {
       setIsLoading(false);
       setMessage(res.response.data.message);
