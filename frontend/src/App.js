@@ -1,4 +1,3 @@
-//Actualizacon en el hostinger 2024/3/21
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Footer, Header } from "./components/General";
@@ -10,6 +9,7 @@ import ShoppingCart from "./components/ShoppingCart";
 import ShoppingCartPage from "./components/ShoppingCartPage";
 import VendorsPage from "./pages/Vendors/VendorsPage";
 import { MyAccountPage } from "./pages/Account/";
+import VendedorAccountPage from "./pages/Account/VendedorAccountPage"; // Importar la página del vendor
 import ProductList from "./pages/ProductList";
 import AboutUs from "./pages/AboutUs/AboutUs.js";
 import CategoriesPage from "./pages/CategoriesPage";
@@ -24,7 +24,8 @@ import PagoPage from "./pages/PagoPage";
 import TermsConditions from "./pages/TermsConditions";
 import PasswordReset from "./pages/PasswordReset";
 import AccountReset from "./pages/AccountReset";
-import NotFoundPage from "./components/General/404"
+import NotFoundPage from "./components/General/404";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
@@ -32,17 +33,23 @@ function App() {
   const [orden, setOrden] = useState([]);
 
   useEffect(() => {
-    if (token !== null) {
+    const storedToken = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("role");
+    if (storedToken) {
+      setToken(storedToken);
+      setRole(storedRole || "default");
+    } else {
+      setRole("none");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
       checkAuth(token);
     }
-    if (token === null) {
-      if (localStorage.getItem("token") !== null) {
-        setToken(localStorage.getItem("token"));
-      } else {
-        setRole("none");
-      }
-    }
   }, [token]);
+
+  
 
   const checkAuth = async (token) => {
     let response = await getTokenData(token);
@@ -74,7 +81,7 @@ function App() {
           path="/vendedores"
           element={
             <PrivateRoute
-              allowedRoles={["administrador", "vendedor"]}
+              allowedRoles={["administrador", "vendor"]}
               userRole={role}
               element={<VendorsPage />}
             />
@@ -87,7 +94,7 @@ function App() {
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={["administrador", "vendedor", "cliente"]}
+              allowedRoles={["administrador", "vendor", "cliente"]}
               element={
                 <MyAccountPage
                   userRole={role}
@@ -98,24 +105,29 @@ function App() {
             />
           }
         />
-        <Route path="/terms&conditions" element={<TermsConditions />} />
         <Route
-          path="/terms&conditions"
+          path="/cuenta-vendor" // Nueva ruta para la cuenta del vendor
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={["administrador", "vendedor"]}
-              element={<TermsConditions />}
+              allowedRoles={["vendor"]}
+              element={
+                <VendedorAccountPage
+                  userRole={role}
+                  setRole={setRole}
+                  setIsLoggedIn={setIsLoggedIn}
+                />
+              }
             />
           }
         />
-
+        <Route path="/terms&conditions" element={<TermsConditions />} />
         <Route
           path="/product-list"
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={["administrador", "vendedor"]}
+              allowedRoles={["administrador", "vendor"]}
               element={<ProductList />}
             />
           }
@@ -125,7 +137,7 @@ function App() {
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={["administrador", "vendedor"]}
+              allowedRoles={["administrador", "vendor"]}
               element={<SaleDetailsPage />}
             />
           }
@@ -135,14 +147,14 @@ function App() {
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={["administrador", "vendedor"]}
+              allowedRoles={["administrador", "vendor"]}
               element={<SalesPage />}
             />
           }
         />
         <Route
           path="/login"
-          element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />}
+          element={<Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} setRole={setRole} />}
         />
 
         <Route path="/registro" element={<Register />} />
@@ -151,7 +163,7 @@ function App() {
           element={
             <PrivateRoute
               userRole={role}
-              allowedRoles={["administrador", "vendedor"]}
+              allowedRoles={["administrador", "vendor"]}
               element={<CategoriesPage />}
             />
           }

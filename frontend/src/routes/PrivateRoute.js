@@ -13,9 +13,10 @@ const PrivateRoute = ({ element, allowedRoles, userRole, ...rest }) => {
         setIsLoading(false);
       } else {
         setIsLoading(false);
+        navigate("/accessDenied");
       }
     }
-  }, [userRole, allowedRoles]);
+  }, [userRole, allowedRoles, navigate]);
 
   if (isLoading) {
     return <div>Cargando...</div>;
@@ -23,10 +24,8 @@ const PrivateRoute = ({ element, allowedRoles, userRole, ...rest }) => {
 
   if (allowedRoles.includes(userRole)) {
     return element;
-
-
   } else {
-    navigate("/accessdenied");
+    navigate("/accessDenied");
     return null;
   }
 };

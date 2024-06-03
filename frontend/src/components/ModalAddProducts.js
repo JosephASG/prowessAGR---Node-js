@@ -101,8 +101,38 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
   };
 
   const handleSave = async () => {
-    if (!newProduct.pro_imagen) {
-      return alert("Debe seleccionar una imagen");
+    if (!newProduct.pro_imagen ) {
+      return alert("Debe seleccionar una imagen");//q
+    }
+    if (!newProduct.pro_nombre ) {
+      return alert("Debe poner un nombre al producto");
+    }
+    if (!newProduct.pro_precio ) {
+      return alert("Debe añadir un precio al producto");
+    }
+    if (!newProduct.pro_stock ) {
+      return alert("Debe añadir un stock al producto");
+    }
+    if (!newProduct.pro_estado ) {
+      return alert("Debe poner una descripción al producto");
+    }
+    if (!newProduct.pro_categoria ) {
+      return alert("Debe seleccionar una categoría");
+    }
+    if (!newProduct.pro_medida ) {
+      return alert("Debe seleccionar una medida");
+    }
+    if (!newProduct.pro_vendedor ) {
+      return alert("Debe seleccionar un vendedor");
+    }
+    if (!newProduct.pro_fechaInicio ) {
+      return alert("Debe poner una fecha de inicio");
+    }
+    if (!newProduct.pro_fechaFinal ) {
+      return alert("Debe poner una fecha de caducidad");
+    }
+    if (!newProduct.pro_numero) {
+      return alert("Debe poner el numero del vendedor");
     }
     const formData = new FormData();
     Object.entries(newProduct).forEach(([key, value]) => {
@@ -298,7 +328,7 @@ const ModalAddProducts = ({ isOpen, onClose }) => {
           >
             Guardar
           </Button>
-        </Form>
+        </Form> 
       </Modal.Body>
     </Modal>
   );
